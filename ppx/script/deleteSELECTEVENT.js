@@ -1,3 +1,3 @@
 //!*script
-// イベント解除汎用
+// 繧､繝吶Φ繝郁ｧ｣髯､豎守畑
 PPx.Execute('*setcust KC_main:SELECTEVENT= %: *setcust KC_main:LOADEVENT=');

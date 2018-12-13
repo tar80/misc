@@ -5,12 +5,12 @@ var fn = PPx.Extract("%2");
 if(PPx.GetFileInformation(fn) == ':DIR'){
   Tdir = fn
   }else if(PPx.GetFileInformation(fn) != ''){
-    PPx.Echo('‘ÎÛ‚ªƒfƒBƒŒƒNƒgƒŠ‚Å‚Í‚ ‚è‚Ü‚¹‚ñ');
+    PPx.Echo('å¯¾è±¡ãŒãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã§ã¯ã‚ã‚Šã¾ã›ã‚“');
     PPx.Quit(1)
   }else Tdir = ws
 
 if(PPx.DirectoryType == 96){
-  PPx.Execute('%u7-zip64.dll,x -aos -hide "%1" -o%"ƒRƒs[æ"%{' + Tdir + '%} %@');
+  PPx.Execute('%u7-zip64.dll,x -aos -hide "%1" -o%"ã‚³ãƒ”ãƒ¼å…ˆ"%{' + Tdir + '%} %@');
 } else{
   var mSize = PPx.EntryMarkCount == 0?PPx.EntrySize : PPx.EntryMarkSize;
   (mSize > 5000) ? a = 'on' : a = 'off';

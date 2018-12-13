@@ -1,6 +1,6 @@
 //!*script
-// ダブルクリックPPV呼び出し用
-// PPc[X]は画像専用
+// 繝繝悶Ν繧ｯ繝ｪ繝�繧ｯPPV蜻ｼ縺ｳ蜃ｺ縺礼畑
+// PPc[X]縺ｯ逕ｻ蜒丞ｰら畑
 var ppvpath = PPx.Extract('%FDC');
 
 if(PPx.WindowIDName == "C_X"){
@@ -9,7 +9,7 @@ if(PPx.WindowIDName == "C_X"){
 } else{
   if (PPx.Extract('%*extract(C\"%%t\")').match(/(JPG|JPEG|GIF|PNG|BMP|EDG|APD)$/i)){
     PPx.Execute('%Oi *setcust X_win:V=B000000000 %:*setcust XV_imgD:VY=-2,4');
-    PPx.Execute('*maskentry .bmp,.jpg,.jpeg,.png,.gif,.vch,.edg,.apd,a:d-'); //※a: =attribute:
+    PPx.Execute('*maskentry .bmp,.jpg,.jpeg,.png,.gif,.vch,.edg,.apd,a:d-'); //窶ｻa: =attribute:
   } else{
     PPx.Execute('%Oi *setcust X_win:V=B000000000');
     PPx.Execute('*maskentry .%t,.txt,.ini,.js,.log,.cfg,.html,.URL,a:d-'); 

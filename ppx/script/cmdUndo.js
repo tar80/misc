@@ -1,5 +1,5 @@
 //!*script
-// undo実行時にログ窓に内容表示
+// undo螳溯｡梧凾縺ｫ繝ｭ繧ｰ遯薙↓蜀�螳ｹ陦ｨ遉ｺ
 var sr = new ActiveXObject('ADODB.Stream');
 sr.type = 2;
 sr.charset = 'utf-16';

@@ -1,5 +1,5 @@
 //!*script
-// Ç¢ÇÎÇÒÇ»ÉPÅ[ÉXÇÃsyncview
+// „ÅÑ„Çç„Çì„Å™„Ç±„Éº„Çπ„ÅÆsyncview
 if(PPx.SyncView == 0){
   if(PPx.Pane.Count == 2){
     PPx.Execute('*string i,vID=Z');

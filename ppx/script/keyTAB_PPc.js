@@ -1,9 +1,9 @@
 //!*script
-// TABã§çª“ç§»å‹•PPcç”¨
-// å‚ç…§å…ƒ:http://hoehoetukasa.blogspot.com/2014/05/ppv.html
-// å®Ÿè¡Œå…ƒã®PPcIDã‚’æ–‡å­—ã‚³ãƒ¼ãƒ‰ã«å¤‰æ›
+// TAB‚Å‘‹ˆÚ“®PPc—p
+// QÆŒ³:http://hoehoetukasa.blogspot.com/2014/05/ppv.html
+// ÀsŒ³‚ÌPPcID‚ğ•¶šƒR[ƒh‚É•ÏŠ·
 var useppc = PPx.Extract('%n').slice(1).charCodeAt(0) + 1;
-// å®Ÿè¡Œå…ƒPPcã‚ˆã‚Šã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆé †ã§å¾Œã®PPcãŒã‚ã‚Œã°ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’ç§»ã™
+// ÀsŒ³PPc‚æ‚èƒAƒ‹ƒtƒ@ƒxƒbƒg‡‚ÅŒã‚ÌPPc‚ª‚ ‚ê‚ÎƒtƒH[ƒJƒX‚ğˆÚ‚·
 for (var i = useppc; i < 91; i++) {
   ppcid = String.fromCharCode(i);
   if (PPx.Extract('%NC' + ppcid).match(/.+/)) {
@@ -11,7 +11,7 @@ for (var i = useppc; i < 91; i++) {
     PPx.Quit(-1);
   }
 }
-// ç„¡ã‘ã‚Œã°PPvã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
+// –³‚¯‚ê‚ÎPPv‚ÉƒtƒH[ƒJƒX
 for (var i = 65; i < 91; i++) {
   ppvid = String.fromCharCode(i);
   if (PPx.Extract('%NV' + ppvid).match(/.+/)) {
@@ -19,5 +19,5 @@ for (var i = 65; i < 91; i++) {
     PPx.Quit(-1);
   }
 }
-// PPvãŒç„¡ã‘ã‚Œã°é€šå¸¸ã®Tabã®å‹•ä½œ
+// PPv‚ª–³‚¯‚ê‚Î’Êí‚ÌTab‚Ì“®ì
 PPx.Execute("%K\"@F6\"");

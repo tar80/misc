@@ -1,8 +1,8 @@
 //!*script
-// 螟画焚遒ｺ隱咲畑
-//譖ｸ蠎ｫ縺ｮ縺ゅｋ繝�繧｣繝ｬ繧ｯ繝医Μ縺ｮ謚ｽ蜃ｺ
+// 変数確認用
+//書庫のあるディレクトリの抽出
 //PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FD\",\"s/^(.*)\\\\.*(zip|rar)$/$1/\")"))
-//譖ｸ蠎ｫ蜷阪�ｮ謚ｽ蜃ｺ//PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FDC\",\"s/^(.*\\\\.*?(zip)).*/$2/\")"))
+//書庫名の抽出//PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FDC\",\"s/^(.*\\\\.*?(zip)).*/$2/\")"))
 //
 //PPx.Execute("*linemessage %*comment(1) %:*stop");
 //PPx.SetPopLineMessage(PPx.Extract('%si"ppp"'));

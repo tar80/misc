@@ -1,5 +1,5 @@
 //!*script
-// 繧ｫ繝ｼ繧ｽ繝ｫ荳九お繝ｳ繝医Μ縺ｮ諡｡蠑ｵ蟄舌〒繝槭�ｼ繧ｯ繝医げ繝ｫ
+// カーソル下エントリの拡張子でマークトグル
 if (PPx.EntryMarkCount == 0){
   PPx.Execute('*markentry *.%t');
 } else{

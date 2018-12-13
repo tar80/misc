@@ -1,5 +1,5 @@
 //!*script
-// èƒŒæ™¯é€éPPvç”¨
+// ”wŒi“§‰ßPPv—p
 PPx.Execute('*RotateExecute C_opaB,*customize X_bg:O_%n=100,*customize X_bg:O_%n=85,*customize X_bg:O_%n=70');
 /*
 if(PPx.WindowIDName == 'C_A' || PPx.WindowIDName == 'C_B'){

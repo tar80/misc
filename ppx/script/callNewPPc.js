@@ -1,6 +1,6 @@
 //!*script
-// æ–°è¦ç‹¬ç«‹çª“å‘¼ã³å‡ºã—
-// å‚ç…§å…ƒ:http://hoehoetukasa.blogspot.com/2014/05/blog-post_20.html
+// V‹K“Æ—§‘‹ŒÄ‚Ño‚µ
+// QÆŒ³:http://hoehoetukasa.blogspot.com/2014/05/blog-post_20.html
 for (var i = 67; i < 91; i++) {
   var ppcid = String.fromCharCode(i);
   if (PPx.Extract('%NC' + ppcid).match(/[^.+]/));
@@ -10,9 +10,9 @@ for (var i = 67; i < 91; i++) {
 
 /*
 if(PPx.Pane.Count == 1){
-    if (PPx.Extract("%*getcust\(X_win:CA\)").slice(6,7) == 1){ // ç¾åœ¨çª“ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã®ä½ç½®ã‚’å–å¾—
+    if (PPx.Extract("%*getcust\(X_win:CA\)").slice(6,7) == 1){ // Œ»İ‘‹‚ÌƒXƒNƒ[ƒ‹ƒo[‚ÌˆÊ’u‚ğæ“¾
         PPx.Execute("*execute CA,%M?layoutmenu,!p");
-    } if (PPx.Extract("%*getcust\(X_win:CB\)").slice(6,7) == 1){ // æ¬¡ã®çª“ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã®ä½ç½®ã‚’å–å¾—
+    } if (PPx.Extract("%*getcust\(X_win:CB\)").slice(6,7) == 1){ // Ÿ‚Ì‘‹‚ÌƒXƒNƒ[ƒ‹ƒo[‚ÌˆÊ’u‚ğæ“¾
         PPx.Execute("*setcust X_win:CB=B001100001");
     }
     PPx.Execute('*pane focus CA');

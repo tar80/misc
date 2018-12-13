@@ -1,8 +1,8 @@
 //!*script
-// TABã§çª“ç§»å‹•PPvç”¨
-// å®Ÿè¡Œå…ƒã®PPvIDã‚’æ–‡å­—ã‚³ãƒ¼ãƒ‰ã«å¤‰æ›
+// TAB‚Å‘‹ˆÚ“®PPv—p
+// ŽÀsŒ³‚ÌPPvID‚ð•¶ŽšƒR[ƒh‚É•ÏŠ·
 var useppv = PPx.Extract('%n').slice(1).charCodeAt(0) + 1;
-// å®Ÿè¡Œå…ƒPPvã‚ˆã‚Šã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆé †ã§å¾Œã®PPvãŒã‚ã‚Œã°ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’ç§»ã™
+// ŽÀsŒ³PPv‚æ‚èƒAƒ‹ƒtƒ@ƒxƒbƒg‡‚ÅŒã‚ÌPPv‚ª‚ ‚ê‚ÎƒtƒH[ƒJƒX‚ðˆÚ‚·
 for (var i = useppv; i < 91; i++) {
   ppvid = String.fromCharCode(i);
   if (PPx.Extract('%NV' + ppvid).match(/.+/)) {
@@ -10,7 +10,7 @@ for (var i = useppv; i < 91; i++) {
     PPx.Quit(-1);
   }
 }
-// ç„¡ã‘ã‚Œã°PPcã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
+// –³‚¯‚ê‚ÎPPc‚ÉƒtƒH[ƒJƒX
 for (var i = 65; i < 91; i++) {
   ppcid = String.fromCharCode(i);
   if (PPx.Extract('%NC' + ppcid).match(/.+/)) {

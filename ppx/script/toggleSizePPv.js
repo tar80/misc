@@ -1,5 +1,5 @@
 //!*script
-// PPv縺ｮ遯薙し繧､繧ｺ繧偵ヨ繧ｰ繝ｫ
+// PPvの窓サイズをトグル
 if(PPx.WindowIDName == "V_Z"){
   ppvwidth = PPx.Extract("%*windowrect(,w)");
   ppcwidth = PPx.Extract("%*windowrect(" + PPx.Extract('%*findwindowclass("PaperPlaneCombo")') +",w)");

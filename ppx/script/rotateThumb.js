@@ -1,11 +1,11 @@
 //!*script
-// ƒŠƒXƒg•\¦Ø‚è‘Ö‚¦
+// ãƒªã‚¹ãƒˆè¡¨ç¤ºåˆ‡ã‚Šæ›¿ãˆ
 if(PPx.Extract('%n') == 'CX'){
 if(PPx.DirectoryType == 96){
-  PPx.Execute('*RotateExecute ViewStyleC,*viewstyle "–Ÿ‰æ¬(&M)",*viewstyle "–Ÿ‰æ‘å(&M)"');
+  PPx.Execute('*RotateExecute ViewStyleC,*viewstyle "æ¼«ç”»å°(&M)",*viewstyle "æ¼«ç”»å¤§(&M)"');
   } else{
-    PPx.Execute('*RotateExecute ViewStyleB,*viewstyle "‰æ‘œ¬(&S)",*viewstyle "‰æ‘œ’†(&M)",*viewstyle "‰æ‘œ‘å(&L)"');
+    PPx.Execute('*RotateExecute ViewStyleB,*viewstyle "ç”»åƒå°(&S)",*viewstyle "ç”»åƒä¸­(&M)",*viewstyle "ç”»åƒå¤§(&L)"');
   }
 } else{
-  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle "ˆê——1(&A)",*viewstyle "ƒTƒ€ƒlƒCƒ‹¬(&T)",*viewstyle "ƒTƒ€ƒlƒCƒ‹’†(&T)",*viewstyle "ƒAƒCƒRƒ“(&I)"');
+  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle "ä¸€è¦§1(&A)",*viewstyle "ã‚µãƒ ãƒã‚¤ãƒ«å°(&T)",*viewstyle "ã‚µãƒ ãƒã‚¤ãƒ«ä¸­(&T)",*viewstyle "ã‚¢ã‚¤ã‚³ãƒ³(&I)"');
 }

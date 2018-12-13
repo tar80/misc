@@ -1,3 +1,3 @@
 //!*script
-// エントリに色付けチェック
+// 繧ｨ繝ｳ繝医Μ縺ｫ濶ｲ莉倥￠繝√ぉ繝�繧ｯ
 PPx.EntryHighlight = n = PPx.EntryHighlight == 2? 0 : 2;

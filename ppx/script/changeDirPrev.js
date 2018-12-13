@@ -1,34 +1,34 @@
 //!*script
-// “¯ŠK‘w‚Ì—×‚ÌƒfƒBƒŒƒNƒgƒŠ‚ÉˆÚ“®
-// QÆŒ³:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
-// eƒtƒHƒ‹ƒ_‚ÌÀ‘Ô‚ª‚È‚¯‚ê‚ÎI—¹
+// åŒéšå±¤ã®éš£ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ç§»å‹•
+// å‚ç…§å…ƒ:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
+// è¦ªãƒ•ã‚©ãƒ«ãƒ€ã®å®Ÿæ…‹ãŒãªã‘ã‚Œã°çµ‚äº†
 if(PPx.DirectoryType != 1) PPx.Quit(1);
 
 var fso = PPx.CreateObject("Scripting.FileSystemObject");
 var fn = PPx.Extract("%FDN");
 var currentDir = fso.GetFolder(fn);
 
-// eƒtƒHƒ‹ƒ_‚ªƒ‹[ƒgorƒTƒuƒtƒHƒ‹ƒ_‚ª‚È‚¯‚ê‚ÎI—¹
+// è¦ªãƒ•ã‚©ãƒ«ãƒ€ãŒãƒ«ãƒ¼ãƒˆorã‚µãƒ–ãƒ•ã‚©ãƒ«ãƒ€ãŒãªã‘ã‚Œã°çµ‚äº†
 if(currentDir.IsRootFolder || currentDir.ParentFolder.SubFolders.count == 1){
-  PPx.SetPopLineMessage("ƒTƒuƒtƒHƒ‹ƒ_‚ª‚ ‚è‚Ü‚¹‚ñ");
+  PPx.SetPopLineMessage("ã‚µãƒ–ãƒ•ã‚©ãƒ«ãƒ€ãŒã‚ã‚Šã¾ã›ã‚“");
   PPx.Quit(1);
 }
-// “¯ŠK‘w‚ÌƒtƒHƒ‹ƒ_‚ÌƒŠƒXƒg‚ğæ“¾
+// åŒéšå±¤ã®ãƒ•ã‚©ãƒ«ãƒ€ã®ãƒªã‚¹ãƒˆã‚’å–å¾—
 e = new Enumerator(currentDir.ParentFolder.SubFolders);
 flds = new Array();
 for(e.moveFirst(); !e.atEnd(); e.moveNext()){
-  //ƒtƒHƒ‹ƒ_‘®«‚ğl—¶‚µ‚ÄƒŠƒXƒg‚É’Ç‰Á
+  //ãƒ•ã‚©ãƒ«ãƒ€å±æ€§ã‚’è€ƒæ…®ã—ã¦ãƒªã‚¹ãƒˆã«è¿½åŠ 
   fuga = fso.GetFolder(fso.BuildPath(currentDir.ParentFolder.Path, e.item().Name));
   if (fuga.Attributes <= 17) flds.push(e.item().Name);
 }
-// –¼‘O‡‚Åƒ\[ƒg
+// åå‰é †ã§ã‚½ãƒ¼ãƒˆ
 flds.sort(function(a, b){return a.toLowerCase() > b.toLowerCase()?1:-1;});
 for(i = 0; i < flds.length; i++){
   if(flds[i] == currentDir.Name)
     break;
 }
-// ‘O‚ÌƒtƒHƒ‹ƒ_‚ğæ“¾
+// å‰ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’å–å¾—
 prevDir = flds[Math.max(i-1, 0)];
-// Å‰‚ÌƒtƒHƒ‹ƒ_
+// æœ€åˆã®ãƒ•ã‚©ãƒ«ãƒ€
 if(flds[i-2] == null) PPx.SetPopLineMessage('|<');
 PPx.Execute('*jumppath "' + fso.BuildPath(fso.GetParentFolderName(fn), prevDir) + '"');

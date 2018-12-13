@@ -1,10 +1,10 @@
 //!*script
-// *PPVUD=ƒ†[ƒU[ƒRƒ}ƒ“ƒh
+// *PPVUD=ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚³ãƒãƒ³ãƒ‰
 var dType = PPx.GetFileInformation(PPx.Extract("%FD"));
 var fType = PPx.GetFileInformation(PPx.Extract("%FDC"));
 if(fType == "" && (dType == ":PKZIP" || dType == ":RAR")){
-  PPx.Execute('%\"ƒtƒ@ƒCƒ‹‘€ì\" %Q\"‘ŒÉ‚©‚çíœ‚µ‚Ü‚·\" %:%u7-zip64.dll,d -hide %FD %FC');
+  PPx.Execute('%\"ãƒ•ã‚¡ã‚¤ãƒ«æ“ä½œ\" %Q\"æ›¸åº«ã‹ã‚‰å‰Šé™¤ã—ã¾ã™\" %:%u7-zip64.dll,d -hide %FD %FC');
   //PPx.Execute('*PPVUD DOWN');
 } else{
-  PPx.Execute('%\"ƒtƒ@ƒCƒ‹‘€ì\" %Q\"•\¦’†‚ÌƒGƒ“ƒgƒŠ‚ğíœ‚µ‚Ü‚·\" %: %Oa *file !safedelete,%FDC,%*name\(H,%1\)\\,/qstart /min /nocount /retry:0 /error:0 /backup /undolog');
+  PPx.Execute('%\"ãƒ•ã‚¡ã‚¤ãƒ«æ“ä½œ\" %Q\"è¡¨ç¤ºä¸­ã®ã‚¨ãƒ³ãƒˆãƒªã‚’å‰Šé™¤ã—ã¾ã™\" %: %Oa *file !safedelete,%FDC,%*name\(H,%1\)\\,/qstart /min /nocount /retry:0 /error:0 /backup /undolog');
 }

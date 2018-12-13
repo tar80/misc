@@ -1,6 +1,6 @@
 //!*script
-// ƒŠƒXƒgƒtƒ@ƒCƒ‹‚ğì‚Á‚½‚è’Ç‹L‚·‚é
-// %si"ppp" = ˆ—Œ³ƒfƒBƒŒƒNƒgƒŠ
+// ãƒªã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œã£ãŸã‚Šè¿½è¨˜ã™ã‚‹
+// %si"ppp" = å‡¦ç†å…ƒãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 if(PPx.EntryMarkCount == 0) PPx.Quit(1);
 
 var fso = PPx.CreateObject("Scripting.FileSystemObject");

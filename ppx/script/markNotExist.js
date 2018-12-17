@@ -1,9 +1,9 @@
 //!*script
-// 繝ｪ繧ｹ繝医ヵ繧｡繧､繝ｫ荳翫�ｮ蟄伜惠縺励↑縺�繝輔ぃ繧､繝ｫ繧呈ｶ亥悉
+// リストファイル上の存在しないファイルをマーク
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
-for(var i = 0; i < PPx.Entry.Count; ++i){
-  var name = PPx.Entry(i).Name;
-  if(!(fso.FileExists(name) || fso.FolderExists(name))){
-    PPx.Entry(i).Mark = -1
-    }
+for(var i = 0,l = PPx.Entry.Count; i < l; ++i){
+  var fn = PPx.Entry(i).Name;
+  if(!(fso.FileExists(fn) || fso.FolderExists(fn))){
+    PPx.Entry(i).Mark = -1;
+  }
 }

@@ -1,17 +1,17 @@
 //!*script
-if (PPx.EntryMarkCount == 2 && PPx.Execute('%Q%"Swap Filename!""ãƒãƒ¼ã‚¯ã‚¨ãƒ³ãƒˆãƒªåã‚’å…¥ã‚Œæ›¿ãˆã¾ã™"') == 0) {
-  var EntryObj = PPx.Entry;
-  EntryObj.FirstMark;
-  var nameA = PPx.Extract('%*name(X,' + EntryObj.name + ')');
-  var extA = PPx.Extract('%*name(T, '+ EntryObj.name + ')');
-  PPx.Execute('*rename ' + EntryObj.name + ',tempRename');
-  EntryObj.NextMark;
-  var nameB = PPx.Extract('%*name(X,' + EntryObj.name + ')');
-  var extB = PPx.Extract('%*name(T, '+ EntryObj.name + ')');
+if(PPx.EntryMarkCount == 2 && PPx.Execute('%Q%"Swap Filename!""ƒ}[ƒN‚µ‚½ƒGƒ“ƒgƒŠ–¼‚ğ“ü‚ê‘Ö‚¦‚Ü‚·"') == 0){
+  var en = PPx.Entry;
+  en.FirstMark;
+  var nameA = PPx.Extract('%*name(X,' + en.name + ')');
+  var extA = PPx.Extract('%*name(T, '+ en.name + ')');
+  PPx.Execute('*rename ' + en.name + ',tempRename');
+  en.NextMark;
+  var nameB = PPx.Extract('%*name(X,' + en.name + ')');
+  var extB = PPx.Extract('%*name(T, '+ en.name + ')');
   PPx.Execute('*rename ' + nameB + '.' + extB + ',' + nameA + '.' + extB);
   PPx.Execute('*rename tempRename,' + nameB + '.' + extA);
   //	PPx.Quit(1);
-} else if (PPx.EntryMarkCount <= 1 && PPx.Pane.Count == 2 && PPx.Execute('%Q%"Swap Filename!""åå¯¾çª“ã‚¨ãƒ³ãƒˆãƒªã¨ãƒ•ã‚¡ã‚¤ãƒ«åäº¤æ›"') == 0) {
+} else if(PPx.EntryMarkCount <= 1 && PPx.Pane.Count == 2 && PPx.Execute('%Q%"Swap Filename!""”½‘Î‘‹ƒGƒ“ƒgƒŠ‚Æƒtƒ@ƒCƒ‹–¼ŒğŠ·"') == 0){
   var nameA = PPx.Extract('%X');
   PPx.Execute('*rename %FXN.%FT,%~FXN.%FT');
   PPx.Execute('*execute ~,*rename %~FXN.%~FT,' + nameA + '.%~FT');

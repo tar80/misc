@@ -1,19 +1,19 @@
 //!*script
-// ãƒªã‚¹ãƒˆã®ç”»åƒã‚µã‚¤ã‚ºã‚’ã‚³ãƒ¡ãƒ³ãƒˆã«è¨˜è¼‰
-// 16è¡Œç›®ã€Psizeã¯ç’°å¢ƒã«åˆã‚ã›ã¦ä¿®æ­£
-PPx.Execute('%\"CommentPictSize\"%Q\"ãƒªã‚¹ãƒˆã«ç”»åƒã‚µã‚¤ã‚ºã‚’è¡¨ç¤ºã•ã›ã¦ãã ã•ã„\"');
+// ƒŠƒXƒg‚Ì‰æ‘œƒTƒCƒY‚ğƒRƒƒ“ƒg‚É‹LÚ
+// 16s–ÚAPsize‚ÍŠÂ‹«‚É‡‚í‚¹‚ÄC³
+PPx.Execute('%\"CommentPictSize\"%Q\"ƒŠƒXƒg‚É‰æ‘œƒTƒCƒY‚ğ•\¦‚³‚¹‚Ä‚­‚¾‚³‚¢\"');
 
 var fso = PPx.CreateObject("Scripting.FileSystemObject");
 var cDir = PPx.Extract('%1%\\');
-strCreateFile = fso.BuildPath(cDir,"00_INDEX.txt");
+strCreateFile = fso.BuildPath(cDir,'00_INDEX.txt');
 fso.CreateTextFile(strCreateFile);
 var pList = fso.OpenTextFile(strCreateFile,2,true);
 
-for (var i = 0; i < PPx.EntryAllCount; i++) {
-  if (PPx.Entry(i).Name.match(/.(bmp|jpg|jpeg|png|gif)$/i)) {
+for(var i = 0,l = PPx.EntryAllCount; i < l; i++){
+  if(PPx.Entry(i).Name.match(/.(bmp|jpg|jpeg|png|gif)$/i)){
     var entryName = PPx.Entry(i).Name;
     var entryinfo = PPx.Entry(i).Information;
-    var Psize = entryinfo.replace(/[\s\S]*å¤§ãã•\s:(\d*\sx\s\d*)[\s\S]*/g,'$1');
+    var Psize = entryinfo.replace(/[\s\S]*‘å‚«‚³\s:(\d*\sx\s\d*)[\s\S]*/g,'$1');
     var str = entryName + "\t" + Psize;
     pList.WriteLine(str);
   }

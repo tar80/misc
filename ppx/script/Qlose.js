@@ -1,8 +1,8 @@
 //!*script
-// „ÅÑ„Çç„Çì„Å™„Ç±„Éº„Çπ„ÅÆÁ™ìÁµÇ‰∫ÜÂá¶ÁêÜ
-// ÂèÇÁÖßÂÖÉ:http://hoehoetukasa.blogspot.com/2014/05/blog-post_20.html
+// Ç¢ÇÎÇÒÇ»ÉPÅ[ÉXÇÃëãèIóπèàóù
+// éQè∆å≥:http://hoehoetukasa.blogspot.com/2014/05/blog-post_20.html
 if(PPx.Extract('%1').match(/aux:\/\/.+/)){
-  PPx.Execute('*execute CY,%j\"%*getcust(_User:pk1)');
+  PPx.Execute('*execute CY,%j"%*getcust(_User:pk1)');
   PPx.Execute('*closeppx CY %:*closeppx BA');
   PPx.Quit(1);
 }
@@ -11,27 +11,27 @@ if(PPx.SyncView != 0){
   PPx.Quit(1);
 }
 for(var i = 90; i > 64; i--){
-  ppvid = 'V' + String.fromCharCode(i);
+  var ppvid = 'V' + String.fromCharCode(i);
   if(PPx.Extract('%N' + ppvid).match(/.+/)){
-    PPx.Execute('\%K' + ppvid + ',\"@Q\"');
+    PPx.Execute('\%K' + ppvid + ',"@Q"');
     PPx.Quit(1);
   }
 } if(PPx.Pane.Tab.Count >= '2'){
-  PPx.Execute('\%KC,\"@Q\"');
+  PPx.Execute('%KC,"@Q"');
   PPx.Quit(1);
 } else{
-  for (var i = 90; i > 64; i--) { //z„Åã„ÇâA„Åæ„Åß
+  for (i = 90; i > 64; i--) {
     var ppcid = 'C' + String.fromCharCode(i);
     if(PPx.Extract('%N' + ppcid).match(/.+/)) {
-      if(ppcid == 'CX' && PPx.Extract("%*getcust\(X_win:CX\)").slice(6,7) == 0){
+      if(ppcid == 'CX' && PPx.Extract('%*getcust(X_win:CX)').slice(6,7) == 0){
         PPx.Execute('*setcust XC_mvUD=1,1,4,B0010,5,B0011 %:*setcust XC_celD=_AUTO,_AUTO,3,7 %: *customize XC_page=1');
       }
       /*    if(ppcid == 'CB'){
-        PPx.Execute('*execute CB,*viewstyle \"Ë©≥Á¥∞\(&A\)\"');
+        PPx.Execute('*execute CB,*viewstyle \"è⁄ç◊\(&A\)\"');
       } if(ppcid == 'CA'){
-        PPx.Execute('*execute CA,*viewstyle \"Ë©≥Á¥∞\(&A\)\"');
+        PPx.Execute('*execute CA,*viewstyle \"è⁄ç◊\(&A\)\"');
       }*/
-      PPx.Execute('\%K' + ppcid + ',\"@Q\"');
+      PPx.Execute('%K' + ppcid + ',"@Q"');
       PPx.Quit(1);
     }
   }

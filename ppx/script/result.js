@@ -20,8 +20,13 @@ case 'filetype':
   PPx.Result = getext == "" ? "---" : PPx.Extract("%*regexp(" + getext + ",\"s/://\")");
   break;
 case 'makepath':
-  var path = PPx.Pane.Count == 2?'%2':"%'work'";
+  var path = PPx.Pane.Count == 2?"%2":"%'work'";
   PPx.Result = PPx.Extract(path);
   break;
   //case break;
+/*
+case 'oppdirtype':
+  PPx.Result = PPx.GetFileInformation(PPx.Extract("%2"));
+  break;
+  */
 }

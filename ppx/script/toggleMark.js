@@ -1,7 +1,7 @@
 //!*script
-// 繧､繝ｳ繧ｯ繝ｪ繝｡繝ｳ繧ｿ繝ｫ繧ｵ繝ｼ繝∽ｸｭ縲∵､懃ｴ｢蟇ｾ雎｡繧ｨ繝ｳ繝医Μ繧貞�ｨ縺ｦ繝槭�ｼ繧ｯ繝医げ繝ｫ
-for (var i = 0; i < PPx.EntryAllCount; i++){
-  if (PPx.Entry(i).Highlight == 1) {
+// インクリメンタルサーチ中、検索対象エントリを全てマークトグル
+for(var i = 0,l = PPx.EntryAllCount; i < l; i++){
+  if(PPx.Entry(i).Highlight == 1){
     PPx.Entry(i).Highlight = 0;
     PPx.Entry(i).Mark = 1;
   } else if(PPx.Entry(i).Mark == 1){

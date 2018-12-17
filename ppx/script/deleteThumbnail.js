@@ -1,7 +1,7 @@
 //!*script
-// 繧ｵ繝繝阪う繝ｫ縺ｮ繧ｭ繝｣繝�繧ｷ繝･蜑企勁
-for (var i = 0; i < PPx.EntryAllCount; i++) {
+// サムネイルのキャッシュ削除
+for (var i = 0,l = PPx.EntryAllCount; i < l; i++) {
   if (PPx.Entry(i).Size != 0){
-    PPx.Execute('*delete "'+PPx.Entry(i).Name+':thumbnail.jpg"');
+    PPx.Execute('*delete "' + PPx.Entry(i).Name + ':thumbnail.jpg"');
   }
 }

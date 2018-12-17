@@ -1,16 +1,16 @@
 //!*script
-// PPv縺ｮ遯薙し繧､繧ｺ繧偵ヨ繧ｰ繝ｫ
-if(PPx.WindowIDName == "V_Z"){
-  ppvwidth = PPx.Extract("%*windowrect(,w)");
-  ppcwidth = PPx.Extract("%*windowrect(" + PPx.Extract('%*findwindowclass("PaperPlaneCombo")') +",w)");
-  if (ppvwidth == ppcwidth){
+// PPvの窓サイズをトグル
+if(PPx.WindowIDName == 'V_Z'){
+  var ppvwidth = PPx.Extract('%*windowrect(,w)');
+  var ppcwidth = PPx.Extract('%*windowrect(' + PPx.Extract("%*findwindowclass(\"PaperPlaneCombo\")") + ',w)');
+  if(ppvwidth == ppcwidth){
     PPx.Execute('*fitwindow %N~');
     PPx.Execute('*topmostwindow %NVZ,1');
-  } else {
+  } else{
     PPx.Execute('*fitwindow %*findwindowclass("PaperPlaneCombo")');
     PPx.Execute('*topmostwindow %NVZ,1');
   }
 }
-else {
+else{
   PPx.Execute('*togglewinsize');
 }

@@ -1,9 +1,9 @@
 ## 構成
 
-> - cfg/ PPx設定ファイル
+ - cfg/ PPx設定ファイル
  - script/ PPx Script
->> - PPXUKEYS.txt キーバインド補完リスト用
-    - PPXUSCRIPT.txt コマンド補完リスト用
+ - PPXUKEYS.txt キーバインド補完リスト用
+ - PPXUSCRIPT.txt コマンド補完リスト用
 
 ### セットアップの手順
 

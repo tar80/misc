@@ -4,8 +4,6 @@
 //PPx.Echo(PPx.Extract(PPx.EntryName));
 //ディレクトリの種類
 PPx.Echo(PPx.DirectoryType);
-// エントリの画像サイズ
-//var frag = PPx.Entry(i).Information.replace(/[\s\S]*Fragments\s+:(\d+).[\s\S]*/g,'$1');
 // 書庫のあるディレクトリの抽出
 //PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FD\",\"s/^(.*)\\\\.*(zip|rar)$/$1/\")"))
 // 書庫名の抽出//PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FDC\",\"s/^(.*\\\\.*?(zip)).*/$2/\")"))
@@ -24,4 +22,3 @@ PPx.Echo(PPx.DirectoryType);
 //PPx.Echo(PPx.SyncView);
 // 汎用一時利用パス
 //PPx.Echo(PPx.Extract('%si"ppp"'));
-// rcloneコピーメニュー用

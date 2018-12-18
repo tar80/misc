@@ -10,7 +10,7 @@ if(PPx.Extract('%n') == 'CX'){
 }
 switch(PPx.Extract(PPx.DirectoryType)){
 case '4':
-  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle -temp リスト:ファイル名(&L),*viewstyle -temp リスト:行表示(&L)');
+  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle -temp リスト:名前(&L),*viewstyle -temp リスト:行表示(&L)');
   break;
 default:
   PPx.Execute('*RotateExecute ViewStyleA,*viewstyle -temp 時刻(&T) %%:*sortentry &T:逆順,*viewstyle -temp サムネイル:小(&T) %%:*sortentry &D:標準,*viewstyle -temp サムネイル:中(&T),*viewstyle アイコン(&I)');

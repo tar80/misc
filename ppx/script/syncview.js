@@ -7,8 +7,10 @@ if(PPx.SyncView == 0){
     //PPx.Execute('*fitwindow %N~,%NVZ');
     //PPx.Execute('*topmostwindow %NVZ,1');
     PPx.Execute('*ppvoption sync %si"vID"');
-    //PPx.Execute('*wait 100,1');
-    PPx.Execute('*capturewindow V%si"vID" -pane:~ -selectnoactive %&*wait 100,2');
+    PPx.Execute('*capturewindow V%si"vID" -pane:~ -selectnoactive');
+    PPx.Execute('*JSCRIPT focus.js');
+    //PPx.Execute('*AHK ActivatePPx.ahk');
+    //PPx.Execute('*focus');
   } else if(PPx.extract('%n') == 'CX'){
     PPx.Execute('*string i,vID=X');
     PPx.Execute('%Oi *setcust X_win:V=B100000000 %:*ppv -r -bootid:%si"vID"');

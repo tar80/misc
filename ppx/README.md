@@ -1,13 +1,12 @@
 ## 構成
----
- - cfg:    PPx設定ファイル
- - script: PPx Script
- > PPXUKEYS.txt   キーバインド補完リスト用
- > PPXUSCRIPT.txt コマンド補完リスト用
 
+> - cfg/ PPx設定ファイル
+ - script/ PPx Script
+>> - PPXUKEYS.txt キーバインド補完リスト用
+    - PPXUSCRIPT.txt コマンド補完リスト用
 
 ### セットアップの手順
----
+
 1. [ppx](https://github.com/tar80/misc/archive/master.zip)を解凍してコピー
 - 各種ライブラリ導入
   - 7-zip32  [FrostMoonProject](http://www16.atpages.jp/rayna/soft.html)

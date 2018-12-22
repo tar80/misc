@@ -8,6 +8,7 @@ if(PPx.SyncView == 0){
     //PPx.Execute('*topmostwindow %NVZ,1');
     PPx.Execute('*ppvoption sync %si"vID"');
     PPx.Execute('*capturewindow V%si"vID" -pane:~ -selectnoactive');
+    PPx.Execute('*wait 100,1');
     PPx.Execute('*JSCRIPT focus.js');
     //PPx.Execute('*AHK ActivatePPx.ahk');
     //PPx.Execute('*focus');

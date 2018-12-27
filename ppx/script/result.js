@@ -20,8 +20,12 @@ case 'filetype':
   PPx.Result = getext == "" ? "---" : PPx.Extract("%*regexp(" + getext + ",\"s/://\")");
   break;
 case 'makepath':
-  var path = PPx.Pane.Count == 2?"%2":"%'work'";
+  var path = PPx.Pane.Count == 2 ? "%2" : "%'work'";
   PPx.Result = PPx.Extract(path);
+  break;
+case 'repository':
+  //if(PPx.Entry(0).Name == ".git") PPx.Result = 1;
+  PPx.Extract("%1").indexOf(PPx.Extract("%'repo'")) >= 0 ? PPx.Result = 1 : PPx.Result = 0;
   break;
   //case break;
 /*

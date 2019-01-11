@@ -1,9 +1,10 @@
 //!*script
 // 変数確認用
+var fd = PPx.Extract('%FD%\\');
 
 //PPx.Echo(PPx.Extract(PPx.EntryName));
 //ディレクトリの種類
-PPx.Echo(PPx.DirectoryType);
+// PPx.Echo(PPx.DirectoryType);
 // 書庫のあるディレクトリの抽出
 //PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FD\",\"s/^(.*)\\\\.*(zip|rar)$/$1/\")"))
 // 書庫名の抽出//PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FDC\",\"s/^(.*\\\\.*?(zip)).*/$2/\")"))

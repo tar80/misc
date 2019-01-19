@@ -1,8 +1,12 @@
 //!*script
 // 変数確認用
 var fd = PPx.Extract('%FD%\\');
+//PPx.Echo();
+//PPx.SetPopLineMessage();
+// PPx.SetPopLineMessage(PPx.Extract("%NC"));
+PPx.EntryHighlight = PPx.Arguments(0);
 
-//PPx.Echo(PPx.Extract(PPx.EntryName));
+//PPx.Echo(PPx.Extract(PPx.Entry(0).Name));
 //ディレクトリの種類
 // PPx.Echo(PPx.DirectoryType);
 // 書庫のあるディレクトリの抽出
@@ -20,6 +24,7 @@ var fd = PPx.Extract('%FD%\\');
 //PPx.SetPopLineMessage("combo:" + PPx.GetComboItemCount);
 // PPx一枚窓のペイン数
 //PPx.SetPopLineMessage("pane:" + PPx.Pane.Count);
+// PPx.SetPopLineMessage("tab:" + PPx.Pane.Tab.Count);
 //PPx.Echo(PPx.SyncView);
 // 汎用一時利用パス
 //PPx.Echo(PPx.Extract('%si"ppp"'));

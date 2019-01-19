@@ -5,8 +5,8 @@ var sr = new ActiveXObject('ADODB.Stream');
 sr.type = 2;
 sr.charset = 'utf-16';
 sr.open();
-sr.loadFromFile(PPx.extract("%0") + "\\" + bu + "\\PPXUNDO.LOG");
-var str = sr.readText(-1).replace(/\w*\s(.*)\n(.*)/, '$2\ndest    $1','im');
+sr.loadFromFile(PPx.extract('%0') + '\\' + bu + '\\PPXUNDO.LOG');
+var str = sr.readText(-1).replace(/\w*\t(.*)\n.*\t(.*)\n.*/, '$2\n>>$1','im');
 
 PPx.SetPopLineMessage(str);
 PPx.Execute('*ppcfile !Undo /min /nocount');

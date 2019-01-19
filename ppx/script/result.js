@@ -28,9 +28,9 @@ case 'repository':
   PPx.Extract("%1").indexOf(PPx.Extract("%'repo'")) >= 0 ? PPx.Result = 1 : PPx.Result = 0;
   break;
   //case break;
-/*
+  /*
 case 'oppdirtype':
   PPx.Result = PPx.GetFileInformation(PPx.Extract("%2"));
   break;
-  */
+   */
 }

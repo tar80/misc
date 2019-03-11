@@ -19,7 +19,7 @@
   - migemo [KaoriYa](https://www.kaoriya.net/software/cmigemo/)
 - susieプラグイン導入
   - axpathlist2 [属性DBによる...](http://artisticimitation.web.fc2.com/adbtest/) 
-  - edgh [TAKABO SOFT](http://takabosoft.com/edge/tool)
+  - edge [TAKABO SOFT](http://takabosoft.com/edge/tool)
   - ifcms [Nilposoft](http://nilposoft.info/susie-plugin/index.html#ifcms)
   - ifapd [走矢灯](http://kt.sakura.ne.jp/~timeflow/MENU.HTM)
   - iftwic [TORO's HomePage](http://toro.d.dooo.jp/slplugin.html#iftwic)

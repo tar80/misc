@@ -1,8 +1,7 @@
 //!*script
 // リストファイルを作ったり追記する
 // %si"ppp" = 処理元ディレクトリ
-if(PPx.EntryMarkCount == 0) PPx.Quit(1);
-
+if(PPx.EntryMarkCount == 0) PPx.EntryMark = 1
 var fso = PPx.CreateObject("Scripting.FileSystemObject");
 var cDir = PPx.Extract("%FDN%\\");
 var Count = PPx.Entry.Count;

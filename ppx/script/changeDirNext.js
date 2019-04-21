@@ -1,41 +1,33 @@
-//!*script
-// “¯ŠK‘w‚Ì—×‚ÌƒfƒBƒŒƒNƒgƒŠ‚ÉˆÚ“®
-// QÆŒ³:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
+ï»¿//!*script
+// åŒéšå±¤ã®éš£ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ç§»å‹•
+// å‚ç…§å…ƒ:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
+// è¦ªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å®Ÿæ…‹ãŒãªã‘ã‚Œã°çµ‚äº†
 if(PPx.DirectoryType != 1) PPx.Quit(1);
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var fn = PPx.Extract('%FDN');
 var currentDir = fso.GetFolder(fn);
-// eƒfƒBƒŒƒNƒgƒŠ‚ªƒ‹[ƒgorƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ª‚È‚¯‚ê‚ÎI—¹
+// è¦ªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒãƒ«ãƒ¼ãƒˆorã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒãªã‘ã‚Œã°çµ‚äº†
 if(currentDir.IsRootFolder || currentDir.ParentFolder.SubFolders.count == 1){
-  PPx.SetPopLineMessage('!"ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ª‚ ‚è‚Ü‚¹‚ñ');
+  PPx.SetPopLineMessage('!"ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒã‚ã‚Šã¾ã›ã‚“');
   PPx.Quit(1);
 }
-// “¯ŠK‘w‚ÌƒfƒBƒŒƒNƒgƒŠ‚ÌƒŠƒXƒg‚ğæ“¾
+// åŒéšå±¤ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ãƒªã‚¹ãƒˆã‚’å–å¾—
 var e = new Enumerator(currentDir.ParentFolder.SubFolders);
 var flds = new Array();
 for(e.moveFirst(); !e.atEnd(); e.moveNext()){
-  //ƒfƒBƒŒƒNƒgƒŠ‘®«‚ğl—¶‚µ‚ÄƒŠƒXƒg‚É’Ç‰Á
+  //ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå±æ€§ã‚’è€ƒæ…®ã—ã¦ãƒªã‚¹ãƒˆã«è¿½åŠ 
   var en = fso.GetFolder(fso.BuildPath(currentDir.ParentFolder.Path, e.item().Name));
   if (en.Attributes <= 17) flds.push(e.item().Name);
 }
-for(var i = 0, l = flds.length; i < l; i++){
-  if(flds[i] == currentDir.Name)
-    break;
-}
-// Ÿ‚ÌƒfƒBƒŒƒNƒgƒŠ‚ğæ“¾
-var nextDir = flds[Math.min(i + 1, l - 1)];
-// ÅIƒfƒBƒŒƒNƒgƒŠ
-if(flds[i + 2] == undefined) PPx.SetPopLineMessage('!">>end');
-PPx.Execute('*jumppath "' + fso.BuildPath(fso.GetParentFolderName(fn), nextDir) + '"');
-
-/*
-  for(var item in flds){
+// åå‰é †ã§ã‚½ãƒ¼ãƒˆ
+flds.sort(function(a, b){return a.toLowerCase() > b.toLowerCase()? 1: -1;});
+for(var item in flds){
   if(flds[item] == currentDir.Name)
     break;
 }
-var nextDir = flds[Math.min(item + 1,flds.length)];
-if(flds[item + 2] == undefined) PPx.SetPopLineMessage('!">>end');
+// æ¬¡ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å–å¾—
+var nextDir = flds[Math.max(item - 1, 0)];
+// æœ€çµ‚ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+if(flds[item - 2] == null) PPx.SetPopLineMessage('!">>end');
 PPx.Execute('*jumppath "' + fso.BuildPath(fso.GetParentFolderName(fn), nextDir) + '"');
-// ª‚¾‚ÆAitem + 1 ‚ª‚¤‚Ü‚­“®‚©‚È‚¢——R‚ª‚í‚©‚ç‚Ü‚¹‚ñ
-  */

@@ -1,6 +1,6 @@
-//!*script
-// ƒ}[ƒN‚ÆƒnƒCƒ‰ƒCƒg‚ğƒgƒOƒ‹
-// QÆŒ³:http://hoehoetukasa.blogspot.com/2015/08/blog-post.html
+ï»¿//!*script
+// ãƒãƒ¼ã‚¯ã¨ãƒã‚¤ãƒ©ã‚¤ãƒˆã‚’ãƒˆã‚°ãƒ«
+// å‚ç…§å…ƒ:http://hoehoetukasa.blogspot.com/2015/08/blog-post.html
 for(var i = 0,l = PPx.EntryAllCount; i < l; i++){
   if(PPx.Entry(i).Mark == 1){
     PPx.Entry(i).Highlight = 2;

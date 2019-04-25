@@ -1,5 +1,5 @@
-//!*script
-// undoÀs‚ÉƒƒO‘‹‚É“à—e•\¦
+ï»¿//!*script
+// undoå®Ÿè¡Œæ™‚ã«ãƒ­ã‚°çª“ã«å†…å®¹è¡¨ç¤º
 var bu = PPx.Extract('%*getcust(X_save)');
 var sr = new ActiveXObject('ADODB.Stream');
 sr.type = 2;

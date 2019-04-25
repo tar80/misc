@@ -1,3 +1,3 @@
-//!*script
-// ƒCƒxƒ“ƒg‰ğœ”Ä—p
+ï»¿//!*script
+// ã‚¤ãƒ™ãƒ³ãƒˆè§£é™¤æ±ç”¨
 PPx.Execute('*setcust KC_main:-|SELECTEVENT= %: *setcust KC_main:-|LOADEVENT=');

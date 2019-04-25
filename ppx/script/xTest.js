@@ -1,5 +1,5 @@
-//!*script
-// •Ï”Šm”F—p
+ï»¿//!*script
+// å¤‰æ•°ç¢ºèªç”¨
 var fd = PPx.Extract('%FD%\\');
 //PPx.Echo();
 //PPx.SetPopLineMessage();
@@ -7,24 +7,24 @@ var fd = PPx.Extract('%FD%\\');
 PPx.EntryHighlight = PPx.Arguments(0);
 
 //PPx.Echo(PPx.Extract(PPx.Entry(0).Name));
-//ƒfƒBƒŒƒNƒgƒŠ‚Ìí—Ş
+//ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ç¨®é¡
 // PPx.Echo(PPx.DirectoryType);
-// ‘ŒÉ‚Ì‚ ‚éƒfƒBƒŒƒNƒgƒŠ‚Ì’Šo
+// æ›¸åº«ã®ã‚ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®æŠ½å‡º
 //PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FD\",\"s/^(.*)\\\\.*(zip|rar)$/$1/\")"))
-// ‘ŒÉ–¼‚Ì’Šo//PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FDC\",\"s/^(.*\\\\.*?(zip)).*/$2/\")"))
-// ƒRƒƒ“ƒg
+// æ›¸åº«åã®æŠ½å‡º//PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FDC\",\"s/^(.*\\\\.*?(zip)).*/$2/\")"))
+// ã‚³ãƒ¡ãƒ³ãƒˆ
 //PPx.Execute("*linemessage %*comment(1)");
-// ”½‘Î‘‹ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ
+// åå¯¾çª“ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 //PPx.SetPopLineMessage(PPx.GetFileInformation(fn))
 // PPx ID
 //PPx.SetPopLineMessage("IDname:" + PPx.WindowIDName);
-// PPx ˆê–‡‘‹‚ÌID
+// PPx ä¸€æšçª“ã®ID
 //PPx.SetPopLineMessage("comboIDname:" + PPx.ComboIDName);
-// PPxˆê–‡‘‹‚Ì”
+// PPxä¸€æšçª“ã®æ•°
 //PPx.SetPopLineMessage("combo:" + PPx.GetComboItemCount);
-// PPxˆê–‡‘‹‚ÌƒyƒCƒ“”
+// PPxä¸€æšçª“ã®ãƒšã‚¤ãƒ³æ•°
 //PPx.SetPopLineMessage("pane:" + PPx.Pane.Count);
 // PPx.SetPopLineMessage("tab:" + PPx.Pane.Tab.Count);
 //PPx.Echo(PPx.SyncView);
-// ”Ä—pˆê—˜—pƒpƒX
+// æ±ç”¨ä¸€æ™‚åˆ©ç”¨ãƒ‘ã‚¹
 //PPx.Echo(PPx.Extract('%si"ppp"'));

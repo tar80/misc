@@ -1,29 +1,29 @@
-//!*script
-// ƒŠƒXƒg•\¦Ø‚è‘Ö‚¦
+ï»¿//!*script
+// ãƒªã‚¹ãƒˆè¡¨ç¤ºåˆ‡ã‚Šæ›¿ãˆ
 if(PPx.Extract('%n') == 'CX'){
   if(PPx.DirectoryType >= 62){
-    PPx.Execute('*RotateExecute ViewStyleC,*viewstyle "–Ÿ‰æ:¬(&M)",*viewstyle "–Ÿ‰æ:‘å(&M)"');
+    PPx.Execute('*RotateExecute ViewStyleC,*viewstyle "æ¼«ç”»:å°(&M)",*viewstyle "æ¼«ç”»:å¤§(&M)"');
   } else{
-    PPx.Execute('*RotateExecute ViewStyleB,*viewstyle "‰æ‘œ:¬(&P)",*viewstyle "‰æ‘œ:’†(&P)",*viewstyle "‰æ‘œ:‘å(&P)"');
+    PPx.Execute('*RotateExecute ViewStyleB,*viewstyle "ç”»åƒ:å°(&P)",*viewstyle "ç”»åƒ:ä¸­(&P)",*viewstyle "ç”»åƒ:å¤§(&P)"');
     PPx.Quit(1);
   }
 }
 switch(PPx.Extract(PPx.DirectoryType)){
 case '4':
-  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle -temp ƒŠƒXƒg:–¼‘O(&L),*viewstyle -temp ƒŠƒXƒg:s•\¦(&L)');
+  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle -temp ãƒªã‚¹ãƒˆ:åå‰(&L),*viewstyle -temp ãƒªã‚¹ãƒˆ:è¡Œè¡¨ç¤º(&L)');
   break;
 default:
-  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle -temp (&T) %%:*sortentry &T:‹t‡,*viewstyle -temp ƒTƒ€ƒlƒCƒ‹:¬(&T) %%:*sortentry &D:•W€,*viewstyle -temp ƒTƒ€ƒlƒCƒ‹:’†(&T),*viewstyle ƒAƒCƒRƒ“(&I)');
+  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle -temp æ™‚åˆ»(&T) %%:*sortentry &T:é€†é †,*viewstyle -temp ã‚µãƒ ãƒã‚¤ãƒ«:å°(&T) %%:*sortentry &D:æ¨™æº–,*viewstyle -temp ã‚µãƒ ãƒã‚¤ãƒ«:ä¸­(&T),*viewstyle ã‚¢ã‚¤ã‚³ãƒ³(&I)');
   break;
 }
 /*
 if(PPx.Extract('%n') == 'CX'){
   if(PPx.DirectoryType >= 62){
-    PPx.Execute('*RotateExecute ViewStyleC,*viewstyle "–Ÿ‰æ:¬(&M)",*viewstyle "–Ÿ‰æ:‘å(&M)"');
+    PPx.Execute('*RotateExecute ViewStyleC,*viewstyle "æ¼«ç”»:å°(&M)",*viewstyle "æ¼«ç”»:å¤§(&M)"');
   } else{
-    PPx.Execute('*RotateExecute ViewStyleB,*viewstyle "‰æ‘œ:¬(&P)",*viewstyle "‰æ‘œ:’†(&P)",*viewstyle "‰æ‘œ:‘å(&P)"');
+    PPx.Execute('*RotateExecute ViewStyleB,*viewstyle "ç”»åƒ:å°(&P)",*viewstyle "ç”»åƒ:ä¸­(&P)",*viewstyle "ç”»åƒ:å¤§(&P)"');
   }
 } else{
-  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle "ˆê——:–¼‘O(&A)",*viewstyle "ƒTƒ€ƒlƒCƒ‹:¬(&T)",*viewstyle "ƒTƒ€ƒlƒCƒ‹:’†(&T)",*viewstyle "ƒAƒCƒRƒ“(&I)"');
+  PPx.Execute('*RotateExecute ViewStyleA,*viewstyle "ä¸€è¦§:åå‰(&A)",*viewstyle "ã‚µãƒ ãƒã‚¤ãƒ«:å°(&T)",*viewstyle "ã‚µãƒ ãƒã‚¤ãƒ«:ä¸­(&T)",*viewstyle "ã‚¢ã‚¤ã‚³ãƒ³(&I)"');
 }
  */

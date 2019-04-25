@@ -1,6 +1,6 @@
-//!*script
-// ƒCƒ“ƒNƒŠƒƒ“ƒ^ƒ‹ƒT[ƒ`’†AŒŸõ‘ÎÛƒGƒ“ƒgƒŠ‚ğ‘S‚Äƒ}[ƒNƒgƒOƒ‹
-// QÆŒ³:http://hoehoetukasa.blogspot.com/2015/08/blog-post.html
+ï»¿//!*script
+// ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ã‚¿ãƒ«ã‚µãƒ¼ãƒä¸­ã€æ¤œç´¢å¯¾è±¡ã‚¨ãƒ³ãƒˆãƒªã‚’å…¨ã¦ãƒãƒ¼ã‚¯ãƒˆã‚°ãƒ«
+// å‚ç…§å…ƒ:http://hoehoetukasa.blogspot.com/2015/08/blog-post.html
 for(var i = 0,l = PPx.EntryAllCount; i < l; i++){
   if(PPx.Entry(i).Highlight == 1){
     PPx.Entry(i).Highlight = 0;

@@ -1,3 +1,3 @@
-//!*script
-// ƒtƒH[ƒJƒX‚ğ–ß‚· syncview—p
+ï»¿//!*script
+// ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’æˆ»ã™ syncviewç”¨
 PPx.Execute('*focus');

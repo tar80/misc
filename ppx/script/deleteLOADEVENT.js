@@ -1,4 +1,4 @@
-//!*script
-// ƒTƒ€ƒlƒCƒ‹‚ÌƒLƒƒƒbƒVƒ…‚ð‰ðœ
-// ‘ŒÉƒTƒ€ƒlƒCƒ‹‚ð‰ðœ
+ï»¿//!*script
+// ã‚µãƒ ãƒã‚¤ãƒ«ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’è§£é™¤
+// æ›¸åº«ã‚µãƒ ãƒã‚¤ãƒ«ã‚’è§£é™¤
 PPx.Execute('*setcust KC_main:-|LOADEVENT=');

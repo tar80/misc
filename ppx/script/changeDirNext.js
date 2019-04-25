@@ -21,7 +21,7 @@ for(e.moveFirst(); !e.atEnd(); e.moveNext()){
   if (en.Attributes <= 17) flds.push(e.item().Name);
 }
 // 名前順でソート
-flds.sort(function(a, b){return a.toLowerCase() > b.toLowerCase()? 1: -1;});
+flds.sort(function(a, b){return a.toLowerCase() < b.toLowerCase()? 1: -1;});
 for(var item in flds){
   if(flds[item] == currentDir.Name)
     break;

@@ -1,5 +1,5 @@
-//!*script
-// PPv‚Ì‘‹ƒTƒCƒY‚ğƒgƒOƒ‹
+ï»¿//!*script
+// PPvã®çª“ã‚µã‚¤ã‚ºã‚’ãƒˆã‚°ãƒ«
 if(PPx.WindowIDName == 'V_Z'){
   var ppvwidth = PPx.Extract('%*windowrect(,w)');
   var ppcwidth = PPx.Extract('%*windowrect(' + PPx.Extract("%*findwindowclass(\"PaperPlaneCombo\")") + ',w)');

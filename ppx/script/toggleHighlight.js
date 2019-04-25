@@ -1,3 +1,3 @@
-//!*script
-// ƒGƒ“ƒgƒŠ‚ÉF•t‚¯ƒ`ƒFƒbƒN
+ï»¿//!*script
+// ã‚¨ãƒ³ãƒˆãƒªã«è‰²ä»˜ã‘ãƒã‚§ãƒƒã‚¯
 PPx.EntryHighlight = PPx.EntryHighlight == 2? 0 : 2;

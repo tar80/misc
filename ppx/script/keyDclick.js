@@ -1,6 +1,6 @@
-//!*script
-// �_�u���N���b�NPPV�Ăяo���p
-// PPc[X]�͉摜��p
+﻿//!*script
+// ダブルクリックPPV呼び出し用
+// PPc[X]は画像専用
 var vpath = PPx.Extract('%FDC');
 
 switch(PPx.Extract(PPx.WindowIDName)){

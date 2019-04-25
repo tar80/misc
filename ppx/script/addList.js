@@ -1,6 +1,6 @@
-//!*script
-// ƒŠƒXƒgƒtƒ@ƒCƒ‹‚ğì‚Á‚½‚è’Ç‹L‚·‚é
-// %si"ppp" = ˆ—Œ³ƒfƒBƒŒƒNƒgƒŠ
+ï»¿//!*script
+// ãƒªã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œã£ãŸã‚Šè¿½è¨˜ã™ã‚‹
+// %si"ppp" = å‡¦ç†å…ƒãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 if(PPx.EntryMarkCount == 0) PPx.EntryMark = 1
 var fso = PPx.CreateObject("Scripting.FileSystemObject");
 var cDir = PPx.Extract("%FDN%\\");
@@ -17,13 +17,13 @@ default:
   break;
 }
 if(PPx.DirectoryType == 4){
-  for(i = 0; i < Count; i++){
+  for(var i = 0; i < Count; i++){
     if(PPx.Entry(i).Mark == 1){
       pList.WriteLine(PPx.Entry(i).Name);
     }
   }
 } else{
-  for(i = 0; i < Count; i++){
+  for(var i = 0; i < Count; i++){
     if(PPx.Entry(i).Mark == 1){
       pList.WriteLine(cDir + PPx.Entry(i).Name);
     }

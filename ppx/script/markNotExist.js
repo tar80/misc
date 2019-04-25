@@ -1,9 +1,9 @@
-//!*script
-// ƒŠƒXƒgƒtƒ@ƒCƒ‹ã‚Ì‘¶İ‚µ‚È‚¢ƒtƒ@ƒCƒ‹‚ğƒ}[ƒN
+ï»¿//!*script
+// ãƒªã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ä¸Šã®å­˜åœ¨ã—ãªã„ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒãƒ¼ã‚¯
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 for(var i = 0,l = PPx.Entry.Count; i < l; ++i){
   var fn = PPx.Entry(i).Name;
   if(!(fso.FileExists(fn) || fso.FolderExists(fn))){
-    PPx.Entry(i).Mark = -1;
+    PPx.Entry(i).Mark = 1;
   }
 }

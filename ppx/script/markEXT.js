@@ -1,5 +1,5 @@
-//!*script
-// ƒJ[ƒ\ƒ‹‰ºƒGƒ“ƒgƒŠ‚ÌŠg’£q‚Åƒ}[ƒNƒgƒOƒ‹
+ï»¿//!*script
+// ã‚«ãƒ¼ã‚½ãƒ«ä¸‹ã‚¨ãƒ³ãƒˆãƒªã®æ‹¡å¼µå­ã§ãƒãƒ¼ã‚¯ãƒˆã‚°ãƒ«
 if(PPx.EntryMarkCount == 0){
   PPx.Execute('*markentry *.%t');
 } else{

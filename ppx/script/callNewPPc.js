@@ -1,6 +1,6 @@
-//!*script
-// V‹K“Æ—§‘‹ŒÄ‚Ño‚µ
-// QÆŒ³:http://hoehoetukasa.blogspot.com/2014/05/blog-post_20.html
+ï»¿//!*script
+// æ–°è¦ç‹¬ç«‹çª“å‘¼ã³å‡ºã—
+// å‚ç…§å…ƒ:http://hoehoetukasa.blogspot.com/2014/05/blog-post_20.html
 for (var i = 67; i < 91; i++) {
   var ppcid = String.fromCharCode(i);
   if (!PPx.Extract('%NC' + ppcid)){

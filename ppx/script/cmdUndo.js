@@ -9,5 +9,5 @@ sr.loadFromFile(PPx.extract('%0') + '\\' + bu + '\\PPXUNDO.LOG');
 var str = sr.readText(-1).replace(/\w*\t(.*)\n.*\t(.*)\n.*/, '$2\n>>$1','im');
 
 PPx.SetPopLineMessage(str);
-PPx.Execute('*ppcfile !Undo /min /nocount');
+PPx.Execute('*file !Undo /min /nocount');
 PPx.Quit(1);

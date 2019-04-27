@@ -1,11 +1,15 @@
 ﻿//!*script
 // 変数確認用
-var fd = PPx.Extract('%FD%\\');
+var dp = PPx.Extract('%FD');
+var fp = PPx.Extract('%FDC');
+var fn = PPx.Extract('%FC');
+var odp = PPx.Extract('%2');
+var odn = PPx.Extract('%2%\\%R');
+PPx.SetPopLineMessage(PPx.Extract('%*input("%*regexp("%FX","s/(.*\)(.*)/$1$2/")").txt'));
 //PPx.Echo();
 //PPx.SetPopLineMessage();
 // PPx.SetPopLineMessage(PPx.Extract("%NC"));
-PPx.EntryHighlight = PPx.Arguments(0);
-
+//PPx.EntryHighlight = PPx.Arguments(0);
 //PPx.Echo(PPx.Extract(PPx.Entry(0).Name));
 //ディレクトリの種類
 // PPx.Echo(PPx.DirectoryType);
@@ -28,3 +32,20 @@ PPx.EntryHighlight = PPx.Arguments(0);
 //PPx.Echo(PPx.SyncView);
 // 汎用一時利用パス
 //PPx.Echo(PPx.Extract('%si"ppp"'));
+//
+//     PPx.Execute('*capturewindow V%si"vID" -pane:~ -selectnoactive');
+//     PPx.Execute('*wait 100,1');
+    //PPx.Execute('*AHK ActivatePPx.ahk');
+    //PPx.Execute('*focus');
+ /* else if(PPx.extract('%n') == 'CX'){
+    PPx.Execute('*string i,vID=X');
+    PPx.Execute('%Oi *setcust X_win:V=B100000000 %:*ppv -r -bootid:%si"vID"');
+    PPx.Execute('*topmostwindow %NVX,1');
+    PPx.Execute('*ppvoption sync %si"vID"');
+  } else{
+    PPx.Execute('*string i,vID=Y');
+    var ppvid = 'V' + PPx.Extract('%si"vID"');
+    PPx.Execute('%Oi *setcust X_win:V=B000000000 %:*ppv -r -bootid:%si"vID"');
+    PPx.Execute('*topmostwindow %N' + ppvid + ',1');
+    PPx.Execute('*ppvoption sync %si"vID"');
+  }*/

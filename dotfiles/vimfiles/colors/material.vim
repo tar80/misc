@@ -1,6 +1,6 @@
 " Vim Color File
 " Name:       material.vim
-" Maintainer: tar
+" Maintainer: tar80
 " License:    none
 " Based On:   https://github.com/kaicataldo/material.vim
 

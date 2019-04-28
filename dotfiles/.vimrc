@@ -12,7 +12,7 @@ scriptencoding utf-8
 "
 "# Variable
 let $HOME='C:/bin/home'
-let mapleader='s'
+let mapleader=';'
 "# 標準のparenを読み込まずにプラグインのparenmatchを読み込む
 let g:loaded_matchparen=1
 "
@@ -183,7 +183,7 @@ let g:unite_redraw_hold_candidates = 1000
 "g:unite_source_bookmark_directory = 
 let g:unite_source_rec_min_cache_files = 20
 let g:unite_source_rec_max_cache_files = 5000
-" let g:unite_source_rec_async_command = ["find","-L"]
+let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
 "let g:unite_source_rec_find_args = ['','']
 "let g:unite_source_rec_git_command =
 if executable('ag')
@@ -342,18 +342,18 @@ vnoremap > >gv
 "# plugins{{{
 "# unite
 nnoremap <silent> <leader>u :<C-u>Unite<CR>
-nnoremap <silent> <leader>d :<C-u>Unite -buffer-name=file_rec -sync file_rec/async<CR>
-nnoremap <silent> <leader>s :<C-u>Unite -buffer-name=files buffer file<CR>
-nnoremap <silent> <leader>r :<C-u>Unite -buffer-name=oldfiles oldfiles<CR>
+nnoremap <silent> <leader>f :<C-u>Unite -buffer-name=file_rec -sync file_rec/async<CR>
+nnoremap <silent> <leader>; :<C-u>Unite -buffer-name=files buffer file<CR>
+nnoremap <silent> <leader>o :<C-u>Unite -buffer-name=oldfiles oldfiles<CR>
 nnoremap <silent> <leader>g :<C-u>Unite -tab -no-start-insert -buffer-name=grep -previewheight=20 grep<CR>
-nnoremap <silent> <leader>a :<C-u>Unite -buffer-name=line line<CR>
+nnoremap <silent> <leader>l :<C-u>Unite -buffer-name=line line<CR>
 noremap <silent> <C-z> :<C-u>Unite -no-start-insert -winwidth=50 -direction=botright
       \ -split -vertical -no-restore history/yank<CR>
 inoremap <silent><expr> <C-z> unite#start_complete(
       \ ['history/yank'], {'winwidth':50, 'split':1, 'vertical':1, 'restore':0})
 "# caw
-nmap <leader>t <Plug>(caw:zeropos:toggle)
-nmap <leader>; <Plug>(caw:dollarpos:toggle)
+nmap <leader>s <Plug>(caw:zeropos:toggle)
+nmap <leader>t <Plug>(caw:dollarpos:toggle)
 "# migemo
 " cnoremap <silent><expr> <CR> migemosearch#replace_search_word()."\<CR>"
 "#}}}

@@ -1,0 +1,44 @@
+-- This is a sample .nyagos written with Lua.
+-- Edit and put it on %USERPROFILE%, %HOME% or the same folder with nyagos.exe
+
+-- Sample : function
+nyagos.prompt = function(this)
+    local wd = nyagos.getwd()
+    local env = nyagos.env
+    local home = env.HOME or env.USERPROFILE
+    local home_len = home:len()
+    if wd:sub(1,home_len) == home then
+        wd = "~" .. wd:sub(home_len+1)
+    end
+    local title = "NYAGOS - " .. wd
+    if nyagos.elevated() then
+        return nyagos.default_prompt('$e[40;31;1m'..this..'$e[37;1m',title)
+    else
+        return nyagos.default_prompt('$e[40;36;1m'..this..'$e[37;1m',title)
+    end
+end
+
+-- 履歴数
+nyagos.histsize=500
+
+-- 環境変数
+nyagos.env.APPS="C:/bin"
+nyagos.env.path="C:/bin/git/cmd/;C:/bin/git/mingw64/libexec/git-core;C:/bin/git/usr/bin;" .. nyagos.env.path
+
+-- エイリアス
+nyagos.alias.cdn="cd %APPS%/nyagos"
+nyagos.alias.cdp="cd %APPS%/ppx"
+nyagos.alias.cdg="cd C:/bin/repository/tar80/misc"
+nyagos.alias.g_cg="git config --global"
+nyagos.alias.g_set="git remote set-url origin git@github.com:tar80/misc.git"
+nyagos.alias.vim="C:/bin/vim/vim81/vim.exe"
+nyagos.alias.peco_grep = function(args)
+    local wd = nyagos.getwd()
+-- ※pecoがエラー吐くので& > @に置換
+    local gpr = nyagos.eval("grep -inr "..args[1].." "..args[2].." | nkf -Lu -w | sed \"s/&/@/\" | peco")
+    local gpr = nyagos.eval('echo '..gpr..' | nkf -Lw')
+    local fn = nyagos.eval('echo '..gpr..' | sed -nr "s/(.*):[0-9]+:.*/\\1/gp"')
+    local gl = nyagos.eval('echo '..gpr..' | sed -nr "s/.*:([0-9]+):.*/\\1/gp"')
+    nyagos.rawexec(nyagos.alias.vim,fn,"+"..gl)
+end
+-- vim:set ft=lua: --

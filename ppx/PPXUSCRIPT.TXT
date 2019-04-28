@@ -1,0 +1,5 @@
+PPx.Extract( ;展開
+PPx.Execute( ;実行
+PPx.SetPopLineMessage( ;ログ窓にメッセージを送る
+PPx.Quit(-1) ;スクリプト停止
+PPx.Echo( ;ダイアログを出す

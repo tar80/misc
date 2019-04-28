@@ -1,0 +1,7 @@
+[user]
+    name = tar80
+    email = tar80master@gmail.com
+[ghq]
+    root = C:/bin/repository
+[core]
+    editor = C:/bin/vim/vim81/vim.exe -n -c 'set fenc=utf-8'

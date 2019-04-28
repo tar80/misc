@@ -24,7 +24,7 @@ if(PPx.Arguments(0) >= 2){
   Tdp = PPx.Extract('%*input("' + Tdp +'" -title:"コピー先" -mode:d)%*addchar(\\)');
   if(Tdp != ''){
     var att = PPx.GetFileInformation(fp) == ":DIR"? "/D ": "";
-    PPx.Execute('%On *ppb -runas -c mklink ' + att + Tdp + fn + ' ' + fp);
+    PPx.Execute('%Orn *ppb -runas -c mklink ' + att + Tdp + fn + ' ' + fp);
   }
 } else if(PPx.DirectoryType >= 62){
   PPx.Execute('%u7-zip64.dll,x -aos -hide "%1" -o%"解凍先"%{' + Tdp + '%} %@');

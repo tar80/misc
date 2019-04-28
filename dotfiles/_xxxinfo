@@ -1,0 +1,92 @@
+# この viminfo ファイルは Vim 8.1 によって生成されました.
+# 変更する際には十分注意してください!
+
+# Viminfo version
+|1,4
+
+# このファイルが書かれた時の 'encoding' の値
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+# 最後の Substitute 検索パターン:
+# 最後に置換された文字列:
+# コマンドライン 項目の履歴 (新しいものから古いものへ):
+:lcd %:h
+|2,0,1556194498,,"lcd %:h"
+:lcd ~/
+|2,0,1556194479,,"lcd ~/"
+:lcd C:/bin/
+|2,0,1556194470,,"lcd C:/bin/"
+:Gcommit
+|2,0,1556194428,,"Gcommit"
+:Gdiff
+|2,0,1556194412,,"Gdiff"
+:Gstatus
+|2,0,1556194401,,"Gstatus"
+:Gwrite
+|2,0,1556194359,,"Gwrite"
+:tab ball
+|2,0,1556194334,,"tab ball"
+:tabnew
+|2,0,1556194325,,"tabnew"
+:so $VIM/vim81/syntax/hitest.vim
+|2,0,1556194313,,"so $VIM/vim81/syntax/hitest.vim"
+:Difforg
+|2,0,1556194227,,"Difforg"
+:set noexpandtab
+|2,0,1556194221,,"set noexpandtab"
+:set noro
+|2,0,1556194209,,"set noro"
+:set spell
+|2,0,1556194202,,"set spell"
+:set fenc=utf-8 ff=unix
+|2,0,1556194196,,"set fenc=utf-8 ff=unix"
+:set fenc=sjis ff=dos
+|2,0,1556194179,,"set fenc=sjis ff=dos"
+:e ++enc=utf-8 ++ff=unix
+|2,0,1556194166,,"e ++enc=utf-8 ++ff=unix"
+:e ++enc=sjis ++ff=dos
+|2,0,1556194141,,"e ++enc=sjis ++ff=dos"
+:marks
+|2,0,1556194028,,"marks"
+:retab!
+|2,0,1556193983,,"retab!"
+:inoreabbrev
+|2,0,1556193973,,"inoreabbrev"
+:vertical diffsplit
+|2,0,1556193940,,"vertical diffsplit"
+:saveas
+|2,0,1556193926,,"saveas"
+:tabclose
+|2,0,1547456013,,"tabclose"
+:tabonly
+|2,0,1547456013,,"tabonly"
+:PlugStatus
+|2,0,1546222660,,"PlugStatus"
+:PlugInstall
+|2,0,1546222660,,"PlugInstall"
+:PlugUpdate
+|2,0,1546222660,,"PlugUpdate"
+:PlugDiff
+|2,0,1546222660,,"PlugDiff"
+:PlugClean
+|2,0,1546222660,,"PlugClean"
+:lcd C:/bin/ppx/
+|2,0,1546222527,,"lcd C:/bin/ppx/"
+
+# 検索文字列 項目の履歴 (新しいものから古いものへ):
+# 式 項目の履歴 (新しいものから古いものへ):
+# 入力行 項目の履歴 (新しいものから古いものへ):
+# デバッグ行 項目の履歴 (新しいものから古いものへ):
+# レジスタ:
+"g	LINE	0
+	C:/git/tar80/misc/
+|3,0,16,1,1,0,1545963168,"C:/git/tar80/misc/"
+"p	LINE	0
+	D:/Apps/ppx/
+|3,0,25,1,1,0,1545963152,"D:/Apps/ppx/"
+# ファイルマーク:
+# ジャンプリスト (新しいものが先):
+# バッファリスト:
+# ファイル内マークの履歴 (新しいものから古いもの):

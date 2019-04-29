@@ -29,10 +29,11 @@ nyagos.env.path="C:/bin/git/cmd/;C:/bin/git/mingw64/libexec/git-core;C:/bin/git/
 nyagos.alias.cdn="cd %APPS%/nyagos"
 nyagos.alias.cdp="cd %APPS%/ppx"
 nyagos.alias.cdg="cd C:/bin/repository/tar80/misc"
-nyagos.alias.g_cg="git config --global"
-nyagos.alias.g_set="git remote set-url origin git@github.com:tar80/misc.git"
+nyagos.alias.gcg="git config --global"
+nyagos.alias.gfo="git fetch origin"
+nyagos.alias.gset="git remote set-url origin git@github.com:tar80/misc.git"
 nyagos.alias.vim="C:/bin/vim/vim81/vim.exe"
-nyagos.alias.peco_grep = function(args)
+nyagos.alias.pg = function(args)
     local wd = nyagos.getwd()
 -- Å¶pecoÇ™ÉGÉâÅ[ìfÇ≠ÇÃÇ≈& > @Ç…íuä∑
     local gpr = nyagos.eval("grep -inr "..args[1].." "..args[2].." | nkf -Lu -w | sed \"s/&/@/\" | peco")

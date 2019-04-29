@@ -29,5 +29,5 @@ for(var item in flds){
 // 次のディレクトリを取得
 var nextDir = flds[Math.max(item - 1, 0)];
 // 最終ディレクトリ
-if(flds[item - 2] == null) PPx.SetPopLineMessage('!">>end');
+if(flds[item - 2] == null) PPx.SetPopLineMessage('!">>bottom');
 PPx.Execute('*jumppath "' + fso.BuildPath(fso.GetParentFolderName(fn), nextDir) + '"');

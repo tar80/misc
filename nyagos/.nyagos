@@ -26,11 +26,12 @@ nyagos.env.APPS="C:/bin"
 nyagos.env.path="C:/bin/git/cmd/;C:/bin/git/mingw64/libexec/git-core;C:/bin/git/usr/bin;" .. nyagos.env.path
 
 -- エイリアス
-nyagos.alias.cdn="cd %APPS%/nyagos"
-nyagos.alias.cdp="cd %APPS%/ppx"
-nyagos.alias.cdg="cd C:/bin/repository/tar80/misc"
+nyagos.alias.cdnya="cd %APPS%/nyagos"
+nyagos.alias.cdppx="cd %APPS%/ppx"
+nyagos.alias.cdgit="cd C:/bin/repository/tar80/misc"
 nyagos.alias.gcg="git config --global"
 nyagos.alias.gfo="git fetch origin"
+nyagos.alias.gc="git checkout"
 nyagos.alias.gset="git remote set-url origin git@github.com:tar80/misc.git"
 nyagos.alias.vim="C:/bin/vim/vim81/vim.exe"
 nyagos.alias.pg = function(args)

@@ -208,6 +208,7 @@ let g:unite_source_grep_encoding = "utf-8"
 "let g:unite_kind_openable_persist_open_blink_time = "250m"
 "let g:unite_converter_file_directory_width = 45
 let g:unite_matcher_fuzzy_max_input_length = 20
+let g:neoyank#limit = 20
 "
 call unite#custom#source('line,grep', 'matchers', 'matcher_migemo')
 call unite#custom#source('file,file_rec,file_rec/async', 'matchers', ['converter_tail', 'matcher_fuzzy'])

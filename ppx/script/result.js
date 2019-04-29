@@ -29,8 +29,8 @@ switch(PPx.Arguments(0)){
     break;
     //case break;
     /*
-case 'oppdirtype':
-  PPx.Result = PPx.GetFileInformation(PPx.Extract("%2"));
-  break;
-  */
+  case 'oppdirtype':
+    PPx.Result = PPx.GetFileInformation(PPx.Extract("%2"));
+    break;
+    */
 }

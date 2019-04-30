@@ -275,7 +275,7 @@ endfunction
 "#{{{
 augroup vimrcAU
   autocmd!
-  autocmd BufEnter * lcd %:p:h
+"   autocmd BufEnter * lcd %:p:h        "#fugitiveでエラーがでる
   autocmd QuitPre * rviminfo! ~/_xxxinfo
 augroup END
 "

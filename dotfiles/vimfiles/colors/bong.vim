@@ -1,8 +1,8 @@
 " Vim Color File
-" Name:       material.vim
+" Name:       bong.vim
 " Maintainer: tar80
-" License:    none
-" Based On:   https://github.com/kaicataldo/material.vim
+" License:    MIT(https://opensource.org/licenses/mit-license.php)
+" Based On:   https://github.com/kaicataldo/bong.vim
 
 highlight clear
 
@@ -10,44 +10,31 @@ if exists('syntax_on')
   syntax reset
 endif
 
-set background=dark
-let g:colors_name = 'material'
+let g:colors_name = 'bong'
 
-let g:material_terminal_italics = get(g:, 'material_terminal_italics', 0)
-let g:material_theme_style = get(g:, 'material_theme_style', 'default')
+let g:bong_terminal_italics = get(g:, 'bong_terminal_italics', 0)
+let g:bong_theme_style = get(g:, 'bong_theme_style', 'default')
 
 " Color Palette
-if g:material_theme_style == 'default'
-  let s:gray1 = '#263238'
-elseif g:material_theme_style == 'palenight'
-  let s:gray1 = '#292D3E'
-elseif g:material_theme_style == 'dark'
-  let s:gray1 = '#000000'
-endif
-
-let s:gray2     = g:material_theme_style == 'dark' ? '#292929' : '#2c3a41'
-let s:gray3     = g:material_theme_style == 'dark' ? '#474646' : '#425762'
-let s:gray4     = g:material_theme_style == 'dark' ? '#6a6c6c' : '#658494'
-let s:gray5     = g:material_theme_style == 'dark' ? '#BEC3C8' : '#aebbc5'
-" let s:gray5     = g:material_theme_style == 'dark' ? '#b7bdc0' : '#aebbc5'
-let s:red       = '#E4435B'
-" let s:red       = '#ff5370'
-let s:green     = '#B3DA6D'
-" let s:green     = '#c3e88d'
-let s:yellow    = '#FAE280'
-" let s:yellow    = '#ffcb6b'
-let s:blue      = '#80A6E7'
-" let s:blue      = '#82aaff'
-let s:purple    = '#c792ea'
-let s:cyan      = '#89ddff'
-let s:orange    = '#f78c6c'
-let s:indigo    = '#BB80B3'
-let s:navy      = '#1D1E81'
-let s:brown     = '#462C2C'
+let s:gray1     = '#000b00'    " îGÇÍâHêF
+let s:gray2     = '#2B2B2B'    " òXêF
+let s:gray3     = '#595857'    " ñn
+let s:gray4     = '#727171'    " ì›êF
+let s:gray5     = '#COC6C9'    " äDê¬
+let s:red       = '#E9546B'    " ÂKÂNêF
+let s:green     = '#98D98E'    " é·óŒ
+let s:yellow    = '#F2D675'    " â©êÖêÂ
+let s:blue      = '#9093E0'    " éáózâ‘ê¬
+let s:purple    = '#CC7EB1'    " è“äóêF
+let s:cyan      = '#75C6C3'    " îíåQ
+let s:orange    = '#FF9740'    " íWãÄót
+let s:plum      = '#F73B70'    " î~èd
+let s:navy      = '#17184B'    " ìSçÆ
+let s:brown     = '#250D00'    " çïíh
 
 function! s:HL(group, fg, bg, attr)
   let l:attr = a:attr
-  if !g:material_terminal_italics && l:attr ==# 'italic'
+  if !g:bong_terminal_italics && l:attr ==# 'italic'
     let l:attr = 'none'
   endif
 
@@ -119,7 +106,7 @@ call s:HL('Define',                         s:purple,   '',         'none')
 call s:HL('Macro',                          s:purple,   '',         '')
 call s:HL('Type',                           s:yellow,   '',         'none')
 call s:HL('Structure',                      s:cyan,     '',         '')
-call s:HL('Special',                        s:indigo,   '',         '')
+call s:HL('Special',                        s:plum,   '',         '')
 call s:HL('Underlined',                     s:blue,     '',         'none')
 call s:HL('Error',                          s:red,      s:gray1,    '')
 call s:HL('Todo',                           s:orange,   s:gray1,    'italic')
@@ -223,9 +210,9 @@ call s:HL('markdownUrlTitleDelimiter',      s:green,    '',         '')
 
 " Ruby
 call s:HL('rubyInterpolation',              s:cyan,     '',         '')
-call s:HL('rubyInterpolationDelimiter',     s:indigo,   '',         '')
+call s:HL('rubyInterpolationDelimiter',     s:plum,   '',         '')
 call s:HL('rubyRegexp',                     s:cyan,     '',         '')
-call s:HL('rubyRegexpDelimiter',            s:indigo,   '',         '')
+call s:HL('rubyRegexpDelimiter',            s:plum,   '',         '')
 call s:HL('rubyStringDelimiter',            s:green,    '',         '')
 
 " Sass

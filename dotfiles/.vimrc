@@ -280,7 +280,7 @@ augroup vimrcAU
 augroup END
 "
 if has('gui_running')
-   let g:lightline.colorscheme = 'material_vim'
+   let g:lightline.colorscheme = 'bong'
 "# 挿入モードで一定時間キー入力がなければ着色
   autocmd vimrcAU CursorHoldI * setlocal cursorline
   autocmd vimrcAU CursorMovedI,InsertLeave * setlocal nocursorline

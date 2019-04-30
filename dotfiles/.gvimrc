@@ -5,8 +5,7 @@
 scriptencoding utf-8
 " カラースキーマ
 set background=dark
-let g:material_theme_style = 'dark'
-colorscheme material
+colorscheme bong
 "
 " IME制御
 if has('multi_byte_ime')

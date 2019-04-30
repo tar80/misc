@@ -24,6 +24,7 @@ nyagos.histsize=500
 -- 環境変数
 nyagos.env.APPS="C:/bin"
 nyagos.env.path="C:/bin/git/cmd/;C:/bin/git/mingw64/libexec/git-core;C:/bin/git/usr/bin;" .. nyagos.env.path
+nyagos.env.LESSCHARSET="utf-8"
 
 -- エイリアス
 nyagos.alias.cdnya="cd %APPS%/nyagos"

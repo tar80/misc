@@ -223,7 +223,7 @@ call unite#custom#profile('default', 'context', {
 "#}}}
 "# lightline{{{
 let g:lightline = {
-      \ 'colorscheme' : 'tar',
+      \ 'colorscheme' : 'bong16',
       \ 'active': {
       \ 'left'  : [['mode', 'paste'],['bufstatus']],
       \ 'right' : [['lineinfo'],['percent'],['fileformat','fileencoding','filetype'],['gitbranch']]
@@ -285,7 +285,7 @@ if has('gui_running')
   autocmd vimrcAU CursorHoldI * setlocal cursorline
   autocmd vimrcAU CursorMovedI,InsertLeave * setlocal nocursorline
 else
-  colorscheme tar
+  colorscheme bong16
 endif
 "
 "# filetype

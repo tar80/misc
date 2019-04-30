@@ -36,4 +36,4 @@ let s:p.tabline.right = [ [ s:green, s:black ] ]
 let s:p.normal.error = [ [ s:green, s:orange ] ]
 let s:p.normal.warning = [ [ s:yellow, s:orange ] ]
 
-let g:lightline#colorscheme#tar#palette = lightline#colorscheme#fill(s:p)
+let g:lightline#colorscheme#bong16#palette = lightline#colorscheme#fill(s:p)

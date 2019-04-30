@@ -1,6 +1,6 @@
 if(exists("g:lightline"))
 
-    let s:gray1     = '#000b00'    " ”G‚ê‰HF
+    let s:gray1     = '#000B00'    " ”G‚ê‰HF
     let s:gray2     = '#2B2B2B'    " ˜XF
     let s:gray3     = '#595857'    " –n
     let s:gray4     = '#727171'    " “İF

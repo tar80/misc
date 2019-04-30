@@ -331,7 +331,7 @@ noremap! <C-j> <Down>
 noremap! <C-k> <Up>
 noremap! <C-b> <Left>
 noremap! <C-f> <Right>
-noremap! <C-d> <Delete>
+noremap! <C-s> <Delete>
 "# inoremap <C-b> <BS>
 inoremap <S-Delete> <C-o>d$
 "#}}}

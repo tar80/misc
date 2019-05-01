@@ -220,6 +220,11 @@ call unite#custom#profile('default', 'context', {
       \ 'no_split' : 1,
       \ 'buffer_name' : ""
       \ })
+"
+function! UniteRepo()
+  lcd C:/bin/repository/tar80/misc
+  Unite -buffer-name=repogitory file_rec/git:--cached:--others:--exclude-standard
+endfunction
 "#}}}
 "# lightline{{{
 let g:lightline = {
@@ -276,7 +281,7 @@ endfunction
 augroup vimrcAU
   autocmd!
 "   autocmd BufEnter * lcd %:p:h        "#fugitiveでエラーがでる
-  autocmd QuitPre * rviminfo! ~/_xxxinfo
+  autocmd QuitPre * rviminfo ~/_xxxinfo
 augroup END
 "
 if has('gui_running')
@@ -343,7 +348,7 @@ vnoremap > >gv
 "# plugins{{{
 "# unite
 nnoremap <silent> <leader>u :<C-u>Unite<CR>
-nnoremap <silent> <leader>f :<C-u>Unite -buffer-name=file_rec -sync file_rec/async<CR>
+nnoremap <silent> <leader>f :<C-u>call UniteRepo()<CR>
 nnoremap <silent> <leader>; :<C-u>Unite -buffer-name=files buffer file<CR>
 nnoremap <silent> <leader>o :<C-u>Unite -buffer-name=oldfiles oldfiles<CR>
 nnoremap <silent> <leader>g :<C-u>Unite -tab -no-start-insert -buffer-name=grep -previewheight=20 grep<CR>

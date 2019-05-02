@@ -24,16 +24,19 @@ nyagos.histsize=500
 -- 環境変数
 nyagos.env.APPS="C:/bin"
 nyagos.env.path="C:/bin/git/cmd/;C:/bin/git/mingw64/libexec/git-core;C:/bin/git/usr/bin;" .. nyagos.env.path
-nyagos.env.LESSCHARSET="utf-8"
 
 -- エイリアス
 nyagos.alias.cdnya="cd %APPS%/nyagos"
 nyagos.alias.cdppx="cd %APPS%/ppx"
 nyagos.alias.cdgit="cd C:/bin/repository/tar80/misc"
 nyagos.alias.gcg="git config --global"
-nyagos.alias.gfo="git fetch origin"
+nyagos.alias.grs="git remote set-url"
+-- nyagos.alias.gset"git remote set-url origin git@github.com:tar80/misc.git"
 nyagos.alias.gc="git checkout"
-nyagos.alias.gset="git remote set-url origin git@github.com:tar80/misc.git"
+nyagos.alias.gb="git branch"
+nyagos.alias.gf="git fetch"
+nyagos.alias.gm="git merge"
+nyagos.alias.gd="git difftool"
 nyagos.alias.vim="C:/bin/vim/vim81/vim.exe"
 nyagos.alias.pg = function(args)
     local wd = nyagos.getwd()

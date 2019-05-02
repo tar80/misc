@@ -1,12 +1,12 @@
 set background=dark
 highlight clear
 
-let g:colors_name = 'tar'
+let g:colors_name = 'bong16'
 if exists('syntax_on')
   syntax reset
 endif
 
-highlight Normal term=none ctermfg=white ctermbg=none gui=none guifg=#dddddd guibg=grey0
+highlight Normal term=none ctermfg=white ctermbg=none gui=none guifg=#dddddd guibg=gray
 highlight Comment term=none ctermfg=gray ctermbg=none gui=none guifg=#767676
 highlight Constant term=none ctermfg=white gui=none guifg=#87afff
 highlight String term=none ctermfg=darkgray ctermbg=none gui=none guifg=#ffaf5f
@@ -54,10 +54,10 @@ highlight Error term=none ctermfg=15 ctermbg=124 gui=none guifg=#ffffff guibg=#a
 highlight WarningMsg term=none ctermfg=7 ctermbg=0 gui=none guifg=#c0c0c0 guibg=#000000
 highlight WildMenu guibg=#ffaf00 ctermfg=white ctermbg=darkcyan
 highlight Todo cterm=none ctermfg=185 ctermbg=none gui=none guifg=#dfdf5f guibg=NONE
-highlight DiffAdd term=none cterm=none ctermfg=red ctermbg=none guifg=fg guibg=#005f00
-highlight DiffChange term=none cterm=none ctermfg=yellow ctermbg=none guifg=fg guibg=#5f0000
+highlight DiffAdd term=none cterm=none ctermfg=black ctermbg=green guifg=fg guibg=#005f00
+highlight DiffChange term=none cterm=none ctermfg=black ctermbg=blue guifg=fg guibg=#5f0000
 highlight DiffDelete term=none cterm=none ctermfg=black ctermbg=darkmagenta guifg=fg guibg=#870000
-highlight DiffText term=none cterm=none ctermfg=red ctermbg=160 guifg=fg guibg=#df0000
+highlight DiffText term=none cterm=none ctermfg=black ctermbg=yellow guifg=fg guibg=#df0000
 highlight DiffFile term=none cterm=none ctermfg=47 ctermbg=none guifg=#00ff5f guibg=bg
 highlight DiffNewFile term=none cterm=none ctermfg=199 ctermbg=none guifg=#ff00af guibg=bg
 highlight default link DiffRemoved DiffDelete
@@ -77,7 +77,7 @@ highlight NonText term=none ctermfg=darkmagenta gui=none guifg=black
 highlight StatusLine term=none gui=none guifg=#1c1c1c guibg=#eeeeee gui=none ctermfg=green ctermbg=darkblue cterm=none
 highlight StatusLineNC term=none gui=none guifg=#262626 guibg=#585858 gui=none ctermfg=235 ctermbg=240 cterm=none
 if version >= 700
-  if get(g:, 'tar_cursorline', 1)
+  if get(g:, 'bong16_cursorline', 1)
     highlight CursorLine term=none cterm=none ctermbg=235 gui=none guibg=#262626
     highlight CursorLineNr term=underline cterm=bold ctermfg=148 ctermbg=235 gui=bold guifg=#afdf00 guibg=#262626
   else
@@ -101,7 +101,7 @@ highlight QuickFixLine cterm=bold ctermfg=none ctermbg=none gui=bold guifg=NONE 
 if exists('*getmatches')
 
   function! s:newmatch() abort
-    if !get(g:, 'tar_highlight_todo', 0) && !get(g:, 'tar_highlight_full_space', 0)
+    if !get(g:, 'bong16_highlight_todo', 0) && !get(g:, 'bong16_highlight_full_space', 0)
       return
     endif
     for m in getmatches()
@@ -109,15 +109,15 @@ if exists('*getmatches')
         silent! call matchdelete(m.id)
       endif
     endfor
-    if get(g:, 'tar_highlight_todo', 0)
+    if get(g:, 'bong16_highlight_todo', 0)
       call matchadd('Todo', '\c\<todo\>', 10)
     endif
-    if get(g:, 'tar_highlight_full_space', 0)
+    if get(g:, 'bong16_highlight_full_space', 0)
       call matchadd('FullSpace', "\u3000", 10)
     endif
   endfunction
 
-  augroup tar-newmatch
+  augroup bong16-newmatch
     autocmd!
     autocmd VimEnter,BufNew,WinEnter,FileType,BufReadPost * call s:newmatch()
   augroup END
@@ -156,7 +156,7 @@ highlight default link Title Identifier
 
 if exists('##CmdlineEnter')
   highlight IncSearch cterm=reverse ctermfg=blue ctermbg=yellow gui=reverse guifg=#dfaf00 guibg=#303030
-  augroup tar-highlight-search
+  augroup bong16-highlight-search
     autocmd!
     autocmd CmdlineEnter /,\? :highlight Search cterm=reverse ctermfg=darkblue ctermbg=yellow gui=reverse guifg=#878700 guibg=#303030
     autocmd CmdlineLeave /,\? :highlight Search cterm=reverse ctermfg=black ctermbg=yellow gui=reverse guifg=#dfaf00 guibg=#303030

@@ -19,7 +19,7 @@
 :lcd C:/bin/
 |2,0,1556194470,,"lcd C:/bin/"
 :lcd C:/bin/ppx/
-|2,0,1546222527,,"lcd C:/bin/ppx/"
+|2,0,1546222527,,"lcd C:/bin/repository/tar80/misc/"
 :Gcommit
 |2,0,1556194428,,"Gcommit"
 :Gdiff

@@ -5,7 +5,7 @@
 " =============================================================================
 let s:black     = '#000b00'    " ”G‚ê‰HF
 let s:red       = '#E9546B'    " åKåNF
-let s:green     = '#98D98E'    " á—Î
+let s:green     = '#59B9C6'    " V‹´F
 let s:yellow    = '#F2D675'    " ‰©…å
 let s:blue      = '#9093E0'    " ‡—z‰ÔÂ
 let s:cyan      = '#75C6C3'    " ”’ŒQ

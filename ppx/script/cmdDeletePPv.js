@@ -1,8 +1,8 @@
 ﻿//!*script
 // *PPVUD=ユーザーコマンド
-var dt = PPx.GetFileInformation(PPx.Extract("%FD"));
-var ft = PPx.GetFileInformation(PPx.Extract("%FDC"));
-if(ft == "" && (dt == ":PKZIP" || dt == ":RAR")){
+var typeDir = PPx.GetFileInformation(PPx.Extract("%FD"));
+var typeFile = PPx.GetFileInformation(PPx.Extract("%FDC"));
+if(!typeFile && (typeDir == ":PKZIP" || typeDir == ":RAR")){
   PPx.Execute('%\"ファイル操作\" %Q\"書庫から削除します\" %:%u7-zip64.dll,d -hide %FD %FC');
   //PPx.Execute('*PPVUD DOWN');
 } else{

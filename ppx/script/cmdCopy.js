@@ -1,17 +1,17 @@
 ﻿//!*script
-/* %'work'=workspace */
-var odp = PPx.Extract("%2");
+// %'work'=workspace
+var opDir = PPx.Extract("%2");
+var tDir;
 var fp = PPx.Extract("%FDC");
 var fn = PPx.Extract("%FC");
-var Tdp;
 var cmd = PPx.Arguments(0) == 0? "copy": "!copy";
 
-switch(PPx.GetFileInformation(odp)){
+switch(PPx.GetFileInformation(opDir)){
 case ':DIR':
-  Tdp = odp;
+  tDir = opDir;
   break;
 case '':
-  Tdp = PPx.Extract("%\'work\'").replace(/\//g,'\\');
+  tDir = PPx.Extract("%\'work\'").replace(/\//g,'\\');
   cmd = "copy";
   break;
 default:
@@ -21,16 +21,16 @@ default:
 }
 
 if(PPx.Arguments(0) >= 2){
-  Tdp = PPx.Extract('%*input("' + Tdp +'" -title:"コピー先" -mode:d)%*addchar(\\)');
-  if(Tdp != ''){
+  tDir = PPx.Extract('%*input("' + tDir +'" -title:"コピー先" -mode:d)%*addchar(\\)');
+  if(tDir != ''){
     var att = PPx.GetFileInformation(fp) == ":DIR"? "/D ": "";
-    PPx.Execute('%Orn *ppb -runas -c mklink ' + att + Tdp + fn + ' ' + fp);
+    PPx.Execute('%Orn *ppb -runas -c mklink ' + att + tDir + fn + ' ' + fp);
   }
 } else if(PPx.DirectoryType >= 62){
-  PPx.Execute('%u7-zip64.dll,x -aos -hide "%1" -o%"解凍先"%{' + Tdp + '%} %@');
+  PPx.Execute('%u7-zip64.dll,x -aos -hide "%1" -o%"解凍先"%{' + tDir + '%} %@');
 } else{
   var bst;
   var mSize = PPx.EntryMarkCount == 0? PPx.EntrySize : PPx.EntryMarkSize;
   (mSize > 5000)? bst = 'on' : bst = 'off';
-  PPx.Execute('*ppcfile ' + cmd + ',' + Tdp + ',/qstart /nocount /preventsleep /same:7 /sameall /burst:' + bst);
+  PPx.Execute('*ppcfile ' + cmd + ',' + tDir + ',/qstart /nocount /preventsleep /same:7 /sameall /burst:' + bst);
 }

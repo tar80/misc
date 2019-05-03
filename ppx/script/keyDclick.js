@@ -2,16 +2,16 @@
 // ダブルクリックPPV呼び出し用
 // PPc[X]は画像専用
 var fp = PPx.Extract('%FDC');
-var ppcid;
+var ppcId;
 
 switch(PPx.Extract(PPx.WindowIDName)){
-case 'C_X':
-  ppcid = PPx.Extract("%N");
+  case 'C_X':
+    ppcId = PPx.Extract("%N");
   PPx.Execute('%Oix *setcust X_win:V=B100000000');
   //PPx.Execute('*topmostwindow %NVA,1');
   break;
-default:
-  ppcid = PPx.Extract("%N.");
+  default:
+    ppcId = PPx.Extract("%N.");
   var ext = PPx.Extract(".%t").toLowerCase();
   var arc = [".zip",".7z"];
   var image = [".jpg",".jpeg",".bmp",".png",".gif",".vch",".edg",".afd"];
@@ -36,4 +36,4 @@ default:
   break;
 }
 // ※ver1.66_書庫内でモジュールを呼ぶとエラーが出る対策に*wait挟んでファイルを開く
-PPx.Execute('%Oi *ppv -r -checkeredpattern:on -bootid:A -k *fitwindow ' + ppcid + '%:*wait 10,1 %:%v%R');
+PPx.Execute('%Oi *ppv -r -checkeredpattern:on -bootid:A -k *fitwindow ' + ppcId + '%:*wait 10,1 %:%v%R');

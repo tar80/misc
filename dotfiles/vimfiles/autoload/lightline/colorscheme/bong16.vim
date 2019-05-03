@@ -5,7 +5,7 @@
 " =============================================================================
 let s:black     = '#000b00'    " ”G‚ê‰HF
 let s:red       = '#E9546B'    " åKåNF
-let s:green     = '#98D98E'    " á—Î
+let s:green     = '#59C9D6'    " V‹´F
 let s:yellow    = '#F2D675'    " ‰©…å
 let s:blue      = '#9093E0'    " ‡—z‰ÔÂ
 let s:cyan      = '#75C6C3'    " ”’ŒQ
@@ -20,7 +20,7 @@ let s:p.normal.right    = [ [ s:black, s:white ], [ s:black, s:white ], [ s:whit
 let s:p.inactive.right  = [ [ s:black, s:blue ], [ s:black, s:blue ] ]
 let s:p.inactive.middle = [ [ s:black, s:blue ] ]
 let s:p.inactive.left   = [ [ s:black, s:blue ], [ s:black, s:blue ] ]
-let s:p.insert.left     = [ [ s:black, s:cyan ], [ s:cyan, s:black ] ]
+let s:p.insert.left     = [ [ s:black, s:green ], [ s:cyan, s:black ] ]
 let s:p.insert.middle   = [ [ s:cyan, s:black ] ]
 let s:p.insert.right    = [ [ s:black, s:cyan ], [ s:black, s:white ], [ s:white, s:black ], [ s:green, s:black ] ]
 let s:p.replace.left    = [ [ s:black, s:yellow ], [ s:yellow, s:black ] ]

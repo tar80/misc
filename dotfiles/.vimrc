@@ -317,6 +317,8 @@ nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmat
 "# 行頭/行末に移動
 noremap <space>h ^
 noremap <space>l $
+"# 行分割
+noremap <space>j i<CR><ESC>
 "# 一文字削除をレジスタ履歴に残さない
 nnoremap  x "_x
 nnoremap  X "_X
@@ -353,8 +355,8 @@ noremap <silent> <C-z> :<C-u>Unite -no-start-insert -winwidth=50 -direction=botr
 inoremap <silent><expr> <C-z> unite#start_complete(
       \ ['history/yank'], {'winwidth':50, 'split':1, 'vertical':1, 'restore':0})
 "# caw
-nmap <leader>s <Plug>(caw:zeropos:toggle)
-nmap <leader>t <Plug>(caw:dollarpos:toggle)
+" nmap <leader>s <Plug>(caw:zeropos:toggle)
+" nmap <leader>t <Plug>(caw:dollarpos:toggle)
 "# migemo
 " cnoremap <silent><expr> <CR> migemosearch#replace_search_word()."\<CR>"
 "#}}}

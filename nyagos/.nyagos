@@ -24,18 +24,25 @@ nyagos.histsize=500
 -- 環境変数
 nyagos.env.APPS="C:/bin"
 nyagos.env.path="C:/bin/git/cmd/;C:/bin/git/mingw64/libexec/git-core;C:/bin/git/usr/bin;" .. nyagos.env.path
-nyagos.env.LESSCHARSET="utf-8"
+-- nyagos.env.LESSCHARSET="utf-8"
 
 -- エイリアス
 nyagos.alias.cdnya="cd %APPS%/nyagos"
 nyagos.alias.cdppx="cd %APPS%/ppx"
 nyagos.alias.cdgit="cd C:/bin/repository/tar80/misc"
 nyagos.alias.gcg="git config --global"
-nyagos.alias.gfo="git fetch origin"
-nyagos.alias.gc="git checkout"
+nyagos.alias.gb="git branch"
+nyagos.alias.gc = function(args)
+    local result = nyagos.eval('git branch | peco')
+    nyagos.eval('git checkout ' ..result)
+end
+nyagos.alias.gf= function(args)
+  local result = nyagos.eval('git branch -a | peco')
+  nyagos.eval('git fetch ' ..result)
+end
 nyagos.alias.gset="git remote set-url origin git@github.com:tar80/misc.git"
 nyagos.alias.vim="C:/bin/vim/vim81/vim.exe"
-nyagos.alias.pg = function(args)
+nyagos.alias.pgrep= function(args)
     local wd = nyagos.getwd()
 -- ※pecoがエラー吐くので& > @に置換
     local gpr = nyagos.eval("grep -inr "..args[1].." "..args[2].." | nkf -Lu -w | sed \"s/&/@/\" | peco")

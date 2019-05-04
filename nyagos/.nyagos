@@ -3,19 +3,19 @@
 
 -- Sample : function
 nyagos.prompt = function(this)
-    local wd = nyagos.getwd()
-    local env = nyagos.env
-    local home = env.HOME or env.USERPROFILE
-    local home_len = home:len()
-    if wd:sub(1,home_len) == home then
-        wd = "~" .. wd:sub(home_len+1)
-    end
-    local title = "NYAGOS - " .. wd
-    if nyagos.elevated() then
-        return nyagos.default_prompt('$e[40;31;1m'..this..'$e[37;1m',title)
-    else
-        return nyagos.default_prompt('$e[40;36;1m'..this..'$e[37;1m',title)
-    end
+  local wd = nyagos.getwd()
+  local env = nyagos.env
+  local home = env.HOME or env.USERPROFILE
+  local home_len = home:len()
+  if wd:sub(1,home_len) == home then
+    wd = "~" .. wd:sub(home_len+1)
+  end
+  local title = "NYAGOS - " .. wd
+  if nyagos.elevated() then
+    return nyagos.default_prompt('$e[40;31;1m'..this..'$e[37;1m',title)
+  else
+    return nyagos.default_prompt('$e[40;36;1m'..this..'$e[37;1m',title)
+  end
 end
 
 -- 履歴数
@@ -34,24 +34,29 @@ nyagos.alias.gcg="git config --global"
 nyagos.alias.grs="git remote set-url"
 -- nyagos.alias.gset"git remote set-url origin git@github.com:tar80/misc.git"
 nyagos.alias.gb="git branch"
-nyagos.alias.gc = function(args)
-    local result = nyagos.eval('git branch | peco')
-    nyagos.eval('git checkout ' ..result)
-end
+nyagos.alias.gba="git branch -a --sort=-authordate"
 nyagos.alias.gc="git checkout"
+nyagos.alias.gcp = function(args)
+  local result = nyagos.eval('git branch | peco')
+  nyagos.eval('git checkout ' ..result)
+end
 nyagos.alias.gd="git diff"
 nyagos.alias.gdv="git difftool"
 nyagos.alias.gf="git fetch"
 nyagos.alias.gm="git merge"
-nyagos.alias.gd="git difftool"
 nyagos.alias.vim="C:/bin/vim/vim81/vim.exe"
 nyagos.alias.pgrep= function(args)
-    local wd = nyagos.getwd()
--- ※pecoがエラー吐くので& > @に置換
-    local gpr = nyagos.eval("grep -inr "..args[1].." "..args[2].." | nkf -Lu -w | sed \"s/&/@/\" | peco")
-    local gpr = nyagos.eval('echo '..gpr..' | nkf -Lw')
-    local fn = nyagos.eval('echo '..gpr..' | sed -nr "s/(.*):[0-9]+:.*/\\1/gp"')
-    local gl = nyagos.eval('echo '..gpr..' | sed -nr "s/.*:([0-9]+):.*/\\1/gp"')
-    nyagos.rawexec(nyagos.alias.vim,fn,"+"..gl)
+  local wd = nyagos.getwd()
+  -- ※pecoがエラー吐くので& > @に置換
+  local gpr = nyagos.eval("grep -inr "..args[1].." "..args[2].." | nkf -Lu -w | sed \"s/&/@/\" | peco")
+  local gpr = nyagos.eval('echo '..gpr..' | nkf -Lw')
+  local fn = nyagos.eval('echo '..gpr..' | sed -nr "s/(.*):[0-9]+:.*/\\1/gp"')
+  local gl = nyagos.eval('echo '..gpr..' | sed -nr "s/.*:([0-9]+):.*/\\1/gp"')
+  nyagos.rawexec(nyagos.alias.vim,fn,"+"..gl)
 end
+nyagos.bindkey("C_G", function(targs)
+  nyagos.chdir('c:/bin/repository/tar80/misc')
+  local result = nyagos.eval('git ls-files | peco')
+  nyagos.rawexec(nyagos.alias.vim,result)
+end)
 -- vim:set ft=lua: --

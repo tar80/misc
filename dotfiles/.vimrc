@@ -315,8 +315,8 @@ nnoremap q <Nop>
 nnoremap <C-q> q
 "# vimrc読み込み
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
-nnoremap <F6> :<C-u>edit C:/bin/ppx/script/xTest.js<CR>
-nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%0script/xTest.js<CR>
+nnoremap <F6> :<C-u>edit C:/bin/repository/tar80/misc/ppx/script/xTest.js<CR>
+nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script C:\bin\repository\tar80\misc\ppx\script\xTest.js<CR>
 nnoremap <F9> :<C-u>edit $MYVIMRC<CR>
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "# 行頭/行末に移動

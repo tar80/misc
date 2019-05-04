@@ -5,8 +5,8 @@
 if(PPx.DirectoryType != 1) PPx.Quit(1);
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
-var fn = PPx.Extract('%FDN');
-var currentDir = fso.GetFolder(fn);
+var cDir = PPx.Extract('%FDN');
+var currentDir = fso.GetFolder(cDir);
 // 親ディレクトリがルートorサブディレクトリがなければ終了
 if(currentDir.IsRootFolder || currentDir.ParentFolder.SubFolders.count == 1){
   PPx.SetPopLineMessage('!"サブディレクトリがありません');
@@ -28,6 +28,6 @@ for(var item in flds){
 }
 // 次のディレクトリを取得
 var nextDir = flds[Math.max(item - 1, 0)];
-// 最終ディレクトリ
+// 最終ディレクトリならメッセージを表示
 if(flds[item - 2] == null) PPx.SetPopLineMessage('!">>bottom');
-PPx.Execute('*jumppath "' + fso.BuildPath(fso.GetParentFolderName(fn), nextDir) + '"');
+PPx.Execute('*jumppath "' + fso.BuildPath(fso.GetParentFolderName(cDir), nextDir) + '"');

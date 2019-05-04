@@ -40,6 +40,8 @@
 |2,0,1556194221,,"set noexpandtab"
 :set noro
 |2,0,1556194209,,"set noro"
+:set noma
+|2,0,1556194209,,"set noma"
 :set spell
 |2,0,1556194202,,"set spell"
 :set fenc=utf-8 ff=unix

@@ -27,7 +27,7 @@ set undodir=$TEMP
 "# 未保存ファイルを閉じる時、ダイアログを出さない
 set confirm
 "# viminfoの設定
-set viminfo=%1,'30,/1,:50,<100,f1,h,s10
+set viminfo=%1,'30,/1,:350,<200,f1,h,s10
 "# Nミリ秒キー入力がなければにスワップファイル自動保存(:default=4000)
 set updatetime=10000
 "# メニューを読み込まない
@@ -281,7 +281,7 @@ endfunction
 augroup vimrcAU
   autocmd!
 "   autocmd BufEnter * lcd %:p:h        "#fugitiveでエラーがでる
-  autocmd QuitPre * rviminfo ~/_xxxinfo
+    execute 'autocmd VimLeavePre * rviminfo ~/_xxxinfo'
 augroup END
 "
 if has('gui_running')

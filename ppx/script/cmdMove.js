@@ -20,10 +20,6 @@ switch(PPx.Extract(PPx.DirectoryType)){
     PPx.Execute('*ppcfile ' + cmd + ',' + Tdp + ',/qstart /nocount /preventsleep /same:5 /sameall /undolog /compcmd %K\"@^\\D\"');
     break;
   default:
-    if(PPx.Extract("%1%\\").indexOf(PPx.Extract("%'repo'%\\")) >= 0){
-      PPx.Execute('%Orn *ppb -c git mv ' + PPx.Extract("%FC") + ' ' + Tdp);
-    } else{
       PPx.Execute('*ppcfile ' + cmd + ',' + Tdp + ',/qstart /nocount /preventsleep /same:7 /sameall /undolog');
     break;
-    }
 }

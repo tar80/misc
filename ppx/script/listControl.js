@@ -16,7 +16,7 @@ switch(arg){
     break;
     // 新規リストファイル
   case 'listfile':
-    list_write('\;listfile\n',PPx.Extract('%si"ppp"'));
+    list_write('\;ListFile\n',PPx.Extract('%si"ppp"'));
     write_mark_path(PPx.Extract('%si"ppp"'));
     break;
     // ReDo 文字コードの問題でうまく動かない
@@ -88,4 +88,5 @@ function write_mark_path(tFile){
   }
   as.saveToFile(tFile, 2);
   as.close();
+  PPx.Execute('%On *ppb -c nkf -Lw --in-place ' + PPx.Extract('%si"ppp"'));
 }

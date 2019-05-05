@@ -57,6 +57,7 @@ end
 nyagos.bindkey("C_G", function(targs)
   nyagos.chdir('c:/bin/repository/tar80/misc')
   local result = nyagos.eval('git ls-files | peco')
-  nyagos.rawexec(nyagos.alias.vim,result)
+  return result
+    -- nyagos.rawexec(nyagos.alias.vim,result)
 end)
 -- vim:set ft=lua: --

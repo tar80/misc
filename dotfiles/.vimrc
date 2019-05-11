@@ -298,7 +298,7 @@ endif
 "# Autocmd {{{
 augroup vimrcAU
   autocmd!
-  execute 'autocmd VimLeavePre * rviminfo ~/_xxxinfo'
+  execute 'autocmd VimEnter * rviminfo ~/_xxxinfo'
 augroup END
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline
@@ -341,7 +341,13 @@ noremap <nowait><Space><Space> <C-w><C-w>
 "# F12でラップ状態の切り替え
 noremap <silent> <F12> :<C-u>call SetWrap()<CR>
 function SetWrap()
+  if &diff
   if &wrap
+      wincmd p | setlocal nowrap | wincmd p | setlocal nowrap
+    else
+      wincmd p | setlocal wrap | wincmd p | setlocal wrap
+    endif
+  elseif &wrap
     setlocal nowrap
   else
     setlocal wrap

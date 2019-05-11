@@ -145,7 +145,6 @@ endfunction
 "
 " packadd! matchit
 "# cleverf{{{
-if s:is_plugged('clever-f.vim')
   "# 行を跨がない = 1
   let g:clever_f_across_no_line = 0
   let g:clever_f_ignore_case = 1
@@ -153,15 +152,13 @@ if s:is_plugged('clever-f.vim')
   "# let g:clever_f_use_migemo  = 1
   "# f前方,F後方検索に固定 = 1
   let g:clever_f_fix_key_direction = 0
-  "# cleverf軌道前に設定する必要あり
+  "# cleverf起動前に設定する必要あり
   let g:clever_f_mark_cursor = 1
-  "let g:clever_f_mark_cursor_color = "SpellRare"
+  let g:clever_f_mark_cursor_color = "SpellRare"
   "# 任意の記号にマッチ
   "let g:clever_f_chars_match_any_signs = ';'
   "# カーソルの色を消す？※1にすると色が戻らなくなる
   let g:clever_f_hide_cursor_on_cmdline = 0
-"
-endif
 "#}}}
 "# vim-plug{{{
 call plug#begin('~/vimfiles')
@@ -368,8 +365,8 @@ nnoremap  x "_x
 nnoremap  X "_X
 "# vimrc読み込み
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
-nnoremap <F6> :<C-u>edit D:/Apps/ppx/script/xTest.js<CR>
-nnoremap <C-F6> :<C-u>!start D:/Apps/ppx/ppcw.exe -r -k *script \%0script/xTest.js<CR>
+nnoremap <F6> :<C-u>edit C:/bin/repository/tar80/misc/ppx/script/xTest.js<CR>
+nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script C:/bin/repository/tar80/misc/ppx/script/xTest.js<CR>
 nnoremap <F9> :<C-u>edit $MYVIMRC<CR>
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}

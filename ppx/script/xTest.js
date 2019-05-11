@@ -1,12 +1,15 @@
 ﻿//!*script
 // 変数確認用
-     PPx.Echo(PPx.Syncview);
 // var dp = PPx.Extract('%FD');
 // var fp = PPx.Extract('%FDC');
 // var fn = PPx.Extract('%FC');
 // var odp = PPx.Extract('%2');
 // var odn = PPx.Extract('%2%\\%R');
 // len test =2;
+// GODOWN      = *ifmatch "/\.\.\\$|[A-Z]:\\$/","%*edittext" %:%K"@TAB" %:*stop
+//               *ifmatch "o:e,a:d+","%*edittext" %:*replace %*edittext%\ %:*completelist %:%K"@F4@TAB" %:*stop
+//               *ifmatch "!/.*\\$/","%*edittext" %:%k"'\'
+}
 // //PPx.Echo();
 // PPx.SetPopLineMessage(test);
 // PPx.SetPopLineMessage(PPx.Extract("%NC"));

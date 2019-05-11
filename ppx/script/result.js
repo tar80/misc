@@ -16,8 +16,8 @@ switch(PPx.Arguments(0)){
     PPx.Result = PPx.DirectoryType;
     break;
   case 'filetype':
-    var getext = PPx.GetFileInformation(PPx.Extract("%FDC"));
-    PPx.Result = getext == "" ? "---" : PPx.Extract("%*regexp(" + getext + ",\"s/://\")");
+    var getext = PPx.GetFileInformation(PPx.Extract("%R")).slice(1);
+    PPx.Result = getext == "" ? "---": getext;
     break;
   case 'makepath':
     var path = PPx.Pane.Count == 2 ? "%2%\\" : "%'work'%\\";

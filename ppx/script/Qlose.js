@@ -15,7 +15,7 @@ if(PPx.SyncView){
 }
 // 起動状態のPPxID取得
 var ppxId = new Array();
-for(var i = 90; i >= 65; i--){
+for(var i = 90; i >= 65; i = (i-1)|0){
   var id = String.fromCharCode(i);
   if(PPx.Extract('%NV' + id)) ppxId.push('V' + id);
   if(PPx.Extract('%NB' + id)) ppxId.push('B' + id);
@@ -31,7 +31,7 @@ close_target('C');
 function close_target(tChar){
   for(var item in ppxId){
     if(ppxId[item].slice(0,1) == tChar){
-      if(item == 'CX') PPx.Execute('*setcust XC_celD=_AUTO,_AUTO,3,7');
+      if(ppxId[item] == 'CX') PPx.Execute('*setcust XC_celD=_AUTO,_AUTO,3,7');
       PPx.Execute('*closeppx ' + ppxId[item]);
       PPx.Quit(1);
     }

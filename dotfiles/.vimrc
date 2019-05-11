@@ -158,6 +158,9 @@ if s:is_plugged('clever-f.vim')
   "let g:clever_f_mark_cursor_color = "SpellRare"
   "# 任意の記号にマッチ
   "let g:clever_f_chars_match_any_signs = ';'
+  "# カーソルの色を消す？※1にすると色が戻らなくなる
+  let g:clever_f_hide_cursor_on_cmdline = 0
+"
 endif
 "#}}}
 "# vim-plug{{{
@@ -368,7 +371,7 @@ nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F6> :<C-u>edit D:/Apps/ppx/script/xTest.js<CR>
 nnoremap <C-F6> :<C-u>!start D:/Apps/ppx/ppcw.exe -r -k *script \%0script/xTest.js<CR>
 nnoremap <F9> :<C-u>edit $MYVIMRC<CR>
-nnoremap <silent> <C-F9> :<C-u>!start D:/Apps/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
+nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}
 "# insert_mode{{{
 noremap! <C-j> <Down>

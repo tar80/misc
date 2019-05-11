@@ -1,13 +1,14 @@
 ﻿//!*script
 // 変数確認用
-var dp = PPx.Extract('%FD');
-var fp = PPx.Extract('%FDC');
-var fn = PPx.Extract('%FC');
-var odp = PPx.Extract('%2');
-var odn = PPx.Extract('%2%\\%R');
-len test =2;
-//PPx.Echo();
-PPx.SetPopLineMessage(test);
+     PPx.Echo(PPx.Syncview);
+// var dp = PPx.Extract('%FD');
+// var fp = PPx.Extract('%FDC');
+// var fn = PPx.Extract('%FC');
+// var odp = PPx.Extract('%2');
+// var odn = PPx.Extract('%2%\\%R');
+// len test =2;
+// //PPx.Echo();
+// PPx.SetPopLineMessage(test);
 // PPx.SetPopLineMessage(PPx.Extract("%NC"));
 //PPx.EntryHighlight = PPx.Arguments(0);
 //PPx.Echo(PPx.Extract(PPx.Entry(0).Name));

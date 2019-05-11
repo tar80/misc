@@ -1,36 +1,38 @@
 ﻿//!*script
 // %'work'=workspace
-var opDir = PPx.Extract("%2");
+var opDir = PPx.Extract('%2');
 var tDir;
-var fp = PPx.Extract("%FDC");
-var fn = PPx.Extract("%FC");
-var cmd = PPx.Arguments(0) == 0? "copy": "!copy";
-
+var filePath = PPx.Extract('%FDC');
+var fileName = PPx.Extract('%FC');
+var cmd = PPx.Arguments(0) == 0? 'copy': '!copy';
+// 送り先を設定
 switch(PPx.GetFileInformation(opDir)){
-case ':DIR':
-  tDir = opDir;
+  case ':DIR':
+  case ':XLF':
+    var tDir = opDir;
   break;
-case '':
+  case '':
   tDir = PPx.Extract("%\'work\'").replace(/\//g,'\\');
-  cmd = "copy";
+      var cmd = 'copy';
   break;
-default:
+      default:
   PPx.Echo('対象がディレクトリではありません');
   PPx.Quit(1);
   break;
-}
-
+    }
+// シンボリックリンク
 if(PPx.Arguments(0) >= 2){
-  tDir = PPx.Extract('%*input("' + tDir +'" -title:"コピー先" -mode:d)%*addchar(\\)');
-  if(tDir != ''){
-    var att = PPx.GetFileInformation(fp) == ":DIR"? "/D ": "";
-    PPx.Execute('%Orn *ppb -runas -c mklink ' + att + tDir + fn + ' ' + fp);
+  var tDir = PPx.Extract('%*input("' + tDir +'" -title:"コピー先" -mode:d)%*addchar(\\)');
+  if(tDir){
+    var att = PPx.GetFileInformation(filePath) == ':DIR'? '/D ': '';
+    PPx.Execute('%Orn *ppb -runas -c mklink ' + att + tDir + fileName + ' ' + filePath);
   }
+  // 送り元が書庫なら解凍
 } else if(PPx.DirectoryType >= 62){
   PPx.Execute('%u7-zip64.dll,x -aos -hide "%1" -o%"解凍先"%{' + tDir + '%} %@');
 } else{
-  var bst;
+  // 5mbyte以上ならバーストモード
   var mSize = PPx.EntryMarkCount == 0? PPx.EntrySize : PPx.EntryMarkSize;
-  (mSize > 5000)? bst = 'on' : bst = 'off';
+  var bst = (mSize > 5000)? 'on': 'off';
   PPx.Execute('*ppcfile ' + cmd + ',' + tDir + ',/qstart /nocount /preventsleep /same:7 /sameall /burst:' + bst);
 }

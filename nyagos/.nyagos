@@ -36,10 +36,7 @@ nyagos.alias.grs="git remote set-url"
 nyagos.alias.gb="git branch"
 nyagos.alias.gba="git branch -a --sort=-authordate"
 nyagos.alias.gc="git checkout"
-nyagos.alias.gcp = function(args)
-  local result = nyagos.eval('git branch | peco')
-  nyagos.eval('git checkout ' ..result)
-end
+nyagos.alias.gcp="git checkout `git branch | peco "
 nyagos.alias.gd="git diff"
 nyagos.alias.gdv="git difftool"
 nyagos.alias.gf="git fetch"
@@ -57,6 +54,7 @@ end
 nyagos.bindkey("C_G", function(targs)
   nyagos.chdir('c:/bin/repository/tar80/misc')
   local result = nyagos.eval('git ls-files | peco')
-  nyagos.rawexec(nyagos.alias.vim,result)
+  return result
+    -- nyagos.rawexec(nyagos.alias.vim,result)
 end)
 -- vim:set ft=lua: --

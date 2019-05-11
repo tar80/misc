@@ -1,14 +1,14 @@
 ﻿//!*script
-var opDir = PPx.Extract("%2"); //反対窓
+var opDir = PPx.Extract('%2'); //反対窓
 var tDir; // 対象DIRパス
 var cmd;  // 詳細コピースイッチ
 // 対象パスを設定
 if(!PPx.GetFileInformation(opDir)){
   tDir = PPx.Extract("%\'work\'").replace(/\//g,'\\');
-    cmd = "move";
+    cmd = 'move';
   } else{
-    tDir = "%2";
-  cmd = PPx.Arguments.count == 0? "move": "!move";
+    tDir = '%2';
+    cmd = PPx.Arguments.count == 0? 'move': '!move';
   }
 // カレントディレクトリの属性をみて処理を分岐
 switch(PPx.Extract(PPx.DirectoryType)){

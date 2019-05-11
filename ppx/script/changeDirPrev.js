@@ -2,11 +2,11 @@
 // 同階層の隣のディレクトリに移動
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
 // 親ディレクトリの実態がなければ終了
-if(PPx.DirectoryType != 1) PPx.Quit(1);
+PPx.DirectoryType == 1 || PPx.Quit(1);
 
-var fso = PPx.CreateObject('Scripting.FileSystemObject');
+var fs = PPx.CreateObject('Scripting.FileSystemObject');
 var cDir = PPx.Extract('%FDN');
-var currentDir = fso.GetFolder(cDir);
+var currentDir = fs.GetFolder(cDir);
 // 親ディレクトリがルートorサブディレクトリがなければ終了
 if(currentDir.IsRootFolder || currentDir.ParentFolder.SubFolders.count == 1){
   PPx.SetPopLineMessage('!"サブディレクトリがありません');
@@ -17,7 +17,7 @@ var e = new Enumerator(currentDir.ParentFolder.SubFolders);
 var flds = new Array();
 for(e.moveFirst(); !e.atEnd(); e.moveNext()){
   //ディレクトリ属性を考慮してリストに追加
-  var en = fso.GetFolder(fso.BuildPath(currentDir.ParentFolder.Path, e.item().Name));
+  var en = fs.GetFolder(fs.BuildPath(currentDir.ParentFolder.Path, e.item().Name));
   if (en.Attributes <= 17) flds.push(e.item().Name);
 }
 // 名前順でソート
@@ -27,7 +27,7 @@ for(var item in flds){
     break;
 }
 // 前のディレクトリを取得
-var prevDir = flds[Math.max(item - 1, 0)];
+var prevDir = flds[Math.max(item - 1, 0)|0];
 // 最初のディレクトリならメッセージを表示
 if(flds[item - 2] == null) PPx.SetPopLineMessage('!">>top');
-PPx.Execute('*jumppath "' + fso.BuildPath(fso.GetParentFolderName(cDir), prevDir) + '"');
+PPx.Execute('*jumppath "' + fs.BuildPath(fs.GetParentFolderName(cDir), prevDir) + '"');

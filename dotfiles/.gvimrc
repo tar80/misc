@@ -10,9 +10,9 @@ colorscheme bong
 " IME制御
 if has('multi_byte_ime')
   set iminsert=0 imsearch=0
-" IMEの状態をカラー表示
-  highlight Cursor guifg=NONE guibg=lightgreen
-  highlight CursorIM guifg=NONE guibg=Orange
+" IMEの状態をカラー表示 (https://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color)
+  highlight Cursor guifg=black guibg=lightgreen
+  highlight CursorIM guifg=white guibg=Orange
 endif
 " カーソル点滅抑止
 set guicursor=a:ver20-blinkwait1000-blinkon700-blinkoff600

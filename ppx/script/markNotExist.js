@@ -1,9 +1,9 @@
 ﻿//!*script
 // リストファイル上の存在しないファイルをマーク
-var fso = PPx.CreateObject('Scripting.FileSystemObject');
-for(var i = 0,l = PPx.Entry.Count; i < l; ++i){
-  var fn = PPx.Entry(i).Name;
-  if(!(fso.FileExists(fn) || fso.FolderExists(fn))){
+var fs = PPx.CreateObject('Scripting.FileSystemObject');
+for(var i = 0,l = PPx.Entry.Count; i < l; i = (i+1)|0){
+  var fileName = PPx.Entry(i).Name;
+  if(!(fs.FileExists(fileName) || fs.FolderExists(fileName))){
     PPx.Entry(i).Mark = 1;
   }
 }

@@ -1,0 +1,73 @@
+﻿add ;[--option] [path]
+	--dry-run  ;[directory_path] addで追加されるファイル
+branch ;[--option] [branch]
+	-a --sort=-authordate
+	--remotes ;(-r)リモートブランチ一覧
+	--all ;(-a)すべてのブランチ一覧
+	--merged ;マージ済みブランチ一覧
+	--no-maeged ;未マージブランチ一覧
+	-vv ;追跡ブランチ一覧
+	--delete  ;(-d)branch 指定したブランチを削除
+	-D  ;branch 指定したブランチを強制削除
+	-m  ;[oldname] newname チェックアウト中(またはoldname)ブランチの名前変更
+	--set-upstream-to= ;(-u)remote/branch [branch]上流ブランチを設定
+	--unset-upstream  ;[branch] 上流ブランチ設定を解除
+checkout ;[--option] branch
+	master
+	-b  ;newbranch [start point] ブランチを作成してチェックアウト
+	--force  ;(-f)branch 変更を破棄してチェックアウト
+fetch ;[--option | remote [branch]]
+	--all ;リモートの全履歴を取得
+	--tags ;(-t)タグを取得
+log ;[--option][branch][-n]
+	--graph --date=short --format=\"%C(yellow)%h %C(magenta)[%ad] %C(auto)%d%C(reset)%s\" -25
+	--graph --name-status --oneline --date=short --format=\"%C(yellow reverse)%h%C(reset) %C(magenta)[%ad]%C(cyan)%an %C(auto)%d%C(green)%s\" -5
+	--all ;全ブランチ
+	--decorate=full ;ブランチ名を短縮せずに表示
+	--graph=' ;' 分岐をグラフィカルに表示
+	--grep ;[検索語]
+	--merges ;マージコミットのみ
+	--no-merges ;マージコミット除外
+	--name-only ;ファイル名のみ表示
+	--name-status ;名前＋ステータス表示
+	--oneline ;一行にまとめる
+	-p  ;[path] 差分表示
+	--summary ;変更点を表示
+	--stat ;変更点のステータス表示
+merge ;[--option] remote [branch]
+	--ff  ;マージコミットを作らない(デフォルト)
+	--no-ff  ;マージコミットを作成
+	--abort ;マージ中断
+	--continue ;中断したマージを再開
+	-X ours  ;branch マージ先を優先
+	-X theirs  ;branch マージ元を優先
+pull ;[--option] remote [branch]
+	origin
+	origin master
+	--rebase ;マージせずリベース
+	--no-ff ;必ずマージする
+push ;[--option] remote [branch]
+	origin
+	origin master
+	--set-upstream  ;(-u)remote branch 上流ブランチを設定してpush
+	--all origin ;全てのローカルブランチをpush
+	--prune origin ;リモートに存在しないローカルブランチを削除
+	--delete  ;(-d)remote branch 指定したリモートブランチを削除
+	--tags  ;リモートにタグをpush
+remote ;[--option]
+	-v show ;リモートのURLを表示
+revert ;[-m] commit [--option] 指定コミットを取り消して新しいコミットを作成
+	--no-commit ;(-n)revert後コミットしない
+	-m  ;[1|2] マージコミットのどちらに戻すかを選択
+stash ;[command]["コメント"]
+	list ;一覧
+	show  ;[-p][stash@{n}] 詳細表示 -p=diff
+	branch  ;newbranch 新しくブランチを作ってポップ
+	apply  ;[stash@{n}] スタッシュを適用する
+	pop  ;[stash@{n}] スタッシュを適用しリストから破棄
+	drop  ;[stash@{n}] リストから破棄
+	clear ;全スタッシュをリストから破棄
+	--patch ;(-p)変更点を選んでスタッシュ
+	--keep-index ;(-k)未addのみスタッシュ
+
+

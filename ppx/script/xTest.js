@@ -6,11 +6,8 @@
 // var odp = PPx.Extract('%2');
 // var odn = PPx.Extract('%2%\\%R');
 // len test =2;
-// GODOWN      = *ifmatch "/\.\.\\$|[A-Z]:\\$/","%*edittext" %:%K"@TAB" %:*stop
-//               *ifmatch "o:e,a:d+","%*edittext" %:*replace %*edittext%\ %:*completelist %:%K"@F4@TAB" %:*stop
-//               *ifmatch "!/.*\\$/","%*edittext" %:%k"'\'
-}
-// //PPx.Echo();
+PPx.Echo(PPx.Extract('%si"ppp"').slice(-13));
+// PPx.Echo(PPx.Extract('%si"ppp"').slice(-13,13));
 // PPx.SetPopLineMessage(test);
 // PPx.SetPopLineMessage(PPx.Extract("%NC"));
 //PPx.EntryHighlight = PPx.Arguments(0);

@@ -18,15 +18,15 @@ nyagos.prompt = function(this)
   end
 end
 
--- óöóêî
+-- Â±•Ê≠¥Êï∞
 nyagos.histsize=500
 
--- ä¬ã´ïœêî
+-- Áí∞Â¢ÉÂ§âÊï∞
 nyagos.env.APPS="C:/bin"
 nyagos.env.path="C:/bin/git/cmd/;C:/bin/git/mingw64/libexec/git-core;C:/bin/git/usr/bin;" .. nyagos.env.path
 -- nyagos.env.LESSCHARSET="utf-8"
 
--- ÉGÉCÉäÉAÉX
+-- „Ç®„Ç§„É™„Ç¢„Çπ
 nyagos.alias.cdnya="cd %APPS%/nyagos"
 nyagos.alias.cdppx="cd %APPS%/ppx"
 nyagos.alias.cdgit="cd C:/bin/repository/tar80/misc"
@@ -36,15 +36,22 @@ nyagos.alias.grs="git remote set-url"
 nyagos.alias.gb="git branch"
 nyagos.alias.gba="git branch -a --sort=-authordate"
 nyagos.alias.gc="git checkout"
-nyagos.alias.gcp="git checkout `git branch | peco "
+nyagos.alias.gcp="git checkout `git branch | peco` "
 nyagos.alias.gd="git diff"
-nyagos.alias.gdv="git difftool"
+nyagos.alias.gdn="git diff --name-only HEAD^"
 nyagos.alias.gf="git fetch"
+nyagos.alias.gv="git difftool"
+nyagos.alias.gf="git fetch"
+nyagos.alias.gl="git log"
+nyagos.alias.gll="git log --graph --date=short --format=\"%C(yellow)%h %C(magenta)[%ad] %C(auto)%d%C(reset)%s\" -25"
+nyagos.alias.gld="git log --graph --name-status --oneline --date=short --format=\"%C(yellow reverse)%h%C(reset) %C(magenta)[%ad]%C(cyan)%an %C(auto)%d%C(green)%s\" -5"
 nyagos.alias.gm="git merge"
+nyagos.alias.go="git pull"
+nyagos.alias.gp="git push"
 nyagos.alias.vim="C:/bin/vim/vim81/vim.exe"
 nyagos.alias.pgrep= function(args)
   local wd = nyagos.getwd()
-  -- Å¶pecoÇ™ÉGÉâÅ[ìfÇ≠ÇÃÇ≈& > @Ç…íuä∑
+  -- ‚Äªpeco„Åå„Ç®„É©„ÉºÂêê„Åè„ÅÆ„Åß& > @„Å´ÁΩÆÊèõ
   local gpr = nyagos.eval("grep -inr "..args[1].." "..args[2].." | nkf -Lu -w | sed \"s/&/@/\" | peco")
   local gpr = nyagos.eval('echo '..gpr..' | nkf -Lw')
   local fn = nyagos.eval('echo '..gpr..' | sed -nr "s/(.*):[0-9]+:.*/\\1/gp"')

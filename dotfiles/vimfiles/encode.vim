@@ -1,6 +1,18 @@
-if &compatible
-  set nocompatible
-endif
+"=============================================================================
+"    Description: UTF-8化と文字コード自動認識設定
+"                 http://www.kawaz.jp/pukiwiki/?vimを改変
+"         Author: fuenor <fuenor@gmail.com>
+"                 http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-utf8
+"        Version: 1.3
+"=============================================================================
+scriptencoding utf-8
+
+" 改行コードの自動認識
+set fileformats=unix,dos,mac
+
+let s:cpo_save = &cpo
+set cpo&vim
+
 "----------------------------------------
 " 内部エンコーディングと文字コード自動認識
 "----------------------------------------
@@ -35,6 +47,18 @@ if has('iconv')
     set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932,utf-16le,utf-16,latin1
   else
     set fileencodings=ucs-bom,utf-8,ucs-2le,ucs-2,iso-2022-jp,euc-jp,cp932
+  endif
+  if &enc !=# 'utf-8' && iconv('変換', &enc, 'utf-8') == '変換'
+    let &fileencodings=substitute(&fileencodings, ',utf-8', '', 'g')
+  endif
+  if &enc !=# 'cp932' && iconv('変換', &enc, 'cp932') == '変換'
+    let &fileencodings=substitute(&fileencodings, ',cp932', '', 'g')
+  endif
+  if iconv('変換', &enc, 'euc-jp') == '変換'
+    let &fileencodings=substitute(&fileencodings, ',euc-jp', '', 'g')
+  endif
+  if iconv('変換', &enc, 'iso-2022-jp') == '変換'
+    let &fileencodings=substitute(&fileencodings, ',iso-2022-jp', '', 'g')
   endif
 "
   " iconvがeucJP-msに対応しているかをチェック
@@ -72,9 +96,5 @@ set fileformats=unix,dos,mac
 "   autocmd BufReadPost * call AU_ReCheck_FENC()
 " endif
 "
-"----------------------------------------
-" メッセージの日本語化
-"----------------------------------------
-if has('unix') && has('gui_running')
-  let $LANG='ja'
-endif
+let &cpo = s:cpo_save
+unlet s:cpo_save

@@ -10,7 +10,7 @@ if(PPx.Extract('%n') == 'CX'){
 }
 switch(PPx.Extract(PPx.DirectoryType)){
 case '4':
-  PPx.Execute('*RotateExecute u_rotate_styleA,*viewstyle -temp リスト:名前(&L),*viewstyle -temp リスト:行表示(&L)');
+  PPx.Execute('*RotateExecute u_rotate_styleA,*viewstyle -temp 一覧:名前(&L),*viewstyle -temp 一覧:日付(&L)');
   break;
 default:
   PPx.Execute('*RotateExecute u_rotate_styleA,*viewstyle -temp 日付(&D) %%:*sortentry &T:逆順,*viewstyle -temp サムネイル:小(&T) %%:*sortentry &D:標準,*viewstyle -temp サムネイル:中(&T),*viewstyle アイコン(&I)');

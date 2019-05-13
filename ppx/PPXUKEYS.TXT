@@ -1,47 +1,47 @@
-%k"\&ENTER  %mPPc|˜A“®ƒvƒƒpƒeƒB(WINDOWS) @rendou@property
-%k"\^F10    %mPPc|ƒGƒNƒXƒvƒ[ƒ‰[ƒƒjƒ…[ @explorer@menu
-%k"^D       %mPPc|Ž©“®D&D
-%k"^R       %mPPc|˜A‘±–¼‘O•ÏX
-%k"\^V      %mPPc|ƒVƒ‡[ƒgƒJƒbƒg“\‚è•t‚¯
-%k"\^C      %mPPc|ƒfƒBƒŒƒNƒgƒŠ–¼ƒRƒs[
-%k"\HOME    %mPPc|‘I‘ðØ‚è‘Ö‚¦
-%k"\^LEFT   %mPPc|‚Ü‚Æ‚ß‚Ä–ß‚é
-%k"|        %mPPc|ƒhƒ‰ƒCƒuƒŠƒXƒg‚ÖˆÚ“® @drive@list
-%k"^G       %mPPc|ƒpƒX•ÏX @path
-%k"\&HOME   %mPPc|‘‹ˆÊ’u‚ð‹L‰¯ @window
-%k"&HOME    %mPPc|‹L‰¯‚µ‚½‘‹ˆÊ’u‚Ì•œŒ³ @window
-%k"_        %mPPc|‘‹‚Ì˜AŒ‹ON/OFF @window
-%k"&-       %mPPc|ƒ^ƒuƒƒjƒ…[ @tabu@menu
-%k"\^A      %mPPc|ƒJ[ƒ\ƒ‹ˆÊ’u‚Ìƒtƒ@ƒCƒ‹‚ðƒ}[ƒN @mark
-%k"&SPACE   %mPPc|ƒVƒXƒeƒ€ƒƒjƒ…[ @menu@system
-%k"^APPS    %mPPc|ƒfƒBƒŒƒNƒgƒŠƒRƒ“ƒeƒLƒXƒgƒƒjƒ…[ @menu
-%k"\INS     %mPPc|Šg‘å @kakudai
-%k"\DEL     %mPPc|k¬ @syukusyo
-%k"^M       %mPPc|ƒ}[ƒN @incs@inkuri@mark
-%k"^PgDOWN  %mPPv|ƒAƒjƒ[ƒVƒ‡ƒ“_ŽŸ‚ÌƒRƒ} @anime
-%k"D        %mPPv|žx @siori
-%k"^D       %mPPv|žx1-4 @siori
-%k"G        %mPPv|žx‚ÉƒWƒƒƒ“ƒv @siori
-%k"^G       %mPPv|žx1-4‚ÉƒWƒƒƒ“ƒv @siori
-%k"I        %mPPv|ƒLƒƒƒŒƒbƒgƒ‚[ƒh @caret@mode
-%k"\^V      %mPPv|Œ`Ž®Žw’èƒy[ƒXƒg
-%k"'@'      %mPPv|•¶ŽšƒR[ƒh @moji
-%k"':'      %mPPv|•\Ž¦Œ`Ž® @hyouji
-%k"';'      %mPPv|Œ…” @ketasuu
-%k"A        %mPPv|ƒAƒXƒyƒNƒg”ä•ÏX @asupekuto
-%k"C        %mPPv|§Œä‹L†
-%k"W        %mPPv|ƒtƒHƒ“ƒgƒgƒOƒ‹ @font
-%k"U        %mPPv|s”Ô† @line@numbe
-%k"T        %mPPv|—Ï—s/•\Ž¦sƒgƒOƒ‹ @gyou
-%k"/        %mPPv|•”•ª•\Ž¦Ø‘Ö
-^:          %mPPe|ƒRƒ“ƒvƒŠƒXƒg @comp@list
-^;          %mPPe|s‘I‘ð @gyou
-\^H         %mPPe|PPc‚ÅŽÀs @run@exe
-&DEL        %mPPe|•\Ž¦’†‚Ì—š—ðíœ
-^U          %mPPe|íœ‚µ‚½•¶Žš‚ðÄ“ü—Í
-^Y          %mPPe|síœ @gyou@delete
-^]          %mPPe|ƒtƒ@ƒCƒ‹ƒƒjƒ…[ @menu
-\F2         %mPPe|Ý’èƒƒjƒ…[ @menu
-^K          %mPPe|•ÒWƒƒjƒ…[1 @menu
-^Q          %mPPe|•ÒWƒƒjƒ…[2 @menu
-^U          %mPPe|’¼‘O‚Éíœ‚µ‚½•¶Žš—š—ð @delite@sakujo@undo
+%k"\&ENTER  %mPPc|é€£å‹•ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£(WINDOWS) @rendou@property
+%k"\^F10    %mPPc|ã‚¨ã‚¯ã‚¹ãƒ—ãƒ­ãƒ¼ãƒ©ãƒ¼ãƒ¡ãƒ‹ãƒ¥ãƒ¼ @explorer@menu
+%k"^D       %mPPc|è‡ªå‹•D&D
+%k"^R       %mPPc|é€£ç¶šåå‰å¤‰æ›´
+%k"\^V      %mPPc|ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆè²¼ã‚Šä»˜ã‘
+%k"\^C      %mPPc|ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªåã‚³ãƒ”ãƒ¼
+%k"\HOME    %mPPc|é¸æŠžåˆ‡ã‚Šæ›¿ãˆ
+%k"\^LEFT   %mPPc|ã¾ã¨ã‚ã¦æˆ»ã‚‹
+%k"|        %mPPc|ãƒ‰ãƒ©ã‚¤ãƒ–ãƒªã‚¹ãƒˆã¸ç§»å‹• @drive@list
+%k"^G       %mPPc|ãƒ‘ã‚¹å¤‰æ›´ @path
+%k"\&HOME   %mPPc|çª“ä½ç½®ã‚’è¨˜æ†¶ @window
+%k"&HOME    %mPPc|è¨˜æ†¶ã—ãŸçª“ä½ç½®ã®å¾©å…ƒ @window
+%k"_        %mPPc|çª“ã®é€£çµON/OFF @window
+%k"&-       %mPPc|ã‚¿ãƒ–ãƒ¡ãƒ‹ãƒ¥ãƒ¼ @tabu@menu
+%k"\^A      %mPPc|ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒžãƒ¼ã‚¯ @mark
+%k"&SPACE   %mPPc|ã‚·ã‚¹ãƒ†ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼ @menu@system
+%k"^APPS    %mPPc|ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ @menu
+%k"\INS     %mPPc|æ‹¡å¤§ @kakudai
+%k"\DEL     %mPPc|ç¸®å° @syukusyo
+%k"^M       %mPPc|ãƒžãƒ¼ã‚¯ @incs@inkuri@mark
+%k"^PgDOWN  %mPPv|ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³_æ¬¡ã®ã‚³ãƒž @anime
+%k"D        %mPPv|æ ž @siori
+%k"^D       %mPPv|æ ž1-4 @siori
+%k"G        %mPPv|æ žã«ã‚¸ãƒ£ãƒ³ãƒ— @siori
+%k"^G       %mPPv|æ ž1-4ã«ã‚¸ãƒ£ãƒ³ãƒ— @siori
+%k"I        %mPPv|ã‚­ãƒ£ãƒ¬ãƒƒãƒˆãƒ¢ãƒ¼ãƒ‰ @caret@mode
+%k"\^V      %mPPv|å½¢å¼æŒ‡å®šãƒšãƒ¼ã‚¹ãƒˆ
+%k"'@'      %mPPv|æ–‡å­—ã‚³ãƒ¼ãƒ‰ @moji
+%k"':'      %mPPv|è¡¨ç¤ºå½¢å¼ @hyouji
+%k"';'      %mPPv|æ¡æ•° @ketasuu
+%k"A        %mPPv|ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”å¤‰æ›´ @asupekuto
+%k"C        %mPPv|åˆ¶å¾¡è¨˜å·
+%k"W        %mPPv|ãƒ•ã‚©ãƒ³ãƒˆãƒˆã‚°ãƒ« @font
+%k"U        %mPPv|è¡Œç•ªå· @line@numbe
+%k"T        %mPPv|å€«ç†è¡Œ/è¡¨ç¤ºè¡Œãƒˆã‚°ãƒ« @gyou
+%k"/        %mPPv|éƒ¨åˆ†è¡¨ç¤ºåˆ‡æ›¿
+^:          %mPPe|ã‚³ãƒ³ãƒ—ãƒªã‚¹ãƒˆ @comp@list
+^;          %mPPe|è¡Œé¸æŠž @gyou
+\^H         %mPPe|PPcã§å®Ÿè¡Œ @run@exe
+&DEL        %mPPe|è¡¨ç¤ºä¸­ã®å±¥æ­´å‰Šé™¤
+^U          %mPPe|å‰Šé™¤ã—ãŸæ–‡å­—ã‚’å†å…¥åŠ›
+^Y          %mPPe|è¡Œå‰Šé™¤ @gyou@delete
+^]          %mPPe|ãƒ•ã‚¡ã‚¤ãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼ @menu
+\F2         %mPPe|è¨­å®šãƒ¡ãƒ‹ãƒ¥ãƒ¼ @menu
+^K          %mPPe|ç·¨é›†ãƒ¡ãƒ‹ãƒ¥ãƒ¼1 @menu
+^Q          %mPPe|ç·¨é›†ãƒ¡ãƒ‹ãƒ¥ãƒ¼2 @menu
+^U          %mPPe|ç›´å‰ã«å‰Šé™¤ã—ãŸæ–‡å­—å±¥æ­´ @delite@sakujo@undo

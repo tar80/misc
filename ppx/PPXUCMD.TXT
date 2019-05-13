@@ -1,1 +1,256 @@
-C:/bin/ppx/PPXUCMD.TXT
+%M?extdrivemenu ;非表示を含むドライブの移動メニュー
+%M?exjumpmenu ;移動形式メニュー
+%M?layoutmenu  ;レイアウト選択メニュー
+%M?docktmenu ;上dockバー選択メニュー
+%M?dockbmenu ;下dockバー選択メニュー
+%M?sortmenu ;MC_sort
+%M?viewmenu ;MC_celS
+%M?newmenu ;エントリ作成メニュー
+%M?drivemenu ;ドライブ移動メニュー
+%M?drivelist ;ドライブ一覧
+%M?favorites ;お気に入り(M_pjump)
+%M?diroptionmenu ;ディレクトリ設定
+%O ;x:窓最大化  n:最小化  d:非表示  a:フォーカス移動なし
+%O ;B:PPbで実行    b:PPbを使わない  W:PPb実行後キー待機
+%O ;s:順番に実行   i:起動完了待機   c:シェルを使用
+%O ;R:マーク無効   r:マーク全処理
+%O ;S:\を/に置換   p:[を\[に置換    A:DIR末尾 \*.*
+%O ;N:編集機能無効 D:マクロ文字を展開しない
+%O ;C:改行を含める O:実行後カーソルを一つ下に移動
+%O ;P: | > を処理せずそのまま表示
+%O ;I:キーコマンドのエラー無視
+%O ;q:コマンド待機時のダイアログ非表示
+%O ;T:レスポンスファイル使用後削除(%Osを併用すること)
+%Obd *ppcust /c ;コマンド一覧を表示して実行
+*JSCRIPT  ;*script %'scrdir'\"xxx.js,%*arg(1)"
+*addhistory  ;type,text
+*alias  ;[valuename=[strings]] エイリアスの設定・一覧表示
+*autodragdrop  ;[caption[,id]][,r[,source path]] 自動ドラッグ＆ドロップ
+*cache  ;[on|off|task] PPc ディレクトリ読み込みキャッシュ
+*capturewindow  ;caption 任意ウィンドウの取り込み
+*cd  ;実行時カレント変更 *cd path
+*checkoffmark ;画面外にマークしたエントリがあれば警告
+*checksignature  ;[filename] 配布書庫の署名検証
+*checkupdate  ;[p] PPxの更新チェック p:試験公開版
+*chopdir ;path ディレクトリのみの階層をカット
+*clearauth ;ID・パスワードのキャッシュを消去
+*clearchange ;PPc 更新状態表示の解除
+*clipentry  ;[text/file] エントリをクリップボードにコピー
+*cliptext ;text クリップボードに登録
+*closeppx  ;[wildcard] 全PPx終了
+*color  ;[back|cursor] [color] 色の一時的変更
+*comment  ;[id,]["text"|[all] command]
+*commandhash ;name モジュールのコマンド名ハッシュの表示
+*comparemark  ;比較方法,マーク属性,サブディレクトリ PPcファイル比較マーク
+*completelist ;[/set][/option] 自動の一覧表示の表示設定
+*countsize ;[-clear] マーク総サイズ算出
+*cursor  ;移動方法,移動量,(画面外方法),(画面外他),(範囲外方法),(範囲外他)
+*customize ;X_xxx:xxx=xxx カスタマイズ(設定の再読込処理有)
+*cutentry ;[textfile] エントリをクリップボードに切り取り
+*defaultmenu ;Windows標準のエディットボックスメニューを表示
+*delete ;entryname ファイルディレクトリを削除
+*diroption ;ディレクトリ別の設定のメニュー変更
+*dock ;dockの操作
+*edit ;[filename] PPeで編集(終了待ちする)
+*editmode  ;e:- n:NUM m:MASK s:SEARCH h:CMD d:DIR c:FILE f:FULLPATH
+*entrytip ;[type] [option] エントリーチップの表示
+	filename ;ファイル名
+	fileinfo ;ファイル情報
+	comment  ;コメント
+	preview  ;プレビュー
+	"text"   ;指定された形式でテキストを表示
+	-cell    ;エントリの位置にチップ表示
+	-mouse   ;マウスの〃
+ 
+*execinarc ;書庫内ファイルを使用できるようにする
+*execute  ;ID,command 指定PPx上で実行
+*file ;[!]action[,[source][,[destination][,options]]] ファイル操作
+	/src: ;path コピー元の名前
+	/dest: ;path コピー先
+	/name: ;name コピー先の名前
+	/mask: ;エントリマスク 例)/mask:a:d+ ファイルコピーしない
+	/same: ;0:最新のみ 2:上書き 同名ファイル処理
+	/sameall:on ;同名ファイルが見つかったときに対処方法を選択入力しない
+	/extractname:on ; /nameのマクロ文字展開有り
+	/snum:001 ;連番番号
+	/div:100m ;分割サイズ
+	/sheet:1 ;名前シートを開く
+	/min ;最小化ダイアログ
+	/qstart ;順番待ち無し
+	/nocount ;総ファイル数・サイズ算出無し
+	/retry:3 ;３回再試行
+	/error:ignore ;エラーを全て無視
+	/querycreatedirectory:on ;ディレクトリ自動作成
+	/undolog:on ;UNDO可能に
+ 
+*fitwindow  ;base window id[,target window id[,type]]
+	0 ;baseに重なる。大きさも同じに
+	1 :baseの左側に移動、高さが同じに
+	2 ;baseの右側に移動、高さが同じに
+	3 ;baseの上側に移動、幅が同じに
+	4 ;baseの下側に移動、幅が同じに
+	5 ;baseの左側の上端に移動
+	6 ;baseの右側の上端に移動
+	7 ;baseの左側の下端に移動
+	8 ;baseの右側の下端に移動
+	9 ;baseの上側の左端に移動
+	10 ;baseの上側の右端に移動
+	11 ;baseの下側の左端に移動
+	12 ;baseの下側の右端に移動
+	20,28 ;baseの中央に移動
+	21 ;baseの左上に移動
+	22 ;baseの左端中央に移動
+	23 ;baseの左下に移動
+	24 ;baseの右上に移動
+	25 ;baseの右端中央に移動
+	26 ;baseの右下に移動
+	27 ;baseの上端中央に移動
+	29 ;baseの右下に移動
+ 
+*flashwindow ;[caption|ID] タイトルバーを点滅させる
+*focus ;[!][caption[,filename]] ！:窓のトグル caption(#数値):でウィンドウID指定
+*freedriveuse ;[drivename] 指定ドライブの使用を一時停止
+*help ;[keyword] PPxのヘルプを表示
+*hibernate ;休止状態に移行
+*httpget  ;"url","destname" httpでファイルを取得
+*if  ;formula 数式の条件を満たしたら行を実行
+*ifmatch  ;wildcards[,string] 満たしたら以降を実行
+*ime  ;0|1 IME状態の変更
+*insert  ;"text" テキスト挿入
+*insertfile  ;filename ファイル挿入(PPe)
+*job ;[close]処理中コマンドの一覧メニュー
+*jumpline ;[L|Y]行番号 行番号指定カーソル移動
+*jumppath ;[path][ /option] 詳細指定付き表示ディレクトリ移動
+*launch  ;command [parameter] commandをそのディレクトリで実行
+*layout ;PPc/PPvのレイアウトメニュー
+*linemessage  ;ステータス行に文字列表示
+*linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
+*logoff ;Windows をログオフ
+*logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
+*makedir  ;dirname ディレクトリを作成
+*makefile  ;filename ディレクトリを作成
+*makelistfile ;[filename] [option] ListFile出力
+	,marked ; マークのみ
+	,marktag ; マーク情報付
+ 
+*markentry ;[wildcards] エントリマーク
+*maskentry ;[wildcards] 一時エントリマスク設定
+*maskpath ;[on|off] PPc 書庫内のディレクトリ仮想移動
+*maximize ;[window id] 窓最大化
+*minimize [window id] 窓最小化
+*monitoroff ;モニターを省電力モードにする
+*pack ;[!]filename[,indiv][,dllname,type] 書庫作成
+*pairrate ;[+|-]移動量|比率 ２枚の窓の幅／丈の比率を変更
+*pane ;commandname [parameter...] ペインの各種操作
+	closeleft ;現タブより左を閉じる
+	closeright ;現タブより右を閉じる
+	closepain ;現ペインを閉じる
+	closetab ;現タブを閉じる
+	eject ;現タブを分離
+	lock ;移動ロック
+	newpane ;新規ペイン
+	newtab ;新規タブ
+	menu ;メニュー表示
+	select h+1 ;次の非表示タブ
+	select h-1 ;前の非表示タブ
+	swappane ;ペインを入れ替え
+ 
+*poweroff ;Windows をシャットダウンし、電源を切る
+*ppb ;PPbを実行
+*ppc ;PPcを実行
+	-runas ;管理者/別のユーザでPPcを実行
+	-r ; 起動中のPPcがあれば使う
+	-max ;最大化
+	-min ;最小化 -r オプション指定時は無効
+	-show ;通常の大きさ
+	-noactive ;非選択
+	-selectnoactive ; 非選択(現在窓以外)
+	-lock ;ディレクトリの変更を禁止
+	-alone  ;[:ID]単独で一体化窓起動
+	-pane  ;[:~|r|数値] 新規ペイン ~:反対窓タブ l:左窓タブ r:右窓タブ 数値:左端=0～
+	-single ;単独のppc起動
+	-mps ;窓毎にプロセスを割り当てる
+	-sps ;一つのプロセスで起動
+	-bootid:  ;[path] A-Z:指定PPcを起動 ~:反対窓
+	-bootmax: ;A-Z:起動していなければ指定PPcまでのPPcを起動
+	-idl ;関連付けフォルダ指定(通常明示する必要なし)
+	-k ;起動後実行コマンド
+	-choose: ;edit|dd|con|multi エントリ選択フロントエンド
+	-choose: ;edit:エディットボックス dd:D&D con[8|16]:%#FDC multi[8|16]:%FDC
+ 
+*ppcfile ;[!]action[,destdir[,option]] [C]/[M]コマンドを実行
+*ppcust ;[param]PPcustを実行
+*ppe ;[filename] PPeで編集(終了待たずに次のコマンドを実行)
+*ppffix ;[param] PPffixを実行
+*pptray ;PPtrayを実行
+*ppv [-runas][param] ;PPvを実行
+*ppvoption  ;command PPv使用時の挙動指定
+*reboot ;Windows を再起動
+*reducemode ;mode PPvの画像縮小方法
+	1 ;モノクロ文書、白地
+	2 ;モノクロ文書、黒地
+	3 ;カラー高速
+	4 ;カラー綺麗
+ 
+*RotateCustomize ;custid,customize1,customize2[,...] "="" \=\\
+*RotateExecute ;id,command1,command2[,...] "="" \=\\
+*rename  ;old,new 名前変更
+*replace ;"text" 全テキスト入れ替え
+*replacefile ;filename ファイルを開き直す(PPe)
+*return ;ユーザコマンドの終了
+*screensaver ;スクリーンセーバを起動
+*selectppx ;[ID] 指定PPxにフォーカス移動
+*setcaption ;text キャプションの設定
+*set ;[valuename=[strings]] 環境変数の設定、削除
+*setcust ;カスタマイズ(高速) X_xxx=xxxx / X_xxx:xxx=xxxx
+*setentryimage ;filename [/save] サムネイル表示用画像の設定
+*setmaskentry ;[wildcards] PPc 常時エントリマスク設定
+*setsortentry ;[XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,オプション エントリのソート(\[S]相当)
+*shownormal ;[window id] 窓を通常の大きさにする
+*shutdown ;Windows をシャットダウン
+*sortentry ;[XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,オプション エントリのソート([S]相当)
+*sound ;[filename.wav] WAVファイルを再生する
+*start ;[-runas][-launch] filename [parameter] filenameを実行
+*stop ;実行中止
+*string ;[valuename=[strings]]
+	i, ;ID別環境変数
+	o, ;コマンドライン内環境変数
+ 
+*suspend ;サスペンド状態に移行
+*syncprop ;[on|off|focus] 連動プロパティ表示
+*terminate ;Windows を強制シャットダウン
+*togglewinsize ;[window id]
+*tree ;type ツリー窓の操作(PPc,一行編集)
+*trimmark 実行済みマークの調整
+*unmarkentry ;[wildcards] エントリマーク解除
+*unpack ;path 書庫の展開
+*viewoption ;各種オプション 表示関係オプション
+*viewstyle ;[option] [MC_celS名|directory|separate] エントリ表示の種類を変更
+*wait  ;time[,1|2] 指定時間待機 1=待機後ループ 2=待機中ループ
+*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
+	%1,,,,,1,0  ;ディレクトリ無視して一覧表示
+	%1;%2,,,,,1,0  ;ディレクトリ無視して現在窓・反対窓を一覧表示
+ 
+*windowposition ;[window id],x,y
+*windowsize ;[window id],width,height
+*zenhan ;[z|h] 文字のa/ａ変換
+*zoom ;比率 拡大縮小
+%m|テキスト比較@diff@diff@fc %C "%2\%C"
+%m|バイナリ比較@cmd@diff@fc fc /b %C "%2\%C"
+%m|クォータ違反の表示@cmd@fsutil fsutil quota violations
+%m|ネットワークアダプタ設定@net@cmd@ipconfig ipconfig /all
+%m|実行中サービス一覧@cmd@net net start
+%m|開いているポートの一覧@cmd@net netstat /n
+%m|DNS問合せ@cmd@nslookup nslookup
+%m|レジストリエディタ@cmd@regedit regedit
+%m|指定セッションをログアウト@cmd@reset reset
+%m|シャットダウン@cmd@shutdown shutdown -s -t 0
+%m|システムのプロパティ@cmd@system SystemPropertiesAdvanced
+%m|プロセス強制終了@cmd@taskkill taskkill
+%m|プロセス一覧@cmd@tasklist tasklist /svc
+%m|指定ドメインまでの経路@cmd@tracert tracert
+%m|SKKFEP設定@cmd@skk@option cscript D:\Apps\skkfep\SETUP.js
+%m|西暦/月/日@nowdatetime %*nowdatetime("Y/n/d")
+%m|月日_時:分:秒@nowdatetime %*nowdatetime("ND_H:U:M")
+%m|月日(曜日)@nowdatetime %*nowdatetime("n月d日(W)")
+%m|設定ファイル読み込み__読み込ませるPxファイルをマーク@cmd@setting@ppcust %"設定ファイル読み込み"%Q"ready?" %:*closeppx C* %:*ifmatch Px*.cfg %:PPCUSTW CA %FDC

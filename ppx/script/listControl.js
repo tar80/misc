@@ -12,11 +12,7 @@ switch(arg){
   case 'git':
     var tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 2, true, -1);
     tList.WriteLine(';ListFile');
-    if(PPx.Extract('%si"ppp"').slice(-13) == 'GITRESULT.XLF'){
-      PPx.Execute('%On *ppb -c git diff --name-only HEAD^ | nkf -w16L -Lw >> %\'repoppx\'%\\list\\GITRESULT.XLF');
-    } else{
-      tList.WriteLine(';Base=' + PPx.Extract('%\'repo\'') + '|1');
-    }
+    tList.WriteLine(';Base=' + PPx.Extract('%\'repo\'') + '|1');
     tList.Close();
     break;
     // 新規リストファイル

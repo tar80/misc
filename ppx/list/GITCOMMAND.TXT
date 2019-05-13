@@ -16,6 +16,12 @@ checkout ;[--option] branch
 	master
 	-b  ;newbranch [start point] ブランチを作成してチェックアウト
 	--force  ;(-f)branch 変更を破棄してチェックアウト
+diff ;[--option][commit(old)][..commit(new)][path]
+	--color-words ;単語単位の差分
+	--name-only ;ファイル名のみ表示
+	--stat ;変更点をステータス表示
+difftool ;
+	--dir-diff
 fetch ;[--option | remote [branch]]
 	--all ;リモートの全履歴を取得
 	--tags ;(-t)タグを取得
@@ -59,6 +65,8 @@ remote ;[--option]
 revert ;[-m] commit [--option] 指定コミットを取り消して新しいコミットを作成
 	--no-commit ;(-n)revert後コミットしない
 	-m  ;[1|2] マージコミットのどちらに戻すかを選択
+show ;[--option][commit]
+	--pretty="[%ad]%C(magenta)%ar%n%C(yellow reverse)%h%C(reset) %C(cyan)@%an% %C(green) >> %s"
 stash ;[command]["コメント"]
 	list ;一覧
 	show  ;[-p][stash@{n}] 詳細表示 -p=diff

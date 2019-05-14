@@ -19,3 +19,5 @@ for(var i = 0,l = PPx.EntryDisplayCount; i < l; i = (i+1)|0){
   }
 }
 tList.Close();
+// 表示を戻す
+PPx.Execute('*customize XC_celF:' + PPx.Extract('%n').slice(1) + '=' + listview);

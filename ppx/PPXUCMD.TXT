@@ -1,256 +1,256 @@
-%M?extdrivemenu ;”ñ•\¦‚ğŠÜ‚Şƒhƒ‰ƒCƒu‚ÌˆÚ“®ƒƒjƒ…[
-%M?exjumpmenu ;ˆÚ“®Œ`®ƒƒjƒ…[
-%M?layoutmenu  ;ƒŒƒCƒAƒEƒg‘I‘ğƒƒjƒ…[
-%M?docktmenu ;ãdockƒo[‘I‘ğƒƒjƒ…[
-%M?dockbmenu ;‰ºdockƒo[‘I‘ğƒƒjƒ…[
+%M?extdrivemenu ;éè¡¨ç¤ºã‚’å«ã‚€ãƒ‰ãƒ©ã‚¤ãƒ–ã®ç§»å‹•ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+%M?exjumpmenu ;ç§»å‹•å½¢å¼ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+%M?layoutmenu  ;ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆé¸æŠãƒ¡ãƒ‹ãƒ¥ãƒ¼
+%M?docktmenu ;ä¸Šdockãƒãƒ¼é¸æŠãƒ¡ãƒ‹ãƒ¥ãƒ¼
+%M?dockbmenu ;ä¸‹dockãƒãƒ¼é¸æŠãƒ¡ãƒ‹ãƒ¥ãƒ¼
 %M?sortmenu ;MC_sort
 %M?viewmenu ;MC_celS
-%M?newmenu ;ƒGƒ“ƒgƒŠì¬ƒƒjƒ…[
-%M?drivemenu ;ƒhƒ‰ƒCƒuˆÚ“®ƒƒjƒ…[
-%M?drivelist ;ƒhƒ‰ƒCƒuˆê——
-%M?favorites ;‚¨‹C‚É“ü‚è(M_pjump)
-%M?diroptionmenu ;ƒfƒBƒŒƒNƒgƒŠİ’è
-%O ;x:‘‹Å‘å‰»  n:Å¬‰»  d:”ñ•\¦  a:ƒtƒH[ƒJƒXˆÚ“®‚È‚µ
-%O ;B:PPb‚ÅÀs    b:PPb‚ğg‚í‚È‚¢  W:PPbÀsŒãƒL[‘Ò‹@
-%O ;s:‡”Ô‚ÉÀs   i:‹N“®Š®—¹‘Ò‹@   c:ƒVƒFƒ‹‚ğg—p
-%O ;R:ƒ}[ƒN–³Œø   r:ƒ}[ƒN‘Sˆ—
-%O ;S:\‚ğ/‚É’uŠ·   p:[‚ğ\[‚É’uŠ·    A:DIR––”ö \*.*
-%O ;N:•ÒW‹@”\–³Œø D:ƒ}ƒNƒ•¶š‚ğ“WŠJ‚µ‚È‚¢
-%O ;C:‰üs‚ğŠÜ‚ß‚é O:ÀsŒãƒJ[ƒ\ƒ‹‚ğˆê‚Â‰º‚ÉˆÚ“®
-%O ;P: | > ‚ğˆ—‚¹‚¸‚»‚Ì‚Ü‚Ü•\¦
-%O ;I:ƒL[ƒRƒ}ƒ“ƒh‚ÌƒGƒ‰[–³‹
-%O ;q:ƒRƒ}ƒ“ƒh‘Ò‹@‚Ìƒ_ƒCƒAƒƒO”ñ•\¦
-%O ;T:ƒŒƒXƒ|ƒ“ƒXƒtƒ@ƒCƒ‹g—pŒãíœ(%Os‚ğ•¹—p‚·‚é‚±‚Æ)
-%Obd *ppcust /c ;ƒRƒ}ƒ“ƒhˆê——‚ğ•\¦‚µ‚ÄÀs
+%M?newmenu ;ã‚¨ãƒ³ãƒˆãƒªä½œæˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
+%M?drivemenu ;ãƒ‰ãƒ©ã‚¤ãƒ–ç§»å‹•ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+%M?drivelist ;ãƒ‰ãƒ©ã‚¤ãƒ–ä¸€è¦§
+%M?favorites ;ãŠæ°—ã«å…¥ã‚Š(M_pjump)
+%M?diroptionmenu ;ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªè¨­å®š
+%O ;x:çª“æœ€å¤§åŒ–  n:æœ€å°åŒ–  d:éè¡¨ç¤º  a:ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•ãªã—
+%O ;B:PPbã§å®Ÿè¡Œ    b:PPbã‚’ä½¿ã‚ãªã„  W:PPbå®Ÿè¡Œå¾Œã‚­ãƒ¼å¾…æ©Ÿ
+%O ;s:é †ç•ªã«å®Ÿè¡Œ   i:èµ·å‹•å®Œäº†å¾…æ©Ÿ   c:ã‚·ã‚§ãƒ«ã‚’ä½¿ç”¨
+%O ;R:ãƒãƒ¼ã‚¯ç„¡åŠ¹   r:ãƒãƒ¼ã‚¯å…¨å‡¦ç†
+%O ;S:\ã‚’/ã«ç½®æ›   p:[ã‚’\[ã«ç½®æ›    A:DIRæœ«å°¾ \*.*
+%O ;N:ç·¨é›†æ©Ÿèƒ½ç„¡åŠ¹ D:ãƒã‚¯ãƒ­æ–‡å­—ã‚’å±•é–‹ã—ãªã„
+%O ;C:æ”¹è¡Œã‚’å«ã‚ã‚‹ O:å®Ÿè¡Œå¾Œã‚«ãƒ¼ã‚½ãƒ«ã‚’ä¸€ã¤ä¸‹ã«ç§»å‹•
+%O ;P: | > ã‚’å‡¦ç†ã›ãšãã®ã¾ã¾è¡¨ç¤º
+%O ;I:ã‚­ãƒ¼ã‚³ãƒãƒ³ãƒ‰ã®ã‚¨ãƒ©ãƒ¼ç„¡è¦–
+%O ;q:ã‚³ãƒãƒ³ãƒ‰å¾…æ©Ÿæ™‚ã®ãƒ€ã‚¤ã‚¢ãƒ­ã‚°éè¡¨ç¤º
+%O ;T:ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«ä½¿ç”¨å¾Œå‰Šé™¤(%Osã‚’ä½µç”¨ã™ã‚‹ã“ã¨)
+%Obd *ppcust /c ;ã‚³ãƒãƒ³ãƒ‰ä¸€è¦§ã‚’è¡¨ç¤ºã—ã¦å®Ÿè¡Œ
 *JSCRIPT  ;*script %'scrdir'\"xxx.js,%*arg(1)"
 *addhistory  ;type,text
-*alias  ;[valuename=[strings]] ƒGƒCƒŠƒAƒX‚Ìİ’èEˆê——•\¦
-*autodragdrop  ;[caption[,id]][,r[,source path]] ©“®ƒhƒ‰ƒbƒO•ƒhƒƒbƒv
-*cache  ;[on|off|task] PPc ƒfƒBƒŒƒNƒgƒŠ“Ç‚İ‚İƒLƒƒƒbƒVƒ…
-*capturewindow  ;caption ”CˆÓƒEƒBƒ“ƒhƒE‚Ìæ‚è‚İ
-*cd  ;ÀsƒJƒŒƒ“ƒg•ÏX *cd path
-*checkoffmark ;‰æ–ÊŠO‚Éƒ}[ƒN‚µ‚½ƒGƒ“ƒgƒŠ‚ª‚ ‚ê‚ÎŒx
-*checksignature  ;[filename] ”z•z‘ŒÉ‚Ì–¼ŒŸØ
-*checkupdate  ;[p] PPx‚ÌXVƒ`ƒFƒbƒN p:Œ±ŒöŠJ”Å
-*chopdir ;path ƒfƒBƒŒƒNƒgƒŠ‚Ì‚İ‚ÌŠK‘w‚ğƒJƒbƒg
-*clearauth ;IDEƒpƒXƒ[ƒh‚ÌƒLƒƒƒbƒVƒ…‚ğÁ‹
-*clearchange ;PPc XVó‘Ô•\¦‚Ì‰ğœ
-*clipentry  ;[text/file] ƒGƒ“ƒgƒŠ‚ğƒNƒŠƒbƒvƒ{[ƒh‚ÉƒRƒs[
-*cliptext ;text ƒNƒŠƒbƒvƒ{[ƒh‚É“o˜^
-*closeppx  ;[wildcard] ‘SPPxI—¹
-*color  ;[back|cursor] [color] F‚Ìˆê“I•ÏX
+*alias  ;[valuename=[strings]] ã‚¨ã‚¤ãƒªã‚¢ã‚¹ã®è¨­å®šãƒ»ä¸€è¦§è¡¨ç¤º
+*autodragdrop  ;[caption[,id]][,r[,source path]] è‡ªå‹•ãƒ‰ãƒ©ãƒƒã‚°ï¼†ãƒ‰ãƒ­ãƒƒãƒ—
+*cache  ;[on|off|task] PPc ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªèª­ã¿è¾¼ã¿ã‚­ãƒ£ãƒƒã‚·ãƒ¥
+*capturewindow  ;caption ä»»æ„ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å–ã‚Šè¾¼ã¿
+*cd  ;å®Ÿè¡Œæ™‚ã‚«ãƒ¬ãƒ³ãƒˆå¤‰æ›´ *cd path
+*checkoffmark ;ç”»é¢å¤–ã«ãƒãƒ¼ã‚¯ã—ãŸã‚¨ãƒ³ãƒˆãƒªãŒã‚ã‚Œã°è­¦å‘Š
+*checksignature  ;[filename] é…å¸ƒæ›¸åº«ã®ç½²åæ¤œè¨¼
+*checkupdate  ;[p] PPxã®æ›´æ–°ãƒã‚§ãƒƒã‚¯ p:è©¦é¨“å…¬é–‹ç‰ˆ
+*chopdir ;path ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ã¿ã®éšå±¤ã‚’ã‚«ãƒƒãƒˆ
+*clearauth ;IDãƒ»ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’æ¶ˆå»
+*clearchange ;PPc æ›´æ–°çŠ¶æ…‹è¡¨ç¤ºã®è§£é™¤
+*clipentry  ;[text/file] ã‚¨ãƒ³ãƒˆãƒªã‚’ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ã‚³ãƒ”ãƒ¼
+*cliptext ;text ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ç™»éŒ²
+*closeppx  ;[wildcard] å…¨PPxçµ‚äº†
+*color  ;[back|cursor] [color] è‰²ã®ä¸€æ™‚çš„å¤‰æ›´
 *comment  ;[id,]["text"|[all] command]
-*commandhash ;name ƒ‚ƒWƒ…[ƒ‹‚ÌƒRƒ}ƒ“ƒh–¼ƒnƒbƒVƒ…‚Ì•\¦
-*comparemark  ;”äŠr•û–@,ƒ}[ƒN‘®«,ƒTƒuƒfƒBƒŒƒNƒgƒŠ PPcƒtƒ@ƒCƒ‹”äŠrƒ}[ƒN
-*completelist ;[/set][/option] ©“®‚Ìˆê——•\¦‚Ì•\¦İ’è
-*countsize ;[-clear] ƒ}[ƒN‘ƒTƒCƒYZo
-*cursor  ;ˆÚ“®•û–@,ˆÚ“®—Ê,(‰æ–ÊŠO•û–@),(‰æ–ÊŠO‘¼),(”ÍˆÍŠO•û–@),(”ÍˆÍŠO‘¼)
-*customize ;X_xxx:xxx=xxx ƒJƒXƒ^ƒ}ƒCƒY(İ’è‚ÌÄ“Çˆ——L)
-*cutentry ;[textfile] ƒGƒ“ƒgƒŠ‚ğƒNƒŠƒbƒvƒ{[ƒh‚ÉØ‚èæ‚è
-*defaultmenu ;Windows•W€‚ÌƒGƒfƒBƒbƒgƒ{ƒbƒNƒXƒƒjƒ…[‚ğ•\¦
-*delete ;entryname ƒtƒ@ƒCƒ‹ƒfƒBƒŒƒNƒgƒŠ‚ğíœ
-*diroption ;ƒfƒBƒŒƒNƒgƒŠ•Ê‚Ìİ’è‚Ìƒƒjƒ…[•ÏX
-*dock ;dock‚Ì‘€ì
-*edit ;[filename] PPe‚Å•ÒW(I—¹‘Ò‚¿‚·‚é)
+*commandhash ;name ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®ã‚³ãƒãƒ³ãƒ‰åãƒãƒƒã‚·ãƒ¥ã®è¡¨ç¤º
+*comparemark  ;æ¯”è¼ƒæ–¹æ³•,ãƒãƒ¼ã‚¯å±æ€§,ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª PPcãƒ•ã‚¡ã‚¤ãƒ«æ¯”è¼ƒãƒãƒ¼ã‚¯
+*completelist ;[/set][/option] è‡ªå‹•ã®ä¸€è¦§è¡¨ç¤ºã®è¡¨ç¤ºè¨­å®š
+*countsize ;[-clear] ãƒãƒ¼ã‚¯ç·ã‚µã‚¤ã‚ºç®—å‡º
+*cursor  ;ç§»å‹•æ–¹æ³•,ç§»å‹•é‡,(ç”»é¢å¤–æ–¹æ³•),(ç”»é¢å¤–ä»–),(ç¯„å›²å¤–æ–¹æ³•),(ç¯„å›²å¤–ä»–)
+*customize ;X_xxx:xxx=xxx ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚º(è¨­å®šã®å†èª­è¾¼å‡¦ç†æœ‰)
+*cutentry ;[textfile] ã‚¨ãƒ³ãƒˆãƒªã‚’ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«åˆ‡ã‚Šå–ã‚Š
+*defaultmenu ;Windowsæ¨™æº–ã®ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’è¡¨ç¤º
+*delete ;entryname ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å‰Šé™¤
+*diroption ;ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªåˆ¥ã®è¨­å®šã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼å¤‰æ›´
+*dock ;dockã®æ“ä½œ
+*edit ;[filename] PPeã§ç·¨é›†(çµ‚äº†å¾…ã¡ã™ã‚‹)
 *editmode  ;e:- n:NUM m:MASK s:SEARCH h:CMD d:DIR c:FILE f:FULLPATH
-*entrytip ;[type] [option] ƒGƒ“ƒgƒŠ[ƒ`ƒbƒv‚Ì•\¦
-	filename ;ƒtƒ@ƒCƒ‹–¼
-	fileinfo ;ƒtƒ@ƒCƒ‹î•ñ
-	comment  ;ƒRƒƒ“ƒg
-	preview  ;ƒvƒŒƒrƒ…[
-	"text"   ;w’è‚³‚ê‚½Œ`®‚ÅƒeƒLƒXƒg‚ğ•\¦
-	-cell    ;ƒGƒ“ƒgƒŠ‚ÌˆÊ’u‚Éƒ`ƒbƒv•\¦
-	-mouse   ;ƒ}ƒEƒX‚ÌV
+*entrytip ;[type] [option] ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒãƒƒãƒ—ã®è¡¨ç¤º
+	filename ;ãƒ•ã‚¡ã‚¤ãƒ«å
+	fileinfo ;ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+	comment  ;ã‚³ãƒ¡ãƒ³ãƒˆ
+	preview  ;ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼
+	"text"   ;æŒ‡å®šã•ã‚ŒãŸå½¢å¼ã§ãƒ†ã‚­ã‚¹ãƒˆã‚’è¡¨ç¤º
+	-cell    ;ã‚¨ãƒ³ãƒˆãƒªã®ä½ç½®ã«ãƒãƒƒãƒ—è¡¨ç¤º
+	-mouse   ;ãƒã‚¦ã‚¹ã®ã€ƒ
  
-*execinarc ;‘ŒÉ“àƒtƒ@ƒCƒ‹‚ğg—p‚Å‚«‚é‚æ‚¤‚É‚·‚é
-*execute  ;ID,command w’èPPxã‚ÅÀs
-*file ;[!]action[,[source][,[destination][,options]]] ƒtƒ@ƒCƒ‹‘€ì
-	/src: ;path ƒRƒs[Œ³‚Ì–¼‘O
-	/dest: ;path ƒRƒs[æ
-	/name: ;name ƒRƒs[æ‚Ì–¼‘O
-	/mask: ;ƒGƒ“ƒgƒŠƒ}ƒXƒN —á)/mask:a:d+ ƒtƒ@ƒCƒ‹ƒRƒs[‚µ‚È‚¢
-	/same: ;0:ÅV‚Ì‚İ 2:ã‘‚« “¯–¼ƒtƒ@ƒCƒ‹ˆ—
-	/sameall:on ;“¯–¼ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚Á‚½‚Æ‚«‚É‘Îˆ•û–@‚ğ‘I‘ğ“ü—Í‚µ‚È‚¢
-	/extractname:on ; /name‚Ìƒ}ƒNƒ•¶š“WŠJ—L‚è
-	/snum:001 ;˜A”Ô”Ô†
-	/div:100m ;•ªŠ„ƒTƒCƒY
-	/sheet:1 ;–¼‘OƒV[ƒg‚ğŠJ‚­
-	/min ;Å¬‰»ƒ_ƒCƒAƒƒO
-	/qstart ;‡”Ô‘Ò‚¿–³‚µ
-	/nocount ;‘ƒtƒ@ƒCƒ‹”EƒTƒCƒYZo–³‚µ
-	/retry:3 ;‚R‰ñÄs
-	/error:ignore ;ƒGƒ‰[‚ğ‘S‚Ä–³‹
-	/querycreatedirectory:on ;ƒfƒBƒŒƒNƒgƒŠ©“®ì¬
-	/undolog:on ;UNDO‰Â”\‚É
+*execinarc ;æ›¸åº«å†…ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½¿ç”¨ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+*execute  ;ID,command æŒ‡å®šPPxä¸Šã§å®Ÿè¡Œ
+*file ;[!]action[,[source][,[destination][,options]]] ãƒ•ã‚¡ã‚¤ãƒ«æ“ä½œ
+	/src: ;path ã‚³ãƒ”ãƒ¼å…ƒã®åå‰
+	/dest: ;path ã‚³ãƒ”ãƒ¼å…ˆ
+	/name: ;name ã‚³ãƒ”ãƒ¼å…ˆã®åå‰
+	/mask: ;ã‚¨ãƒ³ãƒˆãƒªãƒã‚¹ã‚¯ ä¾‹)/mask:a:d+ ãƒ•ã‚¡ã‚¤ãƒ«ã‚³ãƒ”ãƒ¼ã—ãªã„
+	/same: ;0:æœ€æ–°ã®ã¿ 2:ä¸Šæ›¸ã åŒåãƒ•ã‚¡ã‚¤ãƒ«å‡¦ç†
+	/sameall:on ;åŒåãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã£ãŸã¨ãã«å¯¾å‡¦æ–¹æ³•ã‚’é¸æŠå…¥åŠ›ã—ãªã„
+	/extractname:on ; /nameã®ãƒã‚¯ãƒ­æ–‡å­—å±•é–‹æœ‰ã‚Š
+	/snum:001 ;é€£ç•ªç•ªå·
+	/div:100m ;åˆ†å‰²ã‚µã‚¤ã‚º
+	/sheet:1 ;åå‰ã‚·ãƒ¼ãƒˆã‚’é–‹ã
+	/min ;æœ€å°åŒ–ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
+	/qstart ;é †ç•ªå¾…ã¡ç„¡ã—
+	/nocount ;ç·ãƒ•ã‚¡ã‚¤ãƒ«æ•°ãƒ»ã‚µã‚¤ã‚ºç®—å‡ºç„¡ã—
+	/retry:3 ;ï¼“å›å†è©¦è¡Œ
+	/error:ignore ;ã‚¨ãƒ©ãƒ¼ã‚’å…¨ã¦ç„¡è¦–
+	/querycreatedirectory:on ;ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªè‡ªå‹•ä½œæˆ
+	/undolog:on ;UNDOå¯èƒ½ã«
  
 *fitwindow  ;base window id[,target window id[,type]]
-	0 ;base‚Éd‚È‚éB‘å‚«‚³‚à“¯‚¶‚É
-	1 :base‚Ì¶‘¤‚ÉˆÚ“®A‚‚³‚ª“¯‚¶‚É
-	2 ;base‚Ì‰E‘¤‚ÉˆÚ“®A‚‚³‚ª“¯‚¶‚É
-	3 ;base‚Ìã‘¤‚ÉˆÚ“®A•‚ª“¯‚¶‚É
-	4 ;base‚Ì‰º‘¤‚ÉˆÚ“®A•‚ª“¯‚¶‚É
-	5 ;base‚Ì¶‘¤‚Ìã’[‚ÉˆÚ“®
-	6 ;base‚Ì‰E‘¤‚Ìã’[‚ÉˆÚ“®
-	7 ;base‚Ì¶‘¤‚Ì‰º’[‚ÉˆÚ“®
-	8 ;base‚Ì‰E‘¤‚Ì‰º’[‚ÉˆÚ“®
-	9 ;base‚Ìã‘¤‚Ì¶’[‚ÉˆÚ“®
-	10 ;base‚Ìã‘¤‚Ì‰E’[‚ÉˆÚ“®
-	11 ;base‚Ì‰º‘¤‚Ì¶’[‚ÉˆÚ“®
-	12 ;base‚Ì‰º‘¤‚Ì‰E’[‚ÉˆÚ“®
-	20,28 ;base‚Ì’†‰›‚ÉˆÚ“®
-	21 ;base‚Ì¶ã‚ÉˆÚ“®
-	22 ;base‚Ì¶’[’†‰›‚ÉˆÚ“®
-	23 ;base‚Ì¶‰º‚ÉˆÚ“®
-	24 ;base‚Ì‰Eã‚ÉˆÚ“®
-	25 ;base‚Ì‰E’[’†‰›‚ÉˆÚ“®
-	26 ;base‚Ì‰E‰º‚ÉˆÚ“®
-	27 ;base‚Ìã’[’†‰›‚ÉˆÚ“®
-	29 ;base‚Ì‰E‰º‚ÉˆÚ“®
+	0 ;baseã«é‡ãªã‚‹ã€‚å¤§ãã•ã‚‚åŒã˜ã«
+	1 :baseã®å·¦å´ã«ç§»å‹•ã€é«˜ã•ãŒåŒã˜ã«
+	2 ;baseã®å³å´ã«ç§»å‹•ã€é«˜ã•ãŒåŒã˜ã«
+	3 ;baseã®ä¸Šå´ã«ç§»å‹•ã€å¹…ãŒåŒã˜ã«
+	4 ;baseã®ä¸‹å´ã«ç§»å‹•ã€å¹…ãŒåŒã˜ã«
+	5 ;baseã®å·¦å´ã®ä¸Šç«¯ã«ç§»å‹•
+	6 ;baseã®å³å´ã®ä¸Šç«¯ã«ç§»å‹•
+	7 ;baseã®å·¦å´ã®ä¸‹ç«¯ã«ç§»å‹•
+	8 ;baseã®å³å´ã®ä¸‹ç«¯ã«ç§»å‹•
+	9 ;baseã®ä¸Šå´ã®å·¦ç«¯ã«ç§»å‹•
+	10 ;baseã®ä¸Šå´ã®å³ç«¯ã«ç§»å‹•
+	11 ;baseã®ä¸‹å´ã®å·¦ç«¯ã«ç§»å‹•
+	12 ;baseã®ä¸‹å´ã®å³ç«¯ã«ç§»å‹•
+	20,28 ;baseã®ä¸­å¤®ã«ç§»å‹•
+	21 ;baseã®å·¦ä¸Šã«ç§»å‹•
+	22 ;baseã®å·¦ç«¯ä¸­å¤®ã«ç§»å‹•
+	23 ;baseã®å·¦ä¸‹ã«ç§»å‹•
+	24 ;baseã®å³ä¸Šã«ç§»å‹•
+	25 ;baseã®å³ç«¯ä¸­å¤®ã«ç§»å‹•
+	26 ;baseã®å³ä¸‹ã«ç§»å‹•
+	27 ;baseã®ä¸Šç«¯ä¸­å¤®ã«ç§»å‹•
+	29 ;baseã®å³ä¸‹ã«ç§»å‹•
  
-*flashwindow ;[caption|ID] ƒ^ƒCƒgƒ‹ƒo[‚ğ“_–Å‚³‚¹‚é
-*focus ;[!][caption[,filename]] I:‘‹‚ÌƒgƒOƒ‹ caption(#”’l):‚ÅƒEƒBƒ“ƒhƒEIDw’è
-*freedriveuse ;[drivename] w’èƒhƒ‰ƒCƒu‚Ìg—p‚ğˆê’â~
-*help ;[keyword] PPx‚Ìƒwƒ‹ƒv‚ğ•\¦
-*hibernate ;‹x~ó‘Ô‚ÉˆÚs
-*httpget  ;"url","destname" http‚Åƒtƒ@ƒCƒ‹‚ğæ“¾
-*if  ;formula ”®‚ÌğŒ‚ğ–‚½‚µ‚½‚çs‚ğÀs
-*ifmatch  ;wildcards[,string] –‚½‚µ‚½‚çˆÈ~‚ğÀs
-*ime  ;0|1 IMEó‘Ô‚Ì•ÏX
-*insert  ;"text" ƒeƒLƒXƒg‘}“ü
-*insertfile  ;filename ƒtƒ@ƒCƒ‹‘}“ü(PPe)
-*job ;[close]ˆ—’†ƒRƒ}ƒ“ƒh‚Ìˆê——ƒƒjƒ…[
-*jumpline ;[L|Y]s”Ô† s”Ô†w’èƒJ[ƒ\ƒ‹ˆÚ“®
-*jumppath ;[path][ /option] Ú×w’è•t‚«•\¦ƒfƒBƒŒƒNƒgƒŠˆÚ“®
-*launch  ;command [parameter] command‚ğ‚»‚ÌƒfƒBƒŒƒNƒgƒŠ‚ÅÀs
-*layout ;PPc/PPv‚ÌƒŒƒCƒAƒEƒgƒƒjƒ…[
-*linemessage  ;ƒXƒe[ƒ^ƒXs‚É•¶š—ñ•\¦
+*flashwindow ;[caption|ID] ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ã‚’ç‚¹æ»…ã•ã›ã‚‹
+*focus ;[!][caption[,filename]] ï¼:çª“ã®ãƒˆã‚°ãƒ« caption(#æ•°å€¤):ã§ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦IDæŒ‡å®š
+*freedriveuse ;[drivename] æŒ‡å®šãƒ‰ãƒ©ã‚¤ãƒ–ã®ä½¿ç”¨ã‚’ä¸€æ™‚åœæ­¢
+*help ;[keyword] PPxã®ãƒ˜ãƒ«ãƒ—ã‚’è¡¨ç¤º
+*hibernate ;ä¼‘æ­¢çŠ¶æ…‹ã«ç§»è¡Œ
+*httpget  ;"url","destname" httpã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å–å¾—
+*if  ;formula æ•°å¼ã®æ¡ä»¶ã‚’æº€ãŸã—ãŸã‚‰è¡Œã‚’å®Ÿè¡Œ
+*ifmatch  ;wildcards[,string] æº€ãŸã—ãŸã‚‰ä»¥é™ã‚’å®Ÿè¡Œ
+*ime  ;0|1 IMEçŠ¶æ…‹ã®å¤‰æ›´
+*insert  ;"text" ãƒ†ã‚­ã‚¹ãƒˆæŒ¿å…¥
+*insertfile  ;filename ãƒ•ã‚¡ã‚¤ãƒ«æŒ¿å…¥(PPe)
+*job ;[close]å‡¦ç†ä¸­ã‚³ãƒãƒ³ãƒ‰ã®ä¸€è¦§ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+*jumpline ;[L|Y]è¡Œç•ªå· è¡Œç•ªå·æŒ‡å®šã‚«ãƒ¼ã‚½ãƒ«ç§»å‹•
+*jumppath ;[path][ /option] è©³ç´°æŒ‡å®šä»˜ãè¡¨ç¤ºãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªç§»å‹•
+*launch  ;command [parameter] commandã‚’ãã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã§å®Ÿè¡Œ
+*layout ;PPc/PPvã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼
+*linemessage  ;ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡Œã«æ–‡å­—åˆ—è¡¨ç¤º
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
-*logoff ;Windows ‚ğƒƒOƒIƒt
-*logwindow ;[on|off|focus|"•\¦•¶š—ñ"] PPc ƒƒOƒEƒBƒ“ƒhƒE‚Ì§Œä
-*makedir  ;dirname ƒfƒBƒŒƒNƒgƒŠ‚ğì¬
-*makefile  ;filename ƒfƒBƒŒƒNƒgƒŠ‚ğì¬
-*makelistfile ;[filename] [option] ListFileo—Í
-	,marked ; ƒ}[ƒN‚Ì‚İ
-	,marktag ; ƒ}[ƒNî•ñ•t
+*logoff ;Windows ã‚’ãƒ­ã‚°ã‚ªãƒ•
+*logwindow ;[on|off|focus|"è¡¨ç¤ºæ–‡å­—åˆ—"] PPc ãƒ­ã‚°ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åˆ¶å¾¡
+*makedir  ;dirname ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä½œæˆ
+*makefile  ;filename ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä½œæˆ
+*makelistfile ;[filename] [option] ListFileå‡ºåŠ›
+	,marked ; ãƒãƒ¼ã‚¯ã®ã¿
+	,marktag ; ãƒãƒ¼ã‚¯æƒ…å ±ä»˜
  
-*markentry ;[wildcards] ƒGƒ“ƒgƒŠƒ}[ƒN
-*maskentry ;[wildcards] ˆêƒGƒ“ƒgƒŠƒ}ƒXƒNİ’è
-*maskpath ;[on|off] PPc ‘ŒÉ“à‚ÌƒfƒBƒŒƒNƒgƒŠ‰¼‘zˆÚ“®
-*maximize ;[window id] ‘‹Å‘å‰»
-*minimize [window id] ‘‹Å¬‰»
-*monitoroff ;ƒ‚ƒjƒ^[‚ğÈ“d—Íƒ‚[ƒh‚É‚·‚é
-*pack ;[!]filename[,indiv][,dllname,type] ‘ŒÉì¬
-*pairrate ;[+|-]ˆÚ“®—Ê|”ä—¦ ‚Q–‡‚Ì‘‹‚Ì•^ä‚Ì”ä—¦‚ğ•ÏX
-*pane ;commandname [parameter...] ƒyƒCƒ“‚ÌŠeí‘€ì
-	closeleft ;Œ»ƒ^ƒu‚æ‚è¶‚ğ•Â‚¶‚é
-	closeright ;Œ»ƒ^ƒu‚æ‚è‰E‚ğ•Â‚¶‚é
-	closepain ;Œ»ƒyƒCƒ“‚ğ•Â‚¶‚é
-	closetab ;Œ»ƒ^ƒu‚ğ•Â‚¶‚é
-	eject ;Œ»ƒ^ƒu‚ğ•ª—£
-	lock ;ˆÚ“®ƒƒbƒN
-	newpane ;V‹KƒyƒCƒ“
-	newtab ;V‹Kƒ^ƒu
-	menu ;ƒƒjƒ…[•\¦
-	select h+1 ;Ÿ‚Ì”ñ•\¦ƒ^ƒu
-	select h-1 ;‘O‚Ì”ñ•\¦ƒ^ƒu
-	swappane ;ƒyƒCƒ“‚ğ“ü‚ê‘Ö‚¦
+*markentry ;[wildcards] ã‚¨ãƒ³ãƒˆãƒªãƒãƒ¼ã‚¯
+*maskentry ;[wildcards] ä¸€æ™‚ã‚¨ãƒ³ãƒˆãƒªãƒã‚¹ã‚¯è¨­å®š
+*maskpath ;[on|off] PPc æ›¸åº«å†…ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä»®æƒ³ç§»å‹•
+*maximize ;[window id] çª“æœ€å¤§åŒ–
+*minimize [window id] çª“æœ€å°åŒ–
+*monitoroff ;ãƒ¢ãƒ‹ã‚¿ãƒ¼ã‚’çœé›»åŠ›ãƒ¢ãƒ¼ãƒ‰ã«ã™ã‚‹
+*pack ;[!]filename[,indiv][,dllname,type] æ›¸åº«ä½œæˆ
+*pairrate ;[+|-]ç§»å‹•é‡|æ¯”ç‡ ï¼’æšã®çª“ã®å¹…ï¼ä¸ˆã®æ¯”ç‡ã‚’å¤‰æ›´
+*pane ;commandname [parameter...] ãƒšã‚¤ãƒ³ã®å„ç¨®æ“ä½œ
+	closeleft ;ç¾ã‚¿ãƒ–ã‚ˆã‚Šå·¦ã‚’é–‰ã˜ã‚‹
+	closeright ;ç¾ã‚¿ãƒ–ã‚ˆã‚Šå³ã‚’é–‰ã˜ã‚‹
+	closepain ;ç¾ãƒšã‚¤ãƒ³ã‚’é–‰ã˜ã‚‹
+	closetab ;ç¾ã‚¿ãƒ–ã‚’é–‰ã˜ã‚‹
+	eject ;ç¾ã‚¿ãƒ–ã‚’åˆ†é›¢
+	lock ;ç§»å‹•ãƒ­ãƒƒã‚¯
+	newpane ;æ–°è¦ãƒšã‚¤ãƒ³
+	newtab ;æ–°è¦ã‚¿ãƒ–
+	menu ;ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤º
+	select h+1 ;æ¬¡ã®éè¡¨ç¤ºã‚¿ãƒ–
+	select h-1 ;å‰ã®éè¡¨ç¤ºã‚¿ãƒ–
+	swappane ;ãƒšã‚¤ãƒ³ã‚’å…¥ã‚Œæ›¿ãˆ
  
-*poweroff ;Windows ‚ğƒVƒƒƒbƒgƒ_ƒEƒ“‚µA“dŒ¹‚ğØ‚é
-*ppb ;PPb‚ğÀs
-*ppc ;PPc‚ğÀs
-	-runas ;ŠÇ—Ò/•Ê‚Ìƒ†[ƒU‚ÅPPc‚ğÀs
-	-r ; ‹N“®’†‚ÌPPc‚ª‚ ‚ê‚Îg‚¤
-	-max ;Å‘å‰»
-	-min ;Å¬‰» -r ƒIƒvƒVƒ‡ƒ“w’è‚Í–³Œø
-	-show ;’Êí‚Ì‘å‚«‚³
-	-noactive ;”ñ‘I‘ğ
-	-selectnoactive ; ”ñ‘I‘ğ(Œ»İ‘‹ˆÈŠO)
-	-lock ;ƒfƒBƒŒƒNƒgƒŠ‚Ì•ÏX‚ğ‹Ö~
-	-alone  ;[:ID]’P“Æ‚Åˆê‘Ì‰»‘‹‹N“®
-	-pane  ;[:~|r|”’l] V‹KƒyƒCƒ“ ~:”½‘Î‘‹ƒ^ƒu l:¶‘‹ƒ^ƒu r:‰E‘‹ƒ^ƒu ”’l:¶’[=0`
-	-single ;’P“Æ‚Ìppc‹N“®
-	-mps ;‘‹–ˆ‚ÉƒvƒƒZƒX‚ğŠ„‚è“–‚Ä‚é
-	-sps ;ˆê‚Â‚ÌƒvƒƒZƒX‚Å‹N“®
-	-bootid:  ;[path] A-Z:w’èPPc‚ğ‹N“® ~:”½‘Î‘‹
-	-bootmax: ;A-Z:‹N“®‚µ‚Ä‚¢‚È‚¯‚ê‚Îw’èPPc‚Ü‚Å‚ÌPPc‚ğ‹N“®
-	-idl ;ŠÖ˜A•t‚¯ƒtƒHƒ‹ƒ_w’è(’Êí–¾¦‚·‚é•K—v‚È‚µ)
-	-k ;‹N“®ŒãÀsƒRƒ}ƒ“ƒh
-	-choose: ;edit|dd|con|multi ƒGƒ“ƒgƒŠ‘I‘ğƒtƒƒ“ƒgƒGƒ“ƒh
-	-choose: ;edit:ƒGƒfƒBƒbƒgƒ{ƒbƒNƒX dd:D&D con[8|16]:%#FDC multi[8|16]:%FDC
+*poweroff ;Windows ã‚’ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³ã—ã€é›»æºã‚’åˆ‡ã‚‹
+*ppb ;PPbã‚’å®Ÿè¡Œ
+*ppc ;PPcã‚’å®Ÿè¡Œ
+	-runas ;ç®¡ç†è€…/åˆ¥ã®ãƒ¦ãƒ¼ã‚¶ã§PPcã‚’å®Ÿè¡Œ
+	-r ; èµ·å‹•ä¸­ã®PPcãŒã‚ã‚Œã°ä½¿ã†
+	-max ;æœ€å¤§åŒ–
+	-min ;æœ€å°åŒ– -r ã‚ªãƒ—ã‚·ãƒ§ãƒ³æŒ‡å®šæ™‚ã¯ç„¡åŠ¹
+	-show ;é€šå¸¸ã®å¤§ãã•
+	-noactive ;éé¸æŠ
+	-selectnoactive ; éé¸æŠ(ç¾åœ¨çª“ä»¥å¤–)
+	-lock ;ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å¤‰æ›´ã‚’ç¦æ­¢
+	-alone  ;[:ID]å˜ç‹¬ã§ä¸€ä½“åŒ–çª“èµ·å‹•
+	-pane  ;[:~|r|æ•°å€¤] æ–°è¦ãƒšã‚¤ãƒ³ ~:åå¯¾çª“ã‚¿ãƒ– l:å·¦çª“ã‚¿ãƒ– r:å³çª“ã‚¿ãƒ– æ•°å€¤:å·¦ç«¯=0ï½
+	-single ;å˜ç‹¬ã®ppcèµ·å‹•
+	-mps ;çª“æ¯ã«ãƒ—ãƒ­ã‚»ã‚¹ã‚’å‰²ã‚Šå½“ã¦ã‚‹
+	-sps ;ä¸€ã¤ã®ãƒ—ãƒ­ã‚»ã‚¹ã§èµ·å‹•
+	-bootid:  ;[path] A-Z:æŒ‡å®šPPcã‚’èµ·å‹• ~:åå¯¾çª“
+	-bootmax: ;A-Z:èµ·å‹•ã—ã¦ã„ãªã‘ã‚Œã°æŒ‡å®šPPcã¾ã§ã®PPcã‚’èµ·å‹•
+	-idl ;é–¢é€£ä»˜ã‘ãƒ•ã‚©ãƒ«ãƒ€æŒ‡å®š(é€šå¸¸æ˜ç¤ºã™ã‚‹å¿…è¦ãªã—)
+	-k ;èµ·å‹•å¾Œå®Ÿè¡Œã‚³ãƒãƒ³ãƒ‰
+	-choose: ;edit|dd|con|multi ã‚¨ãƒ³ãƒˆãƒªé¸æŠãƒ•ãƒ­ãƒ³ãƒˆã‚¨ãƒ³ãƒ‰
+	-choose: ;edit:ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹ dd:D&D con[8|16]:%#FDC multi[8|16]:%FDC
  
-*ppcfile ;[!]action[,destdir[,option]] [C]/[M]ƒRƒ}ƒ“ƒh‚ğÀs
-*ppcust ;[param]PPcust‚ğÀs
-*ppe ;[filename] PPe‚Å•ÒW(I—¹‘Ò‚½‚¸‚ÉŸ‚ÌƒRƒ}ƒ“ƒh‚ğÀs)
-*ppffix ;[param] PPffix‚ğÀs
-*pptray ;PPtray‚ğÀs
-*ppv [-runas][param] ;PPv‚ğÀs
-*ppvoption  ;command PPvg—p‚Ì‹““®w’è
-*reboot ;Windows ‚ğÄ‹N“®
-*reducemode ;mode PPv‚Ì‰æ‘œk¬•û–@
-	1 ;ƒ‚ƒmƒNƒ•¶‘A”’’n
-	2 ;ƒ‚ƒmƒNƒ•¶‘A•’n
-	3 ;ƒJƒ‰[‚‘¬
-	4 ;ƒJƒ‰[ãY—í
+*ppcfile ;[!]action[,destdir[,option]] [C]/[M]ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œ
+*ppcust ;[param]PPcustã‚’å®Ÿè¡Œ
+*ppe ;[filename] PPeã§ç·¨é›†(çµ‚äº†å¾…ãŸãšã«æ¬¡ã®ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œ)
+*ppffix ;[param] PPffixã‚’å®Ÿè¡Œ
+*pptray ;PPtrayã‚’å®Ÿè¡Œ
+*ppv [-runas][param] ;PPvã‚’å®Ÿè¡Œ
+*ppvoption  ;command PPvä½¿ç”¨æ™‚ã®æŒ™å‹•æŒ‡å®š
+*reboot ;Windows ã‚’å†èµ·å‹•
+*reducemode ;mode PPvã®ç”»åƒç¸®å°æ–¹æ³•
+	1 ;ãƒ¢ãƒã‚¯ãƒ­æ–‡æ›¸ã€ç™½åœ°
+	2 ;ãƒ¢ãƒã‚¯ãƒ­æ–‡æ›¸ã€é»’åœ°
+	3 ;ã‚«ãƒ©ãƒ¼é«˜é€Ÿ
+	4 ;ã‚«ãƒ©ãƒ¼ç¶ºéº—
  
 *RotateCustomize ;custid,customize1,customize2[,...] "="" \=\\
 *RotateExecute ;id,command1,command2[,...] "="" \=\\
-*rename  ;old,new –¼‘O•ÏX
-*replace ;"text" ‘SƒeƒLƒXƒg“ü‚ê‘Ö‚¦
-*replacefile ;filename ƒtƒ@ƒCƒ‹‚ğŠJ‚«’¼‚·(PPe)
-*return ;ƒ†[ƒUƒRƒ}ƒ“ƒh‚ÌI—¹
-*screensaver ;ƒXƒNƒŠ[ƒ“ƒZ[ƒo‚ğ‹N“®
-*selectppx ;[ID] w’èPPx‚ÉƒtƒH[ƒJƒXˆÚ“®
-*setcaption ;text ƒLƒƒƒvƒVƒ‡ƒ“‚Ìİ’è
-*set ;[valuename=[strings]] ŠÂ‹«•Ï”‚Ìİ’èAíœ
-*setcust ;ƒJƒXƒ^ƒ}ƒCƒY(‚‘¬) X_xxx=xxxx / X_xxx:xxx=xxxx
-*setentryimage ;filename [/save] ƒTƒ€ƒlƒCƒ‹•\¦—p‰æ‘œ‚Ìİ’è
-*setmaskentry ;[wildcards] PPc íƒGƒ“ƒgƒŠƒ}ƒXƒNİ’è
-*setsortentry ;[XC_sort–¼] | ƒ\[ƒg1[,ƒ\[ƒg2[,ƒ\[ƒg3]],ƒ\[ƒg‘®«,ƒIƒvƒVƒ‡ƒ“ ƒGƒ“ƒgƒŠ‚Ìƒ\[ƒg(\[S]‘Š“–)
-*shownormal ;[window id] ‘‹‚ğ’Êí‚Ì‘å‚«‚³‚É‚·‚é
-*shutdown ;Windows ‚ğƒVƒƒƒbƒgƒ_ƒEƒ“
-*sortentry ;[XC_sort–¼] | ƒ\[ƒg1[,ƒ\[ƒg2[,ƒ\[ƒg3]],ƒ\[ƒg‘®«,ƒIƒvƒVƒ‡ƒ“ ƒGƒ“ƒgƒŠ‚Ìƒ\[ƒg([S]‘Š“–)
-*sound ;[filename.wav] WAVƒtƒ@ƒCƒ‹‚ğÄ¶‚·‚é
-*start ;[-runas][-launch] filename [parameter] filename‚ğÀs
-*stop ;Às’†~
+*rename  ;old,new åå‰å¤‰æ›´
+*replace ;"text" å…¨ãƒ†ã‚­ã‚¹ãƒˆå…¥ã‚Œæ›¿ãˆ
+*replacefile ;filename ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãç›´ã™(PPe)
+*return ;ãƒ¦ãƒ¼ã‚¶ã‚³ãƒãƒ³ãƒ‰ã®çµ‚äº†
+*screensaver ;ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚»ãƒ¼ãƒã‚’èµ·å‹•
+*selectppx ;[ID] æŒ‡å®šPPxã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ç§»å‹•
+*setcaption ;text ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã®è¨­å®š
+*set ;[valuename=[strings]] ç’°å¢ƒå¤‰æ•°ã®è¨­å®šã€å‰Šé™¤
+*setcust ;ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚º(é«˜é€Ÿ) X_xxx=xxxx / X_xxx:xxx=xxxx
+*setentryimage ;filename [/save] ã‚µãƒ ãƒã‚¤ãƒ«è¡¨ç¤ºç”¨ç”»åƒã®è¨­å®š
+*setmaskentry ;[wildcards] PPc å¸¸æ™‚ã‚¨ãƒ³ãƒˆãƒªãƒã‚¹ã‚¯è¨­å®š
+*setsortentry ;[XC_sortå] | ã‚½ãƒ¼ãƒˆ1[,ã‚½ãƒ¼ãƒˆ2[,ã‚½ãƒ¼ãƒˆ3]],ã‚½ãƒ¼ãƒˆå±æ€§,ã‚ªãƒ—ã‚·ãƒ§ãƒ³ ã‚¨ãƒ³ãƒˆãƒªã®ã‚½ãƒ¼ãƒˆ(\[S]ç›¸å½“)
+*shownormal ;[window id] çª“ã‚’é€šå¸¸ã®å¤§ãã•ã«ã™ã‚‹
+*shutdown ;Windows ã‚’ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³
+*sortentry ;[XC_sortå] | ã‚½ãƒ¼ãƒˆ1[,ã‚½ãƒ¼ãƒˆ2[,ã‚½ãƒ¼ãƒˆ3]],ã‚½ãƒ¼ãƒˆå±æ€§,ã‚ªãƒ—ã‚·ãƒ§ãƒ³ ã‚¨ãƒ³ãƒˆãƒªã®ã‚½ãƒ¼ãƒˆ([S]ç›¸å½“)
+*sound ;[filename.wav] WAVãƒ•ã‚¡ã‚¤ãƒ«ã‚’å†ç”Ÿã™ã‚‹
+*start ;[-runas][-launch] filename [parameter] filenameã‚’å®Ÿè¡Œ
+*stop ;å®Ÿè¡Œä¸­æ­¢
 *string ;[valuename=[strings]]
-	i, ;ID•ÊŠÂ‹«•Ï”
-	o, ;ƒRƒ}ƒ“ƒhƒ‰ƒCƒ““àŠÂ‹«•Ï”
+	i, ;IDåˆ¥ç’°å¢ƒå¤‰æ•°
+	o, ;ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å†…ç’°å¢ƒå¤‰æ•°
  
-*suspend ;ƒTƒXƒyƒ“ƒhó‘Ô‚ÉˆÚs
-*syncprop ;[on|off|focus] ˜A“®ƒvƒƒpƒeƒB•\¦
-*terminate ;Windows ‚ğ‹­§ƒVƒƒƒbƒgƒ_ƒEƒ“
+*suspend ;ã‚µã‚¹ãƒšãƒ³ãƒ‰çŠ¶æ…‹ã«ç§»è¡Œ
+*syncprop ;[on|off|focus] é€£å‹•ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£è¡¨ç¤º
+*terminate ;Windows ã‚’å¼·åˆ¶ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³
 *togglewinsize ;[window id]
-*tree ;type ƒcƒŠ[‘‹‚Ì‘€ì(PPc,ˆês•ÒW)
-*trimmark ÀsÏ‚İƒ}[ƒN‚Ì’²®
-*unmarkentry ;[wildcards] ƒGƒ“ƒgƒŠƒ}[ƒN‰ğœ
-*unpack ;path ‘ŒÉ‚Ì“WŠJ
-*viewoption ;ŠeíƒIƒvƒVƒ‡ƒ“ •\¦ŠÖŒWƒIƒvƒVƒ‡ƒ“
-*viewstyle ;[option] [MC_celS–¼|directory|separate] ƒGƒ“ƒgƒŠ•\¦‚Ìí—Ş‚ğ•ÏX
-*wait  ;time[,1|2] w’èŠÔ‘Ò‹@ 1=‘Ò‹@Œãƒ‹[ƒv 2=‘Ò‹@’†ƒ‹[ƒv
-*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ƒtƒ@ƒCƒ‹ŒŸõ
-	%1,,,,,1,0  ;ƒfƒBƒŒƒNƒgƒŠ–³‹‚µ‚Äˆê——•\¦
-	%1;%2,,,,,1,0  ;ƒfƒBƒŒƒNƒgƒŠ–³‹‚µ‚ÄŒ»İ‘‹E”½‘Î‘‹‚ğˆê——•\¦
+*tree ;type ãƒ„ãƒªãƒ¼çª“ã®æ“ä½œ(PPc,ä¸€è¡Œç·¨é›†)
+*trimmark å®Ÿè¡Œæ¸ˆã¿ãƒãƒ¼ã‚¯ã®èª¿æ•´
+*unmarkentry ;[wildcards] ã‚¨ãƒ³ãƒˆãƒªãƒãƒ¼ã‚¯è§£é™¤
+*unpack ;path æ›¸åº«ã®å±•é–‹
+*viewoption ;å„ç¨®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ è¡¨ç¤ºé–¢ä¿‚ã‚ªãƒ—ã‚·ãƒ§ãƒ³
+*viewstyle ;[option] [MC_celSå|directory|separate] ã‚¨ãƒ³ãƒˆãƒªè¡¨ç¤ºã®ç¨®é¡ã‚’å¤‰æ›´
+*wait  ;time[,1|2] æŒ‡å®šæ™‚é–“å¾…æ©Ÿ 1=å¾…æ©Ÿå¾Œãƒ«ãƒ¼ãƒ— 2=å¾…æ©Ÿä¸­ãƒ«ãƒ¼ãƒ—
+*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢
+	%1,,,,,1,0  ;ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªç„¡è¦–ã—ã¦ä¸€è¦§è¡¨ç¤º
+	%1;%2,,,,,1,0  ;ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªç„¡è¦–ã—ã¦ç¾åœ¨çª“ãƒ»åå¯¾çª“ã‚’ä¸€è¦§è¡¨ç¤º
  
 *windowposition ;[window id],x,y
 *windowsize ;[window id],width,height
-*zenhan ;[z|h] •¶š‚Ìa/‚•ÏŠ·
-*zoom ;”ä—¦ Šg‘åk¬
-%m|ƒeƒLƒXƒg”äŠr@diff@diff@fc %C "%2\%C"
-%m|ƒoƒCƒiƒŠ”äŠr@cmd@diff@fc fc /b %C "%2\%C"
-%m|ƒNƒH[ƒ^ˆá”½‚Ì•\¦@cmd@fsutil fsutil quota violations
-%m|ƒlƒbƒgƒ[ƒNƒAƒ_ƒvƒ^İ’è@net@cmd@ipconfig ipconfig /all
-%m|Às’†ƒT[ƒrƒXˆê——@cmd@net net start
-%m|ŠJ‚¢‚Ä‚¢‚éƒ|[ƒg‚Ìˆê——@cmd@net netstat /n
-%m|DNS–â‡‚¹@cmd@nslookup nslookup
-%m|ƒŒƒWƒXƒgƒŠƒGƒfƒBƒ^@cmd@regedit regedit
-%m|w’èƒZƒbƒVƒ‡ƒ“‚ğƒƒOƒAƒEƒg@cmd@reset reset
-%m|ƒVƒƒƒbƒgƒ_ƒEƒ“@cmd@shutdown shutdown -s -t 0
-%m|ƒVƒXƒeƒ€‚ÌƒvƒƒpƒeƒB@cmd@system SystemPropertiesAdvanced
-%m|ƒvƒƒZƒX‹­§I—¹@cmd@taskkill taskkill
-%m|ƒvƒƒZƒXˆê——@cmd@tasklist tasklist /svc
-%m|w’èƒhƒƒCƒ“‚Ü‚Å‚ÌŒo˜H@cmd@tracert tracert
-%m|SKKFEPİ’è@cmd@skk@option cscript D:\Apps\skkfep\SETUP.js
-%m|¼—ï/Œ/“ú@nowdatetime %*nowdatetime("Y/n/d")
-%m|Œ“ú_:•ª:•b@nowdatetime %*nowdatetime("ND_H:U:M")
-%m|Œ“ú(—j“ú)@nowdatetime %*nowdatetime("nŒd“ú(W)")
-%m|İ’èƒtƒ@ƒCƒ‹“Ç‚İ‚İ__“Ç‚İ‚Ü‚¹‚éPxƒtƒ@ƒCƒ‹‚ğƒ}[ƒN@cmd@setting@ppcust %"İ’èƒtƒ@ƒCƒ‹“Ç‚İ‚İ"%Q"ready?" %:*closeppx C* %:*ifmatch Px*.cfg %:PPCUSTW CA %FDC
+*zenhan ;[z|h] æ–‡å­—ã®a/ï½å¤‰æ›
+*zoom ;æ¯”ç‡ æ‹¡å¤§ç¸®å°
+%m|ãƒ†ã‚­ã‚¹ãƒˆæ¯”è¼ƒ@diff@diff@fc %C "%2\%C"
+%m|ãƒã‚¤ãƒŠãƒªæ¯”è¼ƒ@cmd@diff@fc fc /b %C "%2\%C"
+%m|ã‚¯ã‚©ãƒ¼ã‚¿é•åã®è¡¨ç¤º@cmd@fsutil fsutil quota violations
+%m|ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚¢ãƒ€ãƒ—ã‚¿è¨­å®š@net@cmd@ipconfig ipconfig /all
+%m|å®Ÿè¡Œä¸­ã‚µãƒ¼ãƒ“ã‚¹ä¸€è¦§@cmd@net net start
+%m|é–‹ã„ã¦ã„ã‚‹ãƒãƒ¼ãƒˆã®ä¸€è¦§@cmd@net netstat /n
+%m|DNSå•åˆã›@cmd@nslookup nslookup
+%m|ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚¨ãƒ‡ã‚£ã‚¿@cmd@regedit regedit
+%m|æŒ‡å®šã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚’ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ@cmd@reset reset
+%m|ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³@cmd@shutdown shutdown -s -t 0
+%m|ã‚·ã‚¹ãƒ†ãƒ ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£@cmd@system SystemPropertiesAdvanced
+%m|ãƒ—ãƒ­ã‚»ã‚¹å¼·åˆ¶çµ‚äº†@cmd@taskkill taskkill
+%m|ãƒ—ãƒ­ã‚»ã‚¹ä¸€è¦§@cmd@tasklist tasklist /svc
+%m|æŒ‡å®šãƒ‰ãƒ¡ã‚¤ãƒ³ã¾ã§ã®çµŒè·¯@cmd@tracert tracert
+%m|SKKFEPè¨­å®š@cmd@skk@option cscript D:\Apps\skkfep\SETUP.js
+%m|è¥¿æš¦/æœˆ/æ—¥@nowdatetime %*nowdatetime("Y/n/d")
+%m|æœˆæ—¥_æ™‚:åˆ†:ç§’@nowdatetime %*nowdatetime("ND_H:U:M")
+%m|æœˆæ—¥(æ›œæ—¥)@nowdatetime %*nowdatetime("næœˆdæ—¥(W)")
+%m|è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿__èª­ã¿è¾¼ã¾ã›ã‚‹Pxãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒãƒ¼ã‚¯@cmd@setup@ppcust %"è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿"%Q"ready?" %:*closeppx C* %:*ifmatch Px*.cfg %:PPCUSTW CA %FDC

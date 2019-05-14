@@ -27,27 +27,27 @@ nyagos.env.path="C:/bin/git/cmd/;C:/bin/git/mingw64/libexec/git-core;C:/bin/git/
 -- nyagos.env.LESSCHARSET="utf-8"
 
 -- エイリアス
-nyagos.alias.cdnya="cd %APPS%/nyagos"
-nyagos.alias.cdppx="cd %APPS%/ppx"
-nyagos.alias.cdrepo="cd C:/bin/repository/tar80/misc"
-nyagos.alias.gcg="git config --global"
-nyagos.alias.grs="git remote set-url"
--- nyagos.alias.gset"git remote set-url origin git@github.com:tar80/misc.git"
-nyagos.alias.gb="git branch"
-nyagos.alias.gba="git branch -a --sort=-authordate"
-nyagos.alias.gc="git checkout"
-nyagos.alias.gcp="git checkout `git branch | peco` "
-nyagos.alias.gd="git diff"
-nyagos.alias.gdn="git diff --name-only HEAD^"
-nyagos.alias.gf="git fetch"
-nyagos.alias.gl="git log"
-nyagos.alias.gll="git log --graph --date=short --format=\"%C(yellow)%h %C(magenta)[%ad] %C(auto)%d%C(reset)%s\" -25"
-nyagos.alias.gld="git log --graph --name-status --oneline --date=short --format=\"%C(yellow reverse)%h%C(reset) %C(magenta)[%ad]%C(cyan)%an %C(auto)%d%C(green)%s\" -5"
-nyagos.alias.gm="git merge"
-nyagos.alias.go="git pull"
-nyagos.alias.gp="git push"
-nyagos.alias.gv="git difftool"
-nyagos.alias.vim="C:/bin/vim/vim81/vim.exe"
+nyagos.alias.cdnya='cd %APPS%/nyagos'
+nyagos.alias.cdppx='cd %APPS%/ppx'
+nyagos.alias.cdrepo='cd C:/bin/repository/tar80/misc'
+nyagos.alias.gcg='git config --global'
+nyagos.alias.grs='git remote set-url'
+-- nyagos.alias.gset'git remote set-url origin git@github.com:tar80/misc.git'
+nyagos.alias.gb='git branch'
+nyagos.alias.gba='git branch -a --sort=-authordate'
+nyagos.alias.gc='git checkout'
+nyagos.alias.gcp='git checkout `git branch | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
+nyagos.alias.gd='git diff'
+nyagos.alias.gf='git fetch'
+nyagos.alias.gl='git log'
+nyagos.alias.gll='git log --graph --date=short --format="%C(yellow)%h %C(magenta)[%ad] %C(auto)%d%C(reset)%s" -25'
+nyagos.alias.gld='git log --graph --name-status --oneline --date=short --format="%C(yellow reverse)%h%C(reset) %C(magenta)[%ad]%C(cyan)%an %C(auto)%d%C(green)%s" -3'
+nyagos.alias.gm='git merge'
+nyagos.alias.gg='git pull'
+nyagos.alias.gp='git push'
+nyagos.alias.gsp='git log --oneline | peco | cut -d" " -f1 | xargs git show'
+nyagos.alias.gv='git difftool'
+nyagos.alias.vim='C:/bin/vim/vim81/vim.exe `ls | peco`'
 nyagos.bindkey("C_G", function(targs)
   nyagos.chdir('c:/bin/repository/tar80/misc')
   local result = nyagos.eval('git ls-files | peco')

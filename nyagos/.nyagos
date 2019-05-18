@@ -46,7 +46,7 @@ nyagos.alias.gld='git log --graph --name-status --oneline --date=short --format=
 nyagos.alias.gm='git merge'
 nyagos.alias.go='git pull'
 nyagos.alias.gp='git push'
-nyagos.alias.gsp='git reflog | peco | cut -d" " -f1 | xargs git show'
+nyagos.alias.gsp='git log --oneline | peco | cut -d" " -f1 | xargs git show'
 nyagos.alias.gv='git difftool'
 nyagos.alias.vim='C:/bin/vim/vim81/vim.exe `ls | peco`'
 nyagos.bindkey("C_G", function(targs)

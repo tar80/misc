@@ -1,11 +1,11 @@
 ﻿//!*script
-// TABで窓移動PPc用
-// PPx.Arguments(0) = 'ppc' or 'ppv'
+// TABで窓移動
 // 参照元:http://hoehoetukasa.blogspot.com/2014/05/ppv.html
+// PPx.Arguments(0) = 'ppc' or 'ppv'
 var ppxChar = PPx.Arguments(0) == 'ppc'? ['C','V']: ['V','C'];
-// 実行元のPPxIDを文字コードに変換
-var ppxNum = PPx.Extract('%n').slice(1).charCodeAt(0) + 1;
 var tID = PPx.Extract('%n').slice(1);
+// 実行元のPPxIDを文字コードに変換
+var ppxNum = tID.charCodeAt(0) + 1;
 // syncviewがonならPPvとフォーカスをトグル
 if(PPx.Extract('%*getcust(_others:SyncViewID)')){
   PPx.Execute('*focus ' + ppxChar[1] + tID);

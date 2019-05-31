@@ -11,19 +11,19 @@ for(var item in type){
   switch(ext){
     case arc[item]:
       var result = "arc";
-      var select = "w";
+      var select = "W";
       break;
     case image[item]:
       var result = "image";
-      var select = "l";
+      var select = "L";
       break;
     case doc[item]:
       var result = "doc";
-      var select = "r";
+      var select = "R";
       break;
     case 'DIR':
       var result = "dir";
-      var select = "w";
+      var select = "W";
   }
 }
 var typeDir = PPx.DirectoryType;
@@ -39,7 +39,7 @@ function click_menu(){
       PPx.Execute('%M_Chttp');
       break;
     case 62:
-      PPx.Execute('%M_Carc,o');
+      PPx.Execute('%M_Carc,O');
       break;
     default:
       PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + result + ' %:%' + PPx.Arguments(0) + ',' + select);

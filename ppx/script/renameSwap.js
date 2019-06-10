@@ -1,6 +1,6 @@
 ﻿//!*script
 // ファイル名の交換
-if(PPx.EntryMarkCount == 2 && PPx.Execute('%Q%"Swap Filename!""マークしたエントリ名を入れ替えます"') == 0){
+if(PPx.EntryMarkCount == 2 && PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') == 0){
   function mark() {
     this.name = PPx.Extract('%*name(X,' + entry.name + ')');
     this.ext = PPx.Extract('%*name(T, '+ entry.name + ')');

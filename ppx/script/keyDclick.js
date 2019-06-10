@@ -5,12 +5,12 @@ var filePath = PPx.Extract('%FDC');
 var ext = PPx.Arguments.Length? PPx.Arguments(0): 'none';
 switch(PPx.Extract(PPx.WindowIDName)){
   case 'C_X':
-    var ppcId = PPx.Extract("%N");
+    var ppcId = PPx.Extract("%NC");
   PPx.Execute('%Oix *setcust X_win:V=B100000000');
   //PPx.Execute('*topmostwindow %NVA,1');
   break;
   default:
-    var ppcId = PPx.Extract("%N.");
+    var ppcId = PPx.Extract("%NC#");
   PPx.Execute('%Oi *setcust X_win:V=B000000000');
   PPx.Execute('*linecust NoMask,KV_main:CLOSEEVENT,*execute C,*maskentry');
     if(ext == 'image'){

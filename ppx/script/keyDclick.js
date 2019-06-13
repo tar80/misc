@@ -14,7 +14,7 @@ switch(PPx.Extract(PPx.WindowIDName)){
   PPx.Execute('%Oi *setcust X_win:V=B000000000');
   PPx.Execute('*linecust NoMask,KV_main:CLOSEEVENT,*execute C,*maskentry');
     if(ext == 'image'){
-      var maskExt = [".jpg",".jpeg",".bmp",".png",".gif",".vch",".edg",".afd"];
+      var maskExt = [".jpg",".jpeg",".bmp",".png",".gif",".vch",".edg"];
       PPx.Execute('*maskentry ' + maskExt + ',!p:*');
       PPx.Execute('%Oi *setcust XV_imgD:VZ=-2,4');
       if(ext == 'doc'){

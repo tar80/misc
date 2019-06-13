@@ -1,4 +1,4 @@
-//!*script
+﻿//!*script
 var ext = PPx.GetFileInformation(PPx.Extract("%R")).slice(1) == 'DIR'? 'DIR' :PPx.Extract('%t').toLowerCase();
 var arc = ["zip","7z","cab","msi","rar","lzh"];
 var image = ["jpeg","jpg","bmp","png","gif","vch","edg","afd"];
@@ -8,22 +8,24 @@ var result = "none";
 var select = "S";
 
 for(var item in type){
-  switch(ext){
-    case arc[item]:
-      var result = "arc";
-      var select = "W";
-      break;
-    case image[item]:
-      var result = "image";
-      var select = "L";
-      break;
-    case doc[item]:
-      var result = "doc";
-      var select = "R";
-      break;
-    case 'DIR':
-      var result = "dir";
-      var select = "W";
+  if(ext == arc[item]){
+    var result = "arc";
+    var select = "W";
+    continue;
+  }
+  if(ext == image[item]){
+    var result = "image";
+    var select = "L";
+    continue;
+  }
+  if(ext == doc[item]){
+    var result = "doc";
+    var select = "R";
+    continue;
+  }
+  if(ext == 'DIR'){
+    var result = "dir";
+    var select = "W";
   }
 }
 var typeDir = PPx.DirectoryType;
@@ -39,6 +41,8 @@ function click_menu(){
       PPx.Execute('%M_Chttp');
       break;
     case 62:
+    case 64:
+    case 96:
       PPx.Execute('%M_Carc,O');
       break;
     default:

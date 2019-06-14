@@ -1,6 +1,6 @@
 ﻿//!*script
 // リストの読み書き
-// 引数:PPx.Arguments([0:charset, 1:command])
+// PPx.Arguments(0)=case
 // %si"ppp" = 処理元ディレクトリ
 // var as = new ActiveXObject('ADODB.Stream');
 var fs = PPx.CreateObject('Scripting.FileSystemObject');
@@ -64,13 +64,16 @@ switch(arg){
 function write_mark_path(){
   var cDir = PPx.DirectoryType != 4? PPx.Extract('%FDN%\\'): "";
   var Count = PPx.Entry.Count;
-  // マークがなければカーソルのあるファイルをマークする
-  if(!PPx.EntryMarkCount) PPx.EntryMark = 1;
+  // マークの有無で処理を分岐
+  if(!PPx.EntryMarkCount){
+    tList.WriteLine(cDir + PPx.EntryName);
+  } else{
   for(var i = 0; i < Count; i = (i+1)|0){
     if(PPx.Entry(i).Mark == 1){
       tList.WriteLine(cDir + PPx.Entry(i).Name);
       PPx.Entry(i).Mark = 0;
     }
+  }
   }
   tList.Close();
 }

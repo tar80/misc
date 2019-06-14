@@ -1,7 +1,7 @@
 ﻿//!*script
 // TABで窓移動
+// PPx.Arguments(0)=ppc|ppv
 // 参照元:http://hoehoetukasa.blogspot.com/2014/05/ppv.html
-// PPx.Arguments(0) = 'ppc' or 'ppv'
 var ppxChar = PPx.Arguments(0) == 'ppc'? ['C','V']: ['V','C'];
 var tID = PPx.Extract('%n').slice(1);
 // 実行元のPPxIDを文字コードに変換

@@ -1,4 +1,5 @@
 //!*script
+// PPx.Arguments(0)=case
 switch(PPx.Arguments(0)){
   case 'version':
     PPx.Result = PPx.PPxVersion;
@@ -27,7 +28,6 @@ switch(PPx.Arguments(0)){
     //if(PPx.Entry(0).Name == ".git") PPx.Result = 1;
     PPx.Extract("%1%\\").indexOf(PPx.Extract("%'repo'%\\")) >= 0 ? PPx.Result = 1 : PPx.Result = 0;
     break;
-    //case break;
     /*
   case 'oppdirtype':
     PPx.Result = PPx.GetFileInformation(PPx.Extract("%2"));

@@ -1,41 +1,62 @@
 ﻿//!*script
+// 右クリックメニュー拡張子判別
+// PPx.Arguments(0)=M_Ccr|M_FileMOVE|M_FileCOPY
+var cDir = PPx.Extract('%1');
+if(cDir.match(/aux:.*/)){
+  PPx.Execute('%M_Caux');
+  PPx.Quit(1);
+}
 var ext = PPx.GetFileInformation(PPx.Extract("%R")).slice(1) == 'DIR'? 'DIR' :PPx.Extract('%t').toLowerCase();
-var arc = ["zip","7z","cab","msi","rar","lzh"];
-var image = ["jpeg","jpg","bmp","png","gif","vch","edg","afd"];
-var doc = ["txt","ini","cfg","js","md","vim","log","ahk","json"];
-var type = arc.concat(image + doc);
 var result = "none";
 var select = "S";
-
-for(var item in type){
-  if(ext == arc[item]){
+// 拡張子判別
+switch(ext){
+  case '7z':
+  case 'cab':
+  case 'lzh':
+  case 'msi':
+  case 'rar':
+  case 'zip':
     var result = "arc";
     var select = "W";
-    continue;
-  }
-  if(ext == image[item]){
+    break;
+  case 'bmp':
+  case 'edg':
+  case 'gif':
+  case 'jpeg':
+  case 'jpg':
+  case 'png':
+  case 'vch':
     var result = "image";
     var select = "L";
-    continue;
-  }
-  if(ext == doc[item]){
+    break;
+  case 'ahk':
+  case 'ini':
+  case 'cfg':
+  case 'js':
+  case 'json':
+  case 'log':
+  case 'md':
+  case 'txt':
+  case 'vim':
     var result = "doc";
     var select = "R";
-    continue;
-  }
-  if(ext == 'DIR'){
+    break;
+  case 'DIR':
     var result = "dir";
     var select = "W";
-  }
+    break;
 }
-var typeDir = PPx.DirectoryType;
-var cDir = PPx.Extract('%1');
-if(cDir.match(/aux:.*/)) PPx.Execute('%M_Caux');
-PPx.Arguments(0) == 'M_Ccr'? click_menu(): file_menu();
-function click_menu(){
-  switch(typeDir){
+if(PPx.Arguments(0) == 'M_Ccr'){
+  divide_menu('J','O')
+} else{
+  var select = PPx.Arguments(0) == 'M_FileMOVE'? 'M': 'C';
+  divide_menu(select,select);
+}
+function divide_menu(list,arc){
+  switch(PPx.DirectoryType){
     case 4:
-      PPx.Execute('*setcust M_Clist:Ext = ??M_U' + result + ' %:%M_Clist,J');
+      PPx.Execute('*setcust M_Clist:Ext = ??M_U' + result + ' %:%M_Clist,' + list);
       break;
     case 80:
       PPx.Execute('%M_Chttp');
@@ -43,24 +64,7 @@ function click_menu(){
     case 62:
     case 64:
     case 96:
-      PPx.Execute('%M_Carc,O');
-      break;
-    default:
-      PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + result + ' %:%' + PPx.Arguments(0) + ',' + select);
-      break;
-  }
-}
-function file_menu(){
-  var select = PPx.Arguments(0) == 'M_FileMOVE'? 'M': 'C';
-  switch(typeDir){
-    case 4:
-      PPx.Execute('*setcust M_Clist:Ext = ??M_U' + result + ' %:%M_Clist,' + select);
-      break;
-    case 80:
-      PPx.Execute('%M_Chttp');
-      break;
-    case 62:
-      PPx.Execute('%M_Carc,' + select);
+      PPx.Execute('%M_Carc,' + arc);
       break;
     default:
       PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + result + ' %:%' + PPx.Arguments(0) + ',' + select);

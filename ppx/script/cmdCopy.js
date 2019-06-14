@@ -1,7 +1,7 @@
 ﻿//!*script
 // %'work'=workspace
 var opDir = PPx.Extract('%2');
-var tDir;
+var tDir; //対象DIRパス
 var filePath = PPx.Extract('%FDC');
 var fileName = PPx.Extract('%FC');
 var cmd = PPx.Arguments(0) == 0? 'copy': '!copy';
@@ -10,20 +10,21 @@ switch(PPx.GetFileInformation(opDir)){
   case ':DIR':
   case ':XLF':
     var tDir = opDir;
-  break;
+    break;
   case '':
-  tDir = PPx.Extract("%\'work\'").replace(/\//g,'\\');
-      var cmd = 'copy';
-  break;
-      default:
-  PPx.Echo('対象がディレクトリではありません');
-  PPx.Quit(1);
-  break;
-    }
+    tDir = PPx.Extract("%\'work\'").replace("/\//g,'\\'");
+    var cmd = 'copy';
+    break;
+  default:
+    PPx.Echo('対象がディレクトリではありません');
+    PPx.Quit(1);
+    break;
+}
 // シンボリックリンク
 if(PPx.Arguments(0) >= 2){
   var tDir = PPx.Extract('%*input("' + tDir +'" -title:"コピー先" -mode:d)%*addchar(\\)');
   if(tDir){
+    // 対象がディレクトリなら/Dオプション付加
     var att = PPx.GetFileInformation(filePath) == ':DIR'? '/D ': '';
     PPx.Execute('%Orn *ppb -runas -c mklink ' + att + tDir + fileName + ' ' + filePath);
   }

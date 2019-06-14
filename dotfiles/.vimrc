@@ -112,8 +112,8 @@ set autoindent
 set backspace=indent,eol,start
 "# 検索時にファイルの最後まで行った時最初に戻らない
 set nowrapscan
-"# 括弧入力時に対応する括弧を表示しない
-set showmatch matchtime=0
+"# 括弧入力時に対応する括弧を表示 matchtime=0で非表示
+set showmatch matchtime=3
 "# コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 set wildmenu
 "# テキスト挿入中の自動折り返しを日本語に対応させる
@@ -363,11 +363,14 @@ nnoremap <C-q> q
 "# 一文字削除をレジスタ履歴に残さない
 nnoremap  x "_x
 nnoremap  X "_X
-"# vimrc読み込み
+"# 行末までヤンク
+nnoremap  Y y$
+"# vimrc
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
+nnoremap <F9> :<C-u>edit $MYVIMRC<CR>
+"# ppx
 nnoremap <F6> :<C-u>edit C:/bin/repository/tar80/misc/ppx/script/xTest.js<CR>
 nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script C:/bin/repository/tar80/misc/ppx/script/xTest.js<CR>
-nnoremap <F9> :<C-u>edit $MYVIMRC<CR>
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}
 "# insert_mode{{{
@@ -380,6 +383,10 @@ noremap! <C-s> <Delete>
 inoremap <S-Delete> <C-o>d$
 "#}}}
 "# visual_mode{{{
+"# 範囲を括る
+vnoremap <space>" c"<C-r>""<ESC>
+vnoremap <space>' c'<C-r>"'<ESC>
+vnoremap <space>( c(<C-r>")<ESC>
 "# 範囲インデント処理後に解除しないように
 vnoremap < <gv
 vnoremap > >gv

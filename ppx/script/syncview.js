@@ -1,5 +1,5 @@
 ﻿//!*script
-// いろんなケースのsyncview
+// ケース毎のsyncview
 var paneCount = PPx.Pane.Count;
 var tID = PPx.Extract('%n').slice(1);
 var sync = PPx.Extract('%*getcust(_others:SyncViewID)');

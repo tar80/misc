@@ -1,6 +1,7 @@
 ﻿//!*script
-// 同階層の次(引数があれば前)のディレクトリに移動
+// 同階層の隣のディレクトリに移動
 // 親ディレクトリの実態がなければ終了
+// PPx.Arguments(0)=1:preview
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
 PPx.DirectoryType == 1 || PPx.Quit(1);
 

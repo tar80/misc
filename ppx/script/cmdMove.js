@@ -1,5 +1,6 @@
 ﻿//!*script
 // ケース毎のMoveコマンド
+// PPx.Arguments(0)=0:detail|1:quick
 var opDir = PPx.Extract('%2');
 var tDir; // 対象DIRパス
 var cmd;  // 詳細コピースイッチ

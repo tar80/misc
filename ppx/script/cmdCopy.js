@@ -1,4 +1,5 @@
 ﻿//!*script
+// PPx.Arguments(0)=0:detail|1:quick
 // %'work'=workspace
 var opDir = PPx.Extract('%2');
 var tDir; //対象DIRパス
@@ -30,7 +31,7 @@ if(PPx.Arguments(0) >= 2){
   }
   // 送り元が書庫なら解凍
 } else if(PPx.DirectoryType >= 62){
-  PPx.Execute('%u7-zip64.dll,x -aos -hide "%1" -o%"解凍先"%{' + tDir + '%} %@');
+  PPx.Execute('%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複リネーム,DIR展開"%{' + tDir + '%} %@');
 } else{
   // 5mbyte以上ならバーストモード
   var mSize = PPx.EntryMarkCount == 0? PPx.EntrySize : PPx.EntryMarkSize;

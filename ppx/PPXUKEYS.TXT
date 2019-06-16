@@ -26,7 +26,7 @@
 %k"I        %mPPv|キャレットモード @caret@mode
 %k"\^V      %mPPv|形式指定ペースト
 %k"'@'      %mPPv|文字コード @moji
-%k"':'      %mPPv|表示形式 @hyouji
+%k"\':'     %mPPv|表示形式 @hyouji
 %k"';'      %mPPv|桁数 @ketasuu
 %k"A        %mPPv|アスペクト比変更 @asupekuto
 %k"C        %mPPv|制御記号
@@ -36,7 +36,7 @@
 %k"/        %mPPv|部分表示切替
 ^:          %mPPe|コンプリスト @comp@list
 ^;          %mPPe|行選択 @gyou
-\^H         %mPPe|PPcで実行 @run@exe
+\^:         %mPPe|PPcで実行 @run@exe
 &DEL        %mPPe|表示中の履歴削除
 ^U          %mPPe|削除した文字を再入力
 ^Y          %mPPe|行削除 @gyou@delete

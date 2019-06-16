@@ -54,6 +54,12 @@ switch(arg){
     undoLog.Close();
     PPx.Execute('*file !Undo /min /nocount' + cmd);
     break;
+  case 'memo':
+    var tList = fs.OpenTextFile(PPx.Extract('%0list\\worklist.xlf'), 8, true, -1);
+    var str = PPx.Extract('"%*nowdatetime("n/d(W)H:M")",T:%si"ppp"');
+    tList.WriteLine(str);
+    tList.Close();
+    break;
     // 追記
   default:
     var tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 8, true, -1);

@@ -127,6 +127,7 @@
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
+*MEMO  ;内容 ワークリストにメモを追加
 *makedir  ;dirname ディレクトリを作成
 *makefile  ;filename ディレクトリを作成
 *makelistfile ;[filename] [option] ListFile出力

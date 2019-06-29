@@ -2,15 +2,15 @@
 // 右クリックメニュー拡張子判別
 // PPx.Arguments(0)=M_Ccr|M_FileMOVE|M_FileCOPY
 var cDir = PPx.Extract('%1');
-if(cDir.match(/aux:.*/)){
+if (cDir.match(/aux:.*/)) {
   PPx.Execute('%M_Caux');
   PPx.Quit(1);
 }
-var ext = PPx.GetFileInformation(PPx.Extract("%R")).slice(1) == 'DIR'? 'DIR' :PPx.Extract('%t').toLowerCase();
+var ext = PPx.GetFileInformation(PPx.Extract("%R")).slice(1) == 'DIR' ? 'DIR' : PPx.Extract('%t').toLowerCase();
 var result = "none";
 var select = "S";
 // 拡張子判別
-switch(ext){
+switch (ext) {
   case '7z':
   case 'cab':
   case 'lzh':
@@ -47,14 +47,14 @@ switch(ext){
     var select = "W";
     break;
 }
-if(PPx.Arguments(0) == 'M_Ccr'){
-  divide_menu('J','O')
-} else{
-  var select = PPx.Arguments(0) == 'M_FileMOVE'? 'M': 'C';
-  divide_menu(select,select);
+if (PPx.Arguments(0) == 'M_Ccr') {
+  divide_menu('J', 'O')
+} else {
+  var select = PPx.Arguments(0) == 'M_FileMOVE' ? 'M' : 'C';
+  divide_menu(select, select);
 }
-function divide_menu(list,arc){
-  switch(PPx.DirectoryType){
+function divide_menu(list,arc) {
+  switch (PPx.DirectoryType) {
     case 4:
       PPx.Execute('*setcust M_Clist:Ext = ??M_U' + result + ' %:%M_Clist,' + list);
       break;

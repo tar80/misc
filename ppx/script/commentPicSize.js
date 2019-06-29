@@ -3,14 +3,14 @@
 // 15行目、Psizeは環境に合わせて修正
 var fs = PPx.CreateObject('Scripting.FileSystemObject');
 var filePath = PPx.Extract('%1%\\00_INDEX.txt');
-var tList = fs.OpenTextFile(filePath,2,true);
+var tList = fs.OpenTextFile(filePath, 2, true);
 // アクティブな窓の表示状態を取得
 listview = PPx.extract('%*getcust(xc_celf:' + PPx.extract('%n').slice(1) + ')');
 // 情報取得のため一時的に表示を変更
 PPx.Execute('%Os *customize XC_celF:' + PPx.Extract('%n').slice(1) + '=U"大きさ",0');
 // 画像情報取得
-for(var i = 0,l = PPx.EntryDisplayCount; i < l; i = (i+1)|0){
-  if(PPx.Entry(i).Name.match(/.(bmp|jpg|jpeg|png|gif)$/i)){
+for (var i = 0, l = PPx.EntryDisplayCount; i < l; i = (i+1)|0) {
+  if (PPx.Entry(i).Name.match(/.(bmp|jpg|jpeg|png|gif)$/i)) {
     var entryName = PPx.Entry(i).Name;
     var entryinfo = PPx.Entry(i).Information;
     var Psize = entryinfo.replace(/[\s\S]*\*Size:(\d*x\d*)[\s\S]*/g,'$1');

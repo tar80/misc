@@ -1,6 +1,6 @@
-//!*script
+﻿//!*script
 // PPx.Arguments(0)=case
-switch(PPx.Arguments(0)){
+switch (PPx.Arguments(0)) {
   case 'version':
     PPx.Result = PPx.PPxVersion;
     break;
@@ -18,7 +18,7 @@ switch(PPx.Arguments(0)){
     break;
   case 'filetype':
     var getext = PPx.GetFileInformation(PPx.Extract("%R")).slice(1);
-    PPx.Result = getext == "" ? "---": getext;
+    PPx.Result = getext == "" ? "---" : getext;
     break;
   case 'makepath':
     var path = PPx.Pane.Count == 2 ? "%2%\\" : "%'work'%\\";

@@ -5,15 +5,15 @@ var opDir = PPx.Extract('%2');
 var tDir; // 対象DIRパス
 var cmd;  // 詳細コピースイッチ
 // 対象パスを設定
-if(!PPx.GetFileInformation(opDir)){
+if (!PPx.GetFileInformation(opDir)) {
   var tDir = PPx.Extract("%\'work\'").replace("/\//g,'\\'");
   var cmd = 'move';
-} else{
+} else {
   var tDir = '%2';
-  var cmd = PPx.Arguments.count == 0? 'move': '!move';
+  var cmd = PPx.Arguments.count == 0 ? 'move' : '!move';
 }
 // カレントディレクトリの属性をみて処理を分岐
-switch(PPx.Extract(PPx.DirectoryType)){
+switch (PPx.Extract(PPx.DirectoryType)) {
     // 書庫
   case '63':
   case '64':

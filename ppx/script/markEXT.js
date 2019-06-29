@@ -1,7 +1,7 @@
 ﻿//!*script
 // カーソル下エントリの拡張子でマークトグル
-if(!PPx.EntryMarkCount){
+if (!PPx.EntryMarkCount) {
   PPx.Execute('*markentry *.%t');
-} else{
+} else {
   PPx.Execute('*unmarkentry *');
 }

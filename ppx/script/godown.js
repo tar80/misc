@@ -1,8 +1,8 @@
 ﻿//!*script
 // 一行編集上でパス補完
 var editPath = PPx.Extract('%*edittext');
-var str = editPath.slice(1,4);
-switch(str){
+var str = editPath.slice(1, 4);
+switch (str) {
   case '.\\':
   case ':\\':
     PPx.Execute('%K"@TAB');

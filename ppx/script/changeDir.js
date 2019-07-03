@@ -1,8 +1,9 @@
 ﻿//!*script
-// 同階層の隣のディレクトリに移動
-// 親ディレクトリの実態がなければ終了
+/* 同階層の隣合うディレクトリに移動 */
 // PPx.Arguments(0)=1:preview
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
+
+// 親ディレクトリの実態がなければ中止
 PPx.DirectoryType == 1 || PPx.Quit(1);
 
 var fs = PPx.CreateObject('Scripting.FileSystemObject');
@@ -12,8 +13,10 @@ var currentDir = fs.GetFolder(cDir);
 if (currentDir.IsRootFolder || currentDir.ParentFolder.SubFolders.count == 1) {
   PPx.SetPopLineMessage('!"サブディレクトリがありません');
   PPx.Quit(1);
-}
+};
 PPx.Arguments.length ? change_dir(-1, 1, 'top') : change_dir(1, -1, 'bottom');
+
+/* ディレクトリの移動を実行する関数 */
 function change_dir(valA, valB, termMessage) {
   // 同階層のディレクトリのリストを取得
   var subDir = new Enumerator(currentDir.ParentFolder.SubFolders);
@@ -21,16 +24,21 @@ function change_dir(valA, valB, termMessage) {
   for (subDir.moveFirst(); !subDir.atEnd(); subDir.moveNext()) {
     //ディレクトリ属性を考慮してリストに追加
     var subDirName = fs.GetFolder(fs.BuildPath(currentDir.ParentFolder.Path, subDir.item().Name));
-    if (subDirName.Attributes <= 17) list.push(subDir.item().Name);
-  }
+    if (subDirName.Attributes <= 17)
+      list.push(subDir.item().Name);
+  };
   // 名前順でソート
-  list.sort(function(a, b) {return a.toLowerCase() < b.toLowerCase() ? valA : valB;});
+  list.sort(function (a, b) {
+    return (a.toLowerCase() < b.toLowerCase() ? valA : valB);
+  });
   for (var item in list) {
-    if (list[item] == currentDir.Name) break;
-  }
+    if (list[item] == currentDir.Name)
+      break;
+  };
   // 対象ディレクトリを取得
   var tDir = list[Math.max(item - 1, 0)|0];
   // 対象がなければメッセージを表示
-  if (list[item - 2] == null) PPx.SetPopLineMessage('!">>' + termMessage);
+  if (list[item - 2] == null)
+    PPx.SetPopLineMessage('!">>' + termMessage);
   PPx.Execute('*jumppath "' + fs.BuildPath(fs.GetParentFolderName(cDir), tDir) + '"');
-}
+};

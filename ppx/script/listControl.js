@@ -1,13 +1,30 @@
 ﻿//!*script
-// リストの読み書き
+/* リストファイルの読み書き */
 // PPx.Arguments(0)=case
 // %si"ppp" = 処理元ディレクトリ
-// var as = new ActiveXObject('ADODB.Stream');
+
+/* エントリをリストに書き出す関数 */
+var write_mark_path = function () {
+  var cDir = (PPx.DirectoryType != 4 ? PPx.Extract('%FDN%\\') : '');
+  var Count = PPx.Entry.Count;
+  // マークの有無で処理を分岐
+  if (!PPx.EntryMarkCount)
+    tList.WriteLine(cDir + PPx.EntryName);
+  else {
+    for (var i = 0; i < Count; i = (i+1)|0) {
+      if (PPx.Entry(i).Mark == 1) {
+        tList.WriteLine(cDir + PPx.Entry(i).Name);
+        PPx.Entry(i).Mark = 0;
+      };
+    };
+  };
+  tList.Close();
+};
+
 var fs = PPx.CreateObject('Scripting.FileSystemObject');
-var arg = PPx.Arguments.Length ? PPx.Arguments(0) : "";
-// var enc = PPx.Arguments(1);
+var arg = (PPx.Arguments.Length ? PPx.Arguments(0) : "");
 // command別の処理
-switch(arg) {
+switch (arg) {
     // git関連のリザルト
   case 'git':
     var tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 2, true, -1);
@@ -21,7 +38,7 @@ switch(arg) {
     tList.WriteLine(';ListFile');
     write_mark_path();
     break;
-    // ReDo MoveのUnDoのみ処理
+    // ReDo(MoveのUnDoのみ処理)
   case 'redo':
     var tFile = PPx.Extract('%0%\\%*getcust(X_save)%\\PPXUNDO.LOG');
     var undoLog = fs.OpenTextFile(PPx.Extract(tFile), 1, false, -1);
@@ -42,48 +59,33 @@ switch(arg) {
     var undoLog = fs.OpenTextFile(PPx.Extract(tFile), 1, false, -1);
     var cmd = '';
     PPx.SetPopLineMessage('UnDo!');
-    // ログを置換
+    // UNDOログを置換
     while (!undoLog.AtEndOfStream) {
       var str = undoLog.ReadLine();
       var result = str.replace(/.*\t(.*)/, '$1 < ', 'i');
       var result = result + undoLog.ReadLine().replace(/.*\t(.*)/, '($1)\n', 'i');
-      if (str.slice(0,4) == 'Move') cmd = ' /compcmd *JSCRIPT "listControl.js,redo"';
-      else undoLog.ReadLine();
+      if (str.slice(0,4) == 'Move')
+        cmd = ' /compcmd *JSCRIPT "listControl.js,redo"';
+      else
+        undoLog.ReadLine();
       PPx.SetPopLineMessage(result);
-    }
+    };
     undoLog.Close();
     PPx.Execute('*file !Undo /min /nocount' + cmd);
     break;
   case 'memo':
-    var tList = PPx.DirectoryType == 4 ? '%FVD' : '%\'repoppx\'\\list\\worklist.xlf';
+    var tList = (PPx.DirectoryType == 4 ? '%FVD' : '%\'repoppx\'\\list\\worklist.xlf');
     var tList = fs.OpenTextFile(PPx.Extract(tList), 8, true, -1);
     var str = PPx.Extract('"%*nowdatetime("n/d(W)H:M")",T:%si"ppp"');
     tList.WriteLine(str);
     tList.Close();
     break;
-    // 追記
+    // 指定されたリストに追記
   default:
     var tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 8, true, -1);
     write_mark_path();
     break;
-}
-// マークパス書き込み
-function write_mark_path() {
-  var cDir = PPx.DirectoryType != 4 ? PPx.Extract('%FDN%\\') : "";
-  var Count = PPx.Entry.Count;
-  // マークの有無で処理を分岐
-  if (!PPx.EntryMarkCount) {
-    tList.WriteLine(cDir + PPx.EntryName);
-  } else {
-    for (var i = 0; i < Count; i = (i+1)|0) {
-      if (PPx.Entry(i).Mark == 1) {
-      tList.WriteLine(cDir + PPx.Entry(i).Name);
-      PPx.Entry(i).Mark = 0;
-    }
-  }
-  }
-  tList.Close();
-}
+};
 // // 書き込み
 //
 // function list_write(form, tFile){

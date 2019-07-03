@@ -1,13 +1,18 @@
 ﻿//!*script
-// 右クリックメニュー拡張子判別
+/* 右クリックメニュー拡張子判別 */
 // PPx.Arguments(0)=M_Ccr|M_FileMOVE|M_FileCOPY
+
 var cDir = PPx.Extract('%1');
+// auxパスメニュー
 if (cDir.match(/aux:.*/)) {
   PPx.Execute('%M_Caux');
   PPx.Quit(1);
-}
-var ext = PPx.GetFileInformation(PPx.Extract("%R")).slice(1) == 'DIR' ? 'DIR' : PPx.Extract('%t').toLowerCase();
+};
+// 拡張子を小文字で取得する
+var ext = (PPx.GetFileInformation(PPx.Extract("%R")).slice(1) == 'DIR' ? 'DIR' : PPx.Extract('%t').toLowerCase());
+// ファイル種別
 var result = "none";
+// ショートカットキーの文字
 var select = "S";
 // 拡張子判別
 switch (ext) {
@@ -46,13 +51,17 @@ switch (ext) {
     var result = "dir";
     var select = "W";
     break;
-}
+};
 if (PPx.Arguments(0) == 'M_Ccr') {
+  // 標準メニュー
   divide_menu('J', 'O')
 } else {
-  var select = PPx.Arguments(0) == 'M_FileMOVE' ? 'M' : 'C';
+  // ファイル移動メニュー
+  var select = (PPx.Arguments(0) == 'M_FileMOVE' ? 'M' : 'C');
   divide_menu(select, select);
-}
+};
+
+/* カレントディレクトリの属性に応じて処理を分岐する関数 */
 function divide_menu(list,arc) {
   switch (PPx.DirectoryType) {
     case 4:
@@ -69,6 +78,5 @@ function divide_menu(list,arc) {
     default:
       PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + result + ' %:%' + PPx.Arguments(0) + ',' + select);
       break;
-  }
-}
-
+  };
+};

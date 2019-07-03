@@ -1,3 +1,4 @@
 ﻿//!*script
-// 引数はハイライトの番号
+/* 引数のハイライト色番号でハイライト */
+
 PPx.EntryHighlight = PPx.Arguments(0);

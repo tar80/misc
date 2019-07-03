@@ -11,13 +11,12 @@
 // PPx.Echo(PPx.DirectoryType);
 // 書庫のあるディレクトリの抽出
 //PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FD\",\"s/^(.*)\\\\.*(zip|rar)$/$1/\")"))
-// 書庫名の抽出//PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FDC\",\"s/^(.*\\\\.*?(zip)).*/$2/\")"))
+// 書庫名の抽出
+//PPx.SetPopLineMessage(PPx.Extract("%*regexp(\"%FDC\",\"s/^(.*\\\\.*?(zip)).*/$2/\")"))
 // コメント
 //PPx.Execute("*linemessage %*comment(1)");
-// 反対窓カレントディレクトリ
-//PPx.SetPopLineMessage(PPx.GetFileInformation(fn))
 // PPx ID
-//PPx.SetPopLineMessage("IDname:" + PPx.WindowIDName);
+// PPx.SetPopLineMessage("IDname:" + PPx.WindowIDName);
 // PPx 一枚窓のID
 //PPx.SetPopLineMessage("comboIDname:" + PPx.ComboIDName);
 // PPx一枚窓の数
@@ -28,3 +27,13 @@
 //PPx.Echo(PPx.SyncView);
 // 汎用一時利用パス
 //PPx.Echo(PPx.Extract('%si"ppp"'));
+// 起動状態のPPXID取得
+// var ppxid = new Array();
+//   for(var i = 65; i <= 90; i++){
+//   var id = String.fromCharCode(i);
+//   if(PPx.Extract('%NV' + id)) ppxid.push('V' + id);
+//   if(PPx.Extract('%NB' + id)) ppxid.push('B' + id);
+//   if(PPx.Extract('%NC' + id)) ppxid.push('C' + id);
+// }
+// ppxid.sort(function(a, b){return a < b? 1: -1;});
+// PPx.SetPopLineMessage(ppxid);

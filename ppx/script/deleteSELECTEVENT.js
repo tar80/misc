@@ -1,3 +1,4 @@
 ﻿//!*script
-// SELECTEVENT削除
+/* SELECTEVENTを削除 */
+
 PPx.Execute('*setcust KC_main:-|SELECTEVENT=');

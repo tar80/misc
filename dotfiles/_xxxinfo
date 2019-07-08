@@ -41,17 +41,17 @@
 :set noro
 |2,0,1556194209,,"set noro"
 :set noma
-|2,0,1556194209,,"set noma"
+|2,0,1556194209,,"set nomodifiable"
 :set spell
 |2,0,1556194202,,"set spell"
 :set fenc=utf-8 ff=unix
 |2,0,1556194196,,"set fenc=utf-8 ff=unix"
-:set fenc=sjis ff=dos
-|2,0,1556194179,,"set fenc=sjis ff=dos"
+:set fenc=cp932 ff=dos
+|2,0,1556194179,,"set fenc=cp932 ff=dos"
 :e ++enc=utf-8 ++ff=unix
 |2,0,1556194166,,"e ++enc=utf-8 ++ff=unix"
 :e ++enc=sjis ++ff=dos
-|2,0,1556194141,,"e ++enc=sjis ++ff=dos"
+|2,0,1556194141,,"e ++enc=cp932 ++ff=dos"
 :marks
 |2,0,1556194028,,"marks"
 :retab!
@@ -76,6 +76,9 @@
 |2,0,1546222660,,"PlugDiff"
 :PlugClean
 |2,0,1546222660,,"PlugClean"
+:set scb | wincmd h | set scb
+|2,0,1561703542,,"set scb | wincmd h | set scb"
+
 # 検索文字列 項目の履歴 (新しいものから古いものへ):
 # 式 項目の履歴 (新しいものから古いものへ):
 # 入力行 項目の履歴 (新しいものから古いものへ):
@@ -85,8 +88,8 @@
 	C:/bin/repository/tar80/misc/
 |3,0,16,1,1,0,1545963168,"C:/bin/repository/tar80/misc/"
 "p	LINE	0
-	D:/bin/
-|3,0,25,1,1,0,1545963152,"D:/bin/"
+	C:/bin/ppx/
+|3,0,25,1,1,0,1545963152,"C:/bin/ppx/"
 # ファイルマーク:
 # ジャンプリスト (新しいものが先):
 # バッファリスト:

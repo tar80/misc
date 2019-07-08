@@ -298,8 +298,13 @@ endif
 "# Autocmd {{{
 augroup vimrcAU
   autocmd!
-  execute 'autocmd VimEnter * rviminfo ~/_xxxinfo'
 augroup END
+
+if !exists("first_loaded")
+  let first_loaded = 1
+  autocmd VimEnter * rviminfo ~/_xxxinfo
+endif
+
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline
 autocmd vimrcAU CursorMovedI,InsertLeave * setlocal nocursorline

@@ -186,6 +186,17 @@
 *pptray ;PPtrayを実行
 *ppv [-runas][param] ;PPvを実行
 *ppvoption  ;command PPv使用時の挙動指定
+*range ;target [-option] 指定範囲のマーク・ハイライト
+	cursor ;カーソル位置
+	marked ;マークエントリ
+	all    ;全部
+	firstmark,lastmark ;最初と最後のマーク
+	point  ;マウスカーソル
+	-mark        ;マーク(規定値)
+	-unmark      ;マーク解除
+	-reversemark ;マーク反転
+	-highlight[:n] ;ハイライト(既定値:1) 0=ハイライト解除、1～7=指定ハイライト
+ 
 *reboot ;Windows を再起動
 *reducemode ;mode PPvの画像縮小方法
 	1 ;モノクロ文書、白地
@@ -213,7 +224,7 @@
 *sound ;[filename.wav] WAVファイルを再生する
 *start ;[-runas][-launch] filename [parameter] filenameを実行
 *stop ;実行中止
-*string ;[valuename=[strings]]
+*string ;[valuenamei(i|o)=[strings]]
 	i, ;ID別環境変数
 	o, ;コマンドライン内環境変数
  
@@ -228,10 +239,21 @@
 *viewoption ;各種オプション 表示関係オプション
 *viewstyle ;[option] [MC_celS名|directory|separate] エントリ表示の種類を変更
 *wait  ;time[,1|2] 指定時間待機 1=待機後ループ 2=待機中ループ
-*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
-	%1,,,,,1,0  ;ディレクトリ無視して一覧表示
-	%1;%2,,,,,1,0  ;ディレクトリ無視して現在窓・反対窓を一覧表示
+*where ;ファイル検索
+	-path:"" ;ソースパス
+	-mask:"" ;マスク
+	-listfile:"%'repoppx'%\list\PPXRESULT.xlf" ;結果結果の保存先パス
+	-text:"" ;検索文字列
+	-type:   ;2=コメント,3=explorerのファイル情報
+	-dir     ;ディレクトリを結果に含む
+	-subdir:off ;サブディレクトリ内を検索しない
+	-vfs     ;仮想ディレクトリ内を検索
+	-marked  ;ソースパスの代わりにマークエントリを検索
+	-search  ;検索のみ実行して結果を表示しない
  
+*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
+	-path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf" ;ディレクトリ無視して一覧表示
+	-path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf" ;ディレクトリ無視して現在窓・反対窓を一覧表示
 *windowposition ;[window id],x,y
 *windowsize ;[window id],width,height
 *zenhan ;[z|h] 文字のa/ａ変換

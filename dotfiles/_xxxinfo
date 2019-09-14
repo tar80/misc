@@ -17,17 +17,17 @@
 :lcd ~/
 |2,0,1556194479,,"lcd ~/"
 :lcd C:/bin/
-|2,0,1556194470,,"lcd C:/bin/"
+|2,0,1556194470,,"lcd c:/bin/"
 :lcd C:/bin/ppx/
 |2,0,1546222527,,"lcd C:/bin/repository/tar80/misc/"
 :Gcommit
-|2,0,1556194428,,"Gcommit"
+|2,0,1556194428,,"gcommit"
 :Gdiff
-|2,0,1556194412,,"Gdiff"
+|2,0,1556194412,,"gdiff"
 :Gstatus
-|2,0,1556194401,,"Gstatus"
+|2,0,1556194401,,"gstatus"
 :Gwrite
-|2,0,1556194359,,"Gwrite"
+|2,0,1556194359,,"gwrite"
 :tab ball
 |2,0,1556194334,,"tab ball"
 :tabnew
@@ -35,7 +35,7 @@
 :so $VIM/vim81/syntax/hitest.vim
 |2,0,1556194313,,"so $VIM/vim81/syntax/hitest.vim"
 :Difforg
-|2,0,1556194227,,"Difforg"
+|2,0,1556194227,,"difforg"
 :set noexpandtab
 |2,0,1556194221,,"set noexpandtab"
 :set noro

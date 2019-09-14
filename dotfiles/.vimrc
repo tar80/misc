@@ -300,14 +300,13 @@ augroup vimrcAU
   autocmd!
 augroup END
 
-if !exists("first_loaded")
-  let first_loaded = 1
-  autocmd VimEnter * rviminfo ~/_xxxinfo
-endif
+"# viminfoの初期値をマージ
+autocmd vimrcAU Vimleave * rviminfo ~/_xxxinfo
+autocmd vimrcAU Vimleave * wviminfo!
 
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline
-autocmd vimrcAU CursorMovedI,InsertLeave * setlocal nocursorline
+autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
 "# filetype
 autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/jscript.dict
 autocmd vimrcAU FileType unite call s:unite_my_settings()
@@ -372,7 +371,7 @@ nnoremap  X "_X
 nnoremap  Y y$
 "# vimrc
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
-nnoremap <F9> :<C-u>edit $MYVIMRC<CR>
+nnoremap <F9> :<C-u>tabnew<CR>:edit $MYVIMRC<CR>
 "# ppx
 nnoremap <F6> :<C-u>edit C:/bin/repository/tar80/misc/ppx/script/xTest.js<CR>
 nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script C:/bin/repository/tar80/misc/ppx/script/xTest.js<CR>

@@ -62,8 +62,8 @@ switch (arg) {
     // UNDOログを置換
     while (!undoLog.AtEndOfStream) {
       var str = undoLog.ReadLine();
-      var result = str.replace(/.*\t(.*)/, '$1 < ', 'i');
-      var result = result + undoLog.ReadLine().replace(/.*\t(.*)/, '($1)\n', 'i');
+      var result = str.replace(/.*\t(.*)/, '$1 << ', 'i');
+      var result = result + undoLog.ReadLine().replace(/.*\t(.*)/, '$1\n', 'i');
       if (str.slice(0,4) == 'Move')
         cmd = ' /compcmd *JSCRIPT "listControl.js,redo"';
       else
@@ -76,7 +76,7 @@ switch (arg) {
   case 'memo':
     var tList = (PPx.DirectoryType == 4 ? '%FVD' : '%\'repoppx\'\\list\\worklist.xlf');
     var tList = fs.OpenTextFile(PPx.Extract(tList), 8, true, -1);
-    var str = PPx.Extract('"%*nowdatetime("n/d(W)H:M")",T:%si"ppp"');
+    var str = PPx.Extract('"%*now",T:%si"ppp"');
     tList.WriteLine(str);
     tList.Close();
     break;

@@ -258,22 +258,22 @@
 *windowsize ;[window id],width,height
 *zenhan ;[z|h] 文字のa/ａ変換
 *zoom ;比率 拡大縮小
-%m|テキスト比較@diff@diff@fc %C "%2\%C"
+%m|テキスト比較@cmd@diff@fc %C "%2\%C"
 %m|バイナリ比較@cmd@diff@fc fc /b %C "%2\%C"
-%m|クォータ違反の表示@cmd@fsutil fsutil quota violations
-%m|ネットワークアダプタ設定@net@cmd@ipconfig ipconfig /all
-%m|実行中サービス一覧@cmd@net net start
-%m|開いているポートの一覧@cmd@net netstat /n
-%m|DNS問合せ@cmd@nslookup nslookup
-%m|レジストリエディタ@cmd@regedit regedit
-%m|指定セッションをログアウト@cmd@reset reset
-%m|シャットダウン@cmd@shutdown shutdown -s -t 0
-%m|システムのプロパティ@cmd@system SystemPropertiesAdvanced
-%m|プロセス強制終了@cmd@taskkill taskkill
-%m|プロセス一覧@cmd@tasklist tasklist /svc
-%m|指定ドメインまでの経路@cmd@tracert tracert
+%m|クォータ違反の表示@cmd fsutil quota violations
+%m|ネットワークアダプタ設定@net@cmd ipconfig /all
+%m|実行中サービス一覧@cmd net start
+%m|開いているポートの一覧@cmd netstat /n
+%m|DNS問合せ@cmd nslookup
+%m|レジストリエディタ@cmd regedit
+%m|指定セッションをログアウト@cmd reset
+%m|シャットダウン@cmd shutdown -s -t 0
+%m|システムのプロパティ@cmd SystemPropertiesAdvanced
+%m|プロセス強制終了@cmd taskkill
+%m|プロセス一覧@cmd tasklist /svc
+%m|指定ドメインまでの経路@cmd tracert
 %m|SKKFEP設定@cmd@skk@option cscript D:\Apps\skkfep\SETUP.js
-%m|西暦/月/日@nowdatetime %*nowdatetime("Y/n/d")
-%m|月日_時:分:秒@nowdatetime %*nowdatetime("ND_H:U:M")
-%m|月日(曜日)@nowdatetime %*nowdatetime("n月d日(W)")
-%m|設定ファイル読み込み__読み込ませるPxファイルをマーク@cmd@setup@ppcust %"設定ファイル読み込み"%Q"ready?" %:*closeppx C* %:*ifmatch Px*.cfg %:PPCUSTW CA %FDC
+%m|西暦/月/日 %*nowdatetime("Y/n/d")
+%m|月日_時:分:秒 %*nowdatetime("ND_H:U:M")
+%m|月日(曜日) %*nowdatetime("n月d日(W)")
+%m|設定ファイル読み込み__読み込ませるPxファイルをマーク@cmd@setup %"設定ファイル読み込み"%Q"ready?" %:*closeppx C* %:*ifmatch Px*.cfg %:PPCUSTW CA %FDC

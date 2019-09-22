@@ -22,10 +22,10 @@ checkout ;[--option][<branch>][<コミット>][<path>]
 	checkout --theirs ;<path> マージ先ファイルを優先
 	%#FC
 commit ;[--option] -m 'message'
-        %#FC -m ' ;メッセージ' 選択エントリ
+	%#FC -m ' ;メッセージ' 選択エントリ
 	. -m ' ;メッセージ' カレント以下
 	-m ' ;メッセージ' 全て
-	--amend -m " ;メッセージ" 最新コミットの上書き
+	--amend -m ' ;メッセージ' 最新コミットの上書き
 diff ;[--option][<コミット>(old)][..<コミット>(new)][<path>]
 	--stat  ;変更点を表示
 	--stat --cached  ;addしてからの変更点を表示

@@ -13,7 +13,8 @@ switch (str) {
     PPx.Execute('*ifmatch "o:e,a:d+","' + editPath + '" %: *replace %*edittext()%\\ %: *completelist %: %K"@F2@F4@TAB"');
     break;
 };
+if (PPx.Extract('%W') == 'パス移動') {
 var result = PPx.Extract('%*edittext()');
 var len = result.replace(/(.*\\).*\\/, '$1').length;
 PPx.Execute('*sendmessage %N,177,' + len + ',' + result.length);
-
+};

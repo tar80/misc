@@ -40,6 +40,7 @@
 *closeppx  ;[wildcard] 全PPx終了
 *color  ;[back|cursor] [color] 色の一時的変更
 *comment  ;[id,]["text"|[all] command]
+*COMMITLIST ;UserCommand コミットリストの更新
 *commandhash ;name モジュールのコマンド名ハッシュの表示
 *comparemark  ;比較方法,マーク属性,サブディレクトリ PPcファイル比較マーク
 *completelist ;[/set][/option] 自動の一覧表示の表示設定
@@ -127,7 +128,7 @@
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
-*MEMO  ;内容 ワークリストにメモを追加
+*MEMO  ;内容 |UserCommand ワークリストにメモを追加
 *makedir  ;dirname ディレクトリを作成
 *makefile  ;filename ディレクトリを作成
 *makelistfile ;[filename] [option] ListFile出力
@@ -184,7 +185,7 @@
 *ppe ;[filename] PPeで編集(終了待たずに次のコマンドを実行)
 *ppffix ;[param] PPffixを実行
 *pptray ;PPtrayを実行
-*ppv [-runas][param] ;PPvを実行
+*ppv ;[-runas][param] PPvを実行
 *ppvoption  ;command PPv使用時の挙動指定
 *range ;target [-option] 指定範囲のマーク・ハイライト
 	cursor ;カーソル位置

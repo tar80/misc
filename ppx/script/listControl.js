@@ -74,7 +74,7 @@ switch (arg) {
     PPx.Execute('*file !Undo /min /nocount' + cmd);
     break;
   case 'memo':
-    var tList = (PPx.DirectoryType == 4 ? '%FVD' : '%\'repoppx\'\\list\\worklist.xlf');
+    var tList = (PPx.DirectoryType == 4 ? '%FVD' : '%0\\list\\worklist.xlf');
     var tList = fs.OpenTextFile(PPx.Extract(tList), 8, true, -1);
     var str = PPx.Extract('"%*now",T:%si"ppp"');
     tList.WriteLine(str);

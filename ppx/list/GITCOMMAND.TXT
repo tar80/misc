@@ -1,6 +1,7 @@
 ﻿add ;[--option][<path>]
-	-a ;全部
-	-v . ; カレント以下詳細
+	-v %#FC
+	-v . ;カレント
+	-v --all ;全部
 	--dry-run  ;[<directory_path>] addで追加されるファイルの確認
 branch ;[--option][<branch>]
 	-a --sort=-authordate ;上位からソート
@@ -14,14 +15,16 @@ branch ;[--option][<branch>]
 	-m  ;[<oldname>] <newname> チェックアウト中(またはoldname)ブランチの名前変更
 	--set-upstream-to= ;(-u)remote/branch [<branch>]上流ブランチを設定
 	--unset-upstream  ;[<branch>] 上流ブランチ設定を解除
-checkout ;[--option][<branch>][<コミット>]
+checkout ;[--option][<branch>][<コミット>][<path>]
 	-b  ;<newbranch> [<コミット>] ブランチを作成してチェックアウト
 	--force  ;(-f)<branch> 変更を破棄してチェックアウト
-	checkout --ours ;%#FC マージ元ファイルを優先
-	checkout --theirs ;%#FC マージ先ファイルを優先
-commit ;[--option] -m "message"
-	. -m " ;メッセージ" カレントディレクトリ
-	-m " ;メッセージ"
+	checkout --ours ;<path> マージ元ファイルを優先
+	checkout --theirs ;<path> マージ先ファイルを優先
+	%#FC
+commit ;[--option] -m 'message'
+        %#FC -m ' ;メッセージ' 選択エントリ
+	. -m ' ;メッセージ' カレント以下
+	-m ' ;メッセージ' 全て
 	--amend -m " ;メッセージ" 最新コミットの上書き
 diff ;[--option][<コミット>(old)][..<コミット>(new)][<path>]
 	--stat  ;変更点を表示
@@ -38,8 +41,8 @@ fetch ;[--option|<remote [branch]>] リモートを取得する
 	--prune ;リモートに存在しないローカルブランチを削除
 	--tags ;(-t)タグを取得
 log ;[--option][<branch>][-n <表示数>]
-	--graph --date=short --format="%C(yellow)%h %C(magenta)[%ad] %C(reset)%s%C(auto)%d" -25 ;簡易
-	--graph --name-status --oneline --date=short --format="%C(yellow reverse)%h%C(reset) %C(magenta)[%ad]%C(cyan)%an %C(green)%s%C(auto)%d" -5 ;詳細
+	--graph --date=short --format=""%OD%%C(yellow)%%h %%C(magenta)[%%ad]%%C(reset)%%s%%C(auto)%%d%OD-"" -25
+	--graph --name-status --oneline --date=short --format=""%OD%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad]%%C(cyan)%%an %%C(green)%%s%%C(auto)%%d%OD-"" -5 ;詳細
 	--all ;全ブランチ
 	--decorate=full ;ブランチ名を短縮せずに表示
 	--graph=' ;' 分岐をグラフィカルに表示

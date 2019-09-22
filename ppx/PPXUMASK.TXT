@@ -1,13 +1,13 @@
-&a:d ;@directory
-&a: ;@attribute
-&d: ;@date[&d:<3 3日以内,&d:>=2008-1-1 指定日以降]
-&s: ;@size[&s:<=1M 1Mbytes以内]
 o:edw,r: ;@migemo
-.txt,.ini,.js,.log,.cfg,.ahk,.md ;@document
+path: ;directory path
+.txt,.ini,.js,.log,.cfg,.ahk,.md,sz7,xlf ;@document
 .bmp,.jpg,.jpeg,.png,.gif,.vch,.edg,.apd ;@image
 .mp3,.wav,.mid,.m4b,.avi ;@sound@music
 .zip,.7z,.lzh,.rar,.cab,.msi,.tar ;@archive
 .exe,.com,.bat,.cmd,.lnk ;@execute
 .swf ;@flash
 .mpeg,.mpg,.avi,.mp2,.wma,.3gp,.mp4,.webM,.qt,.flv ;@movie
-
+&a:d ;@directory
+&a: ;@attribute
+&d: ;@date[&d:<3 3日以内,&d:>=2008-1-1 指定日以降]
+&s: ;@size[&s:<=1M 1Mbytes以内]

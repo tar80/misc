@@ -87,7 +87,7 @@ switch (arg) {
     break;
 };
 // // 書き込み
-//
+// var as = new ActiveXObject('ADODB.Stream');
 // function list_write(form, tFile){
 //   as.type = 2;
 //   as.charset = enc;

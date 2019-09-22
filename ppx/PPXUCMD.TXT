@@ -276,4 +276,4 @@
 %m|西暦/月/日 %*nowdatetime("Y/n/d")
 %m|月日_時:分:秒 %*nowdatetime("ND_H:U:M")
 %m|月日(曜日) %*nowdatetime("n月d日(W)")
-%m|設定ファイル読み込み__読み込ませるPxファイルをマーク@cmd@setup %"設定ファイル読み込み"%Q"ready?" %:*closeppx C* %:*ifmatch Px*.cfg %:PPCUSTW CA %FDC
+%m|設定ファイル読み込み@cmd@setup %"設定ファイル読み込み"%Q"読み込ませるエントリをマーク" %: *closeppx C* %: *wait 100,2 %: *ifmatch Px*.cfg %: PPCUSTW CA %FDC

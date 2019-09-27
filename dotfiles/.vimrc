@@ -308,7 +308,8 @@ autocmd vimrcAU Vimleave * wviminfo!
 autocmd vimrcAU CursorHoldI * setlocal cursorline
 autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
 "# filetype
-autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/jscript.dict
+autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict
+autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
 autocmd vimrcAU FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
   imap <silent><buffer><expr> <C-s> unite#do_action('split')
@@ -335,8 +336,8 @@ command! DiffExit syntax on | highlight Normal guifg=gray | diffoff
 "# Keys
 "# 全般{{{
 "# 行頭/行末に移動
-noremap <space>h ^
-noremap <space>l $
+" noremap <space>h ^
+" noremap <space>l $
 "# 検索ハイライトoff
 noremap <silent>, :nohlsearch<cr>
 "# スペースでﾊﾞｯﾌｧ移動制御
@@ -398,9 +399,10 @@ vnoremap > >gv
 "# plugins{{{
 "# unite
 nnoremap <silent> <leader>u :<C-u>Unite<CR>
-nnoremap <silent> <leader>f :<C-u>call UniteRepo()<CR>
 nnoremap <silent> <leader>; :<C-u>Unite -buffer-name=files buffer file<CR>
 nnoremap <silent> <leader>o :<C-u>Unite -buffer-name=oldfiles oldfiles<CR>
+nnoremap <silent> <leader>m :<C-u>Unite -buffer-name=marks mark<CR>
+nnoremap <silent> <leader>r :<C-u>call UniteRepo()<CR>
 nnoremap <silent> <leader>g :<C-u>Unite -tab -no-start-insert -buffer-name=grep -previewheight=20 grep<CR>
 nnoremap <silent> <leader>l :<C-u>Unite -buffer-name=line line<CR>
 noremap <silent> <C-z> :<C-u>Unite -no-start-insert -winwidth=50 -direction=botright

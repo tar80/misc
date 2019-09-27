@@ -78,6 +78,8 @@
 |2,0,1546222660,,"PlugClean"
 :set scb | wincmd h | set scb
 |2,0,1561703542,,"set scb | wincmd h | set scb"
+:set scb | wincmd l | set scb
+|2,0,1561703542,,"diffthis | wincmd l | diffthis"
 
 # 検索文字列 項目の履歴 (新しいものから古いものへ):
 # 式 項目の履歴 (新しいものから古いものへ):

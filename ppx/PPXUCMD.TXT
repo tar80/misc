@@ -40,7 +40,7 @@
 *closeppx  ;[wildcard] 全PPx終了
 *color  ;[back|cursor] [color] 色の一時的変更
 *comment  ;[id,]["text"|[all] command]
-*COMMITLIST ;UserCommand コミットリストの更新
+*commitlist ;UserCommand コミットリストの更新
 *commandhash ;name モジュールのコマンド名ハッシュの表示
 *comparemark  ;比較方法,マーク属性,サブディレクトリ PPcファイル比較マーク
 *completelist ;[/set][/option] 自動の一覧表示の表示設定

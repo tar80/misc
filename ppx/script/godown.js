@@ -10,9 +10,9 @@ switch (str) {
     break;
   default:
     editPath = editPath.replace(/.*\s(.*)/, "$1");
-    PPx.Execute('*ifmatch "o:e,a:d+","' + editPath + ' %: *replace %*edittext()%\\');
-    PPx.Execute('*completelist %: %K"@F4');
-    PPx.Execute('*wait 2,1 %: %K"@TAB"');
+    PPx.Execute('*ifmatch "o:e,a:d+","' + editPath + '" %: *replace %*edittext()%\\');
+    PPx.Execute('*if 0%N-L > 0 %: %K"@F4');
+    PPx.Execute('%K"@F2@TAB"');
     break;
 };
 if (PPx.Extract('%W') == 'パス移動') {

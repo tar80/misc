@@ -7,7 +7,7 @@ var opDir = PPx.Extract('%2');
 var tDir; //対象DIRパス
 var filePath = PPx.Extract('%FDC');
 var fileName = PPx.Extract('%FC');
-var cmd = (PPx.Arguments(0) == 0 ? 'copy' : '!copy');
+var pathState = (PPx.Arguments(0) == 0 ? ['copy', ''] : ['!copy', '-min']);
 // 送り先を設定
 switch (PPx.GetFileInformation(opDir)) {
   case ':DIR':
@@ -16,7 +16,7 @@ switch (PPx.GetFileInformation(opDir)) {
     break;
   case '':
     tDir = PPx.Extract("%\'work\'").replace("/\//g,'\\'");
-    var cmd = 'copy';
+    var pathState = ['copy', ''];
     break;
   default:
     PPx.Echo('対象がディレクトリではありません');
@@ -38,5 +38,5 @@ if (PPx.Arguments(0) >= 2) {
   // 5mbyte以上ならバーストモード
   var mSize = (PPx.EntryMarkCount == 0 ? PPx.EntrySize : PPx.EntryMarkSize);
   var bst = (mSize > 5242880 ? 'on' : 'off');
-  PPx.Execute('*ppcfile ' + cmd + ',' + tDir + ',/qstart /nocount /preventsleep /same:7 /sameall /burst:' + bst);
+  PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:7 -sameall -burst:' + bst);
 };

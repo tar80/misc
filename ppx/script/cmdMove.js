@@ -4,14 +4,14 @@
 
 var opDir = PPx.Extract('%2');
 var tDir; // 対象DIRパス
-var cmd;  // 詳細コピースイッチ
+var pathState = []; //[0]dist,[1]dialog state
 // 対象パスを設定
 if (!PPx.GetFileInformation(opDir)) {
   var tDir = PPx.Extract("%\'work\'").replace("/\//g,'\\'");
-  var cmd = 'move';
+  var pathState = ['move', ''];
 } else {
   var tDir = '%2';
-  var cmd = PPx.Arguments.count == 0 ? 'move' : '!move';
+  var pathState = PPx.Arguments.count == 0 ? ['move', ''] : ['!move', '-min'];
 };
 // カレントディレクトリの属性に応じて処理を分岐
 switch (PPx.Extract(PPx.DirectoryType)) {
@@ -23,10 +23,10 @@ switch (PPx.Extract(PPx.DirectoryType)) {
     break;
   // リストファイル
   case '4':
-    PPx.Execute('*ppcfile ' + cmd + ',' + tDir + ',/qstart /nocount /preventsleep /same:5 /sameall /undolog /compcmd %K\"@^\\D\"');
+    PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:5 -sameall -undolog -compcmd %K\"@^\\D\"');
     break;
   // その他
   default:
-    PPx.Execute('*ppcfile ' + cmd + ',' + tDir + ',/qstart /nocount /preventsleep /same:7 /sameall /undolog');
+    PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:7 -sameall -undolog');
     break;
 };

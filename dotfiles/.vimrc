@@ -301,12 +301,21 @@ augroup vimrcAU
 augroup END
 
 "# viminfoの初期値をマージ
-autocmd vimrcAU Vimleave * rviminfo ~/_xxxinfo
-autocmd vimrcAU Vimleave * wviminfo!
+autocmd vimrcAU VimEnter * rviminfo ~/_xxxinfo
+autocmd vimrcAU VimLeave * wviminfo
 
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline
+"# 挿入モード中にフォーカスが外れたら着色
+autocmd vimrcAU FocusLost * call HighlightIM()
+function HighlightIM()
+  if mode() == 'i'
+    setlocal cursorline
+  endif
+endfunction
+"# 挿入モードを抜ける時に色を戻す
 autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
+
 "# filetype
 autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
@@ -320,7 +329,7 @@ autocmd vimrcAU VimEnter,FilterWritePre * call SetDiffMode()
 function SetDiffMode()
 if &diff
   syntax off
-  highlight Normal guifg=#5B5A5A
+  highlight Normal guifg=#777777
 endif
 endfunction
 "#}}}
@@ -329,7 +338,7 @@ endfunction
 "# 編集中バッファの差分を表示
 command! Difforg vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 "# 隣のバッファとdiff
-command! Diff syntax off | highlight Normal guifg=#5B5A5A | diffthis | wincmd p | diffthis |wincmd H
+command! Diff syntax off | highlight Normal guifg=#777777 | diffthis | wincmd p | diffthis |wincmd h
 command! DiffExit syntax on | highlight Normal guifg=gray | diffoff
 "#}}}
 "======================================================================

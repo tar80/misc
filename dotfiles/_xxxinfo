@@ -12,74 +12,72 @@
 # 最後の Substitute 検索パターン:
 # 最後に置換された文字列:
 # コマンドライン 項目の履歴 (新しいものから古いものへ):
-:lcd %:h
-|2,0,1556194498,,"lcd %:h"
 :lcd ~/
 |2,0,1556194479,,"lcd ~/"
+:lcd %:h
+|2,0,1556194498,,"lcd %:h"
 :lcd C:/bin/
 |2,0,1556194470,,"lcd c:/bin/"
 :lcd C:/bin/ppx/
 |2,0,1546222527,,"lcd C:/bin/repository/tar80/misc/"
-:Gcommit
-|2,0,1556194428,,"gcommit"
-:Gdiff
-|2,0,1556194412,,"gdiff"
-:Gstatus
-|2,0,1556194401,,"gstatus"
-:Gwrite
-|2,0,1556194359,,"gwrite"
-:tab ball
-|2,0,1556194334,,"tab ball"
-:tabnew
-|2,0,1556194325,,"tabnew"
-:so $VIM/vim81/syntax/hitest.vim
-|2,0,1556194313,,"so $VIM/vim81/syntax/hitest.vim"
-:Difforg
-|2,0,1556194227,,"difforg"
-:set noexpandtab
-|2,0,1556194221,,"set noexpandtab"
-:set noro
-|2,0,1556194209,,"set noro"
-:set noma
-|2,0,1556194209,,"set nomodifiable"
-:set spell
-|2,0,1556194202,,"set spell"
-:set fenc=utf-8 ff=unix
-|2,0,1556194196,,"set fenc=utf-8 ff=unix"
-:set fenc=cp932 ff=dos
-|2,0,1556194179,,"set fenc=cp932 ff=dos"
-:e ++enc=utf-8 ++ff=unix
-|2,0,1556194166,,"e ++enc=utf-8 ++ff=unix"
-:e ++enc=sjis ++ff=dos
-|2,0,1556194141,,"e ++enc=cp932 ++ff=dos"
-:marks
-|2,0,1556194028,,"marks"
-:retab!
-|2,0,1556193983,,"retab!"
-:inoreabbrev
-|2,0,1556193973,,"inoreabbrev"
-:vertical diffsplit
-|2,0,1556193940,,"vertical diffsplit"
+:lcd D:/Apps/ppx/
+|2,0,1546222527,,"lcd D:/Apps/ppx/"
 :saveas
-|2,0,1556193926,,"saveas"
-:tabclose
-|2,0,1547456013,,"tabclose"
+|2,0,1548248430,,"saveas"
+:vertical diffsplit
+|2,0,1546222660,,"vertical diffsplit"
+:inoreabbrev
+|2,0,1546222660,,"inoreabbrev"
+:retab!
+|2,0,1547355105,,"retab!"
+:PlugStatus
+|2,0,1546222660,,"plugstatus"
+:PlugInstall
+|2,0,1546222660,,"pluginstall"
+:PlugClean
+|2,0,1546222660,,"plugclean"
+:PlugDiff
+|2,0,1546222660,,"plugdiff"
+:PlugUpdate
+|2,0,1546222660,,"plugupdate"
+:marks
+|2,0,1546222660,,"marks"
+:e ++enc=cp932 ++ff=dos
+|2,0,1546222660,,"e ++enc=sjis ++ff=dos"
+:e ++enc=utf-8 ++ff=unix
+|2,0,1546222660,,"e ++enc=utf-8 ++ff=unix"
+:set fenc=cp932 ff=dos
+|2,0,1546222660,,"set fenc=sjis ff=dos"
+:set fenc=utf-8 ff=unix
+|2,0,1546222660,,"set fenc=utf-8 ff=unix"
+:set spell
+|2,0,1547360863,,"set spell"
+:set noro
+|2,0,1546222660,,"set noro"
+:set noexpandtab
+|2,0,1548164270,,"set noexpandtab"
+:Difforg
+|2,0,1546222660,,"difforg"
+:so ~/vim81/syntax/hitest.vim
+|2,0,1546222660,,"so ~/vim81/syntax/hitest.vim"
+:tabnew
+|2,0,1546222660,,"tabnew"
+:tab ball
+|2,0,1547200449,,"tab ball"
 :tabonly
 |2,0,1547456013,,"tabonly"
-:PlugStatus
-|2,0,1546222660,,"PlugStatus"
-:PlugInstall
-|2,0,1546222660,,"PlugInstall"
-:PlugUpdate
-|2,0,1546222660,,"PlugUpdate"
-:PlugDiff
-|2,0,1546222660,,"PlugDiff"
-:PlugClean
-|2,0,1546222660,,"PlugClean"
-:set scb | wincmd h | set scb
-|2,0,1561703542,,"set scb | wincmd h | set scb"
-:set scb | wincmd l | set scb
-|2,0,1561703542,,"diffthis | wincmd l | diffthis"
+:tabclose
+|2,0,1547456013,,"tabclose"
+:Gwrite
+|2,0,1546222660,,"gwrite"
+:Gstatus
+|2,0,1546222660,,"gstatus"
+:Gdiff
+|2,0,1546222660,,"gdiff"
+:Gcommit
+|2,0,1546222660,,"gcommit"
+:set scb | wincmd p | set scb
+|2,0,1561703542,,"set scb | wincmd p | set scb"
 
 # 検索文字列 項目の履歴 (新しいものから古いものへ):
 # 式 項目の履歴 (新しいものから古いものへ):

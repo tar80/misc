@@ -7,12 +7,12 @@ var sync = PPx.Extract('%*getcust(_others:SyncViewID)');
 
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
 var syncState = function (tWin) {
-  PPx.Execute('%Oi *setcust X_win:V=B' + tWin + ' %:*ppv -r -bootid:' + tID);
+  PPx.Execute('%Oi *setcust X_win:V=B' + tWin + ' %: *ppv -r -bootid:' + tID);
   if (paneCount == 2) {
     PPx.Execute('%Oi *capturewindow V' + tID + ' -pane:~ -selectnoactive');
     PPx.Execute('%Oi *wait 100,1 %:*focus');
   } else {
-    PPx.Execute('%Oi:*ppv -r -bootid:' + tID);
+    // PPx.Execute('%Oi:*ppv -r -bootid:' + tID);
     PPx.Execute('%Oi *topmostwindow %NV' + tID + ',1');
   };
   PPx.Execute('*ppvoption setsync ' + tID);

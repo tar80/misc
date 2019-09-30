@@ -27,6 +27,6 @@ switch (PPx.Extract(PPx.DirectoryType)) {
     break;
   // その他
   default:
-    PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:7 -sameall -undolog');
+    PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog');
     break;
 };

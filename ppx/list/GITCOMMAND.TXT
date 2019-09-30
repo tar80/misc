@@ -102,3 +102,4 @@ stash ;[command]["メッセージ"]
 	clear ;                全スタッシュをリストから破棄
 	--patch ;              変更点を選んでスタッシュ
 	--keep-index ;         未addのみスタッシュ
+show ;[<コミット>]　コミットの詳細

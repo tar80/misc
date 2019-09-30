@@ -383,8 +383,8 @@ nnoremap  Y y$
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F9> :<C-u>tabnew<CR>:edit $MYVIMRC<CR>
 "# ppx
-nnoremap <F6> :<C-u>edit C:/bin/repository/tar80/misc/ppx/script/xTest.js<CR>
-nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script C:/bin/repository/tar80/misc/ppx/script/xTest.js<CR>
+nnoremap <F6> :<C-u>edit C:/bin/ppx/xTest.js<CR>
+nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script C:/bin/ppx/xTest.js<CR>
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}
 "# insert_mode{{{

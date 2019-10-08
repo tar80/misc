@@ -7,7 +7,8 @@ var opDir = PPx.Extract('%2');
 var tDir; //対象DIRパス
 var filePath = PPx.Extract('%FDC');
 var fileName = PPx.Extract('%FC');
-var pathState = (PPx.Arguments(0) == 0 ? ['copy', ''] : ['!copy', '-min']);
+var arg = PPx.Arguments(0);
+var pathState = (arg == 0 ? ['copy', ''] : ['!copy', '-min']);
 // 送り先を設定
 switch (PPx.GetFileInformation(opDir)) {
   case ':DIR':
@@ -24,7 +25,7 @@ switch (PPx.GetFileInformation(opDir)) {
     break;
 };
 // シンボリックリンク
-if (PPx.Arguments(0) >= 2) {
+if (arg >= 2) {
   var tDir = PPx.Extract('%*input("' + tDir +'" -title:"コピー先" -mode:d)%*addchar(\\)');
   if (tDir) {
     // 対象がディレクトリなら/Dオプション付加

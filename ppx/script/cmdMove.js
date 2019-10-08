@@ -1,6 +1,6 @@
 ﻿//!*script
 /* 状況に応じたファイル移動の設定 */
-// PPx.Arguments(0)=0:detail|1:quick
+// PPx.Arguments(0)=1:quick
 
 var opDir = PPx.Extract('%2');
 var tDir; // 対象DIRパス
@@ -11,7 +11,7 @@ if (!PPx.GetFileInformation(opDir)) {
   var pathState = ['move', ''];
 } else {
   var tDir = '%2';
-  var pathState = PPx.Arguments.count == 0 ? ['move', ''] : ['!move', '-min'];
+  var pathState = PPx.Arguments.length == 0 ? ['move', ''] : ['!move', '-min'];
 };
 // カレントディレクトリの属性に応じて処理を分岐
 switch (PPx.Extract(PPx.DirectoryType)) {

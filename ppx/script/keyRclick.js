@@ -2,6 +2,7 @@
 /* 右クリックメニュー拡張子判別 */
 // PPx.Arguments(0)=M_Ccr|M_FileMOVE|M_FileCOPY
 
+var arg = PPx.Arguments(0)
 var cDir = PPx.Extract('%1');
 // auxパスメニュー
 if (cDir.match(/aux:.*/)) {
@@ -52,12 +53,12 @@ switch (ext) {
     var select = "W";
     break;
 };
-if (PPx.Arguments(0) == 'M_Ccr') {
+if (arg == 'M_Ccr') {
   // 標準メニュー
   divide_menu('J', 'O')
 } else {
   // ファイル移動メニュー
-  var select = (PPx.Arguments(0) == 'M_FileMOVE' ? 'M' : 'C');
+  var select = (arg == 'M_FileMOVE' ? 'M' : 'C');
   divide_menu(select, select);
 };
 
@@ -76,7 +77,7 @@ function divide_menu(list,arc) {
       PPx.Execute('%M_Carc,' + arc);
       break;
     default:
-      PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + result + ' %:%' + PPx.Arguments(0) + ',' + select);
+      PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + result + ' %:%' + arg + ',' + select);
       break;
   };
 };

@@ -1,10 +1,10 @@
 ﻿//!*script
 /* TABキーで窓移動 */
-// PPx.Arguments(0)=ppc|ppv
+// PPx.Arguments(0)=ppc|ppv ;実行元
 // 参照元:http://hoehoetukasa.blogspot.com/2014/05/ppv.html
 
 // 引数に応じて移動先を決定する
-var ppxChar = (PPx.Arguments(0) == 'ppc' ? ['C', 'V'] : ['V', 'C']);
+var ppxChar = (PPx.Arguments(0) === 'ppc' ? ['C', 'V'] : ['V', 'C']);
 var tID = PPx.Extract('%n').slice(1);
 // 実行元のPPxIDを文字コードに変換
 var ppxNum = tID.charCodeAt(0) + 1;

@@ -3,15 +3,14 @@
 // PPx.Arguments(0)=1:quick
 
 var opDir = PPx.Extract('%2');
-var tDir; // 対象DIRパス
-var pathState = []; //[0]dist,[1]dialog state
+var pathState = []; //[0]dest,[1]dialog state
 // 対象パスを設定
 if (!PPx.GetFileInformation(opDir)) {
   var tDir = PPx.Extract("%\'work\'").replace("/\//g,'\\'");
   var pathState = ['move', ''];
 } else {
   var tDir = '%2';
-  var pathState = PPx.Arguments.length == 0 ? ['move', ''] : ['!move', '-min'];
+  var pathState = (PPx.Arguments.length == 0 ? ['move', ''] : ['!move', '-min']);
 };
 // カレントディレクトリの属性に応じて処理を分岐
 switch (PPx.Extract(PPx.DirectoryType)) {

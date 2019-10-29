@@ -14,7 +14,7 @@ if (PPx.SyncView) {
   PPx.Quit(1);
 };
 // 起動状態のPPxID取得
-var ppxId = new Array();
+var ppxId = [];
 for (var i = 90; i >= 65; i = (i-1)|0) {
   var id = String.fromCharCode(i);
   if (PPx.Extract('%NV' + id))

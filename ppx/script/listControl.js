@@ -22,7 +22,7 @@ var write_mark_path = function () {
 };
 
 var fs = PPx.CreateObject('Scripting.FileSystemObject');
-var arg = (PPx.Arguments.Length ? PPx.Arguments(0) : "");
+try {var arg = PPx.Arguments(0)} catch (e) {var arg = ''};
 // command別の処理
 switch (arg) {
     // git関連のリザルト

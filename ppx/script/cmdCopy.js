@@ -1,14 +1,18 @@
 ﻿//!*script
 /* 状況に応じたファイルコピーの設定 */
-// PPx.Arguments(0)=0:detail|1:quick
+// PPx.Arguments(0)=0:detail|1:quick|>=2:link
 // %'work'=workspace
 
 var opDir = PPx.Extract('%2');
-var tDir; //対象DIRパス
 var filePath = PPx.Extract('%FDC');
 var fileName = PPx.Extract('%FC');
-var arg = PPx.Arguments(0);
-var pathState = (arg == 0 ? ['copy', ''] : ['!copy', '-min']);
+try {
+  var arg = PPx.Arguments(0);
+  var pathState = (arg == 0 ? ['copy', ''] : ['!copy', '-min']);
+} catch (e) {
+  PPx.Echo('引数が不正です');
+  PPx.Quit();
+};
 // 送り先を設定
 switch (PPx.GetFileInformation(opDir)) {
   case ':DIR':

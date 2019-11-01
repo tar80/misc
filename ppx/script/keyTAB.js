@@ -4,9 +4,14 @@
 // 参照元:http://hoehoetukasa.blogspot.com/2014/05/ppv.html
 
 // 引数に応じて移動先を決定する
-var ppxChar = (PPx.Arguments(0) === 'ppc' ? ['C', 'V'] : ['V', 'C']);
-var tID = PPx.Extract('%n').slice(1);
+try {
+  var ppxChar = (PPx.Arguments(0) === 'ppc' ? ['C', 'V'] : ['V', 'C']);
+} catch (e) {
+  PPx.Echo('引数が足りません');
+  PPx.Quit(1);
+};
 // 実行元のPPxIDを文字コードに変換
+var tID = PPx.Extract('%n').slice(1);
 var ppxNum = tID.charCodeAt(0) + 1;
 // syncviewがonならPPc/PPv間でフォーカスをトグル
 if (PPx.Extract('%*getcust(_others:SyncViewID)')) {

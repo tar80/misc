@@ -1,5 +1,5 @@
 ﻿//!*script
-/* 一行編集上で下流側にパス補完 */
+/* 一行編集上で下層側にパス補完 */
 
 var editPath = PPx.Extract('%*edittext()');
 var str = editPath.slice(1, 4);

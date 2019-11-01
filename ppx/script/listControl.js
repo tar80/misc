@@ -6,19 +6,18 @@
 /* エントリをリストに書き出す関数 */
 var write_mark_path = function () {
   var cDir = (PPx.DirectoryType != 4 ? PPx.Extract('%FDN%\\') : '');
-  var Count = PPx.Entry.Count;
   // マークの有無で処理を分岐
   if (!PPx.EntryMarkCount)
-    tList.WriteLine(cDir + PPx.EntryName);
+    fs_tList.WriteLine(cDir + PPx.EntryName);
   else {
-    for (var i = 0; i < Count; i = (i+1)|0) {
+    for (var i = 0, l = PPx.Entry.Count; i < l; i = (i+1)|0) {
       if (PPx.Entry(i).Mark == 1) {
-        tList.WriteLine(cDir + PPx.Entry(i).Name);
+        fs_tList.WriteLine(cDir + PPx.Entry(i).Name);
         PPx.Entry(i).Mark = 0;
       };
     };
   };
-  tList.Close();
+  fs_tList.Close();
 };
 
 var fs = PPx.CreateObject('Scripting.FileSystemObject');
@@ -27,62 +26,62 @@ try {var arg = PPx.Arguments(0)} catch (e) {var arg = ''};
 switch (arg) {
     // git関連のリザルト
   case 'git':
-    var tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 2, true, -1);
-    tList.WriteLine(';ListFile');
-    tList.WriteLine(';Base=' + PPx.Extract('%\'repo\'') + '|1');
-    tList.Close();
+    var fs_tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 2, true, -1);
+    fs_tList.WriteLine(';ListFile');
+    fs_tList.WriteLine(';Base=' + PPx.Extract('%\'repo\'') + '|1');
+    fs_tList.Close();
     break;
     // 新規リストファイル
   case 'listfile':
-    var tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 2, true, -1);
-    tList.WriteLine(';ListFile');
+    var fs_tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 2, true, -1);
+    fs_tList.WriteLine(';ListFile');
     write_mark_path();
     break;
     // ReDo(MoveのUnDoのみ処理)
   case 'redo':
     var tFile = PPx.Extract('%0%\\%*getcust(X_save)%\\PPXUNDO.LOG');
-    var undoLog = fs.OpenTextFile(PPx.Extract(tFile), 1, false, -1);
-    var result = "";
-    while (!undoLog.AtEndOfStream) {
-      var str = undoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
-      var form = undoLog.ReadLine().replace(/.*\t(.*)/, 'Move\t$1\n ->\t' + str + '\n', 'i');
+    var fs_undoLog = fs.OpenTextFile(PPx.Extract(tFile), 1, false, -1);
+    var result = '';
+    while (!fs_undoLog.AtEndOfStream) {
+      var str = fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
+      var form = fs_undoLog.ReadLine().replace(/.*\t(.*)/, 'Move\t$1\n ->\t' + str + '\n', 'i');
       var result = result + form;
     }
-    undoLog.Close();
-    var undoLog = fs.OpenTextFile(PPx.Extract(tFile), 2, true, -1);
-    undoLog.Write(result);
+    fs_undoLog.Close();
+    var fs_undoLog = fs.OpenTextFile(PPx.Extract(tFile), 2, true, -1);
+    fs_undoLog.Write(result);
     PPx.Execute('%On *ppb -c nkf -w16 -Lw --in-place ' + tFile);
     break;
     // PPcのUNDO履歴
   case 'undo':
     var tFile = PPx.Extract('%0%\\%*getcust(X_save)%\\PPXUNDO.LOG');
-    var undoLog = fs.OpenTextFile(PPx.Extract(tFile), 1, false, -1);
+    var fs_undoLog = fs.OpenTextFile(PPx.Extract(tFile), 1, false, -1);
     var cmd = '';
     PPx.SetPopLineMessage('UnDo!');
     // UNDOログを置換
-    while (!undoLog.AtEndOfStream) {
-      var str = undoLog.ReadLine();
+    while (!fs_undoLog.AtEndOfStream) {
+      var str = fs_undoLog.ReadLine();
       var result = str.replace(/.*\t(.*)/, '$1 << ', 'i');
-      var result = result + undoLog.ReadLine().replace(/.*\t(.*)/, '$1\n', 'i');
+      var result = result + fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1\n', 'i');
       if (str.slice(0,4) == 'Move')
         cmd = ' /compcmd *JSCRIPT "listControl.js,redo"';
       else
-        undoLog.ReadLine();
+        fs_undoLog.ReadLine();
       PPx.SetPopLineMessage(result);
     };
-    undoLog.Close();
+    fs_undoLog.Close();
     PPx.Execute('*file !Undo /min /nocount' + cmd);
     break;
   case 'memo':
     var tList = (PPx.DirectoryType == 4 ? '%FVD' : '%0\\list\\worklist.xlf');
-    var tList = fs.OpenTextFile(PPx.Extract(tList), 8, true, -1);
+    var fs_tList = fs.OpenTextFile(PPx.Extract(tList), 8, true, -1);
     var str = PPx.Extract('"%*now",T:%si"ppp"');
-    tList.WriteLine(str);
-    tList.Close();
+    fs_tList.WriteLine(str);
+    fs_tList.Close();
     break;
     // 指定されたリストに追記
   default:
-    var tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 8, true, -1);
+    var fs_tList = fs.OpenTextFile(PPx.Extract('%si"ppp"'), 8, true, -1);
     write_mark_path();
     break;
 };

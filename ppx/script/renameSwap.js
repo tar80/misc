@@ -1,8 +1,19 @@
 ﻿//!*script
 /* 選択された2ファイル間でファイル名を交換する */
 
-// マークが二つだった時の処理
-if (PPx.EntryMarkCount == 2 && PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') == 0) {
+switch (PPx.EntryMarkCount) {
+  // マークが一つ以下だった時
+  case 0:
+  case 1:
+    if (PPx.Pane.Count == 2 && PPx.Execute('%Q%"Swap Filename!""反対窓エントリとファイル名交換"') == 0) {
+      var nameA = PPx.Extract('%X');
+      PPx.Execute('*rename %FXN.%FT,%~FXN.%FT');
+      PPx.Execute('*execute ~,*rename %~FXN.%~FT,' + nameA + '.%~FT');
+    };
+    break;
+  // マークが二つだった時
+  case 2:
+    if (PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') == 0) {
   /* エントリのファイル名に関する情報を取得する関数 */
   var mark = function () {
     this.name = PPx.Extract('%*name(X,' + entry.name + ')');
@@ -26,9 +37,11 @@ if (PPx.EntryMarkCount == 2 && PPx.Execute('%Q%"Swap Filename""マークした�
     PPx.Execute('*rename ' + b.filename + ',' + a.name + '.' + b.ext);
     PPx.Execute('*rename ' + tempName + ',' + b.name + '.' + a.ext);
   };
-} else if (PPx.EntryMarkCount <= 1 && PPx.Pane.Count == 2 && PPx.Execute('%Q%"Swap Filename!""反対窓エントリとファイル名交換"') == 0) {
-  var nameA = PPx.Extract('%X');
-  PPx.Execute('*rename %FXN.%FT,%~FXN.%FT');
-  PPx.Execute('*execute ~,*rename %~FXN.%~FT,' + nameA + '.%~FT');
+    };
+    break;
+  default:
+    PPx.SetPopLineMessage('mark<2 :反対窓カーソル位置とファイル名交換');
+    PPx.SetPopLineMessage('mark=2 :マークしたエントリのファイル名交換');
+    PPx.Quit(1);
 };
 PPx.Execute('*unmarkentry *');

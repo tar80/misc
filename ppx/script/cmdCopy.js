@@ -11,7 +11,7 @@ try {
   var pathState = (arg == 0 ? ['copy', ''] : ['!copy', '-min']);
 } catch (e) {
   PPx.Echo('引数が不正です');
-  PPx.Quit();
+  PPx.Quit(1);
 };
 // 送り先を設定
 switch (PPx.GetFileInformation(opDir)) {
@@ -24,7 +24,7 @@ switch (PPx.GetFileInformation(opDir)) {
     var pathState = ['copy', ''];
     break;
   default:
-    PPx.Echo('対象がディレクトリではありません');
+    PPx.Echo('非対象ディレクトリ');
     PPx.Quit(1);
     break;
 };

@@ -4,17 +4,14 @@
 
 var arg = PPx.Arguments(0)
 var cDir = PPx.Extract('%1');
+var result = [];
 // auxパスメニュー
 if (cDir.match(/aux:.*/)) {
   PPx.Execute('%M_Caux');
   PPx.Quit(1);
 };
 // 拡張子を小文字で取得する
-var ext = (PPx.GetFileInformation(PPx.Extract("%R")).slice(1) == 'DIR' ? 'DIR' : PPx.Extract('%t').toLowerCase());
-// ファイル種別
-var result = "none";
-// ショートカットキーの文字
-var select = "S";
+var ext = (PPx.GetFileInformation(PPx.Extract('%R')).slice(1) == 'DIR' ? 'DIR' : PPx.Extract('%t').toLowerCase());
 // 拡張子判別
 switch (ext) {
   case '7z':
@@ -23,8 +20,8 @@ switch (ext) {
   case 'msi':
   case 'rar':
   case 'zip':
-    var result = "arc";
-    var select = "W";
+    // 拡張子, ショートカットキー
+    var result = ['arc', 'W'];
     break;
   case 'bmp':
   case 'edg':
@@ -33,8 +30,7 @@ switch (ext) {
   case 'jpg':
   case 'png':
   case 'vch':
-    var result = "image";
-    var select = "L";
+    var result = ['image', 'L'];
     break;
   case 'ahk':
   case 'ini':
@@ -45,12 +41,13 @@ switch (ext) {
   case 'md':
   case 'txt':
   case 'vim':
-    var result = "doc";
-    var select = "R";
+    var result = ['doc', 'R'];
     break;
   case 'DIR':
-    var result = "dir";
-    var select = "W";
+    var result = ['dir', 'W'];
+    break;
+  default:
+    var result = ['none', 'S'];
     break;
 };
 if (arg == 'M_Ccr') {
@@ -58,15 +55,15 @@ if (arg == 'M_Ccr') {
   divide_menu('J', 'O')
 } else {
   // ファイル移動メニュー
-  var select = (arg == 'M_FileMOVE' ? 'M' : 'C');
-  divide_menu(select, select);
+  result[1] = (arg == 'M_FileMOVE' ? 'M' : 'C');
+  divide_menu(result[1], result[1]);
 };
 
 /* カレントディレクトリの属性に応じて処理を分岐する関数 */
-function divide_menu(list,arc) {
+function divide_menu(list, arc) {
   switch (PPx.DirectoryType) {
     case 4:
-      PPx.Execute('*setcust M_Clist:Ext = ??M_U' + result + ' %:%M_Clist,' + list);
+      PPx.Execute('*setcust M_Clist:Ext = ??M_U' + result[0] + ' %:%M_Clist,' + list);
       break;
     case 80:
       PPx.Execute('%M_Chttp');
@@ -77,7 +74,7 @@ function divide_menu(list,arc) {
       PPx.Execute('%M_Carc,' + arc);
       break;
     default:
-      PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + result + ' %:%' + arg + ',' + select);
+      PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + result[0] + ' %:%' + arg + ',' + result[1]);
       break;
   };
 };

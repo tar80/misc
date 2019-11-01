@@ -12,10 +12,9 @@ switch (PPx.Arguments(0)) {
     PPx.Result = PPx.Extract(path);
     break;
   case 'repository':
-    //if(PPx.Entry(0).Name == ".git") PPx.Result = 1;
     PPx.Result = PPx.Extract("%1%\\").indexOf(PPx.Extract("%'repo'%\\")) >= 0 ? 1 : 0;
     break;
-  // case 'oppdirtype':
-  //   PPx.Result = PPx.GetFileInformation(PPx.Extract("%2"));
-  //   break;
+  default:
+    PPx.Quit(1);
+    break;
 };

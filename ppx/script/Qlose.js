@@ -13,22 +13,24 @@ if (PPx.SyncView) {
   PPx.Execute('*setcust X_win:V=B000000001 %: *setcust _others:-|SyncViewID=');
   PPx.Quit(1);
 };
-// 起動状態のPPxID取得
-var ppxId = [];
-for (var i = 90; i >= 65; i = (i-1)|0) {
-  var id = String.fromCharCode(i);
-  if (PPx.Extract('%NV' + id))
-    ppxId.push('V' + id);
-  if (PPx.Extract('%NC' + id))
-    ppxId.push('C' + id);
-};
 // PPvがあれば終了
 close_target('V');
 // PPcがあれば終了
 close_target('C');
 
+/* 起動状態のPPxIDを取得する関数 */
+function get_id(str) {
+  var array = [];
+  for (var i = 90; i >= 65; i = (i-1)|0) {
+    var id = String.fromCharCode(i);
+    if (PPx.Extract('%N' + str + id))
+      array.push(str + id);
+  };
+  return array;
+};
 /* 起動状態のPPxIdを降順に閉じる関数 */
 function close_target(tChar) {
+  var ppxId = get_id(tChar);
   for (var item in ppxId) {
     if (ppxId[item].slice(0,1) == tChar) {
       if (ppxId[item] == 'CX')

@@ -26,9 +26,9 @@ commit ;[--option] -m 'message'
 	. -m ' ;         カレント以下
 	-m ' ;           全て
 	--amend -m ' ;   最新コミットの上書き
-diff ;[--option][<コミット>(old)][..<コミット>(new)][<path>]
+diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
 	--stat  ;          変更点を表示
-	--stat --cached  ; addしてからの変更点を表示
+	--cached ;       addしてからの変更点を表示
 	--color-words ;    単語単位の差分
 	--name-only ;      ファイル名のみ表示
 	--no-renames ;     名前のみの変更を省く

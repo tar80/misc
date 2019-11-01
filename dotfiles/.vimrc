@@ -29,7 +29,7 @@ set undodir=$TEMP
 "# 未保存ファイルを閉じる時、ダイアログを出さない
 set confirm
 "# viminfoの設定
-set viminfo=%1,'30,/1,:350,<200,f1,h,s10
+set viminfo=%2,'30,/10,:300,<200,f1,h,s10
 "# Nミリ秒キー入力がなければにスワップファイル自動保存(:default=4000)
 set updatetime=10000
 "# メニューを読み込まない
@@ -172,7 +172,7 @@ call plug#begin('~/vimfiles')
   Plug 'tpope/vim-fugitive'
   Plug 'rhysd/clever-f.vim'
   Plug 'tyru/caw.vim/'
-  "# manual
+"# manual
   Plug '~/vimfiles/colors'
   Plug '~/vimfiles/autoload'
   Plug '~/vimfiles/dict'
@@ -302,7 +302,8 @@ augroup END
 
 "# viminfoの初期値をマージ
 autocmd vimrcAU VimEnter * rviminfo ~/_xxxinfo
-autocmd vimrcAU VimLeave * wviminfo
+autocmd vimrcAU VimLeavePre * set viminfo+=:200
+" autocmd vimrcAU VimLeave * wviminfo
 
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline

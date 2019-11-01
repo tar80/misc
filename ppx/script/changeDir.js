@@ -25,7 +25,6 @@ switch (PPx.Extract(PPx.DirectoryType)) {
       if (target.Attributes <= 17)
         list.push(e.item().Name);
     };
-    PPx.Arguments.length ? change_path(-1, 1, 'top') : change_path(1, -1, 'bottom');
     break;
   case '4':
   case '63':
@@ -40,12 +39,14 @@ switch (PPx.Extract(PPx.DirectoryType)) {
       if (target == ext)
         list.push(e.item().Name);
     };
-    PPx.Arguments.length ? change_path(-1, 1, 'top') : change_path(1, -1, 'bottom');
     break;
   default:
       PPx.SetPopLineMessage('!"非対応ディレクトリ');
+      PPx.Quit();
     break;
 };
+PPx.Arguments.length ? change_path(-1, 1, 'top') : change_path(1, -1, 'bottom');
+
 /* パス移動を実行する関数 */
 function change_path(valA, valB, termMessage) {
   // 親ディレクトリからリストを取得

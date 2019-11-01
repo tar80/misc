@@ -1,100 +1,93 @@
-# この viminfo ファイルは Vim 8.1 によって生成されました.
-# 変更する際には十分注意してください!
-
 # Viminfo version
 |1,4
 
 # このファイルが書かれた時の 'encoding' の値
 *encoding=utf-8
 
-
-# hlsearch on (H) or off (h):
-# 最後の Substitute 検索パターン:
-# 最後に置換された文字列:
 # コマンドライン 項目の履歴 (新しいものから古いものへ):
 :lcd ~/
-|2,0,1556194479,,"lcd ~/"
+|2,0,1000000019,,"lcd ~/"
 :lcd %:h
-|2,0,1556194498,,"lcd %:h"
-:lcd C:/bin/
-|2,0,1556194470,,"lcd c:/bin/"
-:lcd C:/bin/ppx/
-|2,0,1546222527,,"lcd C:/bin/repository/tar80/misc/"
+|2,0,1000000018,,"lcd %:h"
+:lcd C:/git/tar80/misc/
+|2,0,1000000017,,"lcd C:/git/tar80/misc/"
+:lcd D:/Apps/
+|2,0,1000000016,,"lcd D:/Apps/"
 :lcd D:/Apps/ppx/
-|2,0,1546222527,,"lcd D:/Apps/ppx/"
-:saveas
-|2,0,1548248430,,"saveas"
-:vertical diffsplit
-|2,0,1546222660,,"vertical diffsplit"
-:inoreabbrev
-|2,0,1546222660,,"inoreabbrev"
-:retab!
-|2,0,1547355105,,"retab!"
-:PlugStatus
-|2,0,1546222660,,"plugstatus"
-:PlugInstall
-|2,0,1546222660,,"pluginstall"
-:PlugClean
-|2,0,1546222660,,"plugclean"
-:PlugDiff
-|2,0,1546222660,,"plugdiff"
-:PlugUpdate
-|2,0,1546222660,,"plugupdate"
-:marks
-|2,0,1546222660,,"marks"
-:e ++enc=cp932 ++ff=dos
-|2,0,1546222660,,"e ++enc=sjis ++ff=dos"
-:e ++enc=utf-8 ++ff=unix
-|2,0,1546222660,,"e ++enc=utf-8 ++ff=unix"
-:set fenc=cp932 ff=dos
-|2,0,1546222660,,"set fenc=sjis ff=dos"
-:set fenc=utf-8 ff=unix
-|2,0,1546222660,,"set fenc=utf-8 ff=unix"
-:set spell
-|2,0,1547360863,,"set spell"
-:set noro
-|2,0,1546222660,,"set noro"
-:set noexpandtab
-|2,0,1548164270,,"set noexpandtab"
-:Difforg
-|2,0,1546222660,,"difforg"
-:so ~/vim81/syntax/hitest.vim
-|2,0,1546222660,,"so ~/vim81/syntax/hitest.vim"
-:tabnew
-|2,0,1546222660,,"tabnew"
-:tab ball
-|2,0,1547200449,,"tab ball"
-:tabonly
-|2,0,1547456013,,"tabonly"
-:tabclose
-|2,0,1547456013,,"tabclose"
-:Gwrite
-|2,0,1546222660,,"gwrite"
-:Gstatus
-|2,0,1546222660,,"gstatus"
-:Gdiff
-|2,0,1546222660,,"gdiff"
-:Gcommit
-|2,0,1546222660,,"gcommit"
+|2,0,1000000015,,"lcd D:/Apps/ppx/"
+:difforg
+|2,0,1000000009,,"difforg"
 :set scb | wincmd p | set scb
-|2,0,1561703542,,"set scb | wincmd p | set scb"
+|2,0,1000000009,,"set scb | wincmd p | set scb"
+:e ++enc=utf-8 ++ff=unix
+|2,0,1000000009,,"e ++enc=utf-8 ++ff=unix"
+:e ++enc=sjis ++ff=dos
+|2,0,1000000009,,"e ++enc=sjis ++ff=dos"
+:set noro
+|2,0,1000000009,,"set noro"
+:set fenc=sjis ff=dos
+|2,0,1000000009,,"set fenc=sjis ff=dos"
+:set fenc=utf-8 ff=unix
+|2,0,1000000009,,"set fenc=utf-8 ff=unix"
+:set noexpandtab
+|2,0,1000000009,,"set noexpandtab"
+:plugstatus
+|2,0,1000000008,,"plugstatus"
+:gwrite
+|2,0,1000000008,,"gwrite"
+:gstatus
+|2,0,1000000008,,"gstatus"
+:gdiff
+|2,0,1000000008,,"gdiff"
+:gcommit
+|2,0,1000000008,,"gcommit"
+:pluginstall
+|2,0,1000000008,,"pluginstall"
+:plugupdate
+|2,0,1000000008,,"plugupdate"
+:plugdiff
+|2,0,1000000008,,"plugdiff"
+:plugclean
+|2,0,1000000008,,"plugclean"
+:tabclose
+|2,0,1000000000,,"tabclose"
+:set spell
+|2,0,1000000000,,"set spell"
+:retab!
+|2,0,1000000000,,"retab!"
+:inoreabbrev
+|2,0,1000000000,,"inoreabbrev"
+:vertical diffsplit
+|2,0,1000000000,,"vertical diffsplit"
+:saveas
+|2,0,1000000000,,"saveas"
+:so ~/vim81/syntax/hitest.vim
+|2,0,1000000000,,"so ~/vim81/syntax/hitest.vim"
+:tabnew
+|2,0,1000000000,,"tabnew"
+:tab ball
+|2,0,1000000000,,"tab ball"
+:tabonly
+|2,0,1000000000,,"tabonly"
+:marks
+|2,0,1000000000,,"marks"
 
 # 検索文字列 項目の履歴 (新しいものから古いものへ):
 # 式 項目の履歴 (新しいものから古いものへ):
 # 入力行 項目の履歴 (新しいものから古いものへ):
 # デバッグ行 項目の履歴 (新しいものから古いものへ):
 # レジスタ:
-"g	LINE	0
+"g	CHAR	0
 	C:/bin/repository/tar80/misc/
 |3,0,16,1,1,0,1545963168,"C:/bin/repository/tar80/misc/"
-"p	LINE	0
+"p	CHAR	0
 	C:/bin/ppx/
 |3,0,25,1,1,0,1545963152,"C:/bin/ppx/"
 # ファイルマーク:
-'K  336  1  ~/.vimrc
-|4,75,336,1,1569325397,"~/.vimrc"
-'P  163  0  ~/.vimrc
-|4,80,163,0,1569322384,"~/.vimrc"
+'K  346  1  ~/.vimrc
+|4,75,346,1,1572618453,"~/.vimrc"
+'P  409  1  ~/.vimrc
+|4,80,409,1,1572618458,"~/.vimrc"
 
 # ジャンプリスト (新しいものが先):
 # バッファリスト:

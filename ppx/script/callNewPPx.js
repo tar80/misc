@@ -6,7 +6,7 @@
 var arg = PPx.Arguments(0);
 switch (arg) {
   case 'C':
-    PPx.Execute('*ppc -single -mps -bootid:' + get_id() + ' %1');
+    PPx.Execute('*ppc -single -mps -bootid:' + get_id() + ' %FD');
     break;
   case 'V':
     PPx.Execute('*ppv -bootid:' + get_id() + ' %R');

@@ -1,5 +1,5 @@
 ﻿//!*script
-/* ダブルクリックPPV呼び出し用 */
+/* PPV呼び出し */
 // PPx.Arguments(0)=none|image|doc|movie
 // PPc[X]は画像専用
 

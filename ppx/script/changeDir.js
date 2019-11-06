@@ -1,16 +1,25 @@
 ﻿//!*script
 /* 同階層の隣合うディレクトリに移動 */
 /* 同階層の隣合う同じ拡張子の仮想ディレクトリに移動 */
-// PPx.Arguments(0)=1:preview, 無:next
+// PPx.Arguments(0)=1:preview|無:next
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
 
 var fs = PPx.CreateObject('Scripting.FileSystemObject');
-var path = PPx.Extract('%FDVN');
-var cDirName = path.replace(/^(.*\\)(?!$)(.*)/, '$2');
+var current = PPx.Extract('%FDVN');
+var vCurrent;
+var dirName;
+var ext;
+current.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, rep);
+/* 置換した文字列を取得する関数 */
+function rep(match, p1, p2, p3, p4) {
+  vCurrent = p1;
+  dirName  = p2;
+  ext      = p4.toLowerCase();
+};
 var list = [];
 switch (PPx.Extract(PPx.DirectoryType)) {
   case '1':
-    var cDir = path;
+    var cDir = current;
     var fs_cDir = fs.GetFolder(cDir);
     var fs_parentDir = fs_cDir.ParentFolder
     // 親ディレクトリがルートなら終了
@@ -30,8 +39,7 @@ switch (PPx.Extract(PPx.DirectoryType)) {
   case '63':
   case '64':
   case '96':
-    var ext = path.replace(/^(.*\.)(?!$)(.*)/, '$2').toLowerCase();
-    var cDir = path.replace(/^(.*)\\.*\.(?!$).*/, '$1');
+    var cDir = vCurrent;
     var fs_parentDir = fs.GetFolder(cDir);
     var e = new Enumerator(fs_parentDir.Files);
     /* 拡張子を考慮してリストに追加 */
@@ -60,7 +68,7 @@ function change_path(valA, valB, termMessage) {
     return (a.toLowerCase() < b.toLowerCase() ? valA : valB);
   });
   for (var item in list) {
-    if (list[item] == cDirName)
+    if (list[item] == dirName)
       break;
   };
   // 対象エントリ名を取得
@@ -68,6 +76,8 @@ function change_path(valA, valB, termMessage) {
   // 端ならメッセージを表示
   if (list[item - 2] == null)
     PPx.SetPopLineMessage('!">>' + termMessage);
-  list[item - 1] == null ? PPx.Quit(1)
-                         : PPx.Execute('*jumppath "' + fs.BuildPath(fs_parentDir.Path, tEntry) + '"');
+  if (list[item - 1] != null)
+    PPx.Execute('*jumppath "' + fs.BuildPath(fs_parentDir.Path, tEntry) + '"');
+  else
+    PPx.Quit(1);
 };

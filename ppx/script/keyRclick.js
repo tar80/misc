@@ -11,7 +11,7 @@ if (cDir.match(/aux:.*/)) {
   PPx.Quit(1);
 };
 // 拡張子を小文字で取得する
-var ext = (PPx.GetFileInformation(PPx.Extract('%R')).slice(1) == 'DIR' ? 'DIR' : PPx.Extract('%t').toLowerCase());
+var ext = (PPx.GetFileInformation(PPx.Extract('%R')).slice(1) == 'DIR') ? 'DIR' : PPx.Extract('%t').toLowerCase();
 // 拡張子判別
 switch (ext) {
   case '7z':

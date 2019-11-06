@@ -5,7 +5,7 @@
 
 // 引数に応じて移動先を決定する
 try {
-  var ppxChar = (PPx.Arguments(0) === 'ppc' ? ['C', 'V'] : ['V', 'C']);
+  var ppxChar = (PPx.Arguments(0) === 'ppc') ? ['C', 'V'] : ['V', 'C'];
 } catch (e) {
   PPx.Echo('引数が足りません');
   PPx.Quit(1);

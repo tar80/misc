@@ -25,7 +25,7 @@ endif
 set browsedir=buffer
 "# undoファイルをまとめるディレクトリ
 set undofile
-set undodir=$TEMP
+set undodir=$TEMP/vimlog
 "# 未保存ファイルを閉じる時、ダイアログを出さない
 set confirm
 "# viminfoの設定

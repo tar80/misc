@@ -51,5 +51,5 @@ if (arg >= 2) {
   var bst = (mSize > 5242880)
     ? 'on'
     : 'off';
-  PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:7 -sameall -undolog -burst:' + bst);
+  PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:7 -sameall -undolog -burst:' + bst + '-compcmd *focus');
 };

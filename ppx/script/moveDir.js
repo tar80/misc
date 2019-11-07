@@ -29,7 +29,7 @@ switch (PPx.Extract(PPx.DirectoryType)) {
     };
     var e = new Enumerator(fs_parentDir.SubFolders);
     /* 属性を考慮してリストに追加 */
-    var get_list = function() {
+    var add_list = function() {
       var fs_tPath = fs.GetFolder(fs.BuildPath(fs_parentDir.Path, e.item().Name));
       if (fs_tPath.Attributes <= 17)
         list.push(e.item().Name);
@@ -43,7 +43,7 @@ switch (PPx.Extract(PPx.DirectoryType)) {
     var fs_parentDir = fs.GetFolder(cDir);
     var e = new Enumerator(fs_parentDir.Files);
     /* 拡張子を考慮してリストに追加 */
-    var get_list = function() {
+    var add_list = function() {
       var fs_tPath = fs.GetExtensionName(fs.BuildPath(fs_parentDir.Path, e.item().Name)).toLowerCase();
       if (fs_tPath == ext)
         list.push(e.item().Name);
@@ -54,14 +54,15 @@ switch (PPx.Extract(PPx.DirectoryType)) {
       PPx.Quit(1);
     break;
 };
-PPx.Arguments.length ? change_path(-1, 1, 'top')
-                     : change_path(1, -1, 'bottom');
+(PPx.Arguments.length)
+  ? move_path(-1, 1, 'top')
+  : move_path(1, -1, 'bottom');
 
 /* パス移動を実行する関数 */
-function change_path(valA, valB, termMessage) {
+function move_path(valA, valB, termMessage) {
   // 親ディレクトリからリストを取得
   for (e.moveFirst(); !e.atEnd(); e.moveNext()) {
-    get_list();
+    add_list();
   };
   // リストを名前順でソート
   list.sort(function (a, b) {

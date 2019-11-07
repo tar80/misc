@@ -11,7 +11,9 @@ if (cDir.match(/aux:.*/)) {
   PPx.Quit(1);
 };
 // 拡張子を小文字で取得する
-var ext = (PPx.GetFileInformation(PPx.Extract('%R')).slice(1) == 'DIR') ? 'DIR' : PPx.Extract('%t').toLowerCase();
+var ext = (PPx.GetFileInformation(PPx.Extract('%R')).slice(1) == 'DIR')
+  ? 'DIR'
+  : PPx.Extract('%t').toLowerCase();
 // 拡張子判別
 switch (ext) {
   case '7z':
@@ -52,15 +54,17 @@ switch (ext) {
 };
 if (arg == 'M_Ccr') {
   // 標準メニュー
-  divide_menu('J', 'O')
+  choice_menu('J', 'O')
 } else {
   // ファイル移動メニュー
-  result[1] = (arg == 'M_FileMOVE' ? 'M' : 'C');
-  divide_menu(result[1], result[1]);
+  result[1] = (arg == 'M_FileMOVE')
+    ? 'M'
+    : 'C';
+  choice_menu(result[1], result[1]);
 };
 
 /* カレントディレクトリの属性に応じて処理を分岐する関数 */
-function divide_menu(list, arc) {
+function choice_menu(list, arc) {
   switch (PPx.DirectoryType) {
     case 4:
       PPx.Execute('*setcust M_Clist:Ext = ??M_U' + result[0] + ' %:%M_Clist,' + list);

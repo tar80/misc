@@ -6,7 +6,7 @@ var tID = PPx.Extract('%n').slice(1);
 var sync = PPx.Extract('%*getcust(_others:SyncViewID)');
 
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
-var syncState = function (tWin) {
+var state_syncview = function (tWin) {
   PPx.Execute('%Oi *setcust X_win:V=B' + tWin + ' %: *ppv -r -bootid:' + tID);
   if (paneCount == 2) {
     PPx.Execute('%Oi *capturewindow V' + tID + ' -pane:~ -selectnoactive');
@@ -20,7 +20,9 @@ var syncState = function (tWin) {
 
 if (!sync) {
   // 左右2窓ならタイトルバー無、それ以外なら有
-  paneCount == 2 ? syncState('100000000') : syncState('000000000');
+  (paneCount == 2)
+    ? state_syncview('100000000')
+    : state_syncview('000000000');
 } else {
   // 連動ビューが作動中なら解除して終了
   PPx.SyncView = 0;

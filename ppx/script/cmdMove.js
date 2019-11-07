@@ -10,7 +10,9 @@ if (!PPx.GetFileInformation(opDir)) {
   var pathState = ['move', ''];
 } else {
   var tDir = '%2';
-  var pathState = (PPx.Arguments.length == 0) ? ['move', ''] : ['!move', '-min'];
+  var pathState = (PPx.Arguments.length == 0)
+    ? ['move', '']
+    : ['!move', '-min'];
 };
 // カレントディレクトリの属性に応じて処理を分岐
 switch (PPx.Extract(PPx.DirectoryType)) {

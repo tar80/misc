@@ -5,7 +5,7 @@ var fs = PPx.CreateObject('Scripting.FileSystemObject');
 var filePath = PPx.Extract('%1%\\00_INDEX.txt');
 var tList = fs.OpenTextFile(filePath, 2, true);
 // アクティブな窓の表示状態を取得
-var listView = PPx.extract('%*getcust(xc_celf:' + PPx.extract('%n').slice(1) + ')');
+var listView = PPx.Extract('%*getcust(xc_celf:' + PPx.Extract('%n').slice(1) + ')');
 // 情報取得のため一時的に表示を変更
 PPx.Execute('%Os *customize XC_celF:' + PPx.Extract('%n').slice(1) + '=U"大きさ",0');
 // 画像情報取得

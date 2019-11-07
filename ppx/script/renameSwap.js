@@ -15,16 +15,16 @@ switch (PPx.EntryMarkCount) {
   case 2:
     if (PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') == 0) {
   /* エントリのファイル名に関する情報を取得する関数 */
-  var mark = function () {
+      var info_entry = function () {
     this.name = PPx.Extract('%*name(X,' + entry.name + ')');
     this.ext = PPx.Extract('%*name(T, '+ entry.name + ')');
     this.filename = this.name + '.' + this.ext;
   };
   var entry = PPx.Entry;
   entry.FirstMark;
-  var a = new mark();
+      var a = new info_entry();
   entry.NextMark;
-  var b = new mark();
+      var b = new info_entry();
   // 一時的にFirstMarkの名前に_renを付加
   var tempName = a.name + '_ren.' + a.ext;
   PPx.Execute('*rename ' + a.filename + ',' + tempName);

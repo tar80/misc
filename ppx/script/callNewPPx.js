@@ -6,15 +6,15 @@
 var arg = PPx.Arguments(0);
 switch (arg) {
   case 'C':
-    PPx.Execute('*ppc -single -mps -bootid:' + get_id() + ' %FD');
+    PPx.Execute('*ppc -single -mps -bootid:' + load_id() + ' %FD');
     break;
   case 'V':
-    PPx.Execute('*ppv -bootid:' + get_id() + ' %R');
+    PPx.Execute('*ppv -bootid:' + load_id() + ' %R');
     break;
 };
 /* 未起動のIDを探す関数 */
 // PPc[C]から順番に起動状態を確認(i=67はアルファベットのC)
-function get_id() {
+function load_id() {
   for (var i = 67; i < 91; i = (i+1)|0) {
     var ppcId = String.fromCharCode(i);
     if (!PPx.Extract('%N' + arg + ppcId))

@@ -19,7 +19,7 @@ close_target('V');
 close_target('C');
 
 /* 起動状態のPPxIDを取得する関数 */
-function get_id(str) {
+function load_id(str) {
   var array = [];
   for (var i = 90; i >= 65; i = (i-1)|0) {
     var id = String.fromCharCode(i);
@@ -30,7 +30,7 @@ function get_id(str) {
 };
 /* 起動状態のPPxIdを降順に閉じる関数 */
 function close_target(tChar) {
-  var ppxId = get_id(tChar);
+  var ppxId = load_id(tChar);
   for (var item in ppxId) {
     if (ppxId[item].slice(0,1) == tChar) {
       if (ppxId[item] == 'CX')

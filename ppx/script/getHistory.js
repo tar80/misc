@@ -11,7 +11,7 @@ for (var i = 0; i < histCount; i =(i+1)|0) {
 try {
   var arg = [PPx.Arguments(0), PPx.Arguments(1)];
 } catch (e) {
-  PPx.Echo('引数が不正です');
+  PPx.Echo(e);
   PPx.Quit(-1);
 };
 switch (arg[0]){

@@ -53,18 +53,12 @@ switch (arg) {
       result = result + fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1\n', 'i');
       switch (str.slice(0,4)) {
         case 'Move':
-          cmd = ' /compcmd *JSCRIPT "undo.js,redo';
-          break;
-        case 'Copy':
-          PPx.SetPopLineMessage('Do Not!!');
-          fs_undoLog.Close();
-          PPx.Quit(-1);
+          cmd = ' -compcmd *JSCRIPT "undo.js,redo"';
           break;
         case 'Back':
           var cDir = PPx.Extract('%FDN%\\');
           var count = PPx.EntryDisplayCount;
           for (i = 0; i < count; i = (i+1)|0) {
-            // PPx.Echo(cDir + PPx.Entry(i).Name + '\n' + PPx.Entry(i).state);
             if (PPx.Entry(i).state != 1 && str.replace(/Backup\t(.*)/, '$1' ) == cDir + PPx.Entry(i).Name) {
               PPx.SetPopLineMessage('Do Not!!');
               fs_undoLog.Close();
@@ -74,13 +68,14 @@ switch (arg) {
           fs_undoLog.ReadLine();
           break;
         default:
-          PPx.Echo('これは想定外！\n' + result);
-          PPx.Quit(1);
+          fs_undoLog.Close();
+          PPx.SetPopLineMessage('Do Not!!');
+          PPx.Quit(-1);
           break;
       };
       PPx.SetPopLineMessage(result);
     } while (!fs_undoLog.AtEndOfStream);
     fs_undoLog.Close();
-    PPx.Execute('*file !Undo /min /nocount' + cmd);
+    PPx.Execute('*file !Undo -min -nocount' + cmd);
     break;
 };

@@ -22,8 +22,7 @@
 %O ;q:コマンド待機時のダイアログ非表示
 %O ;T:レスポンスファイル使用後削除(%Osを併用すること)
 %Obd *ppcust /c ;コマンド一覧を表示して実行
-*JSCRIPT  ;*script %'scrdir'\"xxx.js,%*arg(1)"
-*addhistory  ;type,text
+*addhistory  ;type,text ヒストリに登録
 *alias  ;[valuename=[strings]] エイリアスの設定・一覧表示
 *autodragdrop  ;[caption[,id]][,r[,source path]] 自動ドラッグ＆ドロップ
 *cache  ;[on|off|task] PPc ディレクトリ読み込みキャッシュ
@@ -50,6 +49,7 @@
 *cutentry ;[textfile] エントリをクリップボードに切り取り
 *defaultmenu ;Windows標準のエディットボックスメニューを表示
 *delete ;entryname ファイルディレクトリを削除
+*deletehistory ;type,["text"|index] ヒストリの削除
 *diroption ;ディレクトリ別の設定のメニュー変更
 *dock ;dockの操作
 *edit ;[filename] PPeで編集(終了待ちする)
@@ -139,8 +139,10 @@
 *maskentry ;[wildcards] 一時エントリマスク設定
 *maskpath ;[on|off] PPc 書庫内のディレクトリ仮想移動
 *maximize ;[window id] 窓最大化
+*menupos ;x,y ポップアップメニュー基点
 *minimize [window id] 窓最小化
 *monitoroff ;モニターを省電力モードにする
+*mousepos ;x,y マウスカーソルを移動
 *pack ;[!]filename[,indiv][,dllname,type] 書庫作成
 *pairrate ;[+|-]移動量|比率 ２枚の窓の幅／丈の比率を変更
 *pane ;commandname [parameter...] ペインの各種操作
@@ -186,7 +188,28 @@
 *ppffix ;[param] PPffixを実行
 *pptray ;PPtrayを実行
 *ppv ;[-runas][param] PPvを実行
+	-bootid: ;[path] A-Z:指定PPvを起動 ~:反対窓
+	-bootmax: ;A-Z:起動していなければ指定PPvまでのPPcを起動
+	-r ; 起動中のPPvがあれば使う
+	-k ;起動後に実行するコマンド
+	-parent: ;n 指定された数値n(%N)を親ウィンドウとして組み込む
+	-popup: ;n 指定された親ウィンドウn(%N)に被せて表示
+	-esc:off/on ;ESCシーケンス
+	-tag:off/on/tag ;html等のTAG表示 何もしない／隠す／着色
+	-css:off/on ;-tag:on時、cssタグの表示無効/有効
+	-script:off/on ;-tag:on時、scriptタグの表示無効/有効
+	-tab:n ;タブ桁数を指定
+	-width:n ;桁数を指定
+	-linespace:n ;行間隔をピクセル数で指定
+	-tail:on/off ;テキスト表示で末尾に移動して表示
+	-animate:off/on ;アニメーション表示
+	-checkeredpattern:off/on ;アルファ部分を格子模様に書き換え
+	; -hex, -text, -document, -image, -rawimage
+	; -sjis, -utf16, -utf8, etc..
+ 
 *ppvoption  ;command PPv使用時の挙動指定
+	sync ;[on/off/ID] 連動ビュー
+        setsync ;[ID] 連動ビューのIDを固定。ID指定無しで解除
 *range ;target [-option] 指定範囲のマーク・ハイライト
 	cursor ;カーソル位置
 	marked ;マークエントリ
@@ -212,6 +235,7 @@
 *replacefile ;filename ファイルを開き直す(PPe)
 *return ;ユーザコマンドの終了
 *screensaver ;スクリーンセーバを起動
+*script D:\bin\ppx\script\ ;jscript
 *selectppx ;[ID] 指定PPxにフォーカス移動
 *setcaption ;text キャプションの設定
 *set ;[valuename=[strings]] 環境変数の設定、削除

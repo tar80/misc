@@ -16,7 +16,7 @@ try {
 var tID = PPx.Extract('%n').slice(1);
 var ppxNum = tID.charCodeAt(0) + 1;
 // syncviewがonならPPc/PPv間でフォーカスをトグル
-if (PPx.Extract('%*getcust(_others:SyncViewID)')) {
+if (PPx.SyncView) {
   PPx.Execute('*focus ' + ppxChar[1] + tID);
   PPx.Quit(1);
 };

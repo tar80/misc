@@ -7,10 +7,11 @@ if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
   PPx.Quit(1);
 };
 // 連動ビューがあれば終了
+PPx.Execute('*string i,vState=');
 if (PPx.SyncView) {
   PPx.SyncView = 0;
-  PPx.Execute('%KV%*getcust(_others:SyncViewID), "@Q"');
-  PPx.Execute('*setcust X_win:V=B000000001 %: *setcust _others:-|SyncViewID=');
+  PPx.Execute('%KV' + PPx.Extract('%n').slice(1) + ', "@Q"');
+  PPx.Execute('*setcust X_win:V=B000000001');
   PPx.Quit(1);
 };
 // PPvがあれば終了

@@ -2,7 +2,6 @@
 /* 選択された2ファイル間でファイル名を交換する */
 
 switch (PPx.EntryMarkCount) {
-  // マークが一つ以下だった時
   case 0:
   case 1:
     if (PPx.Pane.Count == 2 && PPx.Execute('%Q%"Swap Filename!""反対窓エントリとファイル名交換"') == 0) {
@@ -11,7 +10,6 @@ switch (PPx.EntryMarkCount) {
       PPx.Execute('*execute ~,*rename %~FXN.%~FT,' + nameA + '.%~FT');
     };
     break;
-  // マークが二つだった時
   case 2:
     if (PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') == 0) {
   /* エントリのファイル名に関する情報を取得する関数 */
@@ -25,8 +23,8 @@ switch (PPx.EntryMarkCount) {
       var a = new info_entry();
   entry.NextMark;
       var b = new info_entry();
-  // 一時的にFirstMarkの名前に_renを付加
-  var tempName = a.name + '_ren.' + a.ext;
+      // 一時的にFirstMarkの名前に__renを付加
+      var tempName = a.name + '__ren.' + a.ext;
   PPx.Execute('*rename ' + a.filename + ',' + tempName);
   // 同名ファイルなら拡張子を交換
   if (a.name == b.name) {

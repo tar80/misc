@@ -2,69 +2,56 @@
 /* 右クリックメニュー拡張子判別 */
 // PPx.Arguments(0)=M_Ccr|M_FileMOVE|M_FileCOPY
 
-var arg = PPx.Arguments(0)
 var cDir = PPx.Extract('%1');
-var result = [];
 // auxパスメニュー
 if (cDir.match(/aux:.*/)) {
   PPx.Execute('%M_Caux');
   PPx.Quit(1);
 };
-// 拡張子を小文字で取得する
+
+var arg = PPx.Arguments(0);
+var result = [];
+// 拡張子を大文字で取得する
 var ext = (PPx.GetFileInformation(PPx.Extract('%R')).slice(1) == 'DIR')
   ? 'DIR'
-  : PPx.Extract('%t').toLowerCase();
+  : PPx.Extract('%t').toUpperCase();
 // 拡張子判別
-switch (ext) {
-  case '7z':
-  case 'cab':
-  case 'lzh':
-  case 'msi':
-  case 'rar':
-  case 'zip':
+var arc = ['7Z', 'CAB', 'LZH', 'MSI', 'RAR', 'ZIP'];
+var doc = ['AHK', 'INI', 'CFG', 'JS', 'JSON', 'LOG', 'MD', 'TXT', 'VIM']
+var image = ['BMP', 'EDG', 'GIF', 'JPEG', 'JPG', 'PNG', 'VCH'];
+var types = arc.concat(doc, image);
+if (ext == 'DIR')
+  var result = ['dir', 'W'];
+else {
+  for (var item in types) {
+    if (ext == arc[item]) {
     // 拡張子, ショートカットキー
     var result = ['arc', 'W'];
     break;
-  case 'bmp':
-  case 'edg':
-  case 'gif':
-  case 'jpeg':
-  case 'jpg':
-  case 'png':
-  case 'vch':
+    } else if (ext == image[item]) {
     var result = ['image', 'L'];
     break;
-  case 'ahk':
-  case 'ini':
-  case 'cfg':
-  case 'js':
-  case 'json':
-  case 'log':
-  case 'md':
-  case 'txt':
-  case 'vim':
+    } else if (ext == doc[item]) {
     var result = ['doc', 'R'];
     break;
-  case 'DIR':
-    var result = ['dir', 'W'];
-    break;
-  default:
+    } else
     var result = ['none', 'S'];
-    break;
+  };
 };
+
 if (arg == 'M_Ccr') {
   // 標準メニュー
-  choice_menu('J', 'O')
+  select_menu('J', 'O')
 } else {
   // ファイル移動メニュー
   result[1] = (arg == 'M_FileMOVE')
     ? 'M'
     : 'C';
-  choice_menu(result[1], result[1]);
+  select_menu(result[1], result[1]);
 };
 
 /* カレントディレクトリの属性に応じて処理を分岐する関数 */
-function choice_menu(list, arc) {
+function select_menu(list, arc) {
   switch (PPx.DirectoryType) {
     case 4:
       PPx.Execute('*setcust M_Clist:Ext = ??M_U' + result[0] + ' %:%M_Clist,' + list);

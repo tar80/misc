@@ -25,7 +25,7 @@ endif
 set browsedir=buffer
 "# undoファイルをまとめるディレクトリ
 set undofile
-set undodir=$TEMP/vimlog
+set undodir=$TEMP/vim/log
 "# 未保存ファイルを閉じる時、ダイアログを出さない
 set confirm
 "# viminfoの設定
@@ -301,7 +301,7 @@ augroup vimrcAU
 augroup END
 
 "# viminfoの初期値をマージ
-autocmd vimrcAU VimEnter * rviminfo ~/_xxxinfo
+" autocmd vimrcAU VimEnter * rviminfo ~/_xxxinfo
 " autocmd vimrcAU VimLeave * wviminfo
 
 "# 挿入モードで一定時間キー入力がなければ着色
@@ -383,9 +383,12 @@ nnoremap  Y y$
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F9> :<C-u>tabnew<CR>:edit $MYVIMRC<CR>
 "# ppx
-nnoremap <F6> :<C-u>edit C:/bin/ppx/xTest.js<CR>
-nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script C:/bin/ppx/xTest.js<CR>
-nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
+nnoremap <F6> :<C-u>tabnew<CR>:edit D:/Apps/ppx/script/xTest.js<CR>
+nnoremap <C-F6> :<C-u>!start D:/Apps/ppx/ppcw.exe -r -k *script \%0script/xTest.js<CR>
+nnoremap <silent> <C-F9> :<C-u>!start D:/Apps/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
+"#}}}
+"# command_mode{{{
+cnoremap <F12> rviminfo ~/_xxxinfo<CR>
 "#}}}
 "# insert_mode{{{
 noremap! <C-j> <Down>

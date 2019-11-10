@@ -19,7 +19,7 @@ function rep(match, p1, p2) {
   str = [p1, '', p2];
   if (typeof str[0] === 'undefined')
     str[0] = '';
-  if (str[2].indexOf('"') === 0) {
+  if (str[2].indexOf('"') == 0) {
     str[1] = '"';
     str[2] = str[2].slice(1);
   };

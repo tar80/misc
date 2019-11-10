@@ -3,7 +3,9 @@
 // PPx.Arguments(0)=case [無:undo, 他:redo]
 
 try {
-  var arg = (!PPx.Arguments.length) ? 'undo' : 'redo';
+  var arg = (!PPx.Arguments.length)
+    ? 'undo'
+    : 'redo';
 } catch (e) {
   PPx.Echo(e);
   PPx.Quit(-1);
@@ -53,7 +55,7 @@ switch (arg) {
       result = result + fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1\n', 'i');
       switch (str.slice(0,4)) {
         case 'Move':
-          cmd = ' -compcmd *JSCRIPT "undo.js,redo"';
+          cmd = ' -compcmd *script %\'repoppx\'%\\script\\undo.js,redo';
           break;
         case 'Back':
           var cDir = PPx.Extract('%FDN%\\');

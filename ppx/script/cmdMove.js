@@ -7,10 +7,10 @@ var pathState = []; //[0]dest,[1]dialog state
 // 対象パスを設定
 if (!PPx.GetFileInformation(opDir)) {
   var tDir = PPx.Extract("%\'work\'").replace("/\//g,'\\'");
-  var pathState = ['move', ''];
+  pathState = ['move', ''];
 } else {
   var tDir = '%2';
-  var pathState = (PPx.Arguments.length == 0)
+  pathState = (PPx.Arguments.length == 0)
     ? ['move', '']
     : ['!move', '-min'];
 };

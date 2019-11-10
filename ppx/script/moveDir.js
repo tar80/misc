@@ -66,7 +66,10 @@ function move_path(valA, valB, termMessage) {
   };
   // リストを名前順でソート
   list.sort(function (a, b) {
-    return (a.toLowerCase() < b.toLowerCase() ? valA : valB);
+    return (a.toLowerCase() < b.toLowerCase())
+      ? valA
+      : valB;
+    return 0;
   });
   for (var item in list) {
     if (list[item] == dirName)
@@ -75,9 +78,9 @@ function move_path(valA, valB, termMessage) {
   // 対象エントリ名を取得
   var tEntry = list[Math.max(item - 1, 0)|0];
   // 端ならメッセージを表示
-  if (list[item - 2] == null)
+  if (list[item - 2] === undefined)
     PPx.SetPopLineMessage('!">>' + termMessage);
-  if (list[item - 1] != null)
+  if (list[item - 1] !== undefined)
     PPx.Execute('*jumppath "' + fs.BuildPath(fs_parentDir.Path, tEntry) + '"');
   else
     PPx.Quit(1);

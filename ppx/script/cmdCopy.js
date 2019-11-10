@@ -3,11 +3,12 @@
 // PPx.Arguments(0)=0:detail|1:quick|>=2:link
 // %'work'=workspace
 
+var tDir;
 var opDir = PPx.Extract('%2');
 var filePath = PPx.Extract('%FDC');
 var fileName = PPx.Extract('%FC');
 try {
-  var arg = PPx.Arguments(0);
+  var arg = PPx.Arguments(0)|0;
   var pathState = (arg == 0)
     ? ['copy', '']
     : ['!copy', '-min'];

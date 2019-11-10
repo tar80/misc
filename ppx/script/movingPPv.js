@@ -8,9 +8,9 @@ if ((omit == 1) || (vCount > 1))
   PPx.Quit(1);
 
 // 画面サイズ
-var displayX = 1024;
+var displayX = 1366;
 var displayY = 740;
-var _displayX = (displayX / 2);
+var _displayX = (displayX / 2 - 60);
 var _displayY = (displayY / 2);
 
 var vID = PPx.WindowIDName;

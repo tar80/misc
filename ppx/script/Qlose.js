@@ -9,22 +9,22 @@ if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
 
 var xList = PPx.Extract('%*ppxlist(-)').split(',');
 xList.sort(function (a, b) {
-  return a < b
-  ? 1
-  : -1;
+  return a < b ? 1 : -1;
   return 0;
 });
 var tID = xList.join(',').slice(0, 3);
 if (tID.indexOf('V_') == 0) {
   // PPx.Execute('*setcust X_win:V=B000000001');
+  var sync = PPx.Extract('%*extract(C,"%%*js(PPx.Result=PPx.SyncView;)")')|0;
+  if (sync != 0) {
   PPx.SyncView = 0;
-  if (PPx.Extract('%so"vSize") != 0')) {
+    if (PPx.Extract('%si"vSize') != 0) {
     PPx.Execute('*setcust _WinPos:V' + tID.slice(2) + '=%si"vSize"');
     PPx.Execute('*string i,vSize=');
   };
-  PPx.Execute('*string i,vState=');
-};
-if (tID == 'C_X')
+    PPx.Quit(1);
+  };
+} else if (tID == 'C_X')
         PPx.Execute('*setcust XC_celD=_AUTO,_AUTO,3,7');
 PPx.Execute('*closeppx ' + tID);
 

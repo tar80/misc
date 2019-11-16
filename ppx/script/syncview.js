@@ -3,7 +3,7 @@
 
 var paneCount = PPx.Pane.Count;
 var tID = PPx.WindowIDName.slice(2);
-var sync = PPx.Extract('%*extract(C,"%%*js(PPx.Result=PPx.SyncView;)")')|0;
+var sync = PPx.SyncView;
 if (sync == 0) {
   (paneCount == 2)
     // タイトルバー無し
@@ -16,7 +16,7 @@ if (sync == 0) {
   PPx.Execute('*string i,vState=');
   PPx.Execute('%KV' + tID + ',"@Q"');
   PPx.Execute('*setcust X_win:V=B000000000');
-  if (paneCount == 2) {
+  if (PPx.Extract('%si"vSize') != 0) {
     // capturewindowに取り込む前のサイズに戻す
     PPx.Execute('*setcust _WinPos:V' + tID + '=%si"vSize"');
     PPx.Execute('*string i,vSize=');

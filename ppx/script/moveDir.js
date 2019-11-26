@@ -9,9 +9,7 @@ var current = PPx.Extract('%FDVN');
 var vCurrent;
 var dirName;
 var ext;
-current.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, rep);
-/* 置換した文字列を取得する関数 */
-function rep(match, p1, p2, p3, p4) {
+current.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, function (match, p1, p2, p3, p4) {
   vCurrent = p1;
   dirName  = p2;
   ext      = p4.toLowerCase();
@@ -76,7 +74,7 @@ function move_path(valA, valB, termMessage) {
       break;
   };
   // 対象エントリ名を取得
-  var tEntry = list[Math.max(item - 1, 0)|0];
+  var tEntry = list[Math.max(item - 1, 0)];
   // 端ならメッセージを表示
   if (list[item - 2] === undefined)
     PPx.SetPopLineMessage('!">>' + termMessage);

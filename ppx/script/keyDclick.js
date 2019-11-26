@@ -10,7 +10,7 @@ var expand_ext = function () {
     var ext = PPx.Arguments(0);
   } catch (e) {
     var ext = 'default'
-  };
+  } finally {
   switch (ext) {
     case 'image':
       maskExt = [".jpg", ".jpeg", ".bmp", ".png", ".gif", ".vch", ".edg"];
@@ -28,6 +28,7 @@ var expand_ext = function () {
     default:
     break;
   };
+  };
 };
 
 if (PPx.WindowIDName == 'C_X') {
@@ -37,7 +38,7 @@ if (PPx.WindowIDName == 'C_X') {
 } else {
     // タイトルバーあり
     PPx.Execute('%Oi *setcust X_win:V=B000000000');
-    PPx.Execute('*linecust NoMask,KV_main:CLOSEEVENT,*execute C,*maskentry');
+    PPx.Execute('*linecust no_mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
   expand_ext();
 };
 
@@ -45,6 +46,7 @@ var ppcId = (PPx.Pane.length != 0)
   ? PPx.Extract('%NC#')
   : PPx.Extract('%NC');
 PPx.Execute('*string i,vState=1');
+
 // ※ver1.66_書庫内にて直接PPvでファイルを開くとエラーが出る対策に*wait挟んでファイルを開く
 PPx.Execute('%Oi *ppv -r -checkeredpattern:on -bootid:Z -k *fitwindow ' + ppcId);
 PPx.Execute('*wait 10,1');

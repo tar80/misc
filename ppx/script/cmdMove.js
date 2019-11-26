@@ -3,7 +3,7 @@
 // PPx.Arguments(0)=1:quick
 
 var opDir = PPx.Extract('%2');
-var pathState = []; //[0]dest,[1]dialog state
+var pathState = []; //[0]dest,[1]option
 // 対象パスを設定
 if (!PPx.GetFileInformation(opDir)) {
   var tDir = PPx.Extract("%\'work\'").replace("/\//g,'\\'");
@@ -11,7 +11,7 @@ if (!PPx.GetFileInformation(opDir)) {
 } else {
   var tDir = '%2';
   pathState = (PPx.Arguments.length == 0)
-    ? ['move', '']
+    ? ['move', '-renamedest:on']
     : ['!move', '-min'];
 };
 // カレントディレクトリの属性に応じて処理を分岐
@@ -28,6 +28,6 @@ switch (PPx.DirectoryType) {
     break;
   // その他
   default:
-    PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog -compcmd *focus');
+    PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog');
     break;
 };

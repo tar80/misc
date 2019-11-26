@@ -25,7 +25,7 @@ endif
 set browsedir=buffer
 "# undoファイルをまとめるディレクトリ
 set undofile
-set undodir=$TEMP/vim/log
+set undodir=$VIM/.cache/undolog
 "# 未保存ファイルを閉じる時、ダイアログを出さない
 set confirm
 "# viminfoの設定
@@ -171,7 +171,7 @@ call plug#begin('~/vimfiles')
   Plug 'itchyny/vim-gitbranch'
   Plug 'tpope/vim-fugitive'
   Plug 'rhysd/clever-f.vim'
-  Plug 'tyru/caw.vim/'
+  Plug 'tyru/caw.vim'
 "# manual
   Plug '~/vimfiles/colors'
   Plug '~/vimfiles/autoload'
@@ -388,7 +388,7 @@ nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%0script/xTest.j
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}
 "# command_mode{{{
-cnoremap <F12> rviminfo ~/_xxxinfo<CR>
+cnoremap <F12> <C-u>rviminfo ~/_xxxinfo<CR>:
 "#}}}
 "# insert_mode{{{
 noremap! <C-j> <Down>

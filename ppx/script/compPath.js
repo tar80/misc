@@ -1,6 +1,6 @@
 ﻿//!*script
 /* 基準パスのサブディレクトリを取得する */
-// PPx.Arguments(0)=基準文字列, (1)=補完候補ファイル
+// PPx.Arguments(0)=基準文字列, (1)=補完候補ファイルパス
 // 参照元:http://hoehoetukasa.blogspot.com/2018/11/ppx_7.html
 
 try {
@@ -17,8 +17,10 @@ try {
 /* 置換整形した文字列を取得する関数 */
 function rep(match, p1, p2) {
   str = [p1, '', p2];
+  // 対象がパスのみの場合
   if (typeof str[0] === 'undefined')
     str[0] = '';
+  // 対象にコマンドを含む場合
   if (str[2].indexOf('"') == 0) {
     str[1] = '"';
     str[2] = str[2].slice(1);

@@ -1,6 +1,6 @@
 ﻿//!*script
 /* undo,redo */
-// PPx.Arguments(0)=case [無:undo, 他:redo]
+// PPx.Arguments(0)=無:undo|他:redo
 
 try {
   var arg = (!PPx.Arguments.length)
@@ -17,16 +17,17 @@ var xSave = PPx.Extract('%*getcust(X_save)');
 var logFile = (xSave.search(':') === -1)
   ? PPx.Extract('%0%\\' + xSave + '%\\PPXUNDO.LOG')
   : PPx.Extract(xSave + '%\\PPXUNDO.LOG');
-var xSave;
 
 switch (arg) {
   // ReDo(Move,RenameのUnDoを処理)
   // PPxの仕様上?ディレクトリは対象外
   case 'redo':
     var fs_undoLog = fs.OpenTextFile(logFile, 1, false, -1);
+    var result = '';
     while (!fs_undoLog.AtEndOfStream) {
-      var result = fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
-      result = fs_undoLog.ReadLine().replace(/.*\t(.*)/, 'Move\t$1\n ->\t' + result + '\n', 'i');
+      var line = fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
+      line = fs_undoLog.ReadLine().replace(/.*\t(.*)/, 'Move\t$1\n ->\t' + line + '\n', 'i');
+      result = result + line;
     }
     fs_undoLog.Close();
     // 置換結果を書き出してutf16leで上書きする

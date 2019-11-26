@@ -253,7 +253,7 @@
 	i, ;ID別環境変数
 	o, ;コマンドライン内環境変数
  
-*suspend ;サスペンド状態に移行
+*suspend ;サスペンド(スタンバイ)状態に移行
 *syncprop ;[on|off|focus] 連動プロパティ表示
 *terminate ;Windows を強制シャットダウン
 *togglewinsize ;[window id]

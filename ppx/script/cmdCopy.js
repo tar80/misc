@@ -10,7 +10,7 @@ var fileName = PPx.Extract('%FC');
 try {
   var arg = PPx.Arguments(0)|0;
   var pathState = (arg == 0)
-    ? ['copy', '']
+    ? ['copy', '-renamedest:on']
     : ['!copy', '-min'];
 } catch (e) {
   PPx.Echo(e);
@@ -52,5 +52,5 @@ if (arg >= 2) {
   var bst = (mSize > 5242880)
     ? 'on'
     : 'off';
-  PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog -burst:' + bst + ' -compcmd *focus');
+  PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog -burst:' + bst);
 };

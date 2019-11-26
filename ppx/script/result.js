@@ -16,7 +16,7 @@ switch (PPx.Arguments(0)) {
     PPx.Result = PPx.Extract(path);
     break;
   case 'repository':
-    PPx.Result = (PPx.Extract("%1%\\").indexOf(PPx.Extract("%'repo'%\\")) >= 0) ? 1 : 0;
+    PPx.Result = PPx.Extract("%1%\\").indexOf(PPx.Extract("%'repo'%\\"));
     break;
   default:
     PPx.Quit(1);

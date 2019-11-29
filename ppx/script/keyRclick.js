@@ -20,23 +20,23 @@ var arc = ['7Z', 'CAB', 'LZH', 'MSI', 'RAR', 'ZIP'];
 var doc = ['AHK', 'INI', 'CFG', 'JS', 'JSON', 'LOG', 'MD', 'TXT', 'VIM']
 var image = ['BMP', 'EDG', 'GIF', 'JPEG', 'JPG', 'PNG', 'VCH'];
 var types = arc.concat(doc, image);
-if (ext == 'DIR')
+if (ext == 'DIR') {
   var result = ['dir', 'W'];
-else {
-  for (var item in types) {
-    if (ext == arc[item]) {
+} else {
+  for (var i = types.length; i = (i-1)|0;) {
+    if (ext == arc[i]) {
     // 拡張子, ショートカットキー
     var result = ['arc', 'W'];
     break;
-    } else if (ext == image[item]) {
+    } else if (ext == image[i]) {
     var result = ['image', 'L'];
     break;
-    } else if (ext == doc[item]) {
+    } else if (ext == doc[i]) {
     var result = ['doc', 'R'];
     break;
     } else
     var result = ['none', 'S'];
-  };
+  }
 };
 
 if (arg == 'M_Ccr') {

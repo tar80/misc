@@ -12,23 +12,30 @@ if (sync > 0) {
   PPx.Quit(1);
 };
 
+var xID = xID.join('_');
 var xList = PPx.Extract('%*ppxlist()').split(',');
 if (xList[0] > 1) {
   xList.sort(function (a, b) {
     return a < b ? -1 : 1;
     return 0;
   });
-  var xList = xList.join(',');
-  var tID = xID[0] + '_' + PPx.Extract('%*regexp(' + xID[1] + ',tr/A-Z/B-ZA/)');
-  if (xList.indexOf(tID) == -1) {
-    var vID = xList.indexOf('V_');
-    if (xID[0] == 'V' || vID == -1) {
-      var tID ='C_A';
+  for (var i = xList.length; i=(i-1)|0;) {
+    if (xList[i] == xID) {
+      var tID = xList[(i + 1)|0];
+      break;
+    }
+  }
+  // リストの端なら最初に戻る
+  if (!tID || tID == 'csA')
+    tID = xList[2];
+  if (tID.indexOf('B_') == 0) {
+    // PPbならckwをフォーカス
+    // PPx.Execute('*focus #%*findwindowclass(CkwWindowClass)')
+    PPx.Execute('%K"@F6"');
+    PPx.Quit(1);
     } else {
-      var tID = xList.slice(vID, (vID + 3)|0);
-    };
-  };
   PPx.Execute('*focus ' + tID);
+  }
 } else {
   PPx.Execute('%K"@F6"');
 };

@@ -50,7 +50,7 @@ switch (arg) {
           : PPx.Echo(e + '\n' + str);
         fs_undoLog.Close();
         PPx.Quit(-1);
-      };
+      }
       // UNDOログを置換
       var result = str.replace(/.*\t(.*)/, '$1 << ', 'i');
       result = result + fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1\n', 'i');
@@ -66,8 +66,8 @@ switch (arg) {
               PPx.SetPopLineMessage('Do Not!!');
               fs_undoLog.Close();
               PPx.Quit(-1);
-            };
-          };
+            }
+          }
           fs_undoLog.ReadLine();
           break;
         default:
@@ -75,7 +75,7 @@ switch (arg) {
           PPx.SetPopLineMessage('Do Not!!');
           PPx.Quit(-1);
           break;
-      };
+      }
       PPx.SetPopLineMessage(result);
     } while (!fs_undoLog.AtEndOfStream);
     fs_undoLog.Close();

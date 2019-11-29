@@ -6,10 +6,10 @@ var opDir = PPx.Extract('%2');
 var pathState = []; //[0]dest,[1]option
 // 対象パスを設定
 if (!PPx.GetFileInformation(opDir)) {
-  var tDir = PPx.Extract("%\'work\'").replace("/\//g,'\\'");
+  var tDir = "%'work'%\\";
   pathState = ['move', ''];
 } else {
-  var tDir = '%2';
+  var tDir = opDir;
   pathState = (PPx.Arguments.length == 0)
     ? ['move', '-renamedest:on']
     : ['!move', '-min'];

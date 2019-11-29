@@ -16,6 +16,7 @@ try {
   PPx.Echo(e);
   PPx.Quit(-1);
 };
+
 // 送り先を設定
 switch (PPx.GetFileInformation(opDir)) {
   case ':DIR':
@@ -23,7 +24,7 @@ switch (PPx.GetFileInformation(opDir)) {
     tDir = opDir;
     break;
   case '':
-    tDir = PPx.Extract("%\'work\'").replace("/\//g,'\\'");
+    tDir = "%'work'%\\";
     var pathState = ['copy', ''];
     break;
   default:
@@ -40,7 +41,7 @@ if (arg >= 2) {
       ? '/D '
       : '';
     PPx.Execute('%Orn *ppb -runas -c mklink ' + att + tDir + fileName + ' ' + filePath);
-  };
+  }
   // 送り元が書庫なら解凍
 } else if (PPx.DirectoryType >= 62) {
   PPx.Execute('%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複リネーム,DIR展開"%{' + tDir + '%} %@');

@@ -15,5 +15,4 @@ try {
   PPx.Execute('*sendmessage %N,177,' + str.indexOf(wparam) + ',' + lparam.length);
 } catch (e) {
   PPx.Echo(e);
-  PPx.Quit(1);
 };

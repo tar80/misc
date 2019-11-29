@@ -5,7 +5,6 @@ var dirType = PPx.Extract(PPx.DirectoryType);
 var viewStyle = (PPx.WindowIDName == 'C_X')
   ? ['CX', dirType]
   : [dirType, ''];
-
 switch (viewStyle[0]) {
   case 'CX':
     (viewStyle[1] >= 62)

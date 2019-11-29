@@ -9,7 +9,7 @@ var expand_ext = function () {
   try {
     var ext = PPx.Arguments(0);
   } catch (e) {
-    var ext = 'default'
+    var ext = 'default';
   } finally {
   switch (ext) {
     case 'image':
@@ -27,8 +27,8 @@ var expand_ext = function () {
       PPx.Quit(1);
     default:
     break;
-  };
-  };
+    }
+  }
 };
 
 if (PPx.WindowIDName == 'C_X') {

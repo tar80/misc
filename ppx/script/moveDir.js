@@ -13,7 +13,7 @@ current.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, function (match, p1, p2, p3, p4) {
   vCurrent = p1;
   dirName  = p2;
   ext      = p4.toLowerCase();
-};
+});
 var list = [];
 switch (PPx.DirectoryType) {
   case 1:
@@ -24,14 +24,15 @@ switch (PPx.DirectoryType) {
     if (fs_cDir.IsRootFolder) {
       PPx.SetPopLineMessage('!">>root');
       PPx.Quit(1);
-    };
+    }
     var e = new Enumerator(fs_parentDir.SubFolders);
     /* 属性を考慮してリストに追加 */
     var add_list = function() {
       var fs_tPath = fs.GetFolder(fs.BuildPath(fs_parentDir.Path, e.item().Name));
-      if (fs_tPath.Attributes <= 17)
+      if (fs_tPath.Attributes <= 17) {
         list.push(e.item().Name);
-    };
+      }
+    }
     break;
   case 4:
   case 63:
@@ -45,13 +46,14 @@ switch (PPx.DirectoryType) {
       var fs_tPath = fs.GetExtensionName(fs.BuildPath(fs_parentDir.Path, e.item().Name)).toLowerCase();
       if (fs_tPath == ext)
         list.push(e.item().Name);
-    };
+    }
     break;
   default:
       PPx.SetPopLineMessage('!"非対応ディレクトリ');
       PPx.Quit(1);
     break;
 };
+
 (PPx.Arguments.length)
   ? move_path(-1, 1, 'top')
   : move_path(1, -1, 'bottom');
@@ -61,7 +63,7 @@ function move_path(valA, valB, termMessage) {
   // 親ディレクトリからリストを取得
   for (e.moveFirst(); !e.atEnd(); e.moveNext()) {
     add_list();
-  };
+  }
   // リストを名前順でソート
   list.sort(function (a, b) {
     return (a.toLowerCase() < b.toLowerCase())
@@ -69,17 +71,19 @@ function move_path(valA, valB, termMessage) {
       : valB;
     return 0;
   });
-  for (var item in list) {
-    if (list[item] == dirName)
+  for (var i = list.length; i=(i-1)|0;) {
+    if (list[i] == dirName)
       break;
-  };
+  }
   // 対象エントリ名を取得
-  var tEntry = list[Math.max(item - 1, 0)];
+  var tEntry = list[Math.max(i - 1, 0)];
   // 端ならメッセージを表示
-  if (list[item - 2] === undefined)
+  if (list[i - 2] === undefined) {
     PPx.SetPopLineMessage('!">>' + termMessage);
-  if (list[item - 1] !== undefined)
+  }
+  if (list[i - 1] !== undefined) {
     PPx.Execute('*jumppath "' + fs.BuildPath(fs_parentDir.Path, tEntry) + '"');
-  else
+  } else {
     PPx.Quit(1);
+  }
 };

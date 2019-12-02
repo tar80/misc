@@ -196,7 +196,7 @@ if s:is_plugged('unite.vim')
   "g:unite_source_bookmark_directory = 
   let g:unite_source_rec_min_cache_files = 20
   let g:unite_source_rec_max_cache_files = 5000
-  let g:unite_source_rec_async_command = ['findu', '-L']
+  let g:unite_source_rec_async_command = ['find', '-L']
   "let g:unite_source_rec_find_args = ['','']
   "let g:unite_source_rec_git_command = 
   "let g:unite_source_grep_command = "grep"
@@ -206,8 +206,8 @@ if s:is_plugged('unite.vim')
   let g:unite_source_grep_encoding = "utf-8"
   "let g:unite_source_grep_separator= "--"
   "let g:unite_source_vimgrep_search_word_highlight =a"Search"
-  let g:unite_source_find_command = "findu"
-  let g:unite_source_find_default_opts = "-L"
+  " let g:unite_source_find_command = "find"
+  " let g:unite_source_find_default_opts = "-L"
   "let g:unite_source_find_default_expr = "-name "
   "let g:unite_source_line_enable_highlight = "0"
   "let g:unite_source_alias_aliases = {}

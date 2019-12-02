@@ -3,12 +3,15 @@
 // PPx.Arguments(0)=V:PPv|無:呼び出し元と同じ
 // 参照元:http://hoehoetukasa.blogspot.com/2014/05/blog-post_20.html
 
+var arg;
+var cID;
+
 try {
   if (PPx.Arguments(0)) {
-  var arg = 'V';
+  arg = 'V';
   }
 } catch (e) {
-  var arg = PPx.WindowIDName.slice(0, 1);
+  arg = PPx.WindowIDName.slice(0, 1);
 };
 
 switch (arg) {
@@ -22,9 +25,10 @@ switch (arg) {
 /* 未起動のIDを探す関数 */
 // PPc[C]から順番に起動状態を確認(CharCode=67はアルファベットのC)
 function load_id() {
-  for (var i = 67; i < 91; i = (i+1)|0) {
-    var cID = String.fromCharCode(i);
-    if (!PPx.Extract('%N' + arg + cID))
-      return cID;
+  cID = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  for (var i = 0; i <= 25; i = (i+1)|0) {
+    if (!PPx.Extract('%N' + arg + cID[i])) {
+      return cID[i];
+    }
   }
 };

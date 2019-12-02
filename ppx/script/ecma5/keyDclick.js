@@ -4,12 +4,17 @@
 // PPc[X]は画像専用
 'use strict';
 var maskExt = [];
+var ppcId = (PPx.Pane.length != 0)
+  ? PPx.Extract('%NC#')
+  : PPx.Extract('%NC');
+
 /* 拡張子別の処理をする関数 */
 var expand_ext = function () {
+  var ext;
   try {
-    var ext = PPx.Arguments(0);
+    ext = PPx.Arguments(0);
   } catch (e) {
-    var ext = 'default';
+    ext = 'default';
   } finally {
   switch (ext) {
     case 'image':
@@ -42,11 +47,7 @@ if (PPx.WindowIDName == 'C_X') {
   expand_ext();
 };
 
-var ppcId = (PPx.Pane.length != 0)
-  ? PPx.Extract('%NC#')
-  : PPx.Extract('%NC');
 PPx.Execute('*string i,vState=1');
-
 // ※ver1.66_書庫内にて直接PPvでファイルを開くとエラーが出る対策に*wait挟んでファイルを開く
 PPx.Execute('%Oi *ppv -r -checkeredpattern:on -bootid:Z -k *fitwindow ' + ppcId);
 PPx.Execute('*wait 10,1');

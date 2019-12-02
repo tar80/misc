@@ -2,18 +2,21 @@
 /* 状況に応じたファイル移動の設定 */
 // PPx.Arguments(0)=1:quick
 'use strict';
+var tDir;
 var opDir = PPx.Extract('%2');
-var pathState = []; //[0]dest,[1]option
+var cmdOpt = []; //[0]dest,[1]option
+
 // 対象パスを設定
 if (!PPx.GetFileInformation(opDir)) {
-  var tDir = "%'work'%\\";
-  pathState = ['move', ''];
+  tDir = "%'work'%\\";
+  cmdOpt = ['move', ''];
 } else {
-  var tDir = opDir;
-  pathState = (PPx.Arguments.length == 0)
+  tDir = opDir;
+  cmdOpt = (PPx.Arguments.length == 0)
     ? ['move', '-renamedest:on']
     : ['!move', '-min'];
 };
+
 // カレントディレクトリの属性に応じて処理を分岐
 switch (PPx.DirectoryType) {
   // 書庫
@@ -24,10 +27,10 @@ switch (PPx.DirectoryType) {
     break;
   // リストファイル
   case 4:
-    PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:5 -sameall -undolog -compcmd %K\"@^\\D\"');
+    PPx.Execute('*ppcfile ' + cmdOpt[0] + ',' + tDir + ',' + cmdOpt[1] + ' -qstart -nocount -preventsleep -same:5 -sameall -undolog -compcmd %K\"@^\\D\"');
     break;
   // その他
   default:
-    PPx.Execute('*ppcfile ' + pathState[0] + ',' + tDir + ',' + pathState[1] + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog');
+    PPx.Execute('*ppcfile ' + cmdOpt[0] + ',' + tDir + ',' + cmdOpt[1] + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog');
     break;
 };

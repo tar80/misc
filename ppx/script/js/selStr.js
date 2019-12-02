@@ -6,8 +6,10 @@
 var str = PPx.Extract('%*edittext()');
 var wparam;
 var lparam;
+var reg;
+
 try {
-  var reg = new RegExp(PPx.Arguments(0));
+  reg = new RegExp(PPx.Arguments(0));
   str.replace(reg, function (match, p1, p2) {
     wparam = p2;
     lparam = p1;

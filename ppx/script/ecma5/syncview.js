@@ -4,6 +4,8 @@
 var paneCount = PPx.Pane.Count;
 var tID = PPx.WindowIDName.slice(2);
 var sync = PPx.SyncView;
+var memSize;    // PPvの起動前のサイズ
+
 if (sync == 0) {
   (paneCount == 2)
     // タイトルバー無し
@@ -30,7 +32,7 @@ function state_syncview (tWin) {
   switch (paneCount) {
     case 2:
       // capturewindowに取り込む前のサイズを記憶する
-      var memSize = PPx.Extract('%*getcust(_WinPos:VA)');
+      memSize = PPx.Extract('%*getcust(_WinPos:VA)');
       PPx.Execute('*string i,vSize=' + memSize);
       PPx.Execute('*string i,vState=1');
     PPx.Execute('%Oi *capturewindow V' + tID + ' -pane:~ -selectnoactive');

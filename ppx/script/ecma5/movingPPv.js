@@ -4,6 +4,7 @@
 // %si"vState"=1(除外対象)、PPvが2枚以上で中止
 var omit = PPx.Extract('0%*extract(C,%%si"vState")')|0;
 var vCount = PPx.Extract('%*ppxlist(+V)');
+
 if ((omit == 1) || (vCount > 1)) {
   PPx.Quit(1);
 };
@@ -33,4 +34,5 @@ var moving_pos_LR = function () {
   }
   PPx.Execute('*windowposition ' + vID + ',' + posW + ',' + posH);
 };
+
 moving_pos_LR();

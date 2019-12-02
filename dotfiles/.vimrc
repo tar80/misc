@@ -172,6 +172,7 @@ call plug#begin('~/vimfiles')
   Plug 'tpope/vim-fugitive'
   Plug 'rhysd/clever-f.vim'
   Plug 'tyru/caw.vim'
+  Plug 'osyo-manga/vim-vigemo'
 "# manual
   Plug '~/vimfiles/colors'
   Plug '~/vimfiles/autoload'
@@ -221,7 +222,7 @@ if s:is_plugged('unite.vim')
   let g:neoyank#limit = 20
   "
   "# カスタムプロファイル
-  call unite#custom#source('line,grep', 'matchers', 'matcher_migemo')
+  call unite#custom#source('line,grep', 'matchers', 'matcher_vigemo')
   call unite#custom#source('file,file_rec,file_rec/async', 'matchers', ['converter_tail', 'matcher_fuzzy'])
   call unite#custom#source('file,file_rec,file_rec/async', 'max_candidates', 40)
   call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern',

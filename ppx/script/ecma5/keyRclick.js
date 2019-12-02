@@ -17,7 +17,7 @@ var doc   = ['AHK', 'INI', 'CFG', 'JS', 'JSON', 'LOG', 'MD', 'TXT', 'VIM'];
 
 // auxパスメニュー
 if (cDir.match(/aux:.*/)) {
-  PPx.Execute('%M_Caux');
+  PPx.Execute('%M_Caux, C');
   PPx.Quit(1);
 };
 

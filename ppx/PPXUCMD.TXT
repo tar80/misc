@@ -132,8 +132,14 @@
 *makedir  ;dirname ディレクトリを作成
 *makefile  ;filename ディレクトリを作成
 *makelistfile ;[filename] [option] ListFile出力
-	,marked ; マークのみ
-	,marktag ; マーク情報付
+	-name   ; エントリ名のみ出力
+	-basic  ; エントリ名 + 属性情報
+	-normal ; エントリ名 + 属性情報 + コメント
+	-marked   ; マークのみ処理
+	-marktag  ; (-basic, -normalのとき)マーク情報追加
+	-comment  ; (-basicのとき)コメント情報追加
+	-message  ; システムメッセージも含める
+	-noheader ; ヘッダ情報(;ListFile ;Base等)を付けない
  
 *markentry ;[wildcards] エントリマーク
 *maskentry ;[wildcards] 一時エントリマスク設定

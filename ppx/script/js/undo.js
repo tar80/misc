@@ -59,7 +59,7 @@ switch (arg) {
       result = result + fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1\n', 'i');
       switch (str.slice(0,4)) {
         case 'Move':
-          cmd = ' -compcmd *script %\'repoppx\'%\\script\\undo.js,redo';
+          cmd = ' -compcmd *script %\'scr\'%\\undo.js,redo';
           break;
         case 'Back':
           var cDir = PPx.Extract('%FDN%\\');

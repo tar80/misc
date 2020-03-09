@@ -84,6 +84,7 @@
 *ifmatch
 *ime
 *insert
+*insertsel
 *insertfile
 *job
 *jumpline

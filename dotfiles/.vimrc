@@ -9,11 +9,34 @@ endif
 source ~/vimfiles/encode.vim
 "
 scriptencoding utf-8
-"# Variable
-let $HOME='C:/bin/home'
-let mapleader=';'
+"
+"# 機能の読み込み制限{{{
+let g:no_gvimrc_example=1
+let g:no_vimrc_example =1
+let g:loaded_gzip               = 1
+let g:loaded_tar                = 1
+let g:loaded_tarPlugin          = 1
+let g:loaded_zip                = 1
+let g:loaded_zipPlugin          = 1
+let g:loaded_rrhelper           = 1
+let g:loaded_vimball            = 1
+let g:loaded_vimballPlugin      = 1
+let g:loaded_getscript          = 1
+let g:loaded_getscriptPlugin    = 1
+let g:loaded_netrw              = 1
+let g:loaded_netrwPlugin        = 1
+let g:loaded_netrwSettings      = 1
+let g:loaded_netrwFileHandlers  = 1
+let g:did_install_default_menus = 1
+let g:skip_loading_mswin        = 1
+let g:did_install_syntax_menu   = 1
 "# 標準のparenを読み込まずにプラグインのparenmatchを読み込む
 let g:loaded_matchparen=1
+"}}}
+"
+"# Variable
+let $HOME='D:/Apps/vim'
+let mapleader=';'
 "
 " カラースキム
 if !has('gui_running')

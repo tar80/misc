@@ -1,6 +1,6 @@
 " vim:tw=0:foldmethod=marker:foldcolumn=3:
 "======================================================================
-"" Vim 8.1  Last Change: 30-Dec-2018.
+"# Vim 8.1  Last Change: 23-march-2020.
 "======================================================================
 scriptencoding utf-8
 " カラースキーマ
@@ -19,7 +19,7 @@ set guicursor=a:ver20-blinkwait1000-blinkon700-blinkoff600
 "
 " 表示設定
 set guioptions-=T
-set guioptions-=m
+" set guioptions-=m
 set guioptions+=c
 set guioptions-=e
 set t_vb=
@@ -28,9 +28,10 @@ set t_vb=
 if has('xfontset')
   set guifontset=a14,r14,k14
 elseif has('win32') || has('win64')
-"   set guifont=Consolas:h14:cANSI:qDRAFT
-"   set guifont=RIcty_Diminished:h14:cSHIFTJIS:qDRAFT
-  set guifont=NasuM:h12:cSHIFTJIS:qDRAFT
+  set renderoptions=type:directx,renmode:5,gamma:1.6,contrast:1
+  " set guifont=Consolas:h14:cANSI:qDRAFT
+  " set guifont=Cica:h13:cSHIFTJIS
+  set guifont=NasuM:h13:cSHIFTJIS
 endif
 "
 " 印刷用フォント

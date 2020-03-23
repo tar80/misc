@@ -1,14 +1,12 @@
 "# vim:ts=4:tw=0:foldmethod=marker:foldcolumn=3:
 "======================================================================
-"# Vim 8.1  Last Change: 5-may-2019.
+"# Vim 8.1  Last Change: 23-march-2020.
 "======================================================================
 if &compatible
   set nocompatible
 endif
 "# 文字コードの判別
 source ~/vimfiles/encode.vim
-"
-scriptencoding utf-8
 "
 "# 機能の読み込み制限{{{
 let g:no_gvimrc_example=1
@@ -36,11 +34,9 @@ let g:loaded_matchparen=1
 "
 "# Variable
 let $HOME='C:/bin/home'
-let mapleader=';'
-"# 標準のparenを読み込まずにプラグインのparenmatchを読み込む
-let g:loaded_matchparen=1
+let g:mapleader=';'
 "
-" カラースキム
+"# ColorScheme_cui
 if !has('gui_running')
   colorscheme bong16
 endif
@@ -58,7 +54,7 @@ set viminfo=%2,'30,/10,:200,<200,f1,h,s10
 "# Nミリ秒キー入力がなければにスワップファイル自動保存(:default=4000)
 set updatetime=10000
 "# メニューを読み込まない
-set guioptions+=M
+" set guioptions+=M
 "# スクロールバーを読み込まない
 set guioptions-=l
 set guioptions-=L
@@ -198,6 +194,7 @@ call plug#begin('~/vimfiles')
   Plug 'rhysd/clever-f.vim'
   Plug 'tyru/caw.vim'
   Plug 'osyo-manga/vim-vigemo'
+  Plug 'gorodinskiy/vim-coloresque'
 "# manual
   Plug '~/vimfiles/colors'
   Plug '~/vimfiles/autoload'
@@ -288,12 +285,12 @@ if s:is_plugged('lightline.vim')
         \ 'fileencoding': 'LightlineFileencoding',
         \ }
         \ }
-  function! Unitemode()
+  function! Unitemode( )
     return &ft == 'unite' ? '' : lightline#mode()
   endfunction
   function! Mybufferstatus()
     return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-          \  ('' != LightlineModified() ? LightlineModified() : '') .
+          \  ('' != LightlineModified() ? LightlineModified() : '' ) .
           \  (&ft == 'unite' ? unite#get_status_string() :
           \   '' != expand('%:p') ? expand('%:p') : '[No Name]')
   endfunction
@@ -301,7 +298,7 @@ if s:is_plugged('lightline.vim')
     return &ft !~? 'help' && &readonly ? 'RO |' : ''
   endfunction
   function! LightlineModified()
-    return &modifiable && &modified ? '+ |' : ''
+    return &modifiable && &modified ? '⚡ ' : ''
   endfunction
   function! LightlineFileformat()
     return &ft != 'unite' ? &fileformat : ''
@@ -355,7 +352,7 @@ autocmd vimrcAU VimEnter,FilterWritePre * call SetDiffMode()
 function SetDiffMode()
 if &diff
   syntax off
-  highlight Normal guifg=#777777
+  highlight Normal guifg=#77777
 endif
 endfunction
 "#}}}

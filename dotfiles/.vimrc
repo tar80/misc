@@ -1,6 +1,6 @@
 "# vim:ts=4:tw=0:foldmethod=marker:foldcolumn=3:
 "======================================================================
-"# Vim 8.1  Last Change: 23-march-2020.
+"# Vim 8.1  Last Change: 25-march-2020.
 "======================================================================
 if &compatible
   set nocompatible
@@ -8,9 +8,17 @@ endif
 "# 文字コードの判別
 source ~/vimfiles/encode.vim
 "
-"# 機能の読み込み制限{{{
-let g:no_gvimrc_example=1
-let g:no_vimrc_example =1
+"# ColorScheme(cui)
+if !has('gui_running')
+  colorscheme bong16
+endif
+"======================================================================
+"# Initial {{{
+let $HOME = 'C:/bin/home'
+let $PATH = $PATH . ';C:/bin/node/v13110;C:/bin/node/project/vim/node_modules/.bin'
+let g:mapleader = ';'
+let g:no_gvimrc_example         = 1
+let g:no_vimrc_example          = 1
 let g:loaded_gzip               = 1
 let g:loaded_tar                = 1
 let g:loaded_tarPlugin          = 1
@@ -25,24 +33,16 @@ let g:loaded_netrw              = 1
 let g:loaded_netrwPlugin        = 1
 let g:loaded_netrwSettings      = 1
 let g:loaded_netrwFileHandlers  = 1
-let g:did_install_default_menus = 1
 let g:skip_loading_mswin        = 1
+"# メニュー
+let g:did_install_default_menus = 1
 let g:did_install_syntax_menu   = 1
-"# 標準のparenを読み込まずにプラグインのparenmatchを読み込む
-let g:loaded_matchparen=1
+"# 標準のparen ※vim-parenmatchを読み込むのでoff(=1)
+let g:loaded_matchparen         = 1
 "}}}
-"
-"# Variable
-let $HOME='C:/bin/home'
-let g:mapleader=';'
-"
-"# ColorScheme_cui
-if !has('gui_running')
-  colorscheme bong16
-endif
 "======================================================================
 "# Options {{{
-"# ファイル保存初期directory
+"# ファイル保存初期ディレクトリ
 set browsedir=buffer
 "# undoファイルをまとめるディレクトリ
 set undofile
@@ -53,8 +53,6 @@ set confirm
 set viminfo=%2,'30,/10,:200,<200,f1,h,s10
 "# Nミリ秒キー入力がなければにスワップファイル自動保存(:default=4000)
 set updatetime=10000
-"# メニューを読み込まない
-" set guioptions+=M
 "# スクロールバーを読み込まない
 set guioptions-=l
 set guioptions-=L
@@ -78,7 +76,7 @@ set scrolloff=1
 set smarttab
 set shiftwidth=2
 "# TABで挿入する桁数
-set softtabstop=4
+set softtabstop=2
 "# タブ幅
 set tabstop<
 "# タブをスペースに展開する
@@ -124,7 +122,9 @@ set display=lastline
 "# 対応する括弧を指定
 "set matchpairs+=【;】,";"
 "# 補完メニューの高さ
-set pumheight=10
+set pumheight=7
+"# 補完メニューオプション
+set completeopt=menuone,preview,noinsert
 "# diff縦分割
 set diffopt+=vertical,iwhite,context:3
 "# 自動インデント
@@ -137,6 +137,7 @@ set nowrapscan
 set showmatch matchtime=3
 "# コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 set wildmenu
+set wildmode=longest:full,full
 "# テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mM
 "# どの文字でタブや改行を表示するかを設定
@@ -166,20 +167,20 @@ endfunction
 "
 " packadd! matchit
 "# cleverf{{{
-  "# 行を跨がない = 1
-  let g:clever_f_across_no_line = 0
-  let g:clever_f_ignore_case = 1
-  let g:clever_f_smart_case  = 1
-  "# let g:clever_f_use_migemo  = 1
-  "# f前方,F後方検索に固定 = 1
-  let g:clever_f_fix_key_direction = 0
-  "# cleverf起動前に設定する必要あり
-  let g:clever_f_mark_cursor = 1
-  let g:clever_f_mark_cursor_color = "SpellRare"
-  "# 任意の記号にマッチ
-  "let g:clever_f_chars_match_any_signs = ';'
-  "# カーソルの色を消す？※1にすると色が戻らなくなる
-  let g:clever_f_hide_cursor_on_cmdline = 0
+"# 行を跨がない=1
+let g:clever_f_across_no_line = 0
+let g:clever_f_ignore_case = 1
+let g:clever_f_smart_case = 1
+"# let g:clever_f_use_migemo  = 1
+"# f前方,F後方検索に固定 = 1
+let g:clever_f_fix_key_direction = 0
+"# cleverf起動前に設定する必要あり
+let g:clever_f_mark_cursor = 1
+let g:clever_f_mark_cursor_color = "SpellRare"
+"# 任意の記号にマッチ
+"let g:clever_f_chars_match_any_signs = ';'
+"# カーソルの色を消す？※1にすると色が戻らなくなる
+let g:clever_f_hide_cursor_on_cmdline = 0
 "#}}}
 "# vim-plug{{{
 call plug#begin('~/vimfiles')
@@ -194,15 +195,37 @@ call plug#begin('~/vimfiles')
   Plug 'rhysd/clever-f.vim'
   Plug 'tyru/caw.vim'
   Plug 'osyo-manga/vim-vigemo'
-  Plug 'gorodinskiy/vim-coloresque'
+  " Plug 'gorodinskiy/vim-coloresque'
+  Plug 'w0rp/ale'
 "# manual
-  Plug '~/vimfiles/colors'
   Plug '~/vimfiles/autoload'
+  Plug '~/vimfiles/colors'
   Plug '~/vimfiles/dict'
   Plug '~/vimfiles/ftplugin'
   Plug '~/vimfiles/syntax'
   Plug '~/vimfiles/vimdoc-ja'
 call plug#end()
+"#}}}
+"# ale{{{
+let g:ale_linters = {
+      \  'javascript': ['eslint'],
+      \}
+let g:ale_fixers = {
+      \  'javascript': ['eslint'],
+      \}
+"# 開始時チェック
+let g:ale_lint_on_enter = 0
+"# 保存時チェック
+let g:ale_lint_on_save = 1
+"# 変更時チェック
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 1
+"# カラム幅の固定
+" let g:ale_sign_column_always = 1
+let g:ale_sign_error    = '⇒'
+let g:ale_sign_warning  = '⛔'
+"# セーブ時整形
+" let g:ale_fix_on_save = 1
 "#}}}
 "# Unite{{{
 if s:is_plugged('unite.vim')
@@ -215,12 +238,12 @@ if s:is_plugged('unite.vim')
   "g:unite_restore_alternate_file = 1
   "g:unite_source_buffer_time_format = "(%H:%M:%S %Y/%m/%d)"
   "g:unite_source_file_async_command = "ls -a"
-  "g:unite_source_bookmark_directory = 
+  "g:unite_source_bookmark_directory =
   let g:unite_source_rec_min_cache_files = 20
   let g:unite_source_rec_max_cache_files = 5000
   let g:unite_source_rec_async_command = ['find', '-L']
   "let g:unite_source_rec_find_args = ['','']
-  "let g:unite_source_rec_git_command = 
+  "let g:unite_source_rec_git_command =
   "let g:unite_source_grep_command = "grep"
   "let g:unite_source_grep_recursive_opt = "-r"
   "let g:unite_source_grep_default_opts = "-inH"
@@ -235,7 +258,7 @@ if s:is_plugged('unite.vim')
   "let g:unite_source_alias_aliases = {}
   "let g:unite_source_menu_menus  {}
   "let g:unite_source_process_enable_confirm = 1
-  "let g:unite_source_output_shellcmd_colors = 
+  "let g:unite_source_output_shellcmd_colors =
   "let g:unite_kind_jump_list_after_jump_scroll = 25
   "let g:unite_kind_file_preview_max_filesize = 1000000
   "let g:unite_kind_openable_persist_open_blink_time = "250m"
@@ -323,14 +346,10 @@ augroup vimrcAU
   autocmd!
 augroup END
 
-"# viminfoの初期値をマージ
-" autocmd vimrcAU VimEnter * rviminfo ~/_xxxinfo
-" autocmd vimrcAU VimLeave * wviminfo
-
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline
 "# 挿入モード中にフォーカスが外れたら着色
-autocmd vimrcAU FocusLost * call HighlightIM()
+autocmd vimrcAU FocusLost,BufLeave * call HighlightIM()
 function HighlightIM()
   if mode() == 'i'
     setlocal cursorline
@@ -340,7 +359,7 @@ endfunction
 autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
 
 "# filetype
-autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict
+autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/jscript.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
 autocmd vimrcAU FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
@@ -352,7 +371,7 @@ autocmd vimrcAU VimEnter,FilterWritePre * call SetDiffMode()
 function SetDiffMode()
 if &diff
   syntax off
-  highlight Normal guifg=#77777
+  highlight Normal guifg=#777777
 endif
 endfunction
 "#}}}
@@ -367,9 +386,6 @@ command! DiffExit syntax on | highlight Normal guifg=gray | diffoff
 "======================================================================
 "# Keys
 "# 全般{{{
-"# 行頭/行末に移動
-" noremap <space>h ^
-" noremap <space>l $
 "# 検索ハイライトoff
 noremap <silent>, :nohlsearch<cr>
 "# スペースでﾊﾞｯﾌｧ移動制御
@@ -419,8 +435,34 @@ noremap! <C-k> <Up>
 noremap! <C-b> <Left>
 noremap! <C-f> <Right>
 noremap! <C-s> <Delete>
-"# inoremap <C-b> <BS>
 inoremap <S-Delete> <C-o>d$
+"# completion
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : CompSelKey()
+function! CompSelKey()
+  let n = char2nr(strpart(getline('.'),col('.') -2, 1))
+  if n <= 32
+    return "\<TAB>"
+  else
+    echo "[n]ext,[p]review,[i]nner,[k]Dict,[o]mni,[f]ile,[v]im\<CR>"
+    let c = nr2char(getchar())
+    if c == "l"
+      return "\<C-x>\<C-l>"
+    elseif c == "n"
+      return "\<C-x>\<C-n>"
+    elseif c == "p"
+      return "\<C-x>\<C-p>"
+    elseif c == "k"
+      return "\<C-x>\<C-k>"
+    elseif c == "i"
+      return "\<C-x>\<C-i>"
+    elseif c == "f"
+      return "\<C-x>\<C-f>"
+    elseif c == "v"
+      return "\<C-x>\<C-v>"
+    elseif c == "o"
+      return "\<C-x>\<C-o>"
+  endif
+endfunction
 "#}}}
 "# visual_mode{{{
 "# 範囲を括る
@@ -444,9 +486,8 @@ noremap <silent> <C-z> :<C-u>Unite -no-start-insert -winwidth=50 -direction=botr
       \ -split -vertical -no-restore history/yank<CR>
 inoremap <silent><expr> <C-z> unite#start_complete(
       \ ['history/yank'], {'winwidth':50, 'split':1, 'vertical':1, 'restore':0})
-"# caw
-" nmap <leader>s <Plug>(caw:zeropos:toggle)
-" nmap <leader>t <Plug>(caw:dollarpos:toggle)
-"# migemo
+"# ale
+nmap <silent> [e <Plug>(ale_previous_wrap)
+nmap <silent> ]e <Plug>(ale_next_wrap)
 "#}}}
 filetype plugin indent on

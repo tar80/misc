@@ -92,7 +92,7 @@ call s:HL('WarningMsg',                     s:red,      '',         '')
 call s:HL('WildMenu',                       s:gray2,    s:cyan,     '')
 
 " Standard Syntax
-call s:HL('Comment',                        s:gray3,    '',         'italic')
+call s:HL('Comment',                        s:gray4,    '',         'italic')
 call s:HL('Constant',                       s:orange,   '',         '')
 call s:HL('String',                         s:green,    '',         '')
 call s:HL('Character',                      s:green,    '',         '')

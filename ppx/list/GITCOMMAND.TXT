@@ -22,16 +22,16 @@ checkout ;[--option][<branch>][<コミット>][<path>]
 	checkout --theirs ;<path>    マージ先ファイルを優先
 	%#FC
 commit ;[--option] -m 'message'
-        %#FC -m ' ;      選択エントリ
-	. -m ' ;         カレント以下
-	-m ' ;           全て
-	--amend -m ' ;   最新コミットの上書き
+        %#FC -m ' ;       選択エントリ
+	. -m ' ;          カレント以下
+	-m ' ;            全て
+	--amend -m ' ;    最新コミットの上書き
 diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
-	--stat  ;          変更点を表示
-	--cached ;       addしてからの変更点を表示
-	--color-words ;    単語単位の差分
-	--name-only ;      ファイル名のみ表示
-	--no-renames ;     名前のみの変更を省く
+	--stat  ;         変更点を表示
+	--cached ;        addしてからの変更点を表示
+	--color-words ;   単語単位の差分
+	--name-only ;     ファイル名のみ表示
+	--no-renames ;    名前のみの変更を省く
 difftool ;
 	--dir-diff
 fetch ;[--option|<remote [branch]>] リモートを取得する
@@ -84,10 +84,10 @@ remote ;[--option]
 	-v show ;リモートのURLを表示
 reset ;[--option][<コミット>][<path>]
 	HEAD %#FC ; add取消
-	--soft ;    直前のコミットリセット
-	--mixed ;   ※デフォルト 直前のaddとコミットリセット
+	--soft ;    コミットリセット
+	--mixed ;   ※デフォルト addとコミットリセット
 	ORIG_HEAD ; 直前のHEAD
-	HEAD^ ;     最新の一つ前のHEAD
+	HEAD~ ;     ~N前のHEAD
 revert ;ommit>[--option] 指定コミットを取り消して新しいコミットを作成
 	--no-commit ;           revert後コミットしない
 	-m ;[1(親)|2(派生)]     マージコミットのどちらに戻すかを選択

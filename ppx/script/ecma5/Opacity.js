@@ -16,4 +16,4 @@ try {
   soft = 80;
   hard = 60;
   PPx.Execute('*RotateExecute u_opa, *customize X_bg:O_%' + tID + '=100, *customize X_bg:O_%' + tID + '=' + soft + ', *customize X_bg:O_%' + tID + '=' + hard);
-};
+}

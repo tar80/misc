@@ -32,41 +32,41 @@ try {
 } catch (e) {
   PPx.Echo(e);
   PPx.Quit(-1);
-};
+}
 
 switch (arg[0]) {
-    // git関連のリザルト
-  case 'git':
-    fs_tList = fs.OpenTextFile(arg[1], 2, true, -1);
-    fs_tList.WriteLine(';ListFile');
-    fs_tList.WriteLine(';Base=' + PPx.Extract('%\'repo\'') + '|1');
-    fs_tList.Close();
-    break;
+// git関連のリザルト
+case 'git':
+  fs_tList = fs.OpenTextFile(arg[1], 2, true, -1);
+  fs_tList.WriteLine(';ListFile');
+  fs_tList.WriteLine(';Base=' + PPx.Extract('%\'repo\'') + '|1');
+  fs_tList.Close();
+  break;
   // 一行メモ
-  case 'memo':
-    try {
-      arg.push(PPx.Arguments(2));
-    } catch (e) {
-      PPx.Echo('メモがありません');
-      PPx.Quit(1);
-    };
-    tPath = (PPx.DirectoryType == 4)
-      ? '%FVD'
-      : arg[1];
-    fs_tList = fs.OpenTextFile(PPx.Extract(tPath), 8, true, -1);
-    str = PPx.Extract('"%*now",T:' + arg[2]);
-    fs_tList.WriteLine(str);
-    fs_tList.Close();
-    break;
+case 'memo':
+  try {
+    arg.push(PPx.Arguments(2));
+  } catch (e) {
+    PPx.Echo('メモがありません');
+    PPx.Quit(1);
+  }
+  tPath = (PPx.DirectoryType == 4)
+    ? '%FVD'
+    : arg[1];
+  fs_tList = fs.OpenTextFile(PPx.Extract(tPath), 8, true, -1);
+  str = PPx.Extract('"%*now",T:' + arg[2]);
+  fs_tList.WriteLine(str);
+  fs_tList.Close();
+  break;
   // 新規リストファイル
-  case 'listfile':
-    fs_tList = fs.OpenTextFile(arg[1], 2, true, -1);
-    fs_tList.WriteLine(';ListFile');
-    write_mark_path();
-    break;
-    // 指定されたリストに追記
-  default:
-    fs_tList = fs.OpenTextFile(arg[1], 8, true, -1);
-    write_mark_path();
-    break;
-};
+case 'listfile':
+  fs_tList = fs.OpenTextFile(arg[1], 2, true, -1);
+  fs_tList.WriteLine(';ListFile');
+  write_mark_path();
+  break;
+  // 指定されたリストに追記
+default:
+  fs_tList = fs.OpenTextFile(arg[1], 8, true, -1);
+  write_mark_path();
+  break;
+}

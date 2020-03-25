@@ -23,25 +23,25 @@ if (sync == 0) {
     PPx.Execute('*setcust _WinPos:V' + tID + '=%si"vSize"');
     PPx.Execute('*string i,vSize=');
   }
-};
+}
 
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
 function state_syncview (tWin) {
   PPx.Execute('*setcust X_win:V=' + tWin);
   PPx.Execute('%Oi *ppv -r -bootid:' + tID);
   switch (paneCount) {
-    case 2:
-      // capturewindowに取り込む前のサイズを記憶する
-      memSize = PPx.Extract('%*getcust(_WinPos:VA)');
-      PPx.Execute('*string i,vSize=' + memSize);
-      PPx.Execute('*string i,vState=1');
+  case 2:
+    // capturewindowに取り込む前のサイズを記憶する
+    memSize = PPx.Extract('%*getcust(_WinPos:VA)');
+    PPx.Execute('*string i,vSize=' + memSize);
+    PPx.Execute('*string i,vState=1');
     PPx.Execute('%Oi *capturewindow V' + tID + ' -pane:~ -selectnoactive');
-      //フォーカスがうまくいかない場合は、ここを調整する
-      PPx.Execute('*wait 10,1 %:*focus');
-      break;
-    default:
-      PPx.Execute('*topmostwindow %NV' + tID + ',1');
-      break;
+    //フォーカスがうまくいかない場合は、ここを調整する
+    PPx.Execute('*wait 10,1 %:*focus');
+    break;
+  default:
+    PPx.Execute('*topmostwindow %NV' + tID + ',1');
+    break;
   }
   PPx.Execute('*ppvoption sync ' + tID);
-};
+}

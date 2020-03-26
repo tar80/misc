@@ -8,20 +8,20 @@ var cID;
 
 try {
   if (PPx.Arguments(0)) {
-  arg = 'V';
+    arg = 'V';
   }
 } catch (e) {
   arg = PPx.WindowIDName.slice(0, 1);
-};
+}
 
 switch (arg) {
-  case 'C':
-    PPx.Execute('*ppc -single -mps -bootid:' + load_id() + ' %FD');
-    break;
-  case 'V':
-    PPx.Execute('*ppv -bootid:' + load_id() + ' %R');
-    break;
-};
+case 'C':
+  PPx.Execute('*ppc -single -mps -bootid:' + load_id() + ' %FD');
+  break;
+case 'V':
+  PPx.Execute('*ppv -bootid:' + load_id() + ' %R');
+  break;
+}
 /* 未起動のIDを探す関数 */
 // PPc[C]から順番に起動状態を確認(CharCode=67はアルファベットのC)
 function load_id() {
@@ -31,4 +31,4 @@ function load_id() {
       return cID[i];
     }
   }
-};
+}

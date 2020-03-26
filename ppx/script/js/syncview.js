@@ -23,7 +23,7 @@ if (sync == 0) {
     PPx.Execute('*setcust _WinPos:V' + tID + '=%si"vSize"');
     PPx.Execute('*string i,vSize=');
   }
-};
+}
 
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
 function state_syncview (tWin) {
@@ -44,4 +44,4 @@ function state_syncview (tWin) {
       break;
   }
   PPx.Execute('*ppvoption sync ' + tID);
-};
+}

@@ -23,43 +23,43 @@ current.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, function (match, p1, p2, p3, p4) {
 });
 
 switch (PPx.DirectoryType) {
-  case 1:
-    cDir = current;
-    fs_cDir = fs.GetFolder(cDir);
-    fs_parentDir = fs_cDir.ParentFolder
-    // 親ディレクトリがルートなら終了
-    if (fs_cDir.IsRootFolder) {
-      PPx.SetPopLineMessage('!">>root');
-      PPx.Quit(1);
-    }
-    e = new Enumerator(fs_parentDir.SubFolders);
-    /* 属性を考慮してリストに追加 */
-    add_list = function() {
-      var fs_tPath = fs.GetFolder(fs.BuildPath(fs_parentDir.Path, e.item().Name));
-      if (fs_tPath.Attributes <= 17) {
-        list.push(e.item().Name);
-      }
-    }
-    break;
-  case 4:
-  case 63:
-  case 64:
-  case 96:
-    cDir = vCurrent;
-    fs_parentDir = fs.GetFolder(cDir);
-    e = new Enumerator(fs_parentDir.Files);
-    /* 拡張子を考慮してリストに追加 */
-    add_list = function() {
-      var fs_tPath = fs.GetExtensionName(fs.BuildPath(fs_parentDir.Path, e.item().Name)).toLowerCase();
-      if (fs_tPath == ext)
-        list.push(e.item().Name);
-    }
-    break;
-  default:
-    PPx.SetPopLineMessage('!"非対応ディレクトリ');
+case 1:
+  cDir = current;
+  fs_cDir = fs.GetFolder(cDir);
+  fs_parentDir = fs_cDir.ParentFolder;
+  // 親ディレクトリがルートなら終了
+  if (fs_cDir.IsRootFolder) {
+    PPx.SetPopLineMessage('!">>root');
     PPx.Quit(1);
-    break;
-};
+  }
+  e = new Enumerator(fs_parentDir.SubFolders);
+  /* 属性を考慮してリストに追加 */
+  add_list = function() {
+    var fs_tPath = fs.GetFolder(fs.BuildPath(fs_parentDir.Path, e.item().Name));
+    if (fs_tPath.Attributes <= 17) {
+      list.push(e.item().Name);
+    }
+  };
+  break;
+case 4:
+case 63:
+case 64:
+case 96:
+  cDir = vCurrent;
+  fs_parentDir = fs.GetFolder(cDir);
+  e = new Enumerator(fs_parentDir.Files);
+  /* 拡張子を考慮してリストに追加 */
+  add_list = function() {
+    var fs_tPath = fs.GetExtensionName(fs.BuildPath(fs_parentDir.Path, e.item().Name)).toLowerCase();
+    if (fs_tPath == ext)
+      list.push(e.item().Name);
+  };
+  break;
+default:
+  PPx.SetPopLineMessage('!"非対応ディレクトリ');
+  PPx.Quit(1);
+  break;
+}
 
 (PPx.Arguments.length)
   ? move_path(-1, 1, 'top')
@@ -76,9 +76,8 @@ function move_path(valA, valB, termMessage) {
     return (a.toLowerCase() < b.toLowerCase())
       ? valA
       : valB;
-    return 0;
   });
-  for (var i = list.length; i=(i-1)|0;) {
+  for (var i = list.length; i--;) {
     if (list[i] == dirName)
       break;
   }
@@ -93,4 +92,4 @@ function move_path(valA, valB, termMessage) {
   } else {
     PPx.Quit(1);
   }
-};
+}

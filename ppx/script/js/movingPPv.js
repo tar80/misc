@@ -7,7 +7,7 @@ var vCount = PPx.Extract('%*ppxlist(+V)');
 
 if ((omit == 1) || (vCount > 1)) {
   PPx.Quit(1);
-};
+}
 
 // 画面サイズ
 var displayX = 1024;

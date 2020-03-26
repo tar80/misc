@@ -13,12 +13,11 @@ var sync = PPx.Extract('%*extract(C' + xID[1] + ',"%%*js(PPx.Result=PPx.SyncView
 if (sync > 0) {
   PPx.Execute('*focus ' + tPPx + xID[1]);
   PPx.Quit(1);
-};
+}
 
 if (xList[0] > 1) {
   xList.sort(function (a, b) {
     return a < b ? -1 : 1;
-    return 0;
   });
   xID = xID.join('_');
   for (var i = xList.length; i=(i-1)|0;) {
@@ -41,4 +40,4 @@ if (xList[0] > 1) {
   }
 } else {
   PPx.Execute('%K"@F6"');
-};
+}

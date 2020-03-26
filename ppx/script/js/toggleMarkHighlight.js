@@ -13,4 +13,4 @@ for (var i = 0, l = PPx.EntryDisplayCount; i < l; i = (i+1)|0) {
     PPx.Entry(i).Highlight = 0;
     PPx.Entry(i).Mark = 1;
   }
-};
+}

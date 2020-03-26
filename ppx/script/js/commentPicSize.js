@@ -16,8 +16,8 @@ for (var i = 0, l = PPx.EntryDisplayCount; i < l; i = (i+1)|0) {
     var Psize = entryInfo.replace(/[\s\S]*\*Size:(\d*x\d*)[\s\S]*/g,'$1');
     var str = entryName + '\t' + Psize;
     tList.WriteLine(str);
-  };
-};
+  }
+}
 tList.Close();
 // 表示を戻す
 PPx.Execute('*customize XC_celF:' + PPx.Extract('%n').slice(1) + '=' + listView);

@@ -25,7 +25,7 @@ try {
   PPx.Result = str.join('');
 } catch (e) {
   PPx.Result = arg[0];
-};
+}
 
 /* 補完リストを作成する関数 */
 function make_list(filepath, targetpath) {
@@ -36,8 +36,8 @@ function make_list(filepath, targetpath) {
   var e = new Enumerator(fs_dir.SubFolders);
 
   for (e.moveFirst(); !e.atEnd(); e.moveNext()) {
-    list.push(fs.GetFolder(fs.BuildPath(fs_dir.Path, e.item().Name)) + "\\");
-  };
+    list.push(fs.GetFolder(fs.BuildPath(fs_dir.Path, e.item().Name)) + '\\');
+  }
   fs_file.Write(list.join('\r\n'));
   fs_file.Close();
-};
+}

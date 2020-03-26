@@ -18,7 +18,7 @@ var doc   = ['AHK', 'INI', 'CFG', 'JS', 'JSON', 'LOG', 'MD', 'TXT', 'VIM'];
 if (cDir.match(/aux:.*/)) {
   PPx.Execute('%M_Caux, C');
   PPx.Quit(1);
-};
+}
 
 if (ext == 'DIR') {
   result = ['dir', 'W'];
@@ -37,18 +37,18 @@ if (ext == 'DIR') {
     } else
     result = ['none', 'S'];
   }
-};
+}
 
 if (arg == 'M_Ccr') {
   // 標準メニュー
-  select_menu('J', 'O')
+  select_menu('J', 'O');
 } else {
   // ファイル移動メニュー
   result[1] = (arg == 'M_FileMOVE')
     ? 'M'
     : 'C';
   select_menu(result[1], result[1]);
-};
+}
 
 /* カレントディレクトリの属性に応じて処理を分岐する関数 */
 function select_menu(list, arc) {
@@ -68,4 +68,4 @@ function select_menu(list, arc) {
       PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + result[0] + ' %:%' + arg + ',' + result[1]);
       break;
   }
-};
+}

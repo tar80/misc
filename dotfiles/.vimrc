@@ -13,7 +13,7 @@ if !has('gui_running')
 endif
 "======================================================================
 "# Initial {{{
-let $HOME = 'C:/bin/home'
+" let $HOME = 'C:/bin/home'
 let $PATH = $PATH . ';C:/bin/node/v13110;C:/bin/node/project/vim/node_modules/.bin'
 let g:mapleader = ';'
 let g:no_gvimrc_example         = 1
@@ -45,7 +45,7 @@ let g:loaded_matchparen         = 1
 set browsedir=buffer
 "# undoファイルをまとめるディレクトリ
 set undofile
-set undodir=$VIM/.cache/undolog
+set undodir=$HOME/.cache/undolog
 "# 未保存ファイルを閉じる時、ダイアログを出さない
 set confirm
 "# viminfoの設定
@@ -108,8 +108,8 @@ set ambiwidth=double
 set lazyredraw
 "# Windowsでパスの区切りに / を使えるようにする
 set shellslash
-"# w,bの移動で認識する文字
-set iskeyword=@,48-57,.
+" "# w,bの移動で認識する文字
+set iskeyword+==
 "# 起動時のメッセージ非表示
 "set shortmess+=I
 "# タブライン常時表示
@@ -140,7 +140,7 @@ set wildmode=longest:full,full
 "# テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mM
 "# どの文字でタブや改行を表示するかを設定
-set listchars=tab:<.>,extends:<,precedes:>,trail:_,
+set listchars=tab:\|\ \ ,extends:<,precedes:>,trail:_,
 "# 常にステータス行を表示 (詳細は:he laststatus)
 set laststatus=2
 "# コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
@@ -194,8 +194,8 @@ call plug#begin('~/vimfiles')
   Plug 'rhysd/clever-f.vim'
   Plug 'tyru/caw.vim'
   Plug 'osyo-manga/vim-vigemo'
-  " Plug 'gorodinskiy/vim-coloresque'
   Plug 'w0rp/ale'
+  " Plug 'gorodinskiy/vim-coloresque'
 "# manual
   Plug '~/vimfiles/autoload'
   Plug '~/vimfiles/colors'
@@ -207,7 +207,7 @@ call plug#begin('~/vimfiles')
 call plug#end()
 "#}}}
 "# ale{{{
-" if s:is_plugged('ale.vim')
+if s:is_plugged('ale')
   let g:ale_linters = {
         \  'javascript': ['eslint'],
         \}
@@ -227,13 +227,13 @@ call plug#end()
   let g:ale_sign_warning  = '⛔'
   "# セーブ時整形
   " let g:ale_fix_on_save = 1
-" endif
+endif
 "#}}}
 "# autocomplpop{{{
-if s:is_plugged('acp.vim')
+if s:is_plugged('vim-autocomplpop')
   let g:acp_enableAtStarup = 1
   let g:acp_completeOption        = 'w,b,k,i'
-  let g:acp_behaviorKeywordLength = 4
+  let g:acp_behaviorKeywordLength = 3
   let g:acp_behaviorFileLength    = 2
   let g:acp_behaviorRubyOmniMethodLength  = -1
   let g:acp_behaviorRubyOmniSymbolLength  = -1
@@ -346,10 +346,12 @@ if s:is_plugged('lightline.vim')
     return &ft != 'unite' ? (&filetype !=# '' ? &filetype : 'no ft') : ''
   endfunction
 endif
-if has('gui_running')
-  let g:lightline.colorscheme = 'bong'
-else
-  let g:lightline.colorscheme = 'bong16'
+if s:is_plugged('lightline.vim')
+  if has('gui_running')
+    let g:lightline.colorscheme = 'bong'
+  else
+    let g:lightline.colorscheme = 'bong16'
+  endif
 endif
 "#}}}
 "}}}
@@ -372,7 +374,7 @@ endfunction
 autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
 
 "# filetype
-autocmd vimrcAU FileType javascript setlocal dictionary+=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
+autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
 autocmd vimrcAU FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
@@ -450,30 +452,12 @@ noremap! <C-f> <Right>
 noremap! <C-s> <Delete>
 inoremap <S-Delete> <C-o>d$
 "# completion
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : CompSelKey()
-function! CompSelKey()
-  let n = char2nr(strpart(getline('.'),col('.') -2, 1))
-  if n <= 32
-    return "\<TAB>"
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : OmniTabKey()
+function! OmniTabKey()
+  if strpart(getline('.'),col('.') -2, 1) == "."
+    return "\<C-x>\<C-o>"
   else
-    echo "[n]ext,[p]review,[i]nner,[k]Dict,[o]mni,[f]ile,[v]im\<CR>"
-    let c = nr2char(getchar())
-    if c == "l"
-      return "\<C-x>\<C-l>"
-    elseif c == "n"
-      return "\<C-x>\<C-n>"
-    elseif c == "p"
-      return "\<C-x>\<C-p>"
-    elseif c == "k"
-      return "\<C-x>\<C-k>"
-    elseif c == "i"
-      return "\<C-x>\<C-i>"
-    elseif c == "f"
-      return "\<C-x>\<C-f>"
-    elseif c == "v"
-      return "\<C-x>\<C-v>"
-    elseif c == "o"
-      return "\<C-x>\<C-o>"
+    return "\<TAB>"
   endif
 endfunction
 "#}}}

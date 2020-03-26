@@ -1,3 +1,5 @@
+//!*script
+PPx.Arguments
 PPx.Clipboard
 PPx.ComboIDName
 PPx.CreateObject()
@@ -5,7 +7,7 @@ PPx.DirectoryType
 PPx.DriveFreeSize
 PPx.DriveTotalSize
 PPx.DriveVolumeLabel
-PPx.Echo()
+PPx.Echo(
 PPx.Entry
 PPx.Entry.AllCount
 PPx.Entry.Attributes
@@ -91,12 +93,8 @@ PPx.Pane.Tab.length
 PPx.Pane.length
 PPx.Quit
 PPx.Result
-PPx.ScriptName
-PPx.SetPopLineMessage
-PPx.Sleep
-PPx.SlowMode
+PPx.SetPopLineMessage()
 PPx.SyncView
 PPx.Tab
 PPx.WindowDirection
 PPx.WindowIDName
-PPx.length

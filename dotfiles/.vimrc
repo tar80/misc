@@ -8,13 +8,13 @@ endif
 "# 文字コードの判別
 source ~/vimfiles/encode.vim
 "
-"# ColorScheme(cui)
 if !has('gui_running')
   colorscheme bong16
 endif
 "======================================================================
 "# Initial {{{
-let $HOME='D:/Apps/vim'
+let $HOME = 'C:/bin/home'
+let $PATH = $PATH . ';C:/bin/node/v13110;C:/bin/node/project/vim/node_modules/.bin'
 let g:mapleader = ';'
 let g:no_gvimrc_example         = 1
 let g:no_vimrc_example          = 1
@@ -166,7 +166,7 @@ endfunction
 "
 " packadd! matchit
 "# cleverf{{{
-"# 行を跨がない=1
+"# 行を跨がない = 1
 let g:clever_f_across_no_line = 0
 let g:clever_f_ignore_case = 1
 let g:clever_f_smart_case = 1
@@ -195,6 +195,7 @@ call plug#begin('~/vimfiles')
   Plug 'tyru/caw.vim'
   Plug 'osyo-manga/vim-vigemo'
   " Plug 'gorodinskiy/vim-coloresque'
+  Plug 'w0rp/ale'
 "# manual
   Plug '~/vimfiles/autoload'
   Plug '~/vimfiles/colors'
@@ -202,8 +203,43 @@ call plug#begin('~/vimfiles')
   Plug '~/vimfiles/ftplugin'
   Plug '~/vimfiles/syntax'
   Plug '~/vimfiles/vimdoc-ja'
+  Plug '~/vimfiles/vim-autocomplpop'
 call plug#end()
 "#}}}
+"# ale{{{
+" if s:is_plugged('ale.vim')
+  let g:ale_linters = {
+        \  'javascript': ['eslint'],
+        \}
+  let g:ale_fixers = {
+        \  'javascript': ['eslint'],
+        \}
+  "# 開始時チェック
+  let g:ale_lint_on_enter = 0
+  "# 保存時チェック
+  let g:ale_lint_on_save = 1
+  "# 変更時チェック
+  let g:ale_lint_on_text_changed = 0
+  let g:ale_lint_on_insert_leave = 1
+  "# カラム幅の固定
+  " let g:ale_sign_column_always = 1
+  let g:ale_sign_error    = '⇒'
+  let g:ale_sign_warning  = '⛔'
+  "# セーブ時整形
+  " let g:ale_fix_on_save = 1
+" endif
+"#}}}
+"# autocomplpop{{{
+if s:is_plugged('acp.vim')
+  let g:acp_enableAtStarup = 1
+  let g:acp_completeOption        = 'w,b,k,i'
+  let g:acp_behaviorKeywordLength = 4
+  let g:acp_behaviorFileLength    = 2
+  let g:acp_behaviorRubyOmniMethodLength  = -1
+  let g:acp_behaviorRubyOmniSymbolLength  = -1
+  let g:acp_behaviorPythonOmniLength      = -1
+endif
+"}}}
 "# Unite{{{
 if s:is_plugged('unite.vim')
   let g:unite_ignore_source_files = ['history_unite.vim','bookmark.vim']
@@ -285,12 +321,12 @@ if s:is_plugged('lightline.vim')
         \ 'fileencoding': 'LightlineFileencoding',
         \ }
         \ }
-  function! Unitemode( )
+  function! Unitemode()
     return &ft == 'unite' ? '' : lightline#mode()
   endfunction
   function! Mybufferstatus()
     return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-          \  ('' != LightlineModified() ? LightlineModified() : '' ) .
+         \  ('' != LightlineModified() ? LightlineModified() : '') .
           \  (&ft == 'unite' ? unite#get_status_string() :
           \   '' != expand('%:p') ? expand('%:p') : '[No Name]')
   endfunction
@@ -336,7 +372,7 @@ endfunction
 autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
 
 "# filetype
-autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/jscript.dict
+autocmd vimrcAU FileType javascript setlocal dictionary+=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
 autocmd vimrcAU FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
@@ -416,7 +452,8 @@ inoremap <S-Delete> <C-o>d$
 "# completion
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : CompSelKey()
 function! CompSelKey()
-  if char2nr(strpart(getline('.'),col('.') -2, 1)) <= 32
+  let n = char2nr(strpart(getline('.'),col('.') -2, 1))
+  if n <= 32
     return "\<TAB>"
   else
     echo "[n]ext,[p]review,[i]nner,[k]Dict,[o]mni,[f]ile,[v]im\<CR>"

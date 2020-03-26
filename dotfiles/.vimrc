@@ -8,12 +8,13 @@ endif
 "# 文字コードの判別
 source ~/vimfiles/encode.vim
 "
+"# ColorScheme_cui
 if !has('gui_running')
   colorscheme bong16
 endif
 "======================================================================
 "# Initial {{{
-" let $HOME = 'C:/bin/home'
+let $HOME = 'C:/bin/home'
 let $PATH = $PATH . ';C:/bin/node/v13110;C:/bin/node/project/vim/node_modules/.bin'
 let g:mapleader = ';'
 let g:no_gvimrc_example         = 1
@@ -108,7 +109,7 @@ set ambiwidth=double
 set lazyredraw
 "# Windowsでパスの区切りに / を使えるようにする
 set shellslash
-" "# w,bの移動で認識する文字
+"# w,bの移動で認識する文字
 set iskeyword+==
 "# 起動時のメッセージ非表示
 "set shortmess+=I

@@ -1,6 +1,6 @@
 "# vim:ts=4:tw=0:foldmethod=marker:foldcolumn=3:
 "======================================================================
-"# Vim 8.1  Last Change: 25-march-2020.
+"# Vim 8.1  Last Change: 27-march-2020.
 "======================================================================
 if &compatible
   set nocompatible
@@ -16,7 +16,7 @@ endif
 "# Initial {{{
 let $HOME = 'C:/bin/home'
 let $PATH = $PATH . ';C:/bin/node/v13110;C:/bin/node/project/vim/node_modules/.bin'
-let g:mapleader = ';'
+let g:mapleader                 = ';'
 let g:no_gvimrc_example         = 1
 let g:no_vimrc_example          = 1
 let g:loaded_gzip               = 1
@@ -43,21 +43,21 @@ let g:loaded_matchparen         = 1
 "======================================================================
 "# Options {{{
 "# ファイル保存初期ディレクトリ
-set browsedir=buffer
+set browsedir =buffer
 "# undoファイルをまとめるディレクトリ
 set undofile
-set undodir=$HOME/.cache/undolog
+set undodir =$HOME/.cache/undolog
 "# 未保存ファイルを閉じる時、ダイアログを出さない
 set confirm
 "# viminfoの設定
-set viminfo=%2,'30,/10,:200,<200,f1,h,s10
-"# Nミリ秒キー入力がなければにスワップファイル自動保存(:default=4000)
-set updatetime=10000
+set viminfo =%2,'30,/10,:200,<200,f1,h,s10
+"# CursorHoldI,swapfileの待機時間(:default=4000ミリ秒)
+set updatetime =10000
 "# スクロールバーを読み込まない
-set guioptions-=l
-set guioptions-=L
-set guioptions-=r
-set guioptions-=R
+set guioptions -=l
+set guioptions -=L
+set guioptions -=r
+set guioptions -=R
 "# カレント以外の窓最小高さ
 "# set winminheight=2
 "# 行番号
@@ -71,12 +71,12 @@ set wrap
 "# ステータスのモード表示
 set noshowmode
 "# スクロール時にN行残す
-set scrolloff=1
+set scrolloff =1
 "# 行頭のTABはshiftwidthの数だけスペースで補完
 set smarttab
-set shiftwidth=2
+set shiftwidth =2
 "# TABで挿入する桁数
-set softtabstop=2
+set softtabstop =2
 "# タブ幅
 set tabstop<
 "# タブをスペースに展開する
@@ -90,64 +90,64 @@ set hlsearch
 "# 折り返し行のインデントを揃える
 set breakindent
 "# 折り返しの行頭表示
-set showbreak=>>
+set showbreak =>>
 "# 単語の途中で折り返さない
 set linebreak
 "# フリーカーソルを有効にするモード（block=矩形）
-set virtualedit=block
+set virtualedit =block
 "# キーコマンドタイムアウト
-set timeout timeoutlen=2000 ttimeoutlen=100
+set timeout timeoutlen =2000 ttimeoutlen =100
 "# スペルチェックから日本語を外す
-set spelllang+=cjk
+set spelllang +=cjk
 "# 8進数無効 <C-a>,<C-x>に影響する為
-set nrformats-=octal
+set nrformats -=octal
 "# 行末・行頭の移動を可能にするキー
-set whichwrap=<,>,[,],b
+set whichwrap =<,>,[,],b
 "# 2バイト文字記号でカーソル位置がずれないように
-set ambiwidth=double
+set ambiwidth =double
 "# マクロ実行中などの画面再描画を行わない
 set lazyredraw
 "# Windowsでパスの区切りに / を使えるようにする
 set shellslash
 "# w,bの移動で認識する文字
-set iskeyword+==
+set iskeyword +==
 "# 起動時のメッセージ非表示
-"set shortmess+=I
+" set shortmess+=I
 "# タブライン常時表示
-set showtabline=2
+set showtabline =2
 "# ヴィジュアルベル off
-set visualbell t_vb=
+set visualbell t_vb =
 "# 画面最後の行をできる限り表示する
-set display=lastline
+set display =lastline
 "# 対応する括弧を指定
-"set matchpairs+=【;】,";"
+" set matchpairs+=【;】,";"
 "# 補完メニューの高さ
-set pumheight=7
+set pumheight =7
 "# 補完メニューオプション
-set completeopt=menuone,preview,noinsert
+set completeopt =menuone,noselect
 "# diff縦分割
-set diffopt+=vertical,iwhite,context:3
+set diffopt +=vertical,iwhite,context:3
 "# 自動インデント
 set autoindent
 "# バックスペースでインデントや改行を削除できるようにする
-set backspace=indent,eol,start
+set backspace =indent,eol,start
 "# 検索時にファイルの最後まで行った時最初に戻らない
 set nowrapscan
 "# 括弧入力時に対応する括弧を表示 matchtime=0で非表示
-set showmatch matchtime=3
+set showmatch matchtime =3
 "# コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 set wildmenu
-set wildmode=longest:full,full
+set wildmode =longest:full,full
 "# テキスト挿入中の自動折り返しを日本語に対応させる
-set formatoptions+=mM
+set formatoptions +=mM
 "# どの文字でタブや改行を表示するかを設定
-set listchars=tab:\|\ \ ,extends:<,precedes:>,trail:_,
+set listchars =tab:\|\ \ ,extends:<,precedes:>,trail:_,
 "# 常にステータス行を表示 (詳細は:he laststatus)
-set laststatus=2
+set laststatus =2
 "# コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
-set cmdheight=2
+set cmdheight =2
 "# コマンドをステータス行に表示
-"set showcmd
+" set showcmd
 "# ウインドウにタイトルを付ける
 set title titlestring=Vim
 "# バックアップファイルを作成しない
@@ -169,16 +169,16 @@ endfunction
 "# cleverf{{{
 "# 行を跨がない = 1
 let g:clever_f_across_no_line = 0
-let g:clever_f_ignore_case = 1
-let g:clever_f_smart_case = 1
-"# let g:clever_f_use_migemo  = 1
+let g:clever_f_ignore_case    = 1
+let g:clever_f_smart_case     = 1
+" let g:clever_f_use_migemo     = 1
 "# f前方,F後方検索に固定 = 1
-let g:clever_f_fix_key_direction = 0
+let g:clever_f_fix_key_direction  = 0
 "# cleverf起動前に設定する必要あり
-let g:clever_f_mark_cursor = 1
-let g:clever_f_mark_cursor_color = "SpellRare"
+let g:clever_f_mark_cursor        = 1
+let g:clever_f_mark_cursor_color  = "SpellRare"
 "# 任意の記号にマッチ
-"let g:clever_f_chars_match_any_signs = ';'
+" let g:clever_f_chars_match_any_signs = ';'
 "# カーソルの色を消す？※1にすると色が戻らなくなる
 let g:clever_f_hide_cursor_on_cmdline = 0
 "#}}}
@@ -218,7 +218,7 @@ if s:is_plugged('ale')
   "# 開始時チェック
   let g:ale_lint_on_enter = 0
   "# 保存時チェック
-  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_save  = 1
   "# 変更時チェック
   let g:ale_lint_on_text_changed = 0
   let g:ale_lint_on_insert_leave = 1
@@ -232,7 +232,7 @@ endif
 "#}}}
 "# autocomplpop{{{
 if s:is_plugged('vim-autocomplpop')
-  let g:acp_enableAtStarup = 1
+  let g:acp_enableAtStarup        = 1
   let g:acp_completeOption        = 'w,b,k,i'
   let g:acp_behaviorKeywordLength = 3
   let g:acp_behaviorFileLength    = 2
@@ -255,7 +255,7 @@ if s:is_plugged('unite.vim')
   "g:unite_source_bookmark_directory =
   let g:unite_source_rec_min_cache_files = 20
   let g:unite_source_rec_max_cache_files = 5000
-  let g:unite_source_rec_async_command = ['find', '-L']
+  let g:unite_source_rec_async_command   = ['find', '-L']
   "let g:unite_source_rec_find_args = ['','']
   "let g:unite_source_rec_git_command =
   "let g:unite_source_grep_command = "grep"
@@ -344,7 +344,7 @@ if s:is_plugged('lightline.vim')
     return &ft != 'unite' ? (&fenc !=# '' ? &fenc : &enc) : ''
   endfunction
   function! LightlineFiletype()
-    return &ft != 'unite' ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+    return &ft != 'unite' ? (&filetype !=# '' ? &filetype : 'unknown') : ''
   endfunction
 endif
 if s:is_plugged('lightline.vim')
@@ -406,7 +406,7 @@ command! DiffExit syntax on | highlight Normal guifg=gray | diffoff
 noremap <silent>, :nohlsearch<cr>
 "# スペースでﾊﾞｯﾌｧ移動制御
 noremap <space> <C-w>
-noremap <nowait><Space><Space> <C-w><C-w>
+noremap <nowait> <Space><Space> <C-w><C-w>
 "# F12でラップ状態の切り替え
 noremap <silent> <F12> :<C-u>call SetWrap()<CR>
 function SetWrap()
@@ -453,10 +453,27 @@ noremap! <C-f> <Right>
 noremap! <C-s> <Delete>
 inoremap <S-Delete> <C-o>d$
 "# completion
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : OmniTabKey()
-function! OmniTabKey()
-  if strpart(getline('.'),col('.') -2, 1) == "."
-    return "\<C-x>\<C-o>"
+inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
+inoremap <expr> { col('.') == col('$') ? "{<CR>}<UP><END>" : "{"
+inoremap <expr> " QuoteBehavior('"')
+inoremap <expr> ' QuoteBehavior("'")
+function! QuoteBehavior(tKey)
+  if col('.') == col('$')
+    return a:tKey . a:tKey . "\<Left>"
+    elseif strpart(getline('.'),col('.') -2, 2) == '()'
+      return a:tKey . a:tKey . "\<Left>"
+    else
+      return a:tKey
+    endif
+  endif
+endfunction
+"# omni
+inoremap <expr> . empty(&omnifunc) ? "." : ".<C-x><C-o>"
+"# TABの挙動
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : ComplTabKey()
+function! ComplTabKey()
+  if strpart(getline('.'),col('.') -2, 1) == "/"
+    return "\<C-x>\<C-f>"
   else
     return "\<TAB>"
   endif
@@ -484,6 +501,20 @@ noremap <silent> <C-z> :<C-u>Unite -no-start-insert -winwidth=50 -direction=botr
       \ -split -vertical -no-restore history/yank<CR>
 inoremap <silent><expr> <C-z> unite#start_complete(
       \ ['history/yank'], {'winwidth':50, 'split':1, 'vertical':1, 'restore':0})
+"# acp
+inoremap <expr> <F2> ToggleAutoComplPop()
+function ToggleAutoComplPop()
+  if s:is_plugged('vim-autocomplpop')
+    if g:acp_behaviorKeywordLength == -1
+      let g:acp_behaviorKeywordLength = 3
+      echo 'completion ON'
+    else
+      let g:acp_behaviorKeywordLength = -1
+      echo 'completion OFF'
+    endif
+    return ''
+  endif
+endfunction
 "# ale
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)

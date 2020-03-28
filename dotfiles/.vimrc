@@ -458,7 +458,7 @@ inoremap <expr> { col('.') == col('$') ? "{<CR>}<UP><END>" : "{"
 inoremap <expr> " QuoteBehavior('"')
 inoremap <expr> ' QuoteBehavior("'")
 function! QuoteBehavior(tKey)
-  if col('.') == col('$')
+  if col('.') == col('$') && char2nr(strpart(getline('.'),col('.') -2, 1)) == 32
     return a:tKey . a:tKey . "\<Left>"
     elseif strpart(getline('.'),col('.') -2, 2) == '()'
       return a:tKey . a:tKey . "\<Left>"
@@ -468,7 +468,7 @@ function! QuoteBehavior(tKey)
   endif
 endfunction
 "# omni
-inoremap <expr> . empty(&omnifunc) ? "." : ".<C-x><C-o>"
+inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p>" : ".<C-x><C-o>"
 "# TABの挙動
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : ComplTabKey()
 function! ComplTabKey()

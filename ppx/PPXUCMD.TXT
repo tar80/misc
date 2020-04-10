@@ -241,7 +241,7 @@
 *replacefile ;filename ファイルを開き直す(PPe)
 *return ;ユーザコマンドの終了
 *screensaver ;スクリーンセーバを起動
-*script D:\bin\ppx\script\ ;jscript
+*script %'repoppx'%\xTest.js
 *selectppx ;[ID] 指定PPxにフォーカス移動
 *setcaption ;text キャプションの設定
 *set ;[valuename=[strings]] 環境変数の設定、削除

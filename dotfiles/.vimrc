@@ -215,6 +215,8 @@ if s:is_plugged('ale')
   let g:ale_fixers = {
         \  'javascript': ['eslint'],
         \}
+  "# マウスホバー
+  let g:ale_set_balloons = 0
   "# 開始時チェック
   let g:ale_lint_on_enter = 0
   "# 保存時チェック
@@ -302,8 +304,8 @@ endif
 if s:is_plugged('lightline.vim')
   let g:lightline = {
         \ 'active': {
-        \ 'left'  : [['mode', 'paste'],['bufstatus']],
-        \ 'right' : [['lineinfo'],['percent'],['fileformat','fileencoding','filetype'],['gitbranch']]
+        \ 'left'  : [['mode', 'paste'],['ale', 'bufstatus']],
+        \ 'right' : [['lineinfo'],['percent'],['fileformat', 'fileencoding', 'filetype'],['gitbranch']]
         \ },
         \ 'tabline': {
         \ 'left'   : [['tabs']],
@@ -314,22 +316,29 @@ if s:is_plugged('lightline.vim')
         \ 'cd'       : '%.35(%{fnamemodify(getcwd(), ":~")}%)',
         \ },
         \ 'component_function' : {
-        \ 'mode': 'Unitemode',
-        \ 'bufstatus': 'Mybufferstatus',
-        \ 'gitbranch': 'gitbranch#name',
-        \ 'fileformat': 'LightlineFileformat',
-        \ 'filetype': 'LightlineFiletype',
+        \ 'mode'        : 'Unitemode',
+        \ 'ale'         : 'ALEStatus',
+        \ 'bufstatus'   : 'Mybufferstatus',
+        \ 'gitbranch'   : 'gitbranch#name',
+        \ 'fileformat'  : 'LightlineFileformat',
+        \ 'filetype'    : 'LightlineFiletype',
         \ 'fileencoding': 'LightlineFileencoding',
         \ }
         \ }
   function! Unitemode()
     return &ft == 'unite' ? '' : lightline#mode()
   endfunction
+  function! ALEStatus()
+    let l:count = ale#statusline#Count(bufnr(''))
+    let l:errors = l:count.error + l:count.style_error
+    let l:warnings = l:count.warning + l:count.style_warning
+    return l:count.total != 0 ? '🐬 ' . l:errors . ' ' . '⛔ ' . l:warnings : ''
+  endfunction
   function! Mybufferstatus()
     return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-         \  ('' != LightlineModified() ? LightlineModified() : '') .
-          \  (&ft == 'unite' ? unite#get_status_string() :
-          \   '' != expand('%:p') ? expand('%:p') : '[No Name]')
+         \ ('' != LightlineModified() ? LightlineModified() : '') .
+         \ (&ft == 'unite' ? unite#get_status_string() :
+         \  '' != expand('%:p') ? expand('%:p') : '[No Name]')
   endfunction
   function! LightlineReadonly()
     return &ft !~? 'help' && &readonly ? 'RO |' : ''
@@ -450,15 +459,15 @@ noremap! <C-j> <Down>
 noremap! <C-k> <Up>
 noremap! <C-b> <Left>
 noremap! <C-f> <Right>
-noremap! <C-s> <Delete>
+noremap! <C-l> <Delete>
 inoremap <S-Delete> <C-o>d$
 "# completion
-inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
-inoremap <expr> { col('.') == col('$') ? "{<CR>}<UP><END>" : "{"
+" inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
+" inoremap <expr> [ col('.') == col('$') ? "[]<Left>" : "["
 inoremap <expr> " QuoteBehavior('"')
 inoremap <expr> ' QuoteBehavior("'")
 function! QuoteBehavior(tKey)
-  if col('.') == col('$')
+  if col('.') == col('$') && char2nr(strpart(getline('.'),col('.') -2, 1)) == 32
     return a:tKey . a:tKey . "\<Left>"
     elseif strpart(getline('.'),col('.') -2, 2) == '()'
       return a:tKey . a:tKey . "\<Left>"
@@ -468,7 +477,7 @@ function! QuoteBehavior(tKey)
   endif
 endfunction
 "# omni
-inoremap <expr> . empty(&omnifunc) ? "." : ".<C-x><C-o>"
+inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p>" : ".<C-x><C-o>"
 "# TABの挙動
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : ComplTabKey()
 function! ComplTabKey()
@@ -484,6 +493,9 @@ endfunction
 vnoremap <space>" c"<C-r>""<ESC>
 vnoremap <space>' c'<C-r>"'<ESC>
 vnoremap <space>( c(<C-r>")<ESC>
+vnoremap <space>[ c[<C-r>"]<ESC>
+vnoremap <space>{ c{<C-r>"}<ESC>
+vnoremap <space>${ c${<C-r>"}<ESC>
 "# 範囲インデント処理後に解除しないように
 vnoremap < <gv
 vnoremap > >gv

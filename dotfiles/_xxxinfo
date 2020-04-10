@@ -11,10 +11,6 @@
 |2,0,1000000018,,"lcd %:h"
 :lcd C:/git/tar80/misc/
 |2,0,1000000017,,"lcd C:/git/tar80/misc/"
-:lcd D:/Apps/
-|2,0,1000000016,,"lcd D:/Apps/"
-:lcd D:/Apps/ppx/
-|2,0,1000000015,,"lcd D:/Apps/ppx/"
 :difforg
 |2,0,1000000009,,"difforg"
 :set scb | wincmd p | set scb
@@ -31,24 +27,6 @@
 |2,0,1000000009,,"set fenc=utf-8 ff=unix"
 :set noexpandtab
 |2,0,1000000009,,"set noexpandtab"
-:plugstatus
-|2,0,1000000008,,"plugstatus"
-:gwrite
-|2,0,1000000008,,"gwrite"
-:gstatus
-|2,0,1000000008,,"gstatus"
-:gdiff
-|2,0,1000000008,,"gdiff"
-:gcommit
-|2,0,1000000008,,"gcommit"
-:pluginstall
-|2,0,1000000008,,"pluginstall"
-:plugupdate
-|2,0,1000000008,,"plugupdate"
-:plugdiff
-|2,0,1000000008,,"plugdiff"
-:plugclean
-|2,0,1000000008,,"plugclean"
 :tabclose
 |2,0,1000000000,,"tabclose"
 :set spell
@@ -77,18 +55,6 @@
 # 入力行 項目の履歴 (新しいものから古いものへ):
 # デバッグ行 項目の履歴 (新しいものから古いものへ):
 # レジスタ:
-"g	CHAR	0
-	C:/bin/repository/tar80/misc/
-|3,0,16,1,1,0,1545963168,"C:/bin/repository/tar80/misc/"
-"p	CHAR	0
-	C:/bin/ppx/
-|3,0,25,1,1,0,1545963152,"C:/bin/ppx/"
-# ファイルマーク:
-'K  346  1  ~/.vimrc
-|4,75,346,1,1572618453,"~/.vimrc"
-'P  409  1  ~/.vimrc
-|4,80,409,1,1572618458,"~/.vimrc"
-
 # ジャンプリスト (新しいものが先):
 # バッファリスト:
 # ファイル内マークの履歴 (新しいものから古いもの):

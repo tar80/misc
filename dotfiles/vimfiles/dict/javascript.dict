@@ -37,6 +37,7 @@ export
 extends
 false
 finally
+forEach
 function
 hasOwnProperty
 import

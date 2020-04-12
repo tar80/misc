@@ -6,6 +6,7 @@ const arg = (() => {
   try {
     return PPx.Arguments(0);
   } catch (e) {
+    PPx.Execute(`*linemessage ${e}`);
     PPx.Quit(1);
   }
 })();
@@ -25,16 +26,16 @@ arg.replace(/^([^\\]*\s)?(.*\\)(?!$).*/, (match, p1, p2) => {
 });
 
 // 補完したパスのサブディレクトリの数を取得
-const fs = PPx.CreateObject('Scripting.FileSystemObject');
-const fs_dirCount = (() => {
+const fso = PPx.CreateObject('Scripting.FileSystemObject');
+const fsoDirCount = (() => {
   try {
-    return fs.GetFolder(str[2]).SubFolders.Count;
+    return fso.GetFolder(str[2]).SubFolders.Count;
   } catch (e) {
     PPx.Execute('%k"^a');
     PPx.Quit(-1);
   }
 })();
-const sendKeys = fs_dirCount == 1 ? '@F2@F4' : '@F2@TAB@UP';
+const sendKeys = fsoDirCount == 1 ? '@F2@F4' : '@F2@TAB@UP';
 
 PPx.Execute(`*replace ${str.join('')}`);
 PPx.Execute(`%K"${sendKeys}`);

@@ -6,7 +6,7 @@
   const omit = PPx.Extract('0%*extract(C,%%si"vState")')|0;
   const vCount = PPx.Extract('%*ppxlist(+V)');
 
-  if ((omit == 1) || (vCount > 1)) {
+  if (omit == 1 || vCount > 1) {
     PPx.Quit(1);
   }
 }
@@ -25,8 +25,9 @@ const posW = (() => {
     return (w < _displayX) ? _displayX - w : 0;
   }
 })();
-const posX = (() => {
-  const x = PPx.Extract(`%*windowrect(${vID},t)`)|0;
-  return (x < 80) ? x : 80;
+const posH = (() => {
+  const h = PPx.Extract(`%*windowrect(${vID},t)`)|0;
+  return (h < 80) ? h : 80;
 })();
-PPx.Execute(`*windowposition ${vID},${posW},${posX}`);
+
+PPx.Execute(`*windowposition ${vID},${posW},${posH}`);

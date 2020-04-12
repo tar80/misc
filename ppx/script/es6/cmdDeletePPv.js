@@ -1,10 +1,10 @@
 ﻿//!*script
 /* PPv上からファイル削除 */
 'use strict';
-const dirExt = PPx.GetFileInformation(PPx.Extract('%FD'));
-const fileExt = PPx.GetFileInformation(PPx.Extract('%FDC'));
+const cdExt = PPx.GetFileInformation(PPx.Extract('%FD'));
+const cdFileExt = PPx.GetFileInformation(PPx.Extract('%FDC'));
 
-if (!fileExt && (dirExt == ':PKZIP' || dirExt == ':RAR')) {
+if (!cdFileExt && (cdExt == ':PKZIP' || cdExt == ':RAR')) {
   PPx.Execute('%"ファイル操作" %Q"書庫から削除します" %: %u7-zip64.dll,d -hide %FD %FC');
   // PPx.Execute('*PPVUD DOWN'); // *PPVUD=ユーザーコマンド
 } else {

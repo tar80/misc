@@ -5,6 +5,7 @@
 const tID = (() => {
   return (PPx.WindowIDName == ('C_A'||'C_B') && PPx.Pane.Count <= 2) ? 'n#' : 'n';
 })();
+
 if (PPx.Arguments.length) {
   PPx.Execute(`*customize X_bg:O_%${tID} = ${PPx.Arguments(0)}`);
   PPx.Execute('*setcust _User:u_opa=0');

@@ -10,10 +10,10 @@ const arg = (() => {
     PPx.Quit(-1);
   }
 })();
-const cDir = PPx.Extract('%1');
+const cdPath = PPx.Extract('%1');
 
 // auxパスメニュー
-if (cDir.match(/aux:.*/)) {
+if (cdPath.match(/aux:.*/)) {
   PPx.Execute('%M_Caux, C');
   PPx.Quit(1);
 }
@@ -44,17 +44,15 @@ Object.keys(contents).forEach(function (key) {
 
 if (arg == 'M_Ccr') {
   // 標準メニュー
-  select_menu('J', 'O');
+  Select_menu('J', 'O');
 } else {
   // ファイル移動メニュー
-  selKey[1] = (arg == 'M_FileMOVE')
-    ? 'M'
-    : 'C';
-  select_menu(selKey[1], selKey[1]);
+  selKey[1] = (arg == 'M_FileMOVE') ? 'M' : 'C';
+  Select_menu(selKey[1], selKey[1]);
 }
 
 /* カレントディレクトリの属性に応じて処理を分岐する関数 */
-function select_menu(list, arch) {
+function Select_menu(list, arch) {
   switch (PPx.DirectoryType) {
   case 4:
     PPx.Execute(`*setcust M_Clist:Ext = ??M_U${selKey[0]} %: %M_Clist,${list}`);

@@ -3,6 +3,7 @@
 ' 同階層の隣合う同じ拡張子の仮想ディレクトリに移動
 ' PPx.Arguments(0)=1:preview|無:next
 ' 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Dim fso
 Dim fsoCurrent
 Dim fsoParent
@@ -76,7 +77,7 @@ Else
   run = MoveDir(1, "bottom")
 End If
 
-' 引数に応じて移動先パスを決める変数
+' 引数に応じて移動先パスを決める関数
 Function MoveDir(a, termMessage)
   Dim strTarget
   Dim i
@@ -89,16 +90,11 @@ Function MoveDir(a, termMessage)
     End If
   Next
 
-  If i + a < 0 Or i + a > Ubound(arrayList) Then
+  If i + a < 0 Or i + a + 1 > Ubound(arrayList) Then
     PPx.SetPopLineMessage("!"">>" + termMessage)
     PPx.Quit(1)
   Else
     strTarget = arrayList(i + a)
-  End If
-
-  If strTarget = "" Then
-    PPx.SetPopLineMessage("!"">>" + termMessage)
-  Else
     PPx.Execute("*jumppath " + fso.BuildPath(fsoParent.Path, strTarget))
-  ENd If
+  End If
 End Function

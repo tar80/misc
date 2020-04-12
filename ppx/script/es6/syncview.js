@@ -23,7 +23,7 @@ if (sync == 0) {
   }
 }
 
-/* 呼出元の状態に合わせて連動ビューを起動する関数 */
+// 呼出元の状態に合わせて連動ビューを起動
 function State_syncview (tWin) {
   PPx.Execute(`*setcust X_win:V=${tWin}`);
   PPx.Execute(`%Oi *ppv -r -bootid:${tID}`);
@@ -31,8 +31,8 @@ function State_syncview (tWin) {
   case 2:
     {
       // capturewindowに取り込む前のサイズを記憶する
-      const defSize = PPx.Extract('%*getcust(_WinPos:VA)');
-      PPx.Execute(`*string i,vSize=${defSize}`);
+      const preSize = PPx.Extract('%*getcust(_WinPos:VA)');
+      PPx.Execute(`*string i,vSize=${preSize}`);
       PPx.Execute('*string i,vState=1');
       PPx.Execute(`%Oi *capturewindow V${tID} -pane:~ -selectnoactive`);
       //フォーカスがうまくいかない場合は、ここを調整する

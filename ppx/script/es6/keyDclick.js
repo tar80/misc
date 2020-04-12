@@ -7,26 +7,35 @@ const ppcId = (PPx.Pane.length != 0)
   ? PPx.Extract('%NC#')
   : PPx.Extract('%NC');
 const type = {
-  doc:   ['.txt', '.ini', '.js', '.log', '.cfg', '.html', '.ahk', '.md'],
+  doc:   ['.txt', '.ini', '.js', '.log', '.cfg', '.html', '.ahk', '.md', '.vbs' ,'.json'],
   image: ['.jpg', '.jpeg', '.bmp', '.png', '.gif', '.vch', '.edg'],
-  movie: ['.3gp', '.avi' ,'.flv', '.mp4', '.mpg', '.qt', '.ebml', '.webm']
+  movie: ['.3gp', '.avi' ,'.flv', '.mp4', '.mpg', '.qt', '.ebml', '.webm'],
 };
-const filetype = PPx.Extract('.%t');
-const cKey = [];
+const filetype = PPx.Extract('.%t').toLowerCase();
+const selType = [];
 
 Object.keys(type).forEach(function (key) {
   type[key].find(ext => {
     if (ext == filetype) {
-      cKey[0] = key;
+      selType.push(key);
       return;
     }
   });
 });
 
-const maskExt = Object.values(type[cKey]);
-/* 拡張子別の処理をする関数 */
+const maskExt = (() => {
+  try {
+    return Object.values(type[selType]);
+  } catch (e) {
+    PPx.Execute('%K"@^i');
+    PPx.Execute('*wait 10,1');
+    PPx.Execute('*focus エントリ情報');
+    PPx.Quit(1);
+  }
+})();
+// 拡張子別の処理
 const Expand_ext = function() {
-  switch (cKey) {
+  switch (selType) {
   case 'image':
     PPx.Execute('%Oi *setcust XV_imgD:VZ=-2,4');
     break;

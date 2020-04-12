@@ -25,12 +25,12 @@ switch (arg) {
 // ディレクトリは対象外
 case 'redo':
   {
-    let line;
+    let readLine;
     fs_undoLog = fs.OpenTextFile(logFile, 1, false, -1);
     while (!fs_undoLog.AtEndOfStream) {
-      line = fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
-      line = fs_undoLog.ReadLine().replace(/.*\t(.*)/, `Move\t$1\n ->\t${line}\n`, 'i');
-      result = result + line;
+      readLine = fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
+      readLine = fs_undoLog.ReadLine().replace(/.*\t(.*)/, `Move\t$1\n ->\t${readLine}\n`, 'i');
+      result = result + readLine;
     }
     fs_undoLog.Close();
     // 置換結果を書き出してutf16leで上書きする

@@ -26,11 +26,11 @@ if (sync > 0) {
   PPx.Execute(`*execute C${tID},*ppvoption sync off`);
   // 連動ビューがcapturewindowなら元のサイズに戻す
   if (PPx.Extract('%si"vSize') != 0) {
-    PPx.Execute('*setcust _WinPos:V${tID}=%si"vSize"');
+    PPx.Execute(`*setcust _WinPos:V${tID}=%si"vSize"`);
     PPx.Execute('*string i,vSize=');
   }
   PPx.Quit(1);
 } else if (xID == 'C_X') {
-  PPx.Execute('*setcust XC_celD=_AUTO,_AUTO,3,7');
+  PPx.Execute('*customize XC_celD=_AUTO,_AUTO,3,7');
 }
 PPx.Execute(`*closeppx ${xID}`);

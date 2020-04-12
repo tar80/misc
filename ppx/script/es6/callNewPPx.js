@@ -5,11 +5,13 @@
 const arg = (() => {
   try {
     if (PPx.Arguments(0)) { return 'V'; }
-  } catch (e) { return PPx.WindowIDName.slice(0, 1); }
+  } catch (e) {
+    return PPx.WindowIDName.slice(0, 1);
+  }
 })();
 
+// 未起動PPxのIDを取得
 const array = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-/* 未起動のIDを探す関数 */
 const callID = array.find(id => PPx.Extract(`%N${arg}${id}`) == '');
 
 switch (arg) {

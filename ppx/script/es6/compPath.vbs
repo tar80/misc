@@ -53,9 +53,7 @@ If IsEmpty(strMatch) = 0 Then
     fsoLoadFile.Write(pathList)
     fsoLoadFile.Close()
   End If
-
   PPx.Result = Join(strLine, "")
-
 Else
   PPx.Result = PPx.Arguments(0)
 End If

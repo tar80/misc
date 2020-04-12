@@ -10,5 +10,6 @@ try {
   str.replace(reg, (match, p1, p2) => [lparam, wparam] = [p1, p2]);
   PPx.Execute(`*sendmessage %N,177,${str.indexOf(wparam)},${lparam.length}`);
 } catch (e) {
-  PPx.Echo(e);
+  PPx.Execute(`*linemessage ${e}`);
+  PPx.Quit(-1);
 }

@@ -7,13 +7,13 @@ const opPath = PPx.Extract('%2');
 const cmd = (() => {
   let pre = {};
   if (!PPx.GetFileInformation(opPath)) {
-    pre = {act: 'move', opt: ''};
+    pre = {act: 'move', opt: '', post: '-compcmd *ppc -pane:~ %%hd0'};
     pre.dest = '%\'work\'%\\';
     return pre;
   } else {
     pre = (PPx.Arguments.length == 0)
-      ? {act: 'move', opt: '-renamedest:on'}
-      : {act: '!move', opt: '-min'};
+      ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -pane:~ %%hd0'}
+      : {act: '!move', opt: '-min', post: ''};
     pre.dest = opPath;
     return pre;
   }
@@ -33,6 +33,6 @@ case 4:
   break;
   // その他
 default:
-  PPx.Execute(`*ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall -undolog`);
+  PPx.Execute(`*ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.post}`);
   break;
 }

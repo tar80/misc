@@ -21,22 +21,22 @@ const cmd = (() => {
   switch (PPx.GetFileInformation(opPath)) {
   case ':DIR':
     pre = (arg == 0)
-      ? {act: 'copy', opt: '-renamedest:on'}
-      : {act: '!copy', opt: '-min'};
+      ? {act: 'copy', opt: '-renamedest:on', after: '-compcmd *ppc -r -pane:~ %%hd0'}
+      : {act: '!copy', opt: '-min', after: '-compcmd *focus'};
     pre.dest = opPath;
-    pre.after = `-compcmd *ppcfile !copy, ${pre.dest}, -min -mask:size:>=1m -qstart -nocount -preventsleep -same:0 -sameall -undolog -burst:on -compcmd:*focus`;
+    pre.post = `-compcmd *ppcfile !copy, ${pre.dest}, -min -mask:size:>=1m -qstart -nocount -preventsleep -same:0 -sameall -undolog -burst:on ${pre.after}`;
     return pre;
   case ':XLF':
     pre = (arg == 0)
       ? {act: 'copy', opt: '-renamedest:on'}
       : {act: '!copy', opt: '-min'};
     pre.dest = opPath;
-    pre.after = '';
+    pre.post = '';
     return pre;
   case '':
     pre = {act: 'copy', opt: ''};
     pre.dest = '%\'work\'%\\';
-    pre.after = `-compcmd *ppcfile !copy, ${pre.dest}, -min -mask:size:>=1m -qstart -nocount -preventsleep -same:0 -sameall -undolog -burst:on -compcmd:*focus`;
+    pre.post = `-compcmd *ppcfile !copy, ${pre.dest}, -min -mask:size:>=1m -qstart -nocount -preventsleep -same:0 -sameall -undolog -burst:on -compcmd *ppc -pane:~ %%hd0`;
     return pre;
   default:
     PPx.Echo('非対象ディレクトリ');
@@ -54,7 +54,7 @@ if (arg >= 2) {
   }
   // 書庫なら解凍
 } else if (PPx.DirectoryType >= 62) {
-  PPx.Execute(`%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複>リネーム,DIR>展開"%{${cmd.dest}%} %@`);
+  PPx.Execute(`%Oi %u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複>リネーム,DIR>展開"%{${cmd.dest}%} %@`);
 } else {
-  PPx.Execute(`*ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -mask:size:<1m -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.after}`);
+  PPx.Execute(`%Oi *ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -mask:size:<1m -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.post}`);
 }

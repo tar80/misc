@@ -141,7 +141,7 @@ set wildmode =longest:full,full
 "# テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions +=mM
 "# どの文字でタブや改行を表示するかを設定
-set listchars =tab:\|\ \ ,extends:<,precedes:>,trail:_,
+set listchars =tab:\|\ ,extends:<,precedes:>,trail:_,
 "# 常にステータス行を表示 (詳細は:he laststatus)
 set laststatus =2
 "# コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
@@ -462,8 +462,8 @@ noremap! <C-f> <Right>
 noremap! <C-l> <Delete>
 inoremap <S-Delete> <C-o>d$
 "# completion
-" inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
-" inoremap <expr> [ col('.') == col('$') ? "[]<Left>" : "["
+inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
+inoremap <expr> [ col('.') == col('$') ? "[]<Left>" : "["
 inoremap <expr> " QuoteBehavior('"')
 inoremap <expr> ' QuoteBehavior("'")
 function! QuoteBehavior(tKey)

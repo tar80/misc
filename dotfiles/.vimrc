@@ -1,13 +1,8 @@
 "# vim:ts=4:tw=0:foldmethod=marker:foldcolumn=3:
 "======================================================================
-"# Vim 8.1  Last Change: 27-march-2020.
-"======================================================================
-if &compatible
-  set nocompatible
-endif
 "# 文字コードの判別
 source ~/vimfiles/encode.vim
-"
+"souce
 "# ColorScheme_cui
 if !has('gui_running')
   colorscheme bong16
@@ -50,7 +45,7 @@ set undodir =$HOME/.cache/undolog
 "# 未保存ファイルを閉じる時、ダイアログを出さない
 set confirm
 "# viminfoの設定
-set viminfo =%2,'30,/10,:200,<200,f1,h,s10
+set viminfo =%2,'30,/10,:200,<200,f1,h,s10,c
 "# CursorHoldI,swapfileの待機時間(:default=4000ミリ秒)
 set updatetime =10000
 "# スクロールバーを読み込まない
@@ -371,6 +366,9 @@ augroup vimrcAU
   autocmd!
 augroup END
 
+"# ファイルを開いたとき親ディレクトリをカレントに設定
+" autocmd vimrcAU BufEnter * execute ":lcd " . expand("%:p:h")
+
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline
 "# 挿入モード中にフォーカスが外れたら着色
@@ -382,8 +380,13 @@ function HighlightIM()
 endfunction
 "# 挿入モードを抜ける時に色を戻す
 autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
+"# 通常時はrelativenumber
+autocmd vimrcAU CmdLineEnter * setlocal relativenumber
 
 "# filetype
+"# コメント改行時の自動コメントアウト停止
+autocmd vimrcAU FileType * setlocal formatoptions -=r
+autocmd vimrcAU FileType * setlocal formatoptions -=o
 autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
 autocmd vimrcAU FileType unite call s:unite_my_settings()
@@ -391,6 +394,7 @@ function! s:unite_my_settings()
   imap <silent><buffer><expr> <C-s> unite#do_action('split')
   imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
 endfunction
+
 "# Diff起動時の設定
 autocmd vimrcAU VimEnter,FilterWritePre * call SetDiffMode()
 function SetDiffMode()
@@ -416,6 +420,8 @@ noremap <silent>, :nohlsearch<cr>
 "# スペースでﾊﾞｯﾌｧ移動制御
 noremap <space> <C-w>
 noremap <nowait> <Space><Space> <C-w><C-w>
+"# F3で行番号切り替え
+noremap <F3> :<C-u>setlocal relativenumber!<CR>
 "# F12でラップ状態の切り替え
 noremap <silent> <F12> :<C-u>call SetWrap()<CR>
 function SetWrap()
@@ -435,15 +441,20 @@ endfunction
 "# normal_mode{{{
 "# 行分割
 nnoremap <space>j i<CR><ESC>
-"# 誤爆防止(、キーマクロ)
-nnoremap q <Nop>
-nnoremap <C-q> q
 "# 一文字削除をレジスタ履歴に残さない
-nnoremap  x "_x
-nnoremap  X "_X
+" nnoremap  x "_x
+" nnoremap  X "_X
 "# 行末までヤンク
-nnoremap  Y y$
-"# vimrc
+nnoremap Y 0y$
+"# コマンドモードでは行番号表示
+nnoremap <silent> : :<C-u>call SetNum()<CR>
+function SetNum()
+  set norelativenumber
+  redraw
+  call feedkeys(":",'n')
+endfunction
+
+"# call vimrc
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F9> :<C-u>tabnew<CR>:edit $MYVIMRC<CR>
 "# ppx
@@ -462,19 +473,20 @@ noremap! <C-f> <Right>
 noremap! <C-l> <Delete>
 inoremap <S-Delete> <C-o>d$
 "# completion
-inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
-inoremap <expr> [ col('.') == col('$') ? "[]<Left>" : "["
+" inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
+" inoremap <expr> [ col('.') == col('$') ? "[]<Left>" : "["
 inoremap <expr> " QuoteBehavior('"')
 inoremap <expr> ' QuoteBehavior("'")
 function! QuoteBehavior(tKey)
-  if col('.') == col('$') && char2nr(strpart(getline('.'),col('.') -2, 1)) == 32
+  if col('.') == col('$')
+        \ && (char2nr(strpart(getline('.'),col('.') -2, 1)) == 32
+        \ || strpart(getline('.'),col('.') -2, 1) == '('
+        \ || strpart(getline('.'),col('.') -2, 1) == '[')
     return a:tKey . a:tKey . "\<Left>"
-    elseif strpart(getline('.'),col('.') -2, 2) == '()'
-      return a:tKey . a:tKey . "\<Left>"
-    else
-      return a:tKey
-    endif
+  else
+    return a:tKey
   endif
+endif
 endfunction
 "# omni
 inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p>" : ".<C-x><C-o>"

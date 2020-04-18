@@ -18,10 +18,14 @@ endif
 set guicursor=a:ver20-blinkwait1000-blinkon700-blinkoff600
 "
 " 表示設定
-set guioptions-=T
-" set guioptions-=m
-set guioptions+=c
-set guioptions-=e
+set guioptions -=T
+" set guioptions -=m
+set guioptions +=c
+set guioptions -=e
+set guioptions -=l
+set guioptions -=L
+set guioptions -=r
+set guioptions -=R
 set t_vb=
 "
 "" フォント設定 ※英語名で指定すると問題が起きにくい

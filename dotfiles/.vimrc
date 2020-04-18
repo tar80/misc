@@ -48,11 +48,6 @@ set confirm
 set viminfo =%2,'30,/10,:200,<200,f1,h,s10,c
 "# CursorHoldI,swapfileの待機時間(:default=4000ミリ秒)
 set updatetime =10000
-"# スクロールバーを読み込まない
-set guioptions -=l
-set guioptions -=L
-set guioptions -=r
-set guioptions -=R
 "# カレント以外の窓最小高さ
 "# set winminheight=2
 "# 行番号
@@ -372,8 +367,8 @@ augroup END
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline
 "# 挿入モード中にフォーカスが外れたら着色
-autocmd vimrcAU FocusLost,BufLeave * call HighlightIM()
-function HighlightIM()
+autocmd vimrcAU FocusLost,BufLeave * call <SID>highlightIM()
+function s:highlightIM()
   if mode() == 'i'
     setlocal cursorline
   endif
@@ -381,7 +376,7 @@ endfunction
 "# 挿入モードを抜ける時に色を戻す
 autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
 "# 通常時はrelativenumber
-autocmd vimrcAU CmdLineEnter * setlocal relativenumber
+autocmd vimrcAU CmdLineLeave * setlocal relativenumber
 
 "# filetype
 "# コメント改行時の自動コメントアウト停止
@@ -396,8 +391,8 @@ function! s:unite_my_settings()
 endfunction
 
 "# Diff起動時の設定
-autocmd vimrcAU VimEnter,FilterWritePre * call SetDiffMode()
-function SetDiffMode()
+autocmd vimrcAU VimEnter,FilterWritePre * call <SID>setDiffMode()
+function s:setDiffMode()
 if &diff
   syntax off
   highlight Normal guifg=#777777
@@ -423,8 +418,8 @@ noremap <nowait> <Space><Space> <C-w><C-w>
 "# F3で行番号切り替え
 noremap <F3> :<C-u>setlocal relativenumber!<CR>
 "# F12でラップ状態の切り替え
-noremap <silent> <F12> :<C-u>call SetWrap()<CR>
-function SetWrap()
+noremap <silent> <F12> :<C-u>call <SID>setWrap()<CR>
+function s:setWrap()
   if &diff
   if &wrap
       wincmd p | setlocal nowrap | wincmd p | setlocal nowrap

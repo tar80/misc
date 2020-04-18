@@ -5,13 +5,14 @@
 	--dry-run  ;[<directory_path>] addで追加されるファイルの確認
 branch ;[--option][<branch>]
 	-a --sort=-authordate ;     上位からソート
-	--remotes ;                 リモートブランチ一覧
+	--remotes ;(-a)             リモートブランチ一覧
 	--all ;(-a)                 すべてのブランチ一覧
 	--merged ;                  マージ済みブランチ一覧
-	--no-maeged ;               未マージブランチ一覧
+	--no-merged ;               未マージブランチ一覧
 	-vv ;                       追跡ブランチ一覧
 	--delete  ;(-d)<branch>     指定したブランチを削除
 	-D ;<branch>                指定したブランチを強制削除
+	-r -d ;<origin>/<branch>    指定した追跡ブランチを削除
 	-m ;[<oldname>] <newname>   チェックアウト中(またはoldname)ブランチの名前変更
 	--set-upstream-to= ;(-u)remote/branch [<branch>]上流ブランチを設定
 	--unset-upstream  ;[<branch>] 上流ブランチ設定を解除

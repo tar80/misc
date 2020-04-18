@@ -1,6 +1,6 @@
 ﻿add ;[--option][<path>]
 	-v %#FC
-	-v . ;    カレント
+	-v . ;    カレント以下
 	-v --all ;全部
 	--dry-run  ;[<directory_path>] addで追加されるファイルの確認
 branch ;[--option][<branch>]
@@ -21,11 +21,14 @@ checkout ;[--option][<branch>][<コミット>][<path>]
 	checkout --ours ;<path>      マージ元ファイルを優先
 	checkout --theirs ;<path>    マージ先ファイルを優先
 	%#FC
-commit ;[--option] -m 'message'
-        %#FC -m ' ;       選択エントリ
+commit ;[<path>][--option] -m 'message'
+	%#FC -m ' ;       選択エントリ
 	. -m ' ;          カレント以下
 	-m ' ;            全て
 	--amend -m ' ;    最新コミットの上書き
+	--fixup  ;        <コミット>  対象コミットに追加
+	--squash  ;       <コミット> 対象コミットと結合
+	--dry-run ;       試行
 diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
 	--stat  ;         変更点を表示
 	--cached ;        addしてからの変更点を表示
@@ -41,8 +44,8 @@ fetch ;[--option|<remote [branch]>] リモートを取得する
 	--prune ;   リモートに存在しないローカルブランチを削除
 	--tags ;    タグを取得
 log ;[--option][<branch>][-n <表示数>]
-	--graph --date=short --format="%OD%%C(yellow)%%h %%C(magenta)[%%ad]%%C(reset)%%s%%C(auto)%%d%OD-" -23
-	--graph --name-status --oneline --date=short --format="%OD%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad]%%C(cyan)%%an %%C(green)%%s%%C(auto)%%d%OD-" -5 ;詳細
+	%m|一行表示 --graph --date=short --format="%OD%%C(yellow)%%h %%C(magenta)[%%ad]%%C(reset)%%s%%C(auto)%%d%OD-" -23
+	%m|詳細 --graph --name-status --oneline --date=short --format="%OD%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad]%%C(cyan)%%an %%C(green)%%s%%C(auto)%%d%OD-" -5 %: *focus BA
 	--all ;             全ブランチ
 	--decorate=full ;   ブランチ名を短縮せずに表示
 	--graph=' ;'        分岐をグラフィカルに表示
@@ -79,7 +82,12 @@ push ;[--option]<remote [branch]>
 	--all origin ;                    全てのローカルブランチをpush
 	--delete ;<remote branch>         指定したリモートブランチを削除
 	--tags ;                          リモートにタグをpush
-reflog  ;履歴
+rebase ;[--option]<コミット>
+	-i HEAD~ ;n   インタラクティブ
+	--continue ;  続行
+	--abort ;     中止
+	%: *focus BA
+reflog %: *focus BA ;履歴
 remote ;[--option]
 	-v show ;リモートのURLを表示
 reset ;[--option][<コミット>][<path>]
@@ -103,3 +111,4 @@ stash ;[command]["メッセージ"]
 	--patch ;              変更点を選んでスタッシュ
 	--keep-index ;         未addのみスタッシュ
 show ;[<コミット>]　コミットの詳細
+	%: *focus BA

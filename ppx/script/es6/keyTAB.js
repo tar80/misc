@@ -11,23 +11,23 @@ if (sync > 0) {
   PPx.Quit(1);
 }
 
-const xList = PPx.Extract('%*ppxlist()').split(',');
+// PPbを省いた起動リストを取得
+const xList = (() => {
+  const x = PPx.Extract('%*ppxlist()').split(',');
+  return x.filter(value => value.indexOf('B_') != 0);
+})();
+
+xList.sort((a, b) =>  a < b ? -1 : 1);
 let tID = xList[xList.indexOf(xID.join('_')) + 1];
 
-if (xList[0] > 1) {
-  xList.sort((a, b) =>  a < b ? -1 : 1);
-  // リストの端なら最初に戻る
+if (xList[1] > 1 && PPx.Pane.Count != 1) {
   if (!tID || tID == 'csA') {
+  // リストの端なら最初に戻る
     tID = xList[2];
   }
-  if (tID.indexOf('B_') == 0) {
-    // PPbならckwをフォーカス
-    // PPx.Execute('*focus #%*findwindowclass(CkwWindowClass)')
-    PPx.Execute('%K"@F6"');
-    PPx.Quit(1);
-  } else {
-    PPx.Execute(`*focus ${tID}`);
-  }
+  PPx.Execute(`*focus ${tID}`);
 } else {
+  // 一枚表示なら反対窓起動
   PPx.Execute('%K"@F6"');
 }
+

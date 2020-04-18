@@ -1,41 +1,40 @@
-%k"\&ENTER"  %mPPc|連動プロパティ(WINDOWS)
-%k"\^F10"    %mPPc|エクスプローラーメニュー @explorer@menu
-%k"\^V"      %mPPc|ショートカット貼り付け
-%k"\^C"      %mPPc|ディレクトリ名コピー
-%k"\HOME"    %mPPc|選択切り替え
-%k"\^LEFT"   %mPPc|まとめて戻る
-%k"\&HOME"   %mPPc|窓位置を記憶 @window
-%k"&HOME"    %mPPc|記憶した窓位置の復元 @window
-%k"_"        %mPPc|窓の連結ON/OFF @window
-%k"&-"       %mPPc|タブメニュー @tabu@menu
-%k"\^A"      %mPPc|カーソル位置のファイルをマーク @mark
-%k"\INS"     %mPPc|拡大
-%k"\DEL"     %mPPc|縮小
-%k"^M"       %mPPc|マーク @incs@inkuri@mark
-%k"^PgDOWN"  %mPPv|アニメーション_次のコマ
-%k"D"        %mPPv|栞
-%k"^D"       %mPPv|栞1-4
-%k"G"        %mPPv|栞にジャンプ
-%k"^G"       %mPPv|栞1-4にジャンプ
-%k"I"        %mPPv|キャレットモード @caret@mode
-%k"\^V"      %mPPv|形式指定ペースト
-%k"'@'"      %mPPv|文字コード
-%k"\':'"     %mPPv|表示形式
-%k"';'"      %mPPv|桁数
-%k"A"        %mPPv|アスペクト比変更
-%k"C"        %mPPv|制御記号
-%k"W"        %mPPv|フォントトグル @font
-%k"U"        %mPPv|行番号 @line@number
-%k"T"        %mPPv|倫理行/表示行トグル
-%k"/"        %mPPv|部分表示切替
-^:          %mPPe|コンプリスト @comp@list
-^;          %mPPe|行選択
-\^:         %mPPe|PPcで実行 @run@exe
-&DEL        %mPPe|表示中の履歴削除
-^U          %mPPe|削除した文字を再入力
-^Y          %mPPe|行削除 @delete
-^]          %mPPe|ファイルメニュー @menu
-\F2         %mPPe|設定メニュー @menu
-^K          %mPPe|編集メニュー1 @menu
-^Q          %mPPe|編集メニュー2 @menu
-^U          %mPPe|直前に削除した文字履歴 @delite@undo
+%k"\&ENTER" ; PPc|連動プロパティ(WINDOWS)
+%k"\^F10" ;   PPc|エクスプローラーメニュー @explorermenu
+%k"\^V" ;     PPc|ショートカット貼り付け
+%k"\^C" ;     PPc|ディレクトリ名コピー
+%k"\HOME" ;   PPc|選択切り替え
+%k"\^LEFT" ;  PPc|まとめて戻る
+%k"\&HOME" ;  PPc|窓位置を記憶 @window
+%k"&HOME" ;   PPc|記憶した窓位置の復元 @window
+%k"_" ;       PPc|窓の連結ON/OFF @window
+%k"&-" ;      PPc|タブメニュー @menu
+%k"\^A" ;     PPc|カーソル位置のファイルをマーク @cursor
+%k"\INS" ;    PPc|拡大
+%k"\DEL" ;    PPc|縮小
+%k"^M" ;      PPc|マーク
+%k"^PgDOWN" ; PPv|アニメーション_次のコマ
+%k"D" ;       PPv|栞 @bookamark
+%k"^D" ;      PPv|栞1-4 @bookamark
+%k"G" ;       PPv|栞にジャンプ @bookamark
+%k"^G" ;      PPv|栞1-4にジャンプ @bookamark
+%k"I" ;       PPv|キャレットモード @caretmode
+%k"\^V" ;     PPv|形式指定ペースト
+%k"'@'" ;     PPv|文字コード
+%k"\':'" ;    PPv|表示形式
+%k"';'" ;     PPv|桁数
+%k"A" ;       PPv|アスペクト比変更
+%k"C" ;       PPv|制御記号
+%k"W" ;       PPv|フォントトグル
+%k"U" ;       PPv|行番号 @linenumber
+%k"T" ;       PPv|倫理行/表示行トグル
+%k"/" ;       PPv|部分表示切替
+^: ;          PPe|コンプリスト @list
+^; ;          PPe|行選択 @line
+\^: ;         PPe|PPcで実行 @run@exe
+&DEL ;        PPe|表示中の履歴削除
+^U ;          PPe|削除した文字を再入力 @undo
+^Y ;          PPe|行削除 @delete
+^] ;          PPe|ファイルメニュー @menu
+\F2 ;         PPe|設定メニュー @menu
+^K ;          PPe|編集メニュー1 @menu
+^Q ;          PPe|編集メニュー2 @menu

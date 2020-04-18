@@ -1,3 +1,4 @@
+%K"@LOADCUST
 %M?extdrivemenu ;非表示を含むドライブの移動メニュー
 %M?exjumpmenu ;移動形式メニュー
 %M?layoutmenu  ;レイアウト選択メニュー

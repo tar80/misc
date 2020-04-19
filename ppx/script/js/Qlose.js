@@ -7,6 +7,15 @@ if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
   PPx.Execute('*closeppx CY');
   PPx.Quit(1);
 }
+
+// GITmodeなら解除
+var dock = PPx.Extract('%*getcust(X_dock:CBA_T)');
+if (dock) {
+    PPx.Execute('*dock delete,t,input K_git');
+    PPx.Execute('*closeppx BA');
+    PPx.Quit(1);
+}
+
 // C_A以外の窓から終了
 var xID = PPx.WindowIDName;
 var xList;    // ppxlist
@@ -32,6 +41,6 @@ if (sync > 0) {
   }
   PPx.Quit(1);
 } else if (xID == 'C_X') {
-  PPx.Execute('*setcust XC_celD=_AUTO,_AUTO,3,7');
+  PPx.Execute('*customize XC_celD=_AUTO,_AUTO,3,7');
 }
 PPx.Execute('*closeppx ' + xID);

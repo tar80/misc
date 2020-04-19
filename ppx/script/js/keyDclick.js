@@ -1,6 +1,6 @@
 ﻿//!*script
 /* PPV呼び出し */
-// PPx.Arguments(0)=default|image|doc|movie
+// PPx.Arguments() = [0]image | doc | movie
 // PPc[X]は画像専用
 
 var maskExt = [];

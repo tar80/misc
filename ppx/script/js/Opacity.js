@@ -6,9 +6,8 @@ var xID = PPx.WindowIDName;
 var soft;    // 透過弱
 var hard;    // 透過強
 
-(xID == ('C_A'||'C_B') && PPx.Pane.Count <= 2)
-  ? tID = 'n#'
-  : tID = 'n';
+tID = (xID == ('C_A'||'C_B') && PPx.Pane.Count <= 2)
+  ? 'n#' : 'n';
 try {
   PPx.Execute('*customize X_bg:O_%' + tID + '=' + PPx.Arguments(0));
   PPx.Execute('*setcust _User:u_opa=0');

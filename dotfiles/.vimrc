@@ -284,7 +284,7 @@ if s:is_plugged('unite.vim')
         \ 'buffer_name' : ""
         \ })
   "# Unite file_rec/git(rootを固定)
-  function UniteRepo()
+  function s:UniteRepo()
     lcd C:/bin/repository/tar80/misc
     Unite -buffer-name=repogitory file_rec/git:--cached:--others:--exclude-standard
   endfunction
@@ -343,7 +343,7 @@ if s:is_plugged('lightline.vim')
     return &ft != 'unite' ? (&fenc !=# '' ? &fenc : &enc) : ''
   endfunction
   function! LightlineFiletype()
-    return &ft != 'unite' ? (&filetype !=# '' ? &filetype : 'unknown') : ''
+    return &ft != 'unite' ? (&filetype !=# '' ? &filetype : 'no ft') : ''
   endfunction
 endif
 if s:is_plugged('lightline.vim')
@@ -361,8 +361,6 @@ augroup vimrcAU
   autocmd!
 augroup END
 
-"# ファイルを開いたとき親ディレクトリをカレントに設定
-" autocmd vimrcAU BufEnter * execute ":lcd " . expand("%:p:h")
 
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline
@@ -442,9 +440,9 @@ nnoremap <space>j i<CR><ESC>
 "# 行末までヤンク
 nnoremap Y 0y$
 "# コマンドモードでは行番号表示
-nnoremap <silent> : :<C-u>call SetNum()<CR>
-function SetNum()
-  set norelativenumber
+nnoremap <expr> : &ft == 'unite' ? ':' : ':<C-u>call <SID>setNum()<CR>'
+function s:setNum()
+  setlocal norelativenumber
   redraw
   call feedkeys(":",'n')
 endfunction
@@ -470,9 +468,9 @@ inoremap <S-Delete> <C-o>d$
 "# completion
 " inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
 " inoremap <expr> [ col('.') == col('$') ? "[]<Left>" : "["
-inoremap <expr> " QuoteBehavior('"')
-inoremap <expr> ' QuoteBehavior("'")
-function! QuoteBehavior(tKey)
+inoremap <expr> " <SID>QuoteBehavior('"')
+inoremap <expr> ' <SID>QuoteBehavior("'")
+function! s:QuoteBehavior(tKey)
   if col('.') == col('$')
         \ && (char2nr(strpart(getline('.'),col('.') -2, 1)) == 32
         \ || strpart(getline('.'),col('.') -2, 1) == '('
@@ -486,8 +484,8 @@ endfunction
 "# omni
 inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p>" : ".<C-x><C-o>"
 "# TABの挙動
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : ComplTabKey()
-function! ComplTabKey()
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : <SID>ComplTabKey()
+function! s:ComplTabKey()
   if strpart(getline('.'),col('.') -2, 1) == "/"
     return "\<C-x>\<C-f>"
   else
@@ -513,7 +511,7 @@ nnoremap <silent> <leader>u :<C-u>Unite<CR>
 nnoremap <silent> <leader>; :<C-u>Unite -buffer-name=files buffer file<CR>
 nnoremap <silent> <leader>o :<C-u>Unite -buffer-name=oldfiles oldfiles<CR>
 nnoremap <silent> <leader>m :<C-u>Unite -buffer-name=marks mark<CR>
-nnoremap <silent> <leader>r :<C-u>call UniteRepo()<CR>
+nnoremap <silent> <leader>r :<C-u>call <SID>UniteRepo()<CR>
 nnoremap <silent> <leader>g :<C-u>Unite -tab -no-start-insert -buffer-name=grep -previewheight=20 grep<CR>
 nnoremap <silent> <leader>l :<C-u>Unite -buffer-name=line line<CR>
 noremap <silent> <C-z> :<C-u>Unite -no-start-insert -winwidth=50 -direction=botright
@@ -521,8 +519,8 @@ noremap <silent> <C-z> :<C-u>Unite -no-start-insert -winwidth=50 -direction=botr
 inoremap <silent><expr> <C-z> unite#start_complete(
       \ ['history/yank'], {'winwidth':50, 'split':1, 'vertical':1, 'restore':0})
 "# acp
-inoremap <expr> <F2> ToggleAutoComplPop()
-function ToggleAutoComplPop()
+inoremap <expr> <F2> <SID>toggleAutoComplPop()
+function s:toggleAutoComplPop()
   if s:is_plugged('vim-autocomplpop')
     if g:acp_behaviorKeywordLength == -1
       let g:acp_behaviorKeywordLength = 3

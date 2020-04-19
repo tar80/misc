@@ -18,19 +18,13 @@ var mouseX = PPx.Extract('%*extract(C,"%%*cursorpos(x)")')|0;
 var moving_pos_LR = function () {
   var posW = PPx.Extract('%*windowrect(' + vID + ',w)')|0;
   var posH = PPx.Extract('%*windowrect(' + vID + ',t)')|0;
-  posH = (posH < 80)
-    ? posH
-    : 80;
+  posH = (posH < 80) ? posH : 80;
   if (mouseX <= (_displayX - 100)) {
     // 左
-    posW = (posW < _displayX)
-      ? _displayX
-      : displayX - posW;
+    posW = (posW < _displayX) ? _displayX : displayX - posW;
   } else {
     // 右
-    posW = (posW < _displayX)
-      ? _displayX - posW
-      : 0;
+    posW = (posW < _displayX) ? _displayX - posW : 0;
   }
   PPx.Execute('*windowposition ' + vID + ',' + posW + ',' + posH);
 };

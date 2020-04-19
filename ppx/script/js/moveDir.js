@@ -4,39 +4,39 @@
 // PPx.Arguments(0)=1:preview|無:next
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
 
-var fs = PPx.CreateObject('Scripting.FileSystemObject');
-var fs_cDir;        // current_directory
-var fs_parentDir;   // parent_directory
-var cDir;           // ppc_current_directory
+var fso = PPx.CreateObject('Scripting.FileSystemObject');
+var fsoCdPath;      // current_directory
+var fsoParentPath;  // parent_directory
+var cdPath;         // ppc_current_directory
 var current = PPx.Extract('%FDVN');
 var vCurrent;       // ppc_parent_virtual_directory
-var dirName;        // ppc_current_directory_name
-var ext;            // ppc_current_virtual_directory_ext
+var cdName;         // ppc_current_directory_name
+var cdExt;          // ppc_current_virtual_directory_ext
 var list = [];      // directory_list
 var add_list = {};  // function
 var e;              // enumerator
 
 current.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, function (match, p1, p2, p3, p4) {
   vCurrent = p1;
-  dirName  = p2;
-  ext      = p4.toLowerCase();
+  cdName   = p2;
+  cdExt    = p4.toLowerCase();
 });
 
 switch (PPx.DirectoryType) {
 case 1:
-  cDir = current;
-  fs_cDir = fs.GetFolder(cDir);
-  fs_parentDir = fs_cDir.ParentFolder;
+  cdPath = current;
+  fsoCdPath = fso.GetFolder(cdPath);
+  fsoParentPath = fsoCdPath.ParentFolder;
   // 親ディレクトリがルートなら終了
-  if (fs_cDir.IsRootFolder) {
+  if (fsoCdPath.IsRootFolder) {
     PPx.SetPopLineMessage('!">>root');
     PPx.Quit(1);
   }
-  e = new Enumerator(fs_parentDir.SubFolders);
+  e = new Enumerator(fsoParentPath.SubFolders);
   /* 属性を考慮してリストに追加 */
   add_list = function() {
-    var fs_tPath = fs.GetFolder(fs.BuildPath(fs_parentDir.Path, e.item().Name));
-    if (fs_tPath.Attributes <= 17) {
+    var fsoTPath = fso.GetFolder(fso.BuildPath(fsoParentPath.Path, e.item().Name));
+    if (fsoTPath.Attributes <= 17) {
       list.push(e.item().Name);
     }
   };
@@ -45,13 +45,13 @@ case 4:
 case 63:
 case 64:
 case 96:
-  cDir = vCurrent;
-  fs_parentDir = fs.GetFolder(cDir);
-  e = new Enumerator(fs_parentDir.Files);
+  cdPath = vCurrent;
+  fsoParentPath = fso.GetFolder(cdPath);
+  e = new Enumerator(fsoParentPath.Files);
   /* 拡張子を考慮してリストに追加 */
   add_list = function() {
-    var fs_tPath = fs.GetExtensionName(fs.BuildPath(fs_parentDir.Path, e.item().Name)).toLowerCase();
-    if (fs_tPath == ext)
+    var fsoTPath = fso.GetExtensionName(fso.BuildPath(fsoParentPath.Path, e.item().Name)).toLowerCase();
+    if (fsoTPath == cdExt)
       list.push(e.item().Name);
   };
   break;
@@ -78,7 +78,7 @@ function move_path(valA, valB, termMessage) {
       : valB;
   });
   for (var i = list.length; i--;) {
-    if (list[i] == dirName)
+    if (list[i] == cdName)
       break;
   }
   // 対象エントリ名を取得
@@ -88,7 +88,7 @@ function move_path(valA, valB, termMessage) {
     PPx.SetPopLineMessage('!">>' + termMessage);
   }
   if (list[i - 1] !== undefined) {
-    PPx.Execute('*jumppath "' + fs.BuildPath(fs_parentDir.Path, tEntry) + '"');
+    PPx.Execute('*jumppath "' + fso.BuildPath(fsoParentPath.Path, tEntry) + '"');
   } else {
     PPx.Quit(1);
   }

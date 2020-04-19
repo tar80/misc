@@ -1,6 +1,6 @@
 ﻿//!*script
 /* 新規独立窓呼び出し */
-// PPx.Arguments(0)=V:PPv|無:呼び出し元と同じ
+// PPx.Arguments() = [0]有:PPv呼び出し | 無:呼び出し元と同じ
 // 参照元:http://hoehoetukasa.blogspot.com/2014/05/blog-post_20.html
 
 var arg;

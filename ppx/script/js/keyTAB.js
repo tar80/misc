@@ -5,9 +5,7 @@
 var xID = PPx.WindowIDName.split('_');
 var xList = PPx.Extract('%*ppxlist()').split(',');
 var tID;
-var tPPx = (xID[0] == 'C')
-  ? 'V_'
-  : 'C_';
+var tPPx = (xID[0] == 'C') ? 'V_' : 'C_';
 var sync = PPx.Extract('%*extract(C' + xID[1] + ',"%%*js(PPx.Result=PPx.SyncView;)")')|0;
 
 if (sync > 0) {
@@ -26,8 +24,8 @@ if (xList[0] > 1) {
       break;
     }
   }
-  // リストの端なら最初に戻る
   if (!tID || tID == 'csA') {
+  // リストの端なら最初に戻る
     tID = xList[2];
   }
   if (tID.indexOf('B_') == 0) {
@@ -39,5 +37,6 @@ if (xList[0] > 1) {
     PPx.Execute('*focus ' + tID);
   }
 } else {
+  // 一枚表示なら反対窓起動
   PPx.Execute('%K"@F6"');
 }

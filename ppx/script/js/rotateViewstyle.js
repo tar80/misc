@@ -2,13 +2,11 @@
 /* リストビューの表示切り替え */
 
 var dirType = PPx.Extract(PPx.DirectoryType);
-var viewStyle = (PPx.WindowIDName == 'C_X')
-  ? ['CX', dirType]
-  : [dirType, ''];
+var viewStyle = (PPx.WindowIDName == 'C_X') ? 'CX' : dirType;
 
-switch (viewStyle[0]) {
+switch (viewStyle) {
 case 'CX':
-  (viewStyle[1] >= 62)
+  (dirType >= 62)
     ? PPx.Execute('*RotateExecute u_rotate_styleC, *viewstyle "漫画:小(&M)", *viewstyle "漫画:大(&M)"')
     : PPx.Execute('*RotateExecute u_rotate_styleB, *viewstyle "画像:小(&P)", *viewstyle "画像:中(&P)", *viewstyle "画像:大(&P)"');
   break;

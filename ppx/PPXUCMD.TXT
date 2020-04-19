@@ -284,8 +284,8 @@
 	-search  ;検索のみ実行して結果を表示しない
  
 *whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
-	-path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf" ;ディレクトリ無視して一覧表示
-	-path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf" ;ディレクトリ無視して現在窓・反対窓を一覧表示
+	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
+	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
 *windowposition ;[window id],x,y
 *windowsize ;[window id],width,height
 *zenhan ;[z|h] 文字のa/ａ変換

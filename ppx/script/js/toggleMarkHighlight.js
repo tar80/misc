@@ -1,6 +1,6 @@
 ﻿//!*script
 /* マークとハイライトをトグル */
-// PPx.Arguments(0)=Highlight number
+// PPx.Arguments() = [0]Highlight number
 // 参照元:http://hoehoetukasa.blogspot.com/2015/08/blog-post.html
 
 var num = PPx.Arguments(0)|0;

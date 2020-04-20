@@ -271,21 +271,22 @@
 *viewoption ;各種オプション 表示関係オプション
 *viewstyle ;[option] [MC_celS名|directory|separate] エントリ表示の種類を変更
 *wait  ;time[,1|2] 指定時間待機 1=待機後ループ 2=待機中ループ
-*where ;ファイル検索
+*where ;[!][option...] ファイル検索ダイアログ
+*whereis ;[option...] ファイル検索
+	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
+	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
 	-path:"" ;ソースパス
 	-mask:"" ;マスク
-	-listfile:"%'repoppx'%\list\PPXRESULT.xlf" ;結果結果の保存先パス
 	-text:"" ;検索文字列
 	-type:   ;2=コメント,3=explorerのファイル情報
 	-dir     ;ディレクトリを結果に含む
 	-subdir:off ;サブディレクトリ内を検索しない
 	-vfs     ;仮想ディレクトリ内を検索
 	-marked  ;ソースパスの代わりにマークエントリを検索
+	-listfile:"%'repoppx'%\list\PPXRESULT.xlf" ;結果結果の保存先パス
 	-search  ;検索のみ実行して結果を表示しない
+	-name    ;パスリストを生成する　※自動で-searchを付加
  
-*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
-	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
-	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
 *windowposition ;[window id],x,y
 *windowsize ;[window id],width,height
 *zenhan ;[z|h] 文字のa/ａ変換
@@ -304,7 +305,6 @@
 %m|プロセス強制終了@cmd taskkill
 %m|プロセス一覧@cmd tasklist /svc
 %m|指定ドメインまでの経路@cmd tracert
-%m|SKKFEP設定@cmd@skk@option cscript D:\Apps\skkfep\SETUP.js
 %m|西暦/月/日 %*nowdatetime("Y/n/d")
 %m|月日_時:分:秒 %*nowdatetime("ND_H:U:M")
 %m|月日(曜日) %*nowdatetime("n月d日(W)")

@@ -1,6 +1,6 @@
 ﻿//!*script
-/* 基準パスのサブディレクトリを取得する */
-// PPx.Arguments(0)=基準文字列, (1)=補完候補ファイルパス
+/* 引数で与えられたパスの階層を一つ上へ補完 */
+// PPx.Arguments() = [0]編集中のパス [1]補完候補ファイルパス
 
 try {
   var arg = [PPx.Arguments(0), PPx.Arguments(1)];

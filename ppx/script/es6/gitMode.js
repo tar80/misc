@@ -7,9 +7,12 @@ if (!ppbID) {
   PPx.Execute('*wait 200,2');
 } else {
   PPx.Execute('%Os *shownormal %NBA');
+  PPx.Execute('cd %FD');
 }
+
 PPx.Execute('%Os *focus C');
 
+const marks = PPx.Extract('%#;FC');
 const dock = PPx.Extract('%*getcust(X_dock:CBA_T)');
 if (!dock) {
   PPx.Execute('%Os *dock add,t,input K_git');
@@ -17,4 +20,5 @@ if (!dock) {
 PPx.Execute('%Os *dock focus,t,K_git');
 // PPx.Execute('*wait 10');
 PPx.Execute('%Os %K"@F5');
-PPx.Execute('%k"APPS i');
+PPx.Execute(`%Os *markentry ${marks}`);
+PPx.Execute('%Os %k"APPS i');

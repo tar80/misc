@@ -359,6 +359,7 @@ endif
 "# Autocmd {{{
 augroup vimrcAU
   autocmd!
+  autocmd VimEnter * rviminfo ~/_xxxinfo
 augroup END
 
 
@@ -438,7 +439,7 @@ nnoremap <space>j i<CR><ESC>
 " nnoremap  x "_x
 " nnoremap  X "_X
 "# 行末までヤンク
-nnoremap Y 0y$
+nnoremap Y y$
 "# コマンドモードでは行番号表示
 nnoremap <expr> : &ft == 'unite' ? ':' : ':<C-u>call <SID>setNum()<CR>'
 function s:setNum()
@@ -456,7 +457,6 @@ nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%'repoppx'\%\xTe
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}
 "# command_mode{{{
-cnoremap <F12> <C-u>rviminfo ~/_xxxinfo<CR>:
 "#}}}
 "# insert_mode{{{
 noremap! <C-j> <Down>
@@ -476,10 +476,12 @@ function! s:QuoteBehavior(tKey)
         \ || strpart(getline('.'),col('.') -2, 1) == '('
         \ || strpart(getline('.'),col('.') -2, 1) == '[')
     return a:tKey . a:tKey . "\<Left>"
+  elseif (strpart(getline('.'),col('.') -2, 2) == '()'
+        \ || strpart(getline('.'),col('.') -2, 2) == '[]')
+    return a:tKey . a:tKey . "\<Left>"
   else
     return a:tKey
   endif
-endif
 endfunction
 "# omni
 inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p>" : ".<C-x><C-o>"

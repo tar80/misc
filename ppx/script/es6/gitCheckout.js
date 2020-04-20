@@ -2,14 +2,13 @@
 /* ブランチの変更と表示の更新 */
 // git branchを変更してPPcを更新
 'use strict';
-const branchList = (()=> {
-  try {
-    return PPx.Arguments();
-  } catch (e) {
-    PPx.Echo('引数が異常');
-    PPx.Quit(1);
-  }
-})();
+const branchList = [];
+try {
+  branchList.push(PPx.Arguments(0));
+} catch (e) {
+  PPx.Echo('引数が異常');
+  PPx.Quit(1);
+}
 
 PPx.Execute(`%Os *execute C,@git branch | sed -e s/' '*// > ${branchList}`);
 PPx.Execute('%Os *wait 200,1');

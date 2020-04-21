@@ -224,9 +224,10 @@ endif
 "#}}}
 "# autocomplpop{{{
 if s:is_plugged('vim-autocomplpop')
-  let g:acp_enableAtStarup        = 1
-  let g:acp_completeOption        = 'w,b,k,i'
-  let g:acp_behaviorKeywordLength = 3
+  " let g:acp_enableAtStarup = 1
+  let g:acp_completeOption        = '.,w,b,k,i'
+  " let g:acp_behaviorKeywordCommand = "\<C-n>"
+  " let g:acp_behaviorKeywordLength = 3
   let g:acp_behaviorFileLength    = 2
   let g:acp_behaviorRubyOmniMethodLength  = -1
   let g:acp_behaviorRubyOmniSymbolLength  = -1
@@ -378,13 +379,20 @@ autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
 autocmd vimrcAU CmdLineLeave * setlocal relativenumber
 
 "# filetype
-"# コメント改行時の自動コメントアウト停止
-autocmd vimrcAU FileType * setlocal formatoptions -=r
-autocmd vimrcAU FileType * setlocal formatoptions -=o
+autocmd vimrcAU FileType * call <SID>all_ft()
+function! s:all_ft()
+  "# コメント改行時の自動コメントアウト停止
+  setlocal formatoptions -=r
+  setlocal formatoptions -=o
+  if &ft != 'unite'
+   let g:acp_behaviorKeywordLength = 3 
+  endif
+endfunction
 autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
-autocmd vimrcAU FileType unite call s:unite_my_settings()
+autocmd vimrcAU FileType unite call <SID>unite_my_settings()
 function! s:unite_my_settings()
+  let g:acp_behaviorKeywordLength = -1
   imap <silent><buffer><expr> <C-s> unite#do_action('split')
   imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
 endfunction
@@ -415,7 +423,7 @@ noremap <silent>, :nohlsearch<cr>
 noremap <space> <C-w>
 noremap <nowait> <Space><Space> <C-w><C-w>
 "# F3で行番号切り替え
-noremap <F3> :<C-u>setlocal relativenumber!<CR>
+noremap <silent><F3> :<C-u>setlocal relativenumber!<CR>
 "# F12でラップ状態の切り替え
 noremap <silent> <F12> :<C-u>call <SID>setWrap()<CR>
 function s:setWrap()
@@ -484,7 +492,7 @@ function! s:QuoteBehavior(tKey)
   endif
 endfunction
 "# omni
-inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p>" : ".<C-x><C-o>"
+inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p><Down>" : ".<C-x><C-o><Down>"
 "# TABの挙動
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : <SID>ComplTabKey()
 function! s:ComplTabKey()

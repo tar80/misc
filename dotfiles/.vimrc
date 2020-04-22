@@ -1,8 +1,19 @@
 "# vim:ts=4:tw=0:foldmethod=marker:foldcolumn=3:
 "======================================================================
 "# 文字コードの判別
-source ~/vimfiles/encode.vim
-"souce
+set fileformats=unix,dos,mac
+set encoding=utf-8
+if has('iconv')
+  set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932,utf-16le,utf-16,default,latin1
+else
+  set fileencodings=ucs-bom,utf-8,sjis,utf-16le,utf-16,default,latin1
+endif
+" scriptencodingは本来ファイル先頭で指定するべきだが、
+" 内部エンコーディングを変更した場合は再設定の必要がある
+scriptencoding utf-8
+
+" source $VIM/syntaxinfo.vim
+"
 "# ColorScheme_cui
 if !has('gui_running')
   colorscheme bong16
@@ -37,6 +48,8 @@ let g:loaded_matchparen         = 1
 "}}}
 "======================================================================
 "# Options {{{
+"# バッファのカレントを編集中ファイルのディレクトリに設定
+set autochdir
 "# ファイル保存初期ディレクトリ
 set browsedir =buffer
 "# undoファイルをまとめるディレクトリ

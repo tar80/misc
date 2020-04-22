@@ -2,7 +2,7 @@
 /* ブランチの変更と表示の更新 */
 // git branchを変更してPPcを更新
 try {
-    var branchList = PPx.Arguments();
+    var branchList = PPx.Arguments(0);
   } catch (e) {
     PPx.Echo('引数が異常');
     PPx.Quit(1);

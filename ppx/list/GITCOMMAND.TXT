@@ -91,7 +91,7 @@ rebase ;[--option]<コミット>
 reflog %: *focus BA ;履歴
 remote ;[--option]
 	-v show ;リモートのURLを表示
-reset ;[--option][<コミット>][<path>]
+reset ;[--option][<コミット>][-- <path>]
 	HEAD %#FC ; add取消
 	--soft ;    コミットリセット
 	--mixed ;   ※デフォルト addとコミットリセット

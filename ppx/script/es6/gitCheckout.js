@@ -12,7 +12,17 @@ try {
 
 PPx.Execute(`%Os *execute C,@git branch | sed -e s/' '*// > ${branchList}`);
 PPx.Execute('%Os *wait 200,1');
+PPx.Execute('%Os *focus C');
 // 一行編集で選択したブランチに移動して、PPxのステータス行に反映する
 PPx.Execute(`%Os *execute C,git checkout %*input(-title:"checkout branch" -mode:e -k *completelist -file:${branchList}) %: *wait 200,1 %: *execute C,*CHECKBRANCH`);
 PPx.Execute('%Os *wait 200, 2');
-PPx.Execute('%Os *execute C,%%K"@F5');
+// マーク状態を復元
+const resMark = (() => {
+  if (PPx.EntryMarkCount != 0) {
+    return `*markentry ${PPx.Extract('%#;FC')}`;
+  }else {
+    return '*unmarkentry';
+  }
+})();
+PPx.Execute('%Os %K"@F5');
+PPx.Execute(`%Os ${resMark}`);

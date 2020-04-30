@@ -8,14 +8,6 @@ if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
   PPx.Quit(1);
 }
 
-// GITmodeなら解除
-var dock = PPx.Extract('%*getcust(X_dock:CBA_T)');
-if (dock) {
-    PPx.Execute('*dock delete,t,input K_git');
-    PPx.Execute('*closeppx BA');
-    PPx.Quit(1);
-}
-
 // C_A以外の窓から終了
 var xID = PPx.WindowIDName;
 var xList;    // ppxlist

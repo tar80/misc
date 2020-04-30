@@ -26,15 +26,19 @@ cherry-pick ;[--option]<コミット>[..<コミット>] コミットを個別に
 	-e ;        メッセージを編集
 	-n ;        コミットはせずに取り込む
 	--continue ;中断したpickを再開
-commit ;[<path>][--option] -m 'message'
-	%#FC -m ' ;     選択エントリ
-	. -m ' ;        カレント以下
-	-m ' ;          全て
-	-a -m ' ;       新規以外の変更を含めてコミット
-	--amend -m ' ;  最新コミットの上書き
-	--fixup  ;      <コミット>  対象コミットに追加
-	--squash  ;     <コミット> 対象コミットと結合
-	--dry-run ;     試行
+commit ;[<path>][--option] -m "message"
+	%#FC ;      選択エントリ
+	. ;         カレント以下
+	-a ;        新規以外の変更を含めてコミット
+	--amend ;   最新コミットの上書き
+	--dry-run ; 試行
+	--fixup  ; <コミット> 対象コミットに追加
+	--squash  ;<コミット> 対象コミットと結合。メッセージ更新
+	-m "[fix] ;     バグ調整
+	-m "[update] ;  更新
+	-m "[refctor] ; 整理
+	-m "[add] ;     追加
+	-m "[delete] ;  削除
 diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
 	--stat  ;       変更点を表示
 	--cached ;      addしてからの変更点を表示
@@ -89,7 +93,7 @@ push ;[--option]<remote [branch]>
 	--delete ;<remote branch>         指定したリモートブランチを削除
 	--tags ;                          リモートにタグをpush
 rebase ;[--option]<コミット>
-	-i HEAD~ ;n   インタラクティブ
+	-i HEAD~ ;[n] インタラクティブ
 	--continue ;  続行
 	--abort ;     中止
 	%: *focus BA
@@ -116,5 +120,6 @@ stash ;[command]["メッセージ"]
 	clear ;                全スタッシュをリストから破棄
 	--patch ;              変更点を選んでスタッシュ
 	--keep-index ;         未addのみスタッシュ
-show ;[<コミット>]　コミットの詳細
+show ;[--option][<コミット>] コミットの詳細
+	%OD --date=short --format="%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad] %%C(cyan)@%%an %%C(green) %%s%%C(auto)%%d" %OD-
 	%: *focus BA

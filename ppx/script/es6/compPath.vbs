@@ -34,7 +34,7 @@ If IsEmpty(strMatch) = 0 Then
     strLine = Array(strMatch(0), """", Mid(strMatch(1), 2))
   End If
 
-  If PPx.Extract("%W") = "Jumppath.." Then
+  If Mid(PPx.Extract("%W"), 1, 11) = "Jumppath.." Then
     Dim fso
     Dim fsoLoadFile
     Dim fsoCompPath

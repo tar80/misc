@@ -3,9 +3,8 @@
 // PPx.Arguments() = [0]編集中のパス [1]補完候補ファイルパス
 'use strict';
 try {
-  const arg = [];
+  const arg = [PPx.Arguments(0), PPx.Arguments(1)];
   const str = [];
-  arg.push(PPx.Arguments(0), PPx.Arguments(1));
   arg[0].replace(/^([^\\]*\s)?(.*\\)(?!$).*/, (match, p1, p2) => {
     if (p2.indexOf('"') == 0) {
       // 対象がコマンドを含む場合

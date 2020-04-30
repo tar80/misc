@@ -3,7 +3,6 @@
 'use strict';
 const dirType = PPx.Extract(PPx.DirectoryType);
 const listView = (PPx.WindowIDName == 'C_X') ? 'CX' : dirType;
-const pict = ['jpg', 'jpeg', 'bmp', 'png', 'gif', 'vch', 'edg'];
 
 switch (listView) {
 case 'CX':

@@ -19,8 +19,8 @@ branch ;[--option][<branch>]
 checkout ;[--option][<branch>][<コミット>][<path>]
 	-b ;<newbranch> [<コミット>] ブランチを作成してチェックアウト
 	--force ;(-f)<branch>        変更を破棄してチェックアウト
-	checkout --ours ;<path>      マージ元ファイルを優先
-	checkout --theirs ;<path>    マージ先ファイルを優先
+	--ours ;<path>      マージ元ファイルを優先
+	--theirs ;<path>    マージ先ファイルを優先
 	%#FC
 cherry-pick ;[--option]<コミット>[..<コミット>] コミットを個別に取り込む
 	-e ;        メッセージを編集

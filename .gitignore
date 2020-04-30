@@ -1,10 +1,9 @@
 Px_@Path.cfg
 pictures.xlf
-worklist.xlf
 PPXRESULT.XLF
+PPXTEMP.TXT
 COMMITLIST.TXT
 GITBRANCH.TXT
 GITRESULT.XLF
-comp.txt
-xTest.js
+*Test.js
 memo.xlf

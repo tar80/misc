@@ -53,7 +53,7 @@ if (PPx.WindowIDName == 'C_X') {
 } else {
   // タイトルバーあり
   PPx.Execute('%Oi *setcust X_win:V=B000000000');
-  PPx.Execute('*linecust no_mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
+  PPx.Execute('*linecust mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
   Expand_ext();
 }
 

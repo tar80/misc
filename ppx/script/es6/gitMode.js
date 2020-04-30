@@ -1,5 +1,5 @@
 ﻿//!*script
-/* input_dockを起動してgitモードを開始*/
+/* input_dockを起動してgitモードを開始 */
 'use strict';
 const ppbID = PPx.Extract('%NBA');
 if (!ppbID) {

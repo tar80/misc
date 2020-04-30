@@ -2,9 +2,7 @@
 /* 背景透過用 */
 // PPx.Arguments() = [0]0-100 ;透過度
 'use strict';
-const tID = (() => {
-  return (PPx.WindowIDName == ('C_A'||'C_B') && PPx.Pane.Count <= 2) ? 'n#' : 'n';
-})();
+const tID = (PPx.WindowIDName == ('C_A'||'C_B') && PPx.Pane.Count <= 2) ? 'n#' : 'n';
 
 if (PPx.Arguments.length) {
   PPx.Execute(`*customize X_bg:O_%${tID} = ${PPx.Arguments(0)}`);

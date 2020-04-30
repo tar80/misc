@@ -11,8 +11,8 @@ const arg = (() => {
   }
 })();
 
-var fso = PPx.CreateObject('Scripting.FileSystemObject');
-var fsoTlist;
+const fso = PPx.CreateObject('Scripting.FileSystemObject');
+let fsoTlist;
 
 // 該当エントリをリストに書き出す
 const Write_mark_path = function () {

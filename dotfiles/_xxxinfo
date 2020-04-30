@@ -5,55 +5,57 @@
 *encoding=utf-8
 
 # コマンドライン 項目の履歴 (新しいものから古いものへ):
-:lcd ~/
-|2,0,1000000019,,"lcd ~/"
-:lcd %:h
-|2,0,1000000018,,"lcd %:h"
-:lcd C:/git/tar80/misc/
-|2,0,1000000017,,"lcd C:/git/tar80/misc/"
-:difforg
-|2,0,1000000009,,"difforg"
-:set scb | wincmd p | set scb
-|2,0,1000000009,,"set scb | wincmd p | set scb"
-:e ++enc=utf-8 ++ff=unix
-|2,0,1000000009,,"e ++enc=utf-8 ++ff=unix"
-:e ++enc=sjis ++ff=dos
-|2,0,1000000009,,"e ++enc=sjis ++ff=dos"
-:set noro
-|2,0,1000000009,,"set noro"
-:set fenc=sjis ff=dos
-|2,0,1000000009,,"set fenc=sjis ff=dos"
-:set fenc=utf-8 ff=unix
-|2,0,1000000009,,"set fenc=utf-8 ff=unix"
-:set noexpandtab
-|2,0,1000000009,,"set noexpandtab"
-:tabclose
-|2,0,1000000000,,"tabclose"
-:set spell
-|2,0,1000000000,,"set spell"
-:retab!
-|2,0,1000000000,,"retab!"
-:inoreabbrev
-|2,0,1000000000,,"inoreabbrev"
-:vertical diffsplit
-|2,0,1000000000,,"vertical diffsplit"
-:saveas
-|2,0,1000000000,,"saveas"
-:so ~/vim81/syntax/hitest.vim
-|2,0,1000000000,,"so ~/vim81/syntax/hitest.vim"
-:tabnew
-|2,0,1000000000,,"tabnew"
+:bufdo
+|2,0,1000000001,,"bufdo"
+:argdo
+|2,0,1000000002,,"argdo"
+:args
+|2,0,1000000003,,"args"
 :tab ball
-|2,0,1000000000,,"tab ball"
+|2,0,1000000004,,"tab ball"
 :tabonly
-|2,0,1000000000,,"tabonly"
-:marks
-|2,0,1000000000,,"marks"
+|2,0,1000000005,,"tabonly"
+:tabnew
+|2,0,1000000006,,"tabnew"
+:so ~/vim81/syntax/hitest.vim
+|2,0,1000000007,,"so ~/vim81/syntax/hitest.vim"
+:vertical diffsplit
+|2,0,1000000008,,"vertical diffsplit"
+:inoreabbrev
+|2,0,1000000009,,"inoreabbrev"
+:retab!
+|2,0,1000000010,,"retab!"
+:set spell
+|2,0,1000000011,,"set spell"
+:set noexpandtab
+|2,0,1000000012,,"set noexpandtab"
+:set noreadonly
+|2,0,1000000013,,"set noreadonly"
+:set fenc=sjis ff=dos
+|2,0,1000000014,,"set fenc=sjis ff=dos"
+:set fenc=utf-16 ff=unix
+|2,0,1000000015,,"set fenc=utf-16 ff=unix"
+:set fenc=utf-8 ff=unix
+|2,0,1000000016,,"set fenc=utf-8 ff=unix"
+:e ++enc=sjis ++ff=dos
+|2,0,1000000017,,"e ++enc=sjis ++ff=dos"
+:e ++enc=utf-16 ++ff=unix
+|2,0,1000000018,,"e ++enc=utf-16 ++ff=unix"
+:e ++enc=utf-8 ++ff=unix
+|2,0,1000000019,,"e ++enc=utf-8 ++ff=unix"
+:set scb | wincmd p | set scb
+|2,0,1000000020,,"set scb | wincmd p | set scb"
+:lcd D:/Apps/ppx/
+|2,0,1000000021,,"lcd D:/Apps/ppx/"
+:lcd D:/Apps/
+|2,0,1000000022,,"lcd D:/Apps/"
+:lcd C:/git/tar80/misc/
+|2,0,1000000023,,"lcd C:/git/tar80/misc/"
+:lcd %:h
+|2,0,1000000024,,"lcd %:h"
+:lcd ~/
+|2,0,1000000025,,"lcd ~/"
 
-# 検索文字列 項目の履歴 (新しいものから古いものへ):
-# 式 項目の履歴 (新しいものから古いものへ):
-# 入力行 項目の履歴 (新しいものから古いものへ):
-# デバッグ行 項目の履歴 (新しいものから古いものへ):
 # レジスタ:
 # ジャンプリスト (新しいものが先):
 # バッファリスト:

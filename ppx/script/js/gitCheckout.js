@@ -9,7 +9,7 @@ try {
   }
 
 // PPxのエイリアス(ターミナル呼び出し)
-PPx.Execute('termppx');
+PPx.Execute('%Oai termppx');
 // git branchの状態をテキストに書き出す
 PPx.Execute('%Os *execute C,@git branch | sed -e s/\' \'*// > ' + branchList);
 PPx.Execute('%Os *wait 300,1');
@@ -17,3 +17,12 @@ PPx.Execute('%Os *wait 300,1');
 PPx.Execute('%Os *execute C,git checkout %*input(-title:"checkout branch" -mode:e -k *completelist -file:' + branchList + ') %: *wait 300 %: *execute C,*CHECKBRANCH');
 PPx.Execute('%Os *wait 200, 2');
 PPx.Execute('%Os *execute C,%%K"@F5');
+// マーク状態を復元
+var resMark = function () {
+  if (PPx.EntryMarkCount != 0) {
+    return '*markentry ' + PPx.Extract('%#;FC');
+  }else {
+    return '*unmarkentry';
+  }
+}();
+PPx.Execute('%Os ' + resMark);

@@ -13,7 +13,7 @@ endif
 scriptencoding utf-8
 
 " source $VIM/syntaxinfo.vim
-"
+
 "# ColorScheme_cui
 if !has('gui_running')
   colorscheme bong16
@@ -376,6 +376,8 @@ augroup vimrcAU
   autocmd VimEnter * rviminfo ~/_xxxinfo
 augroup END
 
+"# autocomplpop自動起動
+autocmd vimrcAU BufEnter * call <SID>toggleACP()
 
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline
@@ -392,20 +394,13 @@ autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
 autocmd vimrcAU CmdLineLeave * setlocal relativenumber
 
 "# filetype
-autocmd vimrcAU FileType * call <SID>all_ft()
-function! s:all_ft()
-  "# コメント改行時の自動コメントアウト停止
-  setlocal formatoptions -=r
-  setlocal formatoptions -=o
-  if &ft != 'unite'
-   let g:acp_behaviorKeywordLength = 3 
-  endif
-endfunction
+"# 改行時の自動コメントアウト停止
+autocmd vimrcAU FileType * setlocal formatoptions -=r
+autocmd vimrcAU FileType * setlocal formatoptions -=o
 autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
 autocmd vimrcAU FileType unite call <SID>unite_my_settings()
 function! s:unite_my_settings()
-  let g:acp_behaviorKeywordLength = -1
   imap <silent><buffer><expr> <C-s> unite#do_action('split')
   imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
 endfunction
@@ -537,20 +532,20 @@ nnoremap <silent> <leader>m :<C-u>Unite -buffer-name=marks mark<CR>
 nnoremap <silent> <leader>r :<C-u>call <SID>UniteRepo()<CR>
 nnoremap <silent> <leader>g :<C-u>Unite -tab -no-start-insert -buffer-name=grep -previewheight=20 grep<CR>
 nnoremap <silent> <leader>l :<C-u>Unite -buffer-name=line line<CR>
-noremap <silent> <C-z> :<C-u>Unite -no-start-insert -winwidth=50 -direction=botright
-      \ -split -vertical -no-restore history/yank<CR>
+noremap <silent> <C-z> :<C-u>Unite -winwidth=60 -direction=botright
+  \ -split -vertical -no-restore history/yank<CR>
 inoremap <silent><expr> <C-z> unite#start_complete(
-      \ ['history/yank'], {'winwidth':50, 'split':1, 'vertical':1, 'restore':0})
+   \ ['history/yank'], {'winwidth':60, 'split':1, 'vertical':1, 'restore':0})
 "# acp
-inoremap <expr> <F2> <SID>toggleAutoComplPop()
-function s:toggleAutoComplPop()
+inoremap <expr> <F2> <SID>toggleACP()
+function s:toggleACP()
   if s:is_plugged('vim-autocomplpop')
-    if g:acp_behaviorKeywordLength == -1
+    if g:acp_behaviorKeywordLength != 3 && &ft != 'unite'
       let g:acp_behaviorKeywordLength = 3
-      echo 'completion ON'
+      echo 'ACP ON'
     else
       let g:acp_behaviorKeywordLength = -1
-      echo 'completion OFF'
+      echo 'ACP OFF'
     endif
     return ''
   endif

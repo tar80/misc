@@ -19,23 +19,28 @@ branch ;[--option][<branch>]
 checkout ;[--option][<branch>][<コミット>][<path>]
 	-b ;<newbranch> [<コミット>] ブランチを作成してチェックアウト
 	--force ;(-f)<branch>        変更を破棄してチェックアウト
-	checkout --ours ;<path>      マージ元ファイルを優先
-	checkout --theirs ;<path>    マージ先ファイルを優先
+	--ours ;<path>      マージ元ファイルを優先
+	--theirs ;<path>    マージ先ファイルを優先
 	%#FC
+cherry-pick ;[--option]<コミット>[..<コミット>] コミットを個別に取り込む
+	-e ;        メッセージを編集
+	-n ;        コミットはせずに取り込む
+	--continue ;中断したpickを再開
 commit ;[<path>][--option] -m 'message'
-	%#FC -m ' ;       選択エントリ
-	. -m ' ;          カレント以下
-	-m ' ;            全て
-	--amend -m ' ;    最新コミットの上書き
-	--fixup  ;        <コミット>  対象コミットに追加
-	--squash  ;       <コミット> 対象コミットと結合
-	--dry-run ;       試行
+	%#FC -m ' ;     選択エントリ
+	. -m ' ;        カレント以下
+	-m ' ;          全て
+	-a -m ' ;       新規以外の変更を含めてコミット
+	--amend -m ' ;  最新コミットの上書き
+	--fixup  ;      <コミット>  対象コミットに追加
+	--squash  ;     <コミット> 対象コミットと結合
+	--dry-run ;     試行
 diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
-	--stat  ;         変更点を表示
-	--cached ;        addしてからの変更点を表示
-	--color-words ;   単語単位の差分
-	--name-only ;     ファイル名のみ表示
-	--no-renames ;    名前のみの変更を省く
+	--stat  ;       変更点を表示
+	--cached ;      addしてからの変更点を表示
+	--color-words ; 単語単位の差分
+	--name-only ;   ファイル名のみ表示
+	--no-renames ;  名前のみの変更を省く
 difftool ;
 	--dir-diff
 fetch ;[--option|<remote [branch]>] リモートを取得する
@@ -47,18 +52,18 @@ fetch ;[--option|<remote [branch]>] リモートを取得する
 log ;[--option][<branch>][-n <表示数>]
 	%m|一行表示 --graph --date=short --format="%OD%%C(yellow)%%h %%C(magenta)[%%ad]%%C(reset)%%s%%C(auto)%%d%OD-" -23
 	%m|詳細 --graph --name-status --oneline --date=short --format="%OD%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad]%%C(cyan)%%an %%C(green)%%s%%C(auto)%%d%OD-" -5 %: *focus BA
-	--all ;             全ブランチ
-	--decorate=full ;   ブランチ名を短縮せずに表示
-	--graph=' ;'        分岐をグラフィカルに表示
+	--all ;           全ブランチ
+	--decorate=full ; ブランチ名を短縮せずに表示
+	--graph=' ;'      分岐をグラフィカルに表示
 	--grep ;[検索語]
-	--merges ;          マージコミットのみ
-	--no-merges ;       マージコミット除外
-	--name-only ;       ファイル名のみ表示
-	--name-status ;     名前＋ステータス表示
-	--oneline ;         一行にまとめる
-	-p ;[path]          差分表示
-	--summary ;         変更点を表示
-	--stat ;            変更点のステータス表示
+	--merges ;        マージコミットのみ
+	--no-merges ;     マージコミット除外
+	--name-only ;     ファイル名のみ表示
+	--name-status ;   名前＋ステータス表示
+	--oneline ;       一行にまとめる
+	-p ;[path]        差分表示
+	--summary ;       変更点を表示
+	--stat ;          変更点のステータス表示
 ls-files ;gitで管理中のファイル
 	-m ;変更
 	-d ;削除

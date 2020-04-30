@@ -9,14 +9,13 @@ const cmd = (() => {
   if (!PPx.GetFileInformation(opPath)) {
     pre = {act: 'move', opt: '', post: '-compcmd *ppc -pane:~ %%hd0'};
     pre.dest = '%\'work\'%\\';
-    return pre;
   } else {
     pre = (PPx.Arguments.length == 0)
       ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -pane:~ %%hd0'}
       : {act: '!move', opt: '-min', post: ''};
     pre.dest = opPath;
-    return pre;
   }
+  return pre;
 })();
 
 // 送り元の属性に応じて振り分け

@@ -16,7 +16,7 @@ let cd = {};
 
 PPx.Extract('%FDVN').replace(/^(.*)\\((.*\.)?(?!$)(.*))/, (match, p1, p2, p3, p4) => {
   cd = {
-    path: match,
+    path: `${match}\\`,
     par:  p1,
     name: p2,
     ext:  `.${p4.toLowerCase()}`

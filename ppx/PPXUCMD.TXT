@@ -29,6 +29,7 @@
 *cache  ;[on|off|task] PPc ディレクトリ読み込みキャッシュ
 *capturewindow  ;caption 任意ウィンドウの取り込み
 *cd  ;実行時カレント変更 *cd path
+*checkbranch ;カレントのgitブランチ名を取得
 *checkoffmark ;画面外にマークしたエントリがあれば警告
 *checksignature  ;[filename] 配布書庫の署名検証
 *checkupdate  ;[p] PPxの更新チェック p:試験公開版
@@ -123,6 +124,14 @@
 *job ;[close]処理中コマンドの一覧メニュー
 *jumpline ;[L|Y]行番号 行番号指定カーソル移動
 *jumppath ;[path][ /option] 詳細指定付き表示ディレクトリ移動
+	-update ;       更新(^[F5])
+	-savelocate ;   読み込み前のカーソル位置復元 ※-entryが優先
+	-entry: ;[name] nameにカーソルを合わす
+	-noasync ;      非同期読み込み無効
+	-nofixpath ;    移動先が存在しないときの親DIR表示機能無効
+	-usecache ;     キャッシュ有効
+	-refreshcache ; キャッシュ更新
+ 
 *launch  ;command [parameter] commandをそのディレクトリで実行
 *layout ;PPc/PPvのレイアウトメニュー
 *linemessage  ;ステータス行に文字列表示
@@ -134,13 +143,13 @@
 *makedir  ;dirname ディレクトリを作成
 *makefile  ;filename ディレクトリを作成
 *makelistfile ;[filename] [option] ListFile出力
-	-name   ; エントリ名のみ出力
-	-basic  ; エントリ名 + 属性情報
-	-normal ; エントリ名 + 属性情報 + コメント
-	-marked   ; マークのみ処理
-	-marktag  ; (-basic, -normalのとき)マーク情報追加
-	-comment  ; (-basicのとき)コメント情報追加
-	-message  ; システムメッセージも含める
+	-name ;     エントリ名のみ出力
+	-basic ;    エントリ名 + 属性情報
+	-normal ;   エントリ名 + 属性情報 + コメント
+	-marked ;   マークのみ処理
+	-marktag ;  (-basic, -normalのとき)マーク情報追加
+	-comment ;  (-basicのとき)コメント情報追加
+	-message ;  システムメッセージも含める
 	-noheader ; ヘッダ情報(;ListFile ;Base等)を付けない
  
 *markentry ;[wildcards] エントリマーク
@@ -215,9 +224,11 @@
 	; -hex, -text, -document, -image, -rawimage
 	; -sjis, -utf16, -utf8, etc..
  
-*ppvoption  ;command PPv使用時の挙動指定
+*ppvoption ;command PPv使用時の挙動指定
 	sync ;[on/off/ID] 連動ビュー
-        setsync ;[ID] 連動ビューのIDを固定。ID指定無しで解除
+	setsync ;[ID] 連動ビューのIDを固定。ID指定無しで解除
+ 
+*ppvud  ;[UP/DOWN/LEFT/RIGHT]
 *range ;target [-option] 指定範囲のマーク・ハイライト
 	cursor ;カーソル位置
 	marked ;マークエントリ

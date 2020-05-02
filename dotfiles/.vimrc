@@ -377,7 +377,7 @@ augroup vimrcAU
 augroup END
 
 "# autocomplpop自動起動
-autocmd vimrcAU BufEnter * call <SID>toggleACP()
+" autocmd vimrcAU BufEnter * call <SID>toggleACP()
 
 "# 挿入モードで一定時間キー入力がなければ着色
 autocmd vimrcAU CursorHoldI * setlocal cursorline

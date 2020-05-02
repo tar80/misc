@@ -35,7 +35,7 @@ commit ;[<path>][--option] -m 'message'
 	--fixup  ;      <コミット>  対象コミットに追加
 	--squash  ;     <コミット> 対象コミットと結合
 	--dry-run ;     試行
-diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
+diff ;[--option][<コミット(old)|ブランチ>][..<コミット(new)|ブランチ>][--][<path>]
 	--stat  ;       変更点を表示
 	--cached ;      addしてからの変更点を表示
 	--color-words ; 単語単位の差分

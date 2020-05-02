@@ -126,6 +126,7 @@
 *launch  ;command [parameter] commandをそのディレクトリで実行
 *layout ;PPc/PPvのレイアウトメニュー
 *linemessage  ;ステータス行に文字列表示
+*linemessage %*getcust(
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
@@ -242,6 +243,7 @@
 *replacefile ;filename ファイルを開き直す(PPe)
 *return ;ユーザコマンドの終了
 *screensaver ;スクリーンセーバを起動
+*script %'scr'%\
 *script %'repoppx'%\xTest.js
 *selectppx ;[ID] 指定PPxにフォーカス移動
 *setcaption ;text キャプションの設定

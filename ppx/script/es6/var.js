@@ -1,5 +1,6 @@
 ﻿//!*script
 /* 変数一覧 */
+'use strict';
 PPx.Echo(
   '%W:\t' + PPx.Extract('%W') +
   '\n%n:\t' + PPx.Extract('%n') +

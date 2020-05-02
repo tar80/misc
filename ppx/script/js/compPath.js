@@ -21,5 +21,5 @@ try {
   }
   PPx.Result = str.join('');
 } catch (e) {
-  PPx.Result = arg[0];
+  PPx.Result = PPx.Arguments(0);
 }

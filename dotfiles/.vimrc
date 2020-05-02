@@ -142,7 +142,7 @@ set showmatch matchtime =3
 set wildmenu
 set wildmode =longest:full,full
 "# テキスト挿入中の自動折り返しを日本語に対応させる
-set formatoptions +=mM
+set formatoptions +=mMj
 "# どの文字でタブや改行を表示するかを設定
 set listchars =tab:\|\ ,extends:<,precedes:>,trail:_,
 "# 常にステータス行を表示 (詳細は:he laststatus)

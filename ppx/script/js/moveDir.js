@@ -56,7 +56,7 @@ case 96:
   };
   break;
 default:
-  PPx.SetPopLineMessage('!"非対応ディレクトリ');
+  PPx.SetPopLineMessage('!"Not supported.');
   PPx.Quit(1);
   break;
 }
@@ -85,7 +85,7 @@ function move_path(valA, valB, termMessage) {
   var tEntry = list[Math.max(i - 1, 0)];
   // 端ならメッセージを表示
   if (list[i - 2] === undefined) {
-    PPx.SetPopLineMessage('!">>' + termMessage);
+    PPx.SetPopLineMessage('!"<' + termMessage + '>');
   }
   if (list[i - 1] !== undefined) {
     PPx.Execute('*jumppath "' + fso.BuildPath(fsoParentPath.Path, tEntry) + '"');

@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": false,
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "globals": {
+        "PPx": false
+    },
+    "rules": {
+        "linebreak-style": ["warn", "unix"],
+        "indent"    : ["error", 2],
+        "quotes"    : ["warn", "single"],
+        "semi"      : ["error", "always"],
+        "space-before-blocks": ["warn", {"functions": "always"}],
+        "no-undef"  : "warn"
+    }
+}

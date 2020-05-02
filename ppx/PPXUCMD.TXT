@@ -11,6 +11,9 @@
 %M?drivelist ;ドライブ一覧
 %M?favorites ;お気に入り(M_pjump)
 %M?diroptionmenu ;ディレクトリ設定
+%F ;C:filename.ext  X:filename  T:ext
+%F ;D:directory V:仮想directory S:SFN(8.3形式)
+%F ;B:"で括る   N:"で括らない   M:マークファイル
 %O ;x:窓最大化  n:最小化  d:非表示  a:フォーカス移動なし
 %O ;B:PPbで実行    b:PPbを使わない  W:PPb実行後キー待機
 %O ;s:順番に実行   i:起動完了待機   c:シェルを使用

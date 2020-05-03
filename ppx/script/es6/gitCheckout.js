@@ -19,10 +19,10 @@ PPx.Execute('%Os *wait 200, 2');
 // マーク状態を復元
 const resMark = (() => {
   if (PPx.EntryMarkCount != 0) {
-    return `*markentry ${PPx.Extract('%#;FC')}`;
+    return `*markentry o:dx;${PPx.Extract('%#;FC')}`;
   }else {
     return '*unmarkentry';
   }
 })();
-PPx.Execute('%Os %K"@F5');
+PPx.Execute('%Os *jumppath /savelocate /refreshcache');
 PPx.Execute(`%Os ${resMark}`);

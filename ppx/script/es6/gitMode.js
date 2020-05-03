@@ -1,24 +1,20 @@
 ﻿//!*script
 /* input_dockを起動してgitモードを開始 */
 'use strict';
-const ppbID = PPx.Extract('%NBA');
-if (!ppbID) {
-  PPx.Execute('%Oa *CHECKBRANCH');
-} else {
-  PPx.Execute('%Os *shownormal %NBA');
-  PPx.Execute('cd %FD');
-}
+PPx.Execute('%Oai *CHECKBRANCH');
+PPx.Execute('%Oi *shownormal %NBA');
+PPx.Execute('*focus');
 
 const dock = PPx.Extract('%*getcust(X_dock:CBA_T)');
 if (!dock) { PPx.Execute('%Os *dock add,t,input K_git'); }
 PPx.Execute('%Os *dock focus,t,K_git');
+PPx.Execute('%Os %k"APPS i');
 PPx.Execute('*wait 200,2');
 PPx.Execute('%Os *focus');
 if (PPx.EntryMarkCount != 0) {
   const marks = PPx.Extract('%#;FC');
-  PPx.Execute('%Os %K"@F5');
-  PPx.Execute(`*markentry ${marks}`);
+  PPx.Execute('%Os *jumppath /savelocate /refreshcache');
+  PPx.Execute(`*markentry o:dx;${marks}`);
 } else {
-  PPx.Execute('%Os %K"@F5');
+  PPx.Execute('%Os *jumppath /savelocate /refreshcache');
 }
-PPx.Execute('%Os %k"APPS i');

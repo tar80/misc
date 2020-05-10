@@ -9,10 +9,10 @@ if (ckwID == 0) {
   PPx.Execute('%Os *shownormal %*findwindowclass(CkwWIndowClass)');
 }
 
-PPx.Execute('%Os *focus');
+PPx.Execute('%Oi *focus');
 var dock = PPx.Extract('%*getcust(X_dock:CBA_T)');
 if (!dock) { PPx.Execute('%Os *dock add,t,input K_git'); }
-PPx.Execute('%Os *dock focus,t,K_git');
+PPx.Execute('%Oi *dock focus,t,K_git');
 PPx.Execute('%Os *wait 300,2');
 if (PPx.EntryMarkCount != 0) {
   var marks = PPx.Extract('%#;FC');

@@ -7,12 +7,12 @@ var cmd = {}; //[0]dest,[1]option
 
 // 対象パスを設定
 if (!PPx.GetFileInformation(opPath)) {
-  cmd = {act: 'move', opt: '', post: '-compcmd *ppc -pane:~ %%hd0'};
+  cmd = {act: 'move', opt: '', post: '-compcmd *ppc -noactive -pane:~ %%hd0'};
   cmd.dest = '%\'work\'%\\';
 } else {
   cmd = (PPx.Arguments.length == 0)
-    ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -pane:~ %%hd0'}
-    : {act: '!move', opt: '-min', post: ''};
+    ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -noactive -pane:~ %%hd0'}
+    : {act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive'};
   cmd.dest = opPath;
 }
 

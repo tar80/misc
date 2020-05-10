@@ -11,6 +11,9 @@
 %M?drivelist ;ドライブ一覧
 %M?favorites ;お気に入り(M_pjump)
 %M?diroptionmenu ;ディレクトリ設定
+%F ;C:filename.ext  X:filename  T:ext
+%F ;D:directory V:仮想directory S:SFN(8.3形式)
+%F ;B:"で括る   N:"で括らない   M:マークファイル
 %O ;x:窓最大化  n:最小化  d:非表示  a:フォーカス移動なし
 %O ;B:PPbで実行    b:PPbを使わない  W:PPb実行後キー待機
 %O ;s:順番に実行   i:起動完了待機   c:シェルを使用
@@ -29,6 +32,7 @@
 *cache  ;[on|off|task] PPc ディレクトリ読み込みキャッシュ
 *capturewindow  ;caption 任意ウィンドウの取り込み
 *cd  ;実行時カレント変更 *cd path
+*checkbranch ;カレントのgitブランチ名を取得
 *checkoffmark ;画面外にマークしたエントリがあれば警告
 *checksignature  ;[filename] 配布書庫の署名検証
 *checkupdate  ;[p] PPxの更新チェック p:試験公開版
@@ -123,6 +127,14 @@
 *job ;[close]処理中コマンドの一覧メニュー
 *jumpline ;[L|Y]行番号 行番号指定カーソル移動
 *jumppath ;[path][ /option] 詳細指定付き表示ディレクトリ移動
+	-update ;       更新(^[F5])
+	-savelocate ;   読み込み前のカーソル位置復元 ※-entryが優先
+	-entry: ;[name] nameにカーソルを合わす
+	-noasync ;      非同期読み込み無効
+	-nofixpath ;    移動先が存在しないときの親DIR表示機能無効
+	-usecache ;     キャッシュ有効
+	-refreshcache ; キャッシュ更新
+ 
 *launch  ;command [parameter] commandをそのディレクトリで実行
 *layout ;PPc/PPvのレイアウトメニュー
 *linemessage  ;ステータス行に文字列表示
@@ -218,6 +230,8 @@
 *ppvoption  ;command PPv使用時の挙動指定
 	sync ;[on/off/ID] 連動ビュー
         setsync ;[ID] 連動ビューのIDを固定。ID指定無しで解除
+ 
+*ppvud  ;[UP/DOWN/LEFT/RIGHT]
 *range ;target [-option] 指定範囲のマーク・ハイライト
 	cursor ;カーソル位置
 	marked ;マークエントリ
@@ -289,6 +303,9 @@
 	-search  ;検索のみ実行して結果を表示しない
 	-name    ;パスリストを生成する　※自動で-searchを付加
  
+*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
+	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
+	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
 *windowposition ;[window id],x,y
 *windowsize ;[window id],width,height
 *zenhan ;[z|h] 文字のa/ａ変換

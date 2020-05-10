@@ -14,7 +14,7 @@ case 'CX':
       "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:小(&P)""",\
       "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:中(&P)""",\
       "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:大(&P)"""');
-    PPx.Execute('*wait 0');
+    PPx.Execute('*wait 100');
     PPx.Execute('%K"@F5"');
   break;
 case '4':

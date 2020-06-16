@@ -51,5 +51,5 @@ PPx.Execute('*string i,vState=1');
 // ※ver1.66_書庫内にて直接PPvでファイルを開くとエラーが出る対策に*wait挟んでファイルを開く
 PPx.Execute('%Oi *ppv -r -checkeredpattern:on -bootid:Z -k *fitwindow ' + ppcId);
 PPx.Execute('*wait 10,1');
-PPx.Execute('%v');
+PPx.Execute('%KC"@N"');
 PPx.Execute('*maskentry path:,' + maskExt);

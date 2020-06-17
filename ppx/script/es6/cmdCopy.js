@@ -24,7 +24,7 @@ const cmd = (() => {
       ? {act: 'copy', opt: '-renamedest:on'}
       : {act: '!copy', opt: '-min'};
     pre.dest = opPath;
-    pre.post = '-compcmd *focus';
+    pre.post = '-compcmd *ppc -r -noactive';
     return pre;
   case ':XLF':
     pre = (arg == 0)

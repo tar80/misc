@@ -21,12 +21,17 @@ var cmdOpt = (arg == 0)
 // 送り先を設定
 switch (PPx.GetFileInformation(opDir)) {
 case ':DIR':
+  tDir = opDir;
+  post = '-compcmd *focus';
+  break;
 case ':XLF':
   tDir = opDir;
+  post = '';
   break;
 case '':
   tDir = '%\'work\'%\\';
   cmdOpt = ['copy', ''];
+  post = '-compcmd *ppc -pane:~ %%hd0';
   break;
 default:
   PPx.Echo('非対象ディレクトリ');
@@ -47,6 +52,5 @@ if (arg >= 2) {
 } else if (PPx.DirectoryType >= 62) {
   PPx.Execute('%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複リネーム,DIR展開"%{' + tDir + '%} %@');
 } else {
-  PPx.Execute('%Os *ppcfile ' + cmdOpt[0] + ',' + tDir + ',' + cmdOpt[1] + ' -mask:size:<1m -qstart -nocount -preventsleep -same:0 -sameall');
-  PPx.Execute('%Os *ppcfile !copy,' + tDir + ',-min -mask:size:>=1m -qstart -nocount -preventsleep -same:0 -sameall -burst:on -compcmd *ppc -r -noactive');
+  PPx.Execute('%Os *ppcfile ' + cmdOpt[0] + ',' + tDir + ',' + cmdOpt[1] + ' -qstart -nocount -preventsleep -same:0 -sameall' + post);
 }

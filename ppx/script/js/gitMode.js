@@ -2,7 +2,6 @@
 /* input_dockを起動してgitモードを開始 */
 var ckwID = PPx.Extract('%*findwindowclass(CkwWindowClass)');
 if (ckwID == 0) {
-  PPx.Execute('%Oai termppx');
   PPx.Execute('%Oi *CHECKBRANCH');
 } else {
   PPx.Execute('cd %FD');

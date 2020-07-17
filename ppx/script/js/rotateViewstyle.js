@@ -3,19 +3,32 @@
 
 var dirType = PPx.Extract(PPx.DirectoryType);
 var listView = (PPx.WindowIDName == 'C_X') ? 'CX' : dirType;
+// var imgSize = new Array(2);
+// var str;
+// PPx.Entry.Information.replace(/[\s\S]*\*Size:(\d*)x(\d*)[\s\S]*/g, function (match, p1, p2) {
+//   imgSize = [p1, p2];
+//   str = (imgSize[0] - imgSize[1] < 0)
+//   ? "縦(&H)"
+//   : "(&W)";
+// });
 
 switch (listView) {
 case 'CX':
-  (dirType >= 62)
-    ? PPx.Execute('%Os *RotateExecute u_rotate_styleC,\
-      "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""漫画:小(&M)""",\
-      "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""漫画:大(&M)"""')
-    : PPx.Execute('%Os *RotateExecute u_rotate_styleB,\
-      "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:小(&P)""",\
-      "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:中(&P)""",\
-      "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:大(&P)"""');
-    PPx.Execute('*wait 100');
-    PPx.Execute('%K"@F5"');
+  if (dirType >= 62) {
+    PPx.Execute('%Oi *RotateExecute u_rotate_styleC,\
+      "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中縦(&H)""",\
+      "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:特縦(&H)"""')
+    } else {
+      PPx.Execute('%Osn *ppb -c file %R | xargs %0ppcw -r -bootid:x -noactive -k *string i,str=');
+      PPx.Extract('%si"str"').replace(/.*,(.*)x(.*),\sframes\s\d$/, function (match, p1, p2) {
+        var imgSize = [p1, p2];
+        str = (imgSize[0] - imgSize[1] < 0)
+          ? "縦(&H)"
+          : "(&W)";
+      });
+      if (str == undefined) { str = "(&W)" };
+      PPx.Execute('%Os *RotateExecute u_rotate_styleB, "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:小(&W)""", "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中' + str + '""", "*setcust XC_ocig=2,0,1,0,0,256,2 %%: *viewstyle ""画像:大' + str + '"""');
+    }
   break;
 case '4':
 PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp 一覧:名前(&L), *viewstyle -temp 一覧:コメント(&L)');

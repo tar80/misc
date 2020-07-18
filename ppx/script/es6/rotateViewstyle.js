@@ -8,7 +8,7 @@ switch (listView) {
 case 'CX':
   {
     if (dirType >= 62) {
-      PPx.Execute('%Oi *RotateExecute u_rotate_styleC,\
+      PPx.Execute('*RotateExecute u_rotate_styleC,\
       "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中縦(&H)""",\
       "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:特縦(&H)"""');
     } else {
@@ -16,7 +16,7 @@ case 'CX':
       const str = (imgSize[0] - imgSize[1] < 0)
         ? '縦(&H)'
         : '(&W)';
-      PPx.Execute(`%Os *RotateExecute u_rotate_styleB,\
+      PPx.Execute(`*RotateExecute u_rotate_styleB,\
         "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:小(&W)""",\
         "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中${str}""",\
         "*setcust XC_ocig=2,0,1,0,0,256,2 %%: *viewstyle ""画像:大${str}"""`);

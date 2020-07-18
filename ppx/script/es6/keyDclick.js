@@ -37,7 +37,7 @@ const maskExt = (() => {
 const Expand_ext = function() {
   switch (selType) {
   case 'image':
-    PPx.Execute('%Oi *setcust XV_imgD:VZ=-2,4');
+    PPx.Execute('*setcust XV_imgD:VZ=-2,4');
     break;
   case 'movie':
     PPx.Execute('%On *ppb -c %0..\\mplayer\\mplayer.exe -framedrop -geometry %*windowrect(%N.,l):%*windowrect(%N.,t) -vf dsize=%*windowrect(%N.,w):%*windowrect(%N.,h):0 %FDC -loop 0');
@@ -48,16 +48,16 @@ const Expand_ext = function() {
 
 if (PPx.WindowIDName == 'C_X') {
   // タイトルバーなし
-  PPx.Execute('%Oix *setcust X_win:V=B100000000');
+  PPx.Execute('%Ox *setcust X_win:V=B100000000');
   //PPx.Execute('*topmostwindow %NVA,1');
 } else {
   // タイトルバーあり
-  PPx.Execute('%Oi *setcust X_win:V=B000000000');
+  PPx.Execute('*setcust X_win:V=B000000000');
   PPx.Execute('*linecust mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
   Expand_ext();
 }
 
 PPx.Execute('*string i,vState=1');
-PPx.Execute(`*execinarc %: %Oi *ppv -r -checkeredpattern:on -bootid:Z %R -k *fitwindow ${ppcId}`);
+PPx.Execute(`*execinarc %: *ppv -r -checkeredpattern:on -bootid:Z %R -k *fitwindow ${ppcId}`);
 PPx.Execute(`*maskentry path:,${maskExt}`);
 PPx.Execute('%J"%*extract(VZ"%%R")"');

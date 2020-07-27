@@ -15,7 +15,7 @@ if (sync == 0) {
 } else {
   // 連動ビューがあれば解除して終了
   PPx.SyncView = 0;
-  PPx.Execute('%Oi *setcust X_win:V=B000000000');
+  PPx.Execute('*setcust X_win:V=B000000000');
   PPx.Execute('*string i,vState=');
   // PPx.Execute('%KV' + tID + ',"@Q"');
   if (PPx.Extract('%si"vSize') != 0) {

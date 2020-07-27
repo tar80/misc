@@ -15,19 +15,16 @@ var listView = (PPx.WindowIDName == 'C_X') ? 'CX' : dirType;
 switch (listView) {
 case 'CX':
   if (dirType >= 62) {
-    PPx.Execute('%Oi *RotateExecute u_rotate_styleC,\
+    PPx.Execute('*RotateExecute u_rotate_styleC,\
       "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中縦(&H)""",\
       "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:特縦(&H)"""')
     } else {
-      PPx.Execute('%Osn *ppb -c file %R | xargs %0ppcw -r -bootid:x -noactive -k *string i,str=');
-      PPx.Extract('%si"str"').replace(/.*,(.*)x(.*),\sframes\s\d$/, function (match, p1, p2) {
-        var imgSize = [p1, p2];
-        str = (imgSize[0] - imgSize[1] < 0)
+      PPx.Execute('%Osn *ppb -c file %R | xargs %0ppcw -r -bootid:X -noactive -k *string i,str=');
+      var imgSize = PPx.Extract('%si"str"').replace(/.*,\s([0-9]{1,6})\s?x\s?([0-9]{1,6}),\s.*$/, '$1,$2').split(',');
+      var str = (imgSize[0] - imgSize[1] < 0)
           ? "縦(&H)"
           : "(&W)";
-      });
-      if (str == undefined) { str = "(&W)" };
-      PPx.Execute('%Os *RotateExecute u_rotate_styleB, "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:小(&W)""", "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中' + str + '""", "*setcust XC_ocig=2,0,1,0,0,256,2 %%: *viewstyle ""画像:大' + str + '"""');
+      PPx.Execute('*RotateExecute u_rotate_styleB, "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:小(&W)""", "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中' + str + '""", "*setcust XC_ocig=2,0,1,0,0,256,2 %%: *viewstyle ""画像:大' + str + '"""');
     }
   break;
 case '4':

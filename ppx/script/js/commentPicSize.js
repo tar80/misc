@@ -7,7 +7,7 @@ var tList = fs.OpenTextFile(filePath, 2, true);
 // アクティブな窓の表示状態を取得
 var listView = PPx.Extract('%*getcust(xc_celf:' + PPx.Extract('%n').slice(1) + ')');
 // 情報取得のため一時的に表示を変更
-PPx.Execute('%Os *customize XC_celF:' + PPx.Extract('%n').slice(1) + '=U"大きさ",0');
+PPx.Execute('*customize XC_celF:' + PPx.Extract('%n').slice(1) + '=U"大きさ",0');
 // 画像情報取得
 for (var i = 0, l = PPx.EntryDisplayCount; i < l; i = (i+1)|0) {
   if (PPx.Entry(i).Name.match(/.(bmp|jpg|jpeg|png|gif)$/i)) {

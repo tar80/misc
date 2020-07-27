@@ -32,6 +32,8 @@ commit ;[<path>][--option] -m "message"
 	-a ;        新規以外の変更を含めてコミット
 	--amend ;   最新コミットの上書き
 	--dry-run ; 試行
+	--fixup  ; <コミット> 対象コミットに追加
+	--squash  ;<コミット> 対象コミットと結合。メッセージ更新
 	-m "[fix] ;     バグ調整
 	-m "[update] ;  更新
 	-m "[refctor] ; 整理

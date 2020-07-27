@@ -9,6 +9,13 @@ case 'filetype':
     PPx.Result = (getExt == '') ? '---' : getExt;
   }
   break;
+case 'exists':
+  {
+    const fso = PPx.CreateObject('Scripting.FileSystemObject');
+    const path = PPx.Extract('%FDC');
+    PPx.Result = fso.FileExists(path)|0 + fso.FolderExists(path)|0;
+  }
+  break;
 case 'makepath': // 反対窓の有無に応じてパスを返す
   {
     const tPath = (PPx.Pane.Count == 2) ? '%2%\\' : '%\'work\'%\\';

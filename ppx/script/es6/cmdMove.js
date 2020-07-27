@@ -11,8 +11,8 @@ const cmd = (() => {
     pre.dest = '%\'work\'%\\';
   } else {
     pre = (PPx.Arguments.length == 0)
-      ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -pane:~ %%hd0'}
-      : {act: '!move', opt: '-min', post: ''};
+      ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -noactive -pane:~ %%hd0'}
+      : {act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive'};
     pre.dest = opPath;
   }
   return pre;

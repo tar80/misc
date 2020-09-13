@@ -32,10 +32,11 @@ set t_vb=
 if has('xfontset')
   set guifontset=a14,r14,k14
 elseif has('win32') || has('win64')
-  set renderoptions=type:directx,renmode:5,gamma:1.8,contrast:1
+  set renderoptions=type:directx,renmode:5,gamma:1.8,contrast:1.2
   " set guifont=Consolas:h14:cANSI:qDRAFT
   " set guifont=Cica:h13:cSHIFTJIS
-  set guifont=NasuM:h13:cSHIFTJIS
+  " set guifont=NasuM:h13:cSHIFTJIS
+  set guifont=Rounded_Mgen+_1m_regular:h13:cSHIFTJIS
 endif
 "
 " 印刷用フォント

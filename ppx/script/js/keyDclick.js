@@ -48,6 +48,8 @@ if (PPx.WindowIDName == 'C_X') {
 }
 
 PPx.Execute('*string i,vState=1');
-PPx.Execute('*execinarc %: *ppv -r -checkeredpattern:on -bootid:Z "%R" -k *fitwindow ' + ppcId);
+PPx.Execute('*setcust X_vpos=3');
+PPx.Execute('*ppvoption id z %K"@N');
+// PPx.Execute('*execinarc %: *ppv -r -checkeredpattern:on -bootid:Z %R -k *fitwindow ' + ppcId);
 PPx.Execute('*maskentry path:,' + maskExt);
-PPx.Execute('%J"%*extract(VZ"%%R")"');
+// PPx.Execute('%J"%*extract(VZ"%%R")"');

@@ -46,22 +46,22 @@ case 'undo':
     fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
     PPx.SetPopLineMessage('UnDo!');
     do {
-      const str = (() => {
-        try {
-          return fsoUndoLog.ReadLine();
-        } catch (e) {
-          // ファイルが空なら中止
-          (typeof fsoUndoLog.ReadLine === 'undefined')
-            ? PPx.SetPopLineMessage('no result.')
-            : PPx.Echo(e + '\n' + str);
-          fsoUndoLog.Close();
-          PPx.Quit(-1);
-        }
-      })();
       // UNDOログを置換
-      result = str.replace(/.*\t(.*)/, '$1 << ', 'i');
-      result = result + fsoUndoLog.ReadLine().replace(/.*\t(.*)/, '$1\n', 'i');
-      switch (str.slice(0,4)) {
+      const result = [];
+      try {
+        fsoUndoLog.ReadLine().replace(/(.*)\t(.*)/, (match, p1, p2) => {
+          result.push(p1, p2);
+        });
+        result.push(fsoUndoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i'));
+      } catch (e) {
+        // ファイルが空なら中止
+        (typeof fsoUndoLog.ReadLine === 'undefined')
+          ? PPx.SetPopLineMessage('Not Exist.')
+          : PPx.Echo(e);
+        fsoUndoLog.Close();
+        PPx.Quit(-1);
+      }
+      switch (result[0]) {
       case 'Move':
         cmd = '-compcmd *script %\'scr\'%\\undo.js,redo';
         break;
@@ -69,7 +69,7 @@ case 'undo':
         {
           const cDir = PPx.Extract('%FDN%\\');
           for (let [i, l] = [0, PPx.EntryDisplayCount]; i < l; i++) {
-            if (PPx.Entry(i).state != 1 && (str.replace(/Backup\t(.*)/, '$1' ) == cDir + PPx.Entry(i).Name)) {
+            if (PPx.Entry(i).state != 1 && (result[0].replace(/Backup\t(.*)/, '$1' ) == cDir + PPx.Entry(i).Name)) {
               PPx.SetPopLineMessage('Do Not!');
               fsoUndoLog.Close();
               PPx.Quit(-1);
@@ -84,10 +84,12 @@ case 'undo':
         PPx.Quit(-1);
         break;
       }
-      PPx.SetPopLineMessage(result);
+      PPx.Execute(`*linemessage Dist: ${result[1]}%bnSend: ${result[2]}`);
     } while (!fsoUndoLog.AtEndOfStream);
     fsoUndoLog.Close();
     PPx.Execute(`*file !Undo -min -nocount ${cmd}`);
   }
   break;
 }
+
+

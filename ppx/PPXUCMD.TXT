@@ -195,7 +195,7 @@
 	-single ;単独のppc起動
 	-mps ;窓毎にプロセスを割り当てる
 	-sps ;一つのプロセスで起動
-	-bootid:  ;[path] A-Z:指定PPcを起動 ~:反対窓
+	-bootid: ;[path] A-Z:指定PPcを起動 ~:反対窓
 	-bootmax: ;A-Z:起動していなければ指定PPcまでのPPcを起動
 	-idl ;関連付けフォルダ指定(通常明示する必要なし)
 	-k ;起動後実行コマンド
@@ -262,13 +262,23 @@
 *selectppx ;[ID] 指定PPxにフォーカス移動
 *setcaption ;text キャプションの設定
 *set ;[valuename=[strings]] 環境変数の設定、削除
-*setcust ;カスタマイズ(高速) X_xxx=xxxx / X_xxx:xxx=xxxx
+*setcust  ;カスタマイズ(高速) X_xxx=xxxx / X_xxx:xxx=xxxx
 *setentryimage ;filename [/save] サムネイル表示用画像の設定
+	/save ;サムネイルキャッシュ
 *setmaskentry ;[wildcards] PPc 常時エントリマスク設定
-*setsortentry ;[XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,オプション エントリのソート(\[S]相当)
+*setsortentry ;[option] [XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,ソートオプション
 *shownormal ;[window id] 窓を通常の大きさにする
 *shutdown ;Windows をシャットダウン
-*sortentry ;[XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,オプション エントリのソート([S]相当)
+*sortentry ;[option] [XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,ソートオプション
+	-id ;窓ID毎の設定
+	-temp ;一時設定
+	-thispath ;現在のディレクトリのみ
+	-thisbranch ;現在のディレクトリとその下層
+	-archive ;書庫内限定
+	-listfile ;ListFile内限定
+	-used ;現在適用されている設定。他のオプションと併用
+	-"path" ;指定したpathに適用。末尾が"\"なら下層含む
+ 
 *sound ;[filename.wav] WAVファイルを再生する
 *start ;[-runas][-launch] filename [parameter] filenameを実行
 *stop ;実行中止
@@ -285,7 +295,16 @@
 *unmarkentry ;[wildcards] エントリマーク解除
 *unpack ;path 書庫の展開
 *viewoption ;各種オプション 表示関係オプション
-*viewstyle ;[option] [MC_celS名|directory|separate] エントリ表示の種類を変更
+*viewstyle ;[option] [MC_celS名|directory|separate] エントリ表示変更
+	-id ;窓ID毎の設定
+	-temp ;一時設定
+	-thispath ;現在のディレクトリのみ
+	-thisbranch ;現在のディレクトリとその下層
+	-archive ;書庫内限定
+	-listfile ;ListFile内限定
+	-used ;現在適用されている設定。他のオプションと併用
+	-"path" ;指定したpathに適用。末尾が"\"なら下層含む
+ 
 *wait  ;time[,1|2] 指定時間待機 1=待機後ループ 2=待機中ループ
 *where ;[!][option...] ファイル検索ダイアログ
 *whereis ;[option...] ファイル検索

@@ -1,5 +1,7 @@
 ﻿//!*script
-/* 状況に応じてSyncViewを設定 */
+/* 状況に応じて連動ビューを設定 */
+// %si"vSize"  :capturewindowに取り込む前のPPvのサイズ
+// %si"vState" :値が"1"のとき、カーソルを避けるようにPPvの位置を変える
 'use strict';
 const paneCount = PPx.Pane.Count;
 const tID = PPx.WindowIDName.slice(2);
@@ -17,7 +19,7 @@ if (sync == 0) {
   PPx.Execute('*setcust X_win:V=B000000000');
   PPx.Execute('*string i,vState=');
   if (PPx.Extract('%si"vSize') != 0) {
-    // capturewindowに取り込む前のサイズに戻す
+    // ppvをcapturewindowに取り込む前のサイズに戻す
     PPx.Execute(`*setcust _WinPos:V${tID}=%si"vSize"`);
     PPx.Execute('*string i,vSize=');
   }
@@ -26,22 +28,22 @@ if (sync == 0) {
 // 呼出元の状態に合わせて連動ビューを起動
 function State_syncview (tWin) {
   PPx.Execute(`*setcust X_win:V=${tWin}`);
-  PPx.Execute(`%Oi *ppv -r -bootid:${tID}`);
+  PPx.Execute(`%Oi *ppv -r -min -bootid:${tID}`);
   switch (paneCount) {
   case 2:
     {
-      // capturewindowに取り込む前のサイズを記憶する
-      const preSize = PPx.Extract('%*getcust(_WinPos:VA)');
-      PPx.Execute(`*string i,vSize=${preSize}`);
+      // capturewindowに取り込む前にPPvのサイズを記憶する
+      PPx.Execute('*string i,vSize=%*getcust(_WinPos:VA)');
       PPx.Execute('*string i,vState=1');
       PPx.Execute(`%Oi *capturewindow V${tID} -pane:~ -selectnoactive`);
-      //フォーカスがうまくいかない場合は、ここを調整する
-      PPx.Execute('*wait 10,1 %:*focus');
     }
     break;
   default:
     PPx.Execute('*setcust X_vpos=0');
     PPx.Execute(`*topmostwindow %NV${tID},1`);
+    PPx.Execute('*focus V');
   }
   PPx.Execute(`*ppvoption sync ${tID}`);
+  //フォーカスがうまくいかない場合は、ここを調整する
+  // PPx.Execute('*focus');
 }

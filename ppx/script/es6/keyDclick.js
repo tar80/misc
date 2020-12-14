@@ -3,9 +3,9 @@
 // PPx.Arguments() = [0]image | doc | movie
 // PPc[X]は画像専用
 'use strict';
-const ppcId = (PPx.Pane.length != 0)
-  ? PPx.Extract('%NC#')
-  : PPx.Extract('%NC');
+// const ppcId = (PPx.Pane.length != 0)
+//   ? PPx.Extract('%NC#')
+//   : PPx.Extract('%NC');
 const type = {
   doc:   ['.txt', '.ini', '.js', '.log', '.cfg', '.html', '.ahk', '.md', '.vbs' ,'.json'],
   image: ['.jpg', '.jpeg', '.bmp', '.png', '.gif', '.vch', '.edg'],

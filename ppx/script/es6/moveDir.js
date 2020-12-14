@@ -27,14 +27,14 @@ PPx.Extract('%FDVN').replace(/^(.*)\\((.*\.)?(?!$)(.*))/, (match, p1, p2, p3, p4
 switch (PPx.DirectoryType) {
 case 1:
   // 属性を考慮してリスト作成
-  PPx.Execute(`*whereis -path:${cd.par}%\\ -mask:"a:d+s-" -dir:on -subdir:off -listfile:${arg[1]} -name`);
+  PPx.Execute(`*whereis -path:"${cd.par}%\\" -mask:"a:d+s-" -dir:on -subdir:off -listfile:${arg[1]} -name`);
   break;
 case 4:
 case 63:
 case 64:
 case 96:
   // 拡張子を考慮してリスト作成
-  PPx.Execute(`*whereis -path:${cd.par}%\\ -mask:${cd.ext} -subdir:off -listfile:${arg[1]} -name`);
+  PPx.Execute(`*whereis -path:"${cd.par}%\\" -mask:${cd.ext} -subdir:off -listfile:${arg[1]} -name`);
   break;
 default:
   PPx.SetPopLineMessage('!"Not supported.');
@@ -76,7 +76,7 @@ function move_path(valA, valB, termMessage) {
       PPx.SetPopLineMessage(`!"<${termMessage}>`);
     }
     if (pathList[i - 1] !== undefined) {
-      PPx.Execute(`*jumppath ${targetPath}`);
+      PPx.Execute(`*jumppath "${targetPath}"`);
     }
   }
 }

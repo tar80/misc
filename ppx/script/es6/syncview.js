@@ -40,6 +40,7 @@ function State_syncview (tWin) {
     }
     break;
   default:
+    PPx.Execute('*setcust X_vpos=0');
     PPx.Execute(`*topmostwindow %NV${tID},1`);
   }
   PPx.Execute(`*ppvoption sync ${tID}`);

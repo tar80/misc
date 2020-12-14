@@ -522,8 +522,8 @@ inoremap <silent><expr> <C-z> unite#start_complete(
 inoremap <expr> <F2> <SID>toggleACP()
 function s:toggleACP()
   if s:is_plugged('vim-autocomplpop')
-    if g:acp_behaviorKeywordLength != 3 && &ft != 'unite'
-      let g:acp_behaviorKeywordLength = 3
+    if g:acp_behaviorKeywordLength != 2 && &ft != 'unite'
+      let g:acp_behaviorKeywordLength = 2
       echo 'ACP ON'
     else
       let g:acp_behaviorKeywordLength = -1

@@ -20,4 +20,4 @@ if (PPx.EntryMarkCount != 0) {
 } else {
   PPx.Execute('*jumppath /savelocate /refreshcache');
 }
-PPx.Execute('%k"APPS i');
+PPx.Execute('%k"APPS 9');

@@ -32,6 +32,9 @@ var expand_ext = function () {
       PPx.Quit(1);
     break;
     default:
+      if (PPx.DirectoryType >= 63) {
+        if (PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') != 0) { PPx.Quit(1); }
+      }
     }
   }
 };
@@ -43,7 +46,7 @@ if (PPx.WindowIDName == 'C_X') {
 } else {
     // タイトルバーあり
     PPx.Execute('*setcust X_win:V=B000000000');
-    PPx.Execute('*linecust no_mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
+    PPx.Execute('*linecust mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
     expand_ext();
 }
 

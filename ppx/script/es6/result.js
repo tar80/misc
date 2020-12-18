@@ -1,6 +1,6 @@
 ﻿//!*script
 /* 引数で指定された情報を返す */
-// PPx.Arguments() = [0]filetype | makepath | repository
+// PPx.Arguments() = [0]filetype | exists | getpath | repository
 'use strict';
 const arg = PPx.Arguments(0);
 
@@ -18,7 +18,7 @@ case 'exists':
     PPx.Result = fso.FileExists(path)|0 + fso.FolderExists(path)|0;
   }
   break;
-case 'makepath': // 反対窓の有無に応じてパスを返す
+case 'getpath': // 反対窓の有無に応じてパスを返す
   {
     const tPath = (PPx.Pane.Count == 2) ? '%2%\\' : '%\'work\'%\\';
     PPx.Result = PPx.Extract(tPath);

@@ -70,7 +70,7 @@
 	-pane ;[:~(反対),:n(=数値指定),:l(=左),:r(=右)]
  
 *cd  ;実行時カレント変更 *cd path
-*checkbranch ;カレントのgitブランチ名を取得
+*checkbranch ;<UserCommand> カレントのgitブランチ名を取得
 *checkoffmark ;画面外にマークしたエントリがあれば警告
 *checksignature  ;[filename] 配布書庫の署名検証
 *checkupdate  ;[p] PPxの更新チェック p:試験公開版
@@ -82,7 +82,7 @@
 *closeppx  ;[wildcard] 全PPx終了
 *color  ;[back|cursor] [color] 色の一時的変更
 *comment  ;[id,]["text"|[all] command]
-*commitlist ;UserCommand コミットリストの更新
+*commitlist ;<UserCommand> コミットリストの更新
 *commandhash ;name モジュールのコマンド名ハッシュの表示
 *comparemark  ;比較方法,マーク属性,サブディレクトリ PPcファイル比較マーク
 *completelist ;[/set][/option] 自動の一覧表示の表示設定
@@ -181,7 +181,7 @@
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
-*memo  ;内容 |UserCommand ワークリストにメモを追加
+*memo  ;"内容" <UserCommand> リストファイルにメモを追加
 *makedir  ;dirname ディレクトリを作成
 *makefile  ;filename ディレクトリを作成
 *makelistfile ;[filename] [option] ListFile出力

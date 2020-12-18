@@ -1,6 +1,7 @@
 ﻿//!*script
-/* 一行編集上で編集中のパス末尾を選択状態にする */
+/* 一行編集上で編集中の文字の選択状態を操作する */
 // PPx.Arguments() = [0]"(lparam(wparam))"
+// 引数は正規表現で指定する
 // 参照元:http://egg.2ch.net/reg/read.cgi/software/1476708638/409
 'use strict';
 try {

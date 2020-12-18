@@ -1,5 +1,5 @@
 ﻿//!*script
-/* 引数で指定された情報を返す */
+/* 引数で指定された変数を返す */
 // PPx.Arguments() = [0]filetype | exists | getpath | repository
 'use strict';
 const arg = PPx.Arguments(0);

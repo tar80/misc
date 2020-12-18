@@ -2,7 +2,9 @@
 /* 引数で指定された情報を返す */
 // PPx.Arguments() = [0]filetype | makepath | repository
 'use strict';
-switch (PPx.Arguments(0)) {
+const arg = PPx.Arguments(0);
+
+switch (arg) {
 case 'filetype':
   {
     const getExt = PPx.GetFileInformation(PPx.Extract('%R')).slice(1);
@@ -26,5 +28,6 @@ case 'repository':
   PPx.Result = PPx.Extract('%1%\\').indexOf(PPx.Extract('%\'repo\'%\\'));
   break;
 default:
-  PPx.Quit(1);
+  PPx.Result = PPx.Extract(`%*js(PPx.Result = PPx.${arg};)`);
+  // PPx.Quit(1);
 }

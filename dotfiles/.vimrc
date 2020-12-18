@@ -501,7 +501,7 @@ function! s:QuoteBehavior(tKey)
   endif
 endfunction
 "# omni
-inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p><Down>" : ".<C-x><C-o><Down>"
+" inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p><Down>" : ".<C-x><C-o><Down>"
 "# TABの挙動
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : <SID>ComplTabKey()
 function! s:ComplTabKey()

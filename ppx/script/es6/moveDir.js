@@ -72,11 +72,14 @@ function move_path(valA, valB, termMessage) {
     const i = pathList.indexOf(cd.path);
     const targetPath = pathList[Math.max(i - 1, 0)];
     // 端ならメッセージを表示
-    if (pathList[i - 2] === undefined) {
-      PPx.SetPopLineMessage(`!"<${termMessage}>`);
-    }
+    // if (pathList[i - 2] === undefined) {
+    //   PPx.SetPopLineMessage(`!"<${termMessage}>`);
+    // }
     if (pathList[i - 1] !== undefined) {
       PPx.Execute(`*jumppath "${targetPath}"`);
+    } else {
+      // 端ならメッセージを表示
+      PPx.SetPopLineMessage(`!"<${termMessage}>`);
     }
   }
 }

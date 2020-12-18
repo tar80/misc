@@ -3,9 +3,6 @@
 // PPx.Arguments() = [0]image | doc | movie
 // PPc[X]は画像専用
 'use strict';
-// const ppcId = (PPx.Pane.length != 0)
-//   ? PPx.Extract('%NC#')
-//   : PPx.Extract('%NC');
 const type = {
   doc:   ['.txt', '.ini', '.js', '.log', '.cfg', '.html', '.ahk', '.md', '.vbs' ,'.json'],
   image: ['.jpg', '.jpeg', '.bmp', '.png', '.gif', '.vch', '.edg'],
@@ -61,8 +58,3 @@ PPx.Execute('*string i,vState=1');
 PPx.Execute('*setcust X_vpos=3');
 PPx.Execute('*ppvoption id z %K"@N');
 PPx.Execute(`*maskentry path:,${maskExt}`);
-
-// PPx.Execute(`*execinarc %: *ppv -r -checkeredpattern:on -bootid:Z %R -k *fitwindow ${ppcId}`);
-// PPx.Execute(`*maskentry path:,${maskExt}`);
-// PPx.Execute('%J"%*extract(VZ"%%R")"');
-

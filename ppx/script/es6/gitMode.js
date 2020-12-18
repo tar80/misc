@@ -11,10 +11,11 @@ PPx.Execute('%Oi *dock focus,t,K_git');
 // アプリケーションメニューからGIT用コマンドリストを選択
 PPx.Execute('%k"APPS 9');
 PPx.Execute('*wait 200,2');
-if (PPx.EntryMarkCount != 0) {
-  const marks = PPx.Extract('%#;FC');
-  PPx.Execute('*jumppath /savelocate /refreshcache');
-  PPx.Execute(`*markentry o:dx;${marks}`);
-} else {
-  PPx.Execute('*jumppath /savelocate /refreshcache');
-}
+// ver17601時点では不要かも？
+// if (PPx.EntryMarkCount != 0) {
+//   const marks = PPx.Extract('%#;FC');
+//   PPx.Execute('*jumppath /savelocate /refreshcache');
+//   PPx.Execute(`*markentry o:dx;${marks}`);
+// } else {
+//   PPx.Execute('*jumppath /savelocate /refreshcache');
+// }

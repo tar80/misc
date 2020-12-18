@@ -36,7 +36,7 @@ commit ;[<path>][--option] -m "message"
 	--squash  ;<コミット> 対象コミットと結合。メッセージ更新
 	-m "[fix] ;     バグ調整
 	-m "[update] ;  更新
-	-m "[refctor] ; 整理
+	-m "[refactor] ; 整理
 	-m "[add] ;     追加
 	-m "[delete] ;  削除
 diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
@@ -106,7 +106,7 @@ reset ;[--option][<コミット>][-- <path>]
 	--mixed ;   ※デフォルト addとコミットリセット
 	ORIG_HEAD ; 直前のHEAD
 	HEAD~ ;     ~N前のHEAD
-revert ;ommit>[--option] 指定コミットを取り消して新しいコミットを作成
+revert ;commit>[--option] 指定コミットを取り消して新しいコミットを作成
 	--no-commit ;           revert後コミットしない
 	-m ;[1(親)|2(派生)]     マージコミットのどちらに戻すかを選択
 status --short --branch  ;INDEXの状態

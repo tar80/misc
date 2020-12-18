@@ -1,16 +1,18 @@
 %K"@LOADCUST
-%M?extdrivemenu ;非表示を含むドライブの移動メニュー
-%M?exjumpmenu ;移動形式メニュー
-%M?layoutmenu  ;レイアウト選択メニュー
+%M?diroptionmenu ;ディレクトリ設定
 %M?docktmenu ;上dockバー選択メニュー
 %M?dockbmenu ;下dockバー選択メニュー
-%M?sortmenu ;MC_sort
-%M?viewmenu ;MC_celS
-%M?newmenu ;エントリ作成メニュー
 %M?drivemenu ;ドライブ移動メニュー
 %M?drivelist ;ドライブ一覧
+%M?extdrivemenu ;非表示を含むドライブの移動メニュー
+%M?exjumpmenu ;移動形式メニュー
 %M?favorites ;お気に入り(M_pjump)
-%M?diroptionmenu ;ディレクトリ設定
+%M?layoutmenu  ;レイアウト選択メニュー
+%M?newmenu ;エントリ作成メニュー
+%M?ppclist ;PPcのパスを取得
+%M?ppxidlist ;PPxのIDを取得
+%M?sortmenu ;MC_sort
+%M?viewmenu ;MC_celS
 %F ;C:filename.ext  X:filename  T:ext
 %F ;D:directory V:仮想directory S:SFN(8.3形式)
 %F ;B:"で括る   N:"で括らない   M:マークファイル
@@ -25,12 +27,48 @@
 %O ;I:キーコマンドのエラー無視
 %O ;q:コマンド待機時のダイアログ非表示
 %O ;T:レスポンスファイル使用後削除(%Osを併用すること)
-%Obd *ppcust /c ;コマンド一覧を表示して実行
+%O%*addchar(
+%*calc( ;formula)
+%*comment ;[(id)]
+%*clippedtext
+%*cursorpos( ;x:|y:|r:x下|b:y下|w:幅|h:高)
+%*dirhistory( ;n)「戻る」履歴
+%*edittext
+%*errorlevel ;プロセス終了コード %*exitcodeと同様
+%*exitcode ;プロセス終了コード %*errorlevelと同様
+%*extract( ;[ID]"command")
+%*findwindowclass(
+#%*findwindowclass( ;ウインドウハンドル
+%*findwindowtitle(
+#%*findwindowtitle( ;ウインドウハンドル
+%*getcust( ;X_xxx:xxx)
+%*input( ;-title: -select:l(末) m(桁) m,n(m~n桁) i(|で範囲) -mode:type,reftype
+%*job ;処理中コマンドの数
+%*leftstr( ;"text",length) 左からlength字取得
+%*linkedpath( ;filename) リンク対象パス
+%*maskentry
+%*menupos( ;x|y) ポップアップメニューの位置
+%*midstr( ;"text",index [,length]) index字目からlength字分切取
+%*mousepos( ;x|y) マウスカーソル位置
+%*name( ;format,"filename"[,"path"])
+%*now
+%*nowdatetime( ;"時刻書式"[,ファイル名])
+%*padding( ;"text",length [,"padletter"])
+%*ppxlist( ;)C,V,B,+,- 起動中のPPxID
+%*regexp( ;"source","s///")
+%*RESULT( ;PPx.xxx)
+%*rightstr( ;"text",length) 右からlength字取得
+%*selecttext
+%*windowrect( ;(id),l:左r:右t:上b:下w:幅h:高)bd *ppcust /c ;コマンド一覧を表示して実行
 *addhistory  ;type,text ヒストリに登録
 *alias  ;[valuename=[strings]] エイリアスの設定・一覧表示
 *autodragdrop  ;[caption[,id]][,r[,source path]] 自動ドラッグ＆ドロップ
 *cache  ;[on|off|task] PPc ディレクトリ読み込みキャッシュ
 *capturewindow  ;caption 任意ウィンドウの取り込み
+	-noactive ;非アクティブ。タブ選択なし
+	-selectnoactive ;非アクティブ。タブ選択なし
+	-pane ;[:~(反対),:n(=数値指定),:l(=左),:r(=右)]
+ 
 *cd  ;実行時カレント変更 *cd path
 *checkbranch ;カレントのgitブランチ名を取得
 *checkoffmark ;画面外にマークしたエントリがあれば警告
@@ -54,6 +92,7 @@
 *cutentry ;[textfile] エントリをクリップボードに切り取り
 *defaultmenu ;Windows標準のエディットボックスメニューを表示
 *delete ;entryname ファイルディレクトリを削除
+*deletecust ;["ID"|ID:SubID|ID,"SubID"|ID,index] カスタマイズの削除
 *deletehistory ;type,["text"|index] ヒストリの削除
 *diroption ;ディレクトリ別の設定のメニュー変更
 *dock ;dockの操作
@@ -135,10 +174,10 @@
 	-usecache ;     キャッシュ有効
 	-refreshcache ; キャッシュ更新
  
+*js ;"command;" インラインスクリプト
 *launch  ;command [parameter] commandをそのディレクトリで実行
 *layout ;PPc/PPvのレイアウトメニュー
 *linemessage  ;ステータス行に文字列表示
-*linemessage %*getcust(
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
@@ -241,7 +280,7 @@
 	-mark        ;マーク(規定値)
 	-unmark      ;マーク解除
 	-reversemark ;マーク反転
-	-highlight[:n] ;ハイライト(既定値:1) 0=ハイライト解除、1～7=指定ハイライト
+	-highlight   ;[:n] ハイライト(既定値:1) 0=ハイライト解除、1～7=指定ハイライト
  
 *reboot ;Windows を再起動
 *reducemode ;mode PPvの画像縮小方法
@@ -322,6 +361,9 @@
 	-search  ;検索のみ実行して結果を表示しない
 	-name    ;パスリストを生成する　※自動で-searchを付加
  
+*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
+	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
+	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
 *windowposition ;[window id],x,y
 *windowsize ;[window id],width,height
 *zenhan ;[z|h] 文字のa/ａ変換

@@ -44,7 +44,7 @@ case 'memo':
   {
     const memoStr = (() => {
       try {
-        return PPx.Arguments(2).replace(/%/g, '%%');
+        return PPx.Arguments(2);
       } catch (e) {
         PPx.Echo('メモがありません');
         PPx.Quit(1);
@@ -52,7 +52,7 @@ case 'memo':
     })();
     const tPath = (PPx.DirectoryType == 4) ? '%FVD' : arg[1];
     fsoTlist = fso.OpenTextFile(PPx.Extract(tPath), 8, true, -1);
-    const str = PPx.Extract(`"%*now",T:${memoStr}`);
+    const str = PPx.Extract(`"%*now",T:"${memoStr}"`);
     fsoTlist.WriteLine(str);
     fsoTlist.Close();
   }

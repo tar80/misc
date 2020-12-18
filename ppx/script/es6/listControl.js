@@ -44,7 +44,7 @@ case 'memo':
   {
     const memoStr = (() => {
       try {
-        return PPx.Arguments(2);
+        return PPx.Arguments(2).replace(/%/g, '%%');
       } catch (e) {
         PPx.Echo('メモがありません');
         PPx.Quit(1);

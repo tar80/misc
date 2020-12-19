@@ -10,5 +10,5 @@ if (PPx.Arguments.length) {
 } else {
   const soft = 80;  // 透過弱
   const hard = 60;  // 透過強
-  PPx.Execute(`*RotateExecute u_opa, *customize X_bg:O_%${tID} =100, *customize X_bg:O_%${tID} = ${soft}, *customize X_bg:O_%${tID} = ${hard}`);
+  PPx.Execute(`*RotateCustomize X_bg:O_%%${tID}, 100, ${soft} ,${hard}`);
 }

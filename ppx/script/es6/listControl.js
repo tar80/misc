@@ -58,7 +58,7 @@ case 'memo':
   }
   break;
   // 新規リストファイル
-case 'listfile':
+case 'new':
   fsoTlist = fso.OpenTextFile(arg[1], 2, true, -1);
   fsoTlist.WriteLine(';ListFile');
   Write_mark_path();

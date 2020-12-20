@@ -76,7 +76,6 @@ merge ;[--option]<remote [branch]>
 	--no-ff ;   マージコミットを作成
 	--ff ;      マージコミットを作らない(デフォルト)
 	--abort ;   マージ中断
-	--continue ;中断したマージを再開
 	-X ours ;   branch マージ先を優先
 	-X theirs ; branch マージ元を優先
 pull ;[--option]<remote [branch]> リモートを取得してマージ

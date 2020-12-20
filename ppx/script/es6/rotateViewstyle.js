@@ -6,14 +6,22 @@ const listView = (PPx.WindowIDName == 'C_X') ? 'CX' : dirType;
 
 switch (listView) {
 case 'CX':
-  (dirType >= 62)
-    ? PPx.Execute('*RotateExecute u_rotate_styleC,\
-      "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""漫画:小(&M)""",\
-      "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""漫画:大(&M)"""')
-    : PPx.Execute('*RotateExecute u_rotate_styleB,\
-      "*setcust xc_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:小(&P)""",\
-      "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:中(&P)""",\
-      "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:大(&P)"""');
+  {
+    if (dirType >= 62) {
+      PPx.Execute('*RotateExecute u_rotate_styleC,\
+      "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中縦(&H)""",\
+      "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:特縦(&H)"""');
+    } else {
+      const imgSize = PPx.Entry.Information.replace(/[\s\S]*大きさ\s:\D*(\d*)\sx\s(\d*)[\s\S]*/g, '$1,$2').split(',');
+      const str = (imgSize[0] - imgSize[1] < 0)
+        ? '縦(&H)'
+        : '(&W)';
+      PPx.Execute(`*RotateExecute u_rotate_styleB,\
+        "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:小(&W)""",\
+        "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中${str}""",\
+        "*setcust XC_ocig=2,0,1,0,0,256,2 %%: *viewstyle ""画像:大${str}"""`);
+    }
+  }
   break;
 case '4':
   PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp 一覧:名前(&L), *viewstyle -temp 一覧:コメント(&L)');

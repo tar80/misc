@@ -4,14 +4,13 @@
 var paneCount = PPx.Pane.Count;
 var tID = PPx.WindowIDName.slice(2);
 var sync = PPx.SyncView;
-var memSize;    // PPvの起動前のサイズ
 
 if (sync == 0) {
   (paneCount == 2)
     // タイトルバー無し
-    ? state_syncview('B100000000')
+    ? state_syncview('B100000000', ' -min')
     // タイトルバー有り
-    : state_syncview('B000000000');
+    : state_syncview('B000000000', '');
 } else {
   // 連動ビューがあれば解除して終了
   PPx.SyncView = 0;
@@ -26,22 +25,22 @@ if (sync == 0) {
 }
 
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
-function state_syncview (tWin) {
+function state_syncview (tWin,optMin) {
   PPx.Execute('*setcust X_win:V=' + tWin);
-  PPx.Execute('%Oi *ppv -r -bootid:' + tID);
+  PPx.Execute('%Oi *ppv -r -bootid:' + tID + optMin);
   switch (paneCount) {
     case 2:
       // capturewindowに取り込む前のサイズを記憶する
-      memSize = PPx.Extract('%*getcust(_WinPos:VA)');
-      PPx.Execute('*string i,vSize=' + memSize);
+      PPx.Execute('*string i,vSize=%*getcust(_WinPos:V' + tID + ')');
       PPx.Execute('*string i,vState=1');
-    PPx.Execute('%Oi *capturewindow V' + tID + ' -pane:~ -selectnoactive');
-      //フォーカスがうまくいかない場合は、ここを調整する
-      PPx.Execute('*wait 10,1 %:*focus');
+      PPx.Execute('%Oai *capturewindow V' + tID + ' -pane:~ -selectnoactive');
       break;
     default:
+      PPx.Execute('*setcust X_vpos=0');
       PPx.Execute('*topmostwindow %NV' + tID + ',1');
       break;
   }
   PPx.Execute('*ppvoption sync ' + tID);
+  //フォーカスがうまくいかない場合は、ここを調整する
+  // PPx.Execute('*wait 10,1 %:*focus');
 }

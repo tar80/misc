@@ -9,14 +9,12 @@ var fs = PPx.CreateObject('Scripting.FileSystemObject');
 var fs_tList;
 /* エントリをリストに書き出す関数 */
 var write_mark_path = function () {
-  var cdPath = (PPx.DirectoryType != 4)
-    ? PPx.Extract('%FDN%\\')
-    : '';
+  var cdPath = (PPx.DirectoryType != 4) ? PPx.Extract('%FDN%\\') : '';
   // マークの有無で処理を分岐
   if (!PPx.EntryMarkCount) {
     fs_tList.WriteLine(cdPath + PPx.EntryName);
   } else {
-    for (var i = 0, l = PPx.Entry.Count; i < l; i = (i+1)|0) {
+    for (var i = 0, l = PPx.Entry.Count; i < l; i++) {
       if (PPx.Entry(i).Mark == 1) {
         fs_tList.WriteLine(cdPath + PPx.Entry(i).Name);
         PPx.Entry(i).Mark = 0;

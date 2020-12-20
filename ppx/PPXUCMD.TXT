@@ -127,6 +127,7 @@
 *job ;[close]処理中コマンドの一覧メニュー
 *jumpline ;[L|Y]行番号 行番号指定カーソル移動
 *jumppath ;[path][ /option] 詳細指定付き表示ディレクトリ移動
+*js ;"command;" インラインスクリプト
 	-update ;       更新(^[F5])
 	-savelocate ;   読み込み前のカーソル位置復元 ※-entryが優先
 	-entry: ;[name] nameにカーソルを合わす
@@ -138,7 +139,6 @@
 *launch  ;command [parameter] commandをそのディレクトリで実行
 *layout ;PPc/PPvのレイアウトメニュー
 *linemessage  ;ステータス行に文字列表示
-*linemessage %*getcust(
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
@@ -241,7 +241,7 @@
 	-mark        ;マーク(規定値)
 	-unmark      ;マーク解除
 	-reversemark ;マーク反転
-	-highlight[:n] ;ハイライト(既定値:1) 0=ハイライト解除、1～7=指定ハイライト
+	-highlight   ;[:n] ハイライト(既定値:1) 0=ハイライト解除、1～7=指定ハイライト
  
 *reboot ;Windows を再起動
 *reducemode ;mode PPvの画像縮小方法
@@ -303,6 +303,9 @@
 	-search  ;検索のみ実行して結果を表示しない
 	-name    ;パスリストを生成する　※自動で-searchを付加
  
+*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
+	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
+	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
 *windowposition ;[window id],x,y
 *windowsize ;[window id],width,height
 *zenhan ;[z|h] 文字のa/ａ変換

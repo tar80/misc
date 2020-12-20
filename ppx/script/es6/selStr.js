@@ -6,9 +6,11 @@
 try {
   const str = PPx.Extract('%*edittext()');
   const reg = new RegExp(PPx.Arguments(0));
-  let lparam, wparam;
-  str.replace(reg, (match, p1, p2) => [lparam, wparam] = [p1, p2]);
-  PPx.Execute(`*sendmessage %N,177,${str.indexOf(wparam)},${lparam.length}`);
+  let len, pos;
+  str.replace(reg, (match, p1, p2) => [len, pos] = [p1.length, str.indexOf(p2)]);
+  pos != 0 || (pos = len);
+  // PPx.Echo(len + ' , ' + pos);
+  PPx.Execute(`*sendmessage %N,177,${pos},${len}`);
 } catch (e) {
   PPx.Execute(`*linemessage ${e}`);
   PPx.Quit(-1);

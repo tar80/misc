@@ -24,7 +24,7 @@ const cmd = (() => {
       ? {act: 'copy', opt: '-renamedest:on'}
       : {act: '!copy', opt: '-min'};
     pre.dest = opPath;
-    pre.post = '-compcmd *focus';
+    pre.post = '-compcmd *ppc -r -noactive';
     return pre;
   case ':XLF':
     pre = (arg == 0)
@@ -54,7 +54,15 @@ if (arg >= 2) {
   }
   // 書庫なら解凍
 } else if (PPx.DirectoryType >= 62) {
-  PPx.Execute(`%Oi %u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複>リネーム,DIR>展開"%{${cmd.dest}%} %@`);
+  PPx.Execute(`%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複>リネーム,DIR>展開"%{${cmd.dest}%} %@`);
 } else {
+<<<<<<< HEAD
   PPx.Execute(`%Oi *ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.post}`);
+=======
+<<<<<<< HEAD
+  PPx.Execute(`%Oi *ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.post}`);
+=======
+  PPx.Execute(`*ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall ${cmd.post}`);
+>>>>>>> 0f87e890b26e35dcf2d1ef2aad8a1401b9c688b6
+>>>>>>> sub
 }

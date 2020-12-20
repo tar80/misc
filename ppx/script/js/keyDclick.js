@@ -19,7 +19,7 @@ var expand_ext = function () {
   switch (ext) {
     case 'image':
       maskExt = ['.jpg', '.jpeg', '.bmp', '.png', '.gif', '.vch', '.edg'];
-      PPx.Execute('%Oi *setcust XV_imgD:VZ=-2,4');
+      PPx.Execute('*setcust XV_imgD:VZ=-2,4');
       // PPx.Execute('%Oi %0..\\MassiGra\\MassiGra.exe /user="ppx" %R');
       // PPx.Execute('%Oi *fitwindow ' + ppcId + ',%*findwindowclass(TF811202_MassiGra_Main)');
       // PPx.Quit(1);
@@ -32,24 +32,27 @@ var expand_ext = function () {
       PPx.Quit(1);
     break;
     default:
+      if (PPx.DirectoryType >= 63) {
+        if (PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') != 0) { PPx.Quit(1); }
+      }
     }
   }
 };
 
 if (PPx.WindowIDName == 'C_X') {
     // タイトルバーなし
-    PPx.Execute('%Oix *setcust X_win:V=B100000000');
+    PPx.Execute('%Ox *setcust X_win:V=B100000000');
     //PPx.Execute('*topmostwindow %NVA,1');
 } else {
     // タイトルバーあり
-    PPx.Execute('%Oi *setcust X_win:V=B000000000');
-    PPx.Execute('*linecust no_mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
-  expand_ext();
+    PPx.Execute('*setcust X_win:V=B000000000');
+    PPx.Execute('*linecust mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
+    expand_ext();
 }
 
 PPx.Execute('*string i,vState=1');
-// ※ver1.66_書庫内にて直接PPvでファイルを開くとエラーが出る対策に*wait挟んでファイルを開く
-PPx.Execute('%Oi *ppv -r -checkeredpattern:on -bootid:Z -k *fitwindow ' + ppcId);
-PPx.Execute('*wait 10,1');
-PPx.Execute('%v');
+PPx.Execute('*setcust X_vpos=3');
+PPx.Execute('*ppvoption id z %K"@N');
+// PPx.Execute('*execinarc %: *ppv -r -checkeredpattern:on -bootid:Z %R -k *fitwindow ' + ppcId);
 PPx.Execute('*maskentry path:,' + maskExt);
+// PPx.Execute('%J"%*extract(VZ"%%R")"');

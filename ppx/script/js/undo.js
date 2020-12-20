@@ -11,76 +11,76 @@ try {
   PPx.Quit(-1);
 }
 
-var fs = PPx.CreateObject('Scripting.FileSystemObject');
-var fs_undoLog;
+var fso = PPx.CreateObject('Scripting.FileSystemObject');
 // 保険。X_saveはフルパスが望ましい
 var xSave = PPx.Extract('%*getcust(X_save)');
 var logFile = (xSave.search(':') === -1)
   ? PPx.Extract('%0%\\' + xSave + '%\\PPXUNDO.LOG')
   : PPx.Extract(xSave + '%\\PPXUNDO.LOG');
+var fsoUndoLog;
 var result = '';
 
 switch (arg) {
 // ReDo(Move,RenameのUnDoを処理)
-// PPxの仕様上?ディレクトリは対象外
+// ディレクトリは対象外
 case 'redo':
-  var line;
-  fs_undoLog = fs.OpenTextFile(logFile, 1, false, -1);
-  while (!fs_undoLog.AtEndOfStream) {
-    line = fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
-    line = fs_undoLog.ReadLine().replace(/.*\t(.*)/, 'Move\t$1\n ->\t' + line + '\n', 'i');
-    result = result + line;
+  var readline;
+  fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
+  while (!fsoUndoLog.AtEndOfStream) {
+    readline = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
+    readline = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, 'Move\t$1\n ->\t' + readline + '\n', 'i');
+    result = result + readline;
   }
-  fs_undoLog.Close();
+  fsoUndoLog.Close();
   // 置換結果を書き出してutf16leで上書きする
-  fs_undoLog = fs.OpenTextFile(logFile, 2, true, -1);
-  fs_undoLog.Write(result);
-  fs_undoLog.Close();
+  fsoUndoLog = fso.OpenTextFile(logFile, 2, true, -1);
+  fsoUndoLog.Write(result);
+  fsoUndoLog.Close();
   PPx.Execute('%On *ppb -c nkf -w16 -Lw --in-place ' + logFile);
   break;
 case 'undo':
   var cmd = '';
-  var str;
-  fs_undoLog = fs.OpenTextFile(logFile, 1, false, -1);
+  var result =[];
+  fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
   PPx.SetPopLineMessage('UnDo!');
   do {
     try {
-      str = fs_undoLog.ReadLine();
+      fsoUndoLog.ReadLine().replace(/(.*)\t(.*)/, function (match, p1, p2) {
+        result.push(p1, p2);
+      });
+    result.push(fsoUndoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i'));
     } catch (e) {
       // ファイルが空なら中止
-      (typeof str === 'undefined')
-        ? PPx.SetPopLineMessage('no result.')
-        : PPx.Echo(e + '\n' + str);
-      fs_undoLog.Close();
+      (typeof result[0] === 'undefined')
+        ? PPx.SetPopLineMessage('Not Exist.')
+        : PPx.Echo(e);
+      fsoUndoLog.Close();
       PPx.Quit(-1);
     }
-    // UNDOログを置換
-    result = str.replace(/.*\t(.*)/, '$1 << ', 'i');
-    result = result + fs_undoLog.ReadLine().replace(/.*\t(.*)/, '$1\n', 'i');
-    switch (str.slice(0,4)) {
+    switch (result[0]) {
       case 'Move':
         cmd = ' -compcmd *script %\'scr\'%\\undo.js,redo';
         break;
       case 'Back':
         var cDir = PPx.Extract('%FDN%\\');
         for (var i = 0, l = PPx.EntryDisplayCount; i < l; i = (i+1)|0) {
-          if (PPx.Entry(i).state != 1 && (str.replace(/Backup\t(.*)/, '$1' ) == cDir + PPx.Entry(i).Name)) {
+          if (PPx.Entry(i).state != 1 && (result[0].replace(/Backup\t(.*)/, '$1' ) == cDir + PPx.Entry(i).Name)) {
             PPx.SetPopLineMessage('Do Not!');
-            fs_undoLog.Close();
+            fsoUndoLog.Close();
             PPx.Quit(-1);
           }
         }
-        fs_undoLog.ReadLine();
+        fsoUndoLog.ReadLine();
         break;
       default:
-        fs_undoLog.Close();
+        fsoUndoLog.Close();
         PPx.SetPopLineMessage('Do Not!!');
         PPx.Quit(-1);
         break;
     }
-    PPx.SetPopLineMessage(result);
-  } while (!fs_undoLog.AtEndOfStream);
-  fs_undoLog.Close();
+    PPx.Execute('*linemessage Dist: ' + result[1] + '%bnSend: ' + result[2]);
+  } while (!fsoUndoLog.AtEndOfStream);
+  fsoUndoLog.Close();
   PPx.Execute('*file !Undo -min -nocount' + cmd);
   break;
 }

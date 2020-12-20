@@ -6,15 +6,14 @@
 try {
   var str = PPx.Extract('%*edittext()');
   var reg = new RegExp(PPx.Arguments(0));
-  var len;
-  var pos;
+  var wparam;
+  var lparam;
 
   str.replace(reg, function (match, p1, p2) {
-    len = p1.length;
-    pos = str.indexOf(p2);
+    lparam = p1.length;
+    wparam = (p2 != '') ? str.lastIndexOf(p2) : lparam;
   });
-  pos != 0 || (pos = len);
-  PPx.Execute('*sendmessage %N,177,' + pos + ',' + len);
+  PPx.Execute('*sendmessage %N,177,' + wparam + ',' + lparam);
 } catch (e) {
   PPx.Execute('*linemessage ' + e);
   PPx.Quit(-1);

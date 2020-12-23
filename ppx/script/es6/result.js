@@ -27,6 +27,9 @@ case 'getpath': // 反対窓の有無に応じてパスを返す
 case 'repository':
   PPx.Result = PPx.Extract('%1%\\').indexOf(PPx.Extract('%\'repo\'%\\'));
   break;
+case 'conline':
+  PPx.Result = PPx.Extract('%*edittext').replace(/\r\n/g, ' %: ');
+  break;
 default:
   PPx.Result = PPx.Extract(`%*js(PPx.Result = PPx.${arg};)`);
   // PPx.Quit(1);

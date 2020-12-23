@@ -182,6 +182,11 @@
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
 *memo  ;"内容" <UserCommand> リストファイルにメモを追加
+	1 ; 緑
+        3 ; 暗灰
+        5 ; 暗赤
+        8 ; 赤
+        10 ;水色
 *makedir  ;dirname ディレクトリを作成
 *makefile  ;filename ディレクトリを作成
 *makelistfile ;[filename] [option] ListFile出力

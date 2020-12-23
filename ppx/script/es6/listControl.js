@@ -1,6 +1,6 @@
 ﻿//!*script
 /* リストファイルの読み書き */
-// PPx.Arguments() = [0]case [1]filepath [2]comment
+// PPx.Arguments() = [0]case [1]filepath
 'use strict';
 const arg = (() => {
   try {
@@ -10,13 +10,12 @@ const arg = (() => {
     PPx.Quit(-1);
   }
 })();
-
+const dirType = PPx.DirectoryType;
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 let fsoTlist;
-
 // 該当エントリをリストに書き出す
 const Write_mark_path = function () {
-  const cdPath = (PPx.DirectoryType != 4) ? PPx.Extract('%FDN%\\') : '';
+  const cdPath = (dirType != 4) ? PPx.Extract('%FDN%\\') : '';
   // マークの有無で処理を分岐
   if (!PPx.EntryMarkCount) {
     fsoTlist.WriteLine(cdPath + PPx.EntryName);
@@ -38,24 +37,6 @@ case 'git':
   fsoTlist.WriteLine(';ListFile');
   fsoTlist.WriteLine(`;Base=${PPx.Extract('%\'repo\'')}|1`);
   fsoTlist.Close();
-  break;
-// 一行メモ
-case 'memo':
-  {
-    const memoStr = (() => {
-      try {
-        return PPx.Arguments(2);
-      } catch (e) {
-        PPx.Echo('メモがありません');
-        PPx.Quit(1);
-      }
-    })();
-    const tPath = (PPx.DirectoryType == 4) ? '%FVD' : arg[1];
-    fsoTlist = fso.OpenTextFile(PPx.Extract(tPath), 8, true, -1);
-    const str = PPx.Extract(`"%*now",T:"${memoStr}"`);
-    fsoTlist.WriteLine(str);
-    fsoTlist.Close();
-  }
   break;
   // 新規リストファイル
 case 'new':

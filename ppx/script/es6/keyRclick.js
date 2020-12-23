@@ -30,7 +30,7 @@ const contents = {
 };
 const asgKey = { dir: 'W', arch: 'W', img: 'L', doc: 'R' };
 // コンテキストメニューの初期選択キー
-const selKey = ['none', 'P'];
+const selKey = ['', 'P'];
 
 Object.keys(contents).forEach(function (key) {
   contents[key].find(ext => {

@@ -10,9 +10,9 @@ const sync = PPx.SyncView;
 if (sync == 0) {
   (paneCount == 2)
     // タイトルバー無し
-    ? State_syncview('B100000000', '-min')
+    ? State_syncview('B100000000')
     // タイトルバー有り
-    : State_syncview('B000000000', '');
+    : State_syncview('B000000000');
 } else {
   // 連動ビューがあれば解除して終了
   PPx.SyncView = 0;
@@ -26,13 +26,13 @@ if (sync == 0) {
 }
 
 // 呼出元の状態に合わせて連動ビューを起動
-function State_syncview (tWin, optMin) {
+function State_syncview (tWin) {
   PPx.Execute(`*setcust X_win:V=${tWin}`);
-  PPx.Execute(`%Oi *ppv -r ${optMin} -bootid:${tID}`);
+  PPx.Execute(`%Oin *ppv -r -bootid:${tID}`);
   switch (paneCount) {
   case 2:
     // capturewindowに取り込む前にPPvのサイズを記憶する
-    PPx.Execute('*string i,vSize=%*getcust(_WinPos:VA)');
+    PPx.Execute(`*string i,vSize=%*getcust(_WinPos:V${tID})`);
     PPx.Execute('*string i,vState=1');
     PPx.Execute(`%Oi *capturewindow V${tID} -pane:~ -selectnoactive`);
     break;

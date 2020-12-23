@@ -52,13 +52,13 @@ case 'memo':
     })();
     const tPath = (PPx.DirectoryType == 4) ? '%FVD' : arg[1];
     fsoTlist = fso.OpenTextFile(PPx.Extract(tPath), 8, true, -1);
-    const str = PPx.Extract(`"%*now",T:${memoStr}`);
+    const str = PPx.Extract(`"%*now",T:"${memoStr}"`);
     fsoTlist.WriteLine(str);
     fsoTlist.Close();
   }
   break;
   // 新規リストファイル
-case 'listfile':
+case 'new':
   fsoTlist = fso.OpenTextFile(arg[1], 2, true, -1);
   fsoTlist.WriteLine(';ListFile');
   Write_mark_path();

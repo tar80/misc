@@ -15,5 +15,6 @@ if (PPx.Arguments.length) {
 } else {
   soft = 80;
   hard = 60;
-  PPx.Execute('*RotateExecute u_opa, *customize X_bg:O_%' + tID + '=100, *customize X_bg:O_%' + tID + '=' + soft + ', *customize X_bg:O_%' + tID + '=' + hard);
+  PPx.Execute('*RotateCustomize X_bg:O_%%' + tID + ', 100, ' + soft + ', ' + hard);
+  // PPx.Execute('*RotateExecute u_opa, *customize X_bg:O_%' + tID + '=100, *customize X_bg:O_%' + tID + '=' + soft + ', *customize X_bg:O_%' + tID + '=' + hard);
 }

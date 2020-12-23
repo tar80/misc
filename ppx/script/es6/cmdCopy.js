@@ -56,13 +56,5 @@ if (arg >= 2) {
 } else if (PPx.DirectoryType >= 62) {
   PPx.Execute(`%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複>リネーム,DIR>展開"%{${cmd.dest}%} %@`);
 } else {
-<<<<<<< HEAD
   PPx.Execute(`%Oi *ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.post}`);
-=======
-<<<<<<< HEAD
-  PPx.Execute(`%Oi *ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.post}`);
-=======
-  PPx.Execute(`*ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall ${cmd.post}`);
->>>>>>> 0f87e890b26e35dcf2d1ef2aad8a1401b9c688b6
->>>>>>> sub
 }

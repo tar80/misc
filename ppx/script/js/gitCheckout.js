@@ -20,7 +20,7 @@ PPx.Execute('*wait 200, 2');
 // マーク状態を復元
 var resMark = function () {
   if (PPx.EntryMarkCount != 0) {
-    return '*markentry ' + PPx.Extract('%#;FC');
+    return '*markentry o:dx;' + PPx.Extract('%#;FC');
   }else {
     return '*unmarkentry';
   }

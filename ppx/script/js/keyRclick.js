@@ -11,7 +11,7 @@ var ext = (PPx.GetFileInformation(PPx.Extract('%R')).slice(1) == 'DIR')
 // 拡張子判別
 var selKey = new Array(2);
 var arc   = ['7Z', 'CAB', 'LZH', 'MSI', 'RAR', 'ZIP'];
-var image = ['BMP', 'EDG', 'GIF', 'JPEG', 'JPG', 'PNG', 'VCH'];
+var img = ['BMP', 'EDG', 'GIF', 'JPEG', 'JPG', 'PNG', 'VCH'];
 var doc   = ['AHK', 'INI', 'CFG', 'JS', 'JSON', 'LOG', 'MD', 'TXT', 'VIM'];
 
 // auxパスメニュー
@@ -28,8 +28,8 @@ if (ext == 'DIR') {
     // 拡張子, ショートカットキー
     selKey = ['arc', 'W'];
     break;
-    } else if (ext == image[i]) {
-    selKey = ['image', 'L'];
+    } else if (ext == img[i]) {
+    selKey = ['img', 'L'];
     break;
     } else if (ext == doc[i]) {
     selKey = ['doc', 'R'];

@@ -28,7 +28,7 @@ const contents = {
   img:  ['BMP', 'EDG', 'GIF', 'JPEG', 'JPG', 'PNG', 'VCH'],
   doc:  ['AHK', 'INI', 'CFG', 'JS', 'JSON', 'LOG', 'MD', 'TXT', 'VIM']
 };
-const asgKey = { dir: ['W'], arch: ['W'], img: ['L'], doc: ['R'] };
+const asgKey = { dir: 'W', arch: 'W', img: 'L', doc: 'R' };
 // コンテキストメニューの初期選択キー
 const selKey = ['none', 'P'];
 

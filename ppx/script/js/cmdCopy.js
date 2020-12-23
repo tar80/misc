@@ -22,7 +22,7 @@ var cmdOpt = (arg == 0)
 switch (PPx.GetFileInformation(opDir)) {
 case ':DIR':
   tDir = opDir;
-  post = '-compcmd *focus';
+  post = '-compcmd *ppc -r -noactive';
   break;
 case ':XLF':
   tDir = opDir;

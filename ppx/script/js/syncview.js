@@ -25,7 +25,7 @@ if (sync == 0) {
 }
 
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
-function state_syncview (tWin,optMin) {
+function state_syncview (tWin, optMin) {
   PPx.Execute('*setcust X_win:V=' + tWin);
   PPx.Execute('%Oi *ppv -r -bootid:' + tID + optMin);
   switch (paneCount) {

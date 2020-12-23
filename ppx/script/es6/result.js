@@ -1,8 +1,10 @@
 ﻿//!*script
-/* 引数で指定された情報を返す */
-// PPx.Arguments() = [0]filetype | makepath | repository
+/* 引数で指定された変数を返す */
+// PPx.Arguments() = [0]filetype | exists | getpath | repository
 'use strict';
-switch (PPx.Arguments(0)) {
+const arg = PPx.Arguments(0);
+
+switch (arg) {
 case 'filetype':
   {
     const getExt = PPx.GetFileInformation(PPx.Extract('%R')).slice(1);
@@ -16,7 +18,7 @@ case 'exists':
     PPx.Result = fso.FileExists(path)|0 + fso.FolderExists(path)|0;
   }
   break;
-case 'makepath': // 反対窓の有無に応じてパスを返す
+case 'getpath': // 反対窓の有無に応じてパスを返す
   {
     const tPath = (PPx.Pane.Count == 2) ? '%2%\\' : '%\'work\'%\\';
     PPx.Result = PPx.Extract(tPath);
@@ -26,5 +28,6 @@ case 'repository':
   PPx.Result = PPx.Extract('%1%\\').indexOf(PPx.Extract('%\'repo\'%\\'));
   break;
 default:
-  PPx.Quit(1);
+  PPx.Result = PPx.Extract(`%*js(PPx.Result = PPx.${arg};)`);
+  // PPx.Quit(1);
 }

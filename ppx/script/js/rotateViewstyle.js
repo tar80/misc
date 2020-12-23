@@ -16,15 +16,15 @@ switch (listView) {
   case 'CX':
     if (dirType >= 62) {
       PPx.Execute('*RotateExecute u_rotate_styleC,\
-        "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中縦(&H)""",\
-        "*setcust XC_ocig=2,0,1,0,0,256,0 %%: *viewstyle ""画像:特縦(&H)"""')
+        "*viewstyle ""画像:中縦(&H)""",\
+        "*viewstyle ""画像:特縦(&H)"""');
       } else {
         PPx.Execute('%Osn *ppb -c file %R | xargs %0ppcw -r -bootid:X -noactive -k *string i,str=');
         var imgSize = PPx.Extract('%si"str"').replace(/.*,\s([0-9]{1,6})\s?x\s?([0-9]{1,6}),\s.*$/, '$1,$2').split(',');
         var str = (imgSize[0] - imgSize[1] < 0)
           ? "縦(&H)"
           : "(&W)";
-        PPx.Execute('*RotateExecute u_rotate_styleB, "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:小(&W)""", "*setcust XC_ocig=2,0,1,0,0,256,1 %%: *viewstyle ""画像:中' + str + '""", "*setcust XC_ocig=2,0,1,0,0,256,2 %%: *viewstyle ""画像:大' + str + '"""');
+        PPx.Execute('*RotateExecute u_rotate_styleB, "*viewstyle ""画像:小(&W)""", *viewstyle ""画像:中' + str + '""", *viewstyle ""画像:大' + str + '"""');
       }
     break;
   case '4':
@@ -39,12 +39,12 @@ switch (listView) {
       for (var item in pict) {
         if (pict[item] == PPx.Extract('%t')) {
           PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp "サムネイル:小(&T)", *viewstyle -temp "サムネイル:中(&T)", *viewstyle -temp "書庫(&A)"');
-          PPx.Quit();
+          PPx.Quit(1);
         }
       }
       PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp "アイコン(&;)", *viewstyle -temp "書庫(&A)"');
     } else {
       PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp "一覧:コメント(&@)" %%:*sortentry "&T:日付 降", *viewstyle -temp "サムネイル:小(&T)" %%:*sortentry &R:標準, *viewstyle -temp "サムネイル:中(&T)", *viewstyle -temp "アイコン(&;)"');
     }
-    break;
+  break;
 }

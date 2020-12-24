@@ -1,16 +1,18 @@
 %K"@LOADCUST
-%M?extdrivemenu ;非表示を含むドライブの移動メニュー
-%M?exjumpmenu ;移動形式メニュー
-%M?layoutmenu  ;レイアウト選択メニュー
+%M?diroptionmenu ;ディレクトリ設定
 %M?docktmenu ;上dockバー選択メニュー
 %M?dockbmenu ;下dockバー選択メニュー
-%M?sortmenu ;MC_sort
-%M?viewmenu ;MC_celS
-%M?newmenu ;エントリ作成メニュー
 %M?drivemenu ;ドライブ移動メニュー
 %M?drivelist ;ドライブ一覧
+%M?extdrivemenu ;非表示を含むドライブの移動メニュー
+%M?exjumpmenu ;移動形式メニュー
 %M?favorites ;お気に入り(M_pjump)
-%M?diroptionmenu ;ディレクトリ設定
+%M?layoutmenu  ;レイアウト選択メニュー
+%M?newmenu ;エントリ作成メニュー
+%M?ppclist ;PPcのパスを取得
+%M?ppxidlist ;PPxのIDを取得
+%M?sortmenu ;MC_sort
+%M?viewmenu ;MC_celS
 %F ;C:filename.ext  X:filename  T:ext
 %F ;D:directory V:仮想directory S:SFN(8.3形式)
 %F ;B:"で括る   N:"で括らない   M:マークファイル
@@ -25,14 +27,50 @@
 %O ;I:キーコマンドのエラー無視
 %O ;q:コマンド待機時のダイアログ非表示
 %O ;T:レスポンスファイル使用後削除(%Osを併用すること)
-%Obd *ppcust /c ;コマンド一覧を表示して実行
+%O%*addchar(
+%*calc( ;formula)
+%*comment ;[(id)]
+%*clippedtext
+%*cursorpos( ;x:|y:|r:x下|b:y下|w:幅|h:高)
+%*dirhistory( ;n)「戻る」履歴
+%*edittext
+%*errorlevel ;プロセス終了コード %*exitcodeと同様
+%*exitcode ;プロセス終了コード %*errorlevelと同様
+%*extract( ;[ID]"command")
+%*findwindowclass(
+#%*findwindowclass( ;ウインドウハンドル
+%*findwindowtitle(
+#%*findwindowtitle( ;ウインドウハンドル
+%*getcust( ;X_xxx:xxx)
+%*input( ;-title: -select:l(末) m(桁) m,n(m~n桁) i(|で範囲) -mode:type,reftype
+%*job ;処理中コマンドの数
+%*leftstr( ;"text",length) 左からlength字取得
+%*linkedpath( ;filename) リンク対象パス
+%*maskentry
+%*menupos( ;x|y) ポップアップメニューの位置
+%*midstr( ;"text",index [,length]) index字目からlength字分切取
+%*mousepos( ;x|y) マウスカーソル位置
+%*name( ;format,"filename"[,"path"])
+%*now
+%*nowdatetime( ;"時刻書式"[,ファイル名])
+%*padding( ;"text",length [,"padletter"])
+%*ppxlist( ;)C,V,B,+,- 起動中のPPxID
+%*regexp( ;"source","s///")
+%*RESULT( ;PPx.xxx)
+%*rightstr( ;"text",length) 右からlength字取得
+%*selecttext
+%*windowrect( ;(id),l:左r:右t:上b:下w:幅h:高)bd *ppcust /c ;コマンド一覧を表示して実行
 *addhistory  ;type,text ヒストリに登録
 *alias  ;[valuename=[strings]] エイリアスの設定・一覧表示
 *autodragdrop  ;[caption[,id]][,r[,source path]] 自動ドラッグ＆ドロップ
 *cache  ;[on|off|task] PPc ディレクトリ読み込みキャッシュ
 *capturewindow  ;caption 任意ウィンドウの取り込み
+	-noactive ;非アクティブ。タブ選択なし
+	-selectnoactive ;非アクティブ。タブ選択なし
+	-pane ;[:~(反対),:n(=数値指定),:l(=左),:r(=右)]
+ 
 *cd  ;実行時カレント変更 *cd path
-*checkbranch ;カレントのgitブランチ名を取得
+*checkbranch ;<UserCommand> カレントのgitブランチ名を取得
 *checkoffmark ;画面外にマークしたエントリがあれば警告
 *checksignature  ;[filename] 配布書庫の署名検証
 *checkupdate  ;[p] PPxの更新チェック p:試験公開版
@@ -44,7 +82,7 @@
 *closeppx  ;[wildcard] 全PPx終了
 *color  ;[back|cursor] [color] 色の一時的変更
 *comment  ;[id,]["text"|[all] command]
-*commitlist ;UserCommand コミットリストの更新
+*commitlist ;<UserCommand> コミットリストの更新
 *commandhash ;name モジュールのコマンド名ハッシュの表示
 *comparemark  ;比較方法,マーク属性,サブディレクトリ PPcファイル比較マーク
 *completelist ;[/set][/option] 自動の一覧表示の表示設定
@@ -54,6 +92,7 @@
 *cutentry ;[textfile] エントリをクリップボードに切り取り
 *defaultmenu ;Windows標準のエディットボックスメニューを表示
 *delete ;entryname ファイルディレクトリを削除
+*deletecust ;["ID"|ID:SubID|ID,"SubID"|ID,index] カスタマイズの削除
 *deletehistory ;type,["text"|index] ヒストリの削除
 *diroption ;ディレクトリ別の設定のメニュー変更
 *dock ;dockの操作
@@ -127,7 +166,6 @@
 *job ;[close]処理中コマンドの一覧メニュー
 *jumpline ;[L|Y]行番号 行番号指定カーソル移動
 *jumppath ;[path][ /option] 詳細指定付き表示ディレクトリ移動
-*js ;"command;" インラインスクリプト
 	-update ;       更新(^[F5])
 	-savelocate ;   読み込み前のカーソル位置復元 ※-entryが優先
 	-entry: ;[name] nameにカーソルを合わす
@@ -136,13 +174,19 @@
 	-usecache ;     キャッシュ有効
 	-refreshcache ; キャッシュ更新
  
+*js ;"command;" インラインスクリプト
 *launch  ;command [parameter] commandをそのディレクトリで実行
 *layout ;PPc/PPvのレイアウトメニュー
 *linemessage  ;ステータス行に文字列表示
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
-*memo  ;内容 |UserCommand ワークリストにメモを追加
+*memo  ;"内容" <UserCommand> リストファイルにメモを追加
+	1 ; 緑
+        3 ; 暗灰
+        5 ; 暗赤
+        8 ; 赤
+        10 ;水色
 *makedir  ;dirname ディレクトリを作成
 *makefile  ;filename ディレクトリを作成
 *makelistfile ;[filename] [option] ListFile出力
@@ -264,11 +308,21 @@
 *set ;[valuename=[strings]] 環境変数の設定、削除
 *setcust ;カスタマイズ(高速) X_xxx=xxxx / X_xxx:xxx=xxxx
 *setentryimage ;filename [/save] サムネイル表示用画像の設定
+	/save ;サムネイルキャッシュ
 *setmaskentry ;[wildcards] PPc 常時エントリマスク設定
-*setsortentry ;[XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,オプション エントリのソート(\[S]相当)
+*setsortentry ;[option] [XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,ソートオプション
 *shownormal ;[window id] 窓を通常の大きさにする
 *shutdown ;Windows をシャットダウン
-*sortentry ;[XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,オプション エントリのソート([S]相当)
+*sortentry ;[option] [XC_sort名] | ソート1[,ソート2[,ソート3]],ソート属性,ソートオプション
+	-id ;窓ID毎の設定
+	-temp ;一時設定
+	-thispath ;現在のディレクトリのみ
+	-thisbranch ;現在のディレクトリとその下層
+	-archive ;書庫内限定
+	-listfile ;ListFile内限定
+	-used ;現在適用されている設定。他のオプションと併用
+	-"path" ;指定したpathに適用。末尾が"\"なら下層含む
+ 
 *sound ;[filename.wav] WAVファイルを再生する
 *start ;[-runas][-launch] filename [parameter] filenameを実行
 *stop ;実行中止
@@ -285,7 +339,16 @@
 *unmarkentry ;[wildcards] エントリマーク解除
 *unpack ;path 書庫の展開
 *viewoption ;各種オプション 表示関係オプション
-*viewstyle ;[option] [MC_celS名|directory|separate] エントリ表示の種類を変更
+*viewstyle ;[option] [MC_celS名|directory|separate] エントリ表示変更
+	-id ;窓ID毎の設定
+	-temp ;一時設定
+	-thispath ;現在のディレクトリのみ
+	-thisbranch ;現在のディレクトリとその下層
+	-archive ;書庫内限定
+	-listfile ;ListFile内限定
+	-used ;現在適用されている設定。他のオプションと併用
+	-"path" ;指定したpathに適用。末尾が"\"なら下層含む
+ 
 *wait  ;time[,1|2] 指定時間待機 1=待機後ループ 2=待機中ループ
 *where ;[!][option...] ファイル検索ダイアログ
 *whereis ;[option...] ファイル検索

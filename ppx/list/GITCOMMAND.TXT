@@ -36,7 +36,8 @@ commit ;[<path>][--option] -m "message"
 	--squash  ;<コミット> 対象コミットと結合。メッセージ更新
 	-m "[fix] ;     バグ調整
 	-m "[update] ;  更新
-	-m "[refactor] ; 整理
+	-m "[refactor] ;整理
+	-m "[merge] ;   整理
 	-m "[add] ;     追加
 	-m "[delete] ;  削除
 diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]

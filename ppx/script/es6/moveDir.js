@@ -35,6 +35,7 @@ case 64:
 case 96:
   // 拡張子を考慮してリスト作成
   PPx.Execute(`*whereis -path:"${cd.par}%\\" -mask:${cd.ext} -subdir:off -listfile:${arg[1]} -name`);
+  cd.path = cd.path.slice(0, -1);
   break;
 default:
   PPx.SetPopLineMessage('!"Not supported.');

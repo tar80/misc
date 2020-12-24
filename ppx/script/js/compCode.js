@@ -1,14 +1,14 @@
 ﻿//!*script
-/* 編集テキストの補完。関数コマンド(%*)使用時、",%が消費される問題の対策 */
+/* 編集テキストの補完。コマンド使用時、",%が消費される問題の対策 */
 // PPx.Arguments(0) = "i":%*input(), "s":%*selecttext() ,"e":%*edittext()
 // PPx.Arguments(1) = """", "%%", "\\"  ex)全部の場合 """%%\\" ※ダブルクオーテーションは最初に指定すること
-// PPx.Arguments(2) = "inputのタイトル":引数なしは"compCode"が代入される
+// PPx.Arguments(2) = "inputタイトル":引数なしは"compCode"が代入される
 var arg = function () {
   try {
     return [PPx.Arguments(0), PPx.Arguments(1), PPx.Arguments(2)];
   } catch (e) {
     if (PPx.Arguments.length == 2) {
-      return [PPx.Arguments(0), PPx.Arguments(1), "compCode"];
+      return [PPx.Arguments(0), PPx.Arguments(1), 'compCode..'];
     } else {
     PPx.Echo(e);
     PPx.Quit(-1);
@@ -35,5 +35,4 @@ var esc = {
   '%': '%%',
   '\\': '\\\\'
 };
-// PPx.Echo(PPx.Extract('%*edittext()').replace(rep, (c) => esc[c]));
 PPx.Result = PPx.Extract(arg[0]).replace(rep, function (c) { return esc[c] });

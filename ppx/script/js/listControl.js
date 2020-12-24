@@ -41,25 +41,25 @@ case 'git':
   fsoTlist.Close();
   break;
 // 一行メモ
-case 'memo':
-  try {
-    arg.push(PPx.Extract('"%*script(%\'scr\'%\\compCode.js,"i","""%%","memo")"'));
-    // arg.push(PPx.Arguments(2));
-  } catch (e) {
-    PPx.Echo(e);
-    PPx.Quit(-1);
-  } finally {
-    if (arg[2] == '""') { PPx.Quit(-1);}
-  }
-  tPath = (dirType == 4) ? '%FVD' : arg[1];
-  fsoTlist = fso.OpenTextFile(PPx.Extract(tPath), 8, true, -1);
-  str = PPx.Extract('"%*now",T:' + arg[2] + '');
-  fsoTlist.WriteLine(str);
-  fsoTlist.Close();
-    if (dirType == 4) {
-      PPx.Execute('*wait 100,1 %K"@F5');
-    }
-  break;
+// case 'memo':
+//   try {
+//     arg.push(PPx.Extract('"%*script(%\'scr\'%\\compCode.js,"i","""%%","memo")"'));
+//     // arg.push(PPx.Arguments(2));
+//   } catch (e) {
+//     PPx.Echo(e);
+//     PPx.Quit(-1);
+//   } finally {
+//     if (arg[2] == '""') { PPx.Quit(-1);}
+//   }
+//   tPath = (dirType == 4) ? '%FVD' : arg[1];
+//   fsoTlist = fso.OpenTextFile(PPx.Extract(tPath), 8, true, -1);
+//   str = PPx.Extract('"%*now",T:' + arg[2] + '');
+//   fsoTlist.WriteLine(str);
+//   fsoTlist.Close();
+//     if (dirType == 4) {
+//       PPx.Execute('*wait 100,1 %K"@F5');
+//     }
+//   break;
 // 新規リストファイル
 case 'new':
   fsoTlist = fso.OpenTextFile(arg[1], 2, true, -1);

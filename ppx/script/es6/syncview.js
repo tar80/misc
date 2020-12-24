@@ -28,11 +28,11 @@ if (sync == 0) {
 // 呼出元の状態に合わせて連動ビューを起動
 function State_syncview (tWin, optMin) {
   PPx.Execute(`*setcust X_win:V=${tWin}`);
-  PPx.Execute(`%Oi *ppv -r ${optMin} -bootid:${tID}`);
+  PPx.Execute(`%Oin *ppv -r -bootid:${tID}`);
   switch (paneCount) {
   case 2:
     // capturewindowに取り込む前にPPvのサイズを記憶する
-    PPx.Execute('*string i,vSize=%*getcust(_WinPos:VA)');
+    PPx.Execute(`*string i,vSize=%*getcust(_WinPos:V${tID})`);
     PPx.Execute('*string i,vState=1');
     PPx.Execute(`%Oi *capturewindow V${tID} -pane:~ -selectnoactive`);
     break;

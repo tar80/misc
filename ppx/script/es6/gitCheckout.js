@@ -1,21 +1,12 @@
 ﻿//!*script
-/* ブランチの変更と表示の更新 */
-// git branchを変更してPPcを更新
+/* ブランチの変更 */
+// git branchを変更してENTERにリストの更新を仕組む
 'use strict';
-const branchList = [];
-try {
-  branchList.push(PPx.Arguments(0));
-} catch (e) {
-  PPx.Echo('引数が異常');
-  PPx.Quit(1);
-}
+if (PPx.Extract('%*edittext') == '') { PPx.Execute('*insert "branch "'); }
+PPx.Execute('%Os *ppb -c git branch | peco | xargs %0ppcw -r -k *string i,branch=');
+if (PPx.Extract('0%si"branch"') == '0') { PPx.Quit(-1); }
+PPx.Execute('*insert %si"branch"');
 
-PPx.Execute(`*execute C,@git branch | sed -e s/' '*// > ${branchList}`);
-PPx.Execute('*wait 200,1');
-PPx.Execute('*focus C');
-// 一行編集で選択したブランチに移動して、PPxのステータス行に反映する
-PPx.Execute(`%Os *execute C,git checkout %*input(-title:"checkout branch" -mode:e -k *completelist -file:${branchList}) %: *wait 200,1 %: *execute C,*CHECKBRANCH`);
-PPx.Execute('*wait 200, 2');
 // マーク状態を復元
 const resMark = (() => {
   if (PPx.EntryMarkCount != 0) {
@@ -24,5 +15,5 @@ const resMark = (() => {
     return '*unmarkentry';
   }
 })();
-PPx.Execute('*jumppath /savelocate /refreshcache');
-PPx.Execute(resMark);
+PPx.Execute(`*linecust gitcheckout,K_git:ENTER,*string i,branch= %%: %%Oi *ppb -c *CHECKBRANCH %%: *wait 300,2 %%:\
+  *jumppath /savelocate /refreshcache %%: ${resMark}`);

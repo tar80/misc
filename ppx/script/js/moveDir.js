@@ -73,13 +73,10 @@ function move_path(valA, valB, termMessage) {
   }
   // リストを名前順でソート
   list.sort(function (a, b) {
-    return (a.toLowerCase() < b.toLowerCase())
-      ? valA
-      : valB;
+    return (a.toLowerCase() < b.toLowerCase()) ? valA : valB;
   });
   for (var i = list.length; i--;) {
-    if (list[i] == cdName)
-      break;
+    if (list[i] == cdName) { break; }
   }
   // 対象エントリ名を取得
   var tEntry = list[Math.max(i - 1, 0)];

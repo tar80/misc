@@ -1,5 +1,5 @@
 ﻿//!*script
-/* 引数で指定された変数を返す */
+/* 引数で指定された情報を返す */
 // PPx.Arguments(0)=case
 var arg = PPx.Arguments(0);
 var getext;    // file_extension
@@ -9,6 +9,11 @@ switch (arg) {
 case 'filetype':
   getext = PPx.GetFileInformation(PPx.Extract('%R')).slice(1);
   PPx.Result = (getext == '') ? '---' : getext;
+  break;
+case 'exists':
+    const fso = PPx.CreateObject('Scripting.FileSystemObject');
+    const path = PPx.Extract('%FDC');
+    PPx.Result = fso.FileExists(path)|0 + fso.FolderExists(path)|0;
   break;
 case 'getpath': // 反対窓の有無に応じてパスを返す
   tPath = (PPx.Pane.Count == 2) ? '%2%\\' : '%\'work\'%\\';

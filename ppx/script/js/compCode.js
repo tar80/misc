@@ -2,7 +2,8 @@
 /* 編集テキストの補完。コマンド使用時、",%が消費される問題の対策 */
 // PPx.Arguments(0) = "i":%*input(), "s":%*selecttext() ,"e":%*edittext()
 // PPx.Arguments(1) = """", "%%", "\\"  ex)全部の場合 """%%\\" ※ダブルクオーテーションは最初に指定すること
-// PPx.Arguments(2) = "inputタイトル":引数なしは"compCode"が代入される
+// PPx.Arguments(2) = "inputタイトル":引数なしは"compCode.."が代入される
+
 var arg = function () {
   try {
     return [PPx.Arguments(0), PPx.Arguments(1), PPx.Arguments(2)];
@@ -35,4 +36,4 @@ var esc = {
   '%': '%%',
   '\\': '\\\\'
 };
-PPx.Result = PPx.Extract(arg[0]).replace(rep, function (c) { return esc[c] });
+PPx.Result = PPx.Extract(arg[0]).replace(rep, function (c) { return esc[c]; });

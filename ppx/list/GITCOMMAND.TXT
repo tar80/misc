@@ -37,7 +37,7 @@ commit ;[<path>][--option] -m "message"
 	-m "[fix] ;     バグ調整
 	-m "[update] ;  更新
 	-m "[refactor] ;整理
-	-m "[merge] ;   整理
+	-m "[merge] ;   合体
 	-m "[add] ;     追加
 	-m "[delete] ;  削除
 diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
@@ -77,6 +77,7 @@ merge ;[--option]<remote [branch]>
 	--no-ff ;   マージコミットを作成
 	--ff ;      マージコミットを作らない(デフォルト)
 	--abort ;   マージ中断
+	--continue ;中断したマージを再開
 	-X ours ;   branch マージ先を優先
 	-X theirs ; branch マージ元を優先
 pull ;[--option]<remote [branch]> リモートを取得してマージ

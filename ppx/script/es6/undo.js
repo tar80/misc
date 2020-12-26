@@ -15,7 +15,7 @@ const fso = PPx.CreateObject('Scripting.FileSystemObject');
 // 保険。X_saveはフルパスが望ましい
 const xSave = PPx.Extract('%*getcust(X_save)');
 const logFile = (xSave.search(':') === -1)
-  ? PPx.Extract(`%0%\\${xSave}%\\PPXUNDO.LOG`)
+  ? PPx.Extract(`%0${xSave}%\\PPXUNDO.LOG`)
   : PPx.Extract(`${xSave}%\\PPXUNDO.LOG`);
 let fsoUndoLog;
 let result = '';

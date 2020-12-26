@@ -1,6 +1,5 @@
 ﻿//!*script
 /* カーソル位置を考慮してPPvの位置を移動する */
-
 // %si"vState"=1(除外対象)、PPvが2枚以上で中止
 var omit = PPx.Extract('0%*extract(C,%%si"vState")')|0;
 var vCount = PPx.Extract('%*ppxlist(+V)');

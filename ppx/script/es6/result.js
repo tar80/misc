@@ -32,5 +32,4 @@ case 'conline':
   break;
 default:
   PPx.Result = PPx.Extract(`%*js(PPx.Result = PPx.${arg};)`);
-  // PPx.Quit(1);
 }

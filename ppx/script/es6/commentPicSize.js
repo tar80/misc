@@ -15,5 +15,5 @@ for (let [i, l] = [0, PPx.EntryDisplayCount]; i < l; i++) {
     WxH.push(entry.name + '\t' + entry.Information.replace(rep, '$1'));
   }
 }
-fsoText.WriteLine(WxH.join('\r\n'));
+fsoText.WriteLine(WxH.join('\u000D\u000A'));
 fsoText.Close();

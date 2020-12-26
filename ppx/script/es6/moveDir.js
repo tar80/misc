@@ -8,7 +8,7 @@ const arg = (() => {
   try {
     return [PPx.Arguments(0), PPx.Arguments(1)];
   } catch (e) {
-    PPx.Execute(`*linemessage !"${e}`);
+    PPx.SetPopLineMessage(e);
     PPx.Quit(1);
   }
 })();

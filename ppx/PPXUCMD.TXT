@@ -53,6 +53,9 @@
 %*name( ;format,"filename"[,"path"])
 %*now
 %*nowdatetime( ;"時刻書式"[,ファイル名])
+%*nowdatetime("Y/n/d") ;    西暦/月/日
+%*nowdatetime("ND_H:U:M") ; 月日_時:分:秒
+%*nowdatetime("n月d日(W)") ;月日(曜日)
 %*padding( ;"text",length [,"padletter"])
 %*ppxlist( ;)C,V,B,+,- 起動中のPPxID
 %*regexp( ;"source","s///")
@@ -387,7 +390,4 @@
 %m|プロセス強制終了@cmd taskkill
 %m|プロセス一覧@cmd tasklist /svc
 %m|指定ドメインまでの経路@cmd tracert
-%m|西暦/月/日 %*nowdatetime("Y/n/d")
-%m|月日_時:分:秒 %*nowdatetime("ND_H:U:M")
-%m|月日(曜日) %*nowdatetime("n月d日(W)")
 %m|設定ファイル読み込み@cmd@setup %"設定ファイル読み込み"%Q"読み込ませるエントリをマーク" %: *closeppx C* %: *wait 100,2 %: *ifmatch Px*.cfg %: PPCUSTW CA %FDC

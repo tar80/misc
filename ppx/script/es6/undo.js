@@ -29,7 +29,7 @@ case 'redo':
     fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
     while (!fsoUndoLog.AtEndOfStream) {
       readLine = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
-      readLine = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, `Move\t$1\n ->\t${readLine}\n`, 'i');
+      readLine = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, `Move\t$1\u000D\u000A ->\t${readLine}\u000D\u000A`, 'i');
       result = result + readLine;
     }
     fsoUndoLog.Close();
@@ -37,7 +37,6 @@ case 'redo':
     fsoUndoLog = fso.OpenTextFile(logFile, 2, true, -1);
     fsoUndoLog.Write(result);
     fsoUndoLog.Close();
-    PPx.Execute(`%On *ppb -c nkf -w16 -Lw --in-place ${logFile}`);
   }
   break;
 case 'undo':

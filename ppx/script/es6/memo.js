@@ -10,6 +10,7 @@ const arg = (() => {
     PPx.Quit(-1);
   }
 })();
+const dirType = PPx.DirectoryType;
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 let fsoTlist;
 
@@ -39,18 +40,19 @@ case 'write':
     const str = PPx.Extract(`"%*now","",M:0,A:H${dColor},T:${memoStr}`);
     fsoTlist = fso.OpenTextFile(tPath, 8, true, -1);
     fsoTlist.WriteLine(str);
-    if (dirType == 4) {
-      PPx.Execute('*wait 100,1 %K"@F5"');
-    }
   }
   break;
 // メモの更新状態を保存
 default:
   {
     // リストの並びを取得
-    const list = [];
-    for (let [i, l] = [0, PPx.EntryDisplayCount]; i < l; i++) {
-      list.push(PPx.entry(i).name);
+    const sNum = (() => {
+      const tdir = PPx.Extract('%*getcust(XC_tdir)').split(',');
+      return Number(tdir[0]) + Number(tdir[1]);
+    })();
+    const date = [];
+    for (let [i, l] = [0 + sNum, PPx.EntryDisplayCount]; i < l; i++) {
+      date.push(PPx.entry(i).name);
     }
 
     const memofile = PPx.Extract('%FDV');
@@ -58,22 +60,24 @@ default:
     fsoTlist = fso.OpenTextFile(memofile, 1, false, -1);
     // ファイルに保存されている並びを取得
     while (!fsoTlist.AtEndOfStream) {
-      detail = detail + '\n' + fsoTlist.ReadLine();
+      detail = detail + '\u000A' + fsoTlist.ReadLine();
     }
-    fsoTlist.Close();
-    detail = detail.split('\n');
+    detail = detail.split('\u000A');
 
     const result = [';ListFile'];
     // リスト上の並びをlistfileの形式で取得し直す
-    list.find((element, index) => {
+    date.find((element, index) => {
       for (let [i, l] = [2, detail.length]; i < l; i++) {
         if (detail[i].search(element) != -1) {
           const res = ((mark) => {
             // コメント更新
-            const cmt = PPx.Entry(index).Comment.replace(/"/g,'""');
-            let d = detail[i].replace(/(.*),T:".*?"(.*?)/, `$1,T:"${cmt}"$2`);
+            const cmt = PPx.Entry(index + sNum).Comment.replace(/"/g,'""');
+            let d = detail[i];
+            d = (d.search(',Size,') != -1)
+              ? d.replace(/(.*),T:".*(,Size.*)/, `$1,T:"${cmt}"$2`)
+              : d.replace(/(.*),T:".*/, `$1,T:"${cmt}"`);
             // マーク処理
-            mark = (PPx.Entry(index).Mark != 0)
+            mark = (PPx.Entry(index + sNum).Mark != 0)
               ? d.replace(/((.*?,){2}).*(A:H\d.*)/, '$1M:1,$3')
               : d.replace(/((.*?,){2}).*(A:H\d.*)/, '$1M:0,$3');
             return mark;
@@ -86,9 +90,12 @@ default:
     PPx.Execute('%K"@F5');
     // 置換結果を書き出してutf16leで上書き
     fsoTlist = fso.OpenTextFile(memofile, 2, true, -1);
-    fsoTlist.Write(result.join('\r\n') + '\r\n');
+    fsoTlist.Write(result.join('\u000D\u000A') + '\u000D\u000A');
   }
   break;
 }
 fsoTlist.Close();
-PPx.Execute('*wait 100,1 %: %K"@F5');
+if (dirType == 4) {
+  PPx.Execute('*wait 100,1 %K"@F5"');
+}
+

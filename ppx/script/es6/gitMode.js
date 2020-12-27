@@ -9,7 +9,7 @@ const dock = PPx.Extract('%Oi %*getcust(X_dock:CBA_T)');
 if (!dock) { PPx.Execute('%Oi *dock add,t,input K_git'); }
 PPx.Execute('%Oi *dock focus,t,K_git');
 // アプリケーションメニューからGIT用コマンドリストを選択
-PPx.Execute('%Oi *wait 200,2 %: %k"APPS 9');
+PPx.Execute('%Oi *dock sendkey,t,K_git,APPS 9');
 // マーク状態を復元
 const resMark = (() => {
   if (PPx.EntryMarkCount != 0) {

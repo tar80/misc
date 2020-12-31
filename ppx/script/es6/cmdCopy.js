@@ -2,6 +2,7 @@
 /* 状況に応じたファイルコピーの設定 */
 // PPx.Arguments() = [0]0:detail | 1:quick | 2以上:link
 // %'work'=workspace
+// -comcmdはフォーカス制御
 'use strict';
 const arg = (() => {
   try {

@@ -7,14 +7,12 @@
 
 const arg = (() => {
   try {
-    return [PPx.Arguments(0), PPx.Arguments(1), PPx.Arguments(2)];
+    return (PPx.Arguments.length != 2)
+      ? [PPx.Arguments(0), PPx.Arguments(1), PPx.Arguments(2)]
+      : [PPx.Arguments(0), PPx.Arguments(1), 'compCode..'];
   } catch (e) {
-    if (PPx.Arguments.length == 2) {
-      return [PPx.Arguments(0), PPx.Arguments(1), 'compCode..'];
-    } else {
-      PPx.Echo(e);
-      PPx.Quit(-1);
-    }
+    PPx.Echo(e);
+    PPx.Quit(-1);
   }
 })();
 

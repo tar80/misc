@@ -27,7 +27,7 @@
 %O ;I:キーコマンドのエラー無視
 %O ;q:コマンド待機時のダイアログ非表示
 %O ;T:レスポンスファイル使用後削除(%Osを併用すること)
-%O%*addchar(
+%*addchar(
 %*calc( ;formula)
 %*comment ;[(id)]
 %*clippedtext
@@ -184,7 +184,7 @@
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
-*memo  ;"内容" <UserCommand> リストファイルにメモを追加
+*memo  ;[number] <UserCommand> リストファイルにメモを追加
 	1 ; 緑
         3 ; 暗灰
         5 ; 暗赤

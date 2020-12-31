@@ -15,7 +15,7 @@ PPx.Execute('%Oi *dock focus,t,K_git');
 PPx.Execute('%Oi *dock sendkey,t,K_git,APPS 9');
 // マーク状態を復元
 var resMark = function () {
-  if (PPx.EntryMarkCount != 0) {
+  if (PPx.EntryMarkCount) {
     return '*markentry o:dx;' + PPx.Extract('%#;FC');
   }else {
     return '*unmarkentry';

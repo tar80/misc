@@ -19,7 +19,7 @@ if (cdPath.match(/aux:.*/)) {
 }
 
 // 拡張子を大文字で取得する
-const filetype = (PPx.GetFileInformation(PPx.Extract('%R')).slice(1) == 'DIR')
+const filetype = (PPx.GetFileInformation(PPx.Extract('%R')) == ':DIR')
   ? 'DIR' : PPx.Extract('%t').toUpperCase();
 // 拡張子判別
 const contents = {
@@ -30,7 +30,7 @@ const contents = {
 };
 const asgKey = { dir: 'W', arch: 'W', img: 'L', doc: 'R' };
 // コンテキストメニューの初期選択キー
-const selKey = ['', 'P'];
+const selKey = ['none', 'P'];
 
 Object.keys(contents).forEach(function (key) {
   contents[key].find(ext => {

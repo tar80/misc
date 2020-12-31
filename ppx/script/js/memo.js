@@ -88,7 +88,7 @@ function getlist ( target, index ) {
         d = (d.search(',Size,') != -1)
           ? d.replace(/(.*),T:".*(,Size.*)/, '$1,T:"' + cmt + '"$2')
           : d.replace(/(.*),T:".*/, '$1,T:"' + cmt + '"');
-        mark = (PPx.Entry(index + sNum).Mark != 0)
+        mark = (PPx.Entry(index + sNum).Mark)
           ? d.replace(/((.*?,){2}).*(A:H\d.*)/, '$1M:1,$3')
           : d.replace(/((.*?,){2}).*(A:H\d.*)/, '$1M:0,$3');
         return mark;

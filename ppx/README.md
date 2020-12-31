@@ -9,7 +9,7 @@
 
 1. [ppx](https://github.com/tar80/misc/archive/master.zip)を解凍してコピー
 - 各種ライブラリ導入
-  - 7-zip32  [FrostMoonProject](http://www16.atpages.jp/rayna/soft.html)
+  - 7-zip32  [FrostMoonProject](http://frostmoon.sakura.ne.jp/)
   - unrar [rarlab](http://www.rarlab.com/rar_add.htm)
   - unrar32  [rururutan](https://github.com/rururutan/unrar32)
   - unlha32  [Micco's HomePage](https://micco.mars.jp/mysoft/unlha32.htm)

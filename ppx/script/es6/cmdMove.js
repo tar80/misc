@@ -1,6 +1,7 @@
 ﻿//!*script
 /* 状況に応じたファイル移動の設定 */
 // PPx.Arguments() = [0]有:quick
+// -compcmdはフォーカス制御
 'use strict';
 const opPath = PPx.Extract('%2');
 // 送り先を設定

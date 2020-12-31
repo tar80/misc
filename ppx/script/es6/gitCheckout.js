@@ -4,12 +4,12 @@
 'use strict';
 if (PPx.Extract('%*edittext') == '') { PPx.Execute('*insert "branch "'); }
 PPx.Execute('%Os *ppb -c git branch | peco | xargs %0ppcw -r -k *string i,branch=');
-if (PPx.Extract('0%si"branch"') == '0') { PPx.Quit(-1); }
+if (!PPx.Extract('0%si"branch"')) { PPx.Quit(-1); }
 PPx.Execute('*insert %si"branch"');
 
 // マーク状態を復元
 const resMark = (() => {
-  if (PPx.EntryMarkCount != 0) {
+  if (PPx.EntryMarkCount) {
     return `*markentry o:dx;${PPx.Extract('%#;FC')}`;
   }else {
     return '*unmarkentry';

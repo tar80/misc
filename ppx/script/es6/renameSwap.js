@@ -1,7 +1,12 @@
 ﻿//!*script
 /* 選択された2ファイル間でファイル名を交換する */
+// マーク数が二つなら2ファイル間での名前交換。二つ以下なら反対窓のカーソル位置ファイルと交換します。
+// 同名ファイルの場合、拡張子を交換します。
+// エラーが出るときは、bombを付けるかコメント行を消して下さい。
+
 'use strict';
 const entry = PPx.Entry;
+
 /* エントリのファイル名に関する情報を取得する関数 */
 const Info_entry = function () {
   this.name = PPx.Extract(`%*name(X,${entry.name})`);

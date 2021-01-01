@@ -24,11 +24,11 @@ const filetype = (PPx.GetFileInformation(PPx.Extract('%R')) == ':DIR')
 // 拡張子判別
 const contents = {
   dir:  ['DIR'],
-  arch: ['7Z', 'CAB', 'LZH', 'MSI', 'RAR', 'ZIP'],
+  arc: ['7Z', 'CAB', 'LZH', 'MSI', 'RAR', 'ZIP'],
   img:  ['BMP', 'EDG', 'GIF', 'JPEG', 'JPG', 'PNG', 'VCH'],
   doc:  ['AHK', 'INI', 'CFG', 'JS', 'JSON', 'LOG', 'MD', 'TXT', 'VIM']
 };
-const asgKey = { dir: 'W', arch: 'W', img: 'L', doc: 'R' };
+const asgKey = { dir: 'W', arc: 'W', img: 'L', doc: 'R' };
 // コンテキストメニューの初期選択キー
 const selKey = ['none', 'P'];
 

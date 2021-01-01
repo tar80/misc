@@ -11,8 +11,8 @@ case 'filetype':
   PPx.Result = (getext == '') ? '---' : getext;
   break;
 case 'exists':
-    const fso = PPx.CreateObject('Scripting.FileSystemObject');
-    const path = PPx.Extract('%FDC');
+    var fso = PPx.CreateObject('Scripting.FileSystemObject');
+    var path = PPx.Extract('%FDC');
     PPx.Result = fso.FileExists(path)|0 + fso.FolderExists(path)|0;
   break;
 case 'getpath': // 反対窓の有無に応じてパスを返す

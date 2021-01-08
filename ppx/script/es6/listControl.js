@@ -1,15 +1,13 @@
 ﻿//!*script
 /* リストファイルの読み書き */
 // PPx.Arguments() = [0]case [1]filepath
+
 'use strict';
-const arg = (() => {
-  try {
-    return [PPx.Arguments(0), PPx.Arguments(1)];
-  } catch (e) {
-    PPx.Echo(e);
-    PPx.Quit(-1);
-  }
-})();
+if (PPx.Arguments.length != 2) {
+  PPx.Echo('引数が異常');
+  PPx.Quit(-1);
+}
+const arg = [PPx.Arguments(0), PPx.Arguments(1)];
 const dirType = PPx.DirectoryType;
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 let fsoTlist;
@@ -27,7 +25,6 @@ const Write_mark_path = function () {
       }
     }
   }
-  fsoTlist.Close();
 };
 
 switch (arg[0]) {
@@ -36,7 +33,6 @@ case 'git':
   fsoTlist = fso.OpenTextFile(arg[1], 2, true, -1);
   fsoTlist.WriteLine(';ListFile');
   fsoTlist.WriteLine(`;Base=${PPx.Extract('%\'repo\'')}|1`);
-  fsoTlist.Close();
   break;
   // 新規リストファイル
 case 'new':
@@ -49,3 +45,4 @@ default:
   fsoTlist = fso.OpenTextFile(arg[1], 8, true, -1);
   Write_mark_path();
 }
+fsoTlist.Close();

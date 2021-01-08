@@ -11,9 +11,9 @@ var sync = PPx.SyncView;
 if (!sync) {
   (paneCount == 2)
     // タイトルバー無し
-    ? State_syncview('B100000000')
+    ? State_syncview('B100000000', ' -min')
     // タイトルバー有り
-    : State_syncview('B000000000');
+    : State_syncview('B000000000', '');
 } else {
   // 連動ビューがあれば解除して終了
   PPx.SyncView = 0;
@@ -28,7 +28,7 @@ if (!sync) {
 }
 
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
-function State_syncview (tWin) {
+function State_syncview (tWin, optMin) {
   PPx.Execute('*setcust X_win:V=' + tWin);
   PPx.Execute('%Oi *ppv -r -bootid:' + tID + optMin);
   switch (paneCount) {

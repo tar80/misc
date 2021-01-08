@@ -2,7 +2,7 @@
 /* 状況に応じて連動ビューを設定 */
 // %si"vSize"  :capturewindowに取り込む前のPPvのサイズ
 // %si"vState" :値が"1"のとき、movingPPv.jsを止める
-// エラーが出るときは、bombを付けるかコメント行を消して下さい。
+// エラーが出るときは、BOMを付けるかコメント行を消して下さい。
 
 'use strict';
 const paneCount = PPx.Pane.Count;
@@ -11,7 +11,6 @@ const sync = PPx.SyncView;
 if (!sync) {
   (paneCount == 2)
     // タイトルバー無し
-    // ? State_syncview('B100000000')
     ? State_syncview('B100000000')
     // タイトルバー有り
     : State_syncview('B000000000');

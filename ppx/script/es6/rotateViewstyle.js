@@ -1,7 +1,8 @@
 ﻿//!*script
 /* リストビューの表示切り替え */
+
 'use strict';
-const dirType = PPx.Extract(PPx.DirectoryType);
+const dirType = PPx.DirectoryType;
 const listView = (PPx.WindowIDName == 'C_X') ? 'CX' : dirType;
 
 switch (listView) {

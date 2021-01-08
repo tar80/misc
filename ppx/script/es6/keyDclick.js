@@ -1,8 +1,10 @@
 ﻿//!*script
 /* PPV呼び出し */
-// PPx.Arguments() = [0]image | doc | movie
+// PPx.Arguments() = (0)image | doc | movie
 // PPc[X]は画像専用
+
 'use strict';
+
 const type = {
   doc:   ['.txt', '.ini', '.js', '.log', '.cfg', '.html', '.ahk', '.md', '.vbs' ,'.json'],
   image: ['.jpg', '.jpeg', '.bmp', '.png', '.gif', '.vch', '.edg'],
@@ -11,7 +13,7 @@ const type = {
 const filetype = PPx.Extract('.%t').toLowerCase();
 const selType = [];
 
-Object.keys(type).forEach(function (key) {
+Object.keys(type).forEach(key => {
   type[key].find(ext => {
     if (ext == filetype) {
       selType.push(key);
@@ -30,6 +32,7 @@ const maskExt = (() => {
     PPx.Quit(1);
   }
 })();
+
 // 拡張子別の処理
 const Expand_ext = function() {
   switch (selType) {
@@ -58,3 +61,4 @@ PPx.Execute('*string i,vState=1');
 PPx.Execute('*setcust X_vpos=3');
 PPx.Execute('*ppvoption id z %K"@N');
 PPx.Execute(`*maskentry path:,${maskExt}`);
+

@@ -1,5 +1,6 @@
 ﻿//!*script
 /* 変数一覧 */
+
 'use strict';
 PPx.Echo(
   `%W\t ${PPx.Extract('%W')}
@@ -16,6 +17,5 @@ PPx.Echo(
  %*cursorpos(x)\t ${PPx.Extract('%*cursorpos(x)')}
  %*cursorpos(y)\t ${PPx.Extract('%*cursorpos(y)')}
  %*ppxlist()\t${PPx.Extract('%*ppxlist()')}
- %*clippedtext()\t ${PPx.Extract('%*clippedtext()')}
- `
+ %*clippedtext()\t ${PPx.Extract('%*clippedtext()')} `
 );

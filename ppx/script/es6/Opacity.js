@@ -1,6 +1,7 @@
 ﻿//!*script
 /* 背景透過用 */
 // PPx.Arguments() = [0]0-100 ;透過度
+
 'use strict';
 const tID = (PPx.WindowIDName == ('C_A'||'C_B') && PPx.Pane.Count <= 2) ? 'n#' : 'n';
 

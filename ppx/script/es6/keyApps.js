@@ -1,22 +1,21 @@
 ﻿//!*script
 /* 右クリックメニュー拡張子判別 */
-// PPx.Arguments() = [0]M_Ccr | M_FileMOVE | M_FileCOPY
-'use strict';
-const arg = (() => {
-  try {
-    return PPx.Arguments(0);
-  } catch (e) {
-    PPx.Echo(e);
-    PPx.Quit(-1);
-  }
-})();
-const cdPath = PPx.Extract('%1');
+// PPx.Arguments() = (0)M_Ccr | M_FileMOVE | M_FileCOPY
 
-// auxパスメニュー
-if (cdPath.match(/aux:.*/)) {
-  PPx.Execute('%M_Caux, C');
-  PPx.Quit(1);
+'use strict';
+
+if (!PPx.Arguments.length) {
+  PPx.Echo('引数が足りません');
+  PPx.Quit(-1);
 }
+
+const arg = PPx.Arguments(0);
+// auxパスメニュー
+// const cdPath = PPx.Extract('%1');
+// if (cdPath.match(/aux:.*/)) {
+//   PPx.Execute('%M_Caux, C');
+//   PPx.Quit(1);
+// }
 
 // 拡張子を大文字で取得する
 const filetype = (PPx.GetFileInformation(PPx.Extract('%R')) == ':DIR')
@@ -69,3 +68,4 @@ function Select_menu(list, arch) {
     PPx.Execute(`*setcust M_Ccr:Ext = ??M_U${selKey[0]} %: %${arg},${selKey[1]}`);
   }
 }
+

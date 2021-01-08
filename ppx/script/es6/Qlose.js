@@ -1,5 +1,6 @@
 ﻿//!*script
 /* IDを考慮してPPx終了 */
+
 'use strict';
 // AUX窓なら終了
 if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
@@ -9,8 +10,7 @@ if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
 }
 
 // C_A以外の窓から終了
-const xID = (() => {
-  const id = PPx.WindowIDName;
+const xID = ((id = PPx.WindowIDName) => {
   if (id == 'C_A') {
     let list = PPx.Extract('%*ppxlist(-)').split(',');
     list.sort((a, b) => (a < b) ? 1 : -1);

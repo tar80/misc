@@ -19,6 +19,8 @@ var fsoUndoLog;
 var result = '';
 
 switch (arg) {
+// ReDo(Move,RenameのUnDoを処理)
+// ディレクトリは対象外
 case 'redo':
   var readline;
   fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
@@ -27,6 +29,8 @@ case 'redo':
     readline = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, 'Move\t$1\u000D\u000A ->\t' + readline + '\u000D\u000A', 'i');
     result = result + readline;
   }
+  fsoUndoLog.Close();
+  // 置換結果を書き出してutf16leで上書きする
   fsoUndoLog = fso.OpenTextFile(logFile, 2, true, -1);
   fsoUndoLog.Write(result);
   fsoUndoLog.Close();
@@ -43,6 +47,7 @@ case 'undo':
       });
       result.push(fsoUndoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i'));
     } catch (e) {
+      // ファイルが空なら中止
       (typeof result[0] === 'undefined')
         ? PPx.SetPopLineMessage('Not Exist.')
         : PPx.Echo(e);

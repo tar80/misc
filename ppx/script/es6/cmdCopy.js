@@ -1,17 +1,12 @@
 ﻿//!*script
 /* 状況に応じたファイルコピーの設定 */
-// PPx.Arguments() = [0]0:detail | 1:quick | 2以上:link
+// PPx.Arguments() = (0)0:detail | 1:quick | 2以上:link
 // %'work'=workspace
 // -comcmdはフォーカス制御
+
 'use strict';
-const arg = (() => {
-  try {
-    return PPx.Arguments(0)|0;
-  } catch (e) {
-    PPx.Echo(e);
-    PPx.Quit(-1);
-  }
-})();
+
+const arg = (PPx.Arguments.length) ? PPx.Arguments(0)|0 : 0;
 const cdFilePath = PPx.Extract('%FDC');
 const cdFileName = PPx.Extract('%FC');
 const opPath = PPx.Extract('%2');
@@ -19,6 +14,7 @@ const opPath = PPx.Extract('%2');
 // 送り先振り分け
 const cmd = (() => {
   let pre = {};
+
   switch (PPx.GetFileInformation(opPath)) {
   case ':DIR':
     pre = (arg == 0)
@@ -59,3 +55,4 @@ if (arg >= 2) {
 } else {
   PPx.Execute(`%Oi *ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.post}`);
 }
+

@@ -1,10 +1,12 @@
 ﻿//!*script
 /* 選択された2ファイル間でファイル名を交換する */
-// マーク数が二つなら2ファイル間での名前交換。二つ以下なら反対窓のカーソル位置ファイルと交換します。
-// 同名ファイルの場合、拡張子を交換します。
-// エラーが出るときは、bombを付けるかコメント行を消して下さい。
+// マーク数が二つなら2ファイル間での名前交換。二つ以下なら反対窓のカーソル位置ファイルと交換
+// 同名ファイルの場合、拡張子を交換
+//
+// エラーが出るときは、BOMを付けるかコメント行を削除
 
 'use strict';
+
 const entry = PPx.Entry;
 
 /* エントリのファイル名に関する情報を取得する関数 */
@@ -30,11 +32,14 @@ case 2:
     if (PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') == 0) {
       entry.FirstMark;
       const a = new Info_entry();
+
       entry.NextMark;
       const b = new Info_entry();
       // 一時的にFirstMarkの名前に__renを付加
       const tempName = `${a.name}__ren.${a.ext}`;
+
       PPx.Execute(`*rename ${a.filename},${tempName}`);
+
       // 同名ファイルなら拡張子を交換
       if (a.name == b.name) {
         PPx.Execute(`*rename ${b.filename},${b.name}.${a.ext}`);
@@ -53,3 +58,4 @@ default:
   PPx.Quit(1);
 }
 PPx.Execute('*unmarkentry *');
+

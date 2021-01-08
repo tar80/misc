@@ -1,38 +1,90 @@
 ﻿//!*script
-'use strict';
 /* 編集文字列の補完。コマンド使用時、"%が消費される問題の対策 */
 // PPx.Arguments(0) = "i":%*input(), "s":%*selecttext() ,"e":%*edittext()
-// PPx.Arguments(1) = """", "%%", "\\"  ex)全部の場合 """%%\\" ※ダブルクオーテーションは最初に指定する
+// 二文字目以降があればeditmodeに設定する。例) "iOh" => %eOh *input()
+//
+// PPx.Arguments(1) = ここで記述した文字が補完される。
+// 【",%,\】は二文字以上の偶数個で指定する。
+// 【"】は記述した半分の数が戻る。【%,\】は記述したそのままの数が戻る。
+// アルファベットと数字を引数にした場合、単純に数が倍になる。カンマは使えない。
+// 例)引数,"abcABC122333""%%%%\\\\\\"と記述したとき、abcABC123"%\ -> aabbccAABBCC112222333333"%%%%\\\\\\
+//
 // PPx.Arguments(2) = "inputタイトル":引数なしなら"compCode.."が代入される
+//
+// エラーが出るときは、BOMをつけるかコメント行を削除
 
-const arg = (() => {
-  try {
-    return (PPx.Arguments.length != 2)
-      ? [PPx.Arguments(0), PPx.Arguments(1), PPx.Arguments(2)]
-      : [PPx.Arguments(0), PPx.Arguments(1), 'compCode..'];
-  } catch (e) {
-    PPx.Echo(e);
-    PPx.Quit(-1);
-  }
-})();
+'use strict';
 
-switch(arg[0]) {
-case 'i':
-  arg[0] = `%*input("%*selecttext" -title:${arg[2]} -mode:e -k *editmode h)`;
-  break;
-case 's':
-  arg[0] = '%*selecttext';
-  break;
-case 'e':
-  arg[0] = '%*edittext';
-  break;
+const len = PPx.Arguments.length;
+if (!len || len < 2) {
+  PPx.Echo('引数が足りません');
+  PPx.Quit(-1);
 }
 
-const str = `[${arg[1]}]`;
-const rep = new RegExp(str, 'g');
-const esc = {
-  '"': '""',
-  '%': '%%',
-  '\\': '\\\\'
+const arg = [PPx.Arguments(0), PPx.Arguments(1)];
+const keys = ['g','n','m','s','h','d','c','f','u','x','U','X','R','E','O','S'];
+const edit = {
+  type: arg[0].charAt(0),
+  mode: ((key = 'e') => {
+    key = keys.find(key => key == arg[0].charAt(1)) || key;
+    return key + arg[0].substr(2);
+  })(),
+  title: (len > 2) ? PPx.Arguments(2) : 'compCode..'
 };
-PPx.Result = PPx.Extract(`${arg[0]}`).replace(rep, (c) => esc[c]);
+
+switch(edit.type) {
+case 'i':
+  edit.code = `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode})`;
+  break;
+case 's':
+  edit.code = '%*selecttext';
+  break;
+case 'e':
+  edit.code = '%*edittext';
+  break;
+default:
+  PPx.Echo('引数が異常');
+  PPx.Quit(-1);
+}
+
+// String内の引数と同じ文字数をカウント。最大4回
+String.prototype.counter = function (seq) {
+  let i = this.split(seq).length - 1;
+  return (i < 4) ? i : 4;
+};
+
+// Stringを引数回リピート
+String.prototype.repeat = function (count) { return Array (count * 1 + 1).join(this); };
+
+// 重複した文字をまとめて配列にする
+const str = [...new Set(arg[1].split(''))];
+const strCount = [];
+
+// 同じ文字数のカウント
+for (let [i, l] = [0, str.length]; i < l; i++) {
+  strCount.push(arg[1].counter(str[i]));
+}
+
+// 配列からオブジェクトを生成
+const bsNum = [];
+const esc = str.reduce((esc, value, index) => {
+  esc[value] = value.repeat(Esc_excp(value, index));
+  return esc;
+}, {});
+
+// 例外処理
+if (bsNum != -1) { str[bsNum] = '\\\\'; }
+function Esc_excp (ele, num) {
+  if (ele != '\\') {
+    return strCount[num] * 2;
+  } else {
+    bsNum[0] = num;
+    return strCount[num];
+  }
+}
+
+const regStr = `[${str.join('')}]`;
+const rep = new RegExp(regStr, 'g');
+
+PPx.Result = PPx.Extract(`${edit.code}`).replace(rep, (c) => esc[c]);
+

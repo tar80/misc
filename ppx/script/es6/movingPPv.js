@@ -16,6 +16,7 @@ const displayX = 1366;
 const _displayX = (displayX / 2 - 10);
 const vID = PPx.WindowIDName;
 const mouseX = PPx.Extract('%*extract(C,"%%*cursorpos(x)")')|0;
+
 const posW = (w => {
   w = PPx.Extract(`%*windowrect(${vID},w)`)|0;
   if (mouseX <= (_displayX - 100)) {

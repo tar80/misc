@@ -1,19 +1,25 @@
 ﻿//!*script
 /* リストファイルの読み書き */
+//
 // PPx.Arguments() = [0]case [1]filepath
 
 'use strict';
+
 if (PPx.Arguments.length != 2) {
   PPx.Echo('引数が異常');
   PPx.Quit(-1);
 }
+
 const arg = [PPx.Arguments(0), PPx.Arguments(1)];
 const dirType = PPx.DirectoryType;
+
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 let fsoTlist;
+
 // 該当エントリをリストに書き出す
 const Write_mark_path = function () {
   const cdPath = (dirType != 4) ? PPx.Extract('%FDN%\\') : '';
+
   // マークの有無で処理を分岐
   if (!PPx.EntryMarkCount) {
     fsoTlist.WriteLine(cdPath + PPx.EntryName);
@@ -46,3 +52,4 @@ default:
   Write_mark_path();
 }
 fsoTlist.Close();
+

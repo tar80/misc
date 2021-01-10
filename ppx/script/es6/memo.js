@@ -1,11 +1,13 @@
 ﻿//!*script
 /* メモの書き込みと更新 */
+//
 // PPx.Arguments() = (0)case('write'ならメモ書き込み、それ以外ならメモ更新) (1)filepath (2)color
 
 'use strict';
 
 const arg = (() => {
   const len = PPx.Arguments.length;
+
   if (len || len < 2) {
     return [PPx.Arguments(0), PPx.Arguments(1), len];
   } else {
@@ -15,6 +17,7 @@ const arg = (() => {
 })();
 
 const dirType = PPx.DirectoryType;
+
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 let fsoTlist;
 
@@ -42,6 +45,7 @@ case 'write':
     const dColor = (arg[2] != 3 ) ? '0' : PPx.Arguments(2)|0;
     // メモをListfileの形式に置き換える
     const str = PPx.Extract(`"%*now","",M:0,A:H${dColor},T:${memoStr}`);
+
     fsoTlist = fso.OpenTextFile(tPath, 8, true, -1);
     fsoTlist.WriteLine(str);
   }
@@ -61,12 +65,18 @@ default:
       date.push(PPx.entry(i).name);
     }
 
+    // ファイルに保存されている並びを取得
     const memofile = PPx.Extract('%FDV');
+    let detail = [];
 
     fsoTlist = fso.OpenTextFile(memofile, 1, false, -1);
 
-    // ファイルに保存されている並びを取得
-    const detail = fsoTlist.ReadAll();
+    while (!fsoTlist.AtEndOfStream) {
+      detail = detail + '\u000A' + fsoTlist.ReadLine();
+    }
+
+    detail = detail.split('\u000A');
+
     const result = [';ListFile'];
 
     // リスト上の並びをlistfileの形式で取得し直す
@@ -77,9 +87,11 @@ default:
             // コメント更新
             const cmt = PPx.Entry(index + sNum).Comment.replace(/"/g,'""');
             let d = detail[i];
+
             d = (d.search(',Size,') != -1)
               ? d.replace(/(.*),T:".*(,Size.*)/, `$1,T:"${cmt}"$2`)
               : d.replace(/(.*),T:".*/, `$1,T:"${cmt}"`);
+
             // マーク処理
             mark = (PPx.Entry(index + sNum).Mark)
               ? d.replace(/((.*?,){2}).*(A:H\d.*)/, '$1M:1,$3')

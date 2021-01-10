@@ -1,5 +1,6 @@
 ﻿//!*script
 /* 背景透過用 */
+//
 // PPx.Arguments() = [0]0-100 ;透過度
 
 'use strict';
@@ -13,3 +14,4 @@ if (PPx.Arguments.length) {
   const hard = 60;  // 透過強
   PPx.Execute(`*RotateCustomize X_bg:O_%%${tID}, 100, ${soft} ,${hard}`);
 }
+

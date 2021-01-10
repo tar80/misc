@@ -1,5 +1,6 @@
 ﻿//!*script
 /* 右クリックメニュー拡張子判別 */
+//
 // PPx.Arguments() = (0)M_Ccr | M_FileMOVE | M_FileCOPY
 
 'use strict';
@@ -20,6 +21,7 @@ const arg = PPx.Arguments(0);
 // 拡張子を大文字で取得する
 const filetype = (PPx.GetFileInformation(PPx.Extract('%R')) == ':DIR')
   ? 'DIR' : PPx.Extract('%t').toUpperCase();
+
 // 拡張子判別
 const contents = {
   dir:  ['DIR'],
@@ -27,6 +29,7 @@ const contents = {
   img:  ['BMP', 'EDG', 'GIF', 'JPEG', 'JPG', 'PNG', 'VCH'],
   doc:  ['AHK', 'INI', 'CFG', 'JS', 'JSON', 'LOG', 'MD', 'TXT', 'VIM']
 };
+
 const asgKey = { dir: 'W', arc: 'W', img: 'L', doc: 'R' };
 // コンテキストメニューの初期選択キー
 const selKey = ['none', 'P'];
@@ -50,7 +53,7 @@ if (arg == 'M_Ccr') {
   Select_menu(selKey[1], selKey[1]);
 }
 
-/* カレントディレクトリの属性に応じて処理を分岐する関数 */
+/* カレントディレクトリの属性に応じて処理を分岐する */
 function Select_menu(list, arch) {
   switch (PPx.DirectoryType) {
   case 4:

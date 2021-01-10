@@ -1,6 +1,7 @@
 ﻿//!*script
 /* 同階層の隣合うディレクトリに移動 */
 /* 同階層の隣合う同じ拡張子の仮想ディレクトリに移動 */
+//
 // PPx.Arguments() = (0)0:preview|1:next (1)tempfilepath
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
 
@@ -58,14 +59,15 @@ default:
 /* パス移動を実行する関数 */
 function move_path(valA, valB, termMessage) {
   const fso = PPx.CreateObject('Scripting.FileSystemObject');
-  // パスリストからパスを取得
-  const pathList = [];
   const fsoTempfile = fso.OpenTextFile(arg[1], 1, false, -1);
 
   if (fsoTempfile.AtEndOfLine) {
     PPx.SetPopLineMessage('!"empty.');
     PPx.Quit(1);
   }
+
+  // パスリストからパスを取得
+  const pathList = [];
 
   do {
     pathList.push(fsoTempfile.ReadLine());

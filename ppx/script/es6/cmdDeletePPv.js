@@ -1,6 +1,8 @@
 ﻿//!*script
 /* PPv上からファイル削除 */
+
 'use strict';
+
 const cdExt = PPx.GetFileInformation(PPx.Extract('%FD'));
 const cdFileExt = PPx.GetFileInformation(PPx.Extract('%FDC'));
 

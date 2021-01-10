@@ -16,11 +16,16 @@ PPx.Execute('*string i,branch=');
 
 // マーク状態を復元
 const resMark = (() => {
-  if (PPx.EntryMarkCount) {
-    return `*markentry o:dx;${PPx.Extract('%#;FC')}`;
-  }else {
-    return '*unmarkentry';
-  }
+  const filepath = PPx.Extract('%#FC').split(' ');
+  const filename = [];
+
+  filepath.forEach(value => {
+    filename.push(PPx.Extract('%*name(C,' + value + ')'));
+  });
+
+  return (PPx.EntryMarkCount)
+    ? `*markentry o:dex;${filename.join(';')}`
+    : '*unmarkentry';
 })();
 
 PPx.Execute(`*linecust gitcheckout,K_git:ENTER,%%Oin *ppb -c *CHECKBRANCH %%: *wait 300,2 %%:\

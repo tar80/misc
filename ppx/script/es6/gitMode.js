@@ -17,8 +17,15 @@ PPx.Execute('%Oi *dock sendkey,t,K_git,APPS 9');
 
 // マーク状態を復元
 const resMark = (() => {
+  const filepath = PPx.Extract('%#FC').split(' ');
+  const filename = [];
+
+  filepath.forEach(value => {
+    filename.push(PPx.Extract('%*name(C,' + value + ')'));
+  });
+
   return (PPx.EntryMarkCount)
-    ? `*markentry o:dx;${PPx.Extract('%#;FC')}`
+    ? `*markentry o:dex;${filename.join(';')}`
     : '*unmarkentry';
 })();
 

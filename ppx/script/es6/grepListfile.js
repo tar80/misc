@@ -1,14 +1,13 @@
 ﻿//!*script
 /* grep結果をリストファイルに出力 */
+//
 // PPx.Arguments() = (0)出力ファイル
-// エラーが出る場合は、BOMを付けるかコメント行を削除
 
 'use strict';
 
 /////////* 初期設定 *////////////
 
-// const grepOpt = 'irEC1';                    // grep option '-nH'は固定される
-const grepOpt = '';                    // grep option '-nH'は固定される
+const grepOpt = 'irEC1';                    // grep option '-nH'は固定される
 const markless = '..\\%*name(CB,%FD)';      //マークなしのときの選択対象 %FB(")で括るように
 
 /////////////////////////////////
@@ -42,7 +41,7 @@ const str = (esc => {
 
 const tPath = (PPx.EntryMarkCount) ? '%#FCB' : markless;
 
-// grepの結果をutf16leで出力
+// grepの結果をutf16lbで出力
 PPx.Execute(`%Obn grep %si"gopt" "${str}" ${tPath} | %Os nkf -w16B > ${argResFile}`);
 PPx.Execute('*string i,gopt=');
 
@@ -65,3 +64,4 @@ while (!fsoTlist.AtEndOfStream) {
 fsoTlist = fso.OpenTextFile(argResFile, 2, true, -1);
 fsoTlist.Write(result.join('\u000D\u000A'));
 fsoTlist.Close();
+

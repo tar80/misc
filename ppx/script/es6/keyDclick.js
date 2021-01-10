@@ -1,37 +1,34 @@
 ﻿//!*script
 /* PPV呼び出し */
+//
 // PPx.Arguments() = (0)image | doc | movie
 // PPc[X]は画像専用
 
 'use strict';
 
 const type = {
-  doc:   ['.txt', '.ini', '.js', '.log', '.cfg', '.html', '.ahk', '.md', '.vbs' ,'.json'],
+  doc:   ['.txt', '.ini', '.js', '.log', '.cfg', '.html', '.ahk', '.md', '.vbs', '.json'],
   image: ['.jpg', '.jpeg', '.bmp', '.png', '.gif', '.vch', '.edg'],
-  movie: ['.3gp', '.avi' ,'.flv', '.mp4', '.mpg', '.qt', '.ebml', '.webm'],
+  movie: ['.3gp', '.avi', '.flv', '.mp4', '.mpg', '.qt', '.ebml', '.webm']
 };
+
 const filetype = PPx.Extract('.%t').toLowerCase();
 const selType = [];
 
-Object.keys(type).forEach(key => {
-  type[key].find(ext => {
-    if (ext == filetype) {
-      selType.push(key);
-      return;
-    }
-  });
-});
-
-const maskExt = (() => {
-  try {
-    return Object.values(type[selType]);
-  } catch (e) {
-    PPx.Execute('%K"@^i');
-    PPx.Execute('*wait 10,1');
-    PPx.Execute('*focus エントリ情報');
-    PPx.Quit(1);
+for (var item in type) {
+  if (type[item].indexOf(filetype) != -1) {
+    selType.push(item);
   }
-})();
+}
+
+const maskExt = type[selType];
+
+if (typeof maskExt == 'undefined') {
+  PPx.Execute('%K"@^i');
+  PPx.Execute('*wait 10,1');
+  PPx.Execute('*focus エントリ情報');
+  PPx.Quit(1);
+}
 
 // 拡張子別の処理
 const Expand_ext = function() {

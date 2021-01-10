@@ -2,6 +2,7 @@
 /* TABキーで窓移動 */
 
 'use strict';
+
 const xID = PPx.WindowIDName.split('_');
 const tPPx = (xID[0] == 'C') ? 'V' : 'C';
 const sync = PPx.Extract(`%*extract(C${xID[1]},"%%*js(PPx.Result=PPx.SyncView;)")`)|0;
@@ -19,6 +20,7 @@ const xList = ( x => {
 })();
 
 xList.sort((a, b) =>  a < b ? -1 : 1);
+
 let tID = xList[xList.indexOf(xID.join('_')) + 1];
 
 if (xList[1] > 1 && PPx.Pane.Count != 1) {

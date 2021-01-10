@@ -1,5 +1,6 @@
 ﻿//!*script
 /* 引数で与えられたパスの階層を一つ上へ補完 */
+//
 // PPx.Arguments() = 補完候補ファイルパス
 
 'use strict';
@@ -25,7 +26,6 @@ if (PPx.Arguments.length) {
   }
 
   PPx.Result = str.join('');
-
 } else {
   PPx.Result = PPx.Arguments(0);
 }

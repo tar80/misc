@@ -4,7 +4,7 @@
 
 'use strict';
 
-const arg = (() => { return (!PPx.Arguments.length) ? 'undo' : 'redo'; })();
+const arg = (!PPx.Arguments.length) ? 'undo' : 'redo';
 // 保険。X_saveはフルパスが望ましい
 const xSave = PPx.Extract('%*getcust(X_save)');
 const logFile = (xSave.search(':') === -1)

@@ -2,6 +2,7 @@
 /* 変数一覧 */
 
 'use strict';
+
 PPx.Echo(
   `%W\t ${PPx.Extract('%W')}
  %n\t ${PPx.Extract('%n')}

@@ -1,13 +1,16 @@
 ﻿//!*script
 /* 状況に応じたファイル移動の設定 */
+//
 // PPx.Arguments() = [0]有:quick
 // -compcmdはフォーカス制御
 
 'use strict';
+
 const opPath = PPx.Extract('%2');
 // 送り先を設定
 const cmd = (() => {
   let pre = {};
+
   if (!PPx.GetFileInformation(opPath)) {
     pre = {act: 'move', opt: '', post: '-compcmd *ppc -pane:~ %%hd0'};
     pre.dest = '%\'work\'%\\';
@@ -17,6 +20,7 @@ const cmd = (() => {
       : {act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive'};
     pre.dest = opPath;
   }
+
   return pre;
 })();
 
@@ -37,3 +41,4 @@ default:
   PPx.Execute(`*ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.post}`);
   break;
 }
+

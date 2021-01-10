@@ -2,6 +2,7 @@
 /* リストビューの表示切り替え */
 
 'use strict';
+
 const dirType = PPx.DirectoryType;
 const listView = (PPx.WindowIDName == 'C_X') ? 'CX' : dirType;
 
@@ -14,9 +15,11 @@ case 'CX':
       "*viewstyle ""画像:特縦(&H)"""');
     } else {
       const imgSize = PPx.Entry.Information.replace(/[\s\S]*大きさ\s:\D*(\d*)\sx\s(\d*)[\s\S]*/g, '$1,$2').split(',');
+
       const str = (imgSize[0] - imgSize[1] < 0)
         ? '縦(&H)'
         : '(&W)';
+
       PPx.Execute(`*RotateExecute u_rotate_styleB,\
         "*viewstyle ""画像:小(&W)""",\
         "*viewstyle ""画像:中${str}""",\
@@ -33,6 +36,7 @@ case '4':
 default:
   {
     const pict = ['jpg', 'jpeg', 'bmp', 'png', 'gif', 'vch', 'edg'];
+
     if (dirType >= 62) {
       if (pict.indexOf(PPx.Extract('%t')) != -1 ) {
         PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp "サムネイル:小(&T)", *viewstyle -temp "サムネイル:中(&T)", *viewstyle -temp "書庫(&A)"');

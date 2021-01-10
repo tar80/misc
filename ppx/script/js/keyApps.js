@@ -1,9 +1,16 @@
 ﻿//!*script
 /* 右クリックメニュー拡張子判別 */
-// PPx.Arguments() = [0]M_Ccr | M_FileMOVE | M_FileCOPY
+//
+// PPx.Arguments() = (0)M_Ccr | M_FileMOVE | M_FileCOPY
+
+if (!PPx.Arguments.length) {
+  PPx.Echo('引数が足りません');
+  PPx.Quit(-1);
+}
 
 // auxパスメニュー
 var cdPath = PPx.Extract('%1');
+
 if (cdPath.match(/aux:.*/)) {
   PPx.Execute('%M_Caux, C');
   PPx.Quit(1);
@@ -12,8 +19,8 @@ if (cdPath.match(/aux:.*/)) {
 var arg = PPx.Arguments(0);
 // 拡張子を大文字で取得する
 var ext = (PPx.GetFileInformation(PPx.Extract('%R')) == ':DIR')
-  ? 'DIR'
-  : PPx.Extract('%t').toUpperCase();
+  ? 'DIR' : PPx.Extract('%t').toUpperCase();
+
 // 拡張子判別
 var selKey = new Array(2);
 var arc   = ['7Z', 'CAB', 'LZH', 'MSI', 'RAR', 'ZIP'];
@@ -49,7 +56,7 @@ if (arg == 'M_Ccr') {
 }
 
 /* カレントディレクトリの属性に応じて処理を分岐する関数 */
-function Select_menu(list, arc) {
+function Select_menu(list, arch) {
   switch (PPx.DirectoryType) {
   case 4:
     PPx.Execute('*setcust M_Clist:Ext = ??M_U' + selKey[0] + ' %:%M_Clist,' + list);
@@ -60,7 +67,7 @@ function Select_menu(list, arc) {
   case 62:
   case 64:
   case 96:
-    PPx.Execute('%M_Carc,' + arc);
+    PPx.Execute('%M_Carc,' + arch);
     break;
   default:
     PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + selKey[0] + ' %:%' + arg + ',' + selKey[1]);

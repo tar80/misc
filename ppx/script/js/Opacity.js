@@ -1,5 +1,6 @@
 ﻿//!*script
 /* 背景透過用 */
+//
 // PPx.Arguments() = [0]0-100 ;透過度
 
 var tID;
@@ -9,6 +10,7 @@ var hard;    // 透過強
 
 tID = (xID == ('C_A'||'C_B') && PPx.Pane.Count <= 2)
   ? 'n#' : 'n';
+
 if (PPx.Arguments.length) {
   PPx.Execute('*customize X_bg:O_%' + tID + '=' + PPx.Arguments(0));
   PPx.Execute('*setcust _User:u_opa=0');

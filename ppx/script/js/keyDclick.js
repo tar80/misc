@@ -1,31 +1,37 @@
 ﻿//!*script
 /* PPV呼び出し */
-// PPx.Arguments() = [0]image | doc | movie
+//
+// PPx.Arguments() = (0)image | doc | movie
 // PPc[X]は画像専用
 
-var maskExt = [];
-var ppcId = (PPx.Pane.length != 0)
-  ? PPx.Extract('%NC#')
-  : PPx.Extract('%NC');
+var type = {
+  doc:   '.txt,.ini,.js,.log,.cfg,.html,.ahk,.md,.vbs,.json',
+  image: '.jpg,.jpeg,.bmp,.png,.gif,.vch,.edg',
+  movie: '.3gp,.avi,.flv,.mp4,.mpg,.qt,.ebml,.webm'
+};
+var filetype = PPx.Extract('.%t').toLowerCase();
+var selType = [];
+
+for (var item in type) {
+  if (type[item].indexOf(filetype) != -1) {
+    selType.push(item);
+  }
+}
+
+if (typeof type[selType] != 'undefined') {
+  var maskExt = type[selType];
+} else {
+  PPx.Execute('%K"@^i');
+  PPx.Execute('*wait 10,1');
+  PPx.Execute('*focus エントリ情報');
+  PPx.Quit(1);
+}
 
 /* 拡張子別の処理をする関数 */
-var expand_ext = function () {
-  var ext;
-  try {
-    ext = PPx.Arguments(0);
-  } catch (e) {
-    ext = 'default';
-  } finally {
-  switch (ext) {
+var Expand_ext = function () {
+  switch (selType) {
     case 'image':
-      maskExt = ['.jpg', '.jpeg', '.bmp', '.png', '.gif', '.vch', '.edg'];
       PPx.Execute('*setcust XV_imgD:VZ=-2,4');
-      // PPx.Execute('%Oi %0..\\MassiGra\\MassiGra.exe /user="ppx" %R');
-      // PPx.Execute('%Oi *fitwindow ' + ppcId + ',%*findwindowclass(TF811202_MassiGra_Main)');
-      // PPx.Quit(1);
-      break;
-    case 'doc':
-      maskExt = ['.txt', '.ini', '.js', '.log', '.cfg', '.html', '.ahk', '.md'];
       break;
     case 'movie':
       PPx.Execute('%On *ppb -c %0..\\mplayer\\mplayer.exe -framedrop -geometry %*windowrect(%N.,l):%*windowrect(%N.,t) -vf dsize=%*windowrect(%N.,w):%*windowrect(%N.,h):0 %FDC -loop 0');
@@ -36,8 +42,7 @@ var expand_ext = function () {
         if (PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') != 0) { PPx.Quit(1); }
       }
     }
-  }
-};
+  };
 
 if (PPx.WindowIDName == 'C_X') {
     // タイトルバーなし
@@ -47,12 +52,10 @@ if (PPx.WindowIDName == 'C_X') {
     // タイトルバーあり
     PPx.Execute('*setcust X_win:V=B000000000');
     PPx.Execute('*linecust mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
-    expand_ext();
+    Expand_ext();
 }
 
 PPx.Execute('*string i,vState=1');
 PPx.Execute('*setcust X_vpos=3');
 PPx.Execute('*ppvoption id z %K"@N');
-// PPx.Execute('*execinarc %: *ppv -r -checkeredpattern:on -bootid:Z %R -k *fitwindow ' + ppcId);
 PPx.Execute('*maskentry path:,' + maskExt);
-// PPx.Execute('%J"%*extract(VZ"%%R")"');

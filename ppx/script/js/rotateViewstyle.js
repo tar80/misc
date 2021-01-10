@@ -35,13 +35,11 @@ switch (listView) {
     //   break;
   default:
     if (dirType >= 62) {
-      var pict = ['jpg', 'jpeg', 'bmp', 'png', 'gif', 'vch', 'edg'];
-      for (var item in pict) {
-        if (pict[item] == PPx.Extract('%t')) {
+    var pict = 'jpg ,jpeg ,bmp ,png ,gif ,vch ,edg';
+      if (pict.indexOf(PPx.Extract('%t')) != -1 ) {
           PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp "サムネイル:小(&T)", *viewstyle -temp "サムネイル:中(&T)", *viewstyle -temp "書庫(&A)"');
           PPx.Quit(1);
         }
-      }
       PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp "アイコン(&;)", *viewstyle -temp "書庫(&A)"');
     } else {
       PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp "一覧:コメント(&@)" %%:*sortentry "&T:日付 降", *viewstyle -temp "サムネイル:小(&T)" %%:*sortentry &R:標準, *viewstyle -temp "サムネイル:中(&T)", *viewstyle -temp "アイコン(&;)"');

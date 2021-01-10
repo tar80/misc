@@ -1,6 +1,7 @@
 ﻿//!*script
 /* 状況に応じたファイルコピーの設定 */
-// PPx.Arguments(0)=0:detail|1:quick|>=2:link
+//
+// PPx.Arguments()= (0)0:detail, 1:quick, >=2:link
 // %'work'=workspace
 
 var tDir;
@@ -8,12 +9,12 @@ var opDir = PPx.Extract('%2');
 var filePath = PPx.Extract('%FDC');
 var fileName = PPx.Extract('%FC');
 var mlOpt;    // mklink_option
-try {
-  var arg = PPx.Arguments(0)|0;
-} catch (e) {
-  PPx.Echo(e);
+
+if (!PPx.Arguments.length) {
+  PPx.Echo('引数が足りません');
   PPx.Quit(-1);
 }
+var arg = PPx.Arguments(0);
 var cmdOpt = (arg == 0)
   ? ['copy', '-renamedest:on']
   : ['!copy', '-min'];
@@ -38,14 +39,17 @@ default:
   PPx.Quit(1);
   break;
 }
+
 // シンボリックリンク
 if (arg >= 2) {
   tDir = PPx.Extract('%*input("' + tDir +'" -title:"コピー先" -mode:d)%*addchar(\\)');
+
   if (tDir) {
     // 対象がディレクトリなら/Dオプション付加
     mlOpt = (PPx.GetFileInformation(filePath) == ':DIR')
       ? '/D '
       : '';
+
     PPx.Execute('%Orn *ppb -runas -c mklink ' + mlOpt + tDir + fileName + ' ' + filePath);
   }
   // 送り元が書庫なら解凍

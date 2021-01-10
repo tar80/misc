@@ -1,8 +1,8 @@
 ﻿//!*script
 /* 状況に応じて連動ビューを設定 */
+//
 // %si"vSize"  :capturewindowに取り込む前のPPvのサイズ
 // %si"vState" :値が"1"のとき、movingPPv.jsを止める
-// エラーが出るときは、bombを付けるかコメント行を消して下さい。
 
 var paneCount = PPx.Pane.Count;
 var tID = PPx.WindowIDName.slice(2);
@@ -14,12 +14,14 @@ if (!sync) {
     ? State_syncview('B100000000', ' -min')
     // タイトルバー有り
     : State_syncview('B000000000', '');
+
 } else {
   // 連動ビューがあれば解除して終了
   PPx.SyncView = 0;
   PPx.Execute('*setcust X_win:V=B000000000');
   // movingPPv on
   PPx.Execute('*string i,vState=');
+
   if (PPx.Extract('%si"vSize')) {
     // ppvをcapturewindowに取り込む前のサイズに戻す
     PPx.Execute('*setcust _WinPos:V' + tID + '=%si"vSize"');
@@ -31,6 +33,7 @@ if (!sync) {
 function State_syncview (tWin, optMin) {
   PPx.Execute('*setcust X_win:V=' + tWin);
   PPx.Execute('%Oi *ppv -r -bootid:' + tID + optMin);
+
   switch (paneCount) {
     case 2:
       // capturewindowに取り込む前のサイズを記憶する

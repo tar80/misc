@@ -1,6 +1,7 @@
 ﻿//!*script
 /* 状況に応じたファイル移動の設定 */
-// PPx.Arguments() = [0]有:quick
+// PPx.Arguments() = (0)有:quick
+// -compcmdはフォーカス制御
 
 var opPath = PPx.Extract('%2');
 var cmd = {}; //[0]dest,[1]option
@@ -13,6 +14,7 @@ if (!PPx.GetFileInformation(opPath)) {
   cmd = (PPx.Arguments.length == 0)
     ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -noactive -pane:~ %%hd0'}
     : {act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive'};
+
   cmd.dest = opPath;
 }
 

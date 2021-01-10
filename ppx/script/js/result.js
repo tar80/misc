@@ -1,22 +1,25 @@
 ﻿//!*script
 /* 引数で指定された情報を返す */
+//
 // PPx.Arguments(0)=case
+
 var arg = PPx.Arguments(0);
-var getext;    // file_extension
-var tPath;
 
 switch (arg) {
 case 'filetype':
-  getext = PPx.GetFileInformation(PPx.Extract('%R')).slice(1);
+  var getext = PPx.GetFileInformation(PPx.Extract('%R')).slice(1);
+
   PPx.Result = (getext == '') ? '---' : getext;
   break;
 case 'exists':
-    var fso = PPx.CreateObject('Scripting.FileSystemObject');
-    var path = PPx.Extract('%FDC');
-    PPx.Result = fso.FileExists(path)|0 + fso.FolderExists(path)|0;
+  var fso = PPx.CreateObject('Scripting.FileSystemObject');
+  var path = PPx.Extract('%FDC');
+
+  PPx.Result = fso.FileExists(path)|0 + fso.FolderExists(path)|0;
   break;
 case 'getpath': // 反対窓の有無に応じてパスを返す
-  tPath = (PPx.Pane.Count == 2) ? '%2%\\' : '%\'work\'%\\';
+  var tPath = (PPx.Pane.Count == 2) ? '%2%\\' : '%\'work\'%\\';
+
   PPx.Result = PPx.Extract(tPath);
   break;
 case 'repository':
@@ -29,3 +32,4 @@ default:
   PPx.Result = PPx.Extract('%*js(PPx.Result = PPx.' + arg + ';)');
   break;
 }
+

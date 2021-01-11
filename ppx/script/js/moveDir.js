@@ -1,17 +1,16 @@
 ﻿//!*script
 /* 同階層の隣合うディレクトリに移動 */
 /* 同階層の隣合う同じ拡張子の仮想ディレクトリに移動 */
+//
 // PPx.Arguments() = (0)有:preview, 無:next
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
-//
-// エラーが出るときBOMをつける
 
 var current = PPx.Extract('%FDVN');
 var cd = {};
 
 current.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, function (match, p1, p2, p3, p4) {
   cd = {
-    path: match + '\\',
+    // path: match + '\\',
     par:  p1,
     name: p2,
     ext:  p4.toLowerCase()

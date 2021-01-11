@@ -3,18 +3,16 @@
 //
 // PPx.Arguments() = 初期化するヒストリ
 
-'use strict';
-
-const arg = return (PPx.Arguments.length)
+var arg = (PPx.Arguments.length)
     ? PPx.Arguments()
     : PPx.Quit(-1);
 
-let str = true;
+var str = true;
 
 while (str) {
   str = PPx.Extract('%hh0');
   if (str == '') { break; }
-  PPx.Execute(`*deletehistory ${arg},0`);
+  PPx.Execute('*deletehistory ' + arg + ',0');
 }
 
-PPx.SetPopLineMessage(`delete ${arg}`);
+PPx.SetPopLineMessage('delete ' + arg);

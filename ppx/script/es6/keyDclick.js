@@ -38,8 +38,12 @@ const Expand_ext = function() {
     break;
   case 'movie':
     PPx.Execute('%On *ppb -c %0..\\mplayer\\mplayer.exe -framedrop -geometry %*windowrect(%N.,l):%*windowrect(%N.,t) -vf dsize=%*windowrect(%N.,w):%*windowrect(%N.,h):0 %FDC -loop 0');
+      PPx.Quit(1);
     break;
   default:
+      if (PPx.DirectoryType >= 63) {
+        if (PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') != 0) { PPx.Quit(1); }
+      }
   }
 };
 

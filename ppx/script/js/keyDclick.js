@@ -18,16 +18,16 @@ for (var item in type) {
   }
 }
 
-if (typeof type[selType] != 'undefined') {
-  var maskExt = type[selType];
-} else {
+var maskExt = type[selType];
+
+if (typeof maskExt == 'undefined') {
   PPx.Execute('%K"@^i');
   PPx.Execute('*wait 10,1');
   PPx.Execute('*focus エントリ情報');
   PPx.Quit(1);
 }
 
-/* 拡張子別の処理をする関数 */
+// 拡張子別の処理
 var Expand_ext = function () {
   switch (selType) {
     case 'image':
@@ -41,8 +41,8 @@ var Expand_ext = function () {
       if (PPx.DirectoryType >= 63) {
         if (PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') != 0) { PPx.Quit(1); }
       }
-    }
-  };
+  }
+};
 
 if (PPx.WindowIDName == 'C_X') {
     // タイトルバーなし

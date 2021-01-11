@@ -19,7 +19,7 @@ function Exe_edit (path, line) {
     break;
   case 'vscode':
     //動作未確認
-    PPx.Execute('vscode -g ' + path + ':' + line);
+    PPx.Execute('%Oi vscode -g ' + path + ':' + line);
     break;
   default:
     break;
@@ -31,21 +31,22 @@ var fso = PPx.CreateObject('Scripting.FileSystemObject');
 /* リストファイルの行情報からオブジェクトを生成する関数 */
 function Decode_entry () {
   var info = [];
-  var pDir = PPx.Extract('%FD%\\');
-  var ObjEntry = PPx.Entry;
+  var markEntry = PPx.Extract('%#FDC').split(' ');
   var markCount = PPx.EntryMarkCount;
+  var ObjEntry = PPx.Entry;
 
   // マークの有無でループの初期値を設定
-  var i = (markCount != 0) ? 1 : 0;
+  var n = (markCount != 0) ? 1 : 0;
 
   PPx.Entry.Index = ObjEntry.FirstMark;
 
-  for (; i <= markCount; i++) {
+  for (var i = n; i <= markCount; i++) {
     // 空白行の判定
     if (fso.FileExists(ObjEntry.Name)) {
+      var en = markEntry[i - n];
       // リストファイルのshortname項目を該当の行番号と見立てる
       var sn = (ObjEntry.ShortName.slice(0, 1).match(/[0-9]/) != null) ? ObjEntry.ShortName : 1;
-      info.push({path: pDir + ObjEntry.Name, line: sn, number: ObjEntry.Index});
+      info.push({path: en, line: sn, number: ObjEntry.Index});
     }
     ObjEntry.NextMark;
   }

@@ -1,7 +1,7 @@
 ﻿//!*script
 /* 状況に応じたファイルコピーの設定 */
 //
-// PPx.Arguments() = (0)0:detail | 1:quick | 2以上:link
+// PPx.Arguments()= (0)0:detail, 1:quick, >=2:link
 // %'work'=workspace
 // -comcmdはフォーカス制御
 

@@ -25,7 +25,7 @@ var keys = 'gnmshdcfuxUXREOS';
 var edit = {
   type: arg[0].charAt(0),
   title: (len > 2) ? PPx.Arguments(2) : 'compCode..',
-  mode: function (key) {
+  mode: function () {
     return (keys.indexOf(arg[0].charAt(1)) != 0)
     ? arg[0].substr(1)
     : 'e';

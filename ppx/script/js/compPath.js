@@ -22,6 +22,7 @@ if (PPx.Arguments.length) {
     PPx.Execute('*whereis -path:"' + str[2] + '" -mask:"a:d" -dir:on -subdir:off -listfile:' + arg + ' -name');
     PPx.Execute('*completelist -file:' + arg);
   }
+
   PPx.Result = str.join('');
 } else {
   PPx.Result = PPx.Arguments(0);

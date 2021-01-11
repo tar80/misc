@@ -1,12 +1,13 @@
 ﻿//!*script
 /* 状況に応じたファイル移動の設定 */
+//
 // PPx.Arguments() = (0)有:quick
 // -compcmdはフォーカス制御
 
 var opPath = PPx.Extract('%2');
 var cmd = {}; //[0]dest,[1]option
 
-// 対象パスを設定
+// 送り先を設定
 if (!PPx.GetFileInformation(opPath)) {
   cmd = {act: 'move', opt: '', post: '-compcmd *ppc -noactive -pane:~ %%hd0'};
   cmd.dest = '%\'work\'%\\';
@@ -18,7 +19,7 @@ if (!PPx.GetFileInformation(opPath)) {
   cmd.dest = opPath;
 }
 
-// カレントディレクトリの属性に応じて処理を分岐
+// 送り元の属性に応じて振り分け
 switch (PPx.DirectoryType) {
 // 書庫
 case 63:
@@ -35,3 +36,4 @@ default:
   PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog ' + cmd.post);
   break;
 }
+

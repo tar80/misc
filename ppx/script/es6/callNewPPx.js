@@ -6,16 +6,16 @@
 'use strict';
 
 const arg = (PPx.Arguments.length) ? 'V': PPx.WindowIDName.slice(0, 1);
-const array = [];
+const arrID = [];
 
 switch (arg) {
 case 'C':
-  array[0] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  PPx.Execute(`*ppc -single -mps -bootid:${callID(array[0])} %FD`);
+  arrID = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  PPx.Execute(`*ppc -single -mps -bootid:${callID(arrID)} %FD`);
   break;
 case 'V':
-  array[0] = 'DEFGHIJKLMNOPQRSTUVW'.split('');
-  PPx.Execute(`*ppv -bootid:${callID(array[0])} %R`);
+  arrID = 'DEFGHIJKLMNOPQRSTUVW'.split('');
+  PPx.Execute(`*ppv -bootid:${callID(arrID)} %R`);
   break;
 }
 

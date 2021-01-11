@@ -8,15 +8,15 @@ if (!PPx.Arguments.length) {
   PPx.Quit(-1);
 }
 
-// auxパスメニュー
-var cdPath = PPx.Extract('%1');
-
-if (cdPath.match(/aux:.*/)) {
-  PPx.Execute('%M_Caux, C');
-  PPx.Quit(1);
-}
-
 var arg = PPx.Arguments(0);
+// auxパスメニュー
+// var cdPath = PPx.Extract('%1');
+//
+// if (cdPath.match(/aux:.*/)) {
+//   PPx.Execute('%M_Caux, C');
+//   PPx.Quit(1);
+// }
+
 // 拡張子を大文字で取得する
 var ext = (PPx.GetFileInformation(PPx.Extract('%R')) == ':DIR')
   ? 'DIR' : PPx.Extract('%t').toUpperCase();
@@ -55,7 +55,7 @@ if (arg == 'M_Ccr') {
   Select_menu(selKey[1], selKey[1]);
 }
 
-/* カレントディレクトリの属性に応じて処理を分岐する関数 */
+/* カレントディレクトリの属性に応じて処理を分岐する */
 function Select_menu(list, arch) {
   switch (PPx.DirectoryType) {
   case 4:

@@ -15,6 +15,7 @@ var arg = function() {
 }();
 
 var dirType = PPx.DirectoryType;
+
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var fsoTlist;
 

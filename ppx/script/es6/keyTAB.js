@@ -1,4 +1,5 @@
 ﻿//!*script
+//
 /* TABキーで窓移動 */
 
 'use strict';

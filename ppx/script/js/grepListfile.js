@@ -40,14 +40,14 @@ var str = function (esc) {
 
 var tPath = (PPx.EntryMarkCount) ? '%#FCB' : markless;
 
-// grepの結果をutf16leで出力
+// grepの結果をutf16lbで出力
 PPx.Execute('%Obn grep %si"gopt" "' + str + '" ' + tPath + ' | %Os nkf -w16B > ' + PPx.Extract('%*name(DCB, ' + argResFile + ')'));
 PPx.Execute('*string i,gopt=');
 
 // リストの整形
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var pDir = PPx.Extract('%FD');
-var result = [';ListFile\u000D\u000A;Base=' + pDir + '|4\u000D\u000A"filepath","line",A:H5,T:"grep-result"'];
+var result = [';ListFile\u000D\u000A;Base=' + pDir + '|4\u000D\u000A"file","line",A:H5,T:"result"'];
 var fsoTlist = fso.OpenTextFile(argResFile, 1, false, -1);
 
 while (!fsoTlist.AtEndOfStream) {

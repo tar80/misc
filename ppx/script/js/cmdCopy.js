@@ -3,18 +3,17 @@
 //
 // PPx.Arguments()= (0)0:detail, 1:quick, >=2:link
 // %'work'=workspace
+// -comcmdはフォーカス制御
 
-var tDir;
+var arg = (PPx.Arguments.length) ? PPx.Arguments.Item|0 : 0;
+
+var cdFilePath = PPx.Extract('%FDC');
+var cdFileName = PPx.Extract('%FC');
 var opDir = PPx.Extract('%2');
-var filePath = PPx.Extract('%FDC');
-var fileName = PPx.Extract('%FC');
+var tDir;
 var mlOpt;    // mklink_option
 
-if (!PPx.Arguments.length) {
-  PPx.Echo('引数が足りません');
-  PPx.Quit(-1);
-}
-var arg = PPx.Arguments(0);
+
 var cmdOpt = (arg == 0)
   ? ['copy', '-renamedest:on']
   : ['!copy', '-min'];
@@ -46,11 +45,9 @@ if (arg >= 2) {
 
   if (tDir) {
     // 対象がディレクトリなら/Dオプション付加
-    mlOpt = (PPx.GetFileInformation(filePath) == ':DIR')
-      ? '/D '
-      : '';
+    mlOpt = (PPx.GetFileInformation(cdFilePath) == ':DIR') ? '/D ' : '';
 
-    PPx.Execute('%Orn *ppb -runas -c mklink ' + mlOpt + tDir + fileName + ' ' + filePath);
+    PPx.Execute('%Orn *ppb -runas -c mklink ' + mlOpt + tDir + cdFileName + ' ' + cdFilePath);
   }
   // 送り元が書庫なら解凍
 } else if (PPx.DirectoryType >= 62) {

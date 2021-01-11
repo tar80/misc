@@ -57,18 +57,18 @@ String.prototype.counter = function (seq, max) {
 String.prototype.repeat = function (count) { return Array (count * 1 + 1).join(this); };
 
 // 重複した文字をまとめて配列にする
-const str = Array.from(new Set(arg[1]));
-const strCount = [];
+const charArray = Array.from(new Set(arg[1]));
+const charCount = [];
 
 // 同じ文字数のカウント
-for (let [i, l] = [0, str.length]; i < l; i++) {
-  strCount.push(arg[1].counter(str[i], 4));
+for (let [i, l] = [0, charArray.length]; i < l; i++) {
+  charCount.push(arg[1].counter(charArray[i], 4));
 }
 
 // 配列からオブジェクトを生成
 const bsNum = [];
 
-const esc = str.reduce((esc, value, index) => {
+const esc = charArray.reduce((esc, value, index) => {
   esc[value] = value.repeat(Esc_excp(value, index));
   return esc;
 }, {});
@@ -76,16 +76,16 @@ const esc = str.reduce((esc, value, index) => {
 // 例外処理
 function Esc_excp (ele, num) {
   if (ele != '\\') {
-    return strCount[num] * 2;
+    return charCount[num] * 2;
   } else {
     bsNum[0] = num;
-    return strCount[num];
+    return charCount[num];
   }
 }
 
-if (bsNum != -1) { str[bsNum] = '\\\\'; }
+if (bsNum != -1) { charArray[bsNum] = '\\\\'; }
 
-const regStr = `[${str.join('')}]`;
+const regStr = `[${charArray.join('')}]`;
 const rep = new RegExp(regStr, 'g');
 
 PPx.Result = PPx.Extract(edit.code).replace(rep, (c) => esc[c]);

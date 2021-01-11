@@ -13,9 +13,8 @@ if (!PPx.Arguments.length) {
 PPx.Execute('*markentry -highlight:0');
 
 var arg = PPx.Arguments(0)|1;
-var word = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","search Comment..")');
+var word = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment..")');
 var ObjEntry = PPx.Entry;
-// なんかエラー出るので-1した
 var entryCount = PPx.Entry.Count - 1;
 
 for (var i = 1; i <= entryCount; i++) {
@@ -23,3 +22,4 @@ for (var i = 1; i <= entryCount; i++) {
     PPx.Entry(i).highlight = arg;
   }
 }
+

@@ -15,25 +15,38 @@ var arg = PPx.Arguments(0);
 function Exe_edit (path, line) {
   switch(arg) {
   case 'gvim':
-    PPx.Execute('%Oi gvim --remote-tab-silent +' + line + ' "' + path + '"');
+    PPx.Execute('%Oi gvim --remote-tab-silent +"' + line + ' | /%hs0/ " "' + path + '"');
     break;
-  case 'vscode':
-    //動作未確認
-    PPx.Execute('%Oi vscode -g ' + path + ':' + line);
+  case 'ppv':
+    PPx.Execute('%Oi *ppv -bootid:C ' + path);
     break;
   default:
     break;
   }
 }
 
-var fso = PPx.CreateObject('Scripting.FileSystemObject');
+var markEntry = PPx.Extract('%#FDC').split(' ');
+var markCount = PPx.EntryMarkCount;
+var ObjEntry = PPx.Entry;
+var tmp;
+
+var entryInfo = new Decode_entry();
+
+PPx.Entry.Index = ObjEntry.FirstMark;
+
+for (var i = 0, l = entryInfo.length; i < l; i++) {
+  // 同一パスを判別してエディタを開く
+  if (!entryInfo[i].dup) {
+    Exe_edit(entryInfo[i].path, entryInfo[i].line);
+    PPx.Sleep('300');
+  }
+    ObjEntry.NextMark;
+}
 
 /* リストファイルの行情報からオブジェクトを生成する関数 */
 function Decode_entry () {
+  var fso = PPx.CreateObject('Scripting.FileSystemObject');
   var info = [];
-  var markEntry = PPx.Extract('%#FDC').split(' ');
-  var markCount = PPx.EntryMarkCount;
-  var ObjEntry = PPx.Entry;
 
   // マークの有無でループの初期値を設定
   var n = (markCount != 0) ? 1 : 0;
@@ -46,28 +59,16 @@ function Decode_entry () {
       var en = markEntry[i - n];
       // リストファイルのshortname項目を該当の行番号と見立てる
       var sn = (ObjEntry.ShortName.slice(0, 1).match(/[0-9]/) != null) ? ObjEntry.ShortName : 1;
-      info.push({path: en, line: sn, number: ObjEntry.Index});
+      info.push({path: en, line: sn, number: ObjEntry.Index, dup: Check_dup(en)});
     }
     ObjEntry.NextMark;
   }
   return info;
 }
 
-var entryInfo = new Decode_entry();
-
-// マーク順を無視してリストの並びでソート
-entryInfo.sort(function (a, b) { return a.number < b.number ? -1 : 1; });
-
-var exist = {};
-
-for (i = 0, l = entryInfo.length; i < l; i++) {
-  var tmp = entryInfo[i].path;
-
-  // 同一パスを判別してエディタを開く
-  if (!exist[tmp]) {
-    exist[tmp] = true;
-    Exe_edit(entryInfo[i].path, entryInfo[i].line);
-    PPx.Sleep('300');
-  }
+function Check_dup (filepath) {
+  var d = (tmp == filepath) ? true : false;
+  tmp = filepath;
+  return d;
 }
 

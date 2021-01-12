@@ -391,3 +391,4 @@
 %m|プロセス一覧@cmd tasklist /svc
 %m|指定ドメインまでの経路@cmd tracert
 %m|設定ファイル読み込み@cmd@setup %"設定ファイル読み込み"%Q"読み込ませるエントリをマーク" %: *closeppx C* %: *wait 100,2 %: *ifmatch Px*.cfg %: PPCUSTW CA %FDC
+%m|設定リセット@cmd@reset *setcust @%0cfg\xxReset.cfg %: *execute %*getcust(S_tmp:reset)

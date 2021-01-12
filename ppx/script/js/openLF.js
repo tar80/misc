@@ -20,6 +20,8 @@ function Exe_edit (path, line) {
   case 'ppv':
     PPx.Execute('%Oi *ppv -bootid:C ' + path);
     break;
+  case 'sed':
+    PPx.Execute('%On *ppb -c sed -i_back -r ' + line + '"s#%*script(%\'scr\'%\\compcode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g" %#FDC');
   default:
     break;
   }

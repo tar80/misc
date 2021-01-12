@@ -7,6 +7,7 @@ EvalError
 Function
 Image
 Infinity
+JSON
 Math
 Number
 Object
@@ -19,6 +20,7 @@ SyntaxError
 TypeError
 arguments
 break
+charAt
 case
 catch
 class
@@ -41,10 +43,12 @@ forEach
 function
 hasOwnProperty
 import
+indexOf
 instanceof
 isFinite
 isNaN
 isPrototypeOf
+keys
 length
 name
 null
@@ -52,6 +56,7 @@ parseFloat
 parseInt
 prototype
 return
+stringify
 super
 switch
 this
@@ -62,6 +67,7 @@ typeof
 undefined
 unescape
 valueOf
+values
 void
 while
 with

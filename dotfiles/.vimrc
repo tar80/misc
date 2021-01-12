@@ -538,6 +538,7 @@ noremap <silent> <C-z> :<C-u>Unite -winwidth=60 -direction=botright
 inoremap <silent><expr> <C-z> unite#start_complete(
    \ ['history/yank'], {'winwidth':60, 'split':1, 'vertical':1, 'restore':0})
 "# acp
+nnoremap <expr> <F2> <SID>toggleACP()
 inoremap <expr> <F2> <SID>toggleACP()
 function s:toggleACP()
   if s:is_plugged('vim-autocomplpop')

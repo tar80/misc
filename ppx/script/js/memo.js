@@ -55,7 +55,7 @@ default:
   var date = [];
 
   for (var i = 0 + sNum, l = PPx.EntryDisplayCount; i < l; i++) {
-    date.push(PPx.entry(i).name);
+      date.push(PPx.Entry(i).Name + '","' + PPx.Entry(i).ShortName);
   }
 
   // ファイルに保存されている並びを取得

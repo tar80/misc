@@ -48,7 +48,7 @@ PPx.Execute('*string i,gopt=');
 // リストの整形
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 const pDir = PPx.Extract('%FD');
-const result = [`;ListFile\u000D\u000A;Base=${pDir}|4\u000D\u000A"file","line",A:H5,T:"result"`];
+const result = [`;ListFile\u000D\u000A;Base=${pDir}|4\u000D\u000A"file","line",A:H5,T:"result => ${str}"`];
 let fsoTlist = fso.OpenTextFile(argResFile, 1, false, -1);
 
 while (!fsoTlist.AtEndOfStream) {

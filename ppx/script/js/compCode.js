@@ -35,6 +35,7 @@ var edit = {
 switch(edit.type) {
 case 'i':
   edit.code = '%*input("%*selecttext" -title:"' + edit.title + '" -mode:' + edit.mode() + ')';
+  if (edit.code == '') { PPx.Quit(-1); }
   break;
 case 's':
   edit.code = '%*selecttext';

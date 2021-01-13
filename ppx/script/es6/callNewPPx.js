@@ -10,12 +10,12 @@ const arrID = [];
 
 switch (arg) {
 case 'C':
-  arrID = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  PPx.Execute(`*ppc -single -mps -bootid:${callID(arrID)} %FD`);
+  arrID[0] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  PPx.Execute(`*ppc -single -mps -bootid:${callID(arrID[0])} %FD`);
   break;
 case 'V':
-  arrID = 'DEFGHIJKLMNOPQRSTUVW'.split('');
-  PPx.Execute(`*ppv -bootid:${callID(arrID)} %R`);
+  arrID[0] = 'DEFGHIJKLMNOPQRSTUVW'.split('');
+  PPx.Execute(`*ppv -bootid:${callID(arrID[0])} %R`);
   break;
 }
 

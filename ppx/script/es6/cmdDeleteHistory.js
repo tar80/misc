@@ -5,9 +5,9 @@
 
 'use strict';
 
-const arg = return (PPx.Arguments.length)
-    ? PPx.Arguments()
-    : PPx.Quit(-1);
+const arg = (PPx.Arguments.length)
+  ? PPx.Arguments()
+  : PPx.Quit(-1);
 
 let str = true;
 

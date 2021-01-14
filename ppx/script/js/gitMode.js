@@ -18,7 +18,7 @@ if (!dock) { PPx.Execute('%Oi *dock add,t,input K_git'); }
 
 PPx.Execute('%Oi *dock focus,t,K_git');
 
-PPx.Execute('*wait 300,2');
+PPx.Execute('*wait 500,2');
 
 // アプリケーションメニューからGIT用コマンドリストを選択
 PPx.Execute('*dock sendkey,t,K_git,APPS 9');

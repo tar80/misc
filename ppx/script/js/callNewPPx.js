@@ -18,7 +18,8 @@ case 'V':
   PPx.Execute('*ppv -bootid:' + callID() + ' %R');
   break;
 }
-/* 未起動のIDを探す関数 */
+
+/* 未起動PPxのIDを取得 */
 function callID() {
   for (var i = 0, l = (arrID.length - 1); i <= l; i++) {
     if (!PPx.Extract('%N' + arg + arrID[i])) {

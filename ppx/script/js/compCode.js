@@ -57,6 +57,7 @@ String.prototype.counter = function (seq, max) {
 // Stringを引数回リピート
 String.prototype.repeat = function (count) { return Array (count * 1 + 1).join(this); };
 
+// 重複した文字をまとめて配列にする
 var charArray = removeDupChar(arg[1].split(''));
 var charCount = [];
 
@@ -65,12 +66,10 @@ for (var i = 0, l = charArray.length; i < l; i++) {
   charCount.push(arg[1].counter(charArray[i], 4));
 }
 
-var bsNum = [];
-
 // 配列からオブジェクトを生成
 var esc = {};
 
-esc = function Make_obj () {
+esc = function () {
   for (var i = 0, l = charArray.length; i < l; i++) {
     esc[charArray[i]] = charArray[i].repeat(Esc_excp(charArray[i], i));
   }
@@ -87,6 +86,8 @@ function Esc_excp (ele, num) {
   }
 }
 
+var bsNum = [];
+
 if (bsNum != -1) { charArray[bsNum] = '\\\\'; }
 
 var regStr = '[' + charArray.join('') + ']';
@@ -94,7 +95,7 @@ var rep = new RegExp(regStr, 'g');
 
 PPx.Result = PPx.Extract(edit.code).replace(rep, function (c) { return esc[c]; });
 
-/* 重複した文字をまとめて配列にする関数 */
+/* 重複した文字をまとめて配列にする */
 function removeDupChar (array) {
   var exist = {};
   var result = [];

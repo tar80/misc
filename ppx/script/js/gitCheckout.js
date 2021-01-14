@@ -18,7 +18,7 @@ var resMark = function () {
   var filename = [];
 
   for (var i = 1, l = filepath.length; i <= l; i++) {
-    filename.push(PPx.Extract('%*name(C,' + filepath[i] + ')');
+    filename.push(PPx.Extract('%*name(C,' + filepath[i] + ')'));
   }
 
   return (PPx.EntryMarkCount)

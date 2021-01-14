@@ -5,7 +5,6 @@
 
 /////////* 初期設定 *////////////
 
-// var grepOpt = '';                    // grep option '-nH'は固定される
 var grepOpt = 'irEC1';                    // grep option '-nH'は固定される
 var markless = '..\\%*name(CB,%FD)';      //マークなしのときの選択対象 %FB(")で括るように
 

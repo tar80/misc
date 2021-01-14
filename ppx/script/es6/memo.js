@@ -33,10 +33,7 @@ case 'write':
         PPx.Echo(e);
         PPx.Quit(-1);
       } finally {
-        if (esc == '""') {
-          // PPx.Echo('メモがありません');
-          PPx.Quit(-1);
-        }
+        if (esc == '""') { PPx.Quit(-1); }
       }
     })();
 

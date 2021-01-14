@@ -19,13 +19,13 @@ switch (arg) {
 case 'redo':
   {
     let result = '';
-    let readLine;
+    let readline;
     fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
 
     while (!fsoUndoLog.AtEndOfStream) {
-      readLine = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
-      readLine = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, `Move\t$1\u000D\u000A ->\t${readLine}\u000D\u000A`, 'i');
-      result = result + readLine;
+      readline = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i');
+      readline = fsoUndoLog.ReadLine().replace(/.*\t(.*)/, `Move\t$1\u000D\u000A ->\t${readline}\u000D\u000A`, 'i');
+      result = result + readline;
     }
 
     // 置換結果を書き出してutf16leで上書きする

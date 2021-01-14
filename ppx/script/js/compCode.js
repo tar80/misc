@@ -67,6 +67,7 @@ for (var i = 0, l = charArray.length; i < l; i++) {
 }
 
 // 配列からオブジェクトを生成
+var bsNum = [];
 var esc = {};
 
 esc = function () {
@@ -85,8 +86,6 @@ function Esc_excp (ele, num) {
   return charCount[num];
   }
 }
-
-var bsNum = [];
 
 if (bsNum != -1) { charArray[bsNum] = '\\\\'; }
 

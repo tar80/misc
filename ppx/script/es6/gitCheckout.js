@@ -10,7 +10,7 @@ PPx.Execute('%Os *ppb -c git branch | peco | xargs %0ppcw -r -k *string i,branch
 // 中止の処理
 if (!PPx.Extract('%si"branch"')) { PPx.Quit(-1); }
 
-PPx.Execute('*ifmatch 0,0%*edittext %: *insert "branch "');
+PPx.Execute('*ifmatch 0,0%*edittext %: *insert "checkout "');
 PPx.Execute('*insertsel %si"branch"');
 PPx.Execute('*string i,branch=');
 
@@ -28,6 +28,6 @@ const resMark = (() => {
     : '*unmarkentry';
 })();
 
-PPx.Execute(`*linecust gitcheckout,K_git:ENTER,%%Oin *ppb -c *CHECKBRANCH %%: *wait 300,2 %%:\
+PPx.Execute(`*linecust gitcheckout,K_git:ENTER,%%Oin *ppb -c *CHECKBRANCH %%: *wait 500,2 %%:\
   *jumppath /savelocate /refreshcache %%: ${resMark}`);
 

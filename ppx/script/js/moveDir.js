@@ -78,9 +78,7 @@ function move_path(valA, valB, termMessage) {
   for (e.moveFirst(); !e.atEnd(); e.moveNext()) { add_list(); }
 
   // リストを名前順でソート
-  list.sort(function (a, b) {
-    return (a.toLowerCase() < b.toLowerCase()) ? valA : valB;
-  });
+  list.sort(function (a, b) { return (a.toLowerCase() < b.toLowerCase()) ? valA : valB; });
 
   for (var i = list.length; i--;) { if (list[i] == cd.name) { break; }}
 
@@ -92,7 +90,5 @@ function move_path(valA, valB, termMessage) {
 
     // 端ならメッセージを表示
     if (list[i - 2] == undefined) { PPx.SetPopLineMessage('!"<' + termMessage + '>'); }
-  } else {
-    PPx.Quit(1);
   }
 }

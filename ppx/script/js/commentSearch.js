@@ -19,7 +19,7 @@ var entryCount = PPx.Entry.Count - 1;
 
 for (var i = 1; i <= entryCount; i++) {
   if (ObjEntry(i).Comment.search(word) != -1) {
-    PPx.Entry(i).highlight = arg;
+    ObjEntry(i).highlight = arg;
   }
 }
 

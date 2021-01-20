@@ -7,7 +7,7 @@
 var n = PPx.Arguments.length ? PPx.Arguments(0)|0 : 3;
 var objEntry = PPx.Entry;
 
-for (var i = 0, l = PPx.EntryDisplayCount; i < l; i = (i+1)|0) {
+for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
   if (objEntry(i).Mark == 1) {
     objEntry(i).Highlight = n;
     objEntry(i).Mark = 0;

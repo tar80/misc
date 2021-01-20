@@ -55,7 +55,10 @@ default:
   var date = [];
 
   for (var i = 0 + sNum, l = PPx.EntryDisplayCount; i < l; i++) {
-      date.push(PPx.Entry(i).Name + '","' + PPx.Entry(i).ShortName);
+    var ObjEntry = PPx.Entry(i);
+    (ObjEntry.Name == ObjEntry.ShortName)
+      ? date.push(ObjEntry.name)
+      : date.push(ObjEntry.Name + '","' + ObjEntry.ShortName);
   }
 
   // ファイルに保存されている並びを取得
@@ -93,21 +96,18 @@ if (dirType == 4) { PPx.Execute('*wait 300,1 %K"@F5"'); }
 function getlist (target, index) {
   for (var i = 2, l = detail.length; i < l; i++) {
     if (detail[i].search(target) != -1) {
-      var res = function (mark) {
+      var res = function () {
         var cmt = PPx.Entry(index + sNum).Comment.replace(/"/g,'""');
         var d = detail[i];
+        var mark = (PPx.Entry(index + sNum).Mark) ? 1 : 0;
 
-        d = (d.search(',Size,') != -1)
-          ? d.replace(/(.*),T:".*(,Size.*)/, '$1,T:"' + cmt + '"$2')
-          : d.replace(/(.*),T:".*/, '$1,T:"' + cmt + '"');
-
-        mark = (PPx.Entry(index + sNum).Mark)
-          ? d.replace(/((.*?,){2}).*(A:H\d.*)/, '$1M:1,$3')
-          : d.replace(/((.*?,){2}).*(A:H\d.*)/, '$1M:0,$3');
-
-        return mark;
+        return d = (d.search(',Size,') != -1)
+          ? d.replace(/((.*?,){2})M:\d,(A:H\d.*),T:".*(,Size.*)/, '$1M:' + mark + ',$3,T:"' + cmt + '"$4')
+          : d.replace(/((.*?,){2})M:\d,(A:H\d.*),T:".*/, '$1M:' + mark + ',$3,T:"' + cmt + '"');
       }();
+
       result.push(res);
     }
   }
 }
+

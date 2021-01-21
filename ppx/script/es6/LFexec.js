@@ -29,7 +29,7 @@ function Exe_edit (path, line, duplicate) {
     break;
   case 'sed':
     if (typeof rep[0] == 'undefined') {
-      rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compcode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
+      rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
     }
 
     if (!duplicate) { PPx.Execute(`%Oi copy ${path} ${path}_back`); }
@@ -48,8 +48,8 @@ const markCount = PPx.EntryMarkCount;
 // マークの有無でループの初期値を設定
 const n = (markCount != 0) ? 1 : 0;
 
-const ObjEntry = PPx.Entry;
 let exist = {};
+const ObjEntry = PPx.Entry;
 
 PPx.Entry.Index = ObjEntry.FirstMark;
 

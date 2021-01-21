@@ -56,7 +56,7 @@ while (!fsoTlist.AtEndOfStream) {
     p1 = p1.replace(/^\.\.\\.*\//, '');
     p3 = (p3.indexOf(':') != -1) ? 0 : 3;
     p4 = p4.replace(/"/g, '""');
-    result.push(`"${p1}","${p2}",A:H${p3},T:"${p4}"`);
+    result.push(`"${p1}","${p2}",A:H${p3},C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:"${p4}"`);
   });
 }
 

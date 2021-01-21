@@ -1,5 +1,6 @@
 @add_command.cfg
 Px_@Path.cfg
+PPXRESET.XLF
 pictures.xlf
 COMMITLIST.TXT
 GITRESULT.XLF

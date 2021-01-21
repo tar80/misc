@@ -16,16 +16,16 @@ if (!PPx.Arguments.length) {
 const arg = [PPx.Arguments(0), (PPx.Arguments.length != 2) ? 0 : PPx.Arguments(1)|0];
 const rep = [];
 
-const waitTime = (arg[1] == 1) ? 0 : 300;
-
 function Exe_edit (path, line, duplicate) {
   switch(arg[0]) {
   case 'gvim':
     rep[0] = PPx.Extract('%hs0').replace(/\\/g, '');
     PPx.Execute(`%Oi gvim --remote-tab-silent +"${line}-1 /${rep[0]}/" "${path}"`);
+    PPx.Sleep(300);
     break;
   case 'ppv':
     PPx.Execute(`%Oi *ppv -bootid:C ${path}`);
+    PPx.Sleep(100);
     break;
   case 'sed':
     if (typeof rep[0] == 'undefined') {
@@ -41,48 +41,39 @@ function Exe_edit (path, line, duplicate) {
   }
 }
 
+const fso = PPx.CreateObject('Scripting.FileSystemObject');
+
 const markEntry = PPx.Extract('%#FDC').split(' ');
 const markCount = PPx.EntryMarkCount;
-const ObjEntry = PPx.Entry;
+// マークの有無でループの初期値を設定
+const n = (markCount != 0) ? 1 : 0;
 
-const entryInfo = new Decode_entry();
+const ObjEntry = PPx.Entry;
+let exist = {};
 
 PPx.Entry.Index = ObjEntry.FirstMark;
 
-entryInfo.forEach(value => {
-  // 同一パスを判別してエディタを開く
-  if (arg[1] == 1 || !Object.values(value)[2]) {
-    Exe_edit(Object.values(value)[0], Object.values(value)[1], Object.values(value)[2]);
-    PPx.Sleep(waitTime);
+for (let i = n; i <= markCount; i++) {
+  // 空白行の判定
+  if (fso.FileExists(ObjEntry.Name)) {
+    // フルパスの取得
+    let entryPath = markEntry[i - n];
+
+    // リストファイルのshortname項目を該当の行番号と見立てる
+    let entryLine = (ObjEntry.ShortName.slice(0, 1).match(/[0-9]/) != null) ? ObjEntry.ShortName : 1;
+
+    // 重複エントリの判別
+    let entryDup = ((isDup) => {
+      isDup = (exist[entryPath]) ? true : false;
+      exist[entryPath] = true;
+      return isDup;
+    })();
+
+    // 同一パスを判別してエディタを開く
+    if (arg[1] == 1 || !entryDup) {
+      Exe_edit(entryPath, entryLine, entryDup);
+    }
   }
   ObjEntry.NextMark;
-});
-
-/* リストファイルの行情報からオブジェクトを生成する関数 */
-function Decode_entry (info = []) {
-  const fso = PPx.CreateObject('Scripting.FileSystemObject');
-
-  // マークの有無でループの初期値を設定
-  const n = (markCount != 0) ? 1 : 0;
-  let exist = {};
-
-  PPx.Entry.Index = ObjEntry.FirstMark;
-
-  for (let i = n; i <= markCount; i++) {
-    // 空白行の判定
-    if (fso.FileExists(ObjEntry.Name)) {
-      let en = markEntry[i - n];
-      // リストファイルのshortname項目を該当の行番号と見立てる
-      let sn = (ObjEntry.ShortName.slice(0, 1).match(/[0-9]/) != null) ? ObjEntry.ShortName : 1;
-      let d = ((isDup) => {
-        isDup = (exist[ObjEntry.Name]) ? true : false;
-        exist[ObjEntry.Name] = true;
-        return isDup;
-      })();
-      info.push({path: en, line: sn, dup: d});
-    }
-    ObjEntry.NextMark;
-  }
-  return info;
 }
 

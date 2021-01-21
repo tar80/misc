@@ -56,16 +56,16 @@ case 'undo':
 
       switch (result[0]) {
       case 'Move':
-        cmd = '-compcmd *script %\'scr\'%\\undo.js,redo';
+        cmd = '-compcmd *script %\'scr\'%\\cmdUndo.js,redo';
         break;
       case 'Back':
         {
           const cDir = PPx.Extract('%FDN%\\');
           const l = PPx.EntryDisplayCount;
+          const ObjEntry = PPx.Entry;
 
           for (let i = 0; i < l; i++) {
-            let entry = PPx.Entry(i);
-            if (entry.state != 1 && (result[0].replace(/Backup\t(.*)/, '$1' ) == cDir + entry.Name)) {
+            if (ObjEntry(i).state != 1 && (result[0].replace(/Backup\t(.*)/, '$1' ) == cDir + ObjEntry(i).Name)) {
               PPx.SetPopLineMessage('Do Not!');
               fsoUndoLog.Close();
               PPx.Quit(-1);
@@ -82,7 +82,7 @@ case 'undo':
         PPx.Quit(-1);
         break;
       }
-      PPx.Execute(`*linemessage Dist: ${result[1]}%bnSend: ${result[2]}`);
+      PPx.SetPopLineMessage(`Send: ${result[2]}\r\nDist: ${result[1]}`);
     } while (!fsoUndoLog.AtEndOfStream);
 
     fsoUndoLog.Close();

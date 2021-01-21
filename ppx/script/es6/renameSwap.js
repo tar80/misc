@@ -6,12 +6,12 @@
 
 'use strict';
 
-const entry = PPx.Entry;
+const ObjEntry = PPx.Entry;
 
 /* エントリのファイル名に関する情報を取得する関数 */
 const Info_entry = function () {
-  this.name = PPx.Extract(`%*name(X,${entry.name})`);
-  this.ext = PPx.Extract(`%*name(T,${entry.name})`);
+  this.name = PPx.Extract(`%*name(X,${ObjEntry.name})`);
+  this.ext = PPx.Extract(`%*name(T,${ObjEntry.name})`);
   this.filename = `${this.name}.${this.ext}`;
 };
 
@@ -29,10 +29,10 @@ case 1:
 case 2:
   {
     if (PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') == 0) {
-      entry.FirstMark;
+      ObjEntry.FirstMark;
       const a = new Info_entry();
 
-      entry.NextMark;
+      ObjEntry.NextMark;
       const b = new Info_entry();
       // 一時的にFirstMarkの名前に__renを付加
       const tempName = `${a.name}__ren.${a.ext}`;

@@ -374,7 +374,7 @@ endif
 "# Autocmd {{{
 augroup vimrcAU
   autocmd!
-  autocmd VimEnter * rviminfo ~/_xxxinfo
+  " autocmd VimEnter * rviminfo ~/_xxxinfo
 augroup END
 
 "# autocomplpop自動起動

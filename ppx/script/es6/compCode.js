@@ -22,12 +22,12 @@ if (!len || len < 2) {
 }
 
 const arg = [PPx.Arguments(0), PPx.Arguments(1)];
-const keys = 'gnmshdcfuxUXREOS';
 
 const edit = {
   type: arg[0].charAt(0),
   title: (len > 2) ? PPx.Arguments(2) : 'compCode..',
   mode: (key = 'e') => {
+    const keys = 'gnmshdcfuxUXREOS';
     return (keys.indexOf(arg[0].charAt(1)) != 0) ? arg[0].substr(1) : key;
   }
 };
@@ -54,16 +54,14 @@ String.prototype.counter = function (seq, max) {
   return (i < max) ? i : max;
 };
 
-// Stringを引数回リピート
-String.prototype.repeat = function (count) { return Array (count * 1 + 1).join(this); };
-
 // 重複した文字をまとめて配列にする
 const charArray = Array.from(new Set(arg[1]));
 const charCount = [];
+const countMax = 4;
 
 // 同じ文字数のカウント
 for (let [i, l] = [0, charArray.length]; i < l; i++) {
-  charCount.push(arg[1].counter(charArray[i], 4));
+  charCount.push(arg[1].counter(charArray[i], countMax));
 }
 
 // 配列からオブジェクトを生成

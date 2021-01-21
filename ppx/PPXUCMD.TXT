@@ -73,7 +73,7 @@
 	-pane ;[:~(反対),:n(=数値指定),:l(=左),:r(=右)]
  
 *cd  ;実行時カレント変更 *cd path
-*checkbranch ;<UserCommand> カレントのgitブランチ名を取得
+*CHECKBRANCH ;<UserCommand> カレントのgitブランチ名を取得
 *checkoffmark ;画面外にマークしたエントリがあれば警告
 *checksignature  ;[filename] 配布書庫の署名検証
 *checkupdate  ;[p] PPxの更新チェック p:試験公開版
@@ -85,7 +85,7 @@
 *closeppx  ;[wildcard] 全PPx終了
 *color  ;[back|cursor] [color] 色の一時的変更
 *comment  ;[id,]["text"|[all] command]
-*commitlist ;<UserCommand> コミットリストの更新
+*COMMITLIST ;<UserCommand> コミットリストの更新
 *commandhash ;name モジュールのコマンド名ハッシュの表示
 *comparemark  ;比較方法,マーク属性,サブディレクトリ PPcファイル比較マーク
 *completelist ;[/set][/option] 自動の一覧表示の表示設定
@@ -184,12 +184,13 @@
 *linecust ;[^]label,[ ID=param | ID:SubID=param | ID:SubID,command ]
 *logoff ;Windows をログオフ
 *logwindow ;[on|off|focus|"表示文字列"] PPc ログウィンドウの制御
-*memo  ;[number] <UserCommand> リストファイルにメモを追加
+*MEMO ;[number] <UserCommand> リストファイルにメモを追加
 	1 ; 緑
-        3 ; 暗灰
-        5 ; 暗赤
-        8 ; 赤
-        10 ;水色
+	3 ; 暗灰
+	5 ; 暗赤
+	8 ; 赤
+	10 ;水色
+ 
 *makedir  ;dirname ディレクトリを作成
 *makefile  ;filename ディレクトリを作成
 *makelistfile ;[filename] [option] ListFile出力
@@ -355,8 +356,8 @@
 *wait  ;time[,1|2] 指定時間待機 1=待機後ループ 2=待機中ループ
 *where ;[!][option...] ファイル検索ダイアログ
 *whereis ;[option...] ファイル検索
-	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
-	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
+	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'temp'%\ppxresult.xlf"
+	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'temp'%\ppxresult.xlf"
 	-path:"" ;ソースパス
 	-mask:"" ;マスク
 	-text:"" ;検索文字列
@@ -365,13 +366,14 @@
 	-subdir:off ;サブディレクトリ内を検索しない
 	-vfs     ;仮想ディレクトリ内を検索
 	-marked  ;ソースパスの代わりにマークエントリを検索
-	-listfile:"%'repoppx'%\list\PPXRESULT.xlf" ;結果結果の保存先パス
+	-listfile:"%'temp'%\ppxresult.xlf" ;結果結果の保存先パス
 	-search  ;検索のみ実行して結果を表示しない
 	-name    ;パスリストを生成する　※自動で-searchを付加
  
 *whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
-	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
-	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'repoppx'%\list\PPXRESULT.xlf"
+	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'temp'%\ppxresult.xlf"
+	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'temp'%\ppxresult.xlf"
+ 
 *windowposition ;[window id],x,y
 *windowsize ;[window id],width,height
 *zenhan ;[z|h] 文字のa/ａ変換

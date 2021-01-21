@@ -7,13 +7,13 @@
 'use strict';
 
 const n = PPx.Arguments.length ? PPx.Arguments(0)|0 : 3;
-const objEntry = PPx.Entry;
+const ObjEntry = PPx.Entry;
 
 for (let [i, l] = [0, PPx.EntryDisplayCount]; i < l; i++) {
-  if (objEntry(i).Mark == 1) {
-    [objEntry(i).Highlight, objEntry(i).Mark] = [n, 0];
-  } else if (objEntry(i).Highlight == n) {
-    [objEntry(i).Highlight, objEntry(i).Mark] = [0, 1];
+  if (ObjEntry(i).Mark == 1) {
+    [ObjEntry(i).Highlight, ObjEntry(i).Mark] = [n, 0];
+  } else if (ObjEntry(i).Highlight == n) {
+    [ObjEntry(i).Highlight, ObjEntry(i).Mark] = [0, 1];
   }
 }
 

@@ -17,11 +17,9 @@ PPx.Execute('*markentry -highlight:0');
 const arg = PPx.Arguments(0)|1;
 const word = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment..")');
 const ObjEntry = PPx.Entry;
-const entryCount = PPx.Entry.Count - 1;
+const entryCount = ObjEntry.Count - 1;
 
 for (let i = 1; i <= entryCount; i++) {
-  if (ObjEntry(i).Comment.search(word) != -1) {
-    PPx.Entry(i).highlight = arg;
-  }
+  if (ObjEntry(i).Comment.search(word) != -1) { ObjEntry(i).highlight = arg; }
 }
 

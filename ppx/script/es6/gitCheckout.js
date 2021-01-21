@@ -20,7 +20,7 @@ const resMark = (() => {
   const filename = [];
 
   filepath.forEach(value => {
-    filename.push(PPx.Extract('%*name(C,' + value + ')'));
+    filename.push(PPx.Extract(`%*name(C,${value})`));
   });
 
   return (PPx.EntryMarkCount)

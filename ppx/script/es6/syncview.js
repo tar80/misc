@@ -22,6 +22,7 @@ if (!sync) {
   PPx.Execute('*setcust X_win:V=B000000000');
   // movingPPv on
   PPx.Execute('*string i,vState=');
+
   if (PPx.Extract('%si"vSize')) {
     // ppvをcapturewindowに取り込む前のサイズに戻す
     PPx.Execute(`*setcust _WinPos:V${tID}=%si"vSize"`);
@@ -32,6 +33,7 @@ if (!sync) {
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
 function State_syncview (tWin) {
   PPx.Execute(`*setcust X_win:V=${tWin}`);
+
   switch (paneCount) {
   case 2:
     PPx.Execute(`%Oin *ppv -r -bootid:${tID}`);

@@ -4,10 +4,10 @@
 'use strict';
 
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
-const entry = PPx.Entry;
+const ObjEntry = PPx.Entry;
 
-for (let [i, l] = [0, entry.Count]; i < l; i++) {
-  if (!(fso.FileExists(entry(i).Name) || fso.FolderExists(entry(i).Name))) {
-    entry(i).Mark = 1;
+for (let [i, l] = [0, ObjEntry.Count]; i < l; i++) {
+  if (!(fso.FileExists(ObjEntry(i).Name) || fso.FolderExists(ObjEntry(i).Name))) {
+    ObjEntry(i).Mark = 1;
   }
 }

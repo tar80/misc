@@ -12,19 +12,18 @@ const dock = PPx.Extract('%Oi %*getcust(X_dock:CBA_T)');
 if (!dock) { PPx.Execute('%Oi *dock add,t,input K_git'); }
 
 PPx.Execute('%Oi *dock focus,t,K_git');
-
 PPx.Execute('*wait 500,2');
 
 // アプリケーションメニューからGIT用コマンドリストを選択
 PPx.Execute('*dock sendkey,t,K_git,APPS 9');
 
-// マーク状態を復元 ※ver17604時点ではPPx側でマークが保持されている
+// マーク状態を復元
 // const resMark = (() => {
 //   const filepath = PPx.Extract('%#FC').split(' ');
 //   const filename = [];
 //
 //   filepath.forEach(value => {
-//     filename.push(PPx.Extract('%*name(C,' + value + ')'));
+//     filename.push(PPx.Extract(`%*name(C,${value})`));
 //   });
 //
 //   return (PPx.EntryMarkCount)
@@ -34,4 +33,4 @@ PPx.Execute('*dock sendkey,t,K_git,APPS 9');
 //
 // PPx.Execute('*jumppath /savelocate /refreshcache');
 // PPx.Execute(resMark);
-//
+

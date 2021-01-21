@@ -78,7 +78,7 @@ case 'undo':
       PPx.Quit(-1);
       break;
     }
-    PPx.Execute('*linemessage Dist: ' + result[1] + '%bnSend: ' + result[2]);
+    PPx.SetPopLineMessage('Send: ' + result[2] + '\r\nDist: ' + result[1]);
   } while (!fsoUndoLog.AtEndOfStream);
 
   fsoUndoLog.Close();

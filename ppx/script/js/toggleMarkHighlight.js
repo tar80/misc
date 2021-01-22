@@ -5,15 +5,15 @@
 // 参照元:http://hoehoetukasa.blogspot.com/2015/08/blog-post.html
 
 var n = PPx.Arguments.length ? PPx.Arguments(0)|0 : 3;
-var objEntry = PPx.Entry;
+var ObjEntry = PPx.Entry;
 
 for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
-  if (objEntry(i).Mark == 1) {
-    objEntry(i).Highlight = n;
-    objEntry(i).Mark = 0;
-  } else if (objEntry(i).Highlight == n) {
-    objEntry(i).Highlight = 0;
-    objEntry(i).Mark = 1;
+  if (ObjEntry(i).Mark == 1) {
+    ObjEntry(i).Highlight = n;
+    ObjEntry(i).Mark = 0;
+  } else if (ObjEntry(i).Highlight == n) {
+    ObjEntry(i).Highlight = 0;
+    ObjEntry(i).Mark = 1;
   }
 }
 

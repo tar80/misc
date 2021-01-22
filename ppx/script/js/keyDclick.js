@@ -9,13 +9,12 @@ var type = {
   image: '.jpg,.jpeg,.bmp,.png,.gif,.vch,.edg',
   movie: '.3gp,.avi,.flv,.mp4,.mpg,.qt,.ebml,.webm'
 };
+
 var filetype = PPx.Extract('.%t').toLowerCase();
 var selType = [];
 
 for (var item in type) {
-  if (type[item].indexOf(filetype) != -1) {
-    selType.push(item);
-  }
+  if (type[item].indexOf(filetype) != -1) { selType.push(item); }
 }
 
 var maskExt = type[selType];
@@ -59,3 +58,4 @@ PPx.Execute('*string i,vState=1');
 PPx.Execute('*setcust X_vpos=3');
 PPx.Execute('*ppvoption id z %K"@N');
 PPx.Execute('*maskentry path:,' + maskExt);
+

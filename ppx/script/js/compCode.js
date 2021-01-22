@@ -58,10 +58,11 @@ String.prototype.repeat = function (count) { return Array(count * 1 + 1).join(th
 // 重複した文字をまとめて配列にする
 var charArray = removeDupChar(arg[1].split(''));
 var charCount = [];
+var countMax = 4;
 
 // 同じ文字数のカウント
 for (var i = 0, l = charArray.length; i < l; i++) {
-  charCount.push(arg[1].counter(charArray[i], 4));
+  charCount.push(arg[1].counter(charArray[i], countMax));
 }
 
 // 配列からオブジェクトを生成

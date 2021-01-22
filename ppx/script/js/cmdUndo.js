@@ -57,7 +57,7 @@ case 'undo':
 
     switch (result[0]) {
     case 'Move':
-      cmd = '-compcmd *script %\'scr\'%\\undo.js,redo';
+        cmd = '-compcmd *script %\'scr\'%\\cmdUndo.js,redo';
       break;
     case 'Back':
       var cDir = PPx.Extract('%FDN%\\');

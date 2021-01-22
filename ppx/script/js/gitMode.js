@@ -25,7 +25,7 @@ PPx.Execute('*dock sendkey,t,K_git,APPS 9');
 
 // マーク状態を復元
 // var resMark = function () {
-//   var filepath = PPx.Extract('%#FC').split(' ');
+//   var filepath = PPx.Extract('%#;FC').split(';');
 //   var filename = [];
 //
 //   for (var i = 1, l = filepath.length; i <= l; i++) {

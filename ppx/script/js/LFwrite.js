@@ -8,6 +8,24 @@ if (PPx.Arguments.length != 2) {
   PPx.Quit(-1);
 }
 
+/* エントリをリストに書き出す */
+var Write_mark_path = function () {
+  var cdPath = (dirType != 4) ? PPx.Extract('%FDN%\\') : '';
+
+  // マークの有無で処理を分岐
+  if (!PPx.EntryMarkCount) {
+    fsoTlist.WriteLine(cdPath + PPx.EntryName);
+  } else {
+    for (var i = 0, l = PPx.Entry.Count; i < l; i++) {
+      if (PPx.Entry(i).Mark == 1) {
+        fsoTlist.WriteLine(cdPath + PPx.Entry(i).Name);
+
+        PPx.Entry(i).Mark = 0;
+      }
+    }
+  }
+};
+
 var arg = [PPx.Arguments(0), PPx.Arguments(1)];
 var dirType = PPx.DirectoryType;
 
@@ -36,22 +54,4 @@ default:
   break;
 }
 fsoTlist.Close();
-
-/* エントリをリストに書き出す関数 */
-var Write_mark_path = function () {
-  var cdPath = (dirType != 4) ? PPx.Extract('%FDN%\\') : '';
-
-  // マークの有無で処理を分岐
-  if (!PPx.EntryMarkCount) {
-    fsoTlist.WriteLine(cdPath + PPx.EntryName);
-  } else {
-    for (var i = 0, l = PPx.Entry.Count; i < l; i++) {
-      if (PPx.Entry(i).Mark == 1) {
-        fsoTlist.WriteLine(cdPath + PPx.Entry(i).Name);
-
-        PPx.Entry(i).Mark = 0;
-      }
-    }
-  }
-};
 

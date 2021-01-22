@@ -4,45 +4,48 @@
 // マーク数が二つなら2ファイル間での名前交換。二つ以下なら反対窓のカーソル位置ファイルと交換します。
 // 同名ファイルの場合、拡張子を交換
 
-var objEntry = PPx.Entry;
+var ObjEntry = PPx.Entry;
 
 /* エントリのファイル名に関する情報を取得する関数 */
 var Info_entry = function () {
-  this.name = PPx.Extract('%*name(X,' + objEntry.name + ')');
-  this.ext = PPx.Extract('%*name(T, '+ objEntry.name + ')');
+  this.name = PPx.Extract('%*name(X,' + ObjEntry.name + ')');
+  this.ext = PPx.Extract('%*name(T, '+ ObjEntry.name + ')');
   this.filename = this.name + '.' + this.ext;
 };
 
 switch (PPx.EntryMarkCount) {
 case 0:
 case 1:
-  if (PPx.Pane.Count == 2 && PPx.Execute('%Q%"Swap Filename!""反対窓エントリとファイル名交換"') == 0) {
-    var nameA = PPx.Extract('%X');
-    PPx.Execute('*rename %FXN.%FT,%~FXN.%FT');
-    PPx.Execute('*execute ~,*rename %~FXN.%~FT,' + nameA + '.%~FT');
+  {
+    if (PPx.Pane.Count == 2 && PPx.Execute('%Q%"Swap Filename!""反対窓エントリとファイル名交換"') == 0) {
+      var nameA = PPx.Extract('%X');
+      PPx.Execute('*rename %FXN.%FT,%~FXN.%FT');
+      PPx.Execute('*execute ~,*rename %~FXN.%~FT,' + nameA + '.%~FT');
+    }
   }
   break;
 case 2:
-  if (PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') == 0) {
+  {
+    if (PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') == 0) {
+      ObjEntry.FirstMark;
+      var a = new Info_entry();
 
-    objEntry.FirstMark;
-    var a = new Info_entry();
+      ObjEntry.NextMark;
+      var b = new Info_entry();
+      // 一時的にFirstMarkの名前に__renを付加
+      var tempName = a.name + '__ren.' + a.ext;
 
-    objEntry.NextMark;
-    var b = new Info_entry();
+      PPx.Execute('*rename ' + a.filename + ',' + tempName);
 
-    // 一時的にFirstMarkの名前に__renを付加
-    var tempName = a.name + '__ren.' + a.ext;
-    PPx.Execute('*rename ' + a.filename + ',' + tempName);
-
-    // 同名ファイルなら拡張子を交換
-    if (a.name == b.name) {
-      PPx.Execute('*rename ' + b.filename + ',' + b.name + '.' + a.ext);
-      PPx.Execute('*rename ' + tempName + ',' + a.name + '.' + b.ext);
-    } else {
-      // エントリのファイル名を交換
-      PPx.Execute('*rename ' + b.filename + ',' + a.name + '.' + b.ext);
-      PPx.Execute('*rename ' + tempName + ',' + b.name + '.' + a.ext);
+      // 同名ファイルなら拡張子を交換
+      if (a.name == b.name) {
+        PPx.Execute('*rename ' + b.filename + ',' + b.name + '.' + a.ext);
+        PPx.Execute('*rename ' + tempName + ',' + a.name + '.' + b.ext);
+      } else {
+        // エントリのファイル名を交換
+        PPx.Execute('*rename ' + b.filename + ',' + a.name + '.' + b.ext);
+        PPx.Execute('*rename ' + tempName + ',' + b.name + '.' + a.ext);
+      }
     }
   }
   break;

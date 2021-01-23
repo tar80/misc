@@ -374,7 +374,6 @@ endif
 "# Autocmd {{{
 augroup vimrcAU
   autocmd!
-  " autocmd VimEnter * rviminfo ~/_xxxinfo
 augroup END
 
 "# autocomplpop自動起動
@@ -474,13 +473,14 @@ nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%'repoppx'\%\xTe
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}
 "# command_mode{{{
+cnoremap <F12> <C-u>rviminfo ~/_xxxinfo<CR>:
 "#}}}
 "# insert_mode{{{
 noremap! <C-j> <Down>
 noremap! <C-k> <Up>
-noremap! <C-b> <Left>
-noremap! <C-f> <Right>
 noremap! <C-l> <Delete>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
 inoremap <S-Delete> <C-o>d$
 "# completion
 " inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
@@ -519,7 +519,7 @@ vnoremap <space>' c'<C-r>"'<ESC>
 vnoremap <space>( c(<C-r>")<ESC>
 vnoremap <space>[ c[<C-r>"]<ESC>
 vnoremap <space>{ c{<C-r>"}<ESC>
-vnoremap <space>${ c${<C-r>"}<ESC>
+vnoremap <space>$ c${<C-r>"}<ESC>
 "# 範囲インデント処理後に解除しないように
 vnoremap < <gv
 vnoremap > >gv

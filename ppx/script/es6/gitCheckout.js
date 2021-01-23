@@ -16,7 +16,7 @@ PPx.Execute('*string i,branch=');
 
 // マーク状態を復元
 const resMark = (() => {
-  const filepath = PPx.Extract('%#FC').split(' ');
+  const filepath = PPx.Extract('%#;FC').split(';');
   const filename = [];
 
   filepath.forEach(value => {

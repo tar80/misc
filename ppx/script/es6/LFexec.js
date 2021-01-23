@@ -1,10 +1,10 @@
 ﻿//!*script
-/* リストファイルのエントリからパスを生成 */
+/* リストファイルから取得した情報をコマンドに渡す */
 //
-// PPx.Arguments() = (0)実行するコマンドライン, (1)1＝重複パスの実行
+// PPx.Arguments() = (0)実行するコマンドライン名, (1)1＝重複パスの実行
 //
-// function Exe_edit() のエディタの起動オプション設定が必要
-// 起動オプションは、ファイルパス= ${path}, 行数= ${line}で指定。``で全体を括る
+// コマンドラインは function Exe_edit()内に記述する
+// オプションは、ファイルパス= ${path}, ショートネーム= ${sn}, 行数= ${number}で指定。``で全体を括る
 
 'use strict';
 
@@ -16,16 +16,23 @@ if (!PPx.Arguments.length) {
 const arg = [PPx.Arguments(0), (PPx.Arguments.length != 2) ? 0 : PPx.Arguments(1)|0];
 const rep = [];
 
-function Exe_edit (path, line, duplicate) {
+function Exe_edit (path, shortname, number, duplicate) {
   switch(arg[0]) {
   case 'gvim':
-    rep[0] = PPx.Extract('%hs0').replace(/\\/g, '');
-    PPx.Execute(`%Oi gvim --remote-tab-silent +"${line}-1 /${rep[0]}/" "${path}"`);
-    PPx.Sleep(300);
+    // ヘッダ情報から検索語を取得
+    rep[0] = ((m) => {
+      const regexp = /result\s=>\s(.*)/;
+      m = ObjEntry(0).Comment.replace(/\\/g, '');
+      m = m.match(regexp) || '';
+      return m[1];
+    })();
+
+    PPx.Execute(`%Oi gvim --remote-tab-silent +"${number}-1 /${rep[0]}/" "${path}"`);
+    PPx.Execute('*wait 100,1');
     break;
   case 'ppv':
     PPx.Execute(`%Oi *ppv -bootid:C ${path}`);
-    PPx.Sleep(100);
+    PPx.Execute('*wait 100,1');
     break;
   case 'sed':
     if (typeof rep[0] == 'undefined') {
@@ -34,7 +41,7 @@ function Exe_edit (path, line, duplicate) {
 
     if (!duplicate) { PPx.Execute(`%Oi copy ${path} ${path}_back`); }
 
-    PPx.Execute(`%Oi sed -i -r ${line}${rep[0]} ${path}`);
+    PPx.Execute(`%Oi sed -i -r ${number}${rep[0]} ${path}`);
     break;
   default:
     break;
@@ -43,12 +50,13 @@ function Exe_edit (path, line, duplicate) {
 
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 
-const markEntry = PPx.Extract('%#FDC').split(' ');
+const markEntry = PPx.Extract('%#;FDC').split(';');
 const markCount = PPx.EntryMarkCount;
 // マークの有無でループの初期値を設定
 const n = (markCount != 0) ? 1 : 0;
 
 let exist = {};
+let entryPath, entrySN, entryNum, entryDup;
 const ObjEntry = PPx.Entry;
 
 PPx.Entry.Index = ObjEntry.FirstMark;
@@ -57,21 +65,24 @@ for (let i = n; i <= markCount; i++) {
   // 空白行の判定
   if (fso.FileExists(ObjEntry.Name)) {
     // フルパスの取得
-    let entryPath = markEntry[i - n];
+    entryPath = markEntry[i - n];
 
-    // リストファイルのshortname項目を該当の行番号と見立てる
-    let entryLine = (ObjEntry.ShortName.slice(0, 1).match(/[0-9]/) != null) ? ObjEntry.ShortName : 1;
+    // ShortNameの取得
+    entrySN = ObjEntry.ShortName;
+
+    // ShortNameを数字と見なして取得
+    entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN : 1;
 
     // 重複エントリの判別
-    let entryDup = ((isDup) => {
+    entryDup = ((isDup) => {
       isDup = (exist[entryPath]) ? true : false;
       exist[entryPath] = true;
       return isDup;
     })();
 
-    // 同一パスを判別してエディタを開く
+    // 同一パスを判別してコマンドに渡す
     if (arg[1] == 1 || !entryDup) {
-      Exe_edit(entryPath, entryLine, entryDup);
+      Exe_edit(entryPath, entrySN, entryNum, entryDup);
     }
   }
   ObjEntry.NextMark;

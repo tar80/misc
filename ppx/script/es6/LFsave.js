@@ -1,7 +1,10 @@
 ﻿//!*script
-/* リストファイルを保存 */
+/* リストファイルの並び、コメント、マーク状態を保存 */
 
 'use strict';
+
+// 取得するヘッダ情報の最大行数
+const reserveHeader = 5;
 
 //【.】【..】を考慮
 const sNum = (() => {
@@ -9,15 +12,15 @@ const sNum = (() => {
   return Number(tdir[0]) + Number(tdir[1]);
 })();
 
-const entry = [];
+// リストの並び
+const ArrEntry = [];
 
-// リストの並びを取得
 for (let [i, l] = [sNum, PPx.EntryDisplayCount]; i < l; i++) {
   let ObjEntry = PPx.Entry(i);
 
   (ObjEntry.Name == ObjEntry.ShortName)
-    ? entry.push(ObjEntry.name)
-    : entry.push(`${ObjEntry.Name}","${ObjEntry.ShortName}`);
+    ? ArrEntry.push(ObjEntry.name)
+    : ArrEntry.push(`${ObjEntry.Name}","${ObjEntry.ShortName}`);
 }
 
 const listpath = PPx.Extract('%FDV');
@@ -25,42 +28,38 @@ const listpath = PPx.Extract('%FDV');
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 let fsoTlist = fso.OpenTextFile(listpath, 1, false, -1);
 
-const detail = [];
+// ファイルに保存されている並び
+const entryInfo = [];
 
-// ファイルに保存されている並びを取得
 while (!fsoTlist.AtEndOfStream) {
-  detail.push(fsoTlist.ReadLine());
+  entryInfo.push(fsoTlist.ReadLine());
 }
 
+// 保存用の並び
 const result = [];
 
-//ヘッダ情報を取得
-for (let i = Math.min(5, detail.length); i--;) {
-  if (!detail[i].indexOf(';')) { result[i] = detail.splice(i, 1); }
+// ヘッダを取得
+for (let [i, l] = [0, Math.min(reserveHeader, entryInfo.length)]; i < l; i++) {
+  if (!entryInfo[0].indexOf(';')) { result[i] = entryInfo.splice(0, 1); }
 }
 
 // リスト上の並びをlistfileの形式で取得し直す
 {
-  const l = detail.length;
-  let res, cmt, mark, d, arr;
+  let res, cmt, mark, ArrRes;
 
-  entry.forEach((element, index) => {
-    for (let i = 0; i < l; i++) {
-      d = detail[i];
+  ArrEntry.forEach((element, index) => {
 
-      if (d.indexOf(element) != -1) {
-        res = (() => {
-          cmt = PPx.Entry(index + sNum).Comment.replace(/"/g,'""');
-          mark = (PPx.Entry(index + sNum).Mark) ? 1 : 0;
-          arr = d.split(',');
+    // ファイルからエントリと一致する行情報を取得
+    res = entryInfo.find((d) => d.indexOf(element) != -1);
+    ArrRes = res.split(',');
 
-          return (arr.length < 7)
-            ? d.replace(/(.*)/, `"$1","",A:H0,C:0.0,L:0.0,W:0.0,S:0.0,M:${mark},T:"${cmt}"`)
-            : `${arr.splice(0, 7)},M:${mark},T:"${cmt}`;
-        })();
-        result.push(res);
-      }
-    }
+    cmt = PPx.Entry(index + sNum).Comment.replace(/"/g,'""');
+
+    mark = (PPx.Entry(index + sNum).Mark) ? 1 : 0;
+
+    result.push((ArrRes.length < 7)
+      ? res.replace(/(.*)/, `"$1","",A:H0,C:0.0,L:0.0,W:0.0,S:0.0,M:${mark},T:"${cmt}"`)
+      : `${ArrRes.splice(0, 7)},M:${mark},T:"${cmt}"`);
   });
 }
 

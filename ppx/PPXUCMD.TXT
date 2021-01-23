@@ -392,4 +392,5 @@
 %m|プロセス強制終了@cmd taskkill
 %m|プロセス一覧@cmd tasklist /svc
 %m|指定ドメインまでの経路@cmd tracert
-%m|設定ファイル読み込み@cmd@setup %"設定ファイル読み込み"%Q"読み込ませるエントリをマーク" %: *closeppx C* %: *wait 100,2 %: *ifmatch Px*.cfg %: PPCUSTW CA %FDC
+%m|ファイル読み込み@cmd@setup %Odb *cd %0 %: *ppcust CS %*input("%0%\backup\ppx" -title:"設定ファイルの選択" -select:l -mode:g -k:%%k"right '_" )
+%m|マーク読み込み@cmd@setup %"設定ファイル読み込み"%Q"読み込ませるエントリをマーク" %: *closeppx C* %: *wait 100,2 %: *ifmatch Px*.cfg %: PPCUSTW CA %FDC

@@ -34,16 +34,12 @@ function Exe_edit (path, shortname, number, duplicate) {
     break;
   case 'sed':
     if (typeof rep[0] == 'undefined') {
-      rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compcode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
+      rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
     }
 
     if (!duplicate) { PPx.Execute('%Oi copy ' + path + ' ' + path + '_back'); }
 
     PPx.Execute('%Oi sed -i -r ' + number + rep[0] + ' ' + path);
-    break;
-  case 'ppcust':
-    PPx.Execute('ppcustw CA ' + path);
-    PPx.Execute('*wait 200,1');
     break;
   default:
     break;
@@ -73,9 +69,9 @@ for (var i = n; i <= markCount; i++) {
     entrySN = ObjEntry.ShortName;
 
     // ShortNameを数字と見なして取得
-    var entryNum = (entrySN.match(/[0-9]*/) != null) ? entrySN : 1;
+    var entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN : 1;
 
-    // 重複パスの判別
+    // 重複エントリの判別
     var entryDup = function (isDup) {
       isDup = (exist[entryPath]) ? true : false;
       exist[entryPath] = true;

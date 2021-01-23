@@ -9,7 +9,7 @@ var ObjEntry = PPx.Entry;
 PPx.Entry.Index = ObjEntry.FirstMark;
 
 for (var i = 1; i <= l; i++) {
-  cfgPath.push('*wait 90,1 %%: PPCUSTW CA ' + ObjEntry.Name);
+  cfgPath.push('*wait 120,1 %%: PPCUSTW CA ' + ObjEntry.Name);
   ObjEntry.NextMark;
 }
 

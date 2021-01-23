@@ -1,5 +1,5 @@
 ﻿//!*script
-/* リストファイルを保存 */
+/* リストファイルの並び、コメント、マーク状態を保存 */
 
 // 取得するヘッダ情報の最大行数
 var reserveHeader = 5;
@@ -41,9 +41,9 @@ for (var i = 0, l = Math.min(reserveHeader, entryInfo.length); i < l; i++) {
   if (!entryInfo[0].indexOf(';')) { result[i] = entryInfo.splice(0, 1); }
 }
 
-var exist, index, res, cmt, mark, d, arr;
-
 // リスト上の並びをlistfileの形式で取得し直す
+var exist, index, cmt, mark, d, arr;
+
 for (var element in ArrEntry) {
   exist = {};
   index = element|0 + sNum;

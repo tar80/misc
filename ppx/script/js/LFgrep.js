@@ -46,15 +46,16 @@ PPx.Execute('*string i,gopt=');
 // リストの整形
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var pDir = PPx.Extract('%FD');
-var result = [';ListFile\u000D\u000A;Base=' + pDir + '|4\u000D\u000A"file","line",A:H5,T:"result => ' + str + '"'];
+var dirType = PPx.DirectoryType;
+var result = [';ListFile\u000D\u000A;Base=' + pDir + '|' + dirType + '\u000D\u000A"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:"result => ' + str + '"'];
 var fsoTlist = fso.OpenTextFile(argResFile, 1, false, -1);
 
 while (!fsoTlist.AtEndOfStream) {
   fsoTlist.ReadLine().replace(/^([^-:]*)[-:](\d*)([-:])\d*\s*(.*)/, function (match, p1, p2, p3, p4) {
-    p1 = p1.replace(/^\.\.\\.*\//, '');
+    p1 = (p1 == '') ? p3 : p1.replace(/^\.\.\\.*\//, '');
     p3 = (p3.indexOf(':') != -1) ? 0 : 3;
     p4 = p4.replace(/"/g, '""');
-    result.push('"' + p1 + '","' + p2 + '",A:H' + p3 + ',T:"' + p4 + '"');
+    result.push('"' + p1 + '","' + p2 + '",A:H' + p3 + ',C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:"' + p4 + '"');
   });
 }
 

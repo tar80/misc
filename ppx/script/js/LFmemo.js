@@ -7,7 +7,7 @@ var arg = function() {
   var len = PPx.Arguments.length;
 
   if (len || len < 2) {
-    return [PPx.Arguments(0), PPx.Arguments(1), len];
+    return [PPx.Arguments(0), len];
   } else {
     PPx.Echo('引数が異常');
     PPx.Quit(-1);

@@ -1,5 +1,5 @@
 ﻿//!*script
-/* リストファイルのエントリからパスを生成 */
+/* リストファイルから取得した情報をコマンドに渡す */
 //
 // PPx.Arguments() = (0)実行するコマンドライン名, (1)1＝重複パスの実行
 //
@@ -82,7 +82,7 @@ for (var i = n; i <= markCount; i++) {
       return isDup;
     }();
 
-    // 同一パスを判別してエディタを開く
+    // 同一パスを判別してコマンドに渡す
     if (arg[1] == 1 || !entryDup) {
       Exe_edit(entryPath, entrySN, entryNum, entryDup);
     }

@@ -69,9 +69,9 @@ function move_path(valA, valB, termMessage) {
   // パスリストからパスを取得
   const pathList = [];
 
-  do {
+  while (!fsoTempfile.AtEndOfStream) {
     pathList.push(fsoTempfile.ReadLine());
-  } while (!fsoTempfile.AtEndOfStream);
+  }
 
   fsoTempfile.Close();
 

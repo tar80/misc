@@ -1,5 +1,7 @@
 ﻿//!*script
 /* リストファイルの並び、コメント、マーク状態を保存 */
+//
+// リストファイルの書式は、*makelistfile -basic に順する
 
 'use strict';
 

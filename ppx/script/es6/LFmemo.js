@@ -1,5 +1,5 @@
 ﻿//!*script
-/* メモの書き込みと更新 */
+/* メモの書き込み */
 //
 // PPx.Arguments() = (0)filepath (1)color
 

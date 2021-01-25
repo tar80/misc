@@ -3,8 +3,8 @@
 //
 // PPx.Arguments() = (0)実行するコマンドライン名, (1)1＝重複パスの実行
 //
-// コマンドラインは function Exe_edit()内に記述する
-// オプションは、ファイルパス= ${path}, ショートネーム= ${sn}, 行数= ${number}で指定。``で全体を括る
+// コマンドラインは、 function Exe_edit()内に記述する
+// 変数は、ファイルパス= ${path}, ショートネーム= ${shortname}, 行数= ${number}で指定。``で全体を括る
 
 'use strict';
 
@@ -70,8 +70,8 @@ for (let i = n; i <= markCount; i++) {
     // ShortNameの取得
     entrySN = ObjEntry.ShortName;
 
-    // ShortNameを数字と見なして取得
-    entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN : 1;
+    // ShortNameを数値と見なして取得
+    entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN|0 : 1;
 
     // 重複エントリの判別
     entryDup = ((isDup) => {

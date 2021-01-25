@@ -1,5 +1,7 @@
 ﻿//!*script
 /* リストファイルの並び、コメント、マーク状態を保存 */
+//
+// リストファイルの書式は、*makelistfile -basic に順する
 
 // 取得するヘッダ情報の最大行数
 var reserveHeader = 5;
@@ -37,7 +39,7 @@ while (!fsoTlist.AtEndOfStream) {
 var result = [];
 
 //ヘッダを取得
-for (var i = 0, l = Math.min(reserveHeader, entryInfo.length); i < l; i++) {
+for (i = 0, l = Math.min(reserveHeader, entryInfo.length); i < l; i++) {
   if (!entryInfo[0].indexOf(';')) { result[i] = entryInfo.splice(0, 1); }
 }
 
@@ -48,7 +50,7 @@ for (var element in ArrEntry) {
   exist = {};
   index = element|0 + sNum;
 
-  for (var i = 0, l = entryInfo.length; i < l; i++) {
+  for (i = 0, l = entryInfo.length; i < l; i++) {
     d = entryInfo[i];
 
     if (!exist[ArrEntry[i]] && d.indexOf(ArrEntry[element]) != -1) {

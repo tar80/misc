@@ -3,8 +3,8 @@
 //
 // PPx.Arguments() = (0)実行するコマンドライン名, (1)1＝重複パスの実行
 //
-// コマンドラインはfunction Exe_edit()内に記述
-// オプションは、ファイルパス= path, ショートネーム= sn, 行数= numberで指定
+// コマンドラインは、 function Exe_edit()内に記述する
+// 変数は、ファイルパス= path, ショートネーム= shortname, 行数= numberで指定
 
 if (!PPx.Arguments.length) {
   PPx.Echo('引数が足りません');
@@ -68,11 +68,11 @@ for (var i = n; i <= markCount; i++) {
     //  ShortNameの取得
     entrySN = ObjEntry.ShortName;
 
-    // ShortNameを数字と見なして取得
-    var entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN : 1;
+    // ShortNameを数値と見なして取得
+    entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN|0 : 1;
 
     // 重複エントリの判別
-    var entryDup = function (isDup) {
+    entryDup = function (isDup) {
       isDup = (exist[entryPath]) ? true : false;
       exist[entryPath] = true;
       return isDup;

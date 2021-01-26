@@ -5,14 +5,13 @@
 
 const pDir = PPx.Extract('%FD');
 const cfgPath = [];
-const l = PPx.EntryMarkCount;
+const l = PPx.EntryDisplayCount;
 const ObjEntry = PPx.Entry;
 
-PPx.Entry.Index = ObjEntry.FirstMark;
-
-for (let i = 1; i <= l; i++) {
-  cfgPath.push(`*wait 120,1 %%: PPCUSTW CA ${ObjEntry.Name}`);
-  ObjEntry.NextMark;
+for (let i = 0; i < l; i++) {
+  if (ObjEntry(i).Mark) {
+    cfgPath.push(`*wait 120,1 %%: PPCUSTW CA ${ObjEntry(i).Name}`);
+  }
 }
 
 PPx.Execute('PPCUSTW CINIT');

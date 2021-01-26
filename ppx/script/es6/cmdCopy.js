@@ -1,7 +1,7 @@
 ﻿//!*script
 /* 状況に応じたファイルコピーの設定 */
 //
-// PPx.Arguments()= (0)0:detail, 1:quick, >=2:link
+// PPx.Arguments()= (0)0:detail | 1:quick | >=2:link
 // %'work'=workspace
 // -comcmdはフォーカス制御
 
@@ -13,9 +13,7 @@ const cdFileName = PPx.Extract('%FC');
 const opPath = PPx.Extract('%2');
 
 // 送り先振り分け
-const cmd = (() => {
-  let pre = {};
-
+const cmd = ((pre) => {
   switch (PPx.GetFileInformation(opPath)) {
   case ':DIR':
     pre = (arg == 0)

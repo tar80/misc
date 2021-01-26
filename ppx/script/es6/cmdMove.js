@@ -8,8 +8,7 @@
 
 const opPath = PPx.Extract('%2');
 // 送り先を設定
-const cmd = (() => {
-  let pre = {};
+const cmd = ((pre) => {
 
   if (!PPx.GetFileInformation(opPath)) {
     pre = {act: 'move', opt: '', post: '-compcmd *ppc -pane:~ %%hd0'};

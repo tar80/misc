@@ -22,7 +22,7 @@ function Exe_edit (path, shortname, number, duplicate) {
     // ヘッダ情報から検索語を取得
     rep[0] = ((m) => {
       const regexp = /result\s=>\s(.*)/;
-      m = ObjEntry(0).Comment.replace(/\\/g, '');
+      m = ObjEntry(0).Comment.replace(/\\\(/g, '(');
       m = m.match(regexp) || '';
       return m[1];
     })();

@@ -3,16 +3,15 @@
 
 var pDir = PPx.Extract('%FD');
 var cfgPath = [];
-var l = PPx.EntryMarkCount;
+var l = PPx.EntryDisplayCount;
 var ObjEntry = PPx.Entry;
 
-PPx.Entry.Index = ObjEntry.FirstMark;
-
-for (var i = 1; i <= l; i++) {
-  cfgPath.push('*wait 120,1 %%: PPCUSTW CA ' + ObjEntry.Name);
-  ObjEntry.NextMark;
+for (var i = 0; i < l; i++) {
+  if (ObjEntry(i).Mark) {
+  cfgPath.push('*wait 120,1 %%: PPCUSTW CA ' + ObjEntry(i).Name);
+  }
 }
 
 PPx.Execute('PPCUSTW CINIT');
-PPx.Execute('*setcust _Command:reset=*cd ' + pDir + ' %%: ' + cfgPath.join(' %%:'));
+PPx.Execute('*setcust _Command:reset=*cd ' + pDir + ' %%: ' + cfgPath.join(' %%: '));
 PPx.Execute('*reset');

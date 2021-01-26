@@ -5,7 +5,7 @@
 // -compcmdはフォーカス制御
 
 var opPath = PPx.Extract('%2');
-var cmd = {}; //[0]dest,[1]option
+var cmd = {};
 
 // 送り先を設定
 if (!PPx.GetFileInformation(opPath)) {
@@ -31,7 +31,7 @@ case 96:
 case 4:
   PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:5 -sameall -undolog -compcmd %%K"@^\\D"');
   break;
-  // その他
+// その他
 default:
   PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog ' + cmd.post);
   break;

@@ -1,7 +1,7 @@
 ﻿//!*script
 /* 状況に応じたファイルコピーの設定 */
 //
-// PPx.Arguments()= (0)0:detail, 1:quick, >=2:link
+// PPx.Arguments()= (0)0:detail | 1:quick | >=2:link
 // %'work'=workspace
 // -comcmdはフォーカス制御
 
@@ -12,7 +12,6 @@ var cdFileName = PPx.Extract('%FC');
 var opDir = PPx.Extract('%2');
 var tDir;
 var mlOpt;    // mklink_option
-
 
 var cmdOpt = (arg == 0)
   ? ['copy', '-renamedest:on']

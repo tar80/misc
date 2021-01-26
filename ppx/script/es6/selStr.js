@@ -11,14 +11,15 @@
 try {
   const str = PPx.Extract('%*edittext()');
   const reg = new RegExp(PPx.Arguments(0));
-  let lparam, wparam;
+  const lparam = [];
+  const wparam = [];
 
   str.replace(reg, (match, p1, p2) => {
-    lparam = p1.length;
-    wparam = (p2 != '') ? str.lastIndexOf(p2) : lparam;
+    lparam[0] = p1.length;
+    wparam[0] = (p2 != '') ? str.lastIndexOf(p2) : lparam;
   });
 
-  PPx.Execute(`*sendmessage %N,177,${wparam},${lparam}`);
+  PPx.Execute(`*sendmessage %N,177,${wparam[0]},${lparam[0]}`);
 } catch (e) {
   PPx.SetPopLineMessage(e);
   PPx.Quit(-1);

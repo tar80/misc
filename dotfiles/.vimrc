@@ -230,8 +230,8 @@ if s:is_plugged('ale')
   let g:ale_lint_on_insert_leave = 1
   "# カラム幅の固定
   " let g:ale_sign_column_always = 1
-  let g:ale_sign_error    = '⇒'
-  let g:ale_sign_warning  = '⛔'
+  let g:ale_sign_error    = '❌ '
+  let g:ale_sign_warning  = '⛔ '
   "# セーブ時整形
   " let g:ale_fix_on_save = 1
 endif
@@ -328,7 +328,9 @@ if s:is_plugged('lightline.vim')
         \ 'fileformat'  : 'LightlineFileformat',
         \ 'filetype'    : 'LightlineFiletype',
         \ 'fileencoding': 'LightlineFileencoding',
-        \ }
+        \ },
+        \ 'separator': { 'left': '', 'right': '' },
+        \ 'subseparator': { 'left': ' ', 'right': ' ' }
         \ }
   function! Unitemode()
     return &ft == 'unite' ? '' : lightline#mode()
@@ -337,7 +339,7 @@ if s:is_plugged('lightline.vim')
     let l:count = ale#statusline#Count(bufnr(''))
     let l:errors = l:count.error + l:count.style_error
     let l:warnings = l:count.warning + l:count.style_warning
-    return l:count.total != 0 ? '🐬 ' . l:errors . ' ' . '⛔ ' . l:warnings : ''
+    return l:count.total != 0 ? '❌ ' . l:errors . ' ' . '⛔ ' . l:warnings : ''
   endfunction
   function! Mybufferstatus()
     return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
@@ -349,7 +351,7 @@ if s:is_plugged('lightline.vim')
     return &ft !~? 'help' && &readonly ? 'RO |' : ''
   endfunction
   function! LightlineModified()
-    return &modifiable && &modified ? '⚡ ' : ''
+    return &modifiable && &modified ? ' ⚡ ' : ''
   endfunction
   function! LightlineFileformat()
     return &ft != 'unite' ? &fileformat : ''

@@ -18,6 +18,7 @@ scriptencoding utf-8
 if !has('gui_running')
   colorscheme bong16
 endif
+
 "======================================================================
 "# Initial {{{
 let $HOME = 'C:/bin/home'
@@ -111,7 +112,7 @@ set ambiwidth =double
 "# マクロ実行中などの画面再描画を行わない
 set lazyredraw
 "# Windowsでパスの区切りに / を使えるようにする
-set shellslash
+" set shellslash
 "# w,bの移動で認識する文字
 set iskeyword +==
 "# 起動時のメッセージ非表示
@@ -123,9 +124,9 @@ set visualbell t_vb =
 "# 画面最後の行をできる限り表示する
 set display =lastline
 "# 対応する括弧を指定
-" set matchpairs+=【;】,";"
+" set matchpairs +=【;】,";"
 "# 補完メニューの高さ
-set pumheight =7
+set pumheight =10
 "# 補完メニューオプション
 set completeopt =menuone,noselect
 "# diff縦分割
@@ -241,8 +242,8 @@ if s:is_plugged('vim-autocomplpop')
   " let g:acp_enableAtStarup = 1
   let g:acp_completeOption        = '.,w,b,k,i'
   " let g:acp_behaviorKeywordCommand = "\<C-n>"
-  " let g:acp_behaviorKeywordLength = 3
-  let g:acp_behaviorFileLength    = 2
+  " let g:acp_behaviorKeywordLength = 2
+  let g:acp_behaviorFileLength    = 3
   let g:acp_behaviorRubyOmniMethodLength  = -1
   let g:acp_behaviorRubyOmniSymbolLength  = -1
   let g:acp_behaviorPythonOmniLength      = -1
@@ -262,9 +263,9 @@ if s:is_plugged('unite.vim')
   "g:unite_source_bookmark_directory =
   let g:unite_source_rec_min_cache_files = 20
   let g:unite_source_rec_max_cache_files = 5000
-  let g:unite_source_rec_async_command   = ['find', '-L']
+  let g:unite_source_rec_async_command   = ['fd', '-HL', '-c never', '--exclude ".git"']
   "let g:unite_source_rec_find_args = ['','']
-  "let g:unite_source_rec_git_command =
+  " let g:unite_source_rec_git_command = ['git', 'ls-files']
   "let g:unite_source_grep_command = "grep"
   "let g:unite_source_grep_recursive_opt = "-r"
   "let g:unite_source_grep_default_opts = "-inH"
@@ -329,8 +330,8 @@ if s:is_plugged('lightline.vim')
         \ 'filetype'    : 'LightlineFiletype',
         \ 'fileencoding': 'LightlineFileencoding',
         \ },
-        \ 'separator': { 'left': '', 'right': '' },
-        \ 'subseparator': { 'left': ' ', 'right': ' ' }
+        \ 'separator': { 'left': '', 'right': '' },
+        \ 'subseparator': { 'left': ' ', 'right': ' ' }
         \ }
   function! Unitemode()
     return &ft == 'unite' ? '' : lightline#mode()
@@ -374,26 +375,35 @@ endif
 "}}}
 "======================================================================
 "# Autocmd {{{
+"# imLineColor{{{
+augroup vimrcImLineColor
+  autocmd!
+  "# 挿入モードで一定時間キー入力がなければ着色
+  autocmd CursorHoldI * setlocal cursorline
+  "# 挿入モード中にフォーカスが外れたら着色
+  autocmd FocusLost,BufLeave * call <SID>highlightIM()
+  function s:highlightIM()
+    if mode() == 'i'
+      setlocal cursorline
+    endif
+  endfunction
+  "# 挿入モードを抜ける時に色を戻す
+  autocmd BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
+  "# 通常時はrelativenumber
+  autocmd CmdLineLeave * setlocal relativenumber
+augroup END
+"}}}
+
 augroup vimrcAU
   autocmd!
 augroup END
 
-"# autocomplpop自動起動
-" autocmd vimrcAU BufEnter * call <SID>toggleACP()
-
-"# 挿入モードで一定時間キー入力がなければ着色
-autocmd vimrcAU CursorHoldI * setlocal cursorline
-"# 挿入モード中にフォーカスが外れたら着色
-autocmd vimrcAU FocusLost,BufLeave * call <SID>highlightIM()
-function s:highlightIM()
-  if mode() == 'i'
-    setlocal cursorline
-  endif
+autocmd vimrcAU BufNew * call timer_start(0, { -> s:bufnew() })
+function! s:bufnew()
+    if &buftype == "terminal" && &filetype == ""
+        set filetype=terminal
+    endif
 endfunction
-"# 挿入モードを抜ける時に色を戻す
-autocmd vimrcAU BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
-"# 通常時はrelativenumber
-autocmd vimrcAU CmdLineLeave * setlocal relativenumber
 
 "# filetype
 "# 改行時の自動コメントアウト停止
@@ -401,6 +411,7 @@ autocmd vimrcAU FileType * setlocal formatoptions -=r
 autocmd vimrcAU FileType * setlocal formatoptions -=o
 autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
+autocmd vimrcAU FileType terminal call timer_start(0, { -> feedkeys("\<C-w>" . "\<C-w>")})
 autocmd vimrcAU FileType unite call <SID>unite_my_settings()
 function! s:unite_my_settings()
   imap <silent><buffer><expr> <C-s> unite#do_action('split')
@@ -463,7 +474,7 @@ nnoremap <expr> : &ft == 'unite' ? ':' : ':<C-u>call <SID>setNum()<CR>'
 function s:setNum()
   setlocal norelativenumber
   redraw
-  call feedkeys(":",'n')
+  call feedkeys(':','n')
 endfunction
 
 "# call vimrc
@@ -478,30 +489,41 @@ nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmat
 cnoremap <F12> <C-u>rviminfo ~/_xxxinfo<CR>:
 "#}}}
 "# insert_mode{{{
+noremap! <expr> <F4> <SID>ToggleShellslash()
+function s:ToggleShellslash()
+  if &shellslash
+    echo '\noshellslash\'
+    setlocal noshellslash
+  else
+    echo '/shellslash/'
+    setlocal shellslash
+  endif
+  return ''
+endfunction
 noremap! <C-j> <Down>
 noremap! <C-k> <Up>
-noremap! <C-l> <Delete>
+noremap! <C-d> <Delete>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <S-Delete> <C-o>d$
 "# completion
 " inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
 " inoremap <expr> [ col('.') == col('$') ? "[]<Left>" : "["
-inoremap <expr> " <SID>QuoteBehavior('"')
-inoremap <expr> ' <SID>QuoteBehavior("'")
-function! s:QuoteBehavior(tKey)
-  if col('.') == col('$')
-        \ && (char2nr(strpart(getline('.'),col('.') -2, 1)) == 32
-        \ || strpart(getline('.'),col('.') -2, 1) == '('
-        \ || strpart(getline('.'),col('.') -2, 1) == '[')
-    return a:tKey . a:tKey . "\<Left>"
-  elseif (strpart(getline('.'),col('.') -2, 2) == '()'
-        \ || strpart(getline('.'),col('.') -2, 2) == '[]')
-    return a:tKey . a:tKey . "\<Left>"
-  else
-    return a:tKey
-  endif
-endfunction
+" inoremap <expr> " <SID>QuoteBehavior('"')
+" inoremap <expr> ' <SID>QuoteBehavior("'")
+" function! s:QuoteBehavior(tKey)
+"   if col('.') == col('$')
+"        \ && (char2nr(strpart(getline('.'),col('.') -2, 1)) == 32
+"        \ || strpart(getline('.'),col('.') -2, 1) == '('
+"        \ || strpart(getline('.'),col('.') -2, 1) == '[')
+"     return a:tKey . a:tKey . "\<Left>"
+"   elseif (strpart(getline('.'),col('.') -2, 2) == '()'
+"        \ || strpart(getline('.'),col('.') -2, 2) == '[]')
+"     return a:tKey . a:tKey . "\<Left>"
+"   else
+"     return a:tKey
+"   endif
+" endfunction
 "# omni
 " inoremap <expr> . empty(&omnifunc) ? "." : pumvisible() ? ".<C-x><C-o><C-p><Down>" : ".<C-x><C-o><Down>"
 "# TABの挙動
@@ -546,9 +568,11 @@ function s:toggleACP()
   if s:is_plugged('vim-autocomplpop')
     if g:acp_behaviorKeywordLength != 2 && &ft != 'unite'
       let g:acp_behaviorKeywordLength = 2
+      let g:acp_behaviorFileLength    = 3
       echo 'ACP ON'
     else
       let g:acp_behaviorKeywordLength = -1
+      let g:acp_behaviorFileLength    = -1
       echo 'ACP OFF'
     endif
     return ''

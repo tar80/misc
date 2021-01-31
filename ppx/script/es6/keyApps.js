@@ -36,9 +36,7 @@ const selKey = ['none', 'P'];
 
 Object.keys(contents).forEach(function (key) {
   contents[key].find(ext => {
-    if (ext == filetype) {
-      return [selKey[0], selKey[1]] = [key, this[key]];
-    }
+    if (ext == filetype) { return [selKey[0], selKey[1]] = [key, this[key]]; }
   });
 }, asgKey);
 

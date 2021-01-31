@@ -39,8 +39,10 @@
 |2,0,1000000000,,"vertical diffsplit"
 :saveas
 |2,0,1000000000,,"saveas"
+:so $VIMRUNTIME/syntax/colortest.vim
+|2,0,1000000000,,"so $VIMRUNTIME/syntax/colortest.vim"
 :so ~/vim81/syntax/hitest.vim
-|2,0,1000000000,,"so ~/vim81/syntax/hitest.vim"
+|2,0,1000000000,,"so $VIMRUNTIME/syntax/hitest.vim"
 :tabnew
 |2,0,1000000000,,"tabnew"
 :tab ball

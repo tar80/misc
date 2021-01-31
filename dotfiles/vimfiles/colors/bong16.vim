@@ -47,7 +47,7 @@ highlight Debug term=none ctermfg=183 gui=none guifg=violet
 highlight TabLine ctermfg=253 ctermbg=241 guifg=#dadada guibg=#606060
 highlight TabLineFill ctermfg=253 ctermbg=241 guifg=#dadada guibg=#606060
 highlight TabLineSel cterm=bold ctermfg=253 guifg=#dadada
-highlight Visual ctermfg=black ctermbg=darkMagenta cterm=none
+highlight Visual ctermfg=black ctermbg=darkmagenta cterm=none
 highlight default link VisualNOS Visual
 highlight Underlined term=underline ctermfg=45 gui=underline guifg=#00dfff
 highlight Error term=none ctermfg=15 ctermbg=124 gui=none guifg=#ffffff guibg=#af0000

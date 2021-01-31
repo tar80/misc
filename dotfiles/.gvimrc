@@ -26,6 +26,7 @@ set guioptions -=l
 set guioptions -=L
 set guioptions -=r
 set guioptions -=R
+set guioptions +=!
 set t_vb=
 "
 "" フォント設定 ※英語名で指定すると問題が起きにくい

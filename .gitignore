@@ -1,9 +1,11 @@
 @add_command.cfg
 Px_@Path.cfg
 PPXRESET.XLF
-pictures.xlf
+PPXGREP.XLF
 COMMITLIST.TXT
 GITRESULT.XLF
+GITREPOSITORIES.TXT
 *Test.js
 memo.xlf
+pictures.xlf
 .eslintrc.json

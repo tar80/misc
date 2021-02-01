@@ -25,6 +25,7 @@ case
 catch
 class
 const
+constructor
 continue
 debugger
 decodeURI

@@ -1,7 +1,7 @@
 ﻿//!*script
 /* 編集文字列の補完。コマンド使用時、"%が消費される問題の対策 */
 //
-// PPx.Arguments(0) = "i":%*input(), "s":%*selecttext() ,"e":%*edittext()
+// PPx.Arguments(0) = "i":%*input() | "s":%*selecttext()  | "e":%*edittext()
 // 二文字目以降があればeditmodeに設定する。例) "iOh" => *input(-mode:Oh)
 //
 // PPx.Arguments(1) = ここで記述した文字が補完される。

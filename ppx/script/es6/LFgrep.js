@@ -48,9 +48,13 @@ const str = (esc => {
 
 const tPath = (PPx.EntryMarkCount) ? '%#FCB' : markless;
 
+// const pDir = PPx.Extract('%FD').replace(/\\/g, '\\\\\\\\');
+// const dirType = PPx.DirectoryType;
+
+// PPx.Execute(`*run -noppb -cmd -min -wait:later ${grep_cmd} %si"gopt" "${str}" ${tPath} | sed -r 's/^(.*)[:-]([0-9]*)([:-])(.*)/"\\1","\\2",A:H"\\3",C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:"\\4"/' | awk 'BEGIN {print ";ListFile\\r\\n;Base=${pDir}|${dirType}\\r\\n\\"file\\",\\"line\\",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:\\"result: ${str}\\""} {print $0}' | %Os nkf -w16L > ${argResFile} %: *wait -run`);
+
 // grepの結果をutf16lbで出力
 PPx.Execute(`%Obn ${grep_cmd} %si"gopt" "${str}" ${tPath} | %Os nkf -w16B > ${argResFile}`);
-// PPx.Execute(`${grep_cmd} %si"gopt" "${str}" ${tPath} | sed -r 's/^(.*)[:-]([0-9]*)([:-])(.*)/"\\1","\\2",A:H"\\3",C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:"\\4"/' | awk 'BEGIN {print ";ListFile\\r\\n;Base=\\r\\n"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:result  ${str}"} {print $0}'`);
 
 // リストの整形
 const fso = PPx.CreateObject('Scripting.FileSystemObject');

@@ -7,8 +7,15 @@
 
 /////////* 初期設定 *////////////
 
-const grepOpt = 'irEC1';                    // grep option '-nH'は固定される
-const markless = '..\\%*name(CB,%FD)';      //マークなしのときの選択対象 %FB(")で括るように
+// ripgrepを使うならrg
+const grep_cmd = 'rg';
+
+// grep_option 配列の一番目は固定。二番目以降を変更
+const grepOpt = (grep_cmd != 'rg')
+  ? ['-nH', 'irEC1', 'GREPOPTION.TXT'] // grep
+  : ['-n --no-heading --color never', ' -Li -C1', 'RGOPTION.TXT']; // ripgrep
+
+const markless = '"..\\%*name(C,%FD)"';      //マークなしのときの選択対象(")で括るように
 
 /////////////////////////////////
 
@@ -20,13 +27,13 @@ if (!PPx.Arguments.length) {
 const argResFile =  PPx.Arguments(0);
 
 // optionボタンの設定
-PPx.Execute(`*string i,gopt=-nH${grepOpt}`);
-PPx.Execute('*string i,Edit_OptionCmd=*string i,gopt=%%*input("%%si"gopt"" -title:"Option  ※-nHは外さないこと※" -mode:e -select:3,100 -k *completelist /set /file:"%%\'repoppx\'%%\\list\\GREPOPTION.TXT") %%: *setcaption grep %%si"gopt" ※\\=\\\\\\\\');
+PPx.Execute(`*string i,gopt=${grepOpt[0]}${grepOpt[1]}`);
+PPx.Execute(`*string i,Edit_OptionCmd=*string i,gopt=%%*input("%%si"gopt"" -title:"Option  ※${grepOpt[0]}は外さないこと※" -mode:e -select:${grepOpt[0].length},100 -k *completelist /set /file:"%%'list'\\${grepOpt[2]}") %%: *setcaption ${grep_cmd} %%si"gopt" ※\\=\\\\\\\\`);
 
 // 検索文字の入力とエスケープ処理
 const str = (esc => {
   try {
-    return esc = PPx.Extract(`%*script(%'scr'%\\compCode.js,"iOs","""%%","grep -nH${grepOpt}  ※\\=\\\\\\\\")`);
+    return esc = PPx.Extract(`%*script(%'scr'%\\compCode.js,"iOs","""%%","${grep_cmd} ${grepOpt[0]}${grepOpt[1]}  ※\\=\\\\\\\\")`);
   } catch (e) {
     PPx.Execute('*string i,gopt=');
     PPx.Echo(e);
@@ -42,8 +49,8 @@ const str = (esc => {
 const tPath = (PPx.EntryMarkCount) ? '%#FCB' : markless;
 
 // grepの結果をutf16lbで出力
-PPx.Execute(`%Obn grep %si"gopt" "${str}" ${tPath} | %Os nkf -w16B > ${argResFile}`);
-PPx.Execute('*string i,gopt=');
+PPx.Execute(`%Obn ${grep_cmd} %si"gopt" "${str}" ${tPath} | %Os nkf -w16B > ${argResFile}`);
+// PPx.Execute(`${grep_cmd} %si"gopt" "${str}" ${tPath} | sed -r 's/^(.*)[:-]([0-9]*)([:-])(.*)/"\\1","\\2",A:H"\\3",C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:"\\4"/' | awk 'BEGIN {print ";ListFile\\r\\n;Base=\\r\\n"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:result  ${str}"} {print $0}'`);
 
 // リストの整形
 const fso = PPx.CreateObject('Scripting.FileSystemObject');

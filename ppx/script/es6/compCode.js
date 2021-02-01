@@ -23,10 +23,13 @@ if (!len || len < 2) {
 
 const arg = [PPx.Arguments(0), PPx.Arguments(1)];
 
+// 起動が一行編集からなら現在のモードを参照
+const defType = (!PPx.Extract('%W').match('PP[BCV]\\[')) ? PPx.Extract('%*editprop(whistory)') : 'e';
+
 const edit = {
   type: arg[0].charAt(0),
   title: (len > 2) ? PPx.Arguments(2) : 'compCode..',
-  mode: (key = 'e') => {
+  mode: (key = PPx.Extract(defType)) => {
     const keys = 'gnmshdcfuxUXREOS';
     return (keys.indexOf(arg[0].charAt(1)) != 0) ? arg[0].substr(1) : key;
   }
@@ -35,7 +38,6 @@ const edit = {
 switch(edit.type) {
 case 'i':
   edit.code = `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()})`;
-  if (edit.code == '') { PPx.Quit(-1); }
   break;
 case 's':
   edit.code = '%*selecttext';
@@ -87,5 +89,7 @@ if (bsNum != -1) { charArray[bsNum] = '\\\\'; }
 const regStr = `[${charArray.join('')}]`;
 const rep = new RegExp(regStr, 'g');
 
-PPx.Result = PPx.Extract(edit.code).replace(rep, (c) => esc[c]);
+const code = ((str = PPx.Extract(edit.code)) => { return (str != '') ? str : PPx.Quit(-1); })();
+
+PPx.Result = code.replace(rep, (c) => esc[c]);
 

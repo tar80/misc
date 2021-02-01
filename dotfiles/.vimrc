@@ -200,6 +200,7 @@ call plug#begin('~/vimfiles')
   Plug 'tyru/caw.vim'
   Plug 'osyo-manga/vim-vigemo'
   Plug 'w0rp/ale'
+  Plug 'pprovost/vim-ps1'
   " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   " Plug 'gorodinskiy/vim-coloresque'
 "# manual
@@ -266,9 +267,9 @@ if s:is_plugged('unite.vim')
   let g:unite_source_rec_async_command   = ['fd', '-HL', '-c never', '--exclude ".git"']
   "let g:unite_source_rec_find_args = ['','']
   " let g:unite_source_rec_git_command = ['git', 'ls-files']
-  "let g:unite_source_grep_command = "grep"
-  "let g:unite_source_grep_recursive_opt = "-r"
-  "let g:unite_source_grep_default_opts = "-inH"
+  let g:unite_source_grep_command = "rg"
+  let g:unite_source_grep_recursive_opt = ""
+  "let g:unite_source_grep_default_opts = "--no-heading --color never -Line"
   "let e_source_grep_search_word_highlight = "Search"
   let g:unite_source_grep_encoding = "utf-8"
   "let g:unite_source_grep_separator= "--"
@@ -346,7 +347,7 @@ if s:is_plugged('lightline.vim')
     return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
          \ ('' != LightlineModified() ? LightlineModified() : '') .
          \ (&ft == 'unite' ? unite#get_status_string() :
-         \  '' != expand('%:p') ? expand('%:p') : '[No Name]')
+         \  '' != expand('%:~:.') ? expand('%:~:.') : '[No Name]')
   endfunction
   function! LightlineReadonly()
     return &ft !~? 'help' && &readonly ? 'RO |' : ''

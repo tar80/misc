@@ -1,20 +1,20 @@
 if(exists("g:lightline"))
 
-    let s:gray1     = '#000B00'    " ”G‚ê‰HF
-    let s:gray2     = '#2B2B2B'    " ˜XF
-    let s:gray3     = '#595857'    " –n
-    let s:gray4     = '#727171'    " “İF
-    let s:gray5     = '#COC6C9'    " ŠDÂ
-    let s:red       = '#E9546B'    " åKåNF
-    let s:green     = '#98D98E'    " á—Î
-    let s:yellow    = '#F2D675'    " ‰©…å
-    let s:blue      = '#9093E0'    " ‡—z‰ÔÂ
-    let s:purple    = '#CC7EB1'    " ÒŠ—F
-    let s:cyan      = '#75C6C3'    " ”’ŒQ
-    let s:orange    = '#FF9740'    " ’W‹€—t
-    let s:plum      = '#F73B70'    " ”~d
-    let s:navy      = '#17184B'    " “S®
-    let s:brown     = '#250D00'    " •’h
+    let s:gray1     = '#000B00'    " æ¿¡ã‚Œç¾½è‰²
+    let s:gray2     = '#2B2B2B'    " è‹è‰²
+    let s:gray3     = '#595857'    " å¢¨
+    let s:gray4     = '#727171'    " éˆè‰²
+    let s:gray5     = '#COC6C9'    " ç°é’
+    let s:red       = '#E9546B'    " è–”è–‡è‰²
+    let s:green     = '#98D98E'    " è‹¥ç·‘
+    let s:yellow    = '#F2D675'    " é»„æ°´ä»™
+    let s:blue      = '#9093E0'    " ç´«é™½èŠ±é’
+    let s:purple    = '#CC7EB1'    " è–è’²è‰²
+    let s:cyan      = '#75C6C3'    " ç™½ç¾¤
+    let s:orange    = '#FF9740'    " æ·¡æœ½è‘‰
+    let s:plum      = '#F73B70'    " æ¢…é‡
+    let s:navy      = '#17184B'    " é‰„ç´º
+    let s:brown     = '#250D00'    " é»’æª€
 
     let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
@@ -39,7 +39,7 @@ if(exists("g:lightline"))
 
     let s:p.tabline.left = [ [ s:gray4, s:gray2 ] ]
     let s:p.tabline.middle = [ [ s:gray4, s:gray2 ] ]
-    let s:p.tabline.right = [ [ s:gray4, s:gray2 ] ]
+    let s:p.tabline.right = [ [ s:gray4, s:gray1 ] ]
     let s:p.tabline.tabsel = [ [ s:yellow, s:gray3 ] ]
 
     let g:lightline#colorscheme#bong#palette = lightline#colorscheme#fill(s:p)

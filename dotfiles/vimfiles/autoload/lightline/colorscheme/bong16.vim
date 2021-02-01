@@ -1,17 +1,25 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/tar.vim
+" Filename: autoload/lightline/colorscheme/bong16.vim
 " Author: tar80
-" Last Change: 2018 12/27
+" Last Change: 2021 01/29
 " =============================================================================
-let s:black     = '#000b00'    " ”G‚ê‰HF
-let s:red       = '#E9546B'    " åKåNF
-let s:green     = '#59C9D6'    " V‹´F
-let s:yellow    = '#F2D675'    " ‰©…å
-let s:blue      = '#9093E0'    " ‡—z‰ÔÂ
-let s:cyan      = '#75C6C3'    " ”’ŒQ
-let s:orange    = '#FF9740'    " ’W‹€—t
-let s:magenta   = '#CC7EB1'    " ”~d
-let s:white     = '#c0c6c9'    " ŠDÂ
+let s:black         = '#000b00'  " æ¿¡ã‚Œç¾½è‰²
+let s:red           = '#EC6D71'  " çœŸæœ±
+let s:green         = '#93CA76'  " è–„èŒé»„
+let s:yellow        = '#EEC362'  " ç‰èœ€é»è‰²
+let s:blue          = '#59B9C6'  " æ–°æ©‹è‰²
+let s:cyan          = '#164A84'  " ç´ºç‘ ç’ƒ
+let s:orange        = '#FF9740'  " æ·¡æœ½è‘‰
+let s:magenta       = '#CC7EB1'  " è–è’²è‰²
+let s:gray          = '#9079AD'  " ç«œèƒ†è‰²
+let s:white         = '#EAEDF7'  " ç™½è«è‰²
+let s:darkred       = '#E95464'  " è–”è–‡è‰²
+let s:darkgreen     = '#839B5C'  " æ¾è‘‰è‰²
+let s:darkyellow    = '#FFD768'  " æ¢”å­è‰²
+let s:darkblue      = '#84A2D4'  " é’è—¤è‰²
+let s:darkcyan      = '#83CCD2'  " ç™½ç¾¤
+let s:darkmagenta   = '#BC64A4'  " è‹¥ç´«
+let s:darkwhite     = '#BED2C3'  " é’ç£è‰²
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.normal.left     = [ [ s:black, s:white ], [ s:white, s:black ] ]
@@ -20,7 +28,7 @@ let s:p.normal.right    = [ [ s:black, s:white ], [ s:black, s:white ], [ s:whit
 let s:p.inactive.right  = [ [ s:black, s:blue ], [ s:black, s:blue ] ]
 let s:p.inactive.middle = [ [ s:black, s:blue ] ]
 let s:p.inactive.left   = [ [ s:black, s:blue ], [ s:black, s:blue ] ]
-let s:p.insert.left     = [ [ s:black, s:green ], [ s:cyan, s:black ] ]
+let s:p.insert.left     = [ [ s:black, s:cyan ], [ s:cyan, s:black ] ]
 let s:p.insert.middle   = [ [ s:cyan, s:black ] ]
 let s:p.insert.right    = [ [ s:black, s:cyan ], [ s:black, s:white ], [ s:white, s:black ], [ s:green, s:black ] ]
 let s:p.replace.left    = [ [ s:black, s:yellow ], [ s:yellow, s:black ] ]

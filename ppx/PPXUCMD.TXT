@@ -52,6 +52,7 @@
 %*getcust( ;X_xxx:xxx)
 %*input( ;-title: -select:l(末) m(桁) m,n(m~n桁) i(|で範囲) -mode:type,reftype
 %*job ;処理中コマンドの数
+%*js("PPx.Result = ;;")
 %*leftstr( ;"text",length) 左からlength字取得
 %*linkedpath( ;filename) リンク対象パス
 %*maskentry

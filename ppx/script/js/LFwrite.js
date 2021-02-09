@@ -37,7 +37,7 @@ switch (arg[0]) {
 case 'git':
   fsoTlist = fso.OpenTextFile(arg[1], 2, true, -1);
   fsoTlist.WriteLine(';ListFile');
-  fsoTlist.WriteLine(';Base=' + PPx.Extract('%\'repo\'') + '|1');
+  fsoTlist.WriteLine(';Base=' + PPx.Extract('%\'myrepo\'') + '|1');
   break;
 // 新規リストファイル
 case 'new':

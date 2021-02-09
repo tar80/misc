@@ -15,28 +15,28 @@ const opPath = PPx.Extract('%2');
 // 送り先振り分け
 const cmd = ((pre) => {
   switch (PPx.GetFileInformation(opPath)) {
-  case ':DIR':
-    pre = (arg == 0)
-      ? {act: 'copy', opt: '-renamedest:on'}
-      : {act: '!copy', opt: '-min'};
-    pre.dest = opPath;
-    pre.post = '-compcmd *ppc -r -noactive';
-    return pre;
-  case ':XLF':
-    pre = (arg == 0)
-      ? {act: 'copy', opt: '-renamedest:on'}
-      : {act: '!copy', opt: '-min'};
-    pre.dest = opPath;
-    pre.post = '';
-    return pre;
-  case '':
-    pre = {act: 'copy', opt: ''};
-    pre.dest = '%\'work\'%\\';
-    pre.post = '-compcmd *ppc -pane:~ %%hd0';
-    return pre;
-  default:
-    PPx.Echo('非対象ディレクトリ');
-    PPx.Quit(1);
+    case ':DIR':
+      pre = (arg == 0)
+        ? {act: 'copy', opt: '-renamedest:on'}
+        : {act: '!copy', opt: '-min'};
+      pre.dest = opPath;
+      pre.post = '-compcmd *ppc -r -noactive';
+      return pre;
+    case ':XLF':
+      pre = (arg == 0)
+        ? {act: 'copy', opt: '-renamedest:on'}
+        : {act: '!copy', opt: '-min'};
+      pre.dest = opPath;
+      pre.post = '';
+      return pre;
+    case '':
+      pre = {act: 'copy', opt: ''};
+      pre.dest = '%\'work\'%\\';
+      pre.post = '-compcmd *ppc -pane:~ %%hd0';
+      return pre;
+    default:
+      PPx.Echo('非対象ディレクトリ');
+      PPx.Quit(1);
   }
 })();
 

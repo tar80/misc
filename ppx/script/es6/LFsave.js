@@ -19,10 +19,9 @@ const ArrEntry = [];
 
 for (let [i, l] = [sNum, PPx.EntryDisplayCount]; i < l; i++) {
   let ObjEntry = PPx.Entry(i);
-
-  (ObjEntry.Name == ObjEntry.ShortName)
-    ? ArrEntry.push(ObjEntry.name)
-    : ArrEntry.push(`${ObjEntry.Name}","${ObjEntry.ShortName}`);
+  (ObjEntry.Name == ObjEntry.ShortName) ?
+    ArrEntry.push(ObjEntry.name):
+    ArrEntry.push(`${ObjEntry.Name}","${ObjEntry.ShortName}`);
 }
 
 const listpath = PPx.Extract('%FDV');
@@ -47,21 +46,20 @@ for (let [i, l] = [0, Math.min(reserveHeader, entryInfo.length)]; i < l; i++) {
 
 // リスト上の並びをlistfileの形式で取得し直す
 {
-  let res, cmt, mark, ArrRes;
+  let res, cmt, mark, hl, ArrRes;
 
   ArrEntry.forEach((element, index) => {
 
     // ファイルからエントリと一致する行情報を取得
-    res = entryInfo.find((d) => d.indexOf(element) != -1);
+    res = entryInfo.find(d => d.indexOf(element) != -1);
     ArrRes = res.split(',');
-
     cmt = PPx.Entry(index + sNum).Comment.replace(/"/g,'""');
-
     mark = (PPx.Entry(index + sNum).Mark) ? 1 : 0;
+    hl = PPx.Entry(index + sNum).Highlight;
 
-    result.push((ArrRes.length < 7)
-      ? res.replace(/(.*)/, `"$1","",A:H0,C:0.0,L:0.0,W:0.0,S:0.0,M:${mark},T:"${cmt}"`)
-      : `${ArrRes.splice(0, 7)},M:${mark},T:"${cmt}"`);
+    result.push((ArrRes.length < 8)
+      ? res.replace(/(.*)/, `"$1","",A:H0,C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:${hl},M:${mark},T:"${cmt}"`)
+      : `${ArrRes.splice(0, 8)},H:${hl},M:${mark},T:"${cmt}"`);
   });
 }
 

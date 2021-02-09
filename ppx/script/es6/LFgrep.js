@@ -60,15 +60,16 @@ PPx.Execute(`%Obn ${grep_cmd} %si"gopt" "${str}" ${tPath} | %Os nkf -w16B > ${ar
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 const pDir = PPx.Extract('%FD');
 const dirType = PPx.DirectoryType;
-const result = [`;ListFile\u000D\u000A;Base=${pDir}|${dirType}\u000D\u000A"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:"result => ${str}"`];
+const result = [`;ListFile\u000D\u000A;Base=${pDir}|${dirType}\u000D\u000A"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:0,M:0,T:"result => ${str}"`];
 let fsoTlist = fso.OpenTextFile(argResFile, 1, false, -1);
 
 while (!fsoTlist.AtEndOfStream) {
-  fsoTlist.ReadLine().replace(/^([^-:]*)[-:](\d*)([-:])\d*\s*(.*)/, (match, p1, p2, p3, p4) => {
+  // fsoTlist.ReadLine().replace(/^([^-:]*)[-:](\d*)([-:])\d*\s*(.*)/, (match, p1, p2, p3, p4) => {
+  fsoTlist.ReadLine().replace(/^([^-:]*)[-:](\d*)([-:])\s*(.*)/, (match, p1, p2, p3, p4) => {
     p1 = (p1 == '') ? p3 : p1.replace(/^\.\.\\.*\//, '');
     p3 = (p3.indexOf(':') != -1) ? 0 : 3;
     p4 = p4.replace(/"/g, '""');
-    result.push(`"${p1}","${p2}",A:H${p3},C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:"${p4}"`);
+    result.push(`"${p1}","${p2}",A:H${p3},C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:0,M:0,T:"${p4}"`);
   });
 }
 

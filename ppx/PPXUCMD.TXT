@@ -307,6 +307,32 @@
 	3 ;カラー高速
 	4 ;カラー綺麗
  
+*run ;[options] command [parameter] commandを実行
+	-launch ;commandのパスがあるディレクトリをカレントディレクトリとして実行をカレントディレクトリとして実行
+	-d:path ; pathをカレントディレクトリとし実行
+	-onppb ;常にPPb経由で実行
+	-noppb ;PPb経由で実行しない
+	-cmd ;常にコマンドラインシェル(cmd.exe等)を使用
+	-min ;最小化状態で実行
+	-max ;最大化状態で実行
+	-hide ;非表示で実行
+	-noactive ;フォーカス移動なし
+	-wait ;終了待機
+	-wait:idle ;起動完了待機
+	-wait:later ;command *wait -run で待機できる。PID/TIDを記憶
+	-pid ;-tid  プロセスID, メインスレッドIDを保存
+	-low ;実行優先度「低」
+	-belownormal ;実行優先度「通常以下」
+	-normal ;実行優先度「通常」
+	-abovenormal ;実行優先度「通常以上」
+	-high ;実行優先度「高」
+	-realtime ;実行優先度「リアルタイム」(管理者権限)
+	-breakjob ;タスクのジョブを分離
+	-newgroup ;プロセスグループを分離
+	-pos: ;x,y 表示位置を指定
+	-size: ;width,height 窓の大きさを指定
+	-log ;[:utf8] 標準出力をログ窓(PPcからの実行時のみ
+ 
 *RotateCustomize  ;custid,customize1,customize2[,...] "="" \=\\
 *RotateExecute  ;id,command1,command2[,...] "="" \=\\
 *rename  ;old,new 名前変更
@@ -315,7 +341,7 @@
 *return ;ユーザコマンドの終了
 *screensaver ;スクリーンセーバを起動
 *script %'scr'%\
-*script %'repoppx'%\xTest.js
+*script %'myrepo'%\ppx\xTest.js
 *selectppx  ;[ID] 指定PPxにフォーカス移動
 *setcaption  ;text キャプションの設定
 *set  ;[valuename=[strings]] 環境変数の設定、削除

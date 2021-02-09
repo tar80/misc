@@ -1,7 +1,7 @@
 ﻿//!*script
 /* 引数で指定された情報を返す */
 //
-// PPx.Arguments() = (0)filetype | exists | getpath | repository | conline
+// PPx.Arguments() = (0)filetype | exists | getpath | myrepo | conline
 
 var arg = PPx.Arguments(0);
 
@@ -22,8 +22,8 @@ case 'getpath': // 反対窓の有無に応じてパスを返す
 
   PPx.Result = PPx.Extract(tPath);
   break;
-case 'repository':
-  PPx.Result = PPx.Extract('%1%\\').indexOf(PPx.Extract('%\'repo\'%\\'));
+case 'myrepo':
+  PPx.Result = PPx.Extract('%1%\\').indexOf(PPx.Extract('%\'myrepo\'%\\'));
   break;
 case 'conline':
   PPx.Result = PPx.Extract('%*edittext').replace(/\r\n/g, ' %: ');

@@ -1,0 +1,139 @@
+﻿add ;[--option][<path>]
+	-v %#FC
+	-v . ;      カレント以下
+	-v --all ;  全部
+	-p -v %#FC ;ハンク毎の追加
+	--dry-run  ;[<directory_path>] addで追加されるファイルの確認
+branch ;[--option][<branch>]
+	-a --sort=-authordate ;     上位からソート
+	--remotes ;(-a)             リモートブランチ一覧
+	--all ;(-a)                 すべてのブランチ一覧
+	--merged ;                  マージ済みブランチ一覧
+	--no-merged ;               未マージブランチ一覧
+	-vv ;                       追跡ブランチ一覧
+	--delete  ;(-d)<branch>     指定したブランチを削除
+	-D ;<branch>                指定したブランチを強制削除
+	-r -d ;<origin>/<branch>    指定した追跡ブランチを削除
+	-m ;[<oldname>] <newname>   チェックアウト中(またはoldname)ブランチの名前変更
+	--set-upstream-to= ;(-u)remote/branch [<branch>]上流ブランチを設定
+	--unset-upstream  ;[<branch>] 上流ブランチ設定を解除
+checkout ;[--option][<branch>][<コミット>][<path>]
+	-b ;<newbranch> [<コミット>] ブランチを作成してチェックアウト
+	--force ;(-f)<branch>        変更を破棄してチェックアウト
+	--ours ;<path>      マージ元ファイルを優先
+	--theirs ;<path>    マージ先ファイルを優先
+	%#FC
+cherry-pick ;[--option]<コミット>[..<コミット>] コミットを個別に取り込む
+	-e ;        メッセージを編集
+	-n ;        コミットはせずに取り込む
+	--continue ;中断したpickを再開
+commit ;[<path>][--option] -m "message" [<コミット>]
+	%#FC ;      選択エントリ
+	. ;         カレント以下
+	-a ;        新規以外の変更を含めてコミット
+	--amend ;   最新コミットの上書き
+	--dry-run ; 試行
+	--fixup  ; <コミット> 対象コミットに追加
+	--squash  ;<コミット> 対象コミットと結合。メッセージ更新
+	-m "Fix: ;     バグ調整
+	-m "Update ;  更新
+	-m "Refactor ;整理
+	-m "Merge ;   合体
+	-m "Add ;     追加
+	-m "Delete ;  削除
+diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
+	--stat  ;       変更点を表示
+	--cached ;      addしてからの変更点を表示
+	--color-words ; 単語単位の差分
+	--name-only ;   ファイル名のみ表示
+	--no-renames ;  名前のみの変更を省く
+        origin/master HEAD
+difftool ;
+	--dir-diff
+fetch ;[--option|<remote [branch]>] リモートを取得する
+	origin 
+	origin master
+	--all ;     リモートの全履歴を取得
+	--prune ;   リモートに存在しないローカルブランチを削除
+	--tags ;    タグを取得
+log ;[--option][<branch>][-n <表示数>]
+	%m|一行表示 --graph --date=short --format="%OD%%C(cyan)%%h %%C(magenta)[%%ad]%%C(reset)%%s%%C(auto)%%d%OD-" -23
+	%m|詳細 --graph --name-status --oneline --date=short --format="%OD%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad]%%C(cyan)%%an %%C(green)%%s%%C(auto)%%d%OD-" -5 %: *focus BA
+	--all ;           全ブランチ
+	--decorate=full ; ブランチ名を短縮せずに表示
+	--graph=' ;'      分岐をグラフィカルに表示
+	--grep ;[検索語]
+	--merges ;        マージコミットのみ
+	--no-merges ;     マージコミット除外
+	--name-only ;     ファイル名のみ表示
+	--name-status ;   名前＋ステータス表示
+	--oneline ;       一行にまとめる
+	-p ;[path]        差分表示
+	--summary ;       変更点を表示
+	--stat ;          変更点のステータス表示
+ls-files ;gitで管理中のファイル
+	-m ;変更
+	-d ;削除
+	-i ;未管理
+merge ;[--option]<remote [branch]>
+	--no-ff ;   マージコミットを作成
+	--ff ;      マージコミットを作らない(デフォルト)
+	--abort ;   マージ中断
+	--continue ;中断したマージを再開
+	-X ours ;   branch マージ先を優先
+	-X theirs ; branch マージ元を優先
+pull ;[--option]<remote [branch]> リモートを取得してマージ
+	origin 
+	origin master
+	--rebase ;  マージせずリベース(※履歴の結合)
+	--no-ff ;   必ずマージする
+	--prune ;   リモートに存在しないローカルブランチを削除
+push ;[--option]<remote [branch]>
+	origin 
+	origin master
+	--set-upstream  ;<remote branch>  上流ブランチを設定してpush
+	--all origin ;                    全てのローカルブランチをpush
+	--delete ;<remote branch>         指定したリモートブランチを削除
+	--tags ;                          リモートにタグをpush
+rebase ;[--option]<コミット>
+	-i HEAD~ ;[n] インタラクティブ
+	--continue ;  続行
+	--abort ;     中止
+	%: *focus BA
+reflog %: *focus BA ;履歴
+remote ;[--option]
+	-v show ;リモートのURLを表示
+reset ;[--option][<コミット>][-- <path>]
+	HEAD %#FC ; add取消
+	--soft HEAD^ ;commit取消
+	--soft ;    コミットリセット
+	--mixed ;   ※デフォルト addとコミットリセット
+	ORIG_HEAD ; 直前のHEAD
+	HEAD~ ;     ~N前のHEAD
+revert ;<コミット>[--option] 指定コミットを取り消して新しいコミットを作成
+	--no-commit ;           revert後コミットしない
+	-m ;[1(親)|2(派生)]     マージコミットのどちらに戻すかを選択
+status --short --branch  ;INDEXの状態
+stash ;[command]["メッセージ"]
+	list ;                 一覧
+	show ;[-p][stash@{n}]  詳細表示 -p=diff
+	save ;"コメント"
+	branch ;<newbranch>    新しくブランチを作ってポップ
+	apply ;[stash@{n}]     スタッシュを適用する
+	pop ;[stash@{n}]       スタッシュを適用しリストから破棄
+	drop ;[stash@{n}]      リストから破棄
+	clear ;                全スタッシュをリストから破棄
+	--patch ;              変更点を選んでスタッシュ
+	--keep-index ;         未addのみスタッシュ
+show ;[--option][<コミット>] コミットの詳細
+	%OD --date=short --format="%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad] %%C(cyan)@%%an %%C(green) %%s%%C(auto)%%d" %OD-
+	%: *focus BA
+show-branch --all --more=10
+commit %#FDC -m "
+	Fix ;     バグ調整
+	Update ;  更新
+	Refactor ;整理
+	Merge ;   合体
+	Add ;     追加
+	Delete ;  削除
+

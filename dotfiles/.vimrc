@@ -130,7 +130,7 @@ set pumheight =10
 "# 補完メニューオプション
 set completeopt =menuone,noselect
 "# diff縦分割
-set diffopt +=vertical,iwhite,context:3
+set diffopt +=vertical,iwhite,context:3,indent-heuristic,algorithm:histogram
 "# 自動インデント
 set autoindent
 "# バックスペースでインデントや改行を削除できるようにする
@@ -269,7 +269,7 @@ if s:is_plugged('unite.vim')
   " let g:unite_source_rec_git_command = ['git', 'ls-files']
   let g:unite_source_grep_command = "rg"
   let g:unite_source_grep_recursive_opt = ""
-  "let g:unite_source_grep_default_opts = "--no-heading --color never -Line"
+  let g:unite_source_grep_default_opts = "--no-heading --color never -Line"
   "let e_source_grep_search_word_highlight = "Search"
   let g:unite_source_grep_encoding = "utf-8"
   "let g:unite_source_grep_separator= "--"
@@ -423,6 +423,7 @@ endfunction
 autocmd vimrcAU VimEnter,FilterWritePre * call <SID>setDiffMode()
 function s:setDiffMode()
 if &diff
+  let g:diff_translations = 0
   syntax off
   highlight Normal guifg=#777777
 endif
@@ -483,7 +484,7 @@ nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F9> :<C-u>tabnew<CR>:edit $MYVIMRC<CR>
 "# ppx
 nnoremap <F6> :<C-u>tabnew<CR>:edit C:/bin/repository/tar80/misc/ppx/xTest.js<CR>
-nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%'repoppx'\%\xTest.js<CR>
+nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%'repo'\%\ppx\xTest.js<CR>
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}
 "# command_mode{{{
@@ -503,7 +504,7 @@ function s:ToggleShellslash()
 endfunction
 noremap! <C-j> <Down>
 noremap! <C-k> <Up>
-noremap! <C-d> <Delete>
+noremap! <C-l> <Delete>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <S-Delete> <C-o>d$

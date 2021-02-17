@@ -8,8 +8,8 @@ if has('iconv')
 else
   set fileencodings=ucs-bom,utf-8,sjis,utf-16le,utf-16,default,latin1
 endif
-" scriptencodingは本来ファイル先頭で指定するべきだが、
-" 内部エンコーディングを変更した場合は再設定の必要がある
+"# scriptencodingは本来ファイル先頭で指定するべきだが、
+"# 内部エンコーディングを変更した場合は再設定の必要があるということ
 scriptencoding utf-8
 
 " source $VIM/syntaxinfo.vim
@@ -19,10 +19,16 @@ if !has('gui_running')
   colorscheme bong16
 endif
 
+" set shell=C:\bin\Scoop\apps\nyagos\current\nyagos.exe
+" set shellcmdflag=-c
+" set shellquote=\"
+" set shellxquote=
+" set shellpipe=>
+" set shellredir=>
 "======================================================================
 "# Initial {{{
 let $HOME = 'C:/bin/home'
-let $PATH = $PATH . ';C:/bin/node/v13110;C:/bin/node/project/vim/node_modules/.bin'
+let $PATH = $PATH . ';C:/bin/repository/tar80/misc/nodejs/node_modules/.bin'
 let g:mapleader                 = ';'
 let g:no_gvimrc_example         = 1
 let g:no_vimrc_example          = 1
@@ -160,15 +166,6 @@ set noswapfile
 "#}}}
 "======================================================================
 "# Plugins{{{
-"# インストール状態をチェック (https://ryochack.hatenablog.com/entry/2017/04/08/162354)
-function s:is_plugged(name)
-  if exists('g:plugs') && has_key(g:plugs, a:name) && isdirectory(g:plugs[a:name].dir)
-    return 1
-  else
-    return 0
-  endif
-endfunction
-"
 " packadd! matchit
 "# cleverf{{{
 "# 行を跨がない = 1
@@ -187,193 +184,48 @@ let g:clever_f_mark_cursor_color  = "SpellRare"
 let g:clever_f_hide_cursor_on_cmdline = 0
 "#}}}
 "# vim-plug{{{
+"# プラグインの読み込み
+let g:plug_shallow = 0
+
 call plug#begin('~/vimfiles')
 "# auto
   Plug 'shougo/vimproc.vim', { 'dir': '~/vimfiles/vimproc.vim', 'do': 'make' }
-  Plug 'shougo/unite.vim'
-  Plug 'shougo/neoyank.vim'
+  " Plug 'shougo/unite.vim'
+  " Plug 'shougo/neoyank.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
   Plug 'itchyny/lightline.vim'
   Plug 'itchyny/vim-parenmatch'
   Plug 'itchyny/vim-gitbranch'
   Plug 'tpope/vim-fugitive'
   Plug 'rhysd/clever-f.vim'
   Plug 'tyru/caw.vim'
-  Plug 'osyo-manga/vim-vigemo'
+  Plug 'leafCage/yankround.vim'
+  " Plug 'osyo-manga/vim-vigemo'
   Plug 'w0rp/ale'
-  Plug 'pprovost/vim-ps1'
   " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   " Plug 'gorodinskiy/vim-coloresque'
 "# manual
+  " Plug '~/vimfiles/_rcPlug'
   Plug '~/vimfiles/autoload'
   Plug '~/vimfiles/colors'
   Plug '~/vimfiles/dict'
   Plug '~/vimfiles/ftplugin'
   Plug '~/vimfiles/syntax'
-  Plug '~/vimfiles/vimdoc-ja'
   Plug '~/vimfiles/vim-autocomplpop'
+  Plug '~/vimfiles/vimdoc-ja'
 call plug#end()
-"#}}}
-"# ale{{{
-if s:is_plugged('ale')
-  let g:ale_linters = {
-        \  'javascript': ['eslint'],
-        \}
-  let g:ale_fixers = {
-        \  'javascript': ['eslint'],
-        \}
-  "# マウスホバー
-  let g:ale_set_balloons = 0
-  "# 開始時チェック
-  let g:ale_lint_on_enter = 0
-  "# 保存時チェック
-  let g:ale_lint_on_save  = 1
-  "# 変更時チェック
-  let g:ale_lint_on_text_changed = 0
-  let g:ale_lint_on_insert_leave = 1
-  "# カラム幅の固定
-  " let g:ale_sign_column_always = 1
-  let g:ale_sign_error    = '❌ '
-  let g:ale_sign_warning  = '⛔ '
-  "# セーブ時整形
-  " let g:ale_fix_on_save = 1
-endif
-"#}}}
-"# autocomplpop{{{
-if s:is_plugged('vim-autocomplpop')
-  " let g:acp_enableAtStarup = 1
-  let g:acp_completeOption        = '.,w,b,k,i'
-  " let g:acp_behaviorKeywordCommand = "\<C-n>"
-  " let g:acp_behaviorKeywordLength = 2
-  let g:acp_behaviorFileLength    = 3
-  let g:acp_behaviorRubyOmniMethodLength  = -1
-  let g:acp_behaviorRubyOmniSymbolLength  = -1
-  let g:acp_behaviorPythonOmniLength      = -1
-endif
-"}}}
-"# Unite{{{
-if s:is_plugged('unite.vim')
-  let g:unite_ignore_source_files = ['history_unite.vim','bookmark.vim']
-  let g:unite_force_overwrite_statusline = 0
-  "g:unite_quick_match_table =
-  "g:unite_data_directory =
-  let g:unite_redraw_hold_candidates = 1000
-  "let g:unite_enable_auto_select = 1
-  "g:unite_restore_alternate_file = 1
-  "g:unite_source_buffer_time_format = "(%H:%M:%S %Y/%m/%d)"
-  "g:unite_source_file_async_command = "ls -a"
-  "g:unite_source_bookmark_directory =
-  let g:unite_source_rec_min_cache_files = 20
-  let g:unite_source_rec_max_cache_files = 5000
-  let g:unite_source_rec_async_command   = ['fd', '-HL', '-c never', '--exclude ".git"']
-  "let g:unite_source_rec_find_args = ['','']
-  " let g:unite_source_rec_git_command = ['git', 'ls-files']
-  let g:unite_source_grep_command = "rg"
-  let g:unite_source_grep_recursive_opt = ""
-  let g:unite_source_grep_default_opts = "--no-heading --color never -Line"
-  "let e_source_grep_search_word_highlight = "Search"
-  let g:unite_source_grep_encoding = "utf-8"
-  "let g:unite_source_grep_separator= "--"
-  "let g:unite_source_vimgrep_search_word_highlight =a"Search"
-  " let g:unite_source_find_command = "find"
-  " let g:unite_source_find_default_opts = "-L"
-  "let g:unite_source_find_default_expr = "-name "
-  "let g:unite_source_line_enable_highlight = "0"
-  "let g:unite_source_alias_aliases = {}
-  "let g:unite_source_menu_menus  {}
-  "let g:unite_source_process_enable_confirm = 1
-  "let g:unite_source_output_shellcmd_colors =
-  "let g:unite_kind_jump_list_after_jump_scroll = 25
-  "let g:unite_kind_file_preview_max_filesize = 1000000
-  "let g:unite_kind_openable_persist_open_blink_time = "250m"
-  "let g:unite_converter_file_directory_width = 45
-  let g:unite_matcher_fuzzy_max_input_length = 20
-  let g:neoyank#limit = 20
-  "
-  "# カスタムプロファイル
-  call unite#custom#source('line,grep', 'matchers', 'matcher_vigemo')
-  call unite#custom#source('file,file_rec,file_rec/async', 'matchers', ['converter_tail', 'matcher_fuzzy'])
-  call unite#custom#source('file,file_rec,file_rec/async', 'max_candidates', 40)
-  call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern',
-        \ '\(\.bmp$\|\.png$\|\.jpg$\|\.jpg$\|\.gif$\|\.wav$\|\.mp3$\|\.mp4$\|\.sys$\|\.gid$\|\.hlp$\|\.dat$\|\.diff$\|\.dll$\|\.jax$\|\.zip\|\.7z\|\.git/\)')
-  call unite#custom#profile('default', 'context', {
-        \ 'start_insert' : 1,
-        \ 'no_split' : 1,
-        \ 'buffer_name' : ""
-        \ })
-  "# Unite file_rec/git(rootを固定)
-  function s:UniteRepo()
-    lcd C:/bin/repository/tar80/misc
-    Unite -buffer-name=repogitory file_rec/git:--cached:--others:--exclude-standard
-  endfunction
-endif
-"#}}}
-"# lightline{{{
-if s:is_plugged('lightline.vim')
-  let g:lightline = {
-        \ 'active': {
-        \ 'left'  : [['mode', 'paste'],['ale', 'bufstatus']],
-        \ 'right' : [['lineinfo'],['percent'],['fileformat', 'fileencoding', 'filetype'],['gitbranch']]
-        \ },
-        \ 'tabline': {
-        \ 'left'   : [['tabs']],
-        \ 'right'  : [['cd']]
-        \ },
-        \ 'component': {
-        \ 'lineinfo' : '%2v:%3l/%3L',
-        \ 'cd'       : '%.35(%{fnamemodify(getcwd(), ":~")}%)',
-        \ },
-        \ 'component_function' : {
-        \ 'mode'        : 'Unitemode',
-        \ 'ale'         : 'ALEStatus',
-        \ 'bufstatus'   : 'Mybufferstatus',
-        \ 'gitbranch'   : 'gitbranch#name',
-        \ 'fileformat'  : 'LightlineFileformat',
-        \ 'filetype'    : 'LightlineFiletype',
-        \ 'fileencoding': 'LightlineFileencoding',
-        \ },
-        \ 'separator': { 'left': '', 'right': '' },
-        \ 'subseparator': { 'left': ' ', 'right': ' ' }
-        \ }
-  function! Unitemode()
-    return &ft == 'unite' ? '' : lightline#mode()
-  endfunction
-  function! ALEStatus()
-    let l:count = ale#statusline#Count(bufnr(''))
-    let l:errors = l:count.error + l:count.style_error
-    let l:warnings = l:count.warning + l:count.style_warning
-    return l:count.total != 0 ? '❌ ' . l:errors . ' ' . '⛔ ' . l:warnings : ''
-  endfunction
-  function! Mybufferstatus()
-    return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-         \ ('' != LightlineModified() ? LightlineModified() : '') .
-         \ (&ft == 'unite' ? unite#get_status_string() :
-         \  '' != expand('%:~:.') ? expand('%:~:.') : '[No Name]')
-  endfunction
-  function! LightlineReadonly()
-    return &ft !~? 'help' && &readonly ? 'RO |' : ''
-  endfunction
-  function! LightlineModified()
-    return &modifiable && &modified ? ' ⚡ ' : ''
-  endfunction
-  function! LightlineFileformat()
-    return &ft != 'unite' ? &fileformat : ''
-  endfunction
-  function! LightlineFileencoding()
-    return &ft != 'unite' ? (&fenc !=# '' ? &fenc : &enc) : ''
-  endfunction
-  function! LightlineFiletype()
-    return &ft != 'unite' ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-  endfunction
-endif
-if s:is_plugged('lightline.vim')
-  if has('gui_running')
-    let g:lightline.colorscheme = 'bong'
-  else
-    let g:lightline.colorscheme = 'bong16'
-  endif
-endif
-"#}}}
-"}}}
+
+"# インストール状態をチェック (https://zenn.dev/mattn/articles/565c4ec71f461cbbf5c9)
+let s:plugs = get(s:, 'plugs', get(g:, 'plugs', {}))
+function! FindPlugin(name) abort
+  return has_key(s:plugs, a:name) ? isdirectory(s:plugs[a:name].dir) : 0
+endfunction
+
+command! -nargs=1 UsePlugin if !FindPlugin(<args>) | finish | endif
+
+runtime! _rcPlug/*.vim
+"#}}}}}}
 "======================================================================
 "# Autocmd {{{
 "# imLineColor{{{
@@ -394,7 +246,7 @@ augroup vimrcImLineColor
   autocmd CmdLineLeave * setlocal relativenumber
 augroup END
 "}}}
-
+"# vimrcAU{{{
 augroup vimrcAU
   autocmd!
 augroup END
@@ -413,11 +265,6 @@ autocmd vimrcAU FileType * setlocal formatoptions -=o
 autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
 autocmd vimrcAU FileType terminal call timer_start(0, { -> feedkeys("\<C-w>" . "\<C-w>")})
-autocmd vimrcAU FileType unite call <SID>unite_my_settings()
-function! s:unite_my_settings()
-  imap <silent><buffer><expr> <C-s> unite#do_action('split')
-  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-endfunction
 
 "# Diff起動時の設定
 autocmd vimrcAU VimEnter,FilterWritePre * call <SID>setDiffMode()
@@ -428,7 +275,7 @@ if &diff
   highlight Normal guifg=#777777
 endif
 endfunction
-"#}}}
+"#}}}}}}
 "======================================================================
 "# Command{{{
 "# 編集中バッファの差分を表示
@@ -438,7 +285,7 @@ command! Diff syntax off | highlight Normal guifg=#777777 | diffthis | wincmd p 
 command! DiffExit syntax on | highlight Normal guifg=gray | diffoff
 "#}}}
 "======================================================================
-"# Keys
+"# Keys{{{
 "# 全般{{{
 "# 検索ハイライトoff
 noremap <silent>, :nohlsearch<cr>
@@ -484,7 +331,7 @@ nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F9> :<C-u>tabnew<CR>:edit $MYVIMRC<CR>
 "# ppx
 nnoremap <F6> :<C-u>tabnew<CR>:edit C:/bin/repository/tar80/misc/ppx/xTest.js<CR>
-nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%'repo'\%\ppx\xTest.js<CR>
+nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%'myrepo'\%\ppx\xTest.js<CR>
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}
 "# command_mode{{{
@@ -511,7 +358,7 @@ inoremap <S-Delete> <C-o>d$
 "# completion
 " inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
 " inoremap <expr> [ col('.') == col('$') ? "[]<Left>" : "["
-" inoremap <expr> " <SID>QuoteBehavior('"')
+" inoremap <expr> ' <SID>QuoteBehavior("'")
 " inoremap <expr> ' <SID>QuoteBehavior("'")
 " function! s:QuoteBehavior(tKey)
 "   if col('.') == col('$')
@@ -549,39 +396,5 @@ vnoremap <space>$ c${<C-r>"}<ESC>
 "# 範囲インデント処理後に解除しないように
 vnoremap < <gv
 vnoremap > >gv
-"#}}}
-"# plugins{{{
-"# unite
-nnoremap <silent> <leader>u :<C-u>Unite<CR>
-nnoremap <silent> <leader>; :<C-u>Unite -buffer-name=files buffer file<CR>
-nnoremap <silent> <leader>o :<C-u>Unite -buffer-name=oldfiles oldfiles<CR>
-nnoremap <silent> <leader>m :<C-u>Unite -buffer-name=marks mark<CR>
-nnoremap <silent> <leader>r :<C-u>call <SID>UniteRepo()<CR>
-nnoremap <silent> <leader>g :<C-u>Unite -tab -no-start-insert -buffer-name=grep -previewheight=20 grep<CR>
-nnoremap <silent> <leader>l :<C-u>Unite -buffer-name=line line<CR>
-noremap <silent> <C-z> :<C-u>Unite -winwidth=60 -direction=botright
-  \ -split -vertical -no-restore history/yank<CR>
-inoremap <silent><expr> <C-z> unite#start_complete(
-   \ ['history/yank'], {'winwidth':60, 'split':1, 'vertical':1, 'restore':0})
-"# acp
-nnoremap <expr> <F2> <SID>toggleACP()
-inoremap <expr> <F2> <SID>toggleACP()
-function s:toggleACP()
-  if s:is_plugged('vim-autocomplpop')
-    if g:acp_behaviorKeywordLength != 2 && &ft != 'unite'
-      let g:acp_behaviorKeywordLength = 2
-      let g:acp_behaviorFileLength    = 3
-      echo 'ACP ON'
-    else
-      let g:acp_behaviorKeywordLength = -1
-      let g:acp_behaviorFileLength    = -1
-      echo 'ACP OFF'
-    endif
-    return ''
-  endif
-endfunction
-"# ale
-nmap <silent> [e <Plug>(ale_previous_wrap)
-nmap <silent> ]e <Plug>(ale_next_wrap)
-"#}}}
+"#}}}}}}
 filetype plugin indent on

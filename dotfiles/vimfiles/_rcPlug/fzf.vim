@@ -52,12 +52,9 @@ command! -bang -nargs=* Rg
 nnoremap <silent> <leader>; :<C-u>Buffers<CR>
 nnoremap <silent> <leader>l :<C-u>Files<CR>
 nnoremap <silent> <leader>o :<C-u>Mru<CR>
-nnoremap <silent> <leader>m :<C-u>Unite -buffer-name=marks mark<CR>
 nnoremap <silent> <leader>r :<C-u>Myrepo<CR>
 nnoremap <silent> <leader>g :<C-u>Rg<CR>
 nnoremap <silent> <leader>a :<C-u>GChanges<CR>
 nnoremap <silent> <leader>c :<C-u>Commits<CR>
-noremap <silent> <C-z> :<C-u>Unite -winwidth=60 -direction=botright
-  \ -split -vertical -no-restore history/yank<CR>
 imap <c-x><c-l> <plug>(fzf-complete-line)
 "#}}}

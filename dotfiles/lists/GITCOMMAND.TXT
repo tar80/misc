@@ -1,8 +1,8 @@
-﻿add ;[--option][<path>]
+﻿add ;[--opton][<path>]
 	-v %#FC
 	-v . ;      カレント以下
 	-v --all ;  全部
-	-p -v %#FC ;ハンク毎の追加
+	-p -v %#FC %: *focus #%*NT ;ハンク毎の追加
 	--dry-run  ;[<directory_path>] addで追加されるファイルの確認
 branch ;[--option][<branch>]
 	-a --sort=-authordate ;     上位からソート
@@ -27,20 +27,23 @@ cherry-pick ;[--option]<コミット>[..<コミット>] コミットを個別に
 	-e ;        メッセージを編集
 	-n ;        コミットはせずに取り込む
 	--continue ;中断したpickを再開
-commit ;[<path>][--option] -m "message" [<コミット>]
-	%#FC ;      選択エントリ
+commit ;[--option] -m "message" [<コミット>] -- [<path>]
+	-- %#FC ;   選択エントリ
 	. ;         カレント以下
 	-a ;        新規以外の変更を含めてコミット
 	--amend ;   最新コミットの上書き
+	--amend --no-edit
 	--dry-run ; 試行
-	--fixup  ; <コミット> 対象コミットに追加
-	--squash  ;<コミット> 対象コミットと結合。メッセージ更新
-	-m "Fix: ;     バグ調整
-	-m "Update ;  更新
-	-m "Refactor ;整理
-	-m "Merge ;   合体
-	-m "Add ;     追加
-	-m "Delete ;  削除
+	--fixup  ;  <コミット> 対象コミットに追加
+	--squash  ; <コミット> 対象コミットと結合。メッセージ更新
+	-m " ;"コメント %bnで改行
+	Fix  ;     バグ調整
+	Update  ;  更新
+	Refactor  ;整理
+	Merge  ;   合体
+	Add  ;     追加
+	Delete  ;  削除
+	Move  ;    移動
 diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
 	--stat  ;       変更点を表示
 	--cached ;      addしてからの変更点を表示
@@ -58,7 +61,7 @@ fetch ;[--option|<remote [branch]>] リモートを取得する
 	--tags ;    タグを取得
 log ;[--option][<branch>][-n <表示数>]
 	%m|一行表示 --graph --date=short --format="%OD%%C(cyan)%%h %%C(magenta)[%%ad]%%C(reset)%%s%%C(auto)%%d%OD-" -23
-	%m|詳細 --graph --name-status --oneline --date=short --format="%OD%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad]%%C(cyan)%%an %%C(green)%%s%%C(auto)%%d%OD-" -5 %: *focus BA
+	%m|詳細 --graph --name-status --oneline --date=short --format="%OD%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad]%%C(cyan)%%an %%C(green)%%s%%C(auto)%%d%OD-" -5 %: *focus #%*NT
 	--all ;           全ブランチ
 	--decorate=full ; ブランチ名を短縮せずに表示
 	--graph=' ;'      分岐をグラフィカルに表示
@@ -99,8 +102,7 @@ rebase ;[--option]<コミット>
 	-i HEAD~ ;[n] インタラクティブ
 	--continue ;  続行
 	--abort ;     中止
-	%: *focus BA
-reflog %: *focus BA ;履歴
+reflog %: *focus #%*NT ;履歴
 remote ;[--option]
 	-v show ;リモートのURLを表示
 reset ;[--option][<コミット>][-- <path>]
@@ -127,13 +129,5 @@ stash ;[command]["メッセージ"]
 	--keep-index ;         未addのみスタッシュ
 show ;[--option][<コミット>] コミットの詳細
 	%OD --date=short --format="%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad] %%C(cyan)@%%an %%C(green) %%s%%C(auto)%%d" %OD-
-	%: *focus BA
+	%: *focus #%*NT
 show-branch --all --more=10
-commit %#FDC -m "
-	Fix ;     バグ調整
-	Update ;  更新
-	Refactor ;整理
-	Merge ;   合体
-	Add ;     追加
-	Delete ;  削除
-

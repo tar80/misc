@@ -1,30 +1,99 @@
--- This is a sample .nyagos written with Lua.
 -- Edit and put it on %USERPROFILE%, %HOME% or the same folder with nyagos.exe
 
--- Sample : function
-nyagos.prompt = function(this)
-  local wd = nyagos.getwd()
-  local env = nyagos.env
-  local home = env.HOME or env.USERPROFILE
-  local home_len = home:len()
-  if wd:sub(1,home_len) == home then
-    wd = "~" .. wd:sub(home_len+1)
+-- Prompt for CMD.EXE
+nyagos.env.prompt = '$P$s'
+
+-- Prompt for NYAGOS.EXE
+do
+  local git_branch = function()
+  local path = nyagos.getwd()
+    repeat
+      if nyagos.access(nyagos.pathjoin(path, '.git'), 0) then
+        break
+      end
+      path = string.match(path, '^(.+)\\')
+    until not path
+
+    if path then
+      local branch = nyagos.eval('git rev-parse --abbrev-ref HEAD 2>nul')
+      if branch then
+          local ref = string.match(branch, '^%(detached from ([0-9a-f]+)%)$')
+          if ref then
+            return '(' .. ref .. '...)'
+          else
+            return branch
+          end
+      else
+          return ('no branch')
+      end
+    else
+      return nil
+    end
   end
-  local title = "NYAGOS - " .. wd
-  if nyagos.elevated() then
-    return nyagos.default_prompt('$e[40;31;1m'..this..'$e[37;1m',title)
-  else
-    return nyagos.default_prompt('$e[40;36;1m'..this..'$e[37;1m',title)
+
+  local prompt_ = nyagos.prompt
+
+  nyagos.prompt = function(prompt)
+    local branch = git_branch()
+    local title = "NYAGOS - " .. nyagos.getwd()
+    if branch then
+      branch = '$e[44;96m$e[44;33m  ' .. branch .. ' $e[49;34m'
+    else
+      branch = '$e[49;96m'
+    end
+
+    if nyagos.elevated() then
+      return prompt_('$e[106;30m'.. prompt .. ' ' .. branch .. '$e[49;39m$_$$$s',title)
+    else
+      return prompt_('$e[106;30m'.. prompt .. ' ' .. branch .. '$e[49;39m$_$$$s',title)
+    end
   end
 end
 
 -- 履歴数
-nyagos.histsize=500
+nyagos.histsize = 500
 
 -- 環境変数
-nyagos.env.APPS='C:/bin'
-nyagos.env.LESSCHARSET='utf-8'
+-- nyagos.env.APPS = 'C:/bin'
+nyagos.env.HOME = 'C:/bin/HOME'
+nyagos.env.LESSCHARSET = 'utf-8'
+nyagos.env.FEZ_DEFAULT_COMMAND = 'fd -HL -c never --exclude ".git" .'
+nyagos.env.FZF_DEFAULT_OPTS = '--reverse --border --height 50% --inline-info --color=fg:-1,bg:-1,hl:#ffcc00 --color=fg+:#4d84a8,bg+:-1,hl+:#00eaff --color=info:#aa82fa,prompt:#2cdede,pointer:#6bff26 --color=marker:#c06eff,spinner:#a357ff,header:#a7d1d1'
+
+nyagos.env.myrepo = 'C:/bin/repository/tar80/misc'
 
 -- エイリアス
-nyagos.alias.vim='C:/bin/vim/vim82/vim.exe'
+nyagos.alias.vim = 'C:/bin/vim/vim82/vim.exe'
+nyagos.alias.gvim = 'C:/bin/vim/vim82/gvim.exe'
+
+nyagos.alias.ll = 'lsd -l --group-dirs first --blocks permission --blocks size --blocks date --blocks name '
+nyagos.alias.cc = function ()
+  local path = nyagos.eval('fd -Ht d -c never -E .git -E node_modules | fzf')
+  return nyagos.exec('cd ' .. path)
+end
+nyagos.alias.re = function ()
+  local path = nyagos.eval('fd -Lt d -c never --full-path . %myrepo% | fzf')
+  return nyagos.exec('cd ' .. path)
+end
+
+-- 補完:入力部分のハイライト
+nyagos.completion_hook = function(c)
+  for index, item in ipairs(c.list) do
+      c.shownlist[index] = '\027[49;90m' .. c.word .. '\027[49;93m' .. item:sub(string.len(c.word) + 1 )
+  end
+  return c.list, c.shownlist
+end
+
+-- キーバインド
+nyagos.key["F9"] = function()
+  nyagos.exec('vim c:\\bin\\repository\\tar80\\misc\\nyagos\\.nyagos')
+end
+nyagos.key["C_R"] = function()
+  local path = nyagos.getenv("APPDATA") .. '\\NYAOS_ORG\\nyagos.history'
+  return nyagos.eval('type ' .. path .. ' | cut -f 1 | fzf')
+end
+
+-- 追加コマンド
+use 'subcomplete'
+
 -- vim:set ft=lua: --

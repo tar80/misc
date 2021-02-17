@@ -23,31 +23,33 @@ if (!len || len < 2) {
 
 const arg = [PPx.Arguments(0), PPx.Arguments(1)];
 
-// 起動が一行編集からなら現在のモードを参照
-const defType = (!PPx.Extract('%W').match('PP[BCV]\\[')) ? PPx.Extract('%*editprop(whistory)') : 'e';
+// 現在のモードを参照
+const defType = (!PPx.Extract('%W').match('PP[BCV]\\[')) ?
+  (PPx.Extract('%*editprop(whistory)')) || 'g':
+  'g';
 
 const edit = {
   type: arg[0].charAt(0),
   title: (len > 2) ? PPx.Arguments(2) : 'compCode..',
-  mode: (key = PPx.Extract(defType)) => {
+  mode: () => {
     const keys = 'gnmshdcfuxUXREOS';
-    return (keys.indexOf(arg[0].charAt(1)) != 0) ? arg[0].substr(1) : key;
+    return (keys.indexOf(arg[0].charAt(1)) != 0) ? arg[0].substr(1) : PPx.Extract(defType);
   }
 };
 
 switch(edit.type) {
-case 'i':
-  edit.code = `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()})`;
-  break;
-case 's':
-  edit.code = '%*selecttext';
-  break;
-case 'e':
-  edit.code = '%*edittext';
-  break;
-default:
-  PPx.Echo('引数が異常');
-  PPx.Quit(-1);
+  case 'i':
+    edit.code = `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()})`;
+    break;
+  case 's':
+    edit.code = '%*selecttext';
+    break;
+  case 'e':
+    edit.code = '%*edittext';
+    break;
+  default:
+    PPx.Echo('引数が異常');
+    PPx.Quit(-1);
 }
 
 // String内のseqと同じ文字数をカウント。最大max回
@@ -55,7 +57,6 @@ String.prototype.counter = function (seq, max) {
   let i = this.split(seq).length - 1;
   return (i < max) ? i : max;
 };
-
 // 重複した文字をまとめて配列にする
 const charArray = Array.from(new Set(arg[1]));
 const charCount = [];
@@ -68,12 +69,10 @@ for (let [i, l] = [0, charArray.length]; i < l; i++) {
 
 // 配列からオブジェクトを生成
 const bsNum = [];
-
 const esc = charArray.reduce((esc, value, index) => {
   esc[value] = value.repeat(Esc_excp(value, index));
   return esc;
 }, {});
-
 // 例外処理
 function Esc_excp (ele, num) {
   if (ele != '\\') {
@@ -88,7 +87,6 @@ if (bsNum != -1) { charArray[bsNum] = '\\\\'; }
 
 const regStr = `[${charArray.join('')}]`;
 const rep = new RegExp(regStr, 'g');
-
 const code = ((str = PPx.Extract(edit.code)) => { return (str != '') ? str : PPx.Quit(-1); })();
 
 PPx.Result = code.replace(rep, (c) => esc[c]);

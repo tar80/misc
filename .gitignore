@@ -1,5 +1,11 @@
+node_modules
+.eslintrc.json
 @add_command.cfg
 Px_@Path.cfg
+package-lock.json
+index.js
 *Test.js
-.eslintrc.json
-node_modules
+*.png
+*.jpg
+*.bmp
+

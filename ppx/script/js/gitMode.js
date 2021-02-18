@@ -24,19 +24,19 @@ PPx.Execute('*wait 500,2');
 PPx.Execute('*dock sendkey,t,K_git,APPS 9');
 
 // マーク状態を復元
-// var resMark = function () {
-//   var filepath = PPx.Extract('%#;FC').split(';');
-//   var filename = [];
-//
-//   for (var i = 1, l = filepath.length; i <= l; i++) {
-//     filename.push(PPx.Extract('%*name(C,' + filepath[i] + ')'));
-//   }
-//
-//   return (PPx.EntryMarkCount)
-//     ? '*markentry o:dex;' + filename.join(';')
-//     : '*unmarkentry';
-// }();
-//
-// PPx.Execute('*jumppath /savelocate /refreshcache');
-// PPx.Execute(resMark);
-//
+var resMark = function () {
+  var filepath = PPx.Extract('%#;FC').split(';');
+  var filename = [];
+
+  for (var i = 1, l = filepath.length; i <= l; i++) {
+    filename.push(PPx.Extract('%*name(C,' + filepath[i] + ')'));
+  }
+
+  return (PPx.EntryMarkCount)
+    ? '*markentry o:dex;' + filename.join(';')
+    : '*unmarkentry';
+}();
+
+PPx.Execute('*jumppath /savelocate /refreshcache');
+PPx.Execute(resMark);
+

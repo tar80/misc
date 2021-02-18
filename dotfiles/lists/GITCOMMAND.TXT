@@ -28,7 +28,7 @@ cherry-pick ;[--option]<コミット>[..<コミット>] コミットを個別に
 	-n ;        コミットはせずに取り込む
 	--continue ;中断したpickを再開
 commit ;[--option] -m "message" [<コミット>] -- [<path>]
-	-- %#FC ;   選択エントリ
+	%#FC ;      選択エントリ
 	. ;         カレント以下
 	-a ;        新規以外の変更を含めてコミット
 	--amend ;   最新コミットの上書き
@@ -37,13 +37,13 @@ commit ;[--option] -m "message" [<コミット>] -- [<path>]
 	--fixup  ;  <コミット> 対象コミットに追加
 	--squash  ; <コミット> 対象コミットと結合。メッセージ更新
 	-m " ;"コメント %bnで改行
-	Fix  ;     バグ調整
-	Update  ;  更新
-	Refactor  ;整理
-	Merge  ;   合体
-	Add  ;     追加
-	Delete  ;  削除
-	Move  ;    移動
+	Fix  ;      バグ調整
+	Update  ;   更新
+	Refactor  ; 整理
+	Merge  ;    合体
+	Add  ;      追加
+	Delete  ;   削除
+	Move  ;     移動
 diff ;[--option][<コミット>(old)][..<コミット>(new)][--][<path>]
 	--stat  ;       変更点を表示
 	--cached ;      addしてからの変更点を表示

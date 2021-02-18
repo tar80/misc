@@ -21,7 +21,8 @@ DisplayFiles
 DisplayTop
 DisplayX
 DisplayY
-Echo Entry
+Echo
+Entry
 EntryAllCount
 EntryAttributes
 EntryComment

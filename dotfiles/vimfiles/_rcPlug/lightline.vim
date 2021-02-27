@@ -6,63 +6,90 @@ UsePlugin 'lightline.vim'
 "# Options {{{
 let g:lightline = {
       \ 'active': {
-      \ 'left'  : [['mode', 'paste'],['ale', 'bufstatus']],
-      \ 'right' : [['lineinfo'],['percent'],['fileformat', 'fileencoding', 'filetype'],['gitbranch']]
-      \ },
-      \ 'tabline': {
-      \ 'left'   : [['tabs']],
-      \ 'right'  : [['cd']]
-      \ },
-      \ 'component': {
-      \ 'lineinfo' : '%2v:%3l/%3L',
-      \ 'cd'       : '%.35(%{fnamemodify(getcwd(), ":~")}%)',
-      \ },
-      \ 'component_function' : {
-      \ 'mode'        : 'Unitemode',
-      \ 'ale'         : 'ALEStatus',
-      \ 'bufstatus'   : 'Mybufferstatus',
-      \ 'gitbranch'   : 'gitbranch#name',
-      \ 'fileformat'  : 'LightlineFileformat',
-      \ 'filetype'    : 'LightlineFiletype',
-      \ 'fileencoding': 'LightlineFileencoding',
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': ' ', 'right': ' ' }
-      \ }
-function! Unitemode()
-  return &ft == 'unite' ? '' : lightline#mode()
-endfunction
-function! ALEStatus()
+        \ 'left'  : [['mode', 'paste'],['ale'], ['status']],
+        \ 'right' : [['lineinfo'],['percent'],['format', 'enc', 'ftype'],['gitbranch']]
+        \ },
+        \ 'tabline': {
+          \ 'left'   : [['tabs']],
+          \ 'right'  : [['wd']]
+          \ },
+          \ 'component': {
+            \ 'lineinfo' : '%2v:%3l/%3L',
+            \ 'wd'       : '%.35(%{fnamemodify(getcwd(), ":~")}%)'
+            \ },
+            \ 'component_function' : {
+              \ 'mode'      : 'lightline#mode',
+              \ 'ale'       : 'ALEStatus',
+              \ 'status'    : 'BS',
+              \ 'gitbranch' : 'GB',
+              \ 'format'    : 'FF',
+              \ 'ftype'     : 'FT',
+              \ 'enc'       : 'FE'
+              \ },
+              \ 'separator': { 'left': '', 'right': '' },
+              \ 'subseparator': { 'left': ' ', 'right': ' ' }
+              \ }
+function! ALEStatus() abort
   let l:count = ale#statusline#Count(bufnr(''))
   let l:errors = l:count.error + l:count.style_error
   let l:warnings = l:count.warning + l:count.style_warning
   return l:count.total != 0 ? '❌ ' . l:errors . ' ' . '⛔ ' . l:warnings : ''
 endfunction
-function! Mybufferstatus()
-  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-       \ ('' != LightlineModified() ? LightlineModified() : '') .
-       \ (&ft == 'unite' ? unite#get_status_string() :
-       \  '' != expand('%:~:.') ? expand('%:~:.') : '[No Name]')
+function! GB() abort
+  let s:sybl = (gitbranch#name() != '') ? '' : ''
+  let b:lightline_gitbranch = s:sybl . gitbranch#name()
+  unlet s:sybl
+  return b:lightline_gitbranch
 endfunction
-function! LightlineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO |' : ''
+function! BS() abort
+  return ('' !=# s:RO() ? s:RO() . ' ' : '') .
+        \ ('' !=# s:MOD() ? s:MOD() : '') .
+        \ ('' !=# expand('%:~:.') ? expand('%:~:.') : '[No Name]')
 endfunction
-function! LightlineModified()
-  return &modifiable && &modified ? ' ⚡ ' : ''
+function! s:RO() abort
+  return &ft !~? 'help' && &readonly ? ' |' : ''
 endfunction
-function! LightlineFileformat()
-  return &ft != 'unite' ? &fileformat : ''
+function! s:MOD() abort
+  return &modifiable && &modified ? '⚡ ' : ''
 endfunction
-function! LightlineFileencoding()
-  return &ft != 'unite' ? (&fenc !=# '' ? &fenc : &enc) : ''
+function! FE() abort
+  return &fenc !=# '' ? &fenc : &enc
 endfunction
-function! LightlineFiletype()
-  return &ft != 'unite' ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+function! FT() abort
+  return &filetype !=# '' ? &filetype : 'no ft'
+endfunction
+function! FF() abort
+  return &fileformat
 endfunction
 
 if has('gui_running')
-let g:lightline.colorscheme = 'bong'
+  let g:lightline.colorscheme = 'gulatton'
 else
-let g:lightline.colorscheme = 'bong16'
+  let g:lightline.colorscheme = 'bong16'
 endif
 "#}}}
+"======================================================================
+"# Autocmd {{{
+" augroup vimrcLL
+"   autocmd!
+"   autocmd vimrcLL FileType Gina-status setlocal g:lightline.component_function.gitbranch = Gina()
+" augroup END
+" function! Gine() abort
+"   let b:branch = gina#component#repo#branch()
+"   if '' != b:branch
+"     let b:staged = gina#component#status#staged()
+"     let b:unstaged = gina#component#status#unstaged()
+"     let b:conflicted = gina#component#status#conflicted()
+"     return printf(
+"         \ '%s  s:%s u:%s c:%s',
+"         \ branch,
+"         \ staged,
+"         \ unstaged,
+"         \ conflicted,
+"         \)
+"   else
+"     return ''
+"   endif
+" endfunction
+"#}}}
+"======================================================================

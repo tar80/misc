@@ -18,22 +18,22 @@ if(exists("g:lightline"))
 
     let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
-    let s:p.normal.left = [ [ s:gray2, s:gray4 ], [ s:gray4, s:gray2 ] ]
+    let s:p.normal.left = [ [ s:gray2, s:gray4 ], [ s:red, s:gray3 ], [ s:gray4, s:gray2 ] ]
     let s:p.normal.right = [ [ s:gray1, s:gray3 ], [ s:gray1, s:gray3 ], [ s:gray4, s:gray2 ], [ s:green, s:gray2 ] ]
     let s:p.normal.middle = [ [ s:gray4, s:gray2 ] ]
     let s:p.normal.error = [ [ s:gray2, s:red ] ]
     let s:p.normal.warning = [ [ s:gray2, s:yellow ] ]
 
-    let s:p.insert.left = [ [ s:gray2, s:cyan ], [ s:cyan, s:gray2 ] ]
+    let s:p.insert.left = [ [ s:gray2, s:cyan ], [ s:red, s:gray3 ], [ s:cyan, s:gray2 ] ]
     let s:p.insert.right = [ [ s:gray2, s:cyan ], [ s:gray1, s:gray3 ], [ s:gray4, s:gray2 ], [ s:green, s:gray2 ] ]
 
-    let s:p.replace.left = [ [ s:gray2, s:yellow ], [ s:yellow, s:gray2 ] ]
+    let s:p.replace.left = [ [ s:gray2, s:yellow ], [ s:red, s:gray3 ], [ s:yellow, s:gray2 ] ]
     let s:p.replace.right = [ [ s:gray2, s:yellow ], [ s:gray1, s:gray3 ], [ s:gray4, s:gray2 ], [ s:green, s:gray2 ] ]
 
-    let s:p.visual.left = [ [ s:gray2, s:purple ], [ s:purple, s:gray2 ] ]
+    let s:p.visual.left = [ [ s:gray2, s:purple ], [ s:red, s:gray3 ], [ s:purple, s:gray2 ] ]
     let s:p.visual.right = [ [ s:gray2, s:purple ], [ s:gray1, s:gray3 ], [ s:gray4, s:gray2 ], [ s:green, s:gray2 ] ]
 
-    let s:p.inactive.left =  [ [ s:gray4, s:gray2 ], [ s:gray4, s:gray2 ] ]
+    let s:p.inactive.left =  [ [ s:gray4, s:gray2 ], [ s:red, s:gray3 ], [ s:gray4, s:gray2 ] ]
     let s:p.inactive.right = [ [ s:gray4, s:gray2 ], [ s:gray4, s:gray2 ] ]
     let s:p.inactive.middle = [ [ s:gray4, s:gray2 ] ]
 

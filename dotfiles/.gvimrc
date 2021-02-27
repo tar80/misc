@@ -1,21 +1,20 @@
 " vim:tw=0:foldmethod=marker:foldcolumn=3:
 "======================================================================
-"# Vim 8.1  Last Change: 23-march-2020.
-"======================================================================
 scriptencoding utf-8
 " カラースキーマ
 set background=dark
-colorscheme bong
+colorscheme gulatton
 "
 " IME制御
 if has('multi_byte_ime')
   set iminsert=0 imsearch=0
 " IMEの状態をカラー表示 (https://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color)
   highlight Cursor guifg=black guibg=lightgreen
-  highlight CursorIM guifg=white guibg=Orange
+  highlight CursorIM guifg=white guibg=#D1934C
 endif
 " カーソル点滅抑止
-set guicursor=a:ver20-blinkwait1000-blinkon700-blinkoff600
+set guicursor =a:ver20-blinkwait600-blinkon700-blinkoff600
+set guicursor+=n-v:block-blinkwait1000-blinkon1200-blinkoff1000
 "
 " 表示設定
 set guioptions -=T
@@ -33,12 +32,11 @@ set t_vb=
 if has('xfontset')
   set guifontset=a14,r14,k14
 elseif has('win32') || has('win64')
-  set renderoptions=type:directx,renmode:5,gamma:1.8,contrast:1.2
-  " set guifont=Consolas:h14:cANSI:qDRAFT
   set guifont=Cica:h14:cSHIFTJIS
   " set guifont=HackGenNerd_Console:h13:cSHIFTJIS
   " set guifont=NasuM:h13:cSHIFTJIS
   " set guifont=Rounded_Mgen+_1m_regular:h13:cSHIFTJIS
+  set renderoptions=type:directx,renmode:5,level:1,gamma:1.2,contrast:2
 endif
 "
 " 印刷用フォント

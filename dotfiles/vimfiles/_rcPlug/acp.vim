@@ -3,7 +3,7 @@
 
 UsePlugin 'vim-autocomplpop'
 
-"# Options {{{
+"# Options 
 " let g:acp_enableAtStarup = 1
 let g:acp_completeOption        = '.,w,b,k,i'
 " let g:acp_behaviorKeywordCommand = "\<C-n>"
@@ -12,7 +12,6 @@ let g:acp_behaviorFileLength    = 3
 let g:acp_behaviorRubyOmniMethodLength  = -1
 let g:acp_behaviorRubyOmniSymbolLength  = -1
 let g:acp_behaviorPythonOmniLength      = -1
-"#}}}
 "======================================================================
 "# Keys
 nnoremap <expr> <F2> <SID>toggleACP()

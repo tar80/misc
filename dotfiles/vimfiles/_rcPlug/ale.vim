@@ -6,9 +6,13 @@ UsePlugin 'ale'
 "# Options {{{
 let g:ale_linters = {
       \  'javascript': ['eslint'],
+      \  'lua': ['luacheck'],
+      \  'vim': ['vint'],
       \}
 let g:ale_fixers = {
       \  'javascript': ['eslint'],
+      \  'lua': ['luafmt'],
+      \  'vim': ['vint'],
       \}
 "# マウスホバー
 let g:ale_set_balloons = 0

@@ -15,6 +15,7 @@ RangeError
 ReferenceError
 RegExp
 RegExpURIError
+Promise
 String
 SyntaxError
 TypeError
@@ -56,6 +57,8 @@ null
 parseFloat
 parseInt
 prototype
+reject
+resolve
 return
 stringify
 super

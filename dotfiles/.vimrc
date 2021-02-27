@@ -4,9 +4,9 @@
 set fileformats=unix,dos,mac
 set encoding=utf-8
 if has('iconv')
-  set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932,utf-16le,utf-16,default,latin1
+  set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,utf-16le,utf-16,cp932,default,latin1
 else
-  set fileencodings=ucs-bom,utf-8,sjis,utf-16le,utf-16,default,latin1
+  set fileencodings=ucs-bom,utf-8,sjis,utf-16le,utf-16,cp932,default,latin1
 endif
 "# scriptencodingは本来ファイル先頭で指定するべきだが、
 "# 内部エンコーディングを変更した場合は再設定の必要があるということ
@@ -14,21 +14,23 @@ scriptencoding utf-8
 
 " source $VIM/syntaxinfo.vim
 
-"# ColorScheme_cui
 if !has('gui_running')
+  "# ColorScheme_cui
   colorscheme bong16
+  set title titlestring=Vim
+else
+  set title titlestring=Gvim
 endif
 
-" set shell=C:\bin\Scoop\apps\nyagos\current\nyagos.exe
+" set shell=C:\bin\Scoop\apps\nyagos\current\nyagos.exe\ --norc
 " set shellcmdflag=-c
-" set shellquote=\"
-" set shellxquote=
-" set shellpipe=>
-" set shellredir=>
+" set shellpipe=\|&\ tee
+" set shellredir=>%s\ 2>&1
+" set shellxquote='('
 "======================================================================
 "# Initial {{{
-let $HOME = 'C:/bin/home'
-let $PATH = $PATH . ';C:/bin/repository/tar80/misc/nodejs/node_modules/.bin'
+let $HOME = 'C:\bin\home'
+let $PATH = 'C:\bin\repository\tar80\misc\nodejs\node_modules\.bin;' . $PATH
 let g:mapleader                 = ';'
 let g:no_gvimrc_example         = 1
 let g:no_vimrc_example          = 1
@@ -55,14 +57,14 @@ let g:loaded_matchparen         = 1
 "}}}
 "======================================================================
 "# Options {{{
-"# バッファのカレントを編集中ファイルのディレクトリに設定
+"# 編集中ファイルの親ディレクトリをwdに設定
 set autochdir
 "# ファイル保存初期ディレクトリ
 set browsedir =buffer
-"# undoファイルをまとめるディレクトリ
+"# undoファイルのパス
 set undofile
 set undodir =$HOME/.cache/undolog
-"# 未保存ファイルを閉じる時、ダイアログを出さない
+"# 未保存ファイルを閉じる時にダイアログを出さない
 set confirm
 "# viminfoの設定
 set viminfo =%2,'30,/10,:200,<200,f1,h,s10,c
@@ -80,7 +82,7 @@ set list
 set wrap
 "# ステータスのモード表示
 set noshowmode
-"# スクロール時にN行残す
+"# スクロール時に端N行残す
 set scrolloff =1
 "# 行頭のTABはshiftwidthの数だけスペースで補完
 set smarttab
@@ -130,13 +132,15 @@ set visualbell t_vb =
 "# 画面最後の行をできる限り表示する
 set display =lastline
 "# 対応する括弧を指定
-" set matchpairs +=【;】,";"
+set matchpairs +=【:】,[:]
 "# 補完メニューの高さ
 set pumheight =10
 "# 補完メニューオプション
 set completeopt =menuone,noselect
-"# diff縦分割
-set diffopt +=vertical,iwhite,context:3,indent-heuristic,algorithm:histogram
+" set completeopt =menuone,noselect,popup
+" set pvp =height:10,width:60
+"# diffの設定
+set diffopt +=vertical,closeoff,iwhite,context:3,indent-heuristic,algorithm:histogram
 "# 自動インデント
 set autoindent
 "# バックスペースでインデントや改行を削除できるようにする
@@ -158,8 +162,6 @@ set laststatus =2
 set cmdheight =2
 "# コマンドをステータス行に表示
 " set showcmd
-"# ウインドウにタイトルを付ける
-set title titlestring=Vim
 "# バックアップファイルを作成しない
 set nobackup
 set noswapfile
@@ -190,23 +192,26 @@ let g:plug_shallow = 0
 call plug#begin('~/vimfiles')
 "# auto
   Plug 'shougo/vimproc.vim', { 'dir': '~/vimfiles/vimproc.vim', 'do': 'make' }
-  " Plug 'shougo/unite.vim'
-  " Plug 'shougo/neoyank.vim'
+  Plug 'rhysd/clever-f.vim'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  " Plug 'ctrlpvim/ctrlp.vim'
+  " Plug 'mattn/ctrlp-matchfuzzy'
   Plug 'itchyny/lightline.vim'
   Plug 'itchyny/vim-parenmatch'
   Plug 'itchyny/vim-gitbranch'
-  Plug 'tpope/vim-fugitive'
-  Plug 'rhysd/clever-f.vim'
-  Plug 'tyru/caw.vim'
+  Plug 'kana/vim-operator-user'
+  Plug 'kana/vim-operator-replace'
   Plug 'leafCage/yankround.vim'
   " Plug 'osyo-manga/vim-vigemo'
   Plug 'w0rp/ale'
-  " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  Plug 'tyru/caw.vim'
+  " Plug 'tpope/vim-fugitive'
+  " Plug 'lambdalisue/gina.vim', { 'on': ['Gina'] }
   " Plug 'gorodinskiy/vim-coloresque'
 "# manual
-  " Plug '~/vimfiles/_rcPlug'
+  Plug '~/vimfiles/_rcPlug'
+  Plug '~/vimfiles/bitmaps'
   Plug '~/vimfiles/autoload'
   Plug '~/vimfiles/colors'
   Plug '~/vimfiles/dict'
@@ -234,29 +239,26 @@ augroup vimrcImLineColor
   "# 挿入モードで一定時間キー入力がなければ着色
   autocmd CursorHoldI * setlocal cursorline
   "# 挿入モード中にフォーカスが外れたら着色
-  autocmd FocusLost,BufLeave * call <SID>highlightIM()
-  function s:highlightIM()
-    if mode() == 'i'
-      setlocal cursorline
-    endif
-  endfunction
+  autocmd FocusLost,BufLeave * execute (mode() == 'i') ? 'setlocal cursorline' : ''
   "# 挿入モードを抜ける時に色を戻す
   autocmd BufEnter,CursorMovedI,InsertLeave * setlocal nocursorline
-  "# 通常時はrelativenumber
-  autocmd CmdLineLeave * setlocal relativenumber
 augroup END
 "}}}
 "# vimrcAU{{{
 augroup vimrcAU
   autocmd!
+  "# 通常時はrelativenumber
+  autocmd CmdLineLeave * setlocal relativenumber
+  "# insertmodeを抜けるときにime off
+  autocmd InsertLeave * setlocal iminsert =0
 augroup END
 
-autocmd vimrcAU BufNew * call timer_start(0, { -> s:bufnew() })
-function! s:bufnew()
-    if &buftype == "terminal" && &filetype == ""
-        set filetype=terminal
-    endif
-endfunction
+" autocmd vimrcAU BufNew * call timer_start(0, { -> s:bufnew() })
+" function! s:bufnew()
+"     if &buftype == "terminal" && &filetype == ""
+"         set filetype=terminal
+"     endif
+" endfunction
 
 "# filetype
 "# 改行時の自動コメントアウト停止
@@ -264,31 +266,38 @@ autocmd vimrcAU FileType * setlocal formatoptions -=r
 autocmd vimrcAU FileType * setlocal formatoptions -=o
 autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
-autocmd vimrcAU FileType terminal call timer_start(0, { -> feedkeys("\<C-w>" . "\<C-w>")})
+" autocmd vimrcAU FileType terminal call timer_start(0, { -> feedkeys("\<C-w>" . "\<C-w>")})
 
 "# Diff起動時の設定
-autocmd vimrcAU VimEnter,FilterWritePre * call <SID>setDiffMode()
-function s:setDiffMode()
-if &diff
-  let g:diff_translations = 0
-  syntax off
-  highlight Normal guifg=#777777
-endif
+" autocmd vimrcAU QuitPre * call s:quit_diff()
+autocmd vimrcAU VimEnter,FilterWritePre * call s:set_diff()
+function s:set_diff() abort
+  if &diff
+    let g:diff_translations = 0
+    syntax off
+    highlight Normal guifg=#3C3C40
+  endif
 endfunction
+" function s:quit_diff() abort
+"   if &diff
+"     syntax on
+"     diffoff
+"   endif
+" endfunction
 "#}}}}}}
 "======================================================================
 "# Command{{{
 "# 編集中バッファの差分を表示
 command! Difforg vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 "# 隣のバッファとdiff
-command! Diff syntax off | highlight Normal guifg=#777777 | diffthis | wincmd p | diffthis |wincmd h
-command! DiffExit syntax on | highlight Normal guifg=gray | diffoff
+command! Diff syntax off | highlight Normal guifg=#777777 | diffthis | wincmd p | diffthis | wincmd h
+command! DiffExit syntax enable | diffoff
 "#}}}
 "======================================================================
 "# Keys{{{
-"# 全般{{{
+"# general{{{
 "# 検索ハイライトoff
-noremap <silent>, :nohlsearch<cr>
+noremap <silent>, :<C-u>nohlsearch<cr>
 "# スペースでﾊﾞｯﾌｧ移動制御
 noremap <space> <C-w>
 noremap <nowait> <Space><Space> <C-w><C-w>
@@ -297,45 +306,41 @@ noremap <silent><F3> :<C-u>setlocal relativenumber!<CR>
 "# F12でラップ状態の切り替え
 noremap <silent> <F12> :<C-u>call <SID>setWrap()<CR>
 function s:setWrap()
+  let s:wr = &wrap ? 'nowrap' : 'wrap'
   if &diff
-  if &wrap
-      wincmd p | setlocal nowrap | wincmd p | setlocal nowrap
-    else
-      wincmd p | setlocal wrap | wincmd p | setlocal wrap
-    endif
-  elseif &wrap
-    setlocal nowrap
+    execute 'wincmd p | setlocal' s:wr '| wincmd p | setlocal' s:wr
   else
-    setlocal wrap
+    execute 'setlocal' s:wr
   endif
+  unlet s:wr
 endfunction
 "#}}}
 "# normal_mode{{{
 "# 行分割
 nnoremap <space>j i<CR><ESC>
-"# 一文字削除をレジスタ履歴に残さない
-" nnoremap  x "_x
-" nnoremap  X "_X
 "# 行末までヤンク
 nnoremap Y y$
 "# コマンドモードでは行番号表示
-nnoremap <expr> : &ft == 'unite' ? ':' : ':<C-u>call <SID>setNum()<CR>'
+nnoremap <silent> : :<C-u>call <SID>setNum()<CR>
 function s:setNum()
   setlocal norelativenumber
   redraw
   call feedkeys(':','n')
 endfunction
 
-"# call vimrc
+"# vimrc
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F9> :<C-u>tabnew<CR>:edit $MYVIMRC<CR>
+
 "# ppx
+nnoremap <silent> <C-TAB> :<C-u>!Start C:/bin/ppx/ppcw.exe -r<CR>
 nnoremap <F6> :<C-u>tabnew<CR>:edit C:/bin/repository/tar80/misc/ppx/xTest.js<CR>
 nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%'myrepo'\%\ppx\xTest.js<CR>
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>
 "#}}}
 "# command_mode{{{
 cnoremap <F12> <C-u>rviminfo ~/_xxxinfo<CR>:
+cnoremap <C-a> <HOME>
 "#}}}
 "# insert_mode{{{
 noremap! <expr> <F4> <SID>ToggleShellslash()
@@ -378,11 +383,17 @@ inoremap <S-Delete> <C-o>d$
 "# TABの挙動
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : <SID>ComplTabKey()
 function! s:ComplTabKey()
-  if strpart(getline('.'),col('.') -2, 1) == "/"
-    return "\<C-x>\<C-f>"
+  const s:chr = strpart(getline('.'),col('.') -2, 1)
+  if s:chr == "/"
+    set csl =slash
+  elseif s:chr == "\\"
+    set csl =backslash
   else
+    unlet s:chr
     return "\<TAB>"
   endif
+    unlet s:chr
+    return "\<C-x>\<C-f>"
 endfunction
 "#}}}
 "# visual_mode{{{
@@ -396,5 +407,8 @@ vnoremap <space>$ c${<C-r>"}<ESC>
 "# 範囲インデント処理後に解除しないように
 vnoremap < <gv
 vnoremap > >gv
+"# カーソルを動かさず選択した文字列を検索
+vnoremap <silent> g* "vy:<C-u>let @/ = "<C-R>v"<CR>:<C-u>set hls<CR>gv
+vnoremap <silent> * "vy:<C-u>let @/ = "\\\<<C-R>v\\\>"<CR>:<C-u>set hls<CR>gv
 "#}}}}}}
 filetype plugin indent on

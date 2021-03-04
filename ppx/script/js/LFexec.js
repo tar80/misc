@@ -16,33 +16,33 @@ var rep = [];
 
 function Exe_edit (path, shortname, number, duplicate) {
   switch(arg[0]) {
-  case 'gvim':
+    case 'gvim':
     // ヘッダ情報から検索語を取得
-    rep[0] = function (m) {
-      var regexp = /result\s=>\s(.*)/;
-      m = ObjEntry(0).Comment.replace(/\\\(/g, '(');
-      m = m.match(regexp) || '';
-      return m[1];
-    }();
+      rep[0] = function (m) {
+        var regexp = /result\s=>\s(.*)/;
+        m = ObjEntry(0).Comment.replace(/\\\(/g, '(');
+        m = m.match(regexp) || '';
+        return m[1];
+      }();
 
-    PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + rep[0] + '/ " "' + path + '"');
-    PPx.Execute('*wait 100,1');
-    break;
-  case 'ppv':
-    PPx.Execute('%Oi *ppv -bootid:C ' + path);
-    PPx.Execute('*wait 100,1');
-    break;
-  case 'sed':
-    if (typeof rep[0] == 'undefined') {
-      rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
-    }
+      PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + rep[0] + '/ " "' + path + '"');
+      PPx.Execute('*wait 100,1');
+      break;
+    case 'ppv':
+      PPx.Execute('%Oi *ppv -bootid:C ' + path);
+      PPx.Execute('*wait 100,1');
+      break;
+    case 'sed':
+      if (typeof rep[0] == 'undefined') {
+        rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
+      }
 
-    if (!duplicate) { PPx.Execute('%Oi copy ' + path + ' ' + path + '_back'); }
+      if (!duplicate) { PPx.Execute('%Oi copy ' + path + ' ' + path + '_back'); }
 
-    PPx.Execute('%Oi sed -i -r ' + number + rep[0] + ' ' + path);
-    break;
-  default:
-    break;
+      PPx.Execute('%Oi sed -i -r ' + number + rep[0] + ' ' + path);
+      break;
+    default:
+      break;
   }
 }
 

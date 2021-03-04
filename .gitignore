@@ -1,4 +1,5 @@
 node_modules
+images
 .eslintrc.json
 @add_command.cfg
 Px_@Path.cfg
@@ -8,4 +9,3 @@ index.js
 *.png
 *.jpg
 *.bmp
-

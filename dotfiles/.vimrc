@@ -30,7 +30,9 @@ endif
 "======================================================================
 "# Initial {{{
 let $HOME = 'C:\bin\home'
+let $MYVIMRC = 'C:\bin\repository\tar80\misc\dotfiles\.vimrc'
 let $PATH = 'C:\bin\repository\tar80\misc\nodejs\node_modules\.bin;' . $PATH
+" let $NODE_PATH = 'C:\bin\repository\tar80\misc\nodejs\node_modules'
 let g:mapleader                 = ';'
 let g:no_gvimrc_example         = 1
 let g:no_vimrc_example          = 1
@@ -139,6 +141,7 @@ set pumheight =10
 set completeopt =menuone,noselect
 " set completeopt =menuone,noselect,popup
 " set pvp =height:10,width:60
+set completefunc =BingSuggest
 "# diffの設定
 set diffopt +=vertical,closeoff,iwhite,context:3,indent-heuristic,algorithm:histogram
 "# 自動インデント
@@ -203,7 +206,6 @@ call plug#begin('~/vimfiles')
   Plug 'kana/vim-operator-user'
   Plug 'kana/vim-operator-replace'
   Plug 'leafCage/yankround.vim'
-  " Plug 'osyo-manga/vim-vigemo'
   Plug 'w0rp/ale'
   Plug 'tyru/caw.vim'
   " Plug 'tpope/vim-fugitive'
@@ -264,9 +266,13 @@ augroup END
 "# 改行時の自動コメントアウト停止
 autocmd vimrcAU FileType * setlocal formatoptions -=r
 autocmd vimrcAU FileType * setlocal formatoptions -=o
-autocmd vimrcAU FileType javascript setlocal dictionary=~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
+autocmd vimrcAU FileType javascript  call s:set_js()
 autocmd vimrcAU FileType xcfg setlocal dictionary=~/vimfiles/dict/xcfg.dict
 " autocmd vimrcAU FileType terminal call timer_start(0, { -> feedkeys("\<C-w>" . "\<C-w>")})
+function s:set_js() abort
+  iab ppx PPx
+  setlocal dictionary =~/vimfiles/dict/javascript.dict,~/vimfiles/dict/ppx.dict
+endfunction
 
 "# Diff起動時の設定
 " autocmd vimrcAU QuitPre * call s:quit_diff()
@@ -280,8 +286,7 @@ function s:set_diff() abort
 endfunction
 " function s:quit_diff() abort
 "   if &diff
-"     syntax on
-"     diffoff
+"     DiffExit
 "   endif
 " endfunction
 "#}}}}}}
@@ -290,8 +295,24 @@ endfunction
 "# 編集中バッファの差分を表示
 command! Difforg vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 "# 隣のバッファとdiff
-command! Diff syntax off | highlight Normal guifg=#777777 | diffthis | wincmd p | diffthis | wincmd h
+command! Diff syntax off | highlight Normal guifg=#3C3C40 | diffthis | wincmd p | diffthis | wincmd h
 command! DiffExit syntax enable | diffoff
+"# <C-x><C-u>ユーザー補完にBingサジェストを割り当てる
+function! BingSuggest(findstart, base)
+  if a:findstart
+      let s:line = getline('.')
+      let s:start = col('.') - 1
+      while s:start > 0 && s:line[s:start - 1] =~ '\S'
+          let s:start -= 1
+      endwhile
+      return s:start
+  else
+      let s:ret = system('curl -s -G --data-urlencode "q='
+                  \ . a:base . '" "https://www.bing.com/osjson.aspx"')
+      let s:res = split(substitute(s:ret,'\[\|\]\|"',"","g"),",")
+      return s:res
+  endif
+endfunction
 "#}}}
 "======================================================================
 "# Keys{{{
@@ -361,9 +382,10 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <S-Delete> <C-o>d$
 "# completion
-" inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
-" inoremap <expr> [ col('.') == col('$') ? "[]<Left>" : "["
-" inoremap <expr> ' <SID>QuoteBehavior("'")
+inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
+inoremap <expr> { col('.') == col('$') ? "{}<Left>" : "{"
+inoremap <expr> ) (strpart(getline('.'), col('.') -2, 2) == '()') ? "\<Right>" : ")"
+inoremap <expr> } (strpart(getline('.'), col('.') -2, 2) == '{}') ? "\<Right>" : "}"
 " inoremap <expr> ' <SID>QuoteBehavior("'")
 " function! s:QuoteBehavior(tKey)
 "   if col('.') == col('$')

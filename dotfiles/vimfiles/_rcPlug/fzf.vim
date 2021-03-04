@@ -18,14 +18,14 @@ function! s:set_lcd(line) abort
   endif
   unlet s:path
 endfunction
-function! s:gina_diff(line) abort
+function! s:git_diff(line) abort
   let g:diff_translations = 0
   syntax off
-  highlight Normal guifg=#777777
-  execute 'Gina compare head^:' a:line[0]
+  highlight Normal guifg=#3C3C40
+  execute 'Gitdiff head^' a:line[0]
 endfunction
 let g:fzf_action = {
-  \ 'ctrl-d': function('s:gina_diff'),
+  \ 'ctrl-d': function('s:git_diff'),
   \ 'ctrl-w': function('s:set_lcd'),
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',

@@ -4,30 +4,42 @@
 UsePlugin 'vim-gitbranch'
 
 "# Command
-command! -nargs=? Gitdiff call <SID>gitDiffCmd(<f-args>)
-function s:gitDiffCmd(...) abort
+command! GitrootWD execute 'lcd' <SID>gitRoot()
+command! -nargs=* Gitdiff call <SID>gitDiffCmd(<f-args>)
+
+"======================================================================
+"# Keys
+nnoremap <silent> <space>gv :Gitdiff %<CR>
+nnoremap <silent> <space>ga :<C-u>call <SID>gitadd()<CR>
+
+"======================================================================
+"# functions
+function s:gitadd() abort
   if exists('b:gitbranch_path')
-    let s:root = substitute(b:gitbranch_path, '.git/HEAD', '', '')
-    let s:hash = ((a:0) ==# '1') ? a:1 : 'HEAD~'
-    let s:path = strpart(expand('%:p'), len(s:root))
+    update | terminal ++hidden ++close git add '%:p'
+  endif
+endfunction
+
+function s:gitRoot() abort
+  try
+    return substitute(b:gitbranch_path, '.git/HEAD', '', '')
+  catch
+    return ''
+  endtry
+endfunction
+
+function s:gitDiffCmd(...) abort
+  let s:root = s:gitRoot()
+  if s:root !=# ''
+    let s:path = (a:0 ==# '2') ? a:2 : (a:0 ==# '1') ? a:1 : '%'
+    let s:path = strpart(fnamemodify(expand(s:path), ':p'), len(s:root))
     let s:path = substitute(s:path, '\\', '/', 'g')
+    let s:hash = (a:0 ==# '2') ? a:1 : 'HEAD^'
     let g:diff_translations = 0
-    vertical new | set bt=nofile | execute 'r! git cat-file -p ' . s:hash . ':' . s:path | 0d_ | diffthis | wincmd p | diffthis
+    syntax off | highlight Normal guifg=#3C3C40 | diffthis | vertical new | set bt=nofile | execute 'r! git cat-file -p ' . s:hash . ':' . s:path | 0d_ | diffthis | wincmd p
     unlet s:hash s:root s:path
   else
     echo 'not a git repository.'
   endif
   return ''
-    syntax off
-    highlight Normal guifg=#202026
 endfunction
-"======================================================================
-"# Keys
-nnoremap <silent> <space>gv :Gitdiff<CR>
-nnoremap <silent> <space>gw :<C-u>call <SID>isGitbranch()<CR>
-function s:isGitbranch() abort
-  if exists('b:gitbranch_path')
-    write | terminal ++hidden ++close git add '%:p'
-  endif
-endfunction
-

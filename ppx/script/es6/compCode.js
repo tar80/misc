@@ -2,7 +2,9 @@
 /* 編集文字列の補完。コマンド使用時、"%が消費される問題の対策 */
 //
 // PPx.Arguments(0) = "i":%*input() | "s":%*selecttext()  | "e":%*edittext()
-// 二文字目以降があればeditmodeに設定する。例) "iOh" => *input(-mode:Oh)
+// 二文字目以降があればeditmodeに設定する。
+// ※二文字目がREOSの場合、三文字目が必要になる。
+// 例) "iOh" => *input(-mode:Oh)
 //
 // PPx.Arguments(1) = ここで記述した文字が補完される。
 // 【",%,\】は二文字以上の偶数個で指定する。
@@ -11,6 +13,7 @@
 // 例)引数,"abcABC122333""%%%%\\\\\\"と記述したとき、abcABC123"%\ -> aabbccAABBCC112222333333"%%%%\\\\\\
 //
 // PPx.Arguments(2) = "inputタイトル":引数なしなら"compCode.."が代入される
+// PPx.arguments(3) = command: %*input()のオプション-k 以降に実行するコマンド
 
 'use strict';
 
@@ -21,25 +24,26 @@ if (!len || len < 2) {
   PPx.Quit(-1);
 }
 
-const arg = [PPx.Arguments(0), PPx.Arguments(1)];
-
-// 現在のモードを参照
-const defType = (!PPx.Extract('%W').match('PP[BCV]\\[')) ?
-  (PPx.Extract('%*editprop(whistory)')) || 'g':
-  'g';
+// 現在の編集モードを参照
+const defType = (!PPx.Extract('%W').match('PP[BCV]\\['))
+  ? (PPx.Extract('%*editprop(whistory)')) || 'g'
+  : 'g';
 
 const edit = {
-  type: arg[0].charAt(0),
+  chr: PPx.Arguments(1),
   title: (len > 2) ? PPx.Arguments(2) : 'compCode..',
-  mode: () => {
+  precmd: (len > 3) ? PPx.Arguments(3) : '',
+  zero: PPx.Arguments(0),
+  type: function() { return this.zero.charAt(0); },
+  mode: function() {
     const keys = 'gnmshdcfuxUXREOS';
-    return (keys.indexOf(arg[0].charAt(1)) != 0) ? arg[0].substr(1) : PPx.Extract(defType);
+    return (keys.indexOf(this.zero.charAt(1)) != 0) ? this.zero.substr(1) : PPx.Extract(defType);
   }
 };
 
-switch(edit.type) {
+switch(edit.type()) {
   case 'i':
-    edit.code = `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()})`;
+    edit.code = `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()} -k ${edit.precmd})`;
     break;
   case 's':
     edit.code = '%*selecttext';
@@ -58,14 +62,16 @@ String.prototype.counter = function (seq, max) {
   return (i < max) ? i : max;
 };
 // 重複した文字をまとめて配列にする
-const charArray = Array.from(new Set(arg[1]));
-const charCount = [];
+const charArray = Array.from(new Set(edit.chr));
 const countMax = 4;
 
 // 同じ文字数のカウント
-for (let [i, l] = [0, charArray.length]; i < l; i++) {
-  charCount.push(arg[1].counter(charArray[i], countMax));
-}
+const charCount = ((cc = []) => {
+  for (const value of charArray) {
+    cc.push(edit['chr'].counter(value, countMax));
+  }
+  return cc;
+})();
 
 // 配列からオブジェクトを生成
 const bsNum = [];

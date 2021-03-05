@@ -51,13 +51,13 @@ do
 end
 
 -- 履歴数
-nyagos.histsize = 500
+nyagos.histsize = 200
 
 -- 環境変数
 -- nyagos.env.APPS = 'C:/bin'
 nyagos.env.HOME = 'C:/bin/HOME'
 nyagos.env.LESSCHARSET = 'utf-8'
-nyagos.env.FEZ_DEFAULT_COMMAND = 'fd -HL -c never --exclude ".git" .'
+nyagos.env.FZF_DEFAULT_COMMAND = 'fd -HL -c never --exclude ".git" .'
 nyagos.env.FZF_DEFAULT_OPTS = '--reverse --border --height 50% --inline-info --color=fg:-1,bg:-1,hl:#ffcc00 --color=fg+:#4d84a8,bg+:-1,hl+:#00eaff --color=info:#aa82fa,prompt:#2cdede,pointer:#6bff26 --color=marker:#c06eff,spinner:#a357ff,header:#a7d1d1'
 
 nyagos.env.myrepo = 'C:/bin/repository/tar80/misc'
@@ -91,6 +91,9 @@ end
 nyagos.key["C_R"] = function()
   local path = nyagos.getenv("APPDATA") .. '\\NYAOS_ORG\\nyagos.history'
   return nyagos.eval('type ' .. path .. ' | cut -f 1 | fzf')
+end
+nyagos.key["C_]"] = function()
+  return nyagos.eval('git log -n 60 --oneline --all | sed -e s/\' \'/\' \'/g | fzf | awk \'{print $1}\'')
 end
 
 -- 追加コマンド

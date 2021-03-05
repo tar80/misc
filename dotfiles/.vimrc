@@ -276,14 +276,14 @@ endfunction
 
 "# Diff起動時の設定
 " autocmd vimrcAU QuitPre * call s:quit_diff()
-autocmd vimrcAU VimEnter,FilterWritePre * call s:set_diff()
-function s:set_diff() abort
-  if &diff
-    let g:diff_translations = 0
-    syntax off
-    highlight Normal guifg=#3C3C40
-  endif
-endfunction
+" autocmd vimrcAU VimEnter,FilterWritePre * call s:set_diff()
+" function s:set_diff() abort
+"   if &diff
+"     let g:diff_translations = 0
+"     syntax off
+"     highlight Normal guifg=#3C3C40
+"   endif
+" endfunction
 " function s:quit_diff() abort
 "   if &diff
 "     DiffExit
@@ -295,7 +295,8 @@ endfunction
 "# 編集中バッファの差分を表示
 command! Difforg vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 "# 隣のバッファとdiff
-command! Diff syntax off | highlight Normal guifg=#3C3C40 | diffthis | wincmd p | diffthis | wincmd h
+" command! Diff syntax off | highlight Normal guifg=#3C3C40 | diffthis | wincmd p | diffthis | wincmd h
+command! Diff diffthis | wincmd p | diffthis | wincmd h
 command! DiffExit syntax enable | diffoff
 "# <C-x><C-u>ユーザー補完にBingサジェストを割り当てる
 function! BingSuggest(findstart, base)

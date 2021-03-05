@@ -36,7 +36,8 @@ function s:gitDiffCmd(...) abort
     let s:path = substitute(s:path, '\\', '/', 'g')
     let s:hash = (a:0 ==# '2') ? a:1 : 'HEAD^'
     let g:diff_translations = 0
-    syntax off | highlight Normal guifg=#3C3C40 | diffthis | vertical new | set bt=nofile | execute 'r! git cat-file -p ' . s:hash . ':' . s:path | 0d_ | diffthis | wincmd p
+    " syntax off | highlight Normal guifg=#3C3C40 | diffthis | vertical new | set bt=nofile | execute 'r! git cat-file -p ' . s:hash . ':' . s:path | 0d_ | diffthis | wincmd p
+    diffthis | rightbelow vnew [diff] | set bt=nofile | execute 'r! git cat-file -p ' . s:hash . ':' . s:path | 0d_ | diffthis | wincmd p
     unlet s:hash s:root s:path
   else
     echo 'not a git repository.'

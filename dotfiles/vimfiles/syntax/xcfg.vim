@@ -37,7 +37,7 @@ syn match CfgComment   "\s;.*"
 
 " Define the default hightlighting.
 " Only when an item doesn't have highlighting yet
-hi def link CfgBlock     DiffAdd
+hi def link CfgBlock     TabLinefill
 hi def link CfgDelimiter Statement
 hi def link CfgComment   Comment
 hi def link CfgSection   Constant

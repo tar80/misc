@@ -122,7 +122,7 @@ const Make_status = (filepath => {
           result.push(`"${p3}","",A:H${p4},C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:0,M:0,T:"${p1}${p2}"`);
         });
       }
-      resolve((stdout.length > 3) ? Write_result(result, filepath, 1) : ['', 0]);
+      resolve((arrData.length > 1) ? Write_result(result, filepath, 1) : ['', filepath, 0]);
     });
   });
 });

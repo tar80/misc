@@ -131,3 +131,9 @@ show ;[--option][<コミット>] コミットの詳細
 	%OD --date=short --format="%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad] %%C(cyan)@%%an %%C(green) %%s%%C(auto)%%d" %OD-
 	%: *focus #%*NT
 show-branch --all --more=10
+tag ;[--option][<タグ>]["メッセージ"][<コミット>]
+	-a ;<tag>       タグを付ける
+	-d ;<tag>       タグを削除
+	-m ;"message"
+	%*js(PPx.Result=PPx.Entry.Name;) ;カーソル下のコミットハッシュ
+

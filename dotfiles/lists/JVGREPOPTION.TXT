@@ -1,0 +1,14 @@
+﻿-n
+  -i ;--ignorecase      大文字・小文字無視
+  -G ;--basic-regexp    基本正規表現
+  -P ;--perl-regexp     Perl正規表現
+  -v ;--invert-match    一致しない行を表示
+  -s ;--no-messages     エラーメッセージ非表示
+  -C ;                  行の何文字目か表示
+  --exclude= ;[pat]     [pat]にマッチするファイル除外
+  --enc= ;[ENCODINGS]   コンマ区切りで読み込みのエンコードを指定
+  -B ;[num]--before-context   一致行の前[num]行を表示
+  -A ;[num]--after-context    一致行の後[num]行を表示
+  -r ;                  相対パスを表示
+  -R ;                  ディレクトリ再帰検索
+  -I ;                  バイナリは読み込まない

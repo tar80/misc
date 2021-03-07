@@ -208,7 +208,7 @@ call plug#begin('~/vimfiles')
   Plug 'leafCage/yankround.vim'
   Plug 'w0rp/ale'
   Plug 'tyru/caw.vim'
-  " Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-fugitive'
   " Plug 'lambdalisue/gina.vim', { 'on': ['Gina'] }
   " Plug 'gorodinskiy/vim-coloresque'
 "# manual

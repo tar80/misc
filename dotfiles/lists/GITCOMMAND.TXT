@@ -96,7 +96,7 @@ push ;[--option]<remote [branch]>
 	origin master
 	--set-upstream  ;<remote branch>  上流ブランチを設定してpush
 	--all origin ;                    全てのローカルブランチをpush
-	--delete ;<remote branch>         指定したリモートブランチを削除
+	--delete origin ;<remote branch>         指定したリモートブランチを削除
 	--tags ;                          リモートにタグをpush
 rebase ;[--option]<コミット>
 	-i HEAD~ ;[n] インタラクティブ

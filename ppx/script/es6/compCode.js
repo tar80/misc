@@ -19,7 +19,7 @@
 
 const len = PPx.Arguments.length;
 
-if (!len || len < 2) {
+if (len < 2) {
   PPx.Echo('引数が足りません');
   PPx.Quit(-1);
 }
@@ -37,7 +37,7 @@ const edit = {
   type: function() { return this.zero.charAt(0); },
   mode: function() {
     const keys = 'gnmshdcfuxUXREOS';
-    return (keys.indexOf(this.zero.charAt(1)) != 0) ? this.zero.substr(1) : PPx.Extract(defType);
+    return (keys.indexOf(this.zero.charAt(1)) !== 0 ) ? this.zero.substr(1) : defType;
   }
 };
 
@@ -75,25 +75,24 @@ const charCount = ((cc = []) => {
 
 // 配列からオブジェクトを生成
 const bsNum = [];
-const esc = charArray.reduce((esc, value, index) => {
-  esc[value] = value.repeat(Esc_excp(value, index));
-  return esc;
+const esc = charArray.reduce((chr, value, index) => {
+  chr[value] = value.repeat(Esc_excp(value, index));
+  return chr;
 }, {});
 // 例外処理
 function Esc_excp (ele, num) {
-  if (ele != '\\') {
+  if (ele !== '\\') {
     return charCount[num] * 2;
   } else {
     bsNum[0] = num;
     return charCount[num];
   }
 }
-
-if (bsNum != -1) { charArray[bsNum] = '\\\\'; }
+if (bsNum !== -1) { charArray[bsNum] = '\\\\'; }
 
 const regStr = `[${charArray.join('')}]`;
 const rep = new RegExp(regStr, 'g');
-const code = ((str = PPx.Extract(edit.code)) => { return (str != '') ? str : PPx.Quit(-1); })();
+const code = ((str = PPx.Extract(edit.code)) => { return (str !== '') ? str : PPx.Quit(-1); })();
 
 PPx.Result = code.replace(rep, (c) => esc[c]);
 

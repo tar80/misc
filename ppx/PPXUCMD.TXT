@@ -35,12 +35,12 @@
 %*dirhistory( ;n)「戻る」履歴
 %*edittext
 %*editprop( ;name)
-	start) ;    選択開始位置
-	end) ;      選択終了位置
-	history) ;  参照ヒストリ
-	whistory) ; 保存ヒストリ
-	filename) ; 保存ファイル名
-	tab) ;      タブ桁数
+	start ;    選択開始位置
+	end ;      選択終了位置
+	history ;  参照ヒストリ
+	whistory ; 保存ヒストリ
+	filename ; 保存ファイル名
+	tab ;      タブ桁数
  
 %*errorlevel ;プロセス終了コード %*exitcodeと同様
 %*exitcode ;プロセス終了コード %*errorlevelと同様

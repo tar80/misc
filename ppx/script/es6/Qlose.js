@@ -12,7 +12,7 @@ if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
 
 // C_A以外の窓から終了
 const xID = ((id = PPx.WindowIDName) => {
-  if (id == 'C_A') {
+  if (id === 'C_A') {
     let list = PPx.Extract('%*ppxlist(-)').split(',');
     list.sort((a, b) => (a < b) ? 1 : -1);
     return list[0];
@@ -28,12 +28,12 @@ if (sync > 0) {
   PPx.Execute('*setcust X_win:V=B000000000');
   PPx.Execute(`*execute C${tID},*ppvoption sync off`);
   // 連動ビューがcapturewindowなら元のサイズに戻す
-  if (PPx.Extract('%si"vSize') != 0) {
+  if (PPx.Extract('%si"vSize') !== 0) {
     PPx.Execute(`*setcust _WinPos:V${tID}=%si"vSize"`);
     PPx.Execute('*string i,vSize=');
   }
   PPx.Quit(1);
-} else if (xID == 'C_X') {
+} else if (xID === 'C_X') {
   PPx.Execute('*customize XC_celD=_AUTO,_AUTO,3,7');
 }
 

@@ -3,6 +3,7 @@
 	-v . ;      カレント以下
 	-v --all ;  全部
 	-p -v %#FC %: *focus #%*NT ;ハンク毎の追加
+        -f ;        .gitignoreを無視してadd
 	--dry-run  ;[<directory_path>] addで追加されるファイルの確認
 branch ;[--option][<branch>]
 	-a --sort=-authordate ;     上位からソート

@@ -105,7 +105,6 @@ const result = [`;ListFile\u000D\u000A;Base=${pDir}|${dirType}\u000D\u000A"file"
 let fsoTlist = fso.OpenTextFile(arg.listfile, 1, false, -1);
 
 while (!fsoTlist.AtEndOfStream) {
-  // fsoTlist.ReadLine().replace(/^([^-:]*)[-:](\d*)([-:])\d*\s*(.*)/, (match, p1, p2, p3, p4) => {
   fsoTlist.ReadLine().replace(/^([^-:]*)[-:](\d*)([-:])\s*(.*)/, (match, p1, p2, p3, p4) => {
     p1 = (p1 == '') ? p3 : p1.replace(/^\.\.\\.*\//, '');
     p3 = (p3.indexOf(':') != -1) ? 0 : 3;

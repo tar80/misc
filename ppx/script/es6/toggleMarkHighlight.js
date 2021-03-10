@@ -8,7 +8,7 @@
 const ObjEntry = PPx.Entry;
 
 for (let [i, l] = [0, PPx.EntryDisplayCount]; i < l; i++) {
-  if (ObjEntry(i).Mark == 1) {
+  if (ObjEntry(i).Mark === 1) {
     ObjEntry(i).Mark = 0;
   } else if (ObjEntry(i).Highlight) {
     ObjEntry(i).Mark = 1;

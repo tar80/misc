@@ -41,7 +41,7 @@ if(exists("g:lightline"))
     let s:p.tabline.left = [ [ s:gray4, s:gray2 ] ]
     let s:p.tabline.middle = [ [ s:gray4, s:gray2 ] ]
     let s:p.tabline.right = [ [ s:gray4, s:black ] ]
-    let s:p.tabline.tabsel = [ [ s:white, s:gray3 ] ]
+    let s:p.tabline.tabsel = [ [ s:cyan, s:gray3 ] ]
 
     let g:lightline#colorscheme#gulatton#palette = lightline#colorscheme#fill(s:p)
 endif

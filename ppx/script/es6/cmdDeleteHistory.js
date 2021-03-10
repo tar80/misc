@@ -12,13 +12,13 @@ const tHistory = PPx.Extract('%*editprop(whistory)');
 const tType = (() => {
   const key = Array.from('gnmshdcfuxUX');
   const type = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
-  return type[ key.findIndex(ele => ele == tHistory) ];
+  return type[key.findIndex(ele => ele == tHistory)];
 })();
 
-if (typeof tType == 'undefined') {
+if (tType === undefined) {
   PPx.Execute('%"履歴の削除"%I"該当する履歴がありません');
   PPx.Quit(1);
-} else if (PPx.Execute(`%"履歴の削除"%Q"${tType}ヒストリを全削除します"`) != 0) {
+} else if (PPx.Execute(`%"履歴の削除"%Q"${tType}ヒストリを全削除します"`) !== 0) {
   PPx.Quit(1);
 }
 
@@ -28,7 +28,7 @@ if (saveHistory) {
 
 let str = true;
 
-while (str != '') {
+while (str !== '') {
   str = PPx.Extract(`%h${tHistory}0`);
   PPx.Execute(`*deletehistory ${tHistory},0`);
 }

@@ -3,7 +3,7 @@
 
 'use strict';
 
-const pDir = PPx.Extract('%FD');
+const pwd = PPx.Extract('%FD');
 const cfgPath = [];
 const l = PPx.EntryDisplayCount;
 const ObjEntry = PPx.Entry;
@@ -15,5 +15,5 @@ for (let i = 0; i < l; i++) {
 }
 
 PPx.Execute('PPCUSTW CINIT');
-PPx.Execute(`*setcust _Command:reset=*cd ${pDir} %%: ${cfgPath.join(' %%: ')}`);
+PPx.Execute(`*setcust _Command:reset=*cd ${pwd} %%: ${cfgPath.join(' %%: ')}`);
 PPx.Execute('*reset');

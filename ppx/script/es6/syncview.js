@@ -11,7 +11,7 @@ const tID = PPx.WindowIDName.slice(2);
 const sync = PPx.SyncView;
 
 if (!sync) {
-  (paneCount == 2)
+  (paneCount === 2)
     // タイトルバー無し
     ? State_syncview('B100000000')
     // タイトルバー有り
@@ -35,18 +35,18 @@ function State_syncview (tWin) {
   PPx.Execute(`*setcust X_win:V=${tWin}`);
 
   switch (paneCount) {
-  case 2:
-    PPx.Execute(`%Oin *ppv -r -bootid:${tID}`);
-    // capturewindowに取り込む前にPPvのサイズを記憶する
-    PPx.Execute(`*string i,vSize=%*getcust(_WinPos:V${tID})`);
-    // movingPPv off
-    PPx.Execute('*string i,vState=1');
-    PPx.Execute(`%Oi *capturewindow V${tID} -pane:~ -selectnoactive`);
-    break;
-  default:
-    PPx.Execute(`%Oi *ppv -r -bootid:${tID}`);
-    PPx.Execute('*setcust X_vpos=0');
-    PPx.Execute(`*topmostwindow %NV${tID},1`);
+    case 2:
+      PPx.Execute(`%Oin *ppv -r -bootid:${tID}`);
+      // capturewindowに取り込む前にPPvのサイズを記憶する
+      PPx.Execute(`*string i,vSize=%*getcust(_WinPos:V${tID})`);
+      // movingPPv off
+      PPx.Execute('*string i,vState=1');
+      PPx.Execute(`%Oi *capturewindow V${tID} -pane:~ -selectnoactive`);
+      break;
+    default:
+      PPx.Execute(`%Oi *ppv -r -bootid:${tID}`);
+      PPx.Execute('*setcust X_vpos=0');
+      PPx.Execute(`*topmostwindow %NV${tID},1`);
   }
   PPx.Execute(`*execute C,*ppvoption sync ${tID}`);
 }

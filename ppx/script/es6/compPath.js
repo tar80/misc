@@ -8,7 +8,7 @@
 const editStr = PPx.Extract('%*edittext');
 
 if (PPx.Arguments.length) {
-  const arg = PPx.Arguments(0);
+  const argTempFile = PPx.Arguments(0);
   const str = [];
 
   /* コマンドと基準パスの分離整形 */
@@ -21,8 +21,8 @@ if (PPx.Arguments.length) {
   });
 
   if (PPx.Extract('%W').slice(0,10) == 'Jumppath..') {
-    PPx.Execute(`*execute C,*whereis -path:"${str[2]}" -mask:"a:d" -dir:on -subdir:off -listfile:${arg} -name`);
-    PPx.Execute(`*completelist -file:${arg}`);
+    PPx.Execute(`*execute C,*whereis -path:"${str[2]}" -mask:"a:d" -dir:on -subdir:off -listfile:${argTempFile} -name`);
+    PPx.Execute(`*completelist -file:${argTempFile}`);
   }
 
   PPx.Result = str.join('');

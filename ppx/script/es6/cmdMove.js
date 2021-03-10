@@ -14,7 +14,7 @@ const cmd = ((pre) => {
     pre = {act: 'move', opt: '', post: `-compcmd *ppc -pane:~ -k *jumppath %%hd0 -entry:${cursor}`};
     pre.dest = '%\'work\'%\\';
   } else {
-    pre = (PPx.Arguments.length == 0) ?
+    pre = (PPx.Arguments.length === 0) ?
       {act: 'move', opt: '-renamedest:on', post: `-compcmd *execute ~,*jumppath %%hd0 -entry ${cursor}`}:
       {act: '!move', opt: '-min', post: `-compcmd *ppc -r -noactive -k *execute ~,*jumppath %%hd0 -entry ${cursor}`};
     pre.dest = opPath;

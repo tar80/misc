@@ -4,28 +4,31 @@
 
 'use strict';
 
-const xID = PPx.WindowIDName.split('_');
-const tPPx = (xID[0] == 'C') ? 'V' : 'C';
-const sync = PPx.Extract(`%*extract(C${xID[1]},"%%*js(PPx.Result=PPx.SyncView;)")`)|0;
+const x = (() => {
+  const w = PPx.WindowIDName;
+  const s = (w.substr(0, 1) === 'C') ? 'V' : 'C';
+  return { 'winid': w, 'syncwin': s, 'id': w.substr(-1, 1) };
+})();
+const sync = PPx.Extract(`%*extract(C${x.id}"%%*js(PPx.Result=PPx.SyncView;)")`)|0;
 
 // syncviewがonならPPc/PPv間でフォーカスをトグル
 if (sync > 0) {
-  PPx.Execute(`*focus ${tPPx}_${xID[1]}`);
+  PPx.Execute(`*focus ${x.syncwin}_${x.id}`);
   PPx.Quit(1);
 }
 
 // PPbを省いた起動リストを取得
-const xList = ( x => {
-  x = PPx.Extract('%*ppxlist()').split(',');
-  return x.filter(value => value.indexOf('B_') != 0);
+const xList = (() => {
+  const xl = PPx.Extract('%*ppxlist()').split(',');
+  return xl.filter(v => v.indexOf('B_') !== 0);
 })();
 
 xList.sort((a, b) =>  a < b ? -1 : 1);
 
-let tID = xList[xList.indexOf(xID.join('_')) + 1];
+let tID = xList[xList.indexOf(x.winid) + 1];
 
 if (xList[1] > 1 && PPx.Pane.Count != 1) {
-  if (!tID || tID == 'csA') {
+  if (!tID || tID === 'csA') {
   // リストの端なら最初に戻る
     tID = xList[2];
   }

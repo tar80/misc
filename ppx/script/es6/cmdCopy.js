@@ -16,14 +16,14 @@ const opPath = PPx.Extract('%2');
 const cmd = ((pre) => {
   switch (PPx.GetFileInformation(opPath)) {
     case ':DIR':
-      pre = (arg == 0)
+      pre = (arg === 0)
         ? {act: 'copy', opt: '-renamedest:on'}
         : {act: '!copy', opt: '-min'};
       pre.dest = opPath;
       pre.post = '-compcmd *ppc -r -noactive';
       return pre;
     case ':XLF':
-      pre = (arg == 0)
+      pre = (arg === 0)
         ? {act: 'copy', opt: '-renamedest:on'}
         : {act: '!copy', opt: '-min'};
       pre.dest = opPath;
@@ -45,7 +45,7 @@ if (arg >= 2) {
   cmd.dest = PPx.Extract(`%*input("${cmd.dest}" -title:"リンク先" -mode:d)%\\`);
   if (cmd.dest) {
     // 対象がディレクトリなら/Dオプション付加
-    cmd.opt = (PPx.GetFileInformation(cdFilePath) == ':DIR') ? '/D' : '';
+    cmd.opt = (PPx.GetFileInformation(cdFilePath) === ':DIR') ? '/D' : '';
     PPx.Execute(`%Orn *ppb -runas -c mklink ${cmd.opt} ${cmd.dest}${cdFileName} ${cdFilePath}`);
   }
   // 書庫なら解凍

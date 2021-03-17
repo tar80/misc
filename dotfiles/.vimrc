@@ -31,8 +31,8 @@ endif
 "# Initial {{{
 let $HOME = 'C:\bin\home'
 let $MYVIMRC = 'C:\bin\repository\tar80\misc\dotfiles\.vimrc'
-let $PATH = 'C:\bin\repository\tar80\misc\nodejs\node_modules\.bin;' . $PATH
-" let $NODE_PATH = 'C:\bin\repository\tar80\misc\nodejs\node_modules'
+" let $PATH = 'C:\bin\repository\tar80\misc\nodejs\node_modules\.bin;' . $PATH
+let $NODE_PATH = 'C:\bin\repository\tar80\misc\node_modules'
 let g:mapleader                 = ';'
 let g:no_gvimrc_example         = 1
 let g:no_vimrc_example          = 1

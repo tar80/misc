@@ -3,11 +3,11 @@
 "# 文字コードの判別
 set fileformats=unix,dos,mac
 set encoding=utf-8
-if has('iconv')
-  set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,utf-16le,utf-16,cp932,default,latin1
-else
-  set fileencodings=ucs-bom,utf-8,sjis,utf-16le,utf-16,cp932,default,latin1
-endif
+" if has('iconv')
+"   set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,utf-16le,utf-16,cp932,default,latin1
+" else
+"   set fileencodings=ucs-bom,utf-8,sjis,utf-16le,utf-16,cp932,default,latin1
+" endif
 "# scriptencodingは本来ファイル先頭で指定するべきだが、
 "# 内部エンコーディングを変更した場合は再設定の必要があるということ
 scriptencoding utf-8
@@ -31,8 +31,8 @@ endif
 "# Initial {{{
 let $HOME = 'C:\bin\home'
 let $MYVIMRC = 'C:\bin\repository\tar80\misc\dotfiles\.vimrc'
-" let $PATH = 'C:\bin\repository\tar80\misc\nodejs\node_modules\.bin;' . $PATH
-let $NODE_PATH = 'C:\bin\repository\tar80\misc\node_modules'
+let $PATH = 'C:\bin\repository\tar80\misc\node_modules\.bin;' . $PATH
+" let $NODE_PATH = 'C:\bin\repository\tar80\misc\node_modules'
 let g:mapleader                 = ';'
 let g:no_gvimrc_example         = 1
 let g:no_vimrc_example          = 1
@@ -209,7 +209,6 @@ call plug#begin('~/vimfiles')
   Plug 'w0rp/ale'
   Plug 'tyru/caw.vim'
   Plug 'tpope/vim-fugitive'
-  " Plug 'lambdalisue/gina.vim', { 'on': ['Gina'] }
   " Plug 'gorodinskiy/vim-coloresque'
 "# manual
   Plug '~/vimfiles/_rcPlug'

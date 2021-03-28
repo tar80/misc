@@ -34,7 +34,7 @@ function s:gitDiffCmd(...) abort
     let s:path = (a:0 ==# '2') ? a:2 : (a:0 ==# '1') ? a:1 : '%'
     let s:path = strpart(fnamemodify(expand(s:path), ':p'), len(s:root))
     let s:path = substitute(s:path, '\\', '/', 'g')
-    let s:hash = (a:0 ==# '2') ? a:1 : 'HEAD^'
+    let s:hash = (a:0 ==# '2') ? a:1 : ''
     let g:diff_translations = 0
     " syntax off | highlight Normal guifg=#3C3C40 | diffthis | vertical new | set bt=nofile | execute 'r! git cat-file -p ' . s:hash . ':' . s:path | 0d_ | diffthis | wincmd p
     diffthis | rightbelow vnew [diff] | set bt=nofile | execute 'r! git cat-file -p ' . s:hash . ':' . s:path | 0d_ | diffthis | wincmd p

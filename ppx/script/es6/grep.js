@@ -32,7 +32,7 @@ const use_PPv_jvgrep = true;
 const grLF = (use_LF_grep === true)
   ? { 'op': 'LF', 'lock': '-nH', 'add': 'irEC1 --color=never', 'complist': 'GREPOPTION.TXT' } : null;
 const grPPv = (use_PPv_grep === true)
-  ? { 'op': 'LF', 'lock': '-nH', 'add': 'irEC1 --color=always', 'complist': 'GREPOPTION.TXT' } : null;
+  ? { 'op': 'LF', 'lock': '-nH', 'add': 'irEC1 --color=never', 'complist': 'GREPOPTION.TXT' } : null;
 // ripgrep
 const rgLF = (use_LF_rg === true)
   ? { 'op': 'LF', 'lock': '-nH --no-heading', 'add': ' --color never -Li -C1', 'complist': 'RGOPTION.TXT' } : null;

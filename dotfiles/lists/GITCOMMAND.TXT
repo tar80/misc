@@ -61,8 +61,8 @@ fetch ;[--option|<remote [branch]>] リモートを取得する
 	--prune ;   リモートに存在しないローカルブランチを削除
 	--tags ;    タグを取得
 log ;[--option][<branch>][-n <表示数>]
-	%m|一行表示 --graph --date=short --format="%OD%%C(cyan)%%h %%C(magenta)[%%ad]%%C(reset)%%s%%C(auto)%%d%OD-" -23
-	%m|詳細 --graph --name-status --oneline --date=short --format="%OD%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad]%%C(cyan)%%an %%C(green)%%s%%C(auto)%%d%OD-" -5 %: *focus #%*NT
+	%m|一行表示 -P --graph --date=short --format="%OD%%C(cyan)%%h %%C(magenta)[%%ad]%%C(reset)%%s%%C(auto)%%d%OD-" -23
+	%m|詳細 -P --graph --name-status --oneline --date=short --format="%OD%%C(yellow reverse)%%h%%C(reset) %%C(magenta)[%%ad]%%C(cyan)%%an %%C(green)%%s%%C(auto)%%d%OD-" -5 %: *focus #%*NT
 	--all ;           全ブランチ
 	--decorate=full ; ブランチ名を短縮せずに表示
 	--graph=' ;'      分岐をグラフィカルに表示

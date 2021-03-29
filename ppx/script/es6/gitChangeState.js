@@ -9,7 +9,13 @@
 
 const argState = ((arg = []) => {
   if (PPx.Arguments.length == 2) {
-    arg[0] = (PPx.Arguments(0) == '2') ? '??' : (PPx.Arguments(0) == '1' ? 'M ' : ' M');
+    arg[0] = (PPx.Arguments(0) == '3')
+      ? 'MM'
+      : (PPx.Arguments(0) == '2')
+        ? '??'
+        : (PPx.Arguments(0) == '1')
+          ? 'M '
+          : ' M';
     arg[1] = PPx.Arguments(1)|0;
   } else {
     PPx.Quit(1);

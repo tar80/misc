@@ -1,20 +1,48 @@
 ﻿//!*script
 /* gitmode表示位置調節 */
+//
+// PPx.Arguments(0) = b|c|e:スクリプト終了後のフォーカス
+// ※ 'e'を指定した時は位置調整だけで左右の移動は行わない
 
 'use strict';
 
+if (!PPx.Arguments.length) {
+  PPx.Echo('引数が足りません');
+  PPx.Quit(-1);
+}
+
 /////////* 初期設定 *////////////
 
-// 窓の表示位置
-const x = [20, 1300];   // 横軸[始点, 終点]
-const y = [20, 720];    // 縦軸[始点, 終点]
+// 画面の使用領域
+const x = { 'start': 10, 'end': 1300 };   // 横軸[始点, 終点]
+const y = { 'start': 10, 'end': 720 };    // 縦軸[始点, 終点]
+
+// ppeの配置位置 0=上, 1=下
+const ePos = 0;
 
 /////////////////////////////////
 
-const cID  = 'CG';
+const arg = (() => {
+  const chr = PPx.Arguments(0);
+  const flag = PPx.Extract('%*getcust(_User:g_git_pos)')|0;
+  const move = (() => {
+    if (chr === 'e') {
+      (flag === 2) ? Right_ppc() : Left_ppc();
+    } else {
+      (flag === 2) ? Left_ppc() : Right_ppc();
+    }
+  });
+  const hwnd = (() => {
+    switch(chr) {
+      case 'b': return bHWND;
+      case 'c': return cHWND;
+      case 'e': return eHWND;
+    }
+  });
+  return { 'move': move, 'HWND': hwnd };
+})();
+const cID  = 'C' +  PPx.Extract('%*getcust(_User:g_ppcid)');
 const cHWND = PPx.Extract(`%*Extract(%%N${cID})`)|0;
-const flag = PPx.Extract('%*getcust(_User:g_git_pos)')|0;
-// const ppcH = PPx.Extract('%*Extract(%%NCH)')|0;
 // const bHWND = ((id = 0) => {
 //   const arrStr = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 //   for (const chr of arrStr) {
@@ -27,35 +55,48 @@ if (bHWND === 0 ) {
   PPx.Execute(`*closeppx B* %: *wait 0 %: *ppb -k *selectppx ${cID}`);
   PPx.Quit(1);
 }
+const eHWND = PPx.Extract('%*findwindowclass(PPeditW)')|0;
+const eHeight = (eHWND !== 0) ? PPx.Extract(`%*windowrect(${eHWND},h)`) : 0;
 
 PPx.Execute(`*focus #${bHWND}`);
+const bRect = { 'wide': PPx.Extract(`%*windowrect(${bHWND},w)`), 'height': PPx.Extract(`%*windowrect(${bHWND},h)`) };
 
-// gitmodeに使う画面領域
+// 窓の位置情報
 class field {
-  constructor(zero, end, bWH) {
+  constructor(zero, end, bWH, eWH) {
     this.zero = zero;
     this.end = end;
     this.bWH = bWH|0;
+    this.eWH = eWH|0;
     this.length = end - zero;
   }
-  get rect() { return [this.length / 2, this.length - this.bWH]; }
-  get pos() { return [this.zero + this.rect[0], this.zero + this.rect[1], this.zero + this.bWH]; }
+  get rect() { return { 'wide': this.length - this.bWH, 'length': this.length - this.eWH }; }
+  get hor() { return { 'b': this.zero + this.rect.wide, 'c': this.zero + this.bWH }; }
+  get vert() { return (ePos === 0)
+    ? { 'c': this.zero + this.eWH, 'e': this.zero }
+    : { 'c': this.zero, 'e': this.zero + this.rect.length };
+  }
 }
 
-const ppbWH = [PPx.Extract(`%*windowrect(${bHWND},w)`), PPx.Extract(`%*windowrect(${bHWND},h)`)];
-const w = new field(x[0], x[1], ppbWH[0]);
-const h = new field(y[0], y[1], ppbWH[1]);
+const w = new field(x.start, x.end, bRect.wide, 0);
+const h = new field(y.start, y.end, bRect.height, eHeight);
 
-PPx.Execute(`*windowsize ${cHWND},${w.rect[1]},${h.length}`);
+PPx.Execute(`*windowsize ${cHWND},${w.rect.wide},${h.rect.length}`);
+if (eHWND !== 0) { PPx.Execute(`*windowsize ${eHWND},${w.rect.wide},${eHeight}`); }
 
-if (flag < 2) {
-  PPx.Execute('*setcust _User:g_git_pos=2');
-  PPx.Execute(`*windowposition ${cHWND}, ${w.pos[2]}, ${h.zero}`);
-  PPx.Execute(`*windowposition ${bHWND}, ${w.zero}, ${h.zero}`);
-} else {
+arg.move();
+
+PPx.Execute(`*pptray -c *focus #${arg.HWND()}`);
+
+function Left_ppc() {
   PPx.Execute('*setcust _User:g_git_pos=1');
-  PPx.Execute(`*windowposition ${cHWND}, ${w.zero}, ${h.zero}`);
-  PPx.Execute(`*windowposition ${bHWND}, ${w.pos[1]}, ${h.zero}`);
+  PPx.Execute(`*windowposition ${bHWND}, ${w.hor['b']}, ${h.zero}`);
+  PPx.Execute(`*windowposition ${cHWND}, ${w.zero}, ${h.vert['c']}`);
+  PPx.Execute(`*windowposition ${eHWND}, ${w.zero}, ${h.vert['e']}`);
 }
-
-PPx.Execute(`*selectppx ${cID}`);
+function Right_ppc() {
+  PPx.Execute('*setcust _User:g_git_pos=2');
+  PPx.Execute(`*windowposition ${bHWND}, ${w.zero}, ${h.zero}`);
+  PPx.Execute(`*windowposition ${cHWND}, ${w.hor['c']}, ${h.vert['c']}`);
+  PPx.Execute(`*windowposition ${eHWND}, ${w.hor['c']}, ${h.vert['e']}`);
+}

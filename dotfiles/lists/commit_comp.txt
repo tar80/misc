@@ -1,0 +1,9 @@
+Update ;   更新
+Refactor ; 整理
+Typo ;     oh miss spell
+Fix ;      バグ修正
+Merge ;    合体
+Add ;      追加
+Delete ;   削除
+Move ;     移動
+Rename ;   リネーム

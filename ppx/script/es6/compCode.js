@@ -41,7 +41,7 @@ const edit = {
   }
 };
 
-switch(edit.type()) {
+switch (edit.type()) {
   case 'i':
     edit.code = `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()} -k ${edit.precmd})`;
     break;

@@ -49,34 +49,32 @@ case 'undo':
 
     // UNDOログを置換
   do {
-      fsoUndoLog.ReadLine().replace(/(.*)\t(.*)/, function (match, p1, p2) {
-        result.push(p1, p2);
-      });
-
+      fsoUndoLog.ReadLine().replace(/(.*)\t(.*)/, function (match, p1, p2) { result.push(p1, p2); });
       result.push(fsoUndoLog.ReadLine().replace(/.*\t(.*)/, '$1', 'i'));
 
     switch (result[0]) {
-    case 'Move':
-        cmd = '-compcmd *script %\'scr\'%\\cmdUndo.js,redo';
-      break;
-    case 'Back':
-      var cDir = PPx.Extract('%FDN%\\');
-      for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
-        if (PPx.Entry(i).state != 1 && (result[0].replace(/Backup\t(.*)/, '$1' ) == cDir + PPx.Entry(i).Name)) {
-          PPx.SetPopLineMessage('Do Not!');
-          fsoUndoLog.Close();
-          PPx.Quit(-1);
+      case 'Move':
+      case 'MoveDir':
+          cmd = '-compcmd *script %\'scr\'%\\cmdUndo.js,redo';
+        break;
+      case 'Back':
+        var cDir = PPx.Extract('%FDN%\\');
+        for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
+          if (PPx.Entry(i).state != 1 && (result[0].replace(/Backup\t(.*)/, '$1' ) == cDir + PPx.Entry(i).Name)) {
+            PPx.SetPopLineMessage('Do Not!');
+            fsoUndoLog.Close();
+            PPx.Quit(-1);
+          }
         }
-      }
-      fsoUndoLog.ReadLine();
-      fsoUndoLog.Close();
-      break;
-    default:
-      fsoUndoLog.Close();
+        fsoUndoLog.ReadLine();
+        fsoUndoLog.Close();
+        break;
+      default:
+        fsoUndoLog.Close();
 
-      PPx.SetPopLineMessage('Do Not!!');
-      PPx.Quit(-1);
-      break;
+        PPx.SetPopLineMessage('Do Not!!');
+        PPx.Quit(-1);
+        break;
     }
     PPx.SetPopLineMessage('Send: ' + result[2] + '\r\nDist: ' + result[1]);
   } while (!fsoUndoLog.AtEndOfStream);

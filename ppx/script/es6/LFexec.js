@@ -17,7 +17,7 @@ const arg = [PPx.Arguments(0), (PPx.Arguments.length != 2) ? 0 : PPx.Arguments(1
 const rep = [];
 
 function Exe_edit(path, shortname, number, duplicate) {
-  switch(arg[0]) {
+  switch (arg[0]) {
     case 'gvim':
     // ヘッダ情報から検索語を取得
       rep[0] = ((m = '') => {

@@ -1,21 +1,22 @@
 // #!/usr/bin/env node
+//
 // argv = [0]node [1]script path
 // [2]1:git status
-// [3]1:git log  | hash:git log hash
-// [4]1:git diff | hash:git diff hash
-// [5]%FD 指定がなければPPc[G]が起動する
-// ※argv[5]を空にするとgit-modeが開始され、%si"oBranch"対象パスのブランチ名、%si"gr".レポジトリのルートパス
-// %si"gm"(status or log)表示中のログ、%si"ps",%si"pl,%si"pd"にそれぞれstatus,log,diffのログのパスが設定される
-/* git-mode start keybind
+// [3]1:git log  | hash値:git log hash
+// [4]1:git diff | hash値:git diff hash
+// [5]start | status | log  ;git-mode開始時はstartを指定、status、logはPPcで開くログの種類
+// ※%si"oBranch"対象パスのブランチ名、%si"gr"レポジトリのルートパス、%si"gm"(status or log)表示中のログ
+// %si"ps",%si"pl,%si"pd"にそれぞれstatus, log, diffのログのパスが設定される
+
+/* git-mode開始用のキーバインド
 KC_main = {
 ^G , *ifmatch !0,0%si"gm" %: *linemessage !"already run git-mode %: *stop
      *setcust _User:g_git_pos=0
-     *setcust _User:g_C_back=%*getcust(C_back)
-     *setcust _User:g_XC_alac=%*getcust(XC_alac)
-     *setcust C_back=H12020E
+     *ifmatch 0,0%*getcust(_User:g_C_back) %: *setcust _User:g_C_back=%*getcust(C_back)
+     *if !0%*getcust(_User:g_XC_alac) %: *setcust _User:g_XC_alac=%*getcust(XC_alac)
+     *setcust C_back=H2F151A
      *setcust XC_alac=0
-     node path\git_getlog.js 1 1 1
-}
+     node path\git_getlog.js 1 1 1 start
   */
 
 'use strict';
@@ -23,7 +24,10 @@ KC_main = {
 /////////* 初期設定 *////////////
 
 const log_max       = 100;  // git logの取得数
-const diff_contents = 2;    // git diffの該当行前後に残す行数
+const diff_contents = 1;    // git diffの該当行前後に残す行数
+
+// git-modeに使用するPPcID
+const cID  = 'G';
 
 // PPxのディレクトリパス
 const ppxDir = 'C:\\bin\\PPx';
@@ -49,7 +53,7 @@ const arg = (() => {
     console.log('Error:引数が足りません');
     process.exit();
   } else {
-    return { 'gmpath': process.argv[5], 'stat': process.argv[2], 'log': process.argv[3], 'diff': process.argv[4] };
+    return { 'focus': process.argv[5], 'stat': process.argv[2], 'log': process.argv[3], 'diff': process.argv[4] };
   }
 })();
 
@@ -58,20 +62,15 @@ if (!fs.existsSync(listDir)) { fs.mkdirSync(listDir); }
 
 // レポジトリのルートとプレフィクスを取得
 const gi = (() => {
-  let wd = (() => {
-    try {
-      process.chdir(arg.gmpath);
-    } catch (err) {
-      // 処理なし
-    }
-    return process.cwd();
-  })();
+  let wd = process.cwd();
+
   do{
     const isRoot = path.join(wd, '.git');
     if (fs.existsSync(isRoot)) {
       const pf = (wd === myRepo) ? '_' : '';
       return { 'prefix': pf, 'root': wd };
     }
+
     wd = path.dirname(wd);
     if (wd === path.parse(wd).root) {
       console.log('not repository.');
@@ -87,12 +86,12 @@ const infoLog = (() => {
     : { 'add': '_commit', 'str': 'commit', 'func': (dist => Make_log_commit(dist)) };
   return (arg.log === '0')
     ? {
-      'str': '%si"gm"',
+      'refs': '%si"gm"',
       'path': '',
       'func': ''
     }
     : {
-      'str': mode.str,
+      'refs': mode.str,
       'path': `${listDir}\\${gi.prefix}${gLog}${mode.add}.xgit`,
       'func': function() { return mode.func(this.path); }
     };
@@ -106,7 +105,7 @@ const Make_status = (filepath => {
   const result = `;ListFile,;Base=${gi.root}|1,;git-status`.split(',');
 
   return new Promise((resolve, reject) => {
-    exec('git status --porcelain', (err, stdout) => {
+    exec('git status --porcelain -uall', (err, stdout) => {
       if (err) { reject(err); }
       const arrData = stdout.split('\u000A');
 
@@ -122,7 +121,7 @@ const Make_status = (filepath => {
           result.push(`"${p3}","",A:H${p4},C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:0,M:0,T:"${p1}${p2}"`);
         });
       }
-      resolve((arrData.length > 1) ? Write_result(result, filepath, 1) : ['', filepath, 0]);
+      resolve(Write_result(result, filepath, 1));
     });
   });
 });
@@ -131,17 +130,9 @@ const Make_log = (filepath => {
   const result = `;ListFile,;Base=${gi.root}|1,;git-log`.split(',');
 
   return new Promise((resolve, reject) => {
-    exec(`git log -n${log_max} --all --date=short --graph --format="%h @[%ad]@%d%s"`, (err, stdout) => {
+    exec(`git log -n${log_max} --all --date=short --graph --format="%h @[%ad]@ %d%s"`, (err, stdout) => {
       if (err) { reject(err); }
       const arrData = stdout.split('\u000A');
-      // {
-      //   const save_hash = arrData[0].replace(/^.*\s(\w{7})\s.*/, '$1');
-      //   const head_hash = execSync('git rev-parse --short head').toString().replace('\u000A', '');
-      //   if (save_hash === head_hash) {
-      //     console.log('not change log');
-      //     return;
-      //   }
-      // }
 
       for (const line of arrData) {
         if (line.indexOf('@') === -1) {
@@ -191,7 +182,7 @@ const Make_log_commit = (filepath => {
 
 const Make_diff = (filepath => {
   return new Promise((resolve, reject) => {
-    exec(`git diff -U${diff_contents} --diff-filter=AM --no-prefix --color-words > ${filepath}`, (err) => {
+    exec(`git diff -U${diff_contents} --diff-filter=AM --no-prefix --color-words HEAD^ > ${filepath}`, (err) => {
       if (err) { reject(err); }
       console.log(`${filepath} ok.`);
       resolve();
@@ -210,7 +201,7 @@ const Make_diff_commit = (filepath => {
 });
 
 // 置換結果を書き出して上書き
-function Write_result(result, dist, flag) {
+function Write_result(result, dist) {
   fs.writeFileSync(dist , '');
   const fd = fs.openSync(dist, 'w');
   const buf = iconv.encode(result.join('\u000D\u000A'), 'utf16');
@@ -218,65 +209,91 @@ function Write_result(result, dist, flag) {
     fs.write(fd, buf, 0, buf.length, (err) => {
       if (err) { reject(err); }
       console.log(`${dist} ok.`);
-      resolve({'path': dist, 'flag': flag});
+      resolve({'path': dist});
     });
   });
 }
+
+const Async_run = (async () => {
+  (arg.focus === 'start') ? await start() : await set();
+  if (arg.diff !== '0') {
+    await (() => { return (arg.diff === '1') ? Make_diff(pathDiff) : Make_diff_commit(pathDiff); })();
+  }
+});
 
 Async_run().then(() => {
   console.log('complete.');
   process.exit();
 });
 
-function execPPx(dist, mode) {
-  if (arg.gmpath === undefined) {
-    const branch = (() => execSync('git rev-parse --abbrev-ref HEAD').toString().replace('\n', ''))();
-    const ub = (gi.prefix === '_') ? `*setcust _User:u_git_branch=${branch} %:` : '';
-    exec(`${ppxDir}\\ppcw -r -single -mps -bootid:g ${dist} -k ${ub} *string i,oBranch=${branch} %: *string i,gm=${mode} %: \
-      *string i,ps=${pathStat} %: *string i,pl=${infoLog.path} %: *string i,pd=${pathDiff} %: *string i,gr=${gi.root} %: \
-      *viewstyle -temp git${mode} %: *script %'scr'%\\exchangeKeys.js,1,%'cfg'%\\zz3GitKeys.cfg`, (err) => {
-      if (err) { console.log(err); }
-    });
-  } else {
-    const ps = (arg.stat === '0') ? '' : `*string i,ps=${pathStat}`;
-    const pl = (arg.log === '0') ? '' : `*string i,pl=${infoLog.path}`;
-    const pd = (arg.diff === '0') ? '' : `*string i,pd=${pathDiff}`;
-    exec(`${ppxDir}\\ppcw -r -noactive -bootid:g -k *jumppath ${dist} -savelocate %: *string i,gm=${mode} %: \
-      ${ps} %: ${pl} %: ${pd} %: *viewstyle -temp git${mode}` , (err) => {
-      if (err) { console.log(err); }
-    });
-  }
-  return;
-}
-
-async function Async_run () {
+async function start() {
   if (arg.stat === '1') {
     await (async () => {
       const wReslut = await Make_status(pathStat);
-      if (wReslut.flag === 1) {
-        return execPPx(wReslut.path, 'status');
-      } else {
-        console.log('status no change.');
-        throw new Error();
-      }
+      return startPPc(wReslut.path, 'status');
     })().then(async () => {
       if (arg.log !== '0') { await infoLog.func(); }
     }).catch(async () => {
       if (arg.log !== '0') {
-        await new Promise(resolve => {
-          resolve(infoLog.func());
-        }).then(wReslut => execPPx(wReslut.path, infoLog.str));
+        await (async () => {
+          const wReslut = await infoLog.func();
+          startPPc(wReslut.path, 'log');
+        })();
       }
     });
   } else {
     if (arg.log !== '0') {
-      await new Promise(resolve => {
-        resolve(infoLog.func());
-      }).then(wReslut => execPPx(wReslut.path, infoLog.str));
+      await (async () => {
+        const wReslut = await infoLog.func();
+        startPPc(wReslut.path, 'log');
+      })();
     }
   }
-  if (arg.diff !== '0') {
-    await (() => { return (arg.diff === '1') ? Make_diff(pathDiff) : Make_diff_commit(pathDiff); })();
+}
+
+async function set() {
+  if (arg.stat === '1') {
+    await (async () => {
+      const wReslut = await Make_status(pathStat);
+      if (arg.focus === 'status') {
+        return setLog(wReslut.path, 'status');
+      }
+      return;
+    })();
   }
+  if (arg.log !== '0') {
+    await (async () => {
+      const wReslut = await infoLog.func();
+      if (arg.focus === 'log') {
+        return setLog(wReslut.path, infoLog.refs);
+      }
+      return;
+    })();
+  }
+}
+
+function startPPc(dist, mode) {
+  const branch = (() => execSync('git rev-parse --abbrev-ref HEAD').toString().replace('\n', ''))();
+  const ub = (gi.prefix === '_') ? `*setcust _User:u_git_branch=${branch}` : '';
+  exec(`${ppxDir}\\ppcw -r -single -mps -bootid:${cID} ${dist} -k ${ub} %:*string i,oBranch=${branch} %:\
+*string i,gm=${mode} %:*string i,ps=${pathStat} %:*string i,pl=${infoLog.path} %:*string i,pd=${pathDiff} %:\
+*string i,gr=${gi.root} %:*setcust _User:g_ppcid=${cID} %: *viewstyle -temp git${mode} %:\
+*script %'scr'%\\exchangeKeys.js,1,%'cfg'%\\zz3GitKeys.cfg %:*script %'scr'%\\gitModePos.js,c`, (err) => {
+    if (err) { console.log(err); }
+  });
+  return;
+}
+
+function setLog(dist, mode) {
+  const ps = (arg.stat === '0') ? '' : `*string i,ps=${pathStat}`;
+  const pl = (arg.log === '0') ? '' : `*string i,pl=${infoLog.path}`;
+  const pd = (arg.diff === '0') ? '' : `*string i,pd=${pathDiff}`;
+  return new Promise((resolve, reject) => {
+    exec(`${ppxDir}\\ppcw -r -noactive -bootid:${cID} -k *jumppath ${dist} -savelocate %:*string i,gm=${mode} %:\
+${ps} %:${pl} %:${pd} %:*viewstyle -temp git${mode}` , (err) => {
+      if (err) { reject(err); }
+      resolve();
+    });
+  });
 }
 

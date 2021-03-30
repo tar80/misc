@@ -27,8 +27,6 @@ var defType = (!PPx.Extract('%W').match('PP[BCV]\\['))
   ? (PPx.Extract('%*editprop(whistory)')) || 'g'
   : 'g';
 
-// var arg = [PPx.Arguments(0), PPx.Arguments(1)];
-
 var edit = {
   chr: PPx.Arguments(1),
   title: (len > 2) ? PPx.Arguments(2) : 'compCode..',
@@ -41,7 +39,7 @@ var edit = {
   }
 };
 
-switch(edit.type()) {
+switch (edit.type()) {
   case 'i':
     edit.code = '%*input("%*selecttext" -title:"' + edit.title + '" -mode:' + edit.mode() + ' -k ' + edit.precmd + ')';
     break;
@@ -100,8 +98,12 @@ if (bsNum !== -1) { charArray[bsNum] = '\\\\'; }
 
 var regStr = '[' + charArray.join('') + ']';
 var rep = new RegExp(regStr, 'g');
+var code = (function() {
+  var str = PPx.Extract(edit.code);
+  return (str !== '') ? str : PPx.Quit(1);
+})();
 
-PPx.Result = PPx.Extract(edit.code).replace(rep, function (c) { return esc[c]; });
+PPx.Result = code.replace(rep, function (c) { return esc[c]; });
 
 /* 重複した文字をまとめて配列にする */
 function removeDupChar (array) {

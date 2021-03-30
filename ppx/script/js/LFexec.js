@@ -24,7 +24,6 @@ function Exe_edit(path, shortname, number, duplicate) {
         m = m.match(regexp) || '';
         return m[1];
       }();
-
       PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + rep[0] + '/ " "' + path + '"');
       PPx.Execute('*wait 100,1');
       break;

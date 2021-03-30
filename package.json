@@ -9,7 +9,7 @@
   "author": "tar80",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.19.0",
+    "eslint": "^7.22.0",
     "lua-fmt": "^2.6.0"
   },
   "dependencies": {

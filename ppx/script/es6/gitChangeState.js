@@ -9,19 +9,25 @@
 
 const argState = ((arg = []) => {
   if (PPx.Arguments.length == 2) {
-    arg[0] = (PPx.Arguments(0) == '2') ? '??' : (PPx.Arguments(0) == '1' ? 'M ' : ' M');
+    arg[0] = (PPx.Arguments(0) == '3')
+      ? 'MM'
+      : (PPx.Arguments(0) == '2')
+        ? '??'
+        : (PPx.Arguments(0) == '1')
+          ? 'M '
+          : ' M';
     arg[1] = PPx.Arguments(1)|0;
   } else {
     PPx.Quit(1);
   }
-  return [arg[0], arg[1]];
+  return { 'mark': arg[0], 'number': arg[1] };
 })();
 const pos = PPx.EntryIndex;
 
 PPx.EntryFirstMark;
 do {
-  PPx.EntryComment = argState[0];
-  PPx.EntryState = argState[1];
+  PPx.EntryComment = argState.mark;
+  PPx.EntryState = argState.number;
   PPx.EntryMark = 0;
 }while( PPx.EntryFirstMark != 0 );
 

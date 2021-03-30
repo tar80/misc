@@ -422,6 +422,7 @@ endfunction
 "# 範囲を括る
 vnoremap <space>" c"<C-r>""<ESC>
 vnoremap <space>' c'<C-r>"'<ESC>
+vnoremap <space>` c`<C-r>"`<ESC>
 vnoremap <space>( c(<C-r>")<ESC>
 vnoremap <space>[ c[<C-r>"]<ESC>
 vnoremap <space>{ c{<C-r>"}<ESC>

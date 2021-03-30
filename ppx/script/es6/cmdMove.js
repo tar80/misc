@@ -11,12 +11,12 @@ const cursor = PPx.Extract('%R');
 // 送り先を設定
 const cmd = ((pre) => {
   if (!PPx.GetFileInformation(opPath)) {
-    pre = {act: 'move', opt: '', post: `-compcmd *ppc -pane:~ -k *jumppath %%hd0 -entry:${cursor}`};
+    pre = { act: 'move', opt: '', post: `-compcmd *ppc -pane:~ -k *jumppath %%hd0 -entry:${cursor}` };
     pre.dest = '%\'work\'%\\';
   } else {
-    pre = (PPx.Arguments.length === 0) ?
-      {act: 'move', opt: '-renamedest:on', post: `-compcmd *execute ~,*jumppath %%hd0 -entry ${cursor}`}:
-      {act: '!move', opt: '-min', post: `-compcmd *ppc -r -noactive -k *execute ~,*jumppath %%hd0 -entry ${cursor}`};
+    pre = (PPx.Arguments.length === 0)
+      ? { act: 'move', opt: '-renamedest:on', post: '' }
+      : { act: '!move', opt: '-min', post: '' };
     pre.dest = opPath;
   }
   return pre;

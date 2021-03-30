@@ -17,22 +17,22 @@ const cmd = ((pre) => {
   switch (PPx.GetFileInformation(opPath)) {
     case ':DIR':
       pre = (arg === 0)
-        ? {act: 'copy', opt: '-renamedest:on'}
-        : {act: '!copy', opt: '-min'};
+        ? { act: 'copy', opt: '-renamedest:on' }
+        : { act: '!copy', opt: '-min' };
       pre.dest = opPath;
       pre.post = '-compcmd *ppc -r -noactive';
       return pre;
     case ':XLF':
       pre = (arg === 0)
-        ? {act: 'copy', opt: '-renamedest:on'}
-        : {act: '!copy', opt: '-min'};
+        ? { act: 'copy', opt: '-renamedest:on' }
+        : { act: '!copy', opt: '-min' };
       pre.dest = opPath;
       pre.post = '';
       return pre;
     case '':
-      pre = {act: 'copy', opt: ''};
+      pre = { act: 'copy', opt: '' };
       pre.dest = '%\'work\'%\\';
-      pre.post = '-compcmd *ppc -pane:~ %%hd0';
+      pre.post = `-compcmd *ppc -pane:~ %%hd0 -k *jumppath -entry:${cdFileName}`;
       return pre;
     default:
       PPx.Echo('非対象ディレクトリ');

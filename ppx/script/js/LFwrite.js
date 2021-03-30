@@ -8,9 +8,15 @@ if (PPx.Arguments.length != 2) {
   PPx.Quit(-1);
 }
 
-/* エントリをリストに書き出す */
+var arg = [PPx.Arguments(0), PPx.Arguments(1)];
+var dirType = PPx.DirectoryType;
+
+var fso = PPx.CreateObject('Scripting.FileSystemObject');
+var fsoTlist;
+
+// 該当エントリをリストに書き出す
 var Write_mark_path = function () {
-  var cdPath = (dirType != 4) ? PPx.Extract('%FDN%\\') : '';
+  var cdPath = (dirType !== 4) ? PPx.Extract('%FDN%\\') : '';
 
   // マークの有無で処理を分岐
   if (!PPx.EntryMarkCount) {
@@ -25,12 +31,6 @@ var Write_mark_path = function () {
     }
   }
 };
-
-var arg = [PPx.Arguments(0), PPx.Arguments(1)];
-var dirType = PPx.DirectoryType;
-
-var fso = PPx.CreateObject('Scripting.FileSystemObject');
-var fsoTlist;
 
 switch (arg[0]) {
 // git関連のリザルト

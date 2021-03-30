@@ -19,7 +19,7 @@ if (PPx.Arguments.length) {
   });
 
   if (PPx.Extract('%W').slice(0,10) == 'Jumppath..') {
-    PPx.Execute('*whereis -path:"' + str[2] + '" -mask:"a:d" -dir:on -subdir:off -listfile:' + arg + ' -name');
+    PPx.Execute('*execute C,*whereis -path:"' + str[2] + '" -mask:"a:d" -dir:on -subdir:off -listfile:' + arg + ' -name');
     PPx.Execute('*completelist -file:' + arg);
   }
 

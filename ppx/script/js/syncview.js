@@ -9,7 +9,7 @@ var tID = PPx.WindowIDName.slice(2);
 var sync = PPx.SyncView;
 
 if (!sync) {
-  (paneCount == 2)
+  (paneCount === 2)
     // タイトルバー無し
     ? State_syncview('B000000000')
     // タイトルバー有り

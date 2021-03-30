@@ -15,16 +15,20 @@ var listView = (PPx.WindowIDName == 'C_X') ? 'CX' : dirType;
 switch (listView) {
   case 'CX':
     if (dirType >= 62) {
-      PPx.Execute('*RotateExecute u_rotate_styleC,\
-        "*viewstyle ""画像:中縦(&H)""",\
-        "*viewstyle ""画像:特縦(&H)"""');
+      PPx.Execute(
+'*RotateExecute u_rotate_styleC,\
+"*viewstyle ""画像:中縦(&H)""",\
+"*viewstyle ""画像:特縦(&H)"""');
       } else {
         PPx.Execute('%Osn *ppb -c file %R | xargs %0ppcw -r -bootid:X -noactive -k *string i,str=');
         var imgSize = PPx.Extract('%si"str"').replace(/.*,\s([0-9]{1,6})\s?x\s?([0-9]{1,6}),\s.*$/, '$1,$2').split(',');
         var str = (imgSize[0] - imgSize[1] < 0)
-          ? "縦(&H)"
-          : "(&W)";
-        PPx.Execute('*RotateExecute u_rotate_styleB, "*viewstyle ""画像:小(&W)""", *viewstyle ""画像:中' + str + '""", *viewstyle ""画像:大' + str + '"""');
+          ? "縦(&H)" : "(&W)";
+        PPx.Execute(
+'*RotateExecute u_rotate_styleB,\
+"*viewstyle ""画像:小(&W)""",\
+"*viewstyle ""画像:中' + str + '""",\
+"*viewstyle ""画像:大' + str + '"""');
       }
     break;
   case '4':
@@ -36,7 +40,7 @@ switch (listView) {
   default:
     if (dirType >= 62) {
     var pict = 'jpg ,jpeg ,bmp ,png ,gif ,vch ,edg';
-      if (pict.indexOf(PPx.Extract('%t')) != -1 ) {
+      if (pict.indexOf(PPx.Extract('%t')) !== -1 ) {
           PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp "サムネイル:小(&T)", *viewstyle -temp "サムネイル:中(&T)", *viewstyle -temp "書庫(&A)"');
           PPx.Quit(1);
         }

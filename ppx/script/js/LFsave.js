@@ -40,11 +40,11 @@ var result = [];
 
 //ヘッダを取得
 for (i = 0, l = Math.min(reserveHeader, entryInfo.length); i < l; i++) {
-  if (!entryInfo[0].indexOf(';')) { result[i] = entryInfo.splice(0, 1); }
+  if (entryInfo[0].indexOf(';') === 0) { result[i] = entryInfo.splice(0, 1); }
 }
 
 // リスト上の並びをlistfileの形式で取得し直す
-var exist, index, cmt, mark, d, arr;
+var exist, index, cmt, mark, d, arr, hl;
 
 for (var element in ArrEntry) {
   exist = {};
@@ -53,18 +53,16 @@ for (var element in ArrEntry) {
   for (i = 0, l = entryInfo.length; i < l; i++) {
     d = entryInfo[i];
 
-    if (!exist[ArrEntry[i]] && d.indexOf(ArrEntry[element]) != -1) {
+    if (!exist[ArrEntry[i]] && d.indexOf(ArrEntry[element]) !== -1) {
       exist[ArrEntry[element]] = true;
-
       arr = d.split(',');
-
       cmt = PPx.Entry(index).Comment.replace(/"/g, '""');
-
       mark = (PPx.Entry(index).Mark) ? 1 : 0;
+      hl = PPx.Entry(index).Highlight;
 
-      result.push((arr.length < 7)
-        ? d.replace(/(.*)/, '"$1","",A:H0,C:0.0,L:0.0,W:0.0,S:0.0,M:' + mark + ',T:"' + cmt + '"')
-        : arr.splice(0, 7) + ',M:' + mark + ',T:"' + cmt + '"');
+      result.push((arr.length < 6)
+        ? d.replace(/(.*)/, '"$1","",A:H0,C:0.0,L:0.0,W:0.0,S:0.0,H:' + hl + ',M:' + mark + ',T:"' + cmt + '"')
+        : arr.splice(0, 6) + ',H:' + hl + ',M:' + mark + ',T:"' + cmt + '"');
     }
   }
 }

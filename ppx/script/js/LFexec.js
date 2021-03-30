@@ -49,7 +49,7 @@ var exist = {};
 var entryPath, entrySN, entryNum, entryDup;
 var ObjEntry = PPx.Entry;
 // ヘッダ情報から検索語を取得
-var search_word = function() {
+var search_word = function(w) {
   var regexp = /result\s=>\s(.*)/;
   for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
     var t = ObjEntry(i).Comment.match(regexp);

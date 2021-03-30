@@ -17,6 +17,7 @@ if (sync) {
 
 // PPbを省いた起動リストを取得
 var xList = PPx.Extract('%*ppxlist()').split(',');
+var tID;
 
 if (xList[0] > 1) {
   xList.sort(function (a, b) { return a < b ? -1 : 1; });

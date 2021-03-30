@@ -11,6 +11,7 @@ var cdFileName = PPx.Extract('%FC');
 var opDir = PPx.Extract('%2');
 var tDir;
 var mlOpt;    // mklink_option
+var post;
 
 var cmdOpt = (arg == 0)
   ? ['copy', '-renamedest:on']
@@ -18,23 +19,23 @@ var cmdOpt = (arg == 0)
 
 // 送り先を設定
 switch (PPx.GetFileInformation(opDir)) {
-case ':DIR':
-  tDir = opDir;
-  post = '-compcmd *ppc -r -noactive';
-  break;
-case ':XLF':
-  tDir = opDir;
-  post = '';
-  break;
-case '':
-  tDir = '%\'work\'%\\';
-  cmdOpt = ['copy', ''];
-  post = '-compcmd *ppc -pane:~ %%hd0';
-  break;
-default:
-  PPx.Echo('非対象ディレクトリ');
-  PPx.Quit(1);
-  break;
+  case ':DIR':
+    tDir = opDir;
+    post = '-compcmd *ppc -r -noactive';
+    break;
+  case ':XLF':
+    tDir = opDir;
+    post = '';
+    break;
+  case '':
+    tDir = '%\'work\'%\\';
+    cmdOpt = ['copy', ''];
+    post = '-compcmd *ppc -pane:~ %%hd0';
+    break;
+  default:
+    PPx.Echo('非対象ディレクトリ');
+    PPx.Quit(1);
+    break;
 }
 
 // シンボリックリンク

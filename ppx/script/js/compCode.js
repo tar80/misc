@@ -19,7 +19,7 @@ var len = PPx.Arguments.length;
 
 if (len < 2) {
   PPx.Echo('引数が足りません');
-    PPx.Quit(-1);
+  PPx.Quit(-1);
 }
 
 // 現在の編集モードを参照
@@ -87,10 +87,10 @@ esc = function () {
 // 例外処理
 function Esc_excp (ele, num) {
   if (ele !== '\\') {
-   return charCount[num] * 2;
+    return charCount[num] * 2;
   } else {
     bsNum[0] = num;
-  return charCount[num];
+    return charCount[num];
   }
 }
 
@@ -119,5 +119,5 @@ function removeDupChar (array) {
     }
   }
   return result;
-};
+}
 

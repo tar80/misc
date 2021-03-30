@@ -8,7 +8,7 @@ var ObjEntry = PPx.Entry;
 
 for (var i = 0; i < l; i++) {
   if (ObjEntry(i).Mark) {
-  cfgPath.push('*wait 120,1 %%: PPCUSTW CA ' + ObjEntry(i).Name);
+    cfgPath.push('*wait 120,1 %%: PPCUSTW CA ' + ObjEntry(i).Name);
   }
 }
 

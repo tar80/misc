@@ -18,7 +18,7 @@ if (xID == 'C_A') {
   xID = xList[0];
 }
 
-tID = xID.slice(2);
+var tID = xID.slice(2);
 
 var sync = PPx.Extract('%*extract(C' + tID + ',"%%*js(PPx.Result=PPx.SyncView;)")')|0;
 

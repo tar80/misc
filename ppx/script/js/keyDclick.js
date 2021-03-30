@@ -35,7 +35,7 @@ var Expand_ext = function () {
     case 'movie':
       PPx.Execute('%On *ppb -c %0..\\mplayer\\mplayer.exe -framedrop -geometry %*windowrect(%N.,l):%*windowrect(%N.,t) -vf dsize=%*windowrect(%N.,w):%*windowrect(%N.,h):0 %FDC -loop 0');
       PPx.Quit(1);
-    break;
+      break;
     default:
       if (PPx.DirectoryType >= 63) {
         if (PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') != 0) { PPx.Quit(1); }
@@ -44,14 +44,14 @@ var Expand_ext = function () {
 };
 
 if (PPx.WindowIDName == 'C_X') {
-    // タイトルバーなし
-    PPx.Execute('%Ox *setcust X_win:V=B100000000');
-    //PPx.Execute('*topmostwindow %NVA,1');
+  // タイトルバーなし
+  PPx.Execute('%Ox *setcust X_win:V=B100000000');
+  //PPx.Execute('*topmostwindow %NVA,1');
 } else {
-    // タイトルバーあり
-    PPx.Execute('*setcust X_win:V=B000000000');
-    PPx.Execute('*linecust mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
-    Expand_ext();
+  // タイトルバーあり
+  PPx.Execute('*setcust X_win:V=B000000000');
+  PPx.Execute('*linecust mask,KV_main:CLOSEEVENT,*execute C,*maskentry');
+  Expand_ext();
 }
 
 PPx.Execute('*string i,vState=1');

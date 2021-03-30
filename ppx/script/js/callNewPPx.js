@@ -8,14 +8,14 @@ var arg = (PPx.Arguments.length) ? 'V' : PPx.WindowIDName.slice(0, 1);
 var arrID = [];
 
 switch (arg) {
-case 'C':
-  arrID = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  PPx.Execute('*ppc -single -mps -bootid:' + callID() + ' %FD');
-  break;
-case 'V':
-  arrID = 'DEFGHIJKLMNOPQRSTUVW'.split('');
-  PPx.Execute('*ppv -bootid:' + callID() + ' ' + path());
-  break;
+  case 'C':
+    arrID = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    PPx.Execute('*ppc -single -mps -bootid:' + callID() + ' %FD');
+    break;
+  case 'V':
+    arrID = 'DEFGHIJKLMNOPQRSTUVW'.split('');
+    PPx.Execute('*ppv -bootid:' + callID() + ' ' + path());
+    break;
 }
 
 /* 未起動PPxのIDを取得 */

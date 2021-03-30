@@ -58,20 +58,20 @@ if (arg == 'M_Ccr') {
 /* カレントディレクトリの属性に応じて処理を分岐する */
 function Select_menu(list, archive) {
   switch (PPx.DirectoryType) {
-  case 4:
-    PPx.Execute('*setcust M_Clist:Ext = ??M_U' + selKey[0] + ' %:%M_Clist,' + list);
-    break;
-  case 80:
-    PPx.Execute('%M_Chttp');
-    break;
-  case 62:
-  case 64:
-  case 96:
-    PPx.Execute('%M_Carc,' + archive);
-    break;
-  default:
-    PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + selKey[0] + ' %:%' + arg + ',' + selKey[1]);
-    break;
+    case 4:
+      PPx.Execute('*setcust M_Clist:Ext = ??M_U' + selKey[0] + ' %:%M_Clist,' + list);
+      break;
+    case 80:
+      PPx.Execute('%M_Chttp');
+      break;
+    case 62:
+    case 64:
+    case 96:
+      PPx.Execute('%M_Carc,' + archive);
+      break;
+    default:
+      PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + selKey[0] + ' %:%' + arg + ',' + selKey[1]);
+      break;
   }
 }
 

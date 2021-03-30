@@ -22,18 +22,18 @@ if (!PPx.GetFileInformation(opPath)) {
 // 送り元の属性に応じて振り分け
 switch (PPx.DirectoryType) {
 // 書庫
-case 63:
-case 64:
-case 96:
-  PPx.Execute('%u7-zip64.dll,x -aos -hide "%1" -o%"解凍先"%{' + cmd.dest + '%} %@');
-  break;
-// リストファイル
-case 4:
-  PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:5 -sameall -undolog -compcmd %%K"@^\\D"');
-  break;
-// その他
-default:
-  PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog ' + cmd.post);
-  break;
+  case 63:
+  case 64:
+  case 96:
+    PPx.Execute('%u7-zip64.dll,x -aos -hide "%1" -o%"解凍先"%{' + cmd.dest + '%} %@');
+    break;
+    // リストファイル
+  case 4:
+    PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:5 -sameall -undolog -compcmd %%K"@^\\D"');
+    break;
+    // その他
+  default:
+    PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog ' + cmd.post);
+    break;
 }
 

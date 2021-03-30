@@ -38,7 +38,7 @@ function State_syncview (tWin) {
       PPx.Execute('%Oin *ppv -r -bootid:' + tID);
       // capturewindowに取り込む前のサイズを記憶する
       PPx.Execute('*string i,vSize=%*getcust(_WinPos:V' + tID + ')');
-    // movingPPv off
+      // movingPPv off
       PPx.Execute('*string i,vState=1');
       PPx.Execute('%Oi *capturewindow V' + tID + ' -pane:~ -selectnoactive');
       break;

@@ -5,6 +5,7 @@
 // PPx.Arguments(1) = %FDCなど複数回スクリプトを実行したい場合に指定
 
 var arg = PPx.Arguments(0);
+var fdc;
 
 switch (arg) {
   case 'filetype':
@@ -18,7 +19,7 @@ switch (arg) {
       PPx.Quit(-1);
     }
     var fso = PPx.CreateObject('Scripting.FileSystemObject');
-    var fdc = PPx.Arguments(1);
+    fdc = PPx.Arguments(1);
     PPx.Result = fso.FileExists(fdc)|0 + fso.FolderExists(fdc)|0;
     break;
   case 'getpath': // 反対窓の有無に応じてパスを返す
@@ -39,7 +40,7 @@ switch (arg) {
     // }
     // var fdc = PPx.Arguments(1);
     // PPx.Result = PPx.Extract(`%*linkedpath(${fdc})`) || fdc;
-    var fdc = PPx.Extract('%#;FDC').split(';');
+    fdc = PPx.Extract('%#;FDC').split(';');
     var ldc = [];
     for (var i = 0, l = fdc.length; i < l; i++) {
       ldc.push(function() { return PPx.Extract('%*linkedpath(' + fdc[i] + ')') || fdc[i]; }());

@@ -26,46 +26,46 @@ var add_list = {};  // function
 var e;              // enumerator
 
 switch (PPx.DirectoryType) {
-case 0:
-  break;
-case 1:
-  fsoCdPath = fso.GetFolder(current);
-  fsoParentPath = fsoCdPath.ParentFolder;
+  case 0:
+    break;
+  case 1:
+    fsoCdPath = fso.GetFolder(current);
+    fsoParentPath = fsoCdPath.ParentFolder;
 
-  // 親ディレクトリがルートなら終了
-  if (fsoCdPath.IsRootFolder) {
-    PPx.SetPopLineMessage('!">>root');
+    // 親ディレクトリがルートなら終了
+    if (fsoCdPath.IsRootFolder) {
+      PPx.SetPopLineMessage('!">>root');
+      PPx.Quit(1);
+    }
+
+    e = new Enumerator(fsoParentPath.SubFolders);
+
+    /* 属性を考慮してリストに追加 */
+    add_list = function() {
+      var fsoTPath = fso.GetFolder(fso.BuildPath(fsoParentPath.Path, e.item().Name));
+
+      if (fsoTPath.Attributes <= 17) { list.push(e.item().Name); }
+    };
+    break;
+  case 4:
+  case 63:
+  case 64:
+  case 96:
+    fsoParentPath = fso.GetFolder(cd.par);
+
+    e = new Enumerator(fsoParentPath.Files);
+
+    /* 拡張子を考慮してリストに追加 */
+    add_list = function() {
+      var fsoTPath = fso.GetExtensionName(fso.BuildPath(fsoParentPath.Path, e.item().Name)).toLowerCase();
+
+      if (fsoTPath == cd.ext) { list.push(e.item().Name); }
+    };
+    break;
+  default:
+    PPx.SetPopLineMessage('!"Not supported.');
     PPx.Quit(1);
-  }
-
-  e = new Enumerator(fsoParentPath.SubFolders);
-
-  /* 属性を考慮してリストに追加 */
-  add_list = function() {
-    var fsoTPath = fso.GetFolder(fso.BuildPath(fsoParentPath.Path, e.item().Name));
-
-    if (fsoTPath.Attributes <= 17) { list.push(e.item().Name); }
-  };
-  break;
-case 4:
-case 63:
-case 64:
-case 96:
-  fsoParentPath = fso.GetFolder(cd.par);
-
-  e = new Enumerator(fsoParentPath.Files);
-
-  /* 拡張子を考慮してリストに追加 */
-  add_list = function() {
-    var fsoTPath = fso.GetExtensionName(fso.BuildPath(fsoParentPath.Path, e.item().Name)).toLowerCase();
-
-    if (fsoTPath == cd.ext) { list.push(e.item().Name); }
-  };
-  break;
-default:
-  PPx.SetPopLineMessage('!"Not supported.');
-  PPx.Quit(1);
-  break;
+    break;
 }
 
 (PPx.Arguments.length)

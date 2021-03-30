@@ -34,24 +34,24 @@ var Write_mark_path = function () {
 
 switch (arg[0]) {
 // git関連のリザルト
-case 'git':
-  fsoTlist = fso.OpenTextFile(arg[1], 2, true, -1);
-  fsoTlist.WriteLine(';ListFile');
-  fsoTlist.WriteLine(';Base=' + PPx.Extract('%\'myrepo\'') + '|1');
-  break;
-// 新規リストファイル
-case 'new':
-  fsoTlist = fso.OpenTextFile(arg[1], 2, true, -1);
-  fsoTlist.WriteLine(';ListFile');
+  case 'git':
+    fsoTlist = fso.OpenTextFile(arg[1], 2, true, -1);
+    fsoTlist.WriteLine(';ListFile');
+    fsoTlist.WriteLine(';Base=' + PPx.Extract('%\'myrepo\'') + '|1');
+    break;
+    // 新規リストファイル
+  case 'new':
+    fsoTlist = fso.OpenTextFile(arg[1], 2, true, -1);
+    fsoTlist.WriteLine(';ListFile');
 
-  Write_mark_path();
-  break;
+    Write_mark_path();
+    break;
   // 指定されたリストに追記
-default:
-  fsoTlist = fso.OpenTextFile(arg[1], 8, true, -1);
+  default:
+    fsoTlist = fso.OpenTextFile(arg[1], 8, true, -1);
 
-  Write_mark_path();
-  break;
+    Write_mark_path();
+    break;
 }
 fsoTlist.Close();
 

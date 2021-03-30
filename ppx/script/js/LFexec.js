@@ -11,24 +11,17 @@ if (!PPx.Arguments.length) {
   PPx.Quit(-1);
 }
 
-var arg = [PPx.Arguments(0), (PPx.Arguments.length != 2) ? 0 : PPx.Arguments(1)|0];
+var arg = { 'cmd': PPx.Arguments(0), 'exeDup': (PPx.Arguments.length != 2) ? 0 : PPx.Arguments(1)|0 };
 var rep = [];
 
 function Exe_edit(path, shortname, number, duplicate) {
-  switch(arg[0]) {
+  switch(arg.cmd) {
     case 'gvim':
-    // ヘッダ情報から検索語を取得
-      rep[0] = function (m) {
-        var regexp = /result\s=>\s(.*)/;
-        m = ObjEntry(0).Comment.replace(/\\\(/g, '(');
-        m = m.match(regexp) || '';
-        return m[1];
-      }();
-      PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + rep[0] + '/ " "' + path + '"');
+      PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + search_word + '/ " "' + path + '"');
       PPx.Execute('*wait 100,1');
       break;
     case 'ppv':
-      PPx.Execute('%Oi *ppv -bootid:C ' + path);
+      PPx.Execute('%Oi *ppv -r -bootid:C ' + path);
       PPx.Execute('*wait 100,1');
       break;
     case 'sed':
@@ -55,6 +48,18 @@ var n = (markCount != 0) ? 1 : 0;
 var exist = {};
 var entryPath, entrySN, entryNum, entryDup;
 var ObjEntry = PPx.Entry;
+// ヘッダ情報から検索語を取得
+var search_word = function() {
+  var regexp = /result\s=>\s(.*)/;
+  for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
+    var t = ObjEntry(i).Comment.match(regexp);
+    if (t) {
+      w = String(t[1]).replace(/\\\(/g, '(');
+      break;
+    }
+  }
+  return w;
+}();
 
 PPx.Entry.Index = ObjEntry.FirstMark;
 
@@ -78,7 +83,7 @@ for (var i = n; i <= markCount; i++) {
     }();
 
     // 同一パスを判別してコマンドに渡す
-    if (arg[1] == 1 || !entryDup) {
+    if (arg.exeDup === 1 || !entryDup) {
       Exe_edit(entryPath, entrySN, entryNum, entryDup);
     }
   }

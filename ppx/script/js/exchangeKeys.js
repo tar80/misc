@@ -22,8 +22,6 @@
 //   CTRL+0の場合、^V_H30としないと復元に失敗します
 // 5.'"'キーと'%'キーはエラーが出るのでいまのところ対象外です
 
-'use strict';
-
 if (PPx.Arguments.length < 2) {
   PPx.Echo('引数が足りません');
   PPx.Quit(-1);
@@ -34,6 +32,9 @@ var tPath = PPx.Arguments(1);
 var title = PPx.Extract('%*name(X,' + tPath + ')');
 var checkDup = PPx.Extract('%*getcust(M_' + title + ')').split('\u000A').length;
 var keybinds = 'KC_main, KC_incs, K_edit, K_ppe, K_lied, K_tree, KB_edit, KV_main, KV_page, KV_crt, KV_img';
+var getKeys = [];
+var header, value, cnts, escCnts;
+var i, l;
 
 var st = PPx.CreateObject('ADODB.stream');
 st.Type = 2;
@@ -43,21 +44,18 @@ st.LoadFromFile(tPath);
 var stCnts = st.ReadText(-1).split('\u000A');
 st.Close;
 
-var getKeys = [];
-var header;
-
-for (var i = 0, l = stCnts.length; i < l; i++) {
-  var value = stCnts[i];
+for (i = 0, l = stCnts.length; i < l; i++) {
+  value = stCnts[i];
   if (value.search(/^[^\s]*\s=\s{.*/) === 0) {
     header = value.replace(/^([^\s]*)\s.*/, '$1');
     if (keybinds.indexOf(header) === -1) {
-      PPx.Echo(header + 'のキー登録は許可されていません')
+      PPx.Echo(header + 'のキー登録は許可されていません');
       PPx.Quit(-1);
     }
   } else if (!value.search(/^[^\s]*\s*[=,].*/)) {
-    getKeys.push({ 'key': header, 'cmd': value.replace(/^([^\s]*)\s.*/, function(match, p1) {
+    getKeys.push({ 'key': header, 'cmd': value.replace(/^([^\s]*)\s.*/, function (match, p1) {
       return p1.replace(/\\'/g, '\\\'');
-      })
+    })
     });
   }
 }
@@ -73,16 +71,16 @@ if (process) {
     PPx.Quit(-1);
   }
 
-  for (var i = 0, l = getKeys.length; i < l; i++) {
-    var value = getKeys[i];
-    var cnts = PPx.Extract('%OC %*getcust(' + value.key + ':' + value.cmd +')');
+  for (i = 0, l = getKeys.length; i < l; i++) {
+    value = getKeys[i];
+    cnts = PPx.Extract('%OC %*getcust(' + value.key + ':' + value.cmd +')');
     if (cnts === '') {
       PPx.Execute('*setcust M_' + title + ':' + value.key + ':' + value.cmd + '=%%mNotExist %%K"@' + value.cmd);
     } else {
       if (cnts.slice(0,1) === '@' || cnts.match(/^[a-zA-Z]*$/)) {
         PPx.Execute('*setcust M_' + title + ':' + value.key + ':' + value.cmd + '=%%mSepEQ %%K"' + cnts);
       } else {
-        var escCnts = cnts.replace(/%/g, '%%');
+        escCnts = cnts.replace(/%/g, '%%');
         PPx.Execute('%OC *setcust M_' + title + ':' + value.key + ':' + value.cmd + '=' + escCnts);
       }
     }
@@ -96,9 +94,9 @@ if (process) {
   }
 
   var emptykeys = [];
-  for (var i = 0, l = getKeys.length; i < l; i++) {
-    var value = getKeys[i];
-    var cnts = PPx.Extract('%OC %*getcust(M_' + title + ':' + value.key + ':' + value.cmd + ')');
+  for (i = 0, l = getKeys.length; i < l; i++) {
+    value = getKeys[i];
+    cnts = PPx.Extract('%OC %*getcust(M_' + title + ':' + value.key + ':' + value.cmd + ')');
     if (cnts === '') {
       emptykeys.push(value);
     } else if (cnts.indexOf('mNotExist') !== -1) {
@@ -106,7 +104,7 @@ if (process) {
     } else if (cnts.indexOf('mSepEQ') !== -1) {
       PPx.Execute('*setcust ' + value.key + ':' + value.cmd + '=' + cnts.replace('%K"', ''));
     } else {
-      var escCnts = cnts.replace(/%/g, '%%');
+      escCnts = cnts.replace(/%/g, '%%');
       PPx.Execute('%OC *setcust ' + value.key + ':' + value.cmd + ',' + escCnts);
     }
   }

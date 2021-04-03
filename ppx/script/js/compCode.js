@@ -32,8 +32,8 @@ var edit = {
   title: (len > 2) ? PPx.Arguments(2) : 'compCode..',
   precmd: (len > 3) ? PPx.Arguments(3) : '',
   zero: PPx.Arguments(0),
-  type: function() { return this.zero.charAt(0); },
-  mode: function() {
+  type: function () { return this.zero.charAt(0); },
+  mode: function () {
     var keys = 'gnmshdcfuxUXREOS';
     return (keys.indexOf(this.zero.charAt(1)) !== 0) ? this.zero.substr(1) : defType;
   }
@@ -98,7 +98,7 @@ if (bsNum !== -1) { charArray[bsNum] = '\\\\'; }
 
 var regStr = '[' + charArray.join('') + ']';
 var rep = new RegExp(regStr, 'g');
-var code = (function() {
+var code = (function () {
   var str = PPx.Extract(edit.code);
   return (str !== '') ? str : PPx.Quit(1);
 })();
@@ -106,7 +106,7 @@ var code = (function() {
 PPx.Result = code.replace(rep, function (c) { return esc[c]; });
 
 /* 重複した文字をまとめて配列にする */
-function removeDupChar (array) {
+function removeDupChar(array) {
   var exist = {};
   var result = [];
 

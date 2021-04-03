@@ -62,17 +62,23 @@ const objColor = JSON.parse(clip);
 const getCfg = ((t, e = ['A_color = {']) => {
   for (const key of Object.keys(objColor)) {
     switch (key) {
-      case 'name': t = objColor[key].replace(' ', '-');
+      case 'name':
+        t = objColor[key].replace(' ', '-');
         break;
-      case 'background': e.push(`BG = ${objColor[key]}`.toUpperCase());
+      case 'background':
+        e.push(`BG = ${objColor[key]}`.toUpperCase());
         break;
-      case 'foreground': e.push(`FG = ${objColor[key]}`.toUpperCase());
+      case 'foreground':
+        e.push(`FG = ${objColor[key]}`.toUpperCase());
         break;
-      case 'selectionbackground' : e.push(`SEL_BG = ${objColor[key]}`.toUpperCase());
+      case 'selectionbackground':
+        e.push(`SEL_BG = ${objColor[key]}`.toUpperCase());
         break;
-      case 'cursorcolor': e.push(`CUR = ${objColor[key]}`.toUpperCase());
+      case 'cursorcolor':
+        e.push(`CUR = ${objColor[key]}`.toUpperCase());
         break;
-      default: e.push(`${key} = ${objColor[key]}`.replace('bright', 'b').toUpperCase());
+      default:
+        e.push(`${key} = ${objColor[key]}`.replace('bright', 'b').toUpperCase());
     }
   }
   return { 'title': t, 'ele': e };

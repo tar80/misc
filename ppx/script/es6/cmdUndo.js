@@ -67,7 +67,7 @@ switch (arg) {
               const ObjEntry = PPx.Entry;
 
               for (let i = 0; i < l; i++) {
-                if (ObjEntry(i).state != 1 && (result[0].replace(/Backup\t(.*)/, '$1' ) == cDir + ObjEntry(i).Name)) {
+                if (ObjEntry(i).state != 1 && (result[0].replace(/Backup\t(.*)/, '$1') === cDir + ObjEntry(i).Name)) {
                   PPx.SetPopLineMessage('Do Not!');
                   fsoUndoLog.Close();
                   PPx.Quit(-1);

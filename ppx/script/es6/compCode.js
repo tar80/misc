@@ -34,8 +34,8 @@ const edit = {
   title: (len > 2) ? PPx.Arguments(2) : 'compCode..',
   precmd: (len > 3) ? PPx.Arguments(3) : '',
   zero: PPx.Arguments(0),
-  type: function() { return this.zero.charAt(0); },
-  mode: function() {
+  type: function () { return this.zero.charAt(0); },
+  mode: function () {
     const keys = 'gnmshdcfuxUXREOS';
     return (keys.indexOf(this.zero.charAt(1)) !== 0 ) ? this.zero.substr(1) : defType;
   }

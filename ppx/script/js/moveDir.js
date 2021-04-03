@@ -41,7 +41,7 @@ switch (PPx.DirectoryType) {
     e = new Enumerator(fsoParentPath.SubFolders);
 
     /* 属性を考慮してリストに追加 */
-    add_list = function() {
+    add_list = function () {
       var fsoTPath = fso.GetFolder(fso.BuildPath(fsoParentPath.Path, e.item().Name));
 
       if (fsoTPath.Attributes <= 17) { list.push(e.item().Name); }
@@ -56,7 +56,7 @@ switch (PPx.DirectoryType) {
     e = new Enumerator(fsoParentPath.Files);
 
     /* 拡張子を考慮してリストに追加 */
-    add_list = function() {
+    add_list = function () {
       var fsoTPath = fso.GetExtensionName(fso.BuildPath(fsoParentPath.Path, e.item().Name)).toLowerCase();
 
       if (fsoTPath == cd.ext) { list.push(e.item().Name); }

@@ -28,7 +28,7 @@ function callID() {
 function path() {
   if (PPx.Extract('%se"grep"') !== '1') { return '%R'; }
   var seltext = PPx.extract('%*script(%\'scr\'%\\compCode.js,"s","""")');
-  var p = seltext.replace(/^([^:].*):\d*:.*/, function(match, p1) {
+  var p = seltext.replace(/^([^:].*):\d*:.*/, function (match, p1) {
     return '%*extract(C"%%FD")%\\' + p1;
   });
   return p;

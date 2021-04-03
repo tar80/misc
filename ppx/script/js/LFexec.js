@@ -49,7 +49,7 @@ var exist = {};
 var entryPath, entrySN, entryNum, entryDup;
 var ObjEntry = PPx.Entry;
 // ヘッダ情報から検索語を取得
-var search_word = function(w) {
+var search_word = function (w) {
   var regexp = /result\s=>\s(.*)/;
   for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
     var t = ObjEntry(i).Comment.match(regexp);
@@ -76,7 +76,7 @@ for (var i = n; i <= markCount; i++) {
     entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN|0 : 1;
 
     // 重複エントリの判別
-    entryDup = function(isDup) {
+    entryDup = function (isDup) {
       isDup = (exist[entryPath]) ? true : false;
       exist[entryPath] = true;
       return isDup;

@@ -43,7 +43,7 @@ switch (arg) {
     fdc = PPx.Extract('%#;FDC').split(';');
     var ldc = [];
     for (var i = 0, l = fdc.length; i < l; i++) {
-      ldc.push(function() { return PPx.Extract('%*linkedpath(' + fdc[i] + ')') || fdc[i]; }());
+      ldc.push(function () { return PPx.Extract('%*linkedpath(' + fdc[i] + ')') || fdc[i]; }());
     }
     PPx.Result = ldc.join(' ');
     break;

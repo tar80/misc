@@ -125,7 +125,7 @@ PPx.Execute('*string i,Edit_OptionCmd=*string i,gopt=%%*input("%%se"lock"%%se"ad
 -k *completelist /set /file:"%%\'list\'\\%%se"list"") %%: *setcaption [%%si"output"] %%si"cmd" %%si"gopt" ※\\=\\\\\\\\');
 
 // 検索文字の入力とエスケープ処理
-var str = function(esc) {
+var str = function (esc) {
   try {
     PPx.Execute('*string i,gopt=' + dogrep.lock + dogrep.add);
     return esc = PPx.Extract(
@@ -163,7 +163,7 @@ if (PPx.Extract('%si"output"') === 'PPv') {
   var fsoTlist = fso.OpenTextFile(arg.listfile, 1, false, -1);
 
   while (!fsoTlist.AtEndOfStream) {
-    fsoTlist.ReadLine().replace(/^([^-:]*)[-:](\d*)([-:])\s*(.*)/, function(match, p1, p2, p3, p4) {
+    fsoTlist.ReadLine().replace(/^([^-:]*)[-:](\d*)([-:])\s*(.*)/, function (match, p1, p2, p3, p4) {
       p1 = (p1 == '') ? p3 : p1.replace(/^\.\.\\.*\//, '');
       p3 = (p3.indexOf(':') != -1) ? 0 : 3;
       p4 = p4.replace(/"/g, '""');

@@ -6,7 +6,7 @@
 
 var saveHistory = (!PPx.Arguments.length) ? false : true;
 var tHistory = PPx.Extract('%*editprop(whistory)');
-var tType = (function() {
+var tType = (function () {
   var key = 'gnmshdcfuxUX';
   var type = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
   return type[key.indexOf(tHistory)];

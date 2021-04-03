@@ -3,7 +3,7 @@
 //
 // PPx.Arguments() = (0)filepath (1)color
 
-var arg = function() {
+var arg = function () {
   var len = PPx.Arguments.length;
 
   if (len || len < 1) {

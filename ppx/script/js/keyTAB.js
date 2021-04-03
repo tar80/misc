@@ -2,7 +2,7 @@
 //
 /* TABキーで窓移動 */
 
-var x = function() {
+var x = function () {
   var w = PPx.WindowIDName;
   var s = (w.substr(0, 1) === 'C') ? 'V' : 'C';
   return { 'winid': w, 'syncwin': s, 'id': w.substr(2, 1) };

@@ -7,59 +7,59 @@
 
 'use strict';
 
-if (PPx.Arguments.length != 2) {
+if (PPx.Arguments.length !== 2) {
   PPx.Echo('引数が異常');
   PPx.Quit(1);
 }
 
-const arg = [PPx.Arguments(0), PPx.Arguments(1)];
-let cd = {};
+const arg = { 'action': PPx.Arguments(0)|0, 'filepath': PPx.Arguments(1) };
+let current = {};
 
 PPx.Extract('%FDVN').replace(/^(.*)\\((.*\.)?(?!$)(.*))/, (match, p1, p2, p3, p4) => {
-  cd = {
+  current = {
     path: `${match}\\`,
-    par:  p1,
+    pwd:  p1,
     name: p2,
     ext:  `.${p4.toLowerCase()}`
   };
-  return cd;
+  return current;
 });
 
-if (cd.par == undefined) {
+if (current.pwd === undefined) {
   PPx.SetPopLineMessage('!"<<Root>>');
   PPx.Quit(1);
 }
 
 switch (PPx.DirectoryType) {
-case 0:
-  break;
-case 1:
+  case 0:
+    break;
+  case 1:
   // 属性を考慮してリスト作成
-  PPx.Execute(`*whereis -path:"${cd.par}%\\" -mask:"a:d+s-" -dir:on -subdir:off -listfile:${arg[1]} -name`);
-  break;
-case 4:
-case 63:
-case 64:
-case 96:
+    PPx.Execute(`*whereis -path:"${current.pwd}%\\" -mask:"a:d+s-" -dir:on -subdir:off -listfile:${arg.filepath} -name`);
+    break;
+  case 4:
+  case 63:
+  case 64:
+  case 96:
   // 拡張子を考慮してリスト作成
-  PPx.Execute(`*whereis -path:"${cd.par}%\\" -mask:${cd.ext} -subdir:off -listfile:${arg[1]} -name`);
-  cd.path = cd.path.slice(0, -1);
-  break;
-default:
-  PPx.SetPopLineMessage('!"Not supported.');
-  PPx.Quit(1);
-  break;
+    PPx.Execute(`*whereis -path:"${current.pwd}%\\" -mask:${current.ext} -subdir:off -listfile:${arg.filepath} -name`);
+    current.path = current.path.slice(0, -1);
+    break;
+  default:
+    PPx.SetPopLineMessage('!"Not supported.');
+    PPx.Quit(1);
+    break;
 }
 
 
-(arg[0] == 0)
+(arg.action === 0)
   ? move_path(-1, 1, 'top')
   : move_path(1, -1, 'bottom');
 
 /* パス移動を実行する関数 */
 function move_path(valA, valB, termMessage) {
   const fso = PPx.CreateObject('Scripting.FileSystemObject');
-  const fsoTempfile = fso.OpenTextFile(arg[1], 1, false, -1);
+  const fsoTempfile = fso.OpenTextFile(arg.filepath, 1, false, -1);
 
   if (fsoTempfile.AtEndOfLine) {
     PPx.SetPopLineMessage('!"empty.');
@@ -75,14 +75,14 @@ function move_path(valA, valB, termMessage) {
 
   fsoTempfile.Close();
 
-  if (pathList.length == 1) {
+  if (pathList.length === 1) {
     PPx.Execute('*linemessage !"not found.');
   } else {
     // リストを名前順でソート
     pathList.sort((a, b) => (a.toLowerCase() < b.toLowerCase()) ? valA : valB);
 
     // 対象エントリ名を取得
-    const i = pathList.indexOf(cd.path);
+    const i = pathList.indexOf(current.path);
     const targetPath = pathList[Math.max(i - 1, 0)];
 
     // 端ならメッセージを表示

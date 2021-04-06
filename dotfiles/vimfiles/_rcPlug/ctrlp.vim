@@ -43,7 +43,7 @@ let g:ctrlp_follow_symlinks = 1
 "  \ }
 let g:ctrlp_line_prefix = ''
 " let g:ctrlp_open_single_match = ['buffer tags', 'buffer']
-let g:ctrlp_mruf_max = 100
+let g:ctrlp_mruf_max = 20
 " let g:ctrlp_mruf_exclude = ''
 " let g:ctrlp_mruf_include = ''
 " let g:ctrlp_tilde_homedir = 0
@@ -93,16 +93,17 @@ endfunction
 "#}}}
 "======================================================================
 "# Keys
-" nnoremap <silent> <leader>; :<C-u>CtrlPBuffer<CR>
-nnoremap <silent> <leader>l :<C-u>CtrlPCurWD<CR>
-nnoremap <silent> <leader>o :<C-u>CtrlPMRU<CR>
-nnoremap <silent> <leader>r :<C-u>CtrlPDir C:\bin\repository\tar80\misc<CR>
-nnoremap <silent> <leader>g :<C-u>call <SID>CtrlPrg()<CR>
-function! s:CtrlPrg() abort
-    let b:ctrlp_user_command = 'rg %s --column --line-number --no-heading ""'
-    let b:ctrlp_use_caching = 0
-    CtrlP
-endfunction
+" nnoremap <silent> <leader>; :<C-u>CtrlPMixed<CR>
+nnoremap <silent> <leader>l :<C-u>CtrlPLine<CR>
+nnoremap <silent> <leader>o :<C-u>CtrlPMixed<CR>
+nnoremap <silent> <leader>p :<C-u>CtrlPDir C:\bin\repository\tar80\misc<CR>
+nnoremap <silent> <leader>r :<C-u>CtrlP C:\bin\repository\tar80\misc<CR>
+" nnoremap <silent> <leader>g :<C-u>call <SID>CtrlPrg()<CR>
+" function! s:CtrlPrg() abort
+"     let b:ctrlp_user_command = 'rg --column --line-number --no-heading "" .'
+"     let b:ctrlp_use_caching = 0
+"     CtrlP
+" endfunction
 " nnoremap <Leader>a :call <SID>CallCtrlPBasedOnGitStatus()<Return>
 " function! s:CallCtrlPBasedOnGitStatus()
 "   let s:git_status = system("git status -s")

@@ -3,31 +3,7 @@
 // 1.色設定が上書きされるのでバックアップを取っておく
 // 2.https://windowsterminalthemes.dev/ で気に入った色テーマを"Get theme"する
 // 3.クリップボードに設定がコピーされるのでそのままこのスクリプトを実行
-/*
-{
-  "name": "Japanesque",
-  "black": "#343935",
-  "red": "#cf3f61",
-  "green": "#7bb75b",
-  "yellow": "#e9b32a",
-  "blue": "#4c9ad4",
-  "purple": "#a57fc4",
-  "cyan": "#389aad",
-  "white": "#fafaf6",
-  "brightBlack": "#595b59",
-  "brightRed": "#d18fa6",
-  "brightGreen": "#767f2c",
-  "brightYellow": "#78592f",
-  "brightBlue": "#135979",
-  "brightPurple": "#604291",
-  "brightCyan": "#76bbca",
-  "brightWhite": "#b2b5ae",
-  "background": "#1e1e1e",
-  "foreground": "#f7f6ec",
-  "selectionBackground": "#175877",
-  "cursorColor": "#edcf4f"
-}
-*/
+
 /////////* 初期設定 *////////////
 
 // 設定ファイルを作成する場所
@@ -88,7 +64,7 @@ var getCfg = function() {
       p1 = p1.replace(/"/g, '');
       p2 = p2.replace(/"/g, '').slice(0,-1);
       switch (p1) {
-        case 'name': t = p2.replace(/\s/g, '-');
+        case 'name': t = p2.replace(/\s/g, '-').slice(0, -1);
           break;
         case 'background': e.push('BG = ' + p2.toUpperCase());
           break;
@@ -98,7 +74,7 @@ var getCfg = function() {
           break;
         case 'cursorcolor': e.push('CUR = ' + p2.toUpperCase());
           break;
-        default: e.push(p1 + ' = ' + p2.replace('bright', 'b').toUpperCase());
+        default: e.push(p1.toUpperCase() + ' = ' + p2.replace('bright', 'b').toUpperCase());
       }
     });
   }

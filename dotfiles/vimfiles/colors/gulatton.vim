@@ -50,7 +50,7 @@ let s:purple = '#A659A4'
 let s:cyan   = '#76ADC0'
 let s:orange = '#D1934C'
 let s:plum   = '#E54661'
-let s:navy1  = '#17171F'
+let s:navy1  = '#16132C'
 let s:navy2  = '#2D2F69'
 let s:brown  = '#2E1212'
 

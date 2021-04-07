@@ -65,6 +65,7 @@ switch (arg) {
   // ※返すパスはスペース区切りの複数のパス
   case 'lfnames':
     {
+      if (PPx.EntryMarkCount === 0) { PPx.Entry.Mark = 1; }
       const objEntry = PPx.Entry;
       objEntry.FirstMark;
       let fn = '';

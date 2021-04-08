@@ -1,4 +1,4 @@
-﻿add ;[--opton][<path>]
+﻿add ;[--option][<path>]
 	-v %#FC
 	-v . ;      カレント以下
 	-v --all ;  全部

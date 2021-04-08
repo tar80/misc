@@ -37,7 +37,7 @@ const edit = {
   type: function () { return this.zero.charAt(0); },
   mode: function () {
     const keys = 'gnmshdcfuxUXREOS';
-    return (keys.indexOf(this.zero.charAt(1)) !== 0 ) ? this.zero.substr(1) : defType;
+    return (keys.indexOf(this.zero.charAt(1)) !== 0) ? this.zero.substr(1) : defType;
   }
 };
 

@@ -54,6 +54,8 @@ switch (edit.type()) {
     PPx.Quit(-1);
 }
 
+var code = PPx.Extract(edit.code) || PPx.Quit(-1);
+
 // String内のseqと同じ文字数をカウント。最大max回
 String.prototype.counter = function (seq, max) {
   var i = this.split(seq).length - 1;
@@ -65,23 +67,25 @@ String.prototype.repeat = function (count) { return Array(count * 1 + 1).join(th
 
 // 重複した文字をまとめて配列にする
 var charArray = removeDupChar(edit['chr'].split(''));
-var charCount = [];
 var countMax = 4;
 
 // 同じ文字数のカウント
-for (var i = 0, l = charArray.length; i < l; i++) {
-  charCount.push(edit['chr'].counter(charArray[i], countMax));
-}
+var charCount = function () {
+  var cc = [];
+  for (var i = 0, l = charArray.length; i < l; i++) {
+    cc.push(edit['chr'].counter(charArray[i], countMax));
+  }
+  return cc;
+}();
 
 // 配列からオブジェクトを生成
 var bsNum = [];
-var esc = {};
-
-esc = function () {
+var esc = function () {
+  var chr = [];
   for (var i = 0, l = charArray.length; i < l; i++) {
-    esc[charArray[i]] = charArray[i].repeat(Esc_excp(charArray[i], i));
+    chr[charArray[i]] = charArray[i].repeat(Esc_excp(charArray[i], i));
   }
-  return esc;
+  return chr;
 }();
 
 // 例外処理
@@ -93,15 +97,10 @@ function Esc_excp (ele, num) {
     return charCount[num];
   }
 }
-
 if (bsNum !== -1) { charArray[bsNum] = '\\\\'; }
 
 var regStr = '[' + charArray.join('') + ']';
 var rep = new RegExp(regStr, 'g');
-var code = (function () {
-  var str = PPx.Extract(edit.code);
-  return (str !== '') ? str : PPx.Quit(1);
-})();
 
 PPx.Result = code.replace(rep, function (c) { return esc[c]; });
 

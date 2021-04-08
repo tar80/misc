@@ -30,7 +30,8 @@ switch (PPx.GetFileInformation(opDir)) {
   case '':
     tDir = '%\'work\'%\\';
     cmdOpt = ['copy', ''];
-    post = '-compcmd *ppc -pane:~ %%hd0';
+    post = '-compcmd *ppc -pane:~ %%hd0 -k *jumppath -entry:' + cdFileName
+    ;
     break;
   default:
     PPx.Echo('非対象ディレクトリ');

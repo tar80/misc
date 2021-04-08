@@ -9,4 +9,4 @@ if sb == "" then
     return nil
 end
 
-nyagos.exec('c:/bin/ppx/PPTRAYW.EXE -c *addhistory g,' .. sb)
+nyagos.exec(arg[1]..'PPTRAYW.EXE -c *addhistory g,' .. sb)

@@ -13,11 +13,11 @@ if (!PPx.Arguments.length) {
 PPx.Execute('*markentry -highlight:0');
 
 var arg = PPx.Arguments(0)|1;
-var word = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment..")');
+var word = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment.. ※正規表現")') || PPx.Quit(-1);
 var ObjEntry = PPx.Entry;
-var entryCount = ObjEntry.Count - 1;
+var entryCount = ObjEntry.Count;
 
-for (var i = 1; i <= entryCount; i++) {
+for (var i = 1; i < entryCount; i++) {
   if (ObjEntry(i).Comment.search(word) != -1) { ObjEntry(i).highlight = arg; }
 }
 

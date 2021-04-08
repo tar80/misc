@@ -1,5 +1,6 @@
 ﻿//!*script
 /* undo,redo */
+//
 // PPx.Arguments(0)=無:undo|他:redo
 
 'use strict';

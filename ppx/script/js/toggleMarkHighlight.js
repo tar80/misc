@@ -3,13 +3,13 @@
 //
 // 参照元:http://hoehoetukasa.blogspot.com/2015/08/blog-post.html
 
-var ObjEntry = PPx.Entry;
-
 for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
-  if (ObjEntry(i).Mark === 1) {
-    ObjEntry(i).Mark = 0;
-  } else if (ObjEntry(i).Highlight) {
-    ObjEntry(i).Mark = 1;
+  var thisEntry = PPx.Entry(i);
+
+  if (thisEntry.Mark === 1) {
+    thisEntry.Mark = 0;
+  } else if (thisEntry.Highlight || thisEntry.State > 3) {
+    thisEntry.Mark = 1;
   }
 }
 

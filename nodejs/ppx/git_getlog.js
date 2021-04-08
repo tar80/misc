@@ -107,7 +107,7 @@ const Make_status = (filepath => {
           const p4 = (setColorNum => {
             setColorNum = new Map([[' ', 1], ['D', 5], ['!', 3]]);
             for (const [key, value] of setColorNum) {
-              if (p2.indexOf(key) !== -1) { value; }
+              if (p2.indexOf(key) !== -1) { return value; }
             }
             return 8;
           })();

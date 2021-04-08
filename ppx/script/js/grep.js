@@ -17,12 +17,12 @@ if (arglen < 3) {
 /////////* 初期設定 *////////////
 
 // 使用するコマンド
-var use_LF_grep    = true;
+var use_LF_grep    = false;
 var use_LF_rg      = false;
-var use_LF_jvgrep  = false;
-var use_PPv_grep   = true;
+var use_LF_jvgrep  = true;
+var use_PPv_grep   = false;
 var use_PPv_rg     = false;
-var use_PPv_jvgrep = false;
+var use_PPv_jvgrep = true;
 
 // grep_option lockは固定。addの値を変更
 // ※addの記述はハイフン(-)で始まる場合スペースを１つ入れる

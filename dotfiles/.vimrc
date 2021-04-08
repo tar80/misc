@@ -196,9 +196,9 @@ call plug#begin('~/vimfiles')
 "# auto
   Plug 'shougo/vimproc.vim', { 'dir': '~/vimfiles/vimproc.vim', 'do': 'make' }
   Plug 'rhysd/clever-f.vim'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  " Plug 'ctrlpvim/ctrlp.vim'
+  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  " Plug 'junegunn/fzf.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
   " Plug 'mattn/ctrlp-matchfuzzy'
   Plug 'itchyny/lightline.vim'
   Plug 'itchyny/vim-parenmatch'

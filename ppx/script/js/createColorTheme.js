@@ -74,7 +74,7 @@ var getCfg = function() {
           break;
         case 'cursorcolor': e.push('CUR = ' + p2.toUpperCase());
           break;
-        default: e.push(p1 + ' = ' + p2.replace('bright', 'b').toUpperCase());
+        default: e.push(p1.toUpperCase() + ' = ' + p2.replace('bright', 'b').toUpperCase());
       }
     });
   }

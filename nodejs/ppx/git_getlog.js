@@ -8,17 +8,6 @@
 // ※%si"oBranch"対象パスのブランチ名、%si"gr"レポジトリのルートパス、%si"gm"(status or log)表示中のログ
 // %si"ps",%si"pl,%si"pd"にそれぞれstatus, log, diffのログのパスが設定される
 
-/* git-mode開始用のキーバインド
-KC_main = {
-^G , *ifmatch !0,0%si"gm" %: *linemessage !"already run git-mode %: *stop
-     *setcust _User:g_git_pos=0
-     *ifmatch 0,0%*getcust(_User:g_C_back) %: *setcust _User:g_C_back=%*getcust(C_back)
-     *if !0%*getcust(_User:g_XC_alac) %: *setcust _User:g_XC_alac=%*getcust(XC_alac)
-     *setcust C_back=H2F151A
-     *setcust XC_alac=0
-     node path\git_getlog.js 1 1 1 start
-  */
-
 'use strict';
 
 /////////* 初期設定 *////////////
@@ -46,14 +35,14 @@ const gDiff   = 'gitdiff';
 const fs = require('fs');
 const path = require('path');
 const { exec, execSync } = require('child_process');
-const iconv = require('iconv-lite');
+// const iconv = require('iconv-lite');
 
 const arg = (() => {
   if (process.argv.length < 5) {
     console.log('Error:引数が足りません');
     process.exit();
   } else {
-    return { 'focus': process.argv[5], 'stat': process.argv[2], 'log': process.argv[3], 'diff': process.argv[4] };
+    return { 'open': process.argv[5], 'stat': process.argv[2], 'log': process.argv[3], 'diff': process.argv[4] };
   }
 })();
 
@@ -79,6 +68,10 @@ const gi = (() => {
   } while (wd !== path.parse(wd).root);
 })();
 
+exec(`${ppxDir}\\pptrayw -c *execute CG,*jumppath -savelocate`, (err) => {
+  if (err) { console.log(err); }
+});
+
 const pathStat = `${listDir}\\${gi.prefix}${gStatus}.xgit`;
 const infoLog = (() => {
   const mode = (arg.log === '1')
@@ -93,7 +86,7 @@ const infoLog = (() => {
     : {
       'refs': mode.str,
       'path': `${listDir}\\${gi.prefix}${gLog}${mode.add}.xgit`,
-      'func': function() { return mode.func(this.path); }
+      'func': function () { return mode.func(this.path); }
     };
 })();
 const pathDiff = (() => {
@@ -121,7 +114,7 @@ const Make_status = (filepath => {
           result.push(`"${p3}","",A:H${p4},C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:0,M:0,T:"${p1}${p2}"`);
         });
       }
-      resolve(Write_result(result, filepath, 1));
+      resolve((arg.open !== 'start' || arrData.length > 1) ? Write_result(result, filepath, 1) : ['', filepath, 0]);
     });
   });
 });
@@ -162,18 +155,24 @@ const Make_log_commit = (filepath => {
     exec(`git log -n1 --date=short --name-status --format="%h (%cr)%s %d" ${arg.log}`, (err, stdout) => {
       if (err) { reject(err); }
       const arrData = stdout.split('\u000A');
+      let flag = true;
 
       for (const line of arrData) {
-        line.replace(/^(.)\t?(.*)/, (match, p1, p2) => {
-          const p3 = (setColorNum => {
-            setColorNum = new Map([['M', 1], ['D', 5], ['A', 10], [' ', 0]]);
-            for (const [key, value] of setColorNum) {
-              if (p1.indexOf(key) !== -1) { return value; }
-            }
-            return 8;
-          })();
-          result.push(`"${p2}","${p1}",A:H${p3},C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:0,M:0,T:"${arg.log}"`);
-        });
+        if (flag === true) {
+          flag = false;
+          result.push(`"${line}","**",A:H10,C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:0,M:0,T:"${arg.log}"`);
+        } else {
+          line.replace(/^(.)\t?(.*)/, (match, p1, p2) => {
+            const p3 = (setColorNum => {
+              setColorNum = new Map([['M', 0], ['D', 5], ['A', 1], [' ', 0]]);
+              for (const [key, value] of setColorNum) {
+                if (p1.indexOf(key) !== -1) { return value; }
+              }
+              return 8;
+            })();
+            result.push(`"${p2}","${p1}",A:H${p3},C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:0,M:0,T:"${arg.log}"`);
+          });
+        }
       }
       resolve(Write_result(result, filepath));
     });
@@ -201,21 +200,22 @@ const Make_diff_commit = (filepath => {
 });
 
 // 置換結果を書き出して上書き
-function Write_result(result, dist) {
+function Write_result(res, dist, flag) {
   fs.writeFileSync(dist , '');
   const fd = fs.openSync(dist, 'w');
-  const buf = iconv.encode(result.join('\u000D\u000A'), 'utf16');
+  const buf = res.join('\u000D\u000A');
+  // const buf = iconv.encode(res.join('\u000D\u000A'), 'utf16');
   return new Promise((resolve, reject) => {
     fs.write(fd, buf, 0, buf.length, (err) => {
       if (err) { reject(err); }
       console.log(`${dist} ok.`);
-      resolve({'path': dist});
+      resolve({'path': dist, 'flag': flag});
     });
   });
 }
 
 const Async_run = (async () => {
-  (arg.focus === 'start') ? await start() : await set();
+  (arg.open === 'start') ? await start() : await set();
   if (arg.diff !== '0') {
     await (() => { return (arg.diff === '1') ? Make_diff(pathDiff) : Make_diff_commit(pathDiff); })();
   }
@@ -229,43 +229,48 @@ Async_run().then(() => {
 async function start() {
   if (arg.stat === '1') {
     await (async () => {
-      const wReslut = await Make_status(pathStat);
-      return startPPc(wReslut.path, 'status');
+      const wResult = await Make_status(pathStat);
+      if (wResult.flag === 1) {
+        return startPPc(wResult.path, 'status');
+      } else {
+        console.log('status no change.');
+        throw new Error();
+      }
     })().then(async () => {
       if (arg.log !== '0') { await infoLog.func(); }
     }).catch(async () => {
       if (arg.log !== '0') {
         await (async () => {
-          const wReslut = await infoLog.func();
-          startPPc(wReslut.path, 'log');
+          const wResult = await infoLog.func();
+          startPPc(wResult.path, 'log');
         })();
       }
     });
   } else {
     if (arg.log !== '0') {
       await (async () => {
-        const wReslut = await infoLog.func();
-        startPPc(wReslut.path, 'log');
+        const wResult = await infoLog.func();
+        startPPc(wResult.path, 'log');
       })();
     }
   }
 }
 
 async function set() {
-  if (arg.stat === '1') {
+  if (arg.stat !== '0') {
     await (async () => {
-      const wReslut = await Make_status(pathStat);
-      if (arg.focus === 'status') {
-        return setLog(wReslut.path, 'status');
+      const wResult = await Make_status(pathStat);
+      if (arg.open === 'status') {
+        setLog(wResult.path, 'status', '-update');
       }
       return;
     })();
   }
   if (arg.log !== '0') {
     await (async () => {
-      const wReslut = await infoLog.func();
-      if (arg.focus === 'log') {
-        return setLog(wReslut.path, infoLog.refs);
+      const wResult = await infoLog.func();
+      if (arg.open === 'log') {
+        return setLog(wResult.path, infoLog.refs);
       }
       return;
     })();
@@ -284,13 +289,13 @@ function startPPc(dist, mode) {
   return;
 }
 
-function setLog(dist, mode) {
+function setLog(dist, mode, opt) {
   const ps = (arg.stat === '0') ? '' : `*string i,ps=${pathStat}`;
   const pl = (arg.log === '0') ? '' : `*string i,pl=${infoLog.path}`;
   const pd = (arg.diff === '0') ? '' : `*string i,pd=${pathDiff}`;
   return new Promise((resolve, reject) => {
-    exec(`${ppxDir}\\ppcw -r -noactive -bootid:${cID} -k *jumppath ${dist} -savelocate %:*string i,gm=${mode} %:\
-${ps} %:${pl} %:${pd} %:*viewstyle -temp git${mode}` , (err) => {
+    exec(`${ppxDir}\\ppcw -r -noactive -bootid:${cID} -k *jumppath ${dist} ${opt} -savelocate %:\
+*string i,gm=${mode} %:${ps} %:${pl} %:${pd} %:*viewstyle -temp git${mode}` , (err) => {
       if (err) { reject(err); }
       resolve();
     });

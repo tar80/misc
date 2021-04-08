@@ -3,7 +3,7 @@ images
 theme
 .eslintrc.json
 @add_command.cfg
-Px_@Path.cfg
+*@Path.cfg
 Px_XC_inf1@.cfg
 package-lock.json
 index.js

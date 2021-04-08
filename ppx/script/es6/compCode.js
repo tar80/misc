@@ -56,6 +56,8 @@ switch (edit.type()) {
     PPx.Quit(-1);
 }
 
+const code = PPx.Extract(edit.code) || PPx.Quit(-1);
+
 // String内のseqと同じ文字数をカウント。最大max回
 String.prototype.counter = function (seq, max) {
   let i = this.split(seq).length - 1;
@@ -92,7 +94,6 @@ if (bsNum !== -1) { charArray[bsNum] = '\\\\'; }
 
 const regStr = `[${charArray.join('')}]`;
 const rep = new RegExp(regStr, 'g');
-const code = ((str = PPx.Extract(edit.code)) => { return (str !== '') ? str : PPx.Quit(-1); })();
 
 PPx.Result = code.replace(rep, (c) => esc[c]);
 

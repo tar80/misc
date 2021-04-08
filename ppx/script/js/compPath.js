@@ -25,6 +25,6 @@ if (PPx.Arguments.length) {
 
   PPx.Result = str.join('');
 } else {
-  PPx.Result = PPx.Arguments(0);
+  PPx.Result = editStr;
 }
 

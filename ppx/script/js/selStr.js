@@ -17,9 +17,11 @@ try {
     wparam = (p2 != '') ? str.lastIndexOf(p2) : lparam;
   });
 
+  if (lparam === undefined) { throw 'No match.'; }
   PPx.Execute('*sendmessage %N,177,' + wparam + ',' + lparam);
+
 } catch (e) {
-  PPx.SetPopLineMessage(e);
+  PPx.SetPopLineMessage('selStr: ' + e);
   PPx.Quit(-1);
 }
 

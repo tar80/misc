@@ -68,7 +68,8 @@ const gi = (() => {
   } while (wd !== path.parse(wd).root);
 })();
 
-exec(`${ppxDir}\\pptrayw -c *execute CG,*jumppath -savelocate`, (err) => {
+// listfileの更新状態を初期化
+exec(`${ppxDir}\\pptrayw -c *execute C${cID},*jumppath -savelocate`, (err) => {
   if (err) { console.log(err); }
 });
 

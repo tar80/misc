@@ -68,11 +68,6 @@ const gi = (() => {
   } while (wd !== path.parse(wd).root);
 })();
 
-// listfileの更新状態を初期化
-exec(`${ppxDir}\\pptrayw -c *execute C${cID},*jumppath -savelocate`, (err) => {
-  if (err) { console.log(err); }
-});
-
 const pathStat = `${listDir}\\${gi.prefix}${gStatus}.xgit`;
 const infoLog = (() => {
   const mode = (arg.log === '1')
@@ -262,7 +257,7 @@ async function set() {
     await (async () => {
       const wResult = await Make_status(pathStat);
       if (arg.open === 'status') {
-        setLog(wResult.path, 'status', '-update');
+        setLog(wResult.path, 'status');
       }
       return;
     })();
@@ -290,12 +285,12 @@ function startPPc(dist, mode) {
   return;
 }
 
-function setLog(dist, mode, opt) {
+function setLog(dist, mode) {
   const ps = (arg.stat === '0') ? '' : `*string i,ps=${pathStat}`;
   const pl = (arg.log === '0') ? '' : `*string i,pl=${infoLog.path}`;
   const pd = (arg.diff === '0') ? '' : `*string i,pd=${pathDiff}`;
   return new Promise((resolve, reject) => {
-    exec(`${ppxDir}\\ppcw -r -noactive -bootid:${cID} -k *jumppath ${dist} ${opt} -savelocate %:\
+    exec(`${ppxDir}\\ppcw -r -noactive -bootid:${cID} -k *jumppath ${dist} -savelocate %:\
 *string i,gm=${mode} %:${ps} %:${pl} %:${pd} %:*viewstyle -temp git${mode}` , (err) => {
       if (err) { reject(err); }
       resolve();

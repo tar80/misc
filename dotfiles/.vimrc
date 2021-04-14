@@ -123,6 +123,8 @@ set ambiwidth =double
 set lazyredraw
 "# Windowsでパスの区切りに / を使えるようにする
 " set shellslash
+"# パス区切り
+set isfname -==
 "# w,bの移動で認識する文字
 set iskeyword +==
 "# 起動時のメッセージ非表示
@@ -200,6 +202,8 @@ call plug#begin('~/vimfiles')
   " Plug 'junegunn/fzf.vim'
   Plug 'ctrlpvim/ctrlp.vim'
   " Plug 'mattn/ctrlp-matchfuzzy'
+  Plug 'mattn/webapi-vim'
+  Plug 'mattn/vim-gist'
   Plug 'itchyny/lightline.vim'
   Plug 'itchyny/vim-parenmatch'
   Plug 'itchyny/vim-gitbranch'

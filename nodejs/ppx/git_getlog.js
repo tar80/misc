@@ -5,7 +5,8 @@
 // [3]1:git log  | hash値:git log hash
 // [4]1:git diff | hash値:git diff hash
 // [5]start | status | log  ;git-mode開始時はstartを指定、status、logはPPcで開くログの種類
-// ※%si"oBranch"対象パスのブランチ名、%si"gr"レポジトリのルートパス、%si"gm"(status or log)表示中のログ
+// ※スクリプトは対象PPcに以下の変数を設定する
+// %si"oBranch"対象パスのブランチ名、%si"gr"レポジトリのルートパス、%si"gm"(status or log)表示中のログ
 // %si"ps",%si"pl,%si"pd"にそれぞれstatus, log, diffのログのパスが設定される
 
 'use strict';

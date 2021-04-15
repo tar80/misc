@@ -40,7 +40,7 @@ var gi = function () {
 }();
 
 var pathStat = fso.BuildPath(listDir, gStatus + '.xgit');
-var pathDiff = fso.BuildPath(listDir, gDiff + '.xgit');
+var pathDiff = fso.BuildPath(listDir, gDiff + '.patch');
 var fso;
 
 // ログの取得

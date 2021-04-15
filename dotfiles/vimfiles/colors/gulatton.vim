@@ -50,9 +50,9 @@ let s:purple = '#A659A4'
 let s:cyan   = '#76ADC0'
 let s:orange = '#D1934C'
 let s:plum   = '#E54661'
-let s:navy1  = '#16132C'
-let s:navy2  = '#2D2F69'
-let s:brown  = '#2E1212'
+let s:deep1  = '#002300'
+let s:deep2  = '#006000'
+let s:brown  = '#2E0000'
 
 " Vim Editor
 call s:HL('ColorColumn',        '',        s:gray3,  '')
@@ -61,10 +61,10 @@ call s:HL('CursorColumn',       '',        s:gray2,  '')
 call s:HL('CursorLine',         s:black,   s:cyan,   'none')
 call s:HL('CursorLineNr',       s:green,   s:black,  'none')
 call s:HL('Directory',          s:purple,  '',       '')
-call s:HL('DiffAdd',            s:cyan,    s:navy2,  'none')
-call s:HL('DiffChange',         s:gray4,   s:navy1,  'none')
+call s:HL('DiffAdd',            s:cyan,    s:deep2,  'none')
+call s:HL('DiffChange',         s:gray4,   s:deep1,  'none')
 call s:HL('DiffDelete',         s:brown,   s:brown,  'none')
-call s:HL('DiffText',           s:green,   s:navy2,  'none')
+call s:HL('DiffText',           s:green,   s:deep2,  'none')
 call s:HL('ErrorMsg',           s:red,     s:black,  'bold')
 call s:HL('FoldColumn',         s:yellow,  s:black,  '')
 call s:HL('Folded',             s:gray4,   s:black,  '')

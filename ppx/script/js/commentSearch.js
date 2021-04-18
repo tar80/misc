@@ -7,10 +7,10 @@
 
 var arg = function () {
   if (PPx.Arguments.length) {
-  return (PPx.Arguments(0) === 'filter') ? 'filter' : PPx.Arguments(0)|1;
+    return (PPx.Arguments(0) === 'filter') ? 'filter' : PPx.Arguments(0)|1;
   } else {
-  PPx.Echo('引数が足りません');
-  return PPx.Quit(1);
+    PPx.Echo('引数が足りません');
+    return PPx.Quit(1);
   }
 }();
 
@@ -18,18 +18,19 @@ var arg = function () {
 PPx.Execute('*markentry -highlight:0');
 
 var word = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment.. ※正規表現")') || PPx.Quit(-1);
-var entryCount = ObjEntry.Count;
+var entryCount = PPx.Entry.Count;
+var i, l, objEntry;
 
 if (arg === 'filter') {
-  for (var i = entryCount, l = 0; i > l; i--) {
-    var objEntry = PPx.Entry(i - 1);
+  for (i = entryCount, l = 0; i > l; i--) {
+    objEntry = PPx.Entry(i - 1);
     if (objEntry.Comment.search(word) === -1) {
       objEntry.Hide;
     }
   }
 } else {
-  for (var i = 0, l = entryCount; i < l; i++) {
-    var objEntry = PPx.Entry(i);
+  for (i = 0, l = entryCount; i < l; i++) {
+    objEntry = PPx.Entry(i);
     if(objEntry.Comment.search(word) !== -1) {
       objEntry.Highlight = arg;
     }

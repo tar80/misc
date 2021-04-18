@@ -279,7 +279,7 @@ function startPPc(dist, mode) {
   const ub = (gi.prefix === '_') ? `*setcust _User:u_git_branch=${branch}` : '';
   exec(`${ppxDir}\\ppcw -r -single -mps -bootid:${cID} ${dist} -k ${ub} %:*string i,oBranch=${branch} %:\
 *string i,gm=${mode} %:*string i,ps=${pathStat} %:*string i,pl=${infoLog.path} %:*string i,pd=${pathDiff} %:\
-*string i,gr=${gi.root} %:*setcust _User:g_ppcid=${cID} %: *viewstyle -temp git${mode} %:\
+*string i,gr=${gi.root} %:*setcust _User:g_ppcid=${cID} %: *viewstyle -thispath git${mode} %:\
 *script %'scr'%\\exchangeKeys.js,1,%'cfg'%\\zz3GitKeys.cfg %:*script %'scr'%\\gitModePos.js,c`, (err) => {
     if (err) { console.log(err); }
   });
@@ -292,7 +292,7 @@ function setLog(dist, mode) {
   const pd = (arg.diff === '0') ? '' : `*string i,pd=${pathDiff}`;
   return new Promise((resolve, reject) => {
     exec(`${ppxDir}\\ppcw -r -noactive -bootid:${cID} -k *jumppath ${dist} -savelocate %:\
-*string i,gm=${mode} %:${ps} %:${pl} %:${pd} %:*viewstyle -temp git${mode}` , (err) => {
+*string i,gm=${mode} %:${ps} %:${pl} %:${pd} %:*viewstyle -thispath git${mode}` , (err) => {
       if (err) { reject(err); }
       resolve();
     });

@@ -28,11 +28,9 @@ PPx.EntryFirstMark;
 do {
   if (argState.mark.indexOf('@') !== -1) {
     const chr = PPx.Entry.Comment.replace(' ','');
-    PPx.EntryComment = argState.mark.replace('@', chr);
+    PPx.EntryComment = (chr === '??') ? 'A ' : argState.mark.replace('@', chr);
   } else {
-    PPx.EntryComment = (chr === '??')
-      ? 'A '
-      : argState.mark;
+    argState.mark;
   }
   PPx.EntryState = argState.number;
   PPx.EntryMark = 0;

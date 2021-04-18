@@ -295,6 +295,8 @@ endfunction
 "#}}}}}}
 "======================================================================
 "# Command{{{
+"# 編集中のファイルをShibaに送る
+command! Shiba call vimproc#system_bg('shiba '.expand('%'))
 "# 編集中バッファの差分を表示
 command! Difforg vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 "# 隣のバッファとdiff
@@ -358,7 +360,7 @@ nnoremap <silent> <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F9> :<C-u>tabnew<CR>:edit $MYVIMRC<CR>
 
 "# ppx
-nnoremap <silent> <C-TAB> :<C-u>!Start C:/bin/ppx/ppcw.exe -r<CR>
+nnoremap <silent> <C-TAB> :<C-u>!start C:/bin/cltc/cltc.exe<CR>
 nnoremap <F6> :<C-u>tabnew<CR>:edit C:/bin/repository/tar80/misc/ppx/xTest.js<CR>
 nnoremap <C-F6> :<C-u>!start C:/bin/ppx/ppcw.exe -r -k *script \%'myrepo'\%\ppx\xTest.js<CR>
 nnoremap <silent> <C-F9> :<C-u>!start C:/bin/ppx/ppcw.exe -noactive -r -k *ifmatch Px*,\%*name(,%) \%:*setcust @%:p \%:*linemessage load %<CR>:echo "call ppx! *setting load*"<CR>

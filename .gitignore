@@ -2,10 +2,8 @@ node_modules
 images
 theme
 .eslintrc.json
-@add_command.cfg
-*@Path.cfg
-Px_XC_inf1@.cfg
 package-lock.json
+*@*.cfg
 index.js
 *Test.js
 *.png

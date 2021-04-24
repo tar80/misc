@@ -18,7 +18,7 @@ function Get_si()
             u = "*setcust _User:u_git_branch=" .. sb .. "%:"
         end
         if arg[2] ~= nil then
-            o = "*execute C,*string i,oBRANCH=" .. sb
+            o = "*execute C,*string i,oBranch=" .. sb
         end
         return {u, o}
     end

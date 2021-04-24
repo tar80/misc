@@ -29,7 +29,7 @@ var defType = (!PPx.Extract('%W').match('PP[BCV]\\['))
 
 var edit = {
   chr: PPx.Arguments(1),
-  title: (len > 2) ? PPx.Arguments(2) : 'compCode..',
+  title: (len > 2) ? (PPx.Arguments(2) || 'compCode..') : 'compCode..',
   precmd: (len > 3) ? PPx.Arguments(3) : '',
   zero: PPx.Arguments(0),
   type: function () { return this.zero.charAt(0); },

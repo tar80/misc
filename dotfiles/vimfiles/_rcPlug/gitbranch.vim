@@ -14,9 +14,15 @@ nnoremap <silent> <space>ga :<C-u>call <SID>gitadd()<CR>
 
 "======================================================================
 "# functions
+" function s:gitadd() abort
+"   if exists('b:gitbranch_path')
+"     update | terminal ++hidden ++close git add %
+"   endif
+" endfunction
+" 
 function s:gitadd() abort
   if exists('b:gitbranch_path')
-    update | terminal ++hidden ++close git add %
+    update | call vimproc#system_bg('git add '.expand('%'))
   endif
 endfunction
 

@@ -15,7 +15,7 @@ function Get_si()
         local gitroot = nyagos.eval("git rev-parse --show-toplevel")
         local myrepo = string.gsub(arg[1], "\\", "/")
         if myrepo == gitroot then
-            u = "*setcust _User:u_git_branch=" .. sb .. "%:"
+            u = "*setcust _User:u_git_branch=" .. sb .. " %:"
         end
         if arg[2] ~= nil then
             o = "*execute C,*string i,oBranch=" .. sb

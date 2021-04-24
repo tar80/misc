@@ -61,14 +61,14 @@ switch (arg) {
           case 'MoveDir':
             cmd = '-compcmd *script %\'scr\'%\\cmdUndo.js,redo';
             break;
-          case 'Back':
+          case 'Backup':
             {
               const cDir = PPx.Extract('%FDN%\\');
               const l = PPx.EntryDisplayCount;
               const ObjEntry = PPx.Entry;
 
               for (let i = 0; i < l; i++) {
-                if (ObjEntry(i).state != 1 && (result[0].replace(/Backup\t(.*)/, '$1') === cDir + ObjEntry(i).Name)) {
+                if (ObjEntry(i).state !== 1 && result[1] === cDir + ObjEntry(i).Name) {
                   PPx.SetPopLineMessage('Do Not!');
                   fsoUndoLog.Close();
                   PPx.Quit(-1);
@@ -76,7 +76,6 @@ switch (arg) {
               }
               fsoUndoLog.ReadLine();
             }
-            fsoUndoLog.Close();
             break;
           default:
             fsoUndoLog.Close();

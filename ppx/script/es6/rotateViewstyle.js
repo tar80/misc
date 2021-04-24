@@ -27,7 +27,7 @@ switch (listView) {
     }
     break;
   case '4':
-    PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp "リストファイル(&L)", *viewstyle -temp 一覧:コメント(&@)');
+    PPx.Execute('*RotateExecute u_rotate_styleA, *viewstyle -temp &LISTFILE, *viewstyle -temp 一覧:コメント(&@)');
     break;
   // case '96':
   //   PPx.Execute('*RotateExecute u_rotate_styleA, *maskpath off , *maskpath on');

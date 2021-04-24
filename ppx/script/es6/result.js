@@ -37,7 +37,7 @@ switch (arg) {
     break;
   // メインレポジトリ
   case 'myrepo':
-    PPx.Result = PPx.Extract('%1%\\').indexOf(PPx.Extract('%\'myrepo\'%\\'));
+    PPx.Result = PPx.Extract('%1').indexOf(PPx.Extract('%\'myrepo\''));
     break;
   // 改行を含むPPxコマンドマクロを整形
   case 'shapecode':

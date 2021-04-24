@@ -13,12 +13,12 @@ var logFile = (xSave.search(':') === -1)
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var fsoUndoLog;
+var result = '';
 
 switch (arg) {
 // ReDo(Move,RenameのUnDoを処理)
 // ディレクトリは対象外
   case 'redo':
-    var result = '';
     var readline;
 
     fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
@@ -34,10 +34,9 @@ switch (arg) {
     fsoUndoLog.Write(result);
     break;
   case 'undo':
-    PPx.SetPopLineMessage('UnDo!');
-
-    var result = [];
     var cmd = '';
+
+    PPx.SetPopLineMessage('UnDo!');
 
     fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
 
@@ -57,17 +56,16 @@ switch (arg) {
         case 'MoveDir':
           cmd = '-compcmd *script %\'scr\'%\\cmdUndo.js,redo';
           break;
-        case 'Back':
+        case 'Backup':
           var cDir = PPx.Extract('%FDN%\\');
           for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
-            if (PPx.Entry(i).state != 1 && (result[0].replace(/Backup\t(.*)/, '$1' ) == cDir + PPx.Entry(i).Name)) {
+            if (PPx.Entry(i).state !== 1 && result[1] == cDir + PPx.Entry(i).Name) {
               PPx.SetPopLineMessage('Do Not!');
               fsoUndoLog.Close();
               PPx.Quit(-1);
             }
           }
           fsoUndoLog.ReadLine();
-          fsoUndoLog.Close();
           break;
         default:
           fsoUndoLog.Close();

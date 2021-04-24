@@ -54,7 +54,7 @@ if (PPx.WindowIDName === fullsizeID) {
 } else {
   // タイトルバーあり
   PPx.Execute('*setcust X_win:V=B000000000');
-  PPx.Execute('*linecust keyenter,KV_main:CLOSEEVENT,*setcust X_vpos=%*getcust(X_vpos) %: *execute C,*maskentry');
+  PPx.Execute('*linecust keyenter,KV_main:CLOSEEVENT,*setcust X_vpos=%*getcust(X_vpos) %%: *execute C,*maskentry');
   Expand_ext();
 }
 

@@ -11,11 +11,11 @@ var type = {
 };
 
 var filetype = PPx.Extract('.%t').toLowerCase();
-var maskExt = function () {
+var maskExt = (function () {
   for (var item in type) {
     if (type[item].indexOf(filetype) != -1) { return type[item]; }
   }
-}();
+})();
 
 if (maskExt === undefined) {
   PPx.Execute('*linecust editc,K_edit:FIRSTEVENT,*editmode -modify:silent %%: *linecust editc,K_edit:FIRSTEVENT');

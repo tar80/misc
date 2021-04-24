@@ -25,4 +25,4 @@ function Get_si()
 end
 
 local si = Get_si()
-nyagos.exec("c:/bin/ppx/PPTRAYW.EXE -c " .. si[1] .. si[2])
+nyagos.exec("c:/bin/ppx/PPBW.EXE -c " .. si[1] .. si[2])

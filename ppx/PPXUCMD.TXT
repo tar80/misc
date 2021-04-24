@@ -80,7 +80,7 @@
 %*RESULT( ;PPx.xxx)
 %*rightstr( ;"text",length) 右からlength字取得
 %*selecttext
-%*windowrect( ;(id),l:左r:右t:上b:下w:幅h:高)bd *ppcust /c ;コマンド一覧を表示して実行
+%*windowrect( ;(id),l:左r:右t:上b:下w:幅h:高)bd
 *addhistory  ;type,text ヒストリに登録
 *alias  ;[valuename=[strings]] エイリアスの設定・一覧表示
 *autodragdrop  ;[caption[,id]][,r[,source path]] 自動ドラッグ＆ドロップ
@@ -254,7 +254,7 @@
 *ppb ;PPbを実行
 *ppc ;PPcを実行
 	-runas ;管理者/別のユーザでPPcを実行
-	-r ; 起動中のPPcがあれば使う
+	-r ;起動中のPPcがあれば使う
 	-max ;最大化
 	-min ;最小化 -r オプション指定時は無効
 	-show ;通常の大きさ
@@ -274,7 +274,23 @@
 	-choose: ;edit:エディットボックス dd:D&D con[8|16]:%#FDC multi[8|16]:%FDC
  
 *ppcfile  ;[!]action[,destdir[,option]] [C]/[M]コマンドを実行
-*ppcust  ;[param]PPcustを実行
+*ppcust ;[param]PPcustを実行
+	CA ;追加
+	CU ;更新
+	CS ;上書き
+	CD ;[option] filename 書き出し
+	CD -mask: ;"X_xx,M_*" 出力するID
+	CD -nocomment ;省コメント
+	CD -nosort ;省ソート
+	CD -discover ;非表示項目を出力
+	CINIT ;初期化
+	CSIZE ;size サイズ指定
+	HD ;ヒストリ書き出し
+	HINIT ;ヒストリ初期化
+	HSIZE ;size ヒストリサイズ指定
+	-c ;コマンド一覧
+	-edit ;編集して取り込み
+	-n ;ページ指定[0:ファイル, 1:全般, ...]
 *ppe  ;[filename] PPeで編集(終了待たずに次のコマンドを実行)
 *ppffix  ;[param] PPffixを実行
 *pptray  ;PPtrayを実行
@@ -308,11 +324,11 @@
 	marked ;マークエントリ
 	all ;   全部
 	firstmark,lastmark ;最初と最後のマーク
-	point ;       マウスカーソル
-	-mark ;       マーク(規定値)
-	-unmark ;     マーク解除
+	point ;マウスカーソル
+	-mark ;マーク(規定値)
+	-unmark ;マーク解除
 	-reversemark ;マーク反転
-	-highlight ;  [:n] ハイライト(既定値:1) 0=ハイライト解除、1～7=指定ハイライト
+	-highlight ;[:n] ハイライト(既定値:1) 0=ハイライト解除、1～7=指定ハイライト
  
 *reboot ;Windows を再起動
 *reducemode ;mode PPvの画像縮小方法
@@ -409,28 +425,24 @@
 *whereis ;[option...] ファイル検索
 	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'temp'%\ppxresult.xlf"
 	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'temp'%\ppxresult.xlf"
-	-path:"" ;    ソースパス
-	-mask:"" ;    マスク
-	-text:"" ;    検索文字列
-	-type: ;      2=コメント,3=explorerのファイル情報
-	-dir ;        ディレクトリを結果に含む
-	-subdir:off ; サブディレクトリ内を検索しない
-	-vfs ;        仮想ディレクトリ内を検索
-	-marked ;     ソースパスの代わりにマークエントリを検索
+	-path:"" ;ソースパス
+	-mask:"" ;マスク
+	-text:"" ;検索文字列
+	-type: ;2=コメント,3=explorerのファイル情報
+	-dir ;ディレクトリを結果に含む
+	-subdir:off ;サブディレクトリ内を検索しない
+	-vfs ;仮想ディレクトリ内を検索
+	-marked ;ソースパスの代わりにマークエントリを検索
 	-listfile:"%'temp'%\ppxresult.xlf" ;結果結果の保存先パス
-	-search ;     検索のみ実行して結果を表示しない
-	-name ;       パスリストを生成する　※自動で-searchを付加
- 
-*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
-	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'temp'%\ppxresult.xlf"
-	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'temp'%\ppxresult.xlf"
+	-search ;検索のみ実行して結果を表示しない
+	-name ;パスリストを生成する　※自動で-searchを付加
  
 *windowposition  ;[window id],x,y
 *windowsize  ;[window id],width,height
 *zenhan  ;[z|h] 文字のa/ａ変換
 *zoom  ;比率 拡大縮小
-%m|テキスト比較@cmd@diff@fc %C "%2\%C"
-%m|バイナリ比較@cmd@diff@fc fc /b %C "%2\%C"
+%m|テキスト比較@cmd@diff fc %C "%2\%C"
+%m|バイナリ比較@cmd@diff fc /b %C "%2\%C"
 %m|クォータ違反の表示@cmd fsutil quota violations
 %m|ネットワークアダプタ設定@net@cmd ipconfig /all
 %m|実行中サービス一覧@cmd net start

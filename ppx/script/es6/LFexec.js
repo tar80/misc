@@ -4,7 +4,8 @@
 // PPx.Arguments() = (0)実行するコマンドライン名, (1)1＝重複パスの実行
 //
 // コマンドラインは、 function Exe_edit()内に記述する
-// 変数は、ファイルパス= ${path}, ショートネーム= ${shortname}, 行数= ${number}で指定。``で全体を括る
+// 変数は、ファイルパス= ${path}, ショートネーム= ${shortname},
+// 行数= ${number}, 検索語= ${search_word}で指定。``で全体を括る
 
 'use strict';
 
@@ -16,16 +17,16 @@ if (!PPx.Arguments.length) {
 const arg = { 'cmd': PPx.Arguments(0), 'exeDup': (PPx.Arguments.length != 2) ? 0 : PPx.Arguments(1)|0 };
 const rep = [];
 
-function Exe_edit(path, shortname, number, duplicate) {
+const Exe_edit = ((path, shortname, number, duplicate) => {
   switch (arg.cmd) {
     case 'gvim':
       PPx.Execute(`%Oi gvim --remote-tab-silent +"${number}-1 /${search_word}/" "${path}"`);
       PPx.Execute('*wait 100,1');
-      break;
+      return;
     case 'ppv':
       PPx.Execute(`%Oi *ppv -r -bootid:C ${path}`);
       PPx.Execute('*wait 100,1');
-      break;
+      return;
     case 'sed':
       if (typeof rep[0] == 'undefined') {
         rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
@@ -34,11 +35,11 @@ function Exe_edit(path, shortname, number, duplicate) {
       if (!duplicate) { PPx.Execute(`%Oi copy ${path} ${path}_back`); }
 
       PPx.Execute(`%Oi sed -i -r ${number}${rep[0]} ${path}`);
-      break;
+      return;
     default:
-      break;
+      return;
   }
-}
+});
 
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
 
@@ -52,9 +53,9 @@ let entryPath, entrySN, entryNum, entryDup;
 const ObjEntry = PPx.Entry;
 // ヘッダ情報から検索語を取得
 const search_word = ((w = '') => {
-  const regexp = /result\s=>\s(.*)/;
+  const reg = /result\s=>\s(.*)/;
   for (let [i, l] = [0, PPx.EntryDisplayCount]; i < l; i++) {
-    const t = ObjEntry(i).Comment.match(regexp);
+    const t = ObjEntry(i).Comment.match(reg);
     if (t) {
       w = String(t[1]).replace(/\\\(/g, '(');
       break;
@@ -63,6 +64,7 @@ const search_word = ((w = '') => {
   return w;
 })();
 
+const reg = new RegExp(/^[0-9]*/);
 PPx.Entry.Index = ObjEntry.FirstMark;
 
 for (let i = n; i <= markCount; i++) {
@@ -75,7 +77,7 @@ for (let i = n; i <= markCount; i++) {
     entrySN = ObjEntry.ShortName;
 
     // ShortNameを数値と見なして取得
-    entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN|0 : 1;
+    entryNum = (reg.test(entrySN)) ? entrySN|0 : 1;
 
     // 重複エントリの判別
     entryDup = ((isDup) => {

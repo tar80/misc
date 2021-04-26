@@ -4,7 +4,8 @@
 // PPx.Arguments() = (0)実行するコマンドライン名, (1)1＝重複パスの実行
 //
 // コマンドラインは、 function Exe_edit()内に記述する
-// 変数は、ファイルパス= path, ショートネーム= shortname, 行数= numberで指定
+// 変数は、ファイルパス= path, ショートネーム= shortname,
+// 行数= number, 検索語= search_wordで指定
 
 if (!PPx.Arguments.length) {
   PPx.Echo('引数が足りません');
@@ -14,16 +15,16 @@ if (!PPx.Arguments.length) {
 var arg = { 'cmd': PPx.Arguments(0), 'exeDup': (PPx.Arguments.length != 2) ? 0 : PPx.Arguments(1)|0 };
 var rep = [];
 
-function Exe_edit(path, shortname, number, duplicate) {
+var Exe_edit = (function (path, shortname, number, duplicate) {
   switch(arg.cmd) {
     case 'gvim':
       PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + search_word + '/ " "' + path + '"');
       PPx.Execute('*wait 100,1');
-      break;
+      return;
     case 'ppv':
       PPx.Execute('%Oi *ppv -r -bootid:C ' + path);
       PPx.Execute('*wait 100,1');
-      break;
+      return;
     case 'sed':
       if (typeof rep[0] == 'undefined') {
         rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
@@ -32,11 +33,11 @@ function Exe_edit(path, shortname, number, duplicate) {
       if (!duplicate) { PPx.Execute('%Oi copy ' + path + ' ' + path + '_back'); }
 
       PPx.Execute('%Oi sed -i -r ' + number + rep[0] + ' ' + path);
-      break;
+      return;
     default:
-      break;
+      return;
   }
-}
+});
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 
@@ -49,18 +50,19 @@ var exist = {};
 var entryPath, entrySN, entryNum, entryDup;
 var ObjEntry = PPx.Entry;
 // ヘッダ情報から検索語を取得
-var search_word = function (w) {
-  var regexp = /result\s=>\s(.*)/;
+var search_word = (function (w) {
+  var reg = /result\s=>\s(.*)/;
   for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
-    var t = ObjEntry(i).Comment.match(regexp);
+    var t = ObjEntry(i).Comment.match(reg);
     if (t) {
       w = String(t[1]).replace(/\\\(/g, '(');
       break;
     }
   }
   return w;
-}();
+})();
 
+var reg = new RegExp(/^[0-9]*/);
 PPx.Entry.Index = ObjEntry.FirstMark;
 
 for (var i = n; i <= markCount; i++) {
@@ -73,14 +75,14 @@ for (var i = n; i <= markCount; i++) {
     entrySN = ObjEntry.ShortName;
 
     // ShortNameを数値と見なして取得
-    entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN|0 : 1;
+    entryNum = (reg.test(entrySN)) ? entrySN|0 : 1;
 
     // 重複エントリの判別
-    entryDup = function (isDup) {
+    entryDup = (function (isDup) {
       isDup = (exist[entryPath]) ? true : false;
       exist[entryPath] = true;
       return isDup;
-    }();
+    })();
 
     // 同一パスを判別してコマンドに渡す
     if (arg.exeDup === 1 || !entryDup) {

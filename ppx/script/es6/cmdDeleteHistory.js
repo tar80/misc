@@ -11,7 +11,7 @@ const saveHistory = (!PPx.Arguments.length) ? false : true;
 const tHistory = PPx.Extract('%*editprop(whistory)');
 const tType = (() => {
   const key = Array.from('gnmshdcfuxUX');
-  const type = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
+  const type = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル名','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
   return type[key.findIndex(ele => ele == tHistory)];
 })();
 

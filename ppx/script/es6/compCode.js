@@ -25,9 +25,10 @@ if (len < 2) {
 }
 
 // 現在の編集モードを参照
-const defType = (!PPx.Extract('%W').match('PP[BCV]\\['))
-  ? (PPx.Extract('%*editprop(whistory)')) || 'g'
-  : 'g';
+const defType = PPx.Extract('%*editprop(whistory)') || 'g';
+// const defType = (!PPx.Extract('%W').match('PP[BCV]\\['))
+//   ? (PPx.Extract('%*editprop(whistory)')) || 'g'
+//   : 'g';
 
 const edit = {
   chr: PPx.Arguments(1),

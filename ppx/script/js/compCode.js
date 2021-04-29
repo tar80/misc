@@ -23,9 +23,12 @@ if (len < 2) {
 }
 
 // 現在の編集モードを参照
-var defType = (!PPx.Extract('%W').match('PP[BCV]\\['))
-  ? (PPx.Extract('%*editprop(whistory)')) || 'g'
-  : 'g';
+var defType = (function () {
+  var c = 'g';
+  var reg = new RegExp('PP[BCV]\\[');
+  if (!reg.test(PPx.Extract('%W'))) { c = PPx.Extract('%*editprop(whistory)'); }
+  return c;
+})();
 
 var edit = {
   chr: PPx.Arguments(1),
@@ -70,33 +73,33 @@ var charArray = removeDupChar(edit['chr'].split(''));
 var countMax = 4;
 
 // 同じ文字数のカウント
-var charCount = function () {
+var charCount = (function () {
   var cc = [];
   for (var i = 0, l = charArray.length; i < l; i++) {
     cc.push(edit['chr'].counter(charArray[i], countMax));
   }
   return cc;
-}();
+})();
 
 // 配列からオブジェクトを生成
 var bsNum = [];
-var esc = function () {
+var esc = (function () {
   var chr = [];
+  // 例外処理
+  var Esc_excp = function (ele, num) {
+    if (ele !== '\\') {
+      return charCount[num] * 2;
+    } else {
+      bsNum[0] = num;
+      return charCount[num];
+    }
+  }
   for (var i = 0, l = charArray.length; i < l; i++) {
     chr[charArray[i]] = charArray[i].repeat(Esc_excp(charArray[i], i));
   }
   return chr;
-}();
+})();
 
-// 例外処理
-function Esc_excp (ele, num) {
-  if (ele !== '\\') {
-    return charCount[num] * 2;
-  } else {
-    bsNum[0] = num;
-    return charCount[num];
-  }
-}
 if (bsNum !== -1) { charArray[bsNum] = '\\\\'; }
 
 var regStr = '[' + charArray.join('') + ']';

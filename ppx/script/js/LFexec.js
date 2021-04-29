@@ -64,6 +64,7 @@ var search_word = (function (w) {
 
 var reg = new RegExp(/^[0-9]*/);
 PPx.Entry.Index = ObjEntry.FirstMark;
+var reg = new RegExp(/^[0-9]*/);
 
 for (var i = n; i <= markCount; i++) {
   // 空白行の判定

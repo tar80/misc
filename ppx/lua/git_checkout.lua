@@ -7,15 +7,15 @@ local sb = nyagos.eval("git branch | peco")
 if sb == "" then
     return nil
 end
-local res = nyagos.eval("git checkout " .. sb)
+nyagos.exec("git checkout " .. sb)
 
 function Get_si()
     local u, o = "", ""
-    if res ~= "" then
+    if sb ~= "" then
         local gitroot = nyagos.eval("git rev-parse --show-toplevel")
         local myrepo = string.gsub(arg[1], "\\", "/")
         if myrepo == gitroot then
-            u = "*setcust _User:u_git_branch=" .. sb .. "%:"
+            u = "*setcust _User:u_git_branch=" .. sb .. " %:"
         end
         if arg[2] ~= nil then
             o = "*execute C,*string i,oBranch=" .. sb

@@ -71,13 +71,15 @@ if (process) {
     PPx.Quit(-1);
   }
 
+  var reg = new RegExp(/^[a-zA-Z]*$/);
+
   for (i = 0, l = getKeys.length; i < l; i++) {
     value = getKeys[i];
     cnts = PPx.Extract('%OC %*getcust(' + value.key + ':' + value.cmd +')');
     if (cnts === '') {
       PPx.Execute('*setcust M_' + title + ':' + value.key + ':' + value.cmd + '=%%mNotExist %%K"@' + value.cmd);
     } else {
-      if (cnts.slice(0,1) === '@' || cnts.match(/^[a-zA-Z]*$/)) {
+      if (cnts.slice(0,1) === '@' || reg.test(cnts)) {
         PPx.Execute('*setcust M_' + title + ':' + value.key + ':' + value.cmd + '=%%mSepEQ %%K"' + cnts);
       } else {
         escCnts = cnts.replace(/%/g, '%%');

@@ -14,9 +14,6 @@ var arg = function () {
   }
 }();
 
-// ハイライトを初期化
-PPx.Execute('*markentry -highlight:0');
-
 var word = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment.. ※正規表現")') || PPx.Quit(-1);
 var entryCount = PPx.Entry.Count;
 var i, l, objEntry;
@@ -28,7 +25,10 @@ if (arg === 'filter') {
       objEntry.Hide;
     }
   }
+  if (PPx.Extract('%*getcust(X_bg:P_%n)') !== '"') { PPx.Execute('%K"@^F5'); }
 } else {
+  // ハイライトを初期化
+  PPx.Execute('*markentry -highlight:0');
   for (i = 0, l = entryCount; i < l; i++) {
     objEntry = PPx.Entry(i);
     if(objEntry.Comment.search(word) !== -1) {

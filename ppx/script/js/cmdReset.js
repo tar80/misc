@@ -12,6 +12,7 @@ for (var i = 0; i < l; i++) {
   }
 }
 
-PPx.Execute('PPCUSTW CINIT');
+PPx.Execute('PPCUSTW CD %\'cfg%\'%\\Px_@user.cfg -mask:"_User" %&');
+PPx.Execute('PPCUSTW CINIT %&');
 PPx.Execute('*setcust _Command:reset=*cd ' + pDir + ' %%: ' + cfgPath.join(' %%: '));
 PPx.Execute('*reset');

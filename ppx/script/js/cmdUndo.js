@@ -19,8 +19,8 @@ switch (arg) {
 // ディレクトリは対象外
   case 'redo':
     (function () {
-      var result = '';
-      var readline;
+    var readline;
+    var result = '';
 
       fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
 

@@ -1,4 +1,4 @@
-﻿-n --no-heading --color never
+﻿-nH --no-heading
   -s ;--smart-case      大・小文字判別
   -i ;--ignorecase      大・小文字無視
   -r ;--extended-regexp 正規表現

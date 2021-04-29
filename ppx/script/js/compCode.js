@@ -24,10 +24,10 @@ if (len < 2) {
 
 // 現在の編集モードを参照
 var defType = (function () {
-  var c = 'g';
   var reg = new RegExp('PP[BCV]\\[');
-  if (!reg.test(PPx.Extract('%W'))) { c = PPx.Extract('%*editprop(whistory)'); }
-  return c;
+  var str = 'g';
+  if (!reg.test(PPx.Extract('%W'))) { str = PPx.Extract('%*editprop(whistory)') || str; }
+  return str;
 })();
 
 var edit = {
@@ -93,7 +93,7 @@ var esc = (function () {
       bsNum[0] = num;
       return charCount[num];
     }
-  }
+  };
   for (var i = 0, l = charArray.length; i < l; i++) {
     chr[charArray[i]] = charArray[i].repeat(Esc_excp(charArray[i], i));
   }

@@ -25,10 +25,11 @@ if (len < 2) {
 }
 
 // 現在の編集モードを参照
-const defType = PPx.Extract('%*editprop(whistory)') || 'g';
-// const defType = (!PPx.Extract('%W').match('PP[BCV]\\['))
-//   ? (PPx.Extract('%*editprop(whistory)')) || 'g'
-//   : 'g';
+const defType = ((str = 'g') => {
+  const reg = new RegExp('PP[BCV]\\[');
+  if (!reg.test(PPx.Extract('%W'))) { str = PPx.Extract('%*editprop(whistory)') || str; }
+  return str;
+})();
 
 const edit = {
   chr: PPx.Arguments(1),
@@ -79,18 +80,19 @@ const charCount = ((cc = []) => {
 // 配列からオブジェクトを生成
 const bsNum = [];
 const esc = charArray.reduce((chr, value, index) => {
+  // 例外処理
+  const Esc_excp = ((ele, num) => {
+    if (ele !== '\\') {
+      return charCount[num] * 2;
+    } else {
+      bsNum[0] = num;
+      return charCount[num];
+    }
+  });
   chr[value] = value.repeat(Esc_excp(value, index));
   return chr;
 }, {});
-// 例外処理
-function Esc_excp (ele, num) {
-  if (ele !== '\\') {
-    return charCount[num] * 2;
-  } else {
-    bsNum[0] = num;
-    return charCount[num];
-  }
-}
+
 if (bsNum !== -1) { charArray[bsNum] = '\\\\'; }
 
 const regStr = `[${charArray.join('')}]`;

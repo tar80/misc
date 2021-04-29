@@ -62,6 +62,7 @@ var search_word = function (w) {
 }();
 
 PPx.Entry.Index = ObjEntry.FirstMark;
+var reg = new RegExp(/^[0-9]*/);
 
 for (var i = n; i <= markCount; i++) {
   // 空白行の判定
@@ -73,14 +74,14 @@ for (var i = n; i <= markCount; i++) {
     entrySN = ObjEntry.ShortName;
 
     // ShortNameを数値と見なして取得
-    entryNum = (entrySN.match(/^[0-9]*/) != null) ? entrySN|0 : 1;
+    entryNum = (reg.test(entrySN)) ? entrySN|0 : 1;
 
     // 重複エントリの判別
-    entryDup = function (isDup) {
+    entryDup = (function (isDup) {
       isDup = (exist[entryPath]) ? true : false;
       exist[entryPath] = true;
       return isDup;
-    }();
+    })();
 
     // 同一パスを判別してコマンドに渡す
     if (arg.exeDup === 1 || !entryDup) {

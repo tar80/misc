@@ -13,13 +13,14 @@ var logFile = (xSave.search(':') === -1)
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var fsoUndoLog;
-var result = '';
 
 switch (arg) {
 // ReDo(Move,RenameのUnDoを処理)
 // ディレクトリは対象外
   case 'redo':
+    (function () {
     var readline;
+    var result = '';
 
     fsoUndoLog = fso.OpenTextFile(logFile, 1, false, -1);
 
@@ -32,9 +33,12 @@ switch (arg) {
     // 置換結果を書き出してutf16leで上書きする
     fsoUndoLog = fso.OpenTextFile(logFile, 2, true, -1);
     fsoUndoLog.Write(result);
+    })();
     break;
   case 'undo':
+    (function () {
     var cmd = '';
+    var result = [];
 
     PPx.SetPopLineMessage('UnDo!');
 
@@ -80,6 +84,7 @@ switch (arg) {
     fsoUndoLog.Close();
 
     PPx.Execute('*file !Undo -min -nocount' + cmd);
+    })();
     break;
 }
 

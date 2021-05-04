@@ -50,7 +50,8 @@ var exist = {};
 var entryPath, entrySN, entryNum, entryDup;
 var ObjEntry = PPx.Entry;
 // ヘッダ情報から検索語を取得
-var search_word = (function (w) {
+var search_word = (function () {
+  var w = '';
   var reg = /result\s=>\s(.*)/;
   for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
     var t = ObjEntry(i).Comment.match(reg);
@@ -64,7 +65,6 @@ var search_word = (function (w) {
 
 var reg = new RegExp(/^[0-9]*/);
 PPx.Entry.Index = ObjEntry.FirstMark;
-var reg = new RegExp(/^[0-9]*/);
 
 for (var i = n; i <= markCount; i++) {
   // 空白行の判定

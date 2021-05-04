@@ -22,31 +22,32 @@ var ext = (PPx.GetFileInformation(PPx.Extract('%R')) === ':DIR')
   ? 'DIR' : PPx.Extract('%t').toUpperCase();
 // 拡張子判別
 var selKey = (function () {
-  var filetype = new RegExp(ext);
+  // var filetype = new RegExp(ext);
   var cnts = {
-    arc:  ['7Z', 'CAB', 'LZH', 'MSI', 'RAR', 'ZIP'],
-    img:  ['BMP', 'EDG', 'GIF', 'JPEG', 'JPG', 'PNG', 'VCH'],
-    doc:  ['AHK', 'INI', 'CFG', 'JS', 'JSON', 'LOG', 'MD', 'TXT', 'VIM']
-  }
+    arc:  '7Z,CAB,LZH,MSI,RAR,ZIP',
+    img:  'BMP,EDG,GIF,JPEG,JPG,PNG,VCH',
+    doc:  'AHK,INI,CFG,JS,JSON,LOG,MD,TXT,VIM'
+  };
+
   if (ext === 'DIR') {
     return { type: 'dir', chr: 'W' };
-  } else if (filetype.test(cnts['arc'])) {
+  } else if (cnts['arc'].indexOf(ext) !== -1) {
     return { type: 'arc', chr: 'W' };
-  } else if (filetype.test(cnts['img'])) {
+  } else if (cnts['img'].indexOf(ext) !== -1) {
     return { type: 'img', chr: 'L' };
-  } else if (filetype.test(cnts['doc'])) {
+  } else if (cnts['doc'].indexOf(ext) !== -1) {
     return { type: 'doc', chr: 'R' };
   } else {
-    return { type: 'none', chr: 'S' }
+    return { type: 'none', chr: 'S' };
   }
 })();
 
-if (arg == 'M_Ccr') {
+if (arg === 'M_Ccr') {
   // 標準メニュー
   Select_menu('J', 'O');
 } else {
   // ファイル移動メニュー
-  selKey.chr = (arg == 'M_FileMOVE') ? 'M' : 'C';
+  selKey.chr = (arg === 'M_FileMOVE') ? 'M' : 'C';
   Select_menu(selKey.chr, selKey.chr);
 }
 

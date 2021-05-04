@@ -11,11 +11,11 @@ var type = {
 };
 
 var filetype = PPx.Extract('.%t').toLowerCase();
-var maskExt = function () {
+var maskExt = (function () {
   for (var item in type) {
-    if (type[item].indexOf(filetype) != -1) { return type[item]; }
+    if (type[item].indexOf(filetype) !== -1) { return type[item]; }
   }
-}();
+})();
 
 if (maskExt === undefined) {
   PPx.Execute('*linecust editc,K_edit:FIRSTEVENT,*editmode -modify:silent %%: *linecust editc,K_edit:FIRSTEVENT');
@@ -37,8 +37,8 @@ var Expand_ext = function () {
       PPx.Quit(1);
       break;
     default:
-      if (PPx.DirectoryType >= 63) {
-        if (PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') != 0) { PPx.Quit(1); }
+      if (PPx.DirectoryType >= 63 && PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') !== 0) {
+        PPx.Quit(1);
       }
   }
 };

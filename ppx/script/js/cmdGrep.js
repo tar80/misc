@@ -64,73 +64,70 @@ var reload_opt = (arglen === 4) ? PPx.Arguments(3) : null;
 var check_Mxxx = PPx.Extract('%*getcust(M_grep)').split('\u000D\u000A');
 if (check_Mxxx.length === 3 || reload_opt === '1') {
   if (use_LF_grep === true) {
-    PPx.Execute(
-      '*setcust M_grep:LF_grep=*string i,cmd=grep %%: *string i,gopt=' + grLF.lock + grLF.add + ' %%: \
-*string e,lock=' + grLF.lock + ' %%: *string e,add=' + grLF.add + ' %%: *string e,list=' + grLF.complist + ' %%: \
-*string e,flen=' + grLF.lock.length + ' %%: *string e,blen=' + grLF.lock.length + grLF.add.length + ' %%: \
-*string i,output=LF');
+    PPx.Execute('*setcust M_grep:LF_grep=*string i,cmd=grep %%: *string i,gopt=' + grLF.lock + grLF.add +
+      ' %%: *string e,lock=' + grLF.lock + ' %%: *string e,add=' + grLF.add + ' %%: *string e,list=' + grLF.complist +
+      ' %%: *string e,flen=' + grLF.lock.length + ' %%: *string e,blen=' + grLF.lock.length + grLF.add.length +
+      ' %%: *string i,output=LF');
   } else {
     PPx.Execute('*deletecust "M_grep:LF_grep"');
   }
   if (use_PPv_grep === true) {
-    PPx.Execute(
-      '*setcust M_grep:PPv_grep=*string i,cmd=grep %%: *string i,gopt=' + grPPv.lock + grPPv.add + ' %%: \
-*string e,lock=' + grPPv.lock + ' %%: *string e,add=' + grPPv.add + ' %%: *string e,list=' + grPPv.complist + ' %%: \
-*string e,flen=' + grPPv.lock.length + ' %%: *string e,blen=' + grPPv.lock.length + grPPv.add.length + ' %%: \
-*string i,output=PPv');
+    PPx.Execute('*setcust M_grep:PPv_grep=*string i,cmd=grep %%: *string i,gopt=' + grPPv.lock + grPPv.add +
+      ' %%: *string e,lock=' + grPPv.lock + ' %%: *string e,add=' + grPPv.add + ' %%: *string e,list=' + grPPv.complist +
+      ' %%: *string e,flen=' + grPPv.lock.length + ' %%: *string e,blen=' + grPPv.lock.length + grPPv.add.length +
+      ' %%: *string i,output=PPv');
   } else {
     PPx.Execute('*deletecust "M_grep:PPv_grep"');
   }
   if (use_LF_rg === true) {
-    PPx.Execute(
-      '*setcust M_grep:LF_rg=*string i,cmd=rg %%: *string i,gopt=' + rgLF.lock + rgLF.add + ' %%: \
-*string e,lock=' + rgLF.lock + ' %%: *string e,add=' + rgLF.add + ' %%: *string e,list=' + rgLF.complist + ' %%: \
-*string e,flen=' + rgLF.lock.length + ' %%: *string e,blen=' + rgLF.lock.length + rgLF.add.length + ' %%: \
-*string i,output=LF');
+    PPx.Execute('*setcust M_grep:LF_rg=*string i,cmd=rg %%: *string i,gopt=' + rgLF.lock + rgLF.add +
+      ' %%: *string e,lock=' + rgLF.lock + ' %%: *string e,add=' + rgLF.add + ' %%: *string e,list=' + rgLF.complist +
+      ' %%: *string e,flen=' + rgLF.lock.length + ' %%: *string e,blen=' + rgLF.lock.length + rgLF.add.length +
+      ' %%: *string i,output=LF');
   } else {
     PPx.Execute('*deletecust "M_grep:LF_rg"');
   }
   if (use_PPv_rg === true) {
-    PPx.Execute(
-      '*setcust M_grep:PPv_rg=*string i,cmd=rg %%: *string i,gopt=' + rgPPv.lock + rgPPv.add + ' %%: \
-*string e,lock=' + rgPPv.lock + ' %%: *string e,add=' + rgPPv.add + ' %%: *string e,list=' + rgPPv.complist + ' %%: \
-*string e,flen=' + rgPPv.lock.length + ' %%: *string e,blen=' + rgPPv.lock.length + rgPPv.add.length + ' %%: \
-*string i,output=PPv');
+    PPx.Execute('*setcust M_grep:PPv_rg=*string i,cmd=rg %%: *string i,gopt=' + rgPPv.lock + rgPPv.add +
+      ' %%: *string e,lock=' + rgPPv.lock + ' %%: *string e,add=' + rgPPv.add + ' %%: *string e,list=' + rgPPv.complist +
+      ' %%: *string e,flen=' + rgPPv.lock.length + ' %%: *string e,blen=' + rgPPv.lock.length + rgPPv.add.length +
+      ' %%: *string i,output=PPv');
   } else {
     PPx.Execute('*deletecust "M_grep:PPv_rg"');
   }
   if (use_LF_jvgrep === true) {
-    PPx.Execute(
-      '*setcust M_grep:LF_jvgrep=*string i,cmd=jvgrep %%: *string i,gopt=' + jvLF.lock + jvLF.add + ' %%: \
-*string e,lock=' + jvLF.lock + ' %%: *string e,add=' + jvLF.add + ' %%: *string e,list=' + jvLF.complist + ' %%: \
-*string e,flen=' + jvLF.lock.length + ' %%: *string e,blen' + jvLF.lock.length + jvLF.add.length + ' %%: \
-*string i,output=LF');
+    PPx.Execute('*setcust M_grep:LF_jvgrep=*string i,cmd=jvgrep %%: *string i,gopt=' + jvLF.lock + jvLF.add +
+      ' %%: *string e,lock=' + jvLF.lock + ' %%: *string e,add=' + jvLF.add + ' %%: *string e,list=' + jvLF.complist +
+      ' %%: *string e,flen=' + jvLF.lock.length + ' %%: *string e,blen' + jvLF.lock.length + jvLF.add.length +
+      ' %%: *string i,output=LF');
   } else {
     PPx.Execute('*deletecust "M_grep:LF_jvgrep"');
   }
   if (use_PPv_jvgrep === true) {
-    PPx.Execute(
-      '*setcust M_grep:PPv_jvgrep=*string i,cmd=jvgrep %%: *string i,gopt=' + jvPPv.lock + jvPPv.add + ' %%: \
-*string e,lock=' + jvPPv.lock + ' %%: *string e,add=' + jvPPv.add + ' %%: *string e,list=' + jvPPv.complist + ' %%: \
-*string e,flen=' + jvPPv.lock.length + ' %%: *string e,blen' + jvPPv.lock.length + jvPPv.add.length + ' %%: \
-*string i,output=PPv');
+    PPx.Execute('*setcust M_grep:PPv_jvgrep=*string i,cmd=jvgrep %%: *string i,gopt=' + jvPPv.lock + jvPPv.add +
+      ' %%: *string e,lock=' + jvPPv.lock + ' %%: *string e,add=' + jvPPv.add + ' %%: *string e,list=' + jvPPv.complist +
+      ' %%: *string e,flen=' + jvPPv.lock.length + ' %%: *string e,blen' + jvPPv.lock.length + jvPPv.add.length +
+      ' %%: *string i,output=PPv');
   } else {
     PPx.Execute('*deletecust "M_grep:PPv_jvgrep"');
   }
 }
 
 // optionボタンの設定
-PPx.Execute('*string i,Edit_OptionCmd=*string i,gopt=%%*input("%%se"lock"%%se"add"" \
--title:"Option  ※%%se"lock"は外さないこと※" -mode:e -select:%%se"flen",%%se"blen" \
--k *completelist /set /file:"%%\'list\'\\%%se"list"") %%: *setcaption [%%si"output"] %%si"cmd" %%si"gopt" ※\\=\\\\\\\\');
+PPx.Execute('*string i,Edit_OptionCmd=*string i,gopt=%%*input("%%se"lock"%%se"add""' +
+  ' -title:"Option  ※%%se"lock"は外さないこと※" -mode:e -select:%%se"flen",%%se"blen"' +
+  ' -k *completelist /set /file:"%%\'list\'\\%%se"list"")' +
+  ' %%: *setcaption [%%si"output"] %%si"cmd" %%si"gopt"  ※\\=\\\\\\\\');
 
 // 検索文字の入力とエスケープ処理
 var str = function (esc) {
   try {
     PPx.Execute('*string i,gopt=' + dogrep.lock + dogrep.add);
-    return esc = PPx.Extract(
-      '%*script(%\'scr\'%\\compCode.js,"iOs","""%%","[' + arg.output + '] ' + arg.cmd + ' %%si""gopt"" ※\\=\\\\\\\\", \
-"*execute %%%%%%%%M_grep,!' + arg.output + '_' + arg.cmd + '")');
+    return esc = PPx.Extract('%*script(%\'scr\'%\\compCode.js,' +
+      '"iOs",' +
+      '"""%%",' +
+      '"[' + arg.output + '] ' + arg.cmd + ' %%si""gopt"" ※\\=\\\\\\\\",' +
+      '"*execute %%%%%%%%M_grep,!' + arg.output + '_' + arg.cmd + '")');
   } catch (e) {
     PPx.Execute('*string i,gopt=');
     PPx.Echo(e);
@@ -150,7 +147,8 @@ if (PPx.Extract('%si"output"') === 'PPv') {
   PPx.Execute('*linecust tmod,KV_main:CLOSEEVENT,*setcust XV_tmod=%*getcust(XV_tmod) %%: *linecust tmod,KV_main:CLOSEEVENT,');
   PPx.Execute('*setcust XV_tmod=1');
   // grepの結果をPPvの標準入力で受け取る
-  PPx.Execute('*run -noppb -min %si"cmd" %si"gopt" "' + str + '" ' + tPath + ' | %0ppvw -bootid:w -esc -document -k *string p,grep=1 %%: *find "' + str + '"');
+  PPx.Execute('*run -noppb -min %si"cmd" %si"gopt" "' + str + '" ' + tPath +
+    ' | %0ppvw -bootid:w -esc -document -k *string p,grep=1 %%: *find "' + str + '"');
 } else {
   // grepの結果をutf16lbで出力
   PPx.Execute('%Obn %si"cmd" %si"gopt" "' + str + '" ' + tPath + ' | %Os nkf -w16B > "' + arg.listfile + '"');
@@ -159,7 +157,11 @@ if (PPx.Extract('%si"output"') === 'PPv') {
   var fso = PPx.CreateObject('Scripting.FileSystemObject');
   var pDir = PPx.Extract('%FD');
   var dirType = PPx.DirectoryType;
-  var result = [';ListFile\u000D\u000A;Base=' + pDir + '|' + dirType + '\u000D\u000A"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,H:0,M:0,T:"result => ' + str + '"'];
+  var result = [
+    ';ListFile\u000D\u000A' +
+    ';Base=' + pDir + '|' + dirType + '\u000D\u000A' +
+    '"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,H:0,M:0,T:"result => ' + str + '"'
+  ];
   var fsoTlist = fso.OpenTextFile(arg.listfile, 1, false, -1);
 
   while (!fsoTlist.AtEndOfStream) {

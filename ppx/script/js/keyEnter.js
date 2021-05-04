@@ -13,7 +13,7 @@ var type = {
 var filetype = PPx.Extract('.%t').toLowerCase();
 var maskExt = (function () {
   for (var item in type) {
-    if (type[item].indexOf(filetype) != -1) { return type[item]; }
+    if (type[item].indexOf(filetype) !== -1) { return type[item]; }
   }
 })();
 
@@ -37,8 +37,8 @@ var Expand_ext = function () {
       PPx.Quit(1);
       break;
     default:
-      if (PPx.DirectoryType >= 63) {
-        if (PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') != 0) { PPx.Quit(1); }
+      if (PPx.DirectoryType >= 63 && PPx.Execute('%"書庫内ファイル"%Q"PPvで開きますか？"') !== 0) {
+        PPx.Quit(1);
       }
   }
 };

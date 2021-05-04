@@ -36,9 +36,9 @@ const checkDup = PPx.Extract(`%*getcust(M_${title})`).split('\u000A').length;
 const keybinds = ['KC_main', 'KC_incs', 'K_edit', 'K_ppe', 'K_lied', 'K_tree', 'KB_edit', 'KV_main', 'KV_page', 'KV_crt', 'KV_img'];
 
 const st = PPx.CreateObject('ADODB.stream');
+st.Open;
 st.Type = 2;
 st.Charset = 'UTF-8';
-st.Open();
 st.LoadFromFile(tPath);
 const stCnts = st.ReadText(-1).split('\u000A');
 st.Close;

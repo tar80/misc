@@ -19,9 +19,9 @@ const ArrEntry = [];
 
 for (let [i, l] = [sNum, PPx.EntryDisplayCount]; i < l; i++) {
   let ObjEntry = PPx.Entry(i);
-  (ObjEntry.Name == ObjEntry.ShortName) ?
-    ArrEntry.push(ObjEntry.name):
-    ArrEntry.push(`${ObjEntry.Name}","${ObjEntry.ShortName}`);
+  (ObjEntry.Name === ObjEntry.ShortName)
+    ? ArrEntry.push(ObjEntry.name)
+    : ArrEntry.push(`${ObjEntry.Name}","${ObjEntry.ShortName}`);
 }
 
 const listpath = PPx.Extract('%FDV');
@@ -31,9 +31,7 @@ let fsoTlist = fso.OpenTextFile(listpath, 1, false, -1);
 // ファイルに保存されている並び
 const entryInfo = [];
 
-while (!fsoTlist.AtEndOfStream) {
-  entryInfo.push(fsoTlist.ReadLine());
-}
+while (!fsoTlist.AtEndOfStream) { entryInfo.push(fsoTlist.ReadLine()); }
 
 // 保存用の並び
 const result = [];
@@ -71,5 +69,5 @@ fsoTlist.Write(result.join('\u000D\u000A') + '\u000D\u000A');
 
 fsoTlist.Close();
 
-if (PPx.DirectoryType == 4) { PPx.Execute('*wait 100,1 %K"@F5"'); }
+if (PPx.DirectoryType === 4) { PPx.Execute('*wait 100,1 %: %K"@F5"'); }
 

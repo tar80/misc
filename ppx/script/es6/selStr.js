@@ -11,16 +11,13 @@
 try {
   const str = PPx.Extract('%*edittext()');
   const reg = new RegExp(PPx.Arguments(0));
-  const lparam = [];
-  const wparam = [];
+  const param = ((s, m) => ({
+    l: m[1].length,
+    w: (m[2] !== '') ? s.lastIndexOf(m[2]) : m[1].length
+  }))(str, str.match(reg));
 
-  str.replace(reg, (match, p1, p2) => {
-    lparam.push(p1.length);
-    wparam.push((p2 !== '') ? str.lastIndexOf(p2) : lparam);
-  });
-
-  if (lparam[0] === undefined) { throw 'No match.'; }
-  PPx.Execute(`*sendmessage %N,177,${wparam[0]},${lparam[0]}`);
+  if (param.l === undefined) { throw 'selStr: no match.'; }
+  PPx.Execute(`*sendmessage %N,177,${param.w},${param.l}`);
 
 } catch (e) {
   PPx.SetPopLineMessage(`selStr: ${e}`);

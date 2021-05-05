@@ -32,14 +32,12 @@ const arg = (() => {
       (flag === 2) ? Left_ppc() : Right_ppc();
     }
   });
-  const hwnd = (() => {
-    switch(chr) {
-      case 'b': return bHWND;
-      case 'c': return cHWND;
-      case 'e': return eHWND;
-    }
-  });
-  return { 'move': move, 'HWND': hwnd };
+  const hwnd = {
+    'b': (() => bHWND),
+    'c': (() => cHWND),
+    'e': (() => eHWND)
+  };
+  return { 'move': move, 'HWND': hwnd[chr] };
 })();
 const cID  = 'C' +  PPx.Extract('%*getcust(_User:g_ppcid)');
 const cHWND = PPx.Extract(`%*Extract(%%N${cID})`)|0;

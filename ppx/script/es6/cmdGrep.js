@@ -66,9 +66,13 @@ const dogrep = exec[arg.cmd + arg.output];
   if (check_Menu.length === 3 || reload_opt === '1') {
     for (const name of Object.keys(exec)) {
       if (exec[name].use === true) {
-        PPx.Execute(`%OC *setcust M_grep:${name}=*string i,cmd=${exec[name].cmd} %%: *string i,gopt=${exec[name].lock}${exec[name].add}
-        *string e,lock=${exec[name].lock} %%: *string e,add=${exec[name].add} %%: *string e,list=${exec[name].complist}
-        *string e,flen=${exec[name].lock.length} %%: *string e,blen=${exec[name].lock.length + exec[name].add.length}
+        PPx.Execute(`%OC *setcust M_grep:${name}=*string i,cmd=${exec[name].cmd}
+        *string i,gopt=${exec[name].lock}${exec[name].add}
+        *string e,lock=${exec[name].lock}
+        *string e,add=${exec[name].add}
+        *string e,list=${exec[name].complist}
+        *string e,flen=${exec[name].lock.length}
+        *string e,blen=${exec[name].lock.length + exec[name].add.length}
         *string i,output=${exec[name].op}`);
       } else {
         PPx.Execute(`*deletecust "M_grep:${name}"`);
@@ -138,7 +142,7 @@ if (PPx.Extract('%si"output"') === 'PPv') {
   for (const value of stCnts) {
     value.replace(/^([^-:]*)[-:](\d*)([-:])\s*(.*)/, (match, p1, p2, p3, p4) => {
       p1 = (p1 === '') ? p3 : p1.replace(/^\.\.\\.*\//, '');
-      p3 = (p3.indexOf(':') !== -1) ? 0 : 3;
+      p3 = (~p3.indexOf(':')) ? 0 : 3;
       p4 = p4.replace(/"/g, '""');
       result.push(`"${p1}","${p2}",A:H${p3},C:0.0,L:0.0,W:0.0,S:0.0,H:0,M:0,T:"${p4}"`);
     });

@@ -27,11 +27,9 @@ xList.sort((a, b) =>  a < b ? -1 : 1);
 
 let tID = xList[xList.indexOf(x.winid) + 1];
 
-if (xList[1] > 1 && PPx.Pane.Count != 1) {
-  if (!tID || tID === 'csA') {
+if (xList[1] > 1 && PPx.Pane.Count !== 1) {
   // リストの端なら最初に戻る
-    tID = xList[2];
-  }
+  if (!tID || tID === 'csA') { tID = xList[2]; }
   PPx.Execute(`*focus ${tID}`);
 } else {
   // 一枚表示なら反対窓起動

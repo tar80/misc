@@ -33,7 +33,7 @@ const selKey = (() => {
   };
   const asgKey = { dir: 'W', arc: 'W', img: 'L', doc: 'R' };
   for (const key of Object.keys(cnts)) {
-    if (cnts[key].indexOf(ext) !== -1) { return { type: key, chr: asgKey[key] }; }
+    if (~cnts[key].indexOf(ext)) { return { type: key, chr: asgKey[key] }; }
   }
   return { type: 'none', chr: 'P' };
 })();

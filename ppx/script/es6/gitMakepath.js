@@ -22,5 +22,5 @@ fsoTlist = fso.OpenTextFile(listfile_path, 2, true, -1);
 fsoTlist.Write(result.join('\u000D\u000A'));
 fsoTlist.Close();
 
-PPx.Execute(`*execute C, *linemessage Update  ${listfile_name}`);
+PPx.Execute(`*execute C,*linemessage Update  ${listfile_name}`);
 

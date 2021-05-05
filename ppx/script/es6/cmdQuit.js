@@ -4,11 +4,11 @@
 'use strict';
 
 // AUX窓なら終了
-if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
-  PPx.Execute('*execute CY, %j"%*getcust(_User:pk1)');
-  PPx.Execute('*closeppx CY');
-  PPx.Quit(1);
-}
+// if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
+//   PPx.Execute('*execute CY, %j"%*getcust(_User:pk1)');
+//   PPx.Execute('*closeppx CY');
+//   PPx.Quit(1);
+// }
 
 // C_A以外の窓から終了
 const xID = ((id = PPx.WindowIDName) => {

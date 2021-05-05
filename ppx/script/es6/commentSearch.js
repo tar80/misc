@@ -27,13 +27,14 @@ if (arg === 'filter') {
       objEntry.Hide;
     }
   }
+  // 背景画像が設定されていたら表示更新
   if (PPx.Extract('%*getcust(X_bg:P_%n)') !== '"') { PPx.Execute('%K"@^F5"'); }
 } else {
   // ハイライトを初期化
   PPx.Execute('*markentry -highlight:0');
   for (let [i ,l] = [0, entryCount]; i < l; i++) {
     const objEntry = PPx.Entry(i);
-    if(objEntry.Comment.search(word) !== -1) {
+    if (objEntry.Comment.search(word) !== -1) {
       objEntry.Highlight = arg;
     }
   }

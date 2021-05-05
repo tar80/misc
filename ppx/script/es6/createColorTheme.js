@@ -52,33 +52,29 @@ const bcolor = 'CB_pals=BBLACK,BRED,BGREEN,BBLUE,BYELLOW,BCYAN,BPURPLE,BWHITE,_A
 //////////////////// ////////////
 
 const clip = PPx.Clipboard.toLowerCase().replace(/#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/g,'H$3$2$1');
-if (clip.slice(0,2) !== '{\n') {
-  PPx.Echo('クリップボードから色情報を取得できませんでした');
-  PPx.Quit(1);
+{
+  const fLine = clip.slice(0,2).replace(/[\r\n]/, '@');
+  if (fLine !== '{@') {
+    PPx.Echo('クリップボードから色情報を取得できませんでした');
+    PPx.Quit(1);
+  }
 }
 
 const objColor = JSON.parse(clip);
 
 const getCfg = ((t, e = ['A_color = {']) => {
+  const cnts = {
+    'name': (v => t = objColor[v].replace(' ', '-')),
+    'background': (v => e.push(`BG = ${objColor[v]}`.toUpperCase())),
+    'foreground': (v => e.push(`FG = ${objColor[v]}`.toUpperCase())),
+    'selectionbackground': (v => e.push(`SEL_BG = ${objColor[v]}`.toUpperCase())),
+    'cursorcolor': (v => e.push(`CUR = ${objColor[v]}`.toUpperCase()))
+  };
   for (const key of Object.keys(objColor)) {
-    switch (key) {
-      case 'name':
-        t = objColor[key].replace(' ', '-');
-        break;
-      case 'background':
-        e.push(`BG = ${objColor[key]}`.toUpperCase());
-        break;
-      case 'foreground':
-        e.push(`FG = ${objColor[key]}`.toUpperCase());
-        break;
-      case 'selectionbackground':
-        e.push(`SEL_BG = ${objColor[key]}`.toUpperCase());
-        break;
-      case 'cursorcolor':
-        e.push(`CUR = ${objColor[key]}`.toUpperCase());
-        break;
-      default:
-        e.push(`${key} = ${objColor[key]}`.replace('bright', 'b').toUpperCase());
+    try {
+      cnts[key](key);
+    } catch (err) {
+      e.push(`${key} = ${objColor[key]}`.replace('bright', 'b').toUpperCase());
     }
   }
   return { 'title': t, 'ele': e };

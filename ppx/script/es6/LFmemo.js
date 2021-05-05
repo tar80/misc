@@ -30,12 +30,9 @@ const memoStr = (esc => {
 })();
 
 const dirType = PPx.DirectoryType;
-
 const tPath = (dirType === 4) ? PPx.Extract('%FVD') : arg.filepath;
-
 // 色付け
 const dColor = (arg.enable_color !== 2 ) ? 0 : PPx.Arguments(1)|0;
-
 // メモをListfileの形式に置き換える
 const detail = PPx.Extract(`"%*now","",A:H${dColor},C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:${memoStr}`);
 
@@ -45,5 +42,5 @@ const fsoTlist = fso.OpenTextFile(tPath, 8, true, -1);
 fsoTlist.WriteLine(detail);
 fsoTlist.Close();
 
-if (dirType == 4) { PPx.Execute('*wait 100,1 %K"@F5"'); }
+if (dirType === 4) { PPx.Execute('*wait 100,1 %: %K"@F5"'); }
 

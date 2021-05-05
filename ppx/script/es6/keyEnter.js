@@ -16,7 +16,7 @@ const type = {
 const filetype = PPx.Extract('.%t').toLowerCase();
 const maskExt = (() => {
   for (const key of Object.keys(type)) {
-    if (type[key].indexOf(filetype) !== -1) { return key; }
+    if (~type[key].indexOf(filetype)) { return key; }
   }
 })();
 

@@ -47,13 +47,13 @@ const getKeys = [];
 let header;
 
 for (const value of stCnts) {
-  if (value.search(/^[^\s]*\s=\s{.*/) === 0) {
+  if (/^[^\s]*\s=\s{.*/.test(value) === true) {
     header = value.replace(/^([^\s]*)\s.*/, '$1');
     if (keybinds.indexOf(header) === -1) {
       PPx.Echo(`${header}のキー登録は許可されていません`);
       PPx.Quit(-1);
     }
-  } else if (!value.search(/^[^\s]*\s*[=,].*/)) {
+  } else if (/^[^\s]*\s*[=,].*/.test(value) === true) {
     getKeys.push({ 'key': header, 'cmd': value.replace(/^([^\s]*)\s.*/, (match, p1) => p1.replace(/\\'/g, '\\\'')) });
   }
 }
@@ -97,9 +97,9 @@ if (process) {
     const cnts = PPx.Extract(`%OC %*getcust(M_${title}:${value.key}:${value.cmd})`);
     if (cnts === '') {
       emptykeys.push(value);
-    } else if (cnts.indexOf('mNotExist') !== -1) {
+    } else if (~cnts.indexOf('mNotExist')) {
       PPx.execute(`*deletecust ${value.key}:${value.cmd}`);
-    } else if (cnts.indexOf('mSepEQ') !== -1) {
+    } else if (~cnts.indexOf('mSepEQ')) {
       PPx.Execute(`*setcust ${value.key}:${value.cmd}=${cnts.replace('%K"', '')}`);
     } else {
       const escCnts = cnts.replace(/%/g, '%%');

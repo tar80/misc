@@ -13,17 +13,12 @@ if (PPx.Arguments.length !== 2) {
 }
 
 const arg = { 'action': PPx.Arguments(0)|0, 'filepath': PPx.Arguments(1) };
-let current = {};
-
-PPx.Extract('%FDVN').replace(/^(.*)\\((.*\.)?(?!$)(.*))/, (match, p1, p2, p3, p4) => {
-  current = {
-    path: `${match}\\`,
-    pwd:  p1,
-    name: p2,
-    ext:  `.${p4.toLowerCase()}`
-  };
-  return current;
-});
+const current = (ele => ({
+  path: `${ele[0]}\\`,
+  pwd:  ele[1],
+  name: ele[2],
+  ext:  '.' + ele[4].toLowerCase()
+}))(PPx.Extract('%FDVN').match(/^(.*)\\((.*\.)?(?!$)(.*))/));
 
 if (current.pwd === undefined) {
   PPx.SetPopLineMessage('!"<<Root>>');

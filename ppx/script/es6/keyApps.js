@@ -51,7 +51,7 @@ if (arg === 'M_Ccr') {
 function Select_menu(list, archive) {
   switch (PPx.DirectoryType) {
     case 4:
-      PPx.Execute(`*setcust M_Clist:Ext = ??M_U${selKey.type} %: %M_Clist,${list}`);
+      PPx.Execute(`*setcust M_Clist:Ext=??M  %: %M_Clist,${list}`);
       break;
     case 80:
       PPx.Execute('%M_Chttp');
@@ -62,7 +62,7 @@ function Select_menu(list, archive) {
       PPx.Execute(`%M_Carc,${archive}`);
       break;
     default:
-      PPx.Execute(`*setcust M_Ccr:Ext = ??M_U${selKey.type} %: %${arg},${selKey.chr}`);
+      PPx.Execute(`*setcust M_Ccr:Ext=??M_U${selKey.type} %: %${arg},${selKey.chr}`);
   }
 }
 

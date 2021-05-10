@@ -118,7 +118,20 @@
 *diroption ;ディレクトリ別の設定のメニュー変更
 *dock ;dockの操作
 *edit  ;[filename] PPeで編集(終了待ちする)
-*editmode  ;e:- n:NUMBER m:MASK s:SEARCH h:CMD d:DIR c:FILE f:FULLPATH
+*editmode  ;[option] e:- n:NUMBER m:MASK s:SEARCH h:CMD d:DIR c:FILE f:FULLPATH
+	-sjis
+	-utf8
+	-crlf
+	-cr
+	-lf
+	-tab ;n TAB桁数
+	-modify:silent ;  終了時保存未確認
+	-modify:modify ;  終了時自動保存
+	-modify:readonly ;書き込み禁止
+	-linebreak:off ;  右端で折り返さない
+	-tabkey ;TABキーのカスタマイズ有効
+	-allkey ;TAB,ESC,ENTERのカスタマイズ有効
+ 
 *entrytip ;[type] [option] エントリーチップの表示
 	filename ;ファイル名
 	fileinfo ;ファイル情報

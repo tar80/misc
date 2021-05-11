@@ -32,30 +32,31 @@ var tPath = PPx.Arguments(1);
 var title = PPx.Extract('%*name(X,' + tPath + ')');
 var checkDup = PPx.Extract('%*getcust(M_' + title + ')').split('\u000A').length;
 var keybinds = 'KC_main, KC_incs, K_edit, K_ppe, K_lied, K_tree, KB_edit, KV_main, KV_page, KV_crt, KV_img';
-var getKeys = [];
-var header, value, cnts, escCnts;
-var i, l;
 
 var st = PPx.CreateObject('ADODB.stream');
+st.Open;
 st.Type = 2;
 st.Charset = 'UTF-8';
-st.Open();
 st.LoadFromFile(tPath);
 var stCnts = st.ReadText(-1).split('\u000A');
 st.Close;
 
+var getKeys = [];
+var header, value, cnts, escCnts;
+var i, l;
+
 for (i = 0, l = stCnts.length; i < l; i++) {
   value = stCnts[i];
-  if (value.search(/^[^\s]*\s=\s{.*/) === 0) {
+  if (/^[^\s]*\s=\s{.*/.test(value) === true) {
     header = value.replace(/^([^\s]*)\s.*/, '$1');
     if (keybinds.indexOf(header) === -1) {
       PPx.Echo(header + 'のキー登録は許可されていません');
       PPx.Quit(-1);
     }
-  } else if (!value.search(/^[^\s]*\s*[=,].*/)) {
+  } else if (/^[^\s]*\s*[=,].*/.test(value) === true) {
     getKeys.push({ 'key': header, 'cmd': value.replace(/^([^\s]*)\s.*/, function (match, p1) {
       return p1.replace(/\\'/g, '\\\'');
-    })
+      })
     });
   }
 }

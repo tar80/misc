@@ -5,19 +5,21 @@
 // -compcmdはフォーカス制御
 
 var opPath = PPx.Extract('%2');
-var cmd = {};
 
 // 送り先を設定
-if (!PPx.GetFileInformation(opPath)) {
-  cmd = {act: 'move', opt: '', post: '-compcmd *ppc -noactive -pane:~ %%hd0'};
-  cmd.dest = '%\'work\'%\\';
-} else {
-  cmd = (PPx.Arguments.length == 0)
-    ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -noactive -pane:~ %%hd0'}
-    : {act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive'};
+var cmd = (function (pre) {
+  if (!PPx.GetFileInformation(opPath)) {
+    pre = {act: 'move', opt: '', post: '-compcmd *ppc -noactive -pane:~ %%hd0'};
+    pre.dest = '%\'work\'%\\';
+  } else {
+    pre = (PPx.Arguments.length === 0)
+      ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -noactive -pane:~ %%hd0'}
+      : {act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive'};
 
-  cmd.dest = opPath;
-}
+    pre.dest = opPath;
+  }
+  return pre;
+})();
 
 // 送り元の属性に応じて振り分け
 switch (PPx.DirectoryType) {

@@ -13,7 +13,7 @@ var type = {
 var filetype = PPx.Extract('.%t').toLowerCase();
 var maskExt = (function () {
   for (var item in type) {
-    if (type[item].indexOf(filetype) !== -1) { return type[item]; }
+    if (~type[item].indexOf(filetype)) { return type[item]; }
   }
 })();
 

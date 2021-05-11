@@ -11,7 +11,7 @@ var tPath = PPx.Extract('%\'cfg\'%\\theme');
 
 // 色設定を適用するPPxアプリケーション
 var apply_ppc = false;
-var apply_ppv = true;
+var apply_ppv = false;
 var apply_ppb = false;
 
 /* 色設定
@@ -50,36 +50,37 @@ var bcolor = 'CB_pals=BBLACK,BRED,BGREEN,BBLUE,BYELLOW,BCYAN,BPURPLE,BWHITE,_AUT
 //////////////////// ////////////
 
 var clip = PPx.Clipboard.toLowerCase().replace(/#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/g,'H$3$2$1');
-if (clip.slice(0,2) !== '{\n') {
-  PPx.Echo('クリップボードから色情報を取得できませんでした');
-  PPx.Quit(1);
-}
+(function (v) {
+  var fLine = v.slice(0,2).replace(/[\r\n]/, '@');
+  if (fLine !== '{@') {
+    PPx.Echo('クリップボードから色情報を取得できませんでした');
+    PPx.Quit(1);
+  }
+})(clip);
 
-var arrColor = clip.split('\u000A');
-var getCfg = function() {
+var getCfg = (function() {
   var t;
   var e = ['A_color = {'];
+  var arrColor = clip.split('\u000A');
+  var cnts = {
+    'name': (function (v) { return t = arrColor[v].replace(' ', '-').slice(0,-1); }),
+    'background': (function (v) { return e.push('BG = ' + arrColor[v].toUpperCase()); }),
+    'foreground': (function (v) { return e.push('FG = ' + arrColor[v].toUpperCase()); }),
+    'selectionbackground': (function (v) { return e.push('SEL_BG = ' + arrColor[v].toUpperCase()); }),
+    'cursorcolor': (function (v) { return e.push('CUR = ' + arrColor[v].toUpperCase()); })
+  };
   for (var i = 1, l = arrColor.length; i < l; i++) {
-    arrColor[i].replace(/^[\s]*(.*):\s(.*)/, function (match, p1, p2) {
-      p1 = p1.replace(/"/g, '');
-      p2 = p2.replace(/"/g, '').slice(0,-1);
-      switch (p1) {
-        case 'name': t = p2.replace(/\s/g, '-').slice(0, -1);
-          break;
-        case 'background': e.push('BG = ' + p2.toUpperCase());
-          break;
-        case 'foreground': e.push('FG = ' + p2.toUpperCase());
-          break;
-        case 'selectionbackground' : e.push('SEL_BG = ' + p2.toUpperCase());
-          break;
-        case 'cursorcolor': e.push('CUR = ' + p2.toUpperCase());
-          break;
-        default: e.push(p1.toUpperCase() + ' = ' + p2.replace('bright', 'b').toUpperCase());
+    var m = arrColor[i].match(/^[\s]*(.*):\s(.*)/);
+    m[1] = m[1].replace(/"/g, '');
+    m[2] = m[2].replace(/"/g, '').slice(0,-1);
+    try {
+      cnts[m[1]](m[2]);
+      } catch (err) {
+        e.push(m[1].toUpperCase() + ' = ' + m[2].replace('bright', 'b').toUpperCase());
       }
-    });
   }
   return { 'title': t, 'ele': e };
-}();
+})();
 getCfg.ele.push('}');
 
 if (PPx.Execute('%"テーマの生成"%Q"' + getCfg.title + ' を生成します"') !== 0) { PPx.Quit(1); }

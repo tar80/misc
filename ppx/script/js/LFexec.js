@@ -3,9 +3,9 @@
 //
 // PPx.Arguments() = (0)実行するコマンドライン名, (1)1＝重複パスの実行
 //
-// コマンドラインは、 function Exe_edit()内に記述する
+// コマンドラインは、 オブジェクトExe_edit()内に記述する
 // 変数は、ファイルパス= path, ショートネーム= shortname,
-// 行数= number, 検索語= search_wordで指定
+// 行数= number, 重複パス実行= duplicate, 検索語= search_wordで指定
 
 if (!PPx.Arguments.length) {
   PPx.Echo('引数が足りません');
@@ -14,47 +14,45 @@ if (!PPx.Arguments.length) {
 
 var arg = { 'cmd': PPx.Arguments(0), 'exeDup': (PPx.Arguments.length != 2) ? 0 : PPx.Arguments(1)|0 };
 var rep = [];
+var exe_edit = {
+  // 関数の引数には(path, shortname, number, duplicate)が指定できる
+  'gvim': (function (path, shortname, number) {
+    PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + search_word + '/ " "' + path + '"');
+    PPx.Execute('*wait 100,1');
+    return;
+  }),
+  'ppv': (function (path) {
+    PPx.Execute('%Oi *ppv -r -bootid:C ' + path);
+    PPx.Execute('*wait 100,1');
+    return;
+  }),
+  'sed': (function (path, shortname, number, duplicate) {
+    if (typeof rep[0] === 'undefined') {
+      rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
+    }
+    if (!duplicate) { PPx.Execute('%Oi copy ' + path + ' ' + path + '_back'); }
 
-var Exe_edit = (function (path, shortname, number, duplicate) {
-  switch(arg.cmd) {
-    case 'gvim':
-      PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + search_word + '/ " "' + path + '"');
-      PPx.Execute('*wait 100,1');
-      return;
-    case 'ppv':
-      PPx.Execute('%Oi *ppv -r -bootid:C ' + path);
-      PPx.Execute('*wait 100,1');
-      return;
-    case 'sed':
-      if (typeof rep[0] == 'undefined') {
-        rep[0] = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
-      }
-
-      if (!duplicate) { PPx.Execute('%Oi copy ' + path + ' ' + path + '_back'); }
-
-      PPx.Execute('%Oi sed -i -r ' + number + rep[0] + ' ' + path);
-      return;
-    default:
-      return;
-  }
-});
+    PPx.Execute('%Oi sed -i -r ' + number + rep[0] + ' ' + path);
+    return;
+  })
+};
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 
 var markEntry = PPx.Extract('%#;FDC').split(';');
 var markCount = PPx.EntryMarkCount;
 // マークの有無でループの初期値を設定
-var n = (markCount != 0) ? 1 : 0;
+var n = (markCount !== 0) ? 1 : 0;
 
 var exist = {};
 var entryPath, entrySN, entryNum, entryDup;
-var ObjEntry = PPx.Entry;
+var objEntry = PPx.Entry;
 // ヘッダ情報から検索語を取得
 var search_word = (function () {
   var w = '';
   var reg = /result\s=>\s(.*)/;
   for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
-    var t = ObjEntry(i).Comment.match(reg);
+    var t = objEntry(i).Comment.match(reg);
     if (t) {
       w = String(t[1]).replace(/\\\(/g, '(');
       break;
@@ -64,16 +62,16 @@ var search_word = (function () {
 })();
 
 var reg = new RegExp(/^[0-9]*/);
-PPx.Entry.Index = ObjEntry.FirstMark;
+PPx.Entry.Index = objEntry.FirstMark;
 
 for (var i = n; i <= markCount; i++) {
   // 空白行の判定
-  if (fso.FileExists(ObjEntry.Name)) {
+  if (fso.FileExists(objEntry.Name)) {
     // フルパスの取得
     entryPath = markEntry[i - n];
 
     //  ShortNameの取得
-    entrySN = ObjEntry.ShortName;
+    entrySN = objEntry.ShortName;
 
     // ShortNameを数値と見なして取得
     entryNum = (reg.test(entrySN)) ? entrySN|0 : 1;
@@ -87,9 +85,9 @@ for (var i = n; i <= markCount; i++) {
 
     // 同一パスを判別してコマンドに渡す
     if (arg.exeDup === 1 || !entryDup) {
-      Exe_edit(entryPath, entrySN, entryNum, entryDup);
+      exe_edit[arg.cmd](entryPath, entrySN, entryNum, entryDup);
     }
   }
-  ObjEntry.NextMark;
+  objEntry.NextMark;
 }
 

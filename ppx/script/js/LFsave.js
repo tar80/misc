@@ -7,17 +7,16 @@
 var reserveHeader = 5;
 
 //【.】【..】を考慮
-var sNum = function () {
+var sNum = (function () {
   var tdir = PPx.Extract('%*getcust(XC_tdir)').split(',');
   return Number(tdir[0]) + Number(tdir[1]);
-}();
+})();
 
 // リストの並び
 var ArrEntry = [];
 
 for (var i = sNum, l = PPx.EntryDisplayCount; i < l; i++) {
   var ObjEntry = PPx.Entry(i);
-
   (ObjEntry.Name == ObjEntry.ShortName)
     ? ArrEntry.push(ObjEntry.Name)
     : ArrEntry.push(ObjEntry.Name + '","' + ObjEntry.ShortName);
@@ -38,7 +37,7 @@ while (!fsoTlist.AtEndOfStream) {
 // 保存用の並び
 var result = [];
 
-//ヘッダを取得
+// ヘッダを取得
 for (i = 0, l = Math.min(reserveHeader, entryInfo.length); i < l; i++) {
   if (entryInfo[0].indexOf(';') === 0) { result[i] = entryInfo.splice(0, 1); }
 }
@@ -76,5 +75,5 @@ fsoTlist.Write(result.join('\u000D\u000A') + '\u000D\u000A');
 
 fsoTlist.Close();
 
-if (PPx.DirectoryType == 4) { PPx.Execute('*wait 200,1 %K"@F5"'); }
+if (PPx.DirectoryType === 4) { PPx.Execute('*wait 200,1 %K"@F5"'); }
 

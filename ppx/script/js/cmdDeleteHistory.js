@@ -6,11 +6,11 @@
 
 var saveHistory = (!PPx.Arguments.length) ? false : true;
 var tHistory = PPx.Extract('%*editprop(whistory)');
-var tType = (function () {
+var tType = (function (param) {
   var key = 'gnmshdcfuxUX';
   var type = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
-  return type[key.indexOf(tHistory)];
-})();
+  return type[key.indexOf(param)];
+})(tHistory);
 
 if (tType === undefined) {
   PPx.Execute('%"履歴の削除"%I"該当する履歴がありません');

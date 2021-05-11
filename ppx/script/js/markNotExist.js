@@ -2,10 +2,10 @@
 /* リストファイル上の存在しないファイルをマーク */
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
-var ObjEntry = PPx.Entry;
+var objEntry = PPx.Entry;
 
 for (var i = 0, l = PPx.Entry.Count; i < l; i++) {
   if (!(fso.FileExists(ObjEntry(i).name) || fso.FolderExists(ObjEntry(i).name))) {
-    ObjEntry(i).Mark = 1;
+    objEntry(i).Mark = 1;
   }
 }

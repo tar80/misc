@@ -115,39 +115,33 @@ if (PPx.Extract('%si"output"') === 'PPv') {
   PPx.Execute('*run -noppb -min %si"cmd" %si"gopt" "' + str + '" ' + tPath +
     ' | %0ppvw -bootid:w -esc -document -k *string p,grep=1 %%: *find "' + str + '"');
 } else {
-  // grepの結果を出力
-  PPx.Execute('%Obn %si"cmd" %si"gopt" "' + str + '" ' + tPath + ' > "' + arg.listfile + '"');
+  // grepの結果をutf16lbで出力
+  PPx.Execute('%Obn %si"cmd" %si"gopt" "' + str + '" ' + tPath + ' | %Os nkf -w16B > "' + arg.listfile + '"');
 
   // リストの整形
-  var dirType = PPx.DirectoryType;
+  var fso = PPx.CreateObject('Scripting.FileSystemObject');
   var pDir = PPx.Extract('%FD');
+  var dirType = PPx.DirectoryType;
   var result = [
     ';ListFile\u000D\u000A' +
     ';Base=' + pDir + '|' + dirType + '\u000D\u000A' +
     '"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,H:0,M:0,T:"result => ' + str + '"'
   ];
+  var fsoTlist = fso.OpenTextFile(arg.listfile, 1, false, -1);
 
-  var st = PPx.CreateObject('ADODB.stream');
-  st.Open;
-  st.Type = 2;
-  st.Charset = 'UTF-8';
-  st.LoadFromFile(arg.listfile);
-
-  var stCnts = st.ReadText(-1).split('\u000A');
-
-  for (var value in stCnts) {
-    stCnts[value].replace(/^([^-:]*)[-:](\d*)([-:])\s*(.*)/, function (match, p1, p2, p3, p4) {
-      p1 = (p1 === '') ? p3 : p1.replace(/^\.\.\\.*\//, '');
-      p3 = (p3.indexOf(':') !== -1) ? 0 : 3;
+  while (!fsoTlist.AtEndOfStream) {
+    fsoTlist.ReadLine().replace(/^([^-:]*)[-:](\d*)([-:])\s*(.*)/, function (match, p1, p2, p3, p4) {
+      p1 = (p1 == '') ? p3 : p1.replace(/^\.\.\\.*\//, '');
+      p3 = (p3.indexOf(':') != -1) ? 0 : 3;
       p4 = p4.replace(/"/g, '""');
       result.push('"' + p1 + '","' + p2 + '",A:H' + p3 + ',C:0.0,L:0.0,W:0.0,S:0.0,H:0,M:0,T:"' + p4 + '"');
     });
   }
 
-  st.Position = 0;
-  st.WriteText(result.join('\u000D\u000A'));
-  st.SaveToFile(arg.listfile, 2);
-  st.Close;
+  // 置換結果を書き出して上書き
+  fsoTlist = fso.OpenTextFile(arg.listfile, 2, true, -1);
+  fsoTlist.Write(result.join('\u000D\u000A'));
+  fsoTlist.Close();
 }
 
 PPx.Execute('*execute ' + ppxid + ',*string i,cmd= %%: *string i,gopt=');

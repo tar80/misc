@@ -17,7 +17,7 @@ var cmdOpt = (arg == 0)
   ? ['copy', '-renamedest:on']
   : ['!copy', '-min'];
 
-// 送り先を設定
+// 送り先振り分け
 switch (PPx.GetFileInformation(opDir)) {
   case ':DIR':
     tDir = opDir;

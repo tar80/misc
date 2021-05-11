@@ -2,22 +2,23 @@
 /* 同階層の隣合うディレクトリに移動 */
 /* 同階層の隣合う同じ拡張子の仮想ディレクトリに移動 */
 //
-// PPx.Arguments() = (0)0:preview|1:next
+// PPx.Arguments(0) = 0:preview|1:next
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
 
 var action = (!PPx.Arguments.length) ? 0 : PPx.Arguments(0)|0;
 var wd = PPx.Extract('%FDVN');
-var current = {};   // directory Information
-
-wd.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, function (match, p1, p2, p3, p4) {
-  current = {
-    // path: match + '\\',
-    pwd:  p1,
-    name: p2,
-    ext:  p4.toLowerCase()
-  };
-  return current;
-});
+var current = (function (v) {
+  wd.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, function (match, p1, p2, p3, p4) {
+    v = {
+      // path: match + '\\',
+      pwd:  p1,
+      name: p2,
+      ext:  p4.toLowerCase()
+    };
+    return;
+  });
+  return v;
+})();
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var fsoWD;          // current_directory
@@ -81,16 +82,13 @@ function move_path(valA, valB, termMessage) {
   // リストを名前順でソート
   list.sort(function (a, b) { return (a.toLowerCase() < b.toLowerCase()) ? valA : valB; });
 
-  for (var i = list.length; i--;) {
-    if (list[i] == current.name) { break; }
-  }
+  for (var i = list.length; i--;) { if (list[i] === current.name) { break; } }
 
   // 対象エントリ名を取得
   var tEntry = list[Math.max(i - 1, 0)];
 
   if (list[i - 1] !== undefined) {
     PPx.Execute('*jumppath "' + fso.BuildPath(fsoPWD.Path, tEntry) + '"');
-
     // 端ならメッセージを表示
     if (list[i - 2] === undefined) { PPx.SetPopLineMessage('!"<' + termMessage + '>'); }
   }

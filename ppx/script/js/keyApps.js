@@ -30,11 +30,11 @@ var selKey = (function () {
 
   if (ext === 'DIR') {
     return { type: 'dir', chr: 'W' };
-  } else if (cnts['arc'].indexOf(ext) !== -1) {
+  } else if (~cnts['arc'].indexOf(ext)) {
     return { type: 'arc', chr: 'W' };
-  } else if (cnts['img'].indexOf(ext) !== -1) {
+  } else if (~cnts['img'].indexOf(ext)) {
     return { type: 'img', chr: 'L' };
-  } else if (cnts['doc'].indexOf(ext) !== -1) {
+  } else if (~cnts['doc'].indexOf(ext)) {
     return { type: 'doc', chr: 'R' };
   } else {
     return { type: 'none', chr: 'S' };

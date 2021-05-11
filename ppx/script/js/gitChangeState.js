@@ -1,40 +1,38 @@
 ﻿//!*script
 /* マークしたファイルの背景色を操作 */
 //
-// PPx.Arguments() = (0)0:unstage|1:stage|2:part|3:cache delete, (1)number
-// number = 0:メッセージ, 1:削除, 2:通常, 3:不明, 4:更新, 5:追加
+// PPx.Arguments(0) = 0:unstage |1:stage |2:untrack |3:partofstage
+// PPx.Arguments(1) = 0:メッセージ |1:削除 |2:通常 |3:不明 |4:更新 |5:追加
 // ↑これらの番号はマークの色が上書きされるので注意
 
-var argState = function (arg) {
-  var arg = [];
-  if (PPx.Arguments.length == 2) {
-    arg[0] = (PPx.Arguments(0) == '3')
-      ? 'MM'
-      : (PPx.Arguments(0) == '2')
-        ? '??'
-        : (PPx.Arguments(0) == '1')
-          ? '@ '
-          : ' @';
-    arg[1] = PPx.Arguments(1)|0;
-  } else {
-    PPx.Quit(1);
-  }
-  return { 'mark': arg[0], 'number': arg[1] };
-}();
+if (PPx.Arguments.length < 2) {
+  PPx.Echo('引数が足りません');
+  PPx.Quit(1);
+}
+
+var argState = (function (m) {
+  m = {
+    '3': 'MM',
+    '2': '??',
+    '1': '@ ',
+    '0': ' @'
+  };
+  return { 'mark': m[PPx.Arguments(0)], 'number': PPx.Arguments(1)|0 };
+})();
+
 var pos = PPx.EntryIndex;
 
 PPx.EntryFirstMark;
+
 do {
-  if (argState.mark.indexOf('@') !== -1) {
+  if (~argState.mark.indexOf('@')) {
     var chr = PPx.Entry.Comment.replace(' ','');
-    PPx.EntryComment = argState.mark.replace('@', chr);
+    PPx.EntryComment = (chr === '??') ? 'A ' : argState.mark.replace('@', chr);
   } else {
-    PPx.EntryComment = (chr === '??')
-      ? 'A '
-      : argState.mark;
+    argState.mark;
   }
   PPx.EntryState = argState.number;
   PPx.EntryMark = 0;
-} while ( PPx.EntryFirstMark != 0 );
+} while (PPx.EntryFirstMark !== 0);
 
 PPx.EntryIndex = pos;

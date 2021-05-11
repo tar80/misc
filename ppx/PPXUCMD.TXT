@@ -263,6 +263,7 @@
 	select h-1 ;前の非表示タブ
 	swappane ;ペインを入れ替え
  
+*POSTMARK  ;[n] マークしたファイルをハイライト
 *poweroff ;Windows をシャットダウンし、電源を切る
 *ppb ;PPbを実行
 *ppc ;PPcを実行
@@ -337,11 +338,11 @@
 	marked ;マークエントリ
 	all ;   全部
 	firstmark,lastmark ;最初と最後のマーク
-	point ;マウスカーソル
-	-mark ;マーク(規定値)
-	-unmark ;マーク解除
+	point ;       マウスカーソル
+	-mark ;       マーク(規定値)
+	-unmark ;     マーク解除
 	-reversemark ;マーク反転
-	-highlight ;[:n] ハイライト(既定値:1) 0=ハイライト解除、1～7=指定ハイライト
+	-highlight ;  [:n] ハイライト(既定値:1) 0=ハイライト解除、1～7=指定ハイライト
  
 *reboot ;Windows を再起動
 *reducemode ;mode PPvの画像縮小方法
@@ -438,17 +439,21 @@
 *whereis ;[option...] ファイル検索
 	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'temp'%\ppxresult.xlf"
 	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'temp'%\ppxresult.xlf"
-	-path:"" ;ソースパス
-	-mask:"" ;マスク
-	-text:"" ;検索文字列
-	-type: ;2=コメント,3=explorerのファイル情報
-	-dir ;ディレクトリを結果に含む
-	-subdir:off ;サブディレクトリ内を検索しない
-	-vfs ;仮想ディレクトリ内を検索
-	-marked ;ソースパスの代わりにマークエントリを検索
+	-path:"" ;    ソースパス
+	-mask:"" ;    マスク
+	-text:"" ;    検索文字列
+	-type: ;      2=コメント,3=explorerのファイル情報
+	-dir ;        ディレクトリを結果に含む
+	-subdir:off ; サブディレクトリ内を検索しない
+	-vfs ;        仮想ディレクトリ内を検索
+	-marked ;     ソースパスの代わりにマークエントリを検索
 	-listfile:"%'temp'%\ppxresult.xlf" ;結果結果の保存先パス
-	-search ;検索のみ実行して結果を表示しない
-	-name ;パスリストを生成する　※自動で-searchを付加
+	-search ;     検索のみ実行して結果を表示しない
+	-name ;       パスリストを生成する　※自動で-searchを付加
+ 
+*whereis ;source[,mask1[,mask2[,string[,directory[,subdirectory[,vfs]]]]]] ファイル検索
+	%m|DIR無視一覧 -path:"%1" -vfs -listfile:"%'temp'%\ppxresult.xlf"
+	%m|DIR無視一覧両窓 -path:"%1;%2" -vfs -listfile:"%'temp'%\ppxresult.xlf"
  
 *windowposition  ;[window id],x,y
 *windowsize  ;[window id],width,height

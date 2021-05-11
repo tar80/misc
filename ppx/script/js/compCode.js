@@ -23,23 +23,22 @@ if (len < 2) {
 }
 
 // 現在の編集モードを参照
-var defType = (function () {
+var defType = (function (str) {
   var reg = new RegExp('PP[BCV]\\[');
-  var str = 'g';
   if (!reg.test(PPx.Extract('%W'))) { str = PPx.Extract('%*editprop(whistory)') || str; }
   return str;
-})();
+})('g');
 
 var edit = {
   chr: PPx.Arguments(1),
   title: (len > 2) ? (PPx.Arguments(2) || 'compCode..') : 'compCode..',
   precmd: (len > 3) ? PPx.Arguments(3) : '',
   zero: PPx.Arguments(0),
-  type: function () { return this.zero.charAt(0); },
-  mode: function () {
+  type: (function () { return this.zero.charAt(0); }),
+  mode: (function () {
     var keys = 'gnmshdcfuxUXREOS';
     return (keys.indexOf(this.zero.charAt(1)) !== 0) ? this.zero.substr(1) : defType;
-  }
+  })
 };
 
 switch (edit.type()) {

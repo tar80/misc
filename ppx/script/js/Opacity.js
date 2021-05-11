@@ -3,9 +3,8 @@
 //
 // PPx.Arguments() = [0]0-100 ;透過度
 
-var tID;
 var xID = PPx.WindowIDName;
-tID = (xID == ('C_A'||'C_B') && PPx.Pane.Count <= 2)
+var tID = (xID == ('C_A'||'C_B') && PPx.Pane.Count <= 2)
   ? 'n#' : 'n';
 
 if (PPx.Arguments.length) {

@@ -3,8 +3,8 @@
 
 'use strict';
 
-PPx.Echo(`
-%W\t ${PPx.Extract('%W')}
+PPx.Echo(
+  `%W\t ${PPx.Extract('%W')}
 %n\t ${PPx.Extract('%n')}
 %n#\t ${PPx.Extract('%n#')}
 %N\t ${PPx.Extract('%N')}
@@ -18,5 +18,7 @@ PPx.Echo(`
 %*cursorpos(x)\t ${PPx.Extract('%*cursorpos(x)')}
 %*cursorpos(y)\t ${PPx.Extract('%*cursorpos(y)')}
 %*ppxlist()\t${PPx.Extract('%*ppxlist()')}
+%*RESULT(DirectoryType)\t ${PPx.DirectoryType}
+%*RESULT(exists,%FDC)\t ${PPx.Extract('%*RESULT(exists,%FDC)')}
 %*clippedtext()\t ${PPx.Extract('%*clippedtext()')}`
 );

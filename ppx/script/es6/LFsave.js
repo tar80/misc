@@ -15,13 +15,13 @@ const sNum = (() => {
 })();
 
 // リストの並び
-const ArrEntry = [];
+const arrEntry = [];
 
 for (let [i, l] = [sNum, PPx.EntryDisplayCount]; i < l; i++) {
-  let ObjEntry = PPx.Entry(i);
-  (ObjEntry.Name === ObjEntry.ShortName)
-    ? ArrEntry.push(ObjEntry.name)
-    : ArrEntry.push(`${ObjEntry.Name}","${ObjEntry.ShortName}`);
+  let objEntry = PPx.Entry(i);
+  (objEntry.Name === objEntry.ShortName)
+    ? arrEntry.push(objEntry.name)
+    : arrEntry.push(`${objEntry.Name}","${objEntry.ShortName}`);
 }
 
 const listpath = PPx.Extract('%FDV');
@@ -29,34 +29,34 @@ const fso = PPx.CreateObject('Scripting.FileSystemObject');
 let fsoTlist = fso.OpenTextFile(listpath, 1, false, -1);
 
 // ファイルに保存されている並び
-const entryInfo = [];
+const infoEntry = [];
 
-while (!fsoTlist.AtEndOfStream) { entryInfo.push(fsoTlist.ReadLine()); }
+while (!fsoTlist.AtEndOfStream) { infoEntry.push(fsoTlist.ReadLine()); }
 
 // 保存用の並び
 const result = [];
 
 // ヘッダを取得
-for (let [i, l] = [0, Math.min(reserveHeader, entryInfo.length)]; i < l; i++) {
-  if (entryInfo[0].indexOf(';') === 0) { result[i] = entryInfo.splice(0, 1); }
+for (let [i, l] = [0, Math.min(reserveHeader, infoEntry.length)]; i < l; i++) {
+  if (infoEntry[0].indexOf(';') === 0) { result[i] = infoEntry.splice(0, 1); }
 }
 
 // リスト上の並びをlistfileの形式で取得し直す
 {
-  let res, cmt, mark, hl, ArrRes;
+  // let res, cmt, mark, hl, arrRes;
 
-  ArrEntry.forEach((element, index) => {
+  arrEntry.forEach((element, index) => {
 
     // ファイルからエントリと一致する行情報を取得
-    res = entryInfo.find(d => d.indexOf(element) !== -1);
-    ArrRes = res.split(',');
-    cmt = PPx.Entry(index + sNum).Comment.replace(/"/g,'""');
-    mark = (PPx.Entry(index + sNum).Mark) ? 1 : 0;
-    hl = PPx.Entry(index + sNum).Highlight;
+    let res = infoEntry.find(data => ~data.indexOf(element));
+    let arrRes = res.split(',');
+    let cmt = PPx.Entry(index + sNum).Comment.replace(/"/g,'""');
+    let mark = (PPx.Entry(index + sNum).Mark) ? 1 : 0;
+    let hl = PPx.Entry(index + sNum).Highlight;
 
-    result.push((ArrRes.length < 6)
+    result.push((arrRes.length < 6)
       ? res.replace(/(.*)/, `"$1","",A:H0,C:0.0,L:0.0,W:0.0,S:0.0,H:${hl},M:${mark},T:"${cmt}"`)
-      : `${ArrRes.splice(0, 6)},H:${hl},M:${mark},T:"${cmt}"`);
+      : `${arrRes.splice(0, 6)},H:${hl},M:${mark},T:"${cmt}"`);
   });
 }
 

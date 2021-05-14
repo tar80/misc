@@ -1,39 +1,41 @@
 ﻿//!*script
 /* 状況に応じたファイルコピーの設定 */
 //
-// PPx.Arguments()= (0)0:detail | 1:quick | >=2:link
+// PPx.Arguments(0) = 0:detail | 1:quick | >=2:link
 // %'work'=workspace
 // -comcmdはフォーカス制御
 
 'use strict';
 
 const arg = (PPx.Arguments.length) ? PPx.Arguments(0)|0 : 0;
-const cdFilePath = PPx.Extract('%FDC');
-const cdFileName = PPx.Extract('%FC');
+const filePaths = PPx.Extract('%#;FDCN').split(';');
+const fileNames = PPx.Extract('%#;FCN').split(';');
+const fileCount = fileNames.length;
 const opPath = PPx.Extract('%2');
-
+const opParentExt = PPx.GetFileInformation(opPath) || 'no';
 // 送り先振り分け
-const cmd = ((pre) => {
-  switch (PPx.GetFileInformation(opPath)) {
+const cmd = (obj => {
+  switch (opParentExt) {
     case ':DIR':
-      pre = (arg === 0)
+      obj = (arg === 0)
         ? { act: 'copy', opt: '-renamedest:on' }
         : { act: '!copy', opt: '-min' };
-      pre.dest = opPath;
-      pre.post = '-compcmd *ppc -r -noactive';
-      return pre;
+      obj.dest = opPath;
+      obj.post = '-compcmd *ppc -r -noactive';
+      return obj;
     case ':XLF':
-      pre = (arg === 0)
+      obj = (arg === 0)
         ? { act: 'copy', opt: '-renamedest:on' }
         : { act: '!copy', opt: '-min' };
-      pre.dest = opPath;
-      pre.post = '';
-      return pre;
-    case '':
-      pre = { act: 'copy', opt: '' };
-      pre.dest = '%\'work\'%\\';
-      pre.post = `-compcmd *ppc -pane:~ %%hd0 -k *jumppath -entry:${cdFileName}`;
-      return pre;
+      obj.dest = opPath;
+      obj.post = '';
+      return obj;
+    case 'no':
+      obj.act = 'copy';
+      obj.opt = '';
+      obj.dest = '%\'work\'%\\';
+      obj.post = `-compcmd *ppc -pane:~ %%hd0 -k *jumppath -entry:${fileNames[0]}`;
+      return obj;
     default:
       PPx.Echo('非対象ディレクトリ');
       PPx.Quit(1);
@@ -42,12 +44,16 @@ const cmd = ((pre) => {
 
 // シンボリックリンク
 if (arg >= 2) {
-  cmd.dest = PPx.Extract(`%*input("${cmd.dest}" -title:"リンク先" -mode:d)%\\`);
-  if (cmd.dest) {
-    // 対象がディレクトリなら/Dオプション付加
-    cmd.opt = (PPx.GetFileInformation(cdFilePath) === ':DIR') ? '/D' : '';
-    PPx.Execute(`%Orn *ppb -runas -c mklink ${cmd.opt} ${cmd.dest}${cdFileName} ${cdFilePath}`);
-  }
+  cmd.dest = PPx.Extract(`%*input("${cmd.dest}" -title:"リンク先" -mode:d)%\\`) || PPx.Quit(1);
+  ((value, isDir) => {
+    for (let [i, l] = [0, fileCount]; i < l; i++) {
+      // 対象がディレクトリなら/Dオプション付加
+      isDir = (PPx.GetFileInformation(filePaths[i]) === ':DIR') ? '/D ' : '';
+      value.push(`"${isDir}${cmd.dest}${fileNames[i]} ${filePaths[i]}"`);
+    }
+    // パスに空白を含むと失敗する
+    return PPx.Execute(`%On *ppb -runas -c FOR %%%%i IN (${value.join(',')}) DO mklink %%%%~i`);
+  })([], '');
   // 書庫なら解凍
 } else if (PPx.DirectoryType >= 62) {
   PPx.Execute(`%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複>リネーム,DIR>展開"%{${cmd.dest}%} %@`);

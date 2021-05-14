@@ -17,7 +17,7 @@ if (!PPx.Arguments.length) {
 //   PPx.Quit(1);
 // }
 
-const arg = PPx.Arguments(0);
+const argMenuType = PPx.Arguments(0);
 // 拡張子を大文字で取得する
 const ext = (PPx.GetFileInformation(PPx.Extract('%R')) === ':DIR')
   ? 'DIR' : PPx.Extract('%t').toUpperCase();
@@ -38,20 +38,20 @@ const selKey = (() => {
   return { type: 'none', chr: 'P' };
 })();
 
-if (arg === 'M_Ccr') {
+if (argMenuType === 'M_Ccr') {
   // 標準メニュー
-  Select_menu('J', 'O');
+  SelectMenu('J', 'O');
 } else {
   // ファイル移動メニュー
-  selKey.chr = (arg === 'M_FileMOVE') ? 'M' : 'C';
-  Select_menu(selKey.chr, selKey.chr);
+  selKey.chr = (argMenuType === 'M_FileMOVE') ? 'M' : 'C';
+  SelectMenu(selKey.chr, selKey.chr);
 }
 
 /* カレントディレクトリの属性に応じて処理を分岐する */
-function Select_menu(list, archive) {
+function SelectMenu(list, archive) {
   switch (PPx.DirectoryType) {
     case 4:
-      PPx.Execute(`*setcust M_Clist:Ext=??M  %: %M_Clist,${list}`);
+      PPx.Execute(`*setcust M_Clist:Ext=??M_U${selKey.type} %: %M_Clist,${list}`);
       break;
     case 80:
       PPx.Execute('%M_Chttp');
@@ -62,7 +62,7 @@ function Select_menu(list, archive) {
       PPx.Execute(`%M_Carc,${archive}`);
       break;
     default:
-      PPx.Execute(`*setcust M_Ccr:Ext=??M_U${selKey.type} %: %${arg},${selKey.chr}`);
+      PPx.Execute(`*setcust M_Ccr:Ext=??M_U${selKey.type} %: %${argMenuType},${selKey.chr}`);
   }
 }
 

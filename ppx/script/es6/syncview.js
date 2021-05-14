@@ -7,15 +7,15 @@
 'use strict';
 
 const paneCount = PPx.Pane.Count;
-const tID = PPx.WindowIDName.slice(2);
-const sync = PPx.SyncView;
+const targetID = PPx.WindowIDName.slice(2);
+const ppvSync = PPx.SyncView;
 
-if (!sync) {
+if (!ppvSync) {
   (paneCount === 2)
     // タイトルバー無し
-    ? State_syncview('B100000000')
+    ? StateSyncView('B100000000')
     // タイトルバー有り
-    : State_syncview('B000000000');
+    : StateSyncView('B000000000');
 } else {
   // 連動ビューがあれば解除して終了
   PPx.SyncView = 0;
@@ -25,28 +25,28 @@ if (!sync) {
 
   if (PPx.Extract('%si"vSize')) {
     // ppvをcapturewindowに取り込む前のサイズに戻す
-    PPx.Execute(`*setcust _WinPos:V${tID}=%si"vSize"`);
+    PPx.Execute(`*setcust _WinPos:V${targetID}=%si"vSize"`);
     PPx.Execute('*string i,vSize=');
   }
 }
 
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
-function State_syncview (tWin) {
+function StateSyncView (tWin) {
   PPx.Execute(`*setcust X_win:V=${tWin}`);
 
   switch (paneCount) {
     case 2:
-      PPx.Execute(`%Oin *ppv -r -bootid:${tID}`);
+      PPx.Execute(`%Oin *ppv -r -bootid:${targetID}`);
       // capturewindowに取り込む前にPPvのサイズを記憶する
-      PPx.Execute(`*string i,vSize=%*getcust(_WinPos:V${tID})`);
+      PPx.Execute(`*string i,vSize=%*getcust(_WinPos:V${targetID})`);
       // movingPPv off
       PPx.Execute('*string i,vState=1');
-      PPx.Execute(`%Oi *capturewindow V${tID} -pane:~ -selectnoactive`);
+      PPx.Execute(`%Oi *capturewindow V${targetID} -pane:~ -selectnoactive`);
       break;
     default:
-      PPx.Execute(`%Oi *ppv -r -bootid:${tID}`);
+      PPx.Execute(`%Oi *ppv -r -bootid:${targetID}`);
       PPx.Execute('*setcust X_vpos=0');
-      PPx.Execute(`*topmostwindow %NV${tID},1`);
+      PPx.Execute(`*topmostwindow %NV${targetID},1`);
   }
-  PPx.Execute(`*execute C,*ppvoption sync ${tID}`);
+  PPx.Execute(`*execute C,*ppvoption sync ${targetID}`);
 }

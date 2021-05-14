@@ -22,16 +22,30 @@ const ePos = 0;
 
 /////////////////////////////////
 
+const LeftPPc = () => {
+  PPx.Execute('*setcust _User:g_git_pos=1');
+  PPx.Execute(`*windowposition ${bHWND}, ${w.hor['b']}, ${h.zero}`);
+  PPx.Execute(`*windowposition ${cHWND}, ${w.zero}, ${h.vert['c']}`);
+  if (eHWND !== 0) { PPx.Execute(`*windowposition ${eHWND}, ${w.zero}, ${h.vert['e']}`); }
+};
+
+const RightPPc = () => {
+  PPx.Execute('*setcust _User:g_git_pos=2');
+  PPx.Execute(`*windowposition ${bHWND}, ${w.zero}, ${h.zero}`);
+  PPx.Execute(`*windowposition ${cHWND}, ${w.hor['c']}, ${h.vert['c']}`);
+  if (eHWND !==0) { PPx.Execute(`*windowposition ${eHWND}, ${w.hor['c']}, ${h.vert['e']}`); }
+};
+
 const arg = (() => {
   const chr = PPx.Arguments(0);
   const flag = PPx.Extract('%*getcust(_User:g_git_pos)')|0;
-  const move = (() => {
+  const move = () => {
     if (chr === 'e') {
-      (flag === 2) ? Right_ppc() : Left_ppc();
+      (flag === 2) ? RightPPc() : LeftPPc();
     } else {
-      (flag === 2) ? Left_ppc() : Right_ppc();
+      (flag === 2) ? LeftPPc() : RightPPc();
     }
-  });
+  };
   const hwnd = {
     'b': (() => bHWND),
     'c': (() => cHWND),
@@ -39,8 +53,9 @@ const arg = (() => {
   };
   return { 'move': move, 'HWND': hwnd[chr] };
 })();
-const cID  = 'C' +  PPx.Extract('%*getcust(_User:g_ppcid)');
-const cHWND = PPx.Extract(`%*Extract(%%N${cID})`)|0;
+
+const ppcID  = 'C' +  PPx.Extract('%*getcust(_User:g_ppcid)');
+const cHWND = PPx.Extract(`%*Extract(%%N${ppcID})`)|0;
 // const bHWND = ((id = 0) => {
 //   const arrStr = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 //   for (const chr of arrStr) {
@@ -49,18 +64,21 @@ const cHWND = PPx.Extract(`%*Extract(%%N${cID})`)|0;
 //   }
 // })();
 const bHWND = PPx.Extract('%*extract(%%NBA)')|0;
+
 if (bHWND === 0 ) {
-  PPx.Execute(`*closeppx B* %: *wait 0 %: *ppb -k *selectppx ${cID}`);
+  PPx.Execute(`*closeppx B* %: *wait 0 %: *ppb -k *selectppx ${ppcID}`);
   PPx.Quit(1);
 }
+
 const eHWND = PPx.Extract('%*findwindowclass(PPeditW)')|0;
 const eHeight = (eHWND !== 0) ? PPx.Extract(`%*windowrect(${eHWND},h)`) : 0;
 
 PPx.Execute(`*focus #${bHWND}`);
+
 const bRect = { 'wide': PPx.Extract(`%*windowrect(${bHWND},w)`), 'height': PPx.Extract(`%*windowrect(${bHWND},h)`) };
 
 // 窓の位置情報
-class field {
+class Cfield {
   constructor(zero, end, bWH, eWH) {
     this.zero = zero;
     this.end = end;
@@ -76,8 +94,8 @@ class field {
   }
 }
 
-const w = new field(x.start, x.end, bRect.wide, 0);
-const h = new field(y.start, y.end, bRect.height, eHeight);
+const w = new Cfield(x.start, x.end, bRect.wide, 0);
+const h = new Cfield(y.start, y.end, bRect.height, eHeight);
 
 PPx.Execute(`*windowsize ${cHWND},${w.rect.wide},${h.rect.length}`);
 if (eHWND !== 0) { PPx.Execute(`*windowsize ${eHWND},${w.rect.wide},${eHeight}`); }
@@ -86,15 +104,3 @@ arg.move();
 
 PPx.Execute(`*pptray -c *focus #${arg.HWND()}`);
 
-function Left_ppc() {
-  PPx.Execute('*setcust _User:g_git_pos=1');
-  PPx.Execute(`*windowposition ${bHWND}, ${w.hor['b']}, ${h.zero}`);
-  PPx.Execute(`*windowposition ${cHWND}, ${w.zero}, ${h.vert['c']}`);
-  PPx.Execute(`*windowposition ${eHWND}, ${w.zero}, ${h.vert['e']}`);
-}
-function Right_ppc() {
-  PPx.Execute('*setcust _User:g_git_pos=2');
-  PPx.Execute(`*windowposition ${bHWND}, ${w.zero}, ${h.zero}`);
-  PPx.Execute(`*windowposition ${cHWND}, ${w.hor['c']}, ${h.vert['c']}`);
-  PPx.Execute(`*windowposition ${eHWND}, ${w.hor['c']}, ${h.vert['e']}`);
-}

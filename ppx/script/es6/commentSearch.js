@@ -17,13 +17,13 @@ const arg = (() => {
   }
 })();
 
-const word = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment.. ※正規表現")') || PPx.Quit(-1);
+const searchWord = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment.. ※正規表現")') || PPx.Quit(-1);
 const entryCount = PPx.Entry.Count;
 
 if (arg === 'filter') {
   for (let [i, l] = [entryCount, 0]; i > l; i--) {
     const objEntry = PPx.Entry(i - 1);
-    if (objEntry.Comment.search(word) === -1) {
+    if (objEntry.Comment.search(searchWord) === -1) {
       objEntry.Hide;
     }
   }
@@ -34,7 +34,7 @@ if (arg === 'filter') {
   PPx.Execute('*markentry -highlight:0');
   for (let [i ,l] = [0, entryCount]; i < l; i++) {
     const objEntry = PPx.Entry(i);
-    if (objEntry.Comment.search(word) !== -1) {
+    if (objEntry.Comment.search(searchWord) !== -1) {
       objEntry.Highlight = arg;
     }
   }

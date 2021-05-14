@@ -4,6 +4,7 @@ theme
 .eslintrc.json
 package-lock.json
 *@*.cfg
+template_script.js
 index.js
 *Test.js
 *.png

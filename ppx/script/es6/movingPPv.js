@@ -8,17 +8,17 @@
   const omit = PPx.Extract('0%*extract(C,%%si"vState")')|0;
   const vCount = PPx.Extract('%*ppxlist(+V)');
 
-  if (omit != 0 || vCount > 1) { PPx.Quit(1); }
+  if (omit !== 0 || vCount > 1) { PPx.Quit(1); }
 }
 
 // 画面サイズ
 const displayX = 1366;
 const _displayX = (displayX / 2 - 10);
-const vID = PPx.WindowIDName;
+const ppvID = PPx.WindowIDName;
 const mouseX = PPx.Extract('%*extract(C,"%%*cursorpos(x)")')|0;
 
 const posW = (w => {
-  w = PPx.Extract(`%*windowrect(${vID},w)`)|0;
+  w = PPx.Extract(`%*windowrect(${ppvID},w)`)|0;
   if (mouseX <= (_displayX - 100)) {
   // 左
     return (w < _displayX) ? _displayX : displayX - w;
@@ -29,9 +29,9 @@ const posW = (w => {
 })();
 
 const posH = (h => {
-  h = PPx.Extract(`%*windowrect(${vID},t)`)|0;
+  h = PPx.Extract(`%*windowrect(${ppvID},t)`)|0;
   return (h < 80) ? h : 80;
 })();
 
-PPx.Execute(`*windowposition ${vID},${posW},${posH}`);
+PPx.Execute(`*windowposition ${ppvID},${posW},${posH}`);
 

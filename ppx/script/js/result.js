@@ -15,7 +15,7 @@ var cmd = {
   // 存在確認 要第2引数
   'exists': (function () {
     if (PPx.Arguments.length < 2) {
-        PPx.Echo('引数を指定してください\u000A○  単一のパス(%FDCなど)\u000A×   複数のパス(%#FDCなど)');
+      PPx.Echo('引数を指定してください\u000A○  単一のパス(%FDCなど)\u000A×   複数のパス(%#FDCなど)');
       PPx.Quit(-1);
     }
     var fso = PPx.CreateObject('Scripting.FileSystemObject');
@@ -26,7 +26,7 @@ var cmd = {
   'getpath': (function () {
     var tPath = (PPx.Pane.Count === 2) ? '%2%\\' : '%\'work\'%\\';
     return PPx.Extract(tPath);
-  }), 
+  }),
   // メインレポジトリ
   'myrepo': (function () {
     return PPx.Extract('%1').indexOf(PPx.Extract('%\'myrepo\''));
@@ -48,17 +48,17 @@ var cmd = {
   // listfileのエントリ名をそのまま返す
   // ※返すパスはスペース区切りの複数のパス
   'lfnames': (function () {
-      if (PPx.EntryMarkCount === 0) { PPx.Entry.Mark = 1; }
-      var objEntry = PPx.Entry;
-      objEntry.FirstMark;
-      var fn = '';
-      for (var i = 0,l = PPx.EntryMarkCount; i < l; i++) {
-        fn += objEntry.Name + ' ';
-        objEntry.NextMark;
-      }
-   return fn;
+    if (PPx.EntryMarkCount === 0) { PPx.Entry.Mark = 1; }
+    var objEntry = PPx.Entry;
+    objEntry.FirstMark;
+    var fn = '';
+    for (var i = 0,l = PPx.EntryMarkCount; i < l; i++) {
+      fn += objEntry.Name + ' ';
+      objEntry.NextMark;
+    }
+    return fn;
   })
-}
+};
 
 try {
   PPx.Result = cmd[arg]();

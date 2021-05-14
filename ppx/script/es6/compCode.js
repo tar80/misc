@@ -17,46 +17,40 @@
 
 'use strict';
 
-const len = PPx.Arguments.length;
+const argLength = PPx.Arguments.length;
 
-if (len < 2) {
+if (argLength < 2) {
   PPx.Echo('引数が足りません');
   PPx.Quit(-1);
 }
 
 // 現在の編集モードを参照
-const defType = ((str = 'g') => {
+const currentEditmode = (() => {
+  let historyType = 'g';
   const reg = new RegExp('PP[BCV]\\[');
-  if (!reg.test(PPx.Extract('%W'))) { str = PPx.Extract('%*editprop(whistory)') || str; }
-  return str;
+  if (!reg.test(PPx.Extract('%W'))) {
+    historyType = PPx.Extract('%*editprop(whistory)') || historyType;
+  }
+  return historyType;
 })();
 
 const edit = {
   chr: PPx.Arguments(1),
-  title: (len > 2) ? (PPx.Arguments(2) || 'compCode..') : 'compCode..',
-  precmd: (len > 3) ? PPx.Arguments(3) : '',
+  title: (argLength > 2) ? (PPx.Arguments(2) || 'compCode..') : 'compCode..',
+  precmd: (argLength > 3) ? PPx.Arguments(3) : '',
   zero: PPx.Arguments(0),
-  type: (function () { return this.zero.charAt(0); }),
-  mode: (function () {
+  type: function () { return this.zero.charAt(0); },
+  mode: function () {
     const keys = 'gnmshdcfuxUXREOS';
-    return (keys.indexOf(this.zero.charAt(1)) !== 0) ? this.zero.substr(1) : defType;
-  })
+    return (keys.indexOf(this.zero.charAt(1)) !== 0) ? this.zero.substr(1) : currentEditmode;
+  }
 };
 
-switch (edit.type()) {
-  case 'i':
-    edit.code = `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()} -k ${edit.precmd})`;
-    break;
-  case 's':
-    edit.code = '%*selecttext';
-    break;
-  case 'e':
-    edit.code = '%*edittext';
-    break;
-  default:
-    PPx.Echo('引数が異常');
-    PPx.Quit(-1);
-}
+edit.code = {
+  'i': () => `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()} -k ${edit.precmd})`,
+  's': () => '%*selecttext',
+  'e': () => '%*selecttext'
+}[edit.type()]();
 
 const code = PPx.Extract(edit.code) || PPx.Quit(-1);
 
@@ -70,26 +64,39 @@ const charArray = Array.from(new Set(edit.chr));
 const countMax = 4;
 
 // 同じ文字数のカウント
-const charCount = ((cc = []) => {
+const charCount = (() => {
+  let count = [];
   for (const value of charArray) {
-    cc.push(edit['chr'].counter(value, countMax));
+    count.push(edit['chr'].counter(value, countMax));
   }
-  return cc;
+  return count;
 })();
 
 // 配列からオブジェクトを生成
 const bsNum = [];
+// const esc = charArray.reduce((chr, value, index) => {
+//   // 例外処理
+//   const escExcpt = ((ele, num) => {
+//     if (ele !== '\\') {
+//       return charCount[num] * 2;
+//     } else {
+//       bsNum[0] = num;
+//       return charCount[num];
+//     }
+//   });
+//   chr[value] = value.repeat(escExcpt(value, index));
+//   return chr;
+// }, {});
 const esc = charArray.reduce((chr, value, index) => {
-  // 例外処理
-  const Esc_excp = ((ele, num) => {
+  chr[value] = value.repeat(function (ele, num) {
+    // 例外処理
     if (ele !== '\\') {
       return charCount[num] * 2;
     } else {
       bsNum[0] = num;
       return charCount[num];
     }
-  });
-  chr[value] = value.repeat(Esc_excp(value, index));
+  }(value, index));
   return chr;
 }, {});
 

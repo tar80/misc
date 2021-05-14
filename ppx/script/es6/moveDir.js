@@ -13,9 +13,10 @@ if (PPx.Arguments.length !== 2) {
 }
 
 const arg = { 'action': PPx.Arguments(0)|0, 'filepath': PPx.Arguments(1) };
-const current = ((v = {}) => {
+const current = (() => {
+  let result = {};
   PPx.Extract('%FDVN').replace(/^(.*)\\((.*\.)?(?!$)(.*))/, (match, p1, p2, p3, p4) => {
-    v = {
+    result = {
       path: `${match}\\`,
       pwd:  p1,
       name: p2,
@@ -23,7 +24,7 @@ const current = ((v = {}) => {
     };
     return;
   });
-  return v;
+  return result;
 })();
 
 if (current.pwd === undefined) {
@@ -54,11 +55,11 @@ switch (PPx.DirectoryType) {
 
 
 (arg.action === 0)
-  ? move_path(-1, 1, 'top')
-  : move_path(1, -1, 'bottom');
+  ? MovePath(-1, 1, 'top')
+  : MovePath(1, -1, 'bottom');
 
-/* パス移動を実行する関数 */
-function move_path(valA, valB, termMessage) {
+// パス移動を実行する関数
+function MovePath(valA, valB, termMessage) {
   const fso = PPx.CreateObject('Scripting.FileSystemObject');
   const fsoTempfile = fso.OpenTextFile(arg.filepath, 1, false, -1);
 

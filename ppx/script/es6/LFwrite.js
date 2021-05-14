@@ -17,21 +17,21 @@ const fso = PPx.CreateObject('Scripting.FileSystemObject');
 let fsoTlist;
 
 // 該当エントリをリストに書き出す
-const Write_mark_path = (() => {
-  const cdPath = (dirType !== 4) ? PPx.Extract('%FDN%\\') : '';
+const SaveMarkedEntry = () => {
+  const wd = (dirType !== 4) ? PPx.Extract('%FDN%\\') : '';
 
   // マークの有無で処理を分岐
   if (!PPx.EntryMarkCount) {
-    fsoTlist.WriteLine(cdPath + PPx.EntryName);
+    fsoTlist.WriteLine(wd + PPx.EntryName);
   } else {
     for (let [i, l] = [0, PPx.Entry.Count]; i < l; i++) {
       if (PPx.Entry(i).Mark === 1) {
-        fsoTlist.WriteLine(cdPath + PPx.Entry(i).Name);
+        fsoTlist.WriteLine(wd + PPx.Entry(i).Name);
         PPx.Entry(i).Mark = 0;
       }
     }
   }
-});
+};
 
 switch (arg.cmd) {
 // git関連のリザルト
@@ -44,12 +44,13 @@ switch (arg.cmd) {
   case 'new':
     fsoTlist = fso.OpenTextFile(arg.path, 2, true, -1);
     fsoTlist.WriteLine(';ListFile');
-    Write_mark_path();
+    SaveMarkedEntry();
     break;
     // 指定されたリストに追記
   default:
     fsoTlist = fso.OpenTextFile(arg.path, 8, true, -1);
-    Write_mark_path();
+    SaveMarkedEntry();
 }
+
 fsoTlist.Close();
 

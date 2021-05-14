@@ -6,10 +6,10 @@
 'use strict';
 
 const arg = (() => {
-  const len = PPx.Arguments.length;
+  const argLength = PPx.Arguments.length;
 
-  if (len) {
-    return { 'filepath': PPx.Arguments(0), 'enable_color': len };
+  if (argLength) {
+    return { 'filepath': PPx.Arguments(0), 'enableColor': argLength };
   } else {
     PPx.Echo('引数が異常');
     PPx.Quit(-1);
@@ -30,16 +30,16 @@ const memoStr = (esc => {
 })();
 
 const dirType = PPx.DirectoryType;
-const tPath = (dirType === 4) ? PPx.Extract('%FVD') : arg.filepath;
+const targetPath = (dirType === 4) ? PPx.Extract('%FVD') : arg.filepath;
 // 色付け
-const dColor = (arg.enable_color !== 2 ) ? 0 : PPx.Arguments(1)|0;
+const dColor = (arg.enableColor !== 2 ) ? 0 : PPx.Arguments(1)|0;
 // メモをListfileの形式に置き換える
-const detail = PPx.Extract(`"%*now","",A:H${dColor},C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:${memoStr}`);
+const onelineMemo = PPx.Extract(`"%*now","",A:H${dColor},C:0.0,L:0.0,W:0.0,S:0.0,M:0,T:${memoStr}`);
 
 const fso = PPx.CreateObject('Scripting.FileSystemObject');
-const fsoTlist = fso.OpenTextFile(tPath, 8, true, -1);
+const fsoTlist = fso.OpenTextFile(targetPath, 8, true, -1);
 
-fsoTlist.WriteLine(detail);
+fsoTlist.WriteLine(onelineMemo);
 fsoTlist.Close();
 
 if (dirType === 4) { PPx.Execute('*wait 100,1 %: %K"@F5"'); }

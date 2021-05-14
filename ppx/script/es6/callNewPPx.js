@@ -5,26 +5,25 @@
 
 'use strict';
 
-const arg = (PPx.Arguments.length) ? 'V': PPx.WindowIDName.slice(0, 1);
+const argID = (PPx.Arguments.length) ? 'V' : PPx.WindowIDName.slice(0, 1);
 // 未起動PPxのIDを取得
-const id = ((key) => key.find(id => PPx.Extract(`%N${arg}${id}`) == ''));
+const GetID = (key) => key.find(chr => PPx.Extract(`%N${argID}${chr}`) == '');
 // grepリストファイル上のパスを取得
-const path = (() => {
+const GetPath = () => {
   if (PPx.Extract('%se"grep"') !== '1') { return '%R'; }
-  const seltext = PPx.extract('%*script(%\'scr\'%\\compCode.js,"s","""")');
-  return seltext.replace(/^([^:].*):\d*:.*/, (match, p1) => `%*extract(C"%%FD")%\\${p1}`);
-});
-
-const callPPx = {
-  'C': (() => {
-    const arrChr = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    return PPx.Execute(`*ppc -single -mps -bootid:${id(arrChr)} %FD`);
-  }),
-  'V': (() => {
-    const arrChr = Array.from('DEFGHIJKLMNOPQRSTUVW');
-    return PPx.Execute(`*ppv -bootid:${id(arrChr)} ${path()}`);
-  })
+  const selText = PPx.extract('%*script(%\'scr\'%\\compCode.js,"s","""")');
+  return selText.replace(/^([^:].*):\d*:.*/, (match, p1) => `%*extract(C"%%FD")%\\${p1}`);
 };
 
-callPPx[arg]();
+({
+  'C': () => {
+    const arrChr = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    return PPx.Execute(`*ppc -single -mps -bootid:${GetID(arrChr)} %FD`);
+  },
+  'V': () => {
+    PPx.Echo('V');
+    const arrChr = Array.from('DEFGHIJKLMNOPQRSTUVW');
+    return PPx.Execute(`*ppv -bootid:${GetID(arrChr)} ${GetPath()}`);
+  }
+})[argID]();
 

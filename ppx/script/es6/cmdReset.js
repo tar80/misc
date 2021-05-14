@@ -6,5 +6,4 @@
 const pwd = PPx.Extract('%FD');
 PPx.Execute('PPCUSTW CD %\'cfg\'%\\Px_@user.cfg -mask:"_User" %&');
 PPx.Execute('PPCUSTW CINIT %&');
-PPx.Execute(`*run -d:${pwd} PPCUSTW CA %FDC %&`);
-PPx.Execute('*closeppx CW');
+PPx.Execute(`*closeppx C* %: *wait 100,2 %: *cd ${pwd} %: PPCUSTW CA %FDC`);

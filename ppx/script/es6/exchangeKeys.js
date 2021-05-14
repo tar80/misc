@@ -29,9 +29,8 @@ if (PPx.Arguments.length < 2) {
   PPx.Quit(-1);
 }
 
-const process = PPx.Arguments(0)|0;
-const tPath = PPx.Arguments(1);
-const title = PPx.Extract(`%*name(X,${tPath})`);
+const pathCustomKeys = PPx.Arguments(1);
+const title = PPx.Extract(`%*name(X,${pathCustomKeys})`);
 const checkDup = PPx.Extract(`%*getcust(M_${title})`).split('\u000A').length;
 const keybinds = ['KC_main', 'KC_incs', 'K_edit', 'K_ppe', 'K_lied', 'K_tree', 'KB_edit', 'KV_main', 'KV_page', 'KV_crt', 'KV_img'];
 
@@ -39,75 +38,81 @@ const st = PPx.CreateObject('ADODB.stream');
 st.Open;
 st.Type = 2;
 st.Charset = 'UTF-8';
-st.LoadFromFile(tPath);
+st.LoadFromFile(pathCustomKeys);
 const stCnts = st.ReadText(-1).split('\u000A');
 st.Close;
 
-const getKeys = [];
-let header;
+const setKeys = (() => {
+  let header;
+  const arrKey = [];
 
-for (const value of stCnts) {
-  if (/^[^\s]*\s=\s{.*/.test(value) === true) {
-    header = value.replace(/^([^\s]*)\s.*/, '$1');
-    if (keybinds.indexOf(header) === -1) {
-      PPx.Echo(`${header}のキー登録は許可されていません`);
-      PPx.Quit(-1);
+  for (const value of stCnts) {
+    if (/^[^\s]*\s=\s{.*/.test(value) === true) {
+      header = value.replace(/^([^\s]*)\s.*/, '$1');
+      if (keybinds.indexOf(header) === -1) {
+        PPx.Echo(`${header}のキー登録は許可されていません`);
+        PPx.Quit(-1);
+      }
+    } else if (/^[^\s]*\s*[=,].*/.test(value) === true) {
+      arrKey.push({ 'key': header, 'cmd': value.replace(/^([^\s]*)\s.*/, (match, p1) => p1.replace(/\\'/g, '\\\'')) });
     }
-  } else if (/^[^\s]*\s*[=,].*/.test(value) === true) {
-    getKeys.push({ 'key': header, 'cmd': value.replace(/^([^\s]*)\s.*/, (match, p1) => p1.replace(/\\'/g, '\\\'')) });
   }
-}
+  return arrKey;
+})();
 
-if (getKeys[0].key === undefined) {
+if (setKeys[0].key === undefined) {
   PPx.Echo('項目名が設定されていません');
   PPx.Quit(-1);
 }
 
-if (process) {
-  if (checkDup > 3) {
-    PPx.SetPopLineMessage(`${title}は適用済みです`);
-    PPx.Quit(-1);
-  }
+({
+  '1': () => {
+    if (checkDup > 3) {
+      PPx.SetPopLineMessage(`${title}は適用済みです`);
+      PPx.Quit(-1);
+    }
 
-  const reg = new RegExp(/^[a-zA-Z]*$/);
+    const reg = new RegExp(/^[a-zA-Z]*$/);
 
-  for (const value of getKeys) {
-    const cnts = PPx.Extract(`%OC %*getcust(${value.key}:${value.cmd})`);
-    if (cnts === '') {
-      PPx.Execute(`*setcust M_${title}:${value.key}:${value.cmd}=%%mNotExist %%K"@${value.cmd}`);
-    } else {
-      if (cnts.slice(0,1) === '@' || reg.test(cnts)) {
-        PPx.Execute(`*setcust M_${title}:${value.key}:${value.cmd}=%%mSepEQ %%K"${cnts}`);
+    for (const value of setKeys) {
+      const cnts = PPx.Extract(`%OC %*getcust(${value.key}:${value.cmd})`);
+      if (cnts === '') {
+        PPx.Execute(`*setcust M_${title}:${value.key}:${value.cmd}=%%mNotExist %%K"@${value.cmd}`);
       } else {
-        const escCnts = cnts.replace(/%/g, '%%');
-        PPx.Execute(`%OC *setcust M_${title}:${value.key}:${value.cmd}=${escCnts}`);
+        if (cnts.slice(0,1) === '@' || reg.test(cnts)) {
+          PPx.Execute(`*setcust M_${title}:${value.key}:${value.cmd}=%%mSepEQ %%K"${cnts}`);
+        } else {
+          const escCnts = cnts.replace(/%/g, '%%');
+          PPx.Execute(`%OC *setcust M_${title}:${value.key}:${value.cmd}=${escCnts}`);
+        }
       }
     }
-  }
-  PPx.Execute(`*setcust @${tPath}`);
-
-} else {
-  if (checkDup <= 3) {
-    PPx.SetPopLineMessage(`${title}は登録されていません`);
-    PPx.Quit(-1);
-  }
-
-  const emptykeys = [];
-  for (const value of getKeys) {
-    const cnts = PPx.Extract(`%OC %*getcust(M_${title}:${value.key}:${value.cmd})`);
-    if (cnts === '') {
-      emptykeys.push(value);
-    } else if (~cnts.indexOf('mNotExist')) {
-      PPx.execute(`*deletecust ${value.key}:${value.cmd}`);
-    } else if (~cnts.indexOf('mSepEQ')) {
-      PPx.Execute(`*setcust ${value.key}:${value.cmd}=${cnts.replace('%K"', '')}`);
-    } else {
-      const escCnts = cnts.replace(/%/g, '%%');
-      PPx.Execute(`%OC *setcust ${value.key}:${value.cmd},${escCnts}`);
+    PPx.Execute(`*setcust @${pathCustomKeys}`);
+  },
+  '0': () => {
+    if (checkDup <= 3) {
+      PPx.SetPopLineMessage(`${title}は登録されていません`);
+      PPx.Quit(-1);
     }
+
+    const emptykeys = [];
+
+    for (const value of setKeys) {
+      const cnts = PPx.Extract(`%OC %*getcust(M_${title}:${value.key}:${value.cmd})`);
+      if (cnts === '') {
+        emptykeys.push(value);
+      } else if (~cnts.indexOf('mNotExist')) {
+        PPx.execute(`*deletecust ${value.key}:${value.cmd}`);
+      } else if (~cnts.indexOf('mSepEQ')) {
+        PPx.Execute(`*setcust ${value.key}:${value.cmd}=${cnts.replace('%K"', '')}`);
+      } else {
+        const escCnts = cnts.replace(/%/g, '%%');
+        PPx.Execute(`%OC *setcust ${value.key}:${value.cmd},${escCnts}`);
+      }
+    }
+    if (emptykeys.length !== 0) { PPx.SetPopLineMessage(`未登録キー: ${emptykeys.join(',')}`); }
+    PPx.Execute(`*deletecust "M_${title}"`);
+    PPx.Execute('%K"@LOADCUST');
   }
-  if (emptykeys.length !== 0) { PPx.SetPopLineMessage(`未登録キー: ${emptykeys.join(',')}`); }
-  PPx.Execute(`*deletecust "M_${title}"`);
-  PPx.Execute('%K"@LOADCUST');
-}
+})[PPx.Arguments(0)]();
 

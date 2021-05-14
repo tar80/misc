@@ -1,16 +1,19 @@
 ﻿//!*script
 /* grep結果を出力 */
 //
-// PPx.Arguments() = (0)出力ファイル, (1)grep|rg|jvgrep:初期選択するgrepコマンド, (2)LF|PPv:初期選択の出力先 (3)1:オプションの再登録, 2:M_grepを削除して終了
+// PPx.Arguments(0) = 出力ファイル
+// PPx.Arguments(1) = grep|rg|jvgrep:初期選択grepコマンド
+// PPx.Arguments(2) = LF|PPv:初期選択出力先
+// PPx.Arguments(3) = 1:オプションの再登録 | 2:M_grepを削除して終了
 
 'use strict';
 
-const arglen = PPx.Arguments.length;
+const argLength = PPx.Arguments.length;
 
-if (arglen < 3) {
+if (argLength < 3) {
   PPx.Echo('引数が足りません');
   PPx.Quit(-1);
-} else if (arglen === 4 && PPx.Arguments(3) === '2') {
+} else if (argLength === 4 && PPx.Arguments(3) === '2') {
   PPx.Execute('*deletecust "M_grep"');
   PPx.SetPopLineMessage('Delete > M_grep');
   PPx.Quit(-1);
@@ -58,12 +61,12 @@ const exec = {
 /////////////////////////////////
 
 const arg = { 'listfile': PPx.Arguments(0), 'cmd': PPx.Arguments(1), 'output': PPx.Arguments(2) };
-const ppxid = PPx.Extract('%n');
-const dogrep = exec[arg.cmd + arg.output];
+const ppxID = PPx.Extract('%n');
+const doGrep = exec[arg.cmd + arg.output];
 {
-  const reload_opt = (arglen === 4) ? PPx.Arguments(3) : null;
-  const check_Menu = PPx.Extract('%*getcust(M_grep)').split('\u000D\u000A');
-  if (check_Menu.length === 3 || reload_opt === '1') {
+  const optReload = (argLength === 4) ? PPx.Arguments(3) : null;
+  const checkMenu = PPx.Extract('%*getcust(M_grep)').split('\u000D\u000A');
+  if (checkMenu.length === 3 || optReload === '1') {
     for (const name of Object.keys(exec)) {
       if (exec[name].use === true) {
         PPx.Execute(`%OC *setcust M_grep:${name}=*string i,cmd=${exec[name].cmd}
@@ -90,7 +93,7 @@ PPx.Execute('*string i,Edit_OptionCmd=*string i,gopt=%%*input("%%se"lock"%%se"ad
 // 検索文字の入力とエスケープ処理
 const str = (esc => {
   try {
-    PPx.Execute(`*string i,gopt=${dogrep.lock}${dogrep.add}`);
+    PPx.Execute(`*string i,gopt=${doGrep.lock}${doGrep.add}`);
     return esc = PPx.Extract('%*script(%\'scr\'%\\compCode.js,' +
       '"iOs",' +
       '"""%%",' +
@@ -108,19 +111,19 @@ const str = (esc => {
   }
 })();
 
-const tPath = (PPx.EntryMarkCount) ? '%#FCB' : nomark;
+const targetPath = (PPx.EntryMarkCount) ? '%#FCB' : nomark;
 
 if (PPx.Extract('%si"output"') === 'PPv') {
   // 一時的にキャレットモードに変更
   PPx.Execute('*linecust tmod,KV_main:CLOSEEVENT,*setcust XV_tmod=%*getcust(XV_tmod) %%: *linecust tmod,KV_main:CLOSEEVENT,');
   PPx.Execute('*setcust XV_tmod=1');
   // grepの結果をPPvの標準入力で受け取る
-  PPx.Execute(`*run -noppb -min %si"cmd" %si"gopt" "${str}" ${tPath}` +
+  PPx.Execute(`*run -noppb -min %si"cmd" %si"gopt" "${str}" ${targetPath}` +
   ` | %0ppvw -bootid:w -esc -document -k *string p,grep=1 %%: *find "${str}"`);
 
 } else {
   // grepの結果を出力
-  PPx.Execute(`%Obn %si"cmd" %si"gopt" "${str}" ${tPath} > ${arg.listfile} %&`);
+  PPx.Execute(`%Obn %si"cmd" %si"gopt" "${str}" ${targetPath} > ${arg.listfile} %&`);
 
   // リストの整形
   const dirType = PPx.DirectoryType;
@@ -159,7 +162,7 @@ if (PPx.Extract('%si"output"') === 'PPv') {
 //   const dirType = PPx.DirectoryType;
 //   const pDir = PPx.Extract('%FD').replace(/\\/g, '\\\\\\\\');
 //
-//   PPx.Execute(`*run -noppb -cmd -min -wait:later %si"cmd" %si"gopt" "${str}" ${tPath}` +
+//   PPx.Execute(`*run -noppb -cmd -min -wait:later %si"cmd" %si"gopt" "${str}" ${targetPath}` +
 //     ' | sed -r \'s/^(.*)[:-]([0-9]*)([:-])(.*)/"\\1","\\2",A:H0,C:0.0,L:0.0,W:0.0,S:0.0,H:0,M:0,T:"\\4"/\'' +
 //     ' | awk \'BEGIN {print "' +
 //       ';ListFile\\r\\n' +
@@ -168,5 +171,5 @@ if (PPx.Extract('%si"output"') === 'PPv') {
 //     ` > ${arg.listfile} %: *wait -run`);
 // }
 
-PPx.Execute(`*execute ${ppxid},*string i,cmd= %%: *string i,gopt=`);
+PPx.Execute(`*execute ${ppxID},*string i,cmd= %%: *string i,gopt=`);
 

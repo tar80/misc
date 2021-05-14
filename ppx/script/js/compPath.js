@@ -17,20 +17,20 @@ var editStr = (function (str) {
 var argTempFile = PPx.Arguments(0);
 
 /* コマンドと基準パスの分離整形 */
-var str = editStr.replace(/^([^\\]*\s)?(.*\\)(?!$).*/, function (match, p1, p2) {
+var getStr = editStr.replace(/^([^\\]*\s)?(.*\\)(?!$).*/, function (match, p1, p2) {
   return (p2.indexOf('"') === 0)
     ? [p1, '"', p2.slice(1)]
     : [p1, '', p2];
 }).split(',');
 
-if (str[2] === undefined) {
-  str[0] = (/ /.test(str[0]))
-    ? str[0].replace(/^([^\\]*)\s.*/, '$1')
-    : str[0].replace(/.*/, '');
+if (getStr[2] === undefined) {
+  getStr[0] = (/ /.test(getStr[0]))
+    ? getStr[0].replace(/^([^\\]*)\s.*/, '$1')
+    : getStr[0].replace(/.*/, '');
 } else if (PPx.Extract('%W').slice(0,10) === 'Jumppath..') {
-  PPx.Execute('*execute C,*whereis -path:"' + str[2] + '" -mask:"a:d" -dir:on -subdir:off -listfile:' + argTempFile + ' -name');
+  PPx.Execute('*execute C,*whereis -path:"' + getStr[2] + '" -mask:"a:d" -dir:on -subdir:off -listfile:' + argTempFile + ' -name');
   PPx.Execute('*completelist -file:' + argTempFile);
 }
 
-PPx.Result = '"' + str.join('').replace('@#', ',') + '"';
+PPx.Result = '"' + getStr.join('').replace('@#', ',') + '"';
 

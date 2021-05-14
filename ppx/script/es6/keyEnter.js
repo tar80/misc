@@ -30,7 +30,7 @@ if (maskExt === undefined) {
 }
 
 // 種別の処理
-const Expand_ext = function () {
+const ExpandExt = () => {
   switch (maskExt) {
     case 'image':
       PPx.Execute('*setcust XV_imgD:VZ=-2,4');
@@ -55,7 +55,7 @@ if (PPx.WindowIDName === fullsizeID) {
   // タイトルバーあり
   PPx.Execute('*setcust X_win:V=B000000000');
   PPx.Execute('*linecust keyenter,KV_main:CLOSEEVENT,*setcust X_vpos=%*getcust(X_vpos) %%: *execute C,*maskentry');
-  Expand_ext();
+  ExpandExt();
 }
 
 // Moving_PPv停止 ※movingPPv.jsを導入していなければ不要

@@ -9,7 +9,7 @@
 /////////* 初期設定 *////////////
 
 // 設定ファイルを作成する場所
-const tPath = PPx.Extract('%\'cfg\'%\\theme');
+const themeDir = PPx.Extract('%\'cfg\'%\\theme');
 
 // 色設定を適用するPPxアプリケーション
 const apply_ppc = false;
@@ -51,24 +51,24 @@ const bcolor = 'CB_pals=BBLACK,BRED,BGREEN,BBLUE,BYELLOW,BCYAN,BPURPLE,BWHITE,_A
 
 //////////////////// ////////////
 
-const clip = PPx.Clipboard.toLowerCase().replace(/#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/g,'H$3$2$1');
+const clipStr = PPx.Clipboard.toLowerCase().replace(/#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/g,'H$3$2$1');
 {
-  const fLine = clip.slice(0,2).replace(/[\r\n]/, '@');
-  if (fLine !== '{@') {
+  const lineOf = clipStr.slice(0,2).replace(/[\r\n]/, '@');
+  if (lineOf !== '{@') {
     PPx.Echo('クリップボードから色情報を取得できませんでした');
     PPx.Quit(1);
   }
 }
 
-const objColor = JSON.parse(clip);
+const objColor = JSON.parse(clipStr);
 
 const getCfg = ((t, e = ['A_color = {']) => {
   const cnts = {
-    'name': (v => t = objColor[v].replace(' ', '-')),
-    'background': (v => e.push(`BG = ${objColor[v]}`.toUpperCase())),
-    'foreground': (v => e.push(`FG = ${objColor[v]}`.toUpperCase())),
-    'selectionbackground': (v => e.push(`SEL_BG = ${objColor[v]}`.toUpperCase())),
-    'cursorcolor': (v => e.push(`CUR = ${objColor[v]}`.toUpperCase()))
+    'name': (v) => t = objColor[v].replace(' ', '-'),
+    'background': (v) => e.push(`BG = ${objColor[v]}`.toUpperCase()),
+    'foreground': (v) => e.push(`FG = ${objColor[v]}`.toUpperCase()),
+    'selectionbackground': (v) => e.push(`SEL_BG = ${objColor[v]}`.toUpperCase()),
+    'cursorcolor': (v) => e.push(`CUR = ${objColor[v]}`.toUpperCase())
   };
   for (const key of Object.keys(objColor)) {
     try {
@@ -79,13 +79,14 @@ const getCfg = ((t, e = ['A_color = {']) => {
   }
   return { 'title': t, 'ele': e };
 })();
+
 getCfg.ele.push('}');
 
 if (PPx.Execute(`%"テーマの生成"%Q"${getCfg.title} を生成します"`) !== 0) { PPx.Quit(1); }
 
-if (PPx.Extract(`%*result(exists,${tPath})`) === '0') { PPx.Execute(`*makedir ${tPath}`); }
+if (PPx.Extract(`%*result(exists,${themeDir})`) === '0') { PPx.Execute(`*makedir ${themeDir}`); }
 
-PPx.Execute(`*setcust M_theme:${getCfg.title}=*setcust @${tPath}%\\${getCfg.title}.cfg`);
+PPx.Execute(`*setcust M_theme:${getCfg.title}=*setcust @${themeDir}%\\${getCfg.title}.cfg`);
 
 if (apply_ppc === true) {
   getCfg.ele.push(background);
@@ -122,5 +123,5 @@ st.Open;
 st.Type = 2;
 st.Charset = 'UTF-8';
 st.WriteText(cfgEle);
-st.SaveToFile(`${tPath}\\${getCfg.title}.cfg`, 2);
+st.SaveToFile(`${themeDir}\\${getCfg.title}.cfg`, 2);
 st.Close;

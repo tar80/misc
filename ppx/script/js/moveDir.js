@@ -5,12 +5,11 @@
 // PPx.Arguments(0) = 0:preview|1:next
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
 
-var action = (!PPx.Arguments.length) ? 0 : PPx.Arguments(0)|0;
+var argAction = (!PPx.Arguments.length) ? 0 : PPx.Arguments(0)|0;
 var wd = PPx.Extract('%FDVN');
 var current = (function (v) {
   wd.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, function (match, p1, p2, p3, p4) {
     v = {
-      // path: match + '\\',
       pwd:  p1,
       name: p2,
       ext:  p4.toLowerCase()
@@ -18,7 +17,7 @@ var current = (function (v) {
     return;
   });
   return v;
-})();
+}());
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var fsoWD;          // current_directory
@@ -70,12 +69,12 @@ switch (PPx.DirectoryType) {
     break;
 }
 
-(action === 0)
-  ? move_path(-1, 1, 'top')
-  : move_path(1, -1, 'bottom');
+(argAction === 0)
+  ? MovePath(-1, 1, 'top')
+  : MovePath(1, -1, 'bottom');
 
 /* パス移動を実行する関数 */
-function move_path(valA, valB, termMessage) {
+function MovePath(valA, valB, termMessage) {
   // 親ディレクトリからリストを取得
   for (e.moveFirst(); !e.atEnd(); e.moveNext()) { add_list(); }
 

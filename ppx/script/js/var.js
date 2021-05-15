@@ -16,5 +16,7 @@ PPx.Echo(
   '\n%*cursorpos(x):\t' + PPx.Extract('%*cursorpos(x)') +
   '\n%*cursorpos(y):\t' + PPx.Extract('%*cursorpos(y)') +
   '\n%*ppxlist():\t' + PPx.Extract('%*ppxlist()') +
+  '\n%*RESULT(DirectoryType):\t' + PPx.DirectoryType +
+  '\n%*RESULT(exists,%FDC):\t' + PPx.Extract('%*RESULT(exists,%FDC)') +
   '\n%*clippedtext():\t' + PPx.Extract('%*clippedtext()')
 );

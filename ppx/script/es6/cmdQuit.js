@@ -20,7 +20,7 @@ const ppxID = (() => {
   } else {
     return winID;
   }
-})();
+}());
 
 const targetID = ppxID.slice(2);
 const ppvSync = PPx.Extract(`%*extract(C${targetID},"%%*js(PPx.Result=PPx.SyncView;)")`)|0;

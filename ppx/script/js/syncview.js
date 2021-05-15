@@ -6,14 +6,14 @@
 
 var paneCount = PPx.Pane.Count;
 var tID = PPx.WindowIDName.slice(2);
-var sync = PPx.SyncView;
+var ppvSync = PPx.SyncView;
 
-if (!sync) {
+if (!ppvSync) {
   (paneCount === 2)
     // タイトルバー無し
-    ? State_syncview('B000000000')
+    ? StateSyncView('B000000000')
     // タイトルバー有り
-    : State_syncview('B000000000');
+    : StateSyncView('B000000000');
 
 } else {
   // 連動ビューがあれば解除して終了
@@ -30,7 +30,7 @@ if (!sync) {
 }
 
 /* 呼出元の状態に合わせて連動ビューを起動する関数 */
-function State_syncview (tWin) {
+function StateSyncView (tWin) {
   PPx.Execute('*setcust X_win:V=' + tWin);
 
   switch (paneCount) {

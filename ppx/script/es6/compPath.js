@@ -15,7 +15,7 @@ const editStr = (() => {
   const rep = new RegExp('[",]', 'g');
   const esc = { '"': '""', ',': '@#' };
   return str.replace(rep, (c) => esc[c]);
-})();
+}());
 
 const argTempFile = PPx.Arguments(0);
 

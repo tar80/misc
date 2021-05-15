@@ -2,7 +2,8 @@
 /* 同階層の隣合うディレクトリに移動 */
 /* 同階層の隣合う同じ拡張子の仮想ディレクトリに移動 */
 //
-// PPx.Arguments() = (0)0:preview|1:next (1)tempfilepath
+// PPx.Arguments(0) = 0:preview|1:next
+// PPx.Arguments(1) = tempfilepath
 // 参照元:http://hoehoetukasa.blogspot.com/2014/01/ppx_29.html
 
 'use strict';
@@ -25,7 +26,7 @@ const current = (() => {
     return;
   });
   return result;
-})();
+}());
 
 if (current.pwd === undefined) {
   PPx.SetPopLineMessage('!"<<Root>>');

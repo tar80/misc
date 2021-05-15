@@ -32,7 +32,7 @@ const currentEditmode = (() => {
     historyType = PPx.Extract('%*editprop(whistory)') || historyType;
   }
   return historyType;
-})();
+}());
 
 const edit = {
   chr: PPx.Arguments(1),
@@ -46,13 +46,18 @@ const edit = {
   }
 };
 
-edit.code = {
-  'i': () => `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()} -k ${edit.precmd})`,
-  's': () => '%*selecttext',
-  'e': () => '%*selecttext'
-}[edit.type()]();
-
-const code = PPx.Extract(edit.code) || PPx.Quit(-1);
+const code = PPx.Extract(() => {
+  try {
+    return {
+      'i': () => `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()} -k ${edit.precmd})`,
+      's': () => '%*selecttext',
+      'e': () => '%*selecttext'
+    }[edit.type()]();
+  } catch (e) {
+      PPx.Echo('引数が異常');
+      PPx.Quit(-1);
+  }
+}()) || PPx.Quit(-1);
 
 // String内のseqと同じ文字数をカウント。最大max回
 String.prototype.counter = function (seq, max) {
@@ -61,16 +66,16 @@ String.prototype.counter = function (seq, max) {
 };
 // 重複した文字をまとめて配列にする
 const charArray = Array.from(new Set(edit.chr));
-const countMax = 4;
 
 // 同じ文字数のカウント
+const countMax = 4;
 const charCount = (() => {
   let count = [];
   for (const value of charArray) {
     count.push(edit['chr'].counter(value, countMax));
   }
   return count;
-})();
+)})();
 
 // 配列からオブジェクトを生成
 const bsNum = [];

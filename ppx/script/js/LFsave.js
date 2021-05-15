@@ -10,58 +10,53 @@ var reserveHeader = 5;
 var sNum = (function () {
   var tdir = PPx.Extract('%*getcust(XC_tdir)').split(',');
   return Number(tdir[0]) + Number(tdir[1]);
-})();
+}());
 
 // リストの並び
-var ArrEntry = [];
+var arrEntry = [];
 
 for (var i = sNum, l = PPx.EntryDisplayCount; i < l; i++) {
-  var ObjEntry = PPx.Entry(i);
-  (ObjEntry.Name == ObjEntry.ShortName)
-    ? ArrEntry.push(ObjEntry.Name)
-    : ArrEntry.push(ObjEntry.Name + '","' + ObjEntry.ShortName);
+  var objEntry = PPx.Entry(i);
+  (objEntry.Name === objEntry.ShortName)
+    ? arrEntry.push(objEntry.Name)
+    : arrEntry.push(objEntry.Name + '","' + objEntry.ShortName);
 }
 
 var listpath = PPx.Extract('%FDV');
-
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var fsoTlist = fso.OpenTextFile(listpath, 1, false, -1);
 
 // ファイルに保存されている並び
-var entryInfo = [];
+var infoEntry = [];
 
-while (!fsoTlist.AtEndOfStream) {
-  entryInfo.push(fsoTlist.ReadLine());
-}
+while (!fsoTlist.AtEndOfStream) { infoEntry.push(fsoTlist.ReadLine()); }
 
 // 保存用の並び
 var result = [];
 
 // ヘッダを取得
-for (i = 0, l = Math.min(reserveHeader, entryInfo.length); i < l; i++) {
-  if (entryInfo[0].indexOf(';') === 0) { result[i] = entryInfo.splice(0, 1); }
+for (i = 0, l = Math.min(reserveHeader, infoEntry.length); i < l; i++) {
+  if (infoEntry[0].indexOf(';') === 0) { result[i] = infoEntry.splice(0, 1); }
 }
 
 // リスト上の並びをlistfileの形式で取得し直す
-var exist, index, cmt, mark, d, arr, hl;
+for (var element in arrEntry) {
+  var exist = {};
+  var index = element|0 + sNum;
 
-for (var element in ArrEntry) {
-  exist = {};
-  index = element|0 + sNum;
+  for (i = 0, l = infoEntry.length; i < l; i++) {
+    var d = infoEntry[i];
 
-  for (i = 0, l = entryInfo.length; i < l; i++) {
-    d = entryInfo[i];
+    if (!exist[arrEntry[i]] && ~d.indexOf(arrEntry[element])) {
+      exist[arrEntry[element]] = true;
+      var arrRes = d.split(',');
+      var cmt = PPx.Entry(index).Comment.replace(/"/g, '""');
+      var mark = (PPx.Entry(index).Mark) ? 1 : 0;
+      var hl = PPx.Entry(index).Highlight;
 
-    if (!exist[ArrEntry[i]] && d.indexOf(ArrEntry[element]) !== -1) {
-      exist[ArrEntry[element]] = true;
-      arr = d.split(',');
-      cmt = PPx.Entry(index).Comment.replace(/"/g, '""');
-      mark = (PPx.Entry(index).Mark) ? 1 : 0;
-      hl = PPx.Entry(index).Highlight;
-
-      result.push((arr.length < 6)
+      result.push((arrRes.length < 6)
         ? d.replace(/(.*)/, '"$1","",A:H0,C:0.0,L:0.0,W:0.0,S:0.0,H:' + hl + ',M:' + mark + ',T:"' + cmt + '"')
-        : arr.splice(0, 6) + ',H:' + hl + ',M:' + mark + ',T:"' + cmt + '"');
+        : arrRes.splice(0, 6) + ',H:' + hl + ',M:' + mark + ',T:"' + cmt + '"');
     }
   }
 }

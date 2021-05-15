@@ -23,7 +23,7 @@ var fso = PPx.CreateObject('Scripting.FileSystemObject');
 if (fso.FolderExists(listDir) === false) { PPx.Execute('*makedir ' + listDir); }
 
 // レポジトリのルートを取得
-var gi = function () {
+var gi = (function () {
   var objWD = fso.GetFolder(wd);
 
   do {
@@ -37,7 +37,7 @@ var gi = function () {
       PPx.Quit(-1);
     }
   } while (!objWD.IsRootFolder);
-}();
+}());
 
 var pathStat = fso.BuildPath(listDir, gStatus + '.xgit');
 var pathDiff = fso.BuildPath(listDir, gDiff + '.patch');
@@ -45,10 +45,10 @@ var fso;
 
 // ログの取得
 var Make_status = function () {
-  var result = function (str) {
-    str = ';ListFile,;Base=' + gi.root + '|1,;git-status';
+  var result = (function () {
+    var str = ';ListFile,;Base=' + gi.root + '|1,;git-status';
     return str.split(',');
-  }();
+  }());
 
   PPx.Execute('%Oa git status --porcelain -uall >' + pathStat + ' %&');
   var st = PPx.CreateObject('ADODB.stream');
@@ -61,7 +61,7 @@ var Make_status = function () {
   st.Position = 0;
   do {
     st.ReadText(-2).replace(/^(.)(.)\s(.*)/, function (match, p1, p2, p3) {
-      var p4 = function (setColorNum) {
+      var p4 = (function (setColorNum) {
         setColorNum = { ' ': 1, 'D': 5, '!': 3 };
         for (var key in setColorNum) {
           if (p2.indexOf(key) !== -1) {
@@ -69,7 +69,7 @@ var Make_status = function () {
           }
         }
         return 8;
-      }();
+      }());
       result.push('"' + p3 + '","",A:H' + p4 + ',C:0.0,L:0.0,W:0.0,S:0.0,R:0.0,H:0,M:0,T:"' + p1 + p2 + '"');
     });
   } while (!st.EOS);

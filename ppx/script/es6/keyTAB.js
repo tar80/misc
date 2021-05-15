@@ -8,11 +8,11 @@ const x = (() => {
   const w = PPx.WindowIDName;
   const s = (w.substr(0, 1) === 'C') ? 'V' : 'C';
   return { 'winid': w, 'syncwin': s, 'id': w.substr(-1, 1) };
-})();
+}());
 const ppvSync = PPx.Extract(`%*extract(C${x.id}"%%*js(PPx.Result=PPx.SyncView;)")`)|0;
 
 // syncviewがonならPPc/PPv間でフォーカスをトグル
-if (ppvSync > 0) {
+if (ppvSync) {
   PPx.Execute(`*focus ${x.syncwin}_${x.id}`);
   PPx.Quit(1);
 }

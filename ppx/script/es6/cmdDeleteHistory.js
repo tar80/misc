@@ -13,7 +13,7 @@ const targetType = (param => {
   const arrkey = Array.from('gnmshdcfuxUX');
   const arrType = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル名','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
   return arrType[arrkey.findIndex(ele => ele === param)];
-})(targetHistory);
+}(targetHistory));
 
 if (targetType === undefined) {
   PPx.Execute('%"履歴の削除"%I"該当する履歴がありません');
@@ -24,8 +24,8 @@ if (targetType === undefined) {
 
 if (saveHistory) {
   PPx.Execute(
-    '*run -min -wait:later ' +
-    `ppcustw HD %*getcust(X_save)%\\@history_${targetHistory}_back.txt -format:2 -mask:${targetHistory}` +
+    '*run -min -wait:later' +
+    ` ppcustw HD %*getcust(X_save)%\\@history_${targetHistory}_back.txt -format:2 -mask:${targetHistory}` +
     ' %: *wait -run'
   );
 }

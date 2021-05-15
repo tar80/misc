@@ -15,7 +15,7 @@ var maskExt = (function () {
   for (var item in type) {
     if (~type[item].indexOf(filetype)) { return type[item]; }
   }
-})();
+}());
 
 if (maskExt === undefined) {
   PPx.Execute('*linecust editc,K_edit:FIRSTEVENT,*editmode -modify:silent %%: *linecust editc,K_edit:FIRSTEVENT');
@@ -27,7 +27,7 @@ if (maskExt === undefined) {
 }
 
 // 種別の処理
-var Expand_ext = function () {
+var ExpandExt = function () {
   switch (maskExt) {
     case 'image':
       PPx.Execute('*setcust XV_imgD:VZ=-2,4');
@@ -52,7 +52,7 @@ if (PPx.WindowIDName === fullsizeID) {
   // タイトルバーあり
   PPx.Execute('*setcust X_win:V=B000000000');
   PPx.Execute('*linecust keyenter,KV_main:CLOSEEVENT,*setcust X_vpos=%*getcust(X_vpos) %%: *execute C,*maskentry');
-  Expand_ext();
+  ExpandExt();
 }
 
 // Moving_PPv停止 ※movingPPv.jsを導入していなければ不要

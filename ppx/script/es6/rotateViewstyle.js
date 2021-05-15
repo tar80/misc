@@ -47,9 +47,9 @@ switch (listView) {
     //   break;
   default:
     {
-      const pict = ['jpg', 'jpeg', 'bmp', 'png', 'gif', 'vch', 'edg'];
 
       if (dirType >= 62) {
+        const pict = ['jpg', 'jpeg', 'bmp', 'png', 'gif', 'vch', 'edg'];
         if (~pict.indexOf(PPx.Extract('%t'))) {
           PPx.Execute(
             '*RotateExecute u_rotate_styleA,' +

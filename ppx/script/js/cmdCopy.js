@@ -1,56 +1,61 @@
 ﻿//!*script
 /* 状況に応じたファイルコピーの設定 */
 //
-// PPx.Arguments()= (0)0:detail | 1:quick | >=2:link
+// PPx.Arguments(0) = 0:detail | 1:quick | >=2:link
 // %'work'=workspace
 // -comcmdはフォーカス制御
 
 var arg = (PPx.Arguments.length) ? PPx.Arguments(0)|0 : 0;
-var cdFilePath = PPx.Extract('%FDC');
-var cdFileName = PPx.Extract('%FC');
-var opDir = PPx.Extract('%2');
-var tDir;
-var mlOpt;    // mklink_option
-var post;
-
-var cmdOpt = (arg == 0)
-  ? ['copy', '-renamedest:on']
-  : ['!copy', '-min'];
-
+var filePaths = PPx.Extract('%#;FDCN').split(';');
+var fileNames = PPx.Extract('%#;FCN').split(';');
+var fileCount = fileNames.length;
+var opPath = PPx.Extract('%2');
+var opParentExt = PPx.GetFileInformation(opPath) || 'no';
 // 送り先振り分け
-switch (PPx.GetFileInformation(opDir)) {
-  case ':DIR':
-    tDir = opDir;
-    post = '-compcmd *ppc -r -noactive';
-    break;
-  case ':XLF':
-    tDir = opDir;
-    post = '';
-    break;
-  case '':
-    tDir = '%\'work\'%\\';
-    cmdOpt = ['copy', ''];
-    post = '-compcmd *ppc -pane:~ %%hd0 -k *jumppath -entry:' + cdFileName
-    ;
-    break;
-  default:
-    PPx.Echo('非対象ディレクトリ');
-    PPx.Quit(1);
-    break;
-}
+var cmd = (function (obj) {
+  switch (opParentExt) {
+    case ':DIR':
+        obj = (arg === 0)
+          ? { act: 'copy', opt: '-renamedest:on' }
+          : { act: '!copy', opt: '-min' };
+        obj.dest = opPath;
+        obj.post = '-compcmd *ppc -r -noactive';
+        return obj;
+    case ':XLF':
+        obj = (arg === 0)
+          ? { act: 'copy', opt: '-renamedest:on' }
+          : { act: '!copy', opt: '-min' };
+        obj.dest = opPath;
+        obj.post = '';
+        return obj;
+    case 'no':
+        obj.act = 'copy';
+        obj.opt = '';
+        obj.dest = '%\'work\'%\\';
+        obj.post = '-compcmd *ppc -pane:~ %%hd0 -k *jumppath -entry:' + fileNames[0];
+        return obj;
+    default:
+      PPx.Echo('非対象ディレクトリ');
+      PPx.Quit(1);
+  }
+}());
 
 // シンボリックリンク
 if (arg >= 2) {
-  tDir = PPx.Extract('%*input("' + tDir +'" -title:"コピー先" -mode:d)%\\');
-
-  if (tDir) {
-    // 対象がディレクトリなら/Dオプション付加
-    mlOpt = (PPx.GetFileInformation(cdFilePath) == ':DIR') ? '/D ' : '';
-    PPx.Execute('%Orn *ppb -runas -c mklink ' + mlOpt + tDir + cdFileName + ' ' + cdFilePath);
-  }
-  // 送り元が書庫なら解凍
+  cmd.dest = PPx.Extract('%*input("' + cmd.dest + '" -title:"リンク先" -mode:d)%\\') || PPx.Quit(1);
+  (function (value, isDir) {
+    for (var i = 0, l = fileCount; i < l; i++) {
+      // 対象がディレクトリなら/Dオプション付加
+      isDir = (PPx.GetFileInformation(filePaths[i]) === ':DIR') ? '/D ' : '';
+      value.push('"' + isDir + cmd.dest + fileNames[i] + ' ' + filePaths[i] + '"');
+    }
+    // パスに空白を含むと失敗する
+    return PPx.Execute('%On *ppb -runas -c FOR %%%%i IN (' + value.join(',') + ') DO mklink %%%%~i');
+  })([], '');
+  // 書庫なら解凍
 } else if (PPx.DirectoryType >= 62) {
-  PPx.Execute('%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複リネーム,DIR展開"%{' + tDir + '%} %@');
+  PPx.Execute('%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複リネーム,DIR展開"%{' + cmd.dest + '%} %@');
 } else {
-  PPx.Execute('*ppcfile ' + cmdOpt[0] + ',' + tDir + ',' + cmdOpt[1] + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog ' + post);
+  PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog ' + cmd.post);
 }
+

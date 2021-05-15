@@ -78,7 +78,7 @@ const getCfg = ((t, e = ['A_color = {']) => {
     }
   }
   return { 'title': t, 'ele': e };
-})();
+}());
 
 getCfg.ele.push('}');
 

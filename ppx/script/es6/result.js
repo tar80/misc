@@ -10,13 +10,13 @@ const argVar = PPx.Arguments(0);
 const set = {};
 
 // ファイルタイプ判別
-set['filetype'] = (() => {
+set['filetype'] = () => {
   const getExt = PPx.GetFileInformation(PPx.Extract('%R')).slice(1);
-  return (getExt == '') ? '---' : getExt;
-});
+  return (getExt === '') ? '---' : getExt;
+};
 
 // 存在確認 要第2引数
-set['exists'] = (() => {
+set['exists'] = () => {
   if (PPx.Arguments.length < 2) {
     PPx.Echo('引数を指定してください\u000A○  単一のパス(%FDCなど)\u000A×   複数のパス(%#FDCなど)');
     PPx.Quit(-1);
@@ -24,38 +24,39 @@ set['exists'] = (() => {
   const fso = PPx.CreateObject('Scripting.FileSystemObject');
   const argPath = PPx.Arguments(1);
   return fso.FileExists(argPath)|0 + fso.FolderExists(argPath)|0;
-});
+};
 
 // 反対窓の有無でパスを変える
-set['getpath'] = (() => {
-  const targetPath = (PPx.Pane.Count == 2) ? '%2%\\' : '%\'work\'%\\';
+set['getpath'] = () => {
+  const targetPath = (PPx.Pane.Count === 2) ? '%2%\\' : '%\'work\'%\\';
   return PPx.Extract(targetPath);
-});
+};
 
 // メインレポジトリ
-set['myrepo'] = (() => {
+set['myrepo'] = () => {
   return PPx.Extract('%1').indexOf(PPx.Extract('%\'myrepo\''));
-});
+};
 
 // 改行を含むPPxコマンドマクロを整形
-set['shapecode'] = (() => {
+set['shapecode'] = () => {
   return PPx.Extract('%OC %*edittext').split('\u000D\u000A').join('\u000D\u000A ');
-});
+};
 
 // リンクならリンク先を、実体があればそのままのパスを返す
 // ※返すパスはスペース区切りの複数のパス
-set['LDC'] = (() => {
+set['LDC'] = () => {
   const arrEntries = PPx.Extract('%#;FDC').split(';');
   const arrLdc = [];
   for (const entry of arrEntries) {
-    arrLdc.push((() => { return PPx.Extract(`%*linkedpath(${entry})`) || entry; })());
+    arrLdc.push(() => { return PPx.Extract(`%*linkedpath(${entry})`) || entry; }());
   }
   return arrLdc.join(' ');
-});
+};
 
 // listfileのエントリ名をそのまま返す
 // ※返すパスはスペース区切りの複数のパス
-set['lfnames'] = ((flag = 0) => {
+set['lfnames'] = () => {
+  const flag = 0;
   if (PPx.EntryMarkCount === 0) {
     PPx.Entry.Mark = 1;
     flag = 1;
@@ -69,10 +70,11 @@ set['lfnames'] = ((flag = 0) => {
   }
   if (flag === 1) { PPx.Entry.Mark = 0; }
   return fn;
-});
+};
 
 try {
   PPx.Result = set[argVar]();
 } catch (e) {
   PPx.Result = PPx.Extract(`%*js(PPx.Result = PPx.${argVar};)`) || 'no match';
 }
+

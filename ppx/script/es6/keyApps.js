@@ -12,6 +12,7 @@ if (!PPx.Arguments.length) {
 
 // auxパスメニュー
 // const cdPath = PPx.Extract('%1');
+//
 // if (cdPath.match(/aux:.*/)) {
 //   PPx.Execute('%M_Caux, C');
 //   PPx.Quit(1);
@@ -36,7 +37,7 @@ const selKey = (() => {
     if (~cnts[key].indexOf(ext)) { return { type: key, chr: asgKey[key] }; }
   }
   return { type: 'none', chr: 'P' };
-})();
+}());
 
 if (argMenuType === 'M_Ccr') {
   // 標準メニュー

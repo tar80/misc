@@ -3,33 +3,10 @@
 // 1.色設定が上書きされるのでバックアップを取っておく
 // 2.https://windowsterminalthemes.dev/ で気に入った色テーマを"Get theme"する
 // 3.クリップボードに設定がコピーされるのでそのままこのスクリプトを実行
-// {
-//   "name": "3024 Night",
-//   "black": "#090300",
-//   "red": "#db2d20",
-//   "green": "#01a252",
-//   "yellow": "#fded02",
-//   "blue": "#01a0e4",
-//   "purple": "#a16a94",
-//   "cyan": "#b5e4f4",
-//   "white": "#a5a2a2",
-//   "brightBlack": "#5c5855",
-//   "brightRed": "#e8bbd0",
-//   "brightGreen": "#3a3432",
-//   "brightYellow": "#4a4543",
-//   "brightBlue": "#807d7c",
-//   "brightPurple": "#d6d5d4",
-//   "brightCyan": "#cdab53",
-//   "brightWhite": "#f7f7f7",
-//   "background": "#090300",
-//   "foreground": "#a5a2a2",
-//   "selectionBackground": "#4a4543",
-//   "cursorColor": "#a5a2a2"
-// }
 /////////* 初期設定 *////////////
 
 // 設定ファイルを作成する場所
-var tPath = PPx.Extract('%\'cfg\'%\\theme');
+var themeDir = PPx.Extract('%\'cfg\'%\\theme');
 
 // 色設定を適用するPPxアプリケーション
 var apply_ppc = false;
@@ -71,19 +48,19 @@ var bcolor = 'CB_pals=BBLACK,BRED,BGREEN,BBLUE,BYELLOW,BCYAN,BPURPLE,BWHITE,_AUT
 
 //////////////////// ////////////
 
-var clip = PPx.Clipboard.toLowerCase().replace(/#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/g,'H$3$2$1');
+var clipStr = PPx.Clipboard.toLowerCase().replace(/#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/g,'H$3$2$1');
 (function (v) {
-  var fLine = v.slice(0,2).replace(/[\r\n]/, '@');
-  if (fLine !== '{@') {
+  var lineOf = v.slice(0,2).replace(/[\r\n]/, '@');
+  if (lineOf !== '{@') {
     PPx.Echo('クリップボードから色情報を取得できませんでした');
     PPx.Quit(1);
   }
-})(clip);
+}(clipStr));
 
 var getCfg = (function() {
   var t;
   var e = ['A_color = {'];
-  var arrColor = clip.split('\u000A');
+  var arrColor = clipStr.split('\u000A');
   var cnts = {
     'name': (function (v) { return t = arrColor[v].replace(' ', '-').slice(0,-1); }),
     'background': (function (v) { return e.push('BG = ' + arrColor[v].toUpperCase()); }),
@@ -91,7 +68,7 @@ var getCfg = (function() {
     'selectionbackground': (function (v) { return e.push('SEL_BG = ' + arrColor[v].toUpperCase()); }),
     'cursorcolor': (function (v) { return e.push('CUR = ' + arrColor[v].toUpperCase()); })
   };
-  for (var i = 1, l = arrColor.length; i < l; i++) {
+  for (var i = 1, l = arrColor.length - 2; i < l; i++) {
     var m = arrColor[i].match(/^[\s]*(.*):\s(.*)/);
     m[1] = m[1].replace(/"/g, '');
     m[2] = m[2].replace(/"/g, '').slice(0,-1);
@@ -102,14 +79,15 @@ var getCfg = (function() {
       }
   }
   return { 'title': t, 'ele': e };
-})();
+}());
+
 getCfg.ele.push('}');
 
 if (PPx.Execute('%"テーマの生成"%Q"' + getCfg.title + ' を生成します"') !== 0) { PPx.Quit(1); }
 
-if (PPx.Extract('%*result(exists,' + tPath + ')') === '0') { PPx.Execute('*makedir ' + tPath); }
+if (PPx.Extract('%*result(exists,' + themeDir + ')') === '0') { PPx.Execute('*makedir ' + themeDir); }
 
-PPx.Execute('*setcust M_theme:' + getCfg.title + '=*setcust @' + tPath + '%\\' + getCfg.title + '.cfg');
+PPx.Execute('*setcust M_theme:' + getCfg.title + '=*setcust @' + themeDir + '%\\' + getCfg.title + '.cfg');
 
 if (apply_ppc === true) {
   getCfg.ele.push(background);
@@ -146,5 +124,5 @@ st.Open;
 st.Type = 2;
 st.Charset = 'UTF-8';
 st.WriteText(cfgEle);
-st.SaveToFile(tPath + '\\' + getCfg.title + '.cfg', 2);
+st.SaveToFile(themeDir + '\\' + getCfg.title + '.cfg', 2);
 st.Close;

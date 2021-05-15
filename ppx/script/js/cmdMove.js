@@ -4,22 +4,23 @@
 // PPx.Arguments() = (0)有:quick
 // -compcmdはフォーカス制御
 
+
+var cursorPos = PPx.Extract('%R');
 var opPath = PPx.Extract('%2');
-
+var opParentExt = PPx.GetFileInformation(opPath);
 // 送り先を設定
-var cmd = (function (pre) {
-  if (!PPx.GetFileInformation(opPath)) {
-    pre = {act: 'move', opt: '', post: '-compcmd *ppc -noactive -pane:~ %%hd0'};
-    pre.dest = '%\'work\'%\\';
+var cmd = (function (obj) {
+  if (!opParentExt) {
+    obj = { act: 'move', opt: '', post: '-compcmd *ppc -pane:~ -k *jumppath %%hd0 -entry:' + cursorPos };
+    obj.dest = '%\'work\'%\\';
   } else {
-    pre = (PPx.Arguments.length === 0)
-      ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -noactive -pane:~ %%hd0'}
+    obj = (PPx.Arguments.length === 0)
+      ? {act: 'move', opt: '-renamedest:on', post: '-compcmd *ppc -r -noactive'}
       : {act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive'};
-
-    pre.dest = opPath;
+    obj.dest = opPath;
   }
-  return pre;
-})();
+  return obj;
+}());
 
 // 送り元の属性に応じて振り分け
 switch (PPx.DirectoryType) {
@@ -35,7 +36,10 @@ switch (PPx.DirectoryType) {
     break;
     // その他
   default:
-    PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog ' + cmd.post);
+    PPx.Execute(
+      '*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt +
+      ' -qstart -nocount -preventsleep -same:0 -sameall -undolog' + cmd.post
+    );
     break;
 }
 

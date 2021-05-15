@@ -21,9 +21,8 @@ const GetPath = () => {
     return PPx.Execute(`*ppc -single -mps -bootid:${GetID(arrChr)} %FD`);
   },
   'V': () => {
-    PPx.Echo('V');
     const arrChr = Array.from('DEFGHIJKLMNOPQRSTUVW');
     return PPx.Execute(`*ppv -bootid:${GetID(arrChr)} ${GetPath()}`);
   }
-})[argID]();
+}[argID]());
 

@@ -1,14 +1,17 @@
 ﻿//!*script
 /* grep結果を出力 */
 //
-// PPx.Arguments() = (0)出力ファイル, (1)grep|rg|jvgrep:初期選択するgrepコマンド, (2)LF|PPv:初期選択の出力先 (3)1:オプションの再登録, 2:M_grepを削除して終了
+// PPx.Arguments(0) = 出力ファイル
+// PPx.Arguments(1) = grep|rg|jvgrep:初期選択grepコマンド
+// PPx.Arguments(2) = LF|PPv:初期選択出力先
+// PPx.Arguments(3) = 1:オプションの再登録 | 2:M_grepを削除して終了
 
-var arglen = PPx.Arguments.length;
+var argLength = PPx.Arguments.length;
 
-if (arglen < 3) {
+if (argLength < 3) {
   PPx.Echo('引数が足りません');
   PPx.Quit(-1);
-} else if (arglen === 4 && PPx.Arguments(3) === '2') {
+} else if (argLength === 4 && PPx.Arguments(3) === '2') {
   PPx.Execute('*deletecust "M_grep"');
   PPx.SetPopLineMessage('Delete > M_grep');
   PPx.Quit(-1);
@@ -59,9 +62,9 @@ var arg = { 'listfile': PPx.Arguments(0), 'cmd': PPx.Arguments(1), 'output': PPx
 var ppxid = PPx.Extract('%n');
 var dogrep = exec[arg.cmd + arg.output];
 
-var reload_opt = (arglen === 4) ? PPx.Arguments(3) : null;
-var check_Menu = PPx.Extract('%*getcust(M_grep)').split('\u000D\u000A');
-if (check_Menu.length === 3 || reload_opt === '1') {
+var optReload = (argLength === 4) ? PPx.Arguments(3) : null;
+var checkMenu = PPx.Extract('%*getcust(M_grep)').split('\u000D\u000A');
+if (checkMenu.length === 3 || optReload === '1') {
   for (var name in exec) {
     if (exec[name].use === true) {
       PPx.Execute('*setcust M_grep:' + name + '=*string i,cmd=' + exec[name].cmd +
@@ -103,20 +106,20 @@ var str = (function (esc) {
       PPx.Quit(-1);
     }
   }
-})();
+}());
 
-var tPath = (PPx.EntryMarkCount) ? '%#FCB' : nomark;
+var targetPath = (PPx.EntryMarkCount) ? '%#FCB' : nomark;
 
 if (PPx.Extract('%si"output"') === 'PPv') {
   // 一時的にキャレットモードに変更
   PPx.Execute('*linecust tmod,KV_main:CLOSEEVENT,*setcust XV_tmod=%*getcust(XV_tmod) %%: *linecust tmod,KV_main:CLOSEEVENT,');
   PPx.Execute('*setcust XV_tmod=1');
   // grepの結果をPPvの標準入力で受け取る
-  PPx.Execute('*run -noppb -min %si"cmd" %si"gopt" "' + str + '" ' + tPath +
+  PPx.Execute('*run -noppb -min %si"cmd" %si"gopt" "' + str + '" ' + targetPath +
     ' | %0ppvw -bootid:w -esc -document -k *string p,grep=1 %%: *find "' + str + '"');
 } else {
   // grepの結果をutf16lbで出力
-  PPx.Execute('%Obn %si"cmd" %si"gopt" "' + str + '" ' + tPath + ' | %Os nkf -w16B > "' + arg.listfile + '"');
+  PPx.Execute('%Obn %si"cmd" %si"gopt" "' + str + '" ' + targetPath + ' | %Os nkf -w16B > "' + arg.listfile + '"');
 
   // リストの整形
   var fso = PPx.CreateObject('Scripting.FileSystemObject');

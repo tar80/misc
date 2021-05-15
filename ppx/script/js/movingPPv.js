@@ -5,7 +5,7 @@
 var omit = PPx.Extract('0%*extract(C,%%si"vState")')|0;
 var vCount = PPx.Extract('%*ppxlist(+V)');
 
-if ((omit != 0) || (vCount > 1)) { PPx.Quit(1); }
+if ((omit !== 0) || (vCount > 1)) { PPx.Quit(1); }
 
 // 画面サイズ
 var displayX = 1024;

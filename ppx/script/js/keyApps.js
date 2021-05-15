@@ -16,10 +16,12 @@ if (!PPx.Arguments.length) {
 //   PPx.Quit(1);
 // }
 
-var arg = PPx.Arguments(0);
+var argMenuType = PPx.Arguments(0);
 // 拡張子を大文字で取得する
 var ext = (PPx.GetFileInformation(PPx.Extract('%R')) === ':DIR')
   ? 'DIR' : PPx.Extract('%t').toUpperCase();
+
+// コンテキストメニューの初期選択キー
 var selKey = (function () {
   // 拡張子判別
   var cnts = {
@@ -39,14 +41,14 @@ var selKey = (function () {
   } else {
     return { type: 'none', chr: 'S' };
   }
-})();
+}());
 
-if (arg === 'M_Ccr') {
+if (argMenuType === 'M_Ccr') {
   // 標準メニュー
   Select_menu('J', 'O');
 } else {
   // ファイル移動メニュー
-  selKey.chr = (arg === 'M_FileMOVE') ? 'M' : 'C';
+  selKey.chr = (argMenuType === 'M_FileMOVE') ? 'M' : 'C';
   Select_menu(selKey.chr, selKey.chr);
 }
 
@@ -65,7 +67,7 @@ function Select_menu(list, archive) {
       PPx.Execute('%M_Carc,' + archive);
       break;
     default:
-      PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + selKey.type + ' %:%' + arg + ',' + selKey.chr);
+      PPx.Execute('*setcust M_Ccr:Ext = ??M_U' + selKey.type + ' %:%' + argMenuType + ',' + selKey.chr);
       break;
   }
 }

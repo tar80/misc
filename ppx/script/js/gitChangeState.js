@@ -18,7 +18,7 @@ var argState = (function (m) {
     '0': ' @'
   };
   return { 'mark': m[PPx.Arguments(0)], 'number': PPx.Arguments(1)|0 };
-})();
+}());
 
 var pos = PPx.EntryIndex;
 

@@ -12,7 +12,7 @@ const reserveHeader = 5;
 const sNum = (() => {
   const tdir = PPx.Extract('%*getcust(XC_tdir)').split(',');
   return Number(tdir[0]) + Number(tdir[1]);
-})();
+}());
 
 // リストの並び
 const arrEntry = [];
@@ -20,7 +20,7 @@ const arrEntry = [];
 for (let [i, l] = [sNum, PPx.EntryDisplayCount]; i < l; i++) {
   let objEntry = PPx.Entry(i);
   (objEntry.Name === objEntry.ShortName)
-    ? arrEntry.push(objEntry.name)
+    ? arrEntry.push(objEntry.Name)
     : arrEntry.push(`${objEntry.Name}","${objEntry.ShortName}`);
 }
 

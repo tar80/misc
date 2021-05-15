@@ -29,8 +29,8 @@ if (PPx.Arguments.length < 2) {
   PPx.Quit(-1);
 }
 
-const pathCustomKeys = PPx.Arguments(1);
-const title = PPx.Extract(`%*name(X,${pathCustomKeys})`);
+const targetPath = PPx.Arguments(1);
+const title = PPx.Extract(`%*name(X,${targetPath})`);
 const checkDup = PPx.Extract(`%*getcust(M_${title})`).split('\u000A').length;
 const keybinds = ['KC_main', 'KC_incs', 'K_edit', 'K_ppe', 'K_lied', 'K_tree', 'KB_edit', 'KV_main', 'KV_page', 'KV_crt', 'KV_img'];
 
@@ -38,7 +38,7 @@ const st = PPx.CreateObject('ADODB.stream');
 st.Open;
 st.Type = 2;
 st.Charset = 'UTF-8';
-st.LoadFromFile(pathCustomKeys);
+st.LoadFromFile(targetPath);
 const stCnts = st.ReadText(-1).split('\u000A');
 st.Close;
 
@@ -58,7 +58,7 @@ const setKeys = (() => {
     }
   }
   return arrKey;
-})();
+}());
 
 if (setKeys[0].key === undefined) {
   PPx.Echo('項目名が設定されていません');
@@ -87,7 +87,7 @@ if (setKeys[0].key === undefined) {
         }
       }
     }
-    PPx.Execute(`*setcust @${pathCustomKeys}`);
+    PPx.Execute(`*setcust @${targetPath}`);
   },
   '0': () => {
     if (checkDup <= 3) {
@@ -114,5 +114,5 @@ if (setKeys[0].key === undefined) {
     PPx.Execute(`*deletecust "M_${title}"`);
     PPx.Execute('%K"@LOADCUST');
   }
-})[PPx.Arguments(0)]();
+}[PPx.Arguments(0)]());
 

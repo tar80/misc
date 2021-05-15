@@ -8,27 +8,27 @@ switch (PPx.EntryMarkCount) {
   case 0:
   case 1:
     if (PPx.Pane.Count === 2 && PPx.Execute('%Q%"Swap Filename!""反対窓エントリとファイル名交換"') === 0) {
-      var nameA = PPx.Extract('%X');
+      var opName = PPx.Extract('%X');
       PPx.Execute('*rename %FXN.%FT,%~FXN.%FT');
-      PPx.Execute('*execute ~,*rename %~FXN.%~FT,' + nameA + '.%~FT');
+      PPx.Execute('*execute ~,*rename %~FXN.%~FT,' + opName + '.%~FT');
     }
     break;
   case 2:
     var objEntry = PPx.Entry;
 
     /* エントリのファイル名に関する情報を取得する関数 */
-    var Info_entry = (function () {
+    var InfoEntry = function () {
       this.name = PPx.Extract('%*name(X,"' + objEntry.name + '")');
       this.ext = PPx.Extract('%*name(T,"'+ objEntry.name + '")');
       this.filename = this.name + '.' + this.ext;
-    });
+    };
 
     if (PPx.Execute('%Q%"Swap Filename""マークしたエントリ名を入れ替えます"') === 0) {
       objEntry.FirstMark;
-      var entry1 = new Info_entry();
+      var entry1 = new InfoEntry();
 
       objEntry.NextMark;
-      var entry2 = new Info_entry();
+      var entry2 = new InfoEntry();
       // 一時的にFirstMarkの名前に__renを付加
       var tempName = entry1.name + '__ren.' + entry1.ext;
 
@@ -50,5 +50,6 @@ switch (PPx.EntryMarkCount) {
     PPx.SetPopLineMessage('mark = 2 :マークしたエントリのファイル名交換');
     PPx.Quit(1);
 }
+
 PPx.Execute('*unmarkentry *');
 

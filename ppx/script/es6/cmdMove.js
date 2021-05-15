@@ -17,11 +17,11 @@ const cmd = (obj => {
   } else {
     obj = (PPx.Arguments.length === 0)
       ? { act: 'move', opt: '-renamedest:on', post: '' }
-      : { act: '!move', opt: '-min', post: '' };
+      : { act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive' };
     obj.dest = opPath;
   }
   return obj;
-})();
+}());
 
 // 送り元の属性に応じて振り分け
 switch (PPx.DirectoryType) {

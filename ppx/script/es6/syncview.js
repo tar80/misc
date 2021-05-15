@@ -37,7 +37,7 @@ function StateSyncView (tWin) {
   switch (paneCount) {
     case 2:
       PPx.Execute(`%Oin *ppv -r -bootid:${targetID}`);
-      // capturewindowに取り込む前にPPvのサイズを記憶する
+      // capturewindowに取り込む前のサイズを記憶する
       PPx.Execute(`*string i,vSize=%*getcust(_WinPos:V${targetID})`);
       // movingPPv off
       PPx.Execute('*string i,vState=1');
@@ -47,6 +47,7 @@ function StateSyncView (tWin) {
       PPx.Execute(`%Oi *ppv -r -bootid:${targetID}`);
       PPx.Execute('*setcust X_vpos=0');
       PPx.Execute(`*topmostwindow %NV${targetID},1`);
+      break;
   }
   PPx.Execute(`*execute C,*ppvoption sync ${targetID}`);
 }

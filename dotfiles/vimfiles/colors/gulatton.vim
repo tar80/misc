@@ -51,7 +51,7 @@ let s:cyan   = '#76ADC0'
 let s:orange = '#D1934C'
 let s:plum   = '#E54661'
 let s:deep1  = '#002300'
-let s:deep2  = '#006000'
+let s:deep2  = '#004000'
 let s:brown  = '#2E0000'
 
 " Vim Editor

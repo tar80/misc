@@ -26,7 +26,7 @@ const current = (() => {
     return;
   });
   return result;
-}());
+})();
 
 if (current.pwd === undefined) {
   PPx.SetPopLineMessage('!"<<Root>>');

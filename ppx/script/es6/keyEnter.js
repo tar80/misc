@@ -18,7 +18,7 @@ const maskExt = (() => {
   for (const key of Object.keys(type)) {
     if (~type[key].indexOf(filetype)) { return key; }
   }
-}());
+})();
 
 if (maskExt === undefined) {
   PPx.Execute('*linecust editc,K_edit:FIRSTEVENT,*editmode -modify:silent %%: *linecust editc,K_edit:FIRSTEVENT');

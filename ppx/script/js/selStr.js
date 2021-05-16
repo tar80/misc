@@ -16,11 +16,10 @@ try {
       l: m[1].length,
       w: (m[2] !== '') ? s.lastIndexOf(m[2]) : m[1].length
     };
-  }(str, str.match(reg)));
+  })(str, str.match(reg));
 
   if (param.l === undefined) { throw 'selStr: no match.'; }
   PPx.Execute('*sendmessage %N,177,' + param.w + ',' + param.l);
-
 } catch (e) {
   PPx.SetPopLineMessage('selStr: ' + e);
   PPx.Quit(-1);

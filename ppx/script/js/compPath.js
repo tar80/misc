@@ -13,7 +13,7 @@ var editStr = (function () {
   var rep = new RegExp('[",]', 'g');
   var esc = { '"': '""', ',': '@#' };
   return str.replace(rep, (function (c) { return esc[c]; }));
-}());
+})();
 
 var argTempFile = PPx.Arguments(0);
 

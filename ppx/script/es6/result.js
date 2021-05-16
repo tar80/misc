@@ -48,7 +48,7 @@ set['LDC'] = () => {
   const arrEntries = PPx.Extract('%#;FDC').split(';');
   const arrLdc = [];
   for (const entry of arrEntries) {
-    arrLdc.push(() => { return PPx.Extract(`%*linkedpath(${entry})`) || entry; }());
+    arrLdc.push((() => { return PPx.Extract(`%*linkedpath(${entry})`) || entry; })());
   }
   return arrLdc.join(' ');
 };
@@ -56,7 +56,7 @@ set['LDC'] = () => {
 // listfileのエントリ名をそのまま返す
 // ※返すパスはスペース区切りの複数のパス
 set['lfnames'] = () => {
-  const flag = 0;
+  let flag = 0;
   if (PPx.EntryMarkCount === 0) {
     PPx.Entry.Mark = 1;
     flag = 1;

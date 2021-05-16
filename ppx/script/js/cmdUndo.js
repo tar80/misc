@@ -54,9 +54,9 @@ var fso = PPx.CreateObject('Scripting.FileSystemObject');
           cmd = '-compcmd *script %\'scr\'%\\cmdUndo.js,redo';
           break;
         case 'Backup':
-          var cDir = PPx.Extract('%FDN%\\');
+          var wd = PPx.Extract('%FDN%\\');
           for (var i = 0, l = PPx.EntryDisplayCount; i < l; i++) {
-            if (PPx.Entry(i).state !== 1 && result[1] == cDir + PPx.Entry(i).Name) {
+            if (PPx.Entry(i).state !== 1 && result[1] == wd + PPx.Entry(i).Name) {
               PPx.SetPopLineMessage('Do Not!');
               fsoUndoLog.Close();
               PPx.Quit(-1);

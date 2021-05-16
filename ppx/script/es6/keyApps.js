@@ -37,7 +37,7 @@ const selKey = (() => {
     if (~cnts[key].indexOf(ext)) { return { type: key, chr: asgKey[key] }; }
   }
   return { type: 'none', chr: 'P' };
-}());
+})();
 
 if (argMenuType === 'M_Ccr') {
   // 標準メニュー

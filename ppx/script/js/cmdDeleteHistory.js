@@ -10,7 +10,7 @@ var targetType = (function (param) {
   var key = 'gnmshdcfuxUX';
   var type = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
   return type[key.indexOf(param)];
-}(targetHistory));
+})(targetHistory);
 
 if (targetType === undefined) {
   PPx.Execute('%"履歴の削除"%I"該当する履歴がありません');

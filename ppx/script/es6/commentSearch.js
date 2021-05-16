@@ -15,7 +15,7 @@ const arg = (() => {
     PPx.Echo('引数が足りません');
     return PPx.Quit(1);
   }
-}());
+})();
 
 const searchWord = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment.. ※正規表現")') || PPx.Quit(-1);
 const entryCount = PPx.Entry.Count;

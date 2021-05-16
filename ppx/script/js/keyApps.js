@@ -41,19 +41,19 @@ var selKey = (function () {
   } else {
     return { type: 'none', chr: 'S' };
   }
-}());
+})();
 
 if (argMenuType === 'M_Ccr') {
   // 標準メニュー
-  Select_menu('J', 'O');
+  SelectMenu('J', 'O');
 } else {
   // ファイル移動メニュー
   selKey.chr = (argMenuType === 'M_FileMOVE') ? 'M' : 'C';
-  Select_menu(selKey.chr, selKey.chr);
+  SelectMenu(selKey.chr, selKey.chr);
 }
 
 /* カレントディレクトリの属性に応じて処理を分岐する */
-function Select_menu(list, archive) {
+function SelectMenu(list, archive) {
   switch (PPx.DirectoryType) {
     case 4:
       PPx.Execute('*setcust M_Clist:Ext = ??M_U' + selKey.type + ' %:%M_Clist,' + list);

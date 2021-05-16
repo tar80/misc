@@ -29,6 +29,6 @@ var GetPath = function () {
   'V': function () {
     var arrChr = 'DEFGHIJKLMNOPQRSTUVW'.split('');
     return PPx.Execute('*ppv -bootid:' + GetID(arrChr) + ' ' + GetPath());
- }
-}[argID]());
+  }
+})[argID]();
 

@@ -12,7 +12,7 @@ var arg = (function () {
     PPx.Echo('引数が異常');
     PPx.Quit(-1);
   }
-}());
+})();
 
 // メモの書き込み
 var memoStr = (function (esc) {
@@ -25,7 +25,7 @@ var memoStr = (function (esc) {
   } finally {
     if (esc === '') { PPx.Quit(-1); }
   }
-}());
+})();
 
 var dirType = PPx.DirectoryType;
 var targetPath = (dirType === 4) ? PPx.Extract('%FVD') : arg.filepath;

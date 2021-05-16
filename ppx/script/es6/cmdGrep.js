@@ -109,7 +109,7 @@ const str = (esc => {
       PPx.Quit(-1);
     }
   }
-}());
+})();
 
 const targetPath = (PPx.EntryMarkCount) ? '%#FCB' : nomark;
 

@@ -7,17 +7,18 @@
 
 var argAction = (!PPx.Arguments.length) ? 0 : PPx.Arguments(0)|0;
 var wd = PPx.Extract('%FDVN');
-var current = (function (v) {
+var current = (function () {
+  var result = {};
   wd.replace(/^(.*)\\((.*\.)?(?!$)(.*))/, function (match, p1, p2, p3, p4) {
-    v = {
+    result = {
       pwd:  p1,
       name: p2,
       ext:  p4.toLowerCase()
     };
     return;
   });
-  return v;
-}());
+  return result;
+})();
 
 var fso = PPx.CreateObject('Scripting.FileSystemObject');
 var fsoWD;          // current_directory

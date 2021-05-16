@@ -27,7 +27,6 @@ if (PPx.Arguments.length < 2) {
   PPx.Quit(-1);
 }
 
-var process = PPx.Arguments(0)|0;
 var targetPath = PPx.Arguments(1);
 var title = PPx.Extract('%*name(X,' + targetPath + ')');
 var checkDup = PPx.Extract('%*getcust(M_' + title + ')').split('\u000A').length;
@@ -56,12 +55,12 @@ var setKeys = (function () {
     } else if (/^[^\s]*\s*[=,].*/.test(value) === true) {
       arrKey.push({ 'key': header, 'cmd': value.replace(/^([^\s]*)\s.*/, function (match, p1) {
         return p1.replace(/\\'/g, '\\\'');
-        })
+      })
       });
     }
   }
   return arrKey;
-}());
+})();
 
 if (setKeys[0].key === undefined) {
   PPx.Echo('項目名が設定されていません');
@@ -77,16 +76,16 @@ if (setKeys[0].key === undefined) {
 
     var reg = new RegExp(/^[a-zA-Z]*$/);
 
-    for (i = 0, l = setKeys.length; i < l; i++) {
-      value = setKeys[i];
-      cnts = PPx.Extract('%OC %*getcust(' + value.key + ':' + value.cmd +')');
+    for (var i = 0, l = setKeys.length; i < l; i++) {
+      var value = setKeys[i];
+      var cnts = PPx.Extract('%OC %*getcust(' + value.key + ':' + value.cmd +')');
       if (cnts === '') {
         PPx.Execute('*setcust M_' + title + ':' + value.key + ':' + value.cmd + '=%%mNotExist %%K"@' + value.cmd);
       } else {
         if (cnts.slice(0,1) === '@' || reg.test(cnts)) {
           PPx.Execute('*setcust M_' + title + ':' + value.key + ':' + value.cmd + '=%%mSepEQ %%K"' + cnts);
         } else {
-          escCnts = cnts.replace(/%/g, '%%');
+          var escCnts = cnts.replace(/%/g, '%%');
           PPx.Execute('%OC *setcust M_' + title + ':' + value.key + ':' + value.cmd + '=' + escCnts);
         }
       }
@@ -101,7 +100,7 @@ if (setKeys[0].key === undefined) {
 
     var emptykeys = [];
 
-    for (i = 0, l = setKeys.length; i < l; i++) {
+    for (var i = 0, l = setKeys.length; i < l; i++) {
       var value = setKeys[i];
       var cnts = PPx.Extract('%OC %*getcust(M_' + title + ':' + value.key + ':' + value.cmd + ')');
       if (cnts === '') {
@@ -119,5 +118,5 @@ if (setKeys[0].key === undefined) {
     PPx.Execute('*deletecust "M_' + title + '"');
     PPx.Execute('%K"@LOADCUST');
   }
-}[PPx.Arguments(0)]());
+})[PPx.Arguments(0)]();
 

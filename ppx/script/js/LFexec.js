@@ -19,24 +19,24 @@ var cmd = {};
 // returnより前の部分は初回のみ実行される
 cmd['gvim'] = function () {
   return function (path, shortname, number) {
-  PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + search_word + '/ " "' + path + '"');
-  PPx.Execute('*wait 100,1');
+    PPx.Execute('%Oi gvim --remote-tab-silent +"' + number + '-1 /' + search_word + '/ " "' + path + '"');
+    PPx.Execute('*wait 100,1');
   };
 };
 
 cmd['ppv'] = function () {
   return function (path) {
-  PPx.Execute('%Oi *ppv -r -bootid:C ' + path);
-  PPx.Execute('*wait 100,1');
+    PPx.Execute('%Oi *ppv -r -bootid:C ' + path);
+    PPx.Execute('*wait 100,1');
   };
 };
 
 cmd['sed'] = function () {
   var rep = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
   return function (path, shortname, number, duplicate) {
-  if (!duplicate) { PPx.Execute('%Oi copy ' + path + ' ' + path + '_back'); }
-    PPx.Echo('rep:' + rep + 'num:' + number + 'path:' + path)
-  PPx.Execute('%Oi sed -i -r ' + number + rep + ' ' + path);
+    if (!duplicate) { PPx.Execute('%Oi copy ' + path + ' ' + path + '_back'); }
+    PPx.Echo('rep:' + rep + 'num:' + number + 'path:' + path);
+    PPx.Execute('%Oi sed -i -r ' + number + rep + ' ' + path);
   };
 };
 

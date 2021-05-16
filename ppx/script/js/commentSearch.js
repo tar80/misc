@@ -13,7 +13,7 @@ var arg = (function () {
     PPx.Echo('引数が足りません');
     return PPx.Quit(1);
   }
-}());
+})();
 
 var searchWord = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment.. ※正規表現")') || PPx.Quit(-1);
 var entryCount = PPx.Entry.Count;

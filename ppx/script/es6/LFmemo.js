@@ -14,7 +14,7 @@ const arg = (() => {
     PPx.Echo('引数が異常');
     PPx.Quit(-1);
   }
-}());
+})();
 
 // メモの書き込み
 const memoStr = (esc => {
@@ -27,7 +27,7 @@ const memoStr = (esc => {
   } finally {
     if (esc === '') { PPx.Quit(-1); }
   }
-}());
+})();
 
 const dirType = PPx.DirectoryType;
 const targetPath = (dirType === 4) ? PPx.Extract('%FVD') : arg.filepath;

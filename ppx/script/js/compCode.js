@@ -27,10 +27,10 @@ var currentEditmode = (function () {
   var historyType = 'g';
   var reg = new RegExp('PP[BCV]\\[');
   if (!reg.test(PPx.Extract('%W'))) {
-   historyType = PPx.Extract('%*editprop(whistory)') || historyType;
+    historyType = PPx.Extract('%*editprop(whistory)') || historyType;
   }
   return historyType;
-}());
+})();
 
 var edit = {
   chr: PPx.Arguments(1),
@@ -52,10 +52,10 @@ var code = PPx.Extract(function () {
       'e': function () { return '%*edittext'; }
     }[edit.type()]();
   } catch (e) {
-      PPx.Echo('引数が異常');
-      PPx.Quit(-1);
+    PPx.Echo('引数が異常');
+    PPx.Quit(-1);
   }
-}()) || PPx.Quit(-1);
+})() || PPx.Quit(-1);
 
 // String内のseqと同じ文字数をカウント。最大max回
 String.prototype.counter = function (seq, max) {
@@ -90,7 +90,7 @@ var charCount = (function () {
     count.push(edit['chr'].counter(charArray[i], countMax));
   }
   return count;
-}());
+})();
 
 // 配列からオブジェクトを生成
 var bsNum = [];
@@ -108,7 +108,7 @@ var esc = (function () {
     }(charArray[i], i));
   }
   return chr;
-}());
+})();
 
 if (bsNum !== -1) { charArray[bsNum] = '\\\\'; }
 

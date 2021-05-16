@@ -12,7 +12,7 @@ const reserveHeader = 5;
 const sNum = (() => {
   const tdir = PPx.Extract('%*getcust(XC_tdir)').split(',');
   return Number(tdir[0]) + Number(tdir[1]);
-}());
+})();
 
 // リストの並び
 const arrEntry = [];

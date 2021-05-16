@@ -47,7 +47,6 @@ switch (listView) {
     //   break;
   default:
     {
-
       if (dirType >= 62) {
         const pict = ['jpg', 'jpeg', 'bmp', 'png', 'gif', 'vch', 'edg'];
         if (~pict.indexOf(PPx.Extract('%t'))) {

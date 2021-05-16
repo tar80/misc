@@ -7,8 +7,8 @@
 // 例) "iOh" => *input(-mode:Oh)
 //
 // PPx.Arguments(1) = ここで記述した文字が補完される。
-// 【",%,\】は二文字以上の偶数個で指定する。
-// 【"】は記述した半分の数が戻る。【%,\】は記述したそのままの数が戻る。
+// 【"%\】は二文字以上の偶数個で指定する。
+// 【"】は記述した半分の数が戻る。【%\】は記述したそのままの数が戻る。
 // アルファベットと数字を引数にした場合、単純に数が倍になる。カンマは使えない。
 // 例)引数,"abcABC122333""%%%%\\\\\\"と記述したとき、abcABC123"%\ -> aabbccAABBCC112222333333"%%%%\\\\\\
 //
@@ -32,7 +32,7 @@ const currentEditmode = (() => {
     historyType = PPx.Extract('%*editprop(whistory)') || historyType;
   }
   return historyType;
-}());
+})();
 
 const edit = {
   chr: PPx.Arguments(1),
@@ -46,16 +46,16 @@ const edit = {
   }
 };
 
-const code = PPx.Extract(() => {
+const code = PPx.Extract(function () {
   try {
     return {
       'i': () => `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()} -k ${edit.precmd})`,
       's': () => '%*selecttext',
-      'e': () => '%*selecttext'
+      'e': () => '%*edittext'
     }[edit.type()]();
   } catch (e) {
-      PPx.Echo('引数が異常');
-      PPx.Quit(-1);
+    PPx.Echo('引数が異常');
+    PPx.Quit(-1);
   }
 }()) || PPx.Quit(-1);
 
@@ -75,7 +75,7 @@ const charCount = (() => {
     count.push(edit['chr'].counter(value, countMax));
   }
   return count;
-)})();
+})();
 
 // 配列からオブジェクトを生成
 const bsNum = [];

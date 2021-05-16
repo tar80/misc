@@ -1,7 +1,7 @@
 ﻿//!*script
 /* 状況に応じたファイル移動の設定 */
 //
-// PPx.Arguments() = (0)有:quick
+// PPx.Arguments(0) = 無:detail | 有:quick
 // -compcmdはフォーカス制御
 
 'use strict';
@@ -12,20 +12,22 @@ const opParentExt = PPx.GetFileInformation(opPath);
 // 送り先を設定
 const cmd = (obj => {
   if (!opParentExt) {
+    // 反対窓なし
     obj = { act: 'move', opt: '', post: `-compcmd *ppc -pane:~ -k *jumppath %%hd0 -entry:${cursorPos}` };
     obj.dest = '%\'work\'%\\';
   } else {
+    // 反対窓あり
     obj = (PPx.Arguments.length === 0)
       ? { act: 'move', opt: '-renamedest:on', post: '' }
       : { act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive' };
     obj.dest = opPath;
   }
   return obj;
-}());
+})();
 
 // 送り元の属性に応じて振り分け
 switch (PPx.DirectoryType) {
-// 書庫
+  // 書庫
   case 63:
   case 64:
   case 96:

@@ -20,7 +20,7 @@ const argState = (m => {
     '0': ' @'
   };
   return { 'mark': m[PPx.Arguments(0)], 'number': PPx.Arguments(1)|0 };
-}());
+})();
 
 const pos = PPx.EntryIndex;
 

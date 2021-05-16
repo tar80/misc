@@ -57,12 +57,12 @@ const fso = PPx.CreateObject('Scripting.FileSystemObject');
           break;
         case 'Backup':
           {
-            const cDir = PPx.Extract('%FDN%\\');
+            const wd = PPx.Extract('%FDN%\\');
             const l = PPx.EntryDisplayCount;
             const ObjEntry = PPx.Entry;
 
             for (let i = 0; i < l; i++) {
-              if (ObjEntry(i).state !== 1 && result[1] === cDir + ObjEntry(i).Name) {
+              if (ObjEntry(i).state !== 1 && result[1] === wd + ObjEntry(i).Name) {
                 PPx.SetPopLineMessage('Do Not!');
                 fsoUndoLog.Close();
                 PPx.Quit(-1);

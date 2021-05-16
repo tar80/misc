@@ -12,13 +12,13 @@
 var ppxID = (function () {
   var winID = PPx.WindowIDName;
   if (winID === 'C_A') {
-      var list = PPx.Extract('%*ppxlist(-)').split(',');
-      list.sort(function (a, b) { return a < b ? 1 : -1; });
+    var list = PPx.Extract('%*ppxlist(-)').split(',');
+    list.sort(function (a, b) { return a < b ? 1 : -1; });
     return list[0];
   } else {
     return winID;
   }
-}());
+})();
 
 var targetID = ppxID.slice(2);
 var ppvSync = PPx.Extract('%*extract(C' + targetID + ',"%%*js(PPx.Result=PPx.SyncView;)")')|0;

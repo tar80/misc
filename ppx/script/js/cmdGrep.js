@@ -106,7 +106,7 @@ var str = (function (esc) {
       PPx.Quit(-1);
     }
   }
-}());
+})();
 
 var targetPath = (PPx.EntryMarkCount) ? '%#FCB' : nomark;
 

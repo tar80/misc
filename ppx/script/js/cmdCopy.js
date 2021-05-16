@@ -14,34 +14,37 @@ var opParentExt = PPx.GetFileInformation(opPath) || 'no';
 // 送り先振り分け
 var cmd = (function (obj) {
   switch (opParentExt) {
+    // 反対窓あり
     case ':DIR':
-        obj = (arg === 0)
-          ? { act: 'copy', opt: '-renamedest:on' }
-          : { act: '!copy', opt: '-min' };
-        obj.dest = opPath;
-        obj.post = '-compcmd *ppc -r -noactive';
-        return obj;
+      obj = (arg === 0)
+        ? { act: 'copy', opt: '-renamedest:on' }
+        : { act: '!copy', opt: '-min' };
+      obj.dest = opPath;
+      obj.post = '-compcmd *ppc -r -noactive';
+      return obj;
+    // リストファイル
     case ':XLF':
-        obj = (arg === 0)
-          ? { act: 'copy', opt: '-renamedest:on' }
-          : { act: '!copy', opt: '-min' };
-        obj.dest = opPath;
-        obj.post = '';
-        return obj;
+      obj = (arg === 0)
+        ? { act: 'copy', opt: '-renamedest:on' }
+        : { act: '!copy', opt: '-min' };
+      obj.dest = opPath;
+      obj.post = '';
+      return obj;
+    // 反対窓なし
     case 'no':
-        obj.act = 'copy';
-        obj.opt = '';
-        obj.dest = '%\'work\'%\\';
-        obj.post = '-compcmd *ppc -pane:~ %%hd0 -k *jumppath -entry:' + fileNames[0];
-        return obj;
+      obj.act = 'copy';
+      obj.opt = '';
+      obj.dest = '%\'work\'%\\';
+      obj.post = '-compcmd *ppc -pane:~ %%hd0 -k *jumppath -entry:' + fileNames[0];
+      return obj;
     default:
-      PPx.Echo('非対象ディレクトリ');
+      PPx.Echo('送り先が非対象ディレクトリ');
       PPx.Quit(1);
   }
-}());
+})();
 
-// シンボリックリンク
 if (arg >= 2) {
+  // シンボリックリンク
   cmd.dest = PPx.Extract('%*input("' + cmd.dest + '" -title:"リンク先" -mode:d)%\\') || PPx.Quit(1);
   (function (value, isDir) {
     for (var i = 0, l = fileCount; i < l; i++) {
@@ -52,8 +55,8 @@ if (arg >= 2) {
     // パスに空白を含むと失敗する
     return PPx.Execute('%On *ppb -runas -c FOR %%%%i IN (' + value.join(',') + ') DO mklink %%%%~i');
   })([], '');
-  // 書庫なら解凍
 } else if (PPx.DirectoryType >= 62) {
+  // 書庫なら解凍
   PPx.Execute('%u7-zip64.dll,e -aou -hide "%1" -o%"解凍先  ※重複リネーム,DIR展開"%{' + cmd.dest + '%} %@');
 } else {
   PPx.Execute('*ppcfile ' + cmd.act + ',' + cmd.dest + ',' + cmd.opt + ' -qstart -nocount -preventsleep -same:0 -sameall -undolog ' + cmd.post);

@@ -37,18 +37,17 @@ var gi = (function () {
       PPx.Quit(-1);
     }
   } while (!objWD.IsRootFolder);
-}());
+})();
 
 var pathStat = fso.BuildPath(listDir, gStatus + '.xgit');
 var pathDiff = fso.BuildPath(listDir, gDiff + '.patch');
-var fso;
 
 // ログの取得
 var Make_status = function () {
   var result = (function () {
     var str = ';ListFile,;Base=' + gi.root + '|1,;git-status';
     return str.split(',');
-  }());
+  })();
 
   PPx.Execute('%Oa git status --porcelain -uall >' + pathStat + ' %&');
   var st = PPx.CreateObject('ADODB.stream');
@@ -65,7 +64,7 @@ var Make_status = function () {
         setColorNum = { ' ': 1, 'D': 5, '!': 3 };
         for (var key in setColorNum) {
           if (p2.indexOf(key) !== -1) {
-            return setColorNum[key]
+            return setColorNum[key];
           }
         }
         return 8;
@@ -88,7 +87,7 @@ var Make_diff = function () {
   return;
 };
 
-var setup = function (bn) {
+var setup = function () {
   PPx.Execute('*string i,ps=' + pathStat);
   PPx.Execute('*string i,pd=' + pathDiff);
   PPx.Execute('%Oa git rev-parse --abbrev-ref HEAD | %0pptrayw -c *execute C,*string i,oBranch=%%*stdin(utf8) %%&');

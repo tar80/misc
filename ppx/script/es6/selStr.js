@@ -13,11 +13,10 @@
 try {
   const str = PPx.Extract('%*edittext()');
   const reg = new RegExp(PPx.Arguments(0));
-  const param = (function (s, m) {
+  const param = ((s, m) => ({
     l: m[1].length,
     w: (m[2] !== '') ? s.lastIndexOf(m[2]) : m[1].length
-    };
-  }(str, str.match(reg)));
+  }))(str, str.match(reg));
 
   if (param.l === undefined) { throw 'selStr: no match.'; }
   PPx.Execute(`*sendmessage %N,177,${param.w},${param.l}`);

@@ -10,7 +10,7 @@ var reserveHeader = 5;
 var sNum = (function () {
   var tdir = PPx.Extract('%*getcust(XC_tdir)').split(',');
   return Number(tdir[0]) + Number(tdir[1]);
-}());
+})();
 
 // リストの並び
 var arrEntry = [];
@@ -40,15 +40,15 @@ for (i = 0, l = Math.min(reserveHeader, infoEntry.length); i < l; i++) {
 }
 
 // リスト上の並びをlistfileの形式で取得し直す
-for (var element in arrEntry) {
+for (var value in arrEntry) {
   var exist = {};
-  var index = element|0 + sNum;
+  var index = value|0 + sNum;
 
   for (i = 0, l = infoEntry.length; i < l; i++) {
     var d = infoEntry[i];
 
-    if (!exist[arrEntry[i]] && ~d.indexOf(arrEntry[element])) {
-      exist[arrEntry[element]] = true;
+    if (!exist[arrEntry[i]] && ~d.indexOf(arrEntry[value])) {
+      exist[arrEntry[value]] = true;
       var arrRes = d.split(',');
       var cmt = PPx.Entry(index).Comment.replace(/"/g, '""');
       var mark = (PPx.Entry(index).Mark) ? 1 : 0;

@@ -3,6 +3,7 @@
 // 1.色設定が上書きされるのでバックアップを取っておく
 // 2.https://windowsterminalthemes.dev/ で気に入った色テーマを"Get theme"する
 // 3.クリップボードに設定がコピーされるのでそのままこのスクリプトを実行
+
 /////////* 初期設定 *////////////
 
 // 設定ファイルを作成する場所
@@ -55,7 +56,7 @@ var clipStr = PPx.Clipboard.toLowerCase().replace(/#([a-f0-9]{2})([a-f0-9]{2})([
     PPx.Echo('クリップボードから色情報を取得できませんでした');
     PPx.Quit(1);
   }
-}(clipStr));
+})(clipStr);
 
 var getCfg = (function() {
   var t;
@@ -74,12 +75,12 @@ var getCfg = (function() {
     m[2] = m[2].replace(/"/g, '').slice(0,-1);
     try {
       cnts[m[1]](m[2]);
-      } catch (err) {
-        e.push(m[1].toUpperCase() + ' = ' + m[2].replace('bright', 'b').toUpperCase());
-      }
+    } catch (err) {
+      e.push(m[1].toUpperCase() + ' = ' + m[2].replace('bright', 'b').toUpperCase());
+    }
   }
   return { 'title': t, 'ele': e };
-}());
+})();
 
 getCfg.ele.push('}');
 

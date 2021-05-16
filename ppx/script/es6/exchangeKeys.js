@@ -58,7 +58,7 @@ const setKeys = (() => {
     }
   }
   return arrKey;
-}());
+})();
 
 if (setKeys[0].key === undefined) {
   PPx.Echo('項目名が設定されていません');
@@ -114,5 +114,5 @@ if (setKeys[0].key === undefined) {
     PPx.Execute(`*deletecust "M_${title}"`);
     PPx.Execute('%K"@LOADCUST');
   }
-}[PPx.Arguments(0)]());
+})[PPx.Arguments(0)]();
 

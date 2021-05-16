@@ -15,7 +15,7 @@ var maskExt = (function () {
   for (var item in type) {
     if (~type[item].indexOf(filetype)) { return type[item]; }
   }
-}());
+})();
 
 if (maskExt === undefined) {
   PPx.Execute('*linecust editc,K_edit:FIRSTEVENT,*editmode -modify:silent %%: *linecust editc,K_edit:FIRSTEVENT');

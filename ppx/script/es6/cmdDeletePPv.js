@@ -3,11 +3,11 @@
 
 'use strict';
 
-const pwdExt = PPx.GetFileInformation(PPx.Extract('%FD'));
-const entryExt = PPx.GetFileInformation(PPx.Extract('%FDC'));
+const extPwd = PPx.GetFileInformation(PPx.Extract('%FD'));
+const extEntry = PPx.GetFileInformation(PPx.Extract('%FDC'));
 
 // 書庫
-if (!entryExt && (pwdExt === ':PKZIP' || pwdExt === ':RAR')) {
+if (!extEntry && (extPwd === ':PKZIP' || extPwd === ':RAR')) {
   PPx.Execute('%"ファイル操作"%Q"書庫から削除します" %: %u7-zip64.dll,d -hide %FD %FC');
   // PPx.Execute('*PPVUD DOWN'); // *PPVUD=ユーザーコマンド
   PPx.Quit(1);

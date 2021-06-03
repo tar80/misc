@@ -43,8 +43,6 @@ for (let [i, l] = [0, Math.min(reserveHeader, infoEntry.length)]; i < l; i++) {
 
 // リスト上の並びをlistfileの形式で取得し直す
 {
-  // let res, cmt, mark, hl, arrRes;
-
   arrEntry.forEach((element, index) => {
 
     // ファイルからエントリと一致する行情報を取得

@@ -137,4 +137,4 @@ tag ;[--option][<タグ>]["メッセージ"][<コミット>]
 	-d ;<tag>       タグを削除
 	-m ;"message"
 	%*js(PPx.Result=PPx.Entry.Name;) ;カーソル下のコミットハッシュ
-
+%mGist commit -m "Update" %& git push

@@ -49,7 +49,7 @@ const edit = {
 edit.code = {
   'i': () => `%*input("%*selecttext" -title:"${edit.title}" -mode:${edit.mode()} -k ${edit.precmd})`,
   's': () => '%*selecttext',
-  'e': () => '%*selecttext'
+  'e': () => '%*edittext'
 }[edit.type()]();
 
 const code = PPx.Extract(edit.code) || PPx.Quit(-1);

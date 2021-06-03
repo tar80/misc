@@ -4,8 +4,8 @@
 'use strict';
 
 {
-  // %si"vState" = 1;(除外対象)、PPvが2枚以上で中止
-  const omit = PPx.Extract('0%*extract(C,%%si"vState")')|0;
+  // %sp"vState" = 1;(除外対象)、PPvが2枚以上で中止
+  const omit = PPx.Extract('0%*extract(C,%%sp"vState")')|0;
   const vCount = PPx.Extract('%*ppxlist(+V)');
 
   if (omit !== 0 || vCount > 1) { PPx.Quit(1); }

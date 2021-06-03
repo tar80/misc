@@ -2,7 +2,7 @@
 /* 状況に応じて連動ビューを設定 */
 //
 // %si"vSize"  :capturewindowに取り込む前のPPvのサイズ
-// %si"vState" :値が"1"のとき、movingPPv.jsを止める
+// %sp"vState" :値が"1"のとき、movingPPv.jsを止める
 
 'use strict';
 
@@ -21,7 +21,7 @@ if (!ppvSync) {
   PPx.SyncView = 0;
   PPx.Execute('*setcust X_win:V=B000000000');
   // movingPPv on
-  PPx.Execute('*string i,vState=');
+  PPx.Execute('*string p,vState=');
 
   if (PPx.Extract('%si"vSize')) {
     // ppvをcapturewindowに取り込む前のサイズに戻す
@@ -40,7 +40,7 @@ function StateSyncView (tWin) {
       // capturewindowに取り込む前のサイズを記憶する
       PPx.Execute(`*string i,vSize=%*getcust(_WinPos:V${targetID})`);
       // movingPPv off
-      PPx.Execute('*string i,vState=1');
+      PPx.Execute('*string p,vState=1');
       PPx.Execute(`%Oi *capturewindow V${targetID} -pane:~ -selectnoactive`);
       break;
     default:

@@ -210,12 +210,12 @@ function Write_result(res, dist, flag) {
   });
 }
 
-const Async_run = (async () => {
+const Async_run = async () => {
   (arg.open === 'start') ? await start() : await set();
   if (arg.diff !== '0') {
     await (() => { return (arg.diff === '1') ? Make_diff(pathDiff) : Make_diff_commit(pathDiff); })();
   }
-});
+};
 
 Async_run().then(() => {
   console.log('complete.');

@@ -6,11 +6,16 @@
 
 var saveHistory = (!PPx.Arguments.length) ? false : true;
 var targetHistory = PPx.Extract('%*editprop(whistory)');
-var targetType = (function (param) {
-  var key = 'gnmshdcfuxUX';
-  var type = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
-  return type[key.indexOf(param)];
-})(targetHistory);
+var targetType = {
+  g: '汎用', n: '数値', m: 'マスク', s: '検索', h: 'コマンド',
+  d: 'ディレクトリ', c: 'ファイル名', f: 'フルパス',
+  u: 'ユーザ1', U: 'ユーザ1', x: 'ユーザ2', X: 'ユーザ2'
+}[targetHistory];
+// var targetType = (function (param) {
+//   var key = 'gnmshdcfuxUX';
+//   var type = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
+//   return type[key.indexOf(param)];
+// })(targetHistory);
 
 if (targetType === undefined) {
   PPx.Execute('%"履歴の削除"%I"該当する履歴がありません');

@@ -119,7 +119,7 @@ if (PPx.Extract('%si"output"') === 'PPv') {
   PPx.Execute('*setcust XV_tmod=1');
   // grepの結果をPPvの標準入力で受け取る
   PPx.Execute(`*run -noppb -min %si"cmd" %si"gopt" "${str}" ${targetPath}` +
-  ` | %0ppvw -bootid:w -esc -document -k *string p,grep=1 %%: *find "${str}"`);
+  ` | %0ppvw -bootid:w -esc -document -utf8 -k *string p,grep=1 %%: *find "${str}"`);
 
 } else {
   // grepの結果を出力

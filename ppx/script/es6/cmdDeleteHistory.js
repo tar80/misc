@@ -1,7 +1,7 @@
 ﻿//!*script
 /* 対象ヒストリを初期化 */
 //
-// PPx.Arguments() = (0)1:履歴をバックアップ
+// PPx.Arguments(0) = 1:履歴をバックアップ
 // 引数を付けると、X_save%\@history_?_back.txtが保存される
 
 'use strict';
@@ -9,11 +9,11 @@
 const saveHistory = (!PPx.Arguments.length) ? false : true;
 
 const targetHistory = PPx.Extract('%*editprop(whistory)');
-const targetType = (param => {
-  const arrkey = Array.from('gnmshdcfuxUX');
-  const arrType = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル名','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
-  return arrType[arrkey.findIndex(ele => ele === param)];
-})(targetHistory);
+const targetType = {
+  g: '汎用', n: '数値', m: 'マスク', s: '検索', h: 'コマンド',
+  d: 'ディレクトリ', c: 'ファイル名', f: 'フルパス',
+  u: 'ユーザ1', U: 'ユーザ1', x: 'ユーザ2', X: 'ユーザ2'
+}[targetHistory];
 
 if (targetType === undefined) {
   PPx.Execute('%"履歴の削除"%I"該当する履歴がありません');

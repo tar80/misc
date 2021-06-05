@@ -196,7 +196,7 @@ let g:plug_shallow = 0
 
 call plug#begin('~/vimfiles')
 "# auto
-  Plug 'shougo/vimproc.vim', { 'dir': '~/vimfiles/vimproc.vim', 'do': 'make' }
+  " Plug 'shougo/vimproc.vim', { 'dir': '~/vimfiles/vimproc.vim', 'do': 'make' }
   Plug 'rhysd/clever-f.vim'
   " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   " Plug 'junegunn/fzf.vim'
@@ -296,7 +296,8 @@ endfunction
 "======================================================================
 "# Command{{{
 "# 編集中のファイルをShibaに送る
-command! Shiba call vimproc#system_bg('shiba '.expand('%'))
+" command! Shiba call vimproc#system_bg('shiba '.expand('%'))
+command! Shiba call job_start('shiba '.expand('%'))
 "# 編集中バッファの差分を表示
 command! Difforg vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 "# 隣のバッファとdiff

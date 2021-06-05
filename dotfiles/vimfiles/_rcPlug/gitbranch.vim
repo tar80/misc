@@ -22,7 +22,7 @@ nnoremap <silent> <space>ga :<C-u>call <SID>gitadd()<CR>
 " 
 function s:gitadd() abort
   if exists('b:gitbranch_path')
-    update | call vimproc#system_bg('git add '.expand('%'))
+    update | call job_start('git add '.expand('%'))
   endif
 endfunction
 

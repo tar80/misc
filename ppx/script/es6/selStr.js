@@ -25,4 +25,3 @@ try {
   PPx.SetPopLineMessage(`selStr: ${e}`);
   PPx.Quit(-1);
 }
-

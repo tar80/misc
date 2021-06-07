@@ -71,7 +71,7 @@ var fso = PPx.CreateObject('Scripting.FileSystemObject');
           PPx.Quit(-1);
           break;
       }
-      PPx.SetPopLineMessage('Send: ' + result[2] + '\r\nDist: ' + result[1]);
+      PPx.SetPopLineMessage('Send: ' + result[2] + '\r\nDest: ' + result[1]);
     } while (!fsoUndoLog.AtEndOfStream);
 
     fsoUndoLog.Close();

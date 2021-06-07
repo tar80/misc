@@ -8,11 +8,11 @@
 
 const saveHistory = (!PPx.Arguments.length) ? false : true;
 
-const targetHistory = PPx.Extract('%*editprop(whistory)');
+const targetHistory = PPx.Extract('%*editprop(whistory)').toLowerCase();
 const targetType = {
   g: '汎用', n: '数値', m: 'マスク', s: '検索', h: 'コマンド',
   d: 'ディレクトリ', c: 'ファイル名', f: 'フルパス',
-  u: 'ユーザ1', U: 'ユーザ1', x: 'ユーザ2', X: 'ユーザ2'
+  u: 'ユーザ1', x: 'ユーザ2'
 }[targetHistory];
 
 if (targetType === undefined) {

@@ -1,7 +1,7 @@
 ﻿//!*script
 /* 対象ヒストリを初期化 */
 //
-// PPx.Arguments() = (0)1:履歴をバックアップ
+// PPx.Arguments(0) = 1:履歴をバックアップ
 // 引数を付けると、X_save%\@history_?_back.txtが保存される
 
 var saveHistory = (!PPx.Arguments.length) ? false : true;
@@ -11,11 +11,6 @@ var targetType = {
   d: 'ディレクトリ', c: 'ファイル名', f: 'フルパス',
   u: 'ユーザ1', U: 'ユーザ1', x: 'ユーザ2', X: 'ユーザ2'
 }[targetHistory];
-// var targetType = (function (param) {
-//   var key = 'gnmshdcfuxUX';
-//   var type = ['汎用','数値','マスク','検索','コマンド','ディレクトリ','ファイル','フルパス','ユーザ1','ユーザ2','ユーザ1','ユーザ2'];
-//   return type[key.indexOf(param)];
-// })(targetHistory);
 
 if (targetType === undefined) {
   PPx.Execute('%"履歴の削除"%I"該当する履歴がありません');

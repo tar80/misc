@@ -14,8 +14,8 @@ let g:acp_behaviorRubyOmniSymbolLength  = -1
 let g:acp_behaviorPythonOmniLength      = -1
 "======================================================================
 "# Keys
-nnoremap <expr> <F2> <SID>toggleACP()
-inoremap <expr> <F2> <SID>toggleACP()
+noremap <expr> <F2> <SID>toggleACP()
+" inoremap <expr> <F2> <SID>toggleACP()
 function s:toggleACP()
   if g:acp_behaviorKeywordLength != 2 && &ft != 'unite'
     let g:acp_behaviorKeywordLength = 2
@@ -28,4 +28,3 @@ function s:toggleACP()
   endif
   return ''
 endfunction
-"#}}}

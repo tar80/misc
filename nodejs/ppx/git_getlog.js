@@ -1,10 +1,10 @@
 // #!/usr/bin/env node
 //
-// argv = [0]node [1]script path
-// [2]1:git status
-// [3]1:git log  | hash値:git log hash
-// [4]1:git diff | hash値:git diff hash
-// [5]start | status | log  ;git-mode開始時はstartを指定、status、logはPPcで開くログの種類
+// argv = [0]node.exe path [1]script path
+// [2]1:get status list
+// [3]1:get log list | hash値:get hash log list
+// [4]1:get diff | hash値:get hash diff
+// [5]start | status | log  ;git-mode開始時はstartを指定、status、logはPPcで開くリストの種類
 // ※スクリプトは対象PPcに以下の変数を設定する
 // %si"oBranch"対象パスのブランチ名、%si"gr"レポジトリのルートパス、%si"gm"(status or log)表示中のログ
 // %si"ps",%si"pl,%si"pd"にそれぞれstatus, log, diffのログのパスが設定される
@@ -17,7 +17,7 @@ const log_max       = 100;  // git logの取得数
 const diff_contents = 1;    // git diffの該当行前後に残す行数
 
 // git-modeに使用するPPcID
-const cID  = 'G';
+const ppcID  = 'G';
 
 // PPxのディレクトリパス
 const ppxDir = 'C:\\bin\\PPx';
@@ -71,8 +71,8 @@ const gi = (() => {
 const pathStat = `${listDir}\\${gi.prefix}${gStatus}.xgit`;
 const infoLog = (() => {
   const mode = (arg.log === '1')
-    ? { 'add': '', 'str': 'log', 'func': (dist => Make_log(dist)) }
-    : { 'add': '_commit', 'str': 'commit', 'func': (dist => Make_log_commit(dist)) };
+    ? { 'add': '', 'str': 'log', 'func': (dest => Make_log(dest)) }
+    : { 'add': '_commit', 'str': 'commit', 'func': (dest => Make_log_commit(dest)) };
   return (arg.log === '0')
     ? {
       'refs': '%si"gm"',
@@ -196,16 +196,16 @@ const Make_diff_commit = (filepath => {
 });
 
 // 置換結果を書き出して上書き
-function Write_result(res, dist, flag) {
-  fs.writeFileSync(dist , '');
-  const fd = fs.openSync(dist, 'w');
+function Write_result(res, dest, flag) {
+  fs.writeFileSync(dest , '');
+  const fd = fs.openSync(dest, 'w');
   const buf = res.join('\u000D\u000A');
   // const buf = iconv.encode(res.join('\u000D\u000A'), 'utf16');
   return new Promise((resolve, reject) => {
     fs.write(fd, buf, 0, buf.length, (err) => {
       if (err) { reject(err); }
-      console.log(`${dist} ok.`);
-      resolve({'path': dist, 'flag': flag});
+      console.log(`${dest} ok.`);
+      resolve({'path': dest, 'flag': flag});
     });
   });
 }
@@ -273,24 +273,24 @@ async function set() {
   }
 }
 
-function startPPc(dist, mode) {
+function startPPc(dest, mode) {
   const branch = (() => execSync('git rev-parse --abbrev-ref HEAD').toString().replace('\n', ''))();
   const ub = (gi.prefix === '_') ? `*setcust _User:u_git_branch=${branch}` : '';
-  exec(`${ppxDir}\\ppcw -r -single -mps -bootid:${cID} ${dist} -k ${ub} %:*string i,oBranch=${branch} %:` +
+  exec(`${ppxDir}\\ppcw -r -single -mps -bootid:${ppcID} ${dest} -k ${ub} %:*string i,oBranch=${branch} %:` +
   `*string i,gm=${mode} %:*string i,ps=${pathStat} %:*string i,pl=${infoLog.path} %:*string i,pd=${pathDiff} %:` +
-  `*string i,gr=${gi.root} %:*setcust _User:g_ppcid=${cID} %: *viewstyle -thispath git${mode} %:` +
+  `*string i,gr=${gi.root} %:*setcust _User:g_ppcid=${ppcID} %: *viewstyle -thispath git${mode} %:` +
   '*script %\'scr\'%\\exchangeKeys.js,1,%\'cfg\'%\\zz3GitKeys.cfg %:*script %\'scr\'%\\gitModePos.js,c', (err) => {
     if (err) { console.log(err); }
   });
   return;
 }
 
-function setLog(dist, mode) {
+function setLog(dest, mode) {
   const ps = (arg.stat === '0') ? '' : `*string i,ps=${pathStat}`;
   const pl = (arg.log === '0') ? '' : `*string i,pl=${infoLog.path}`;
   const pd = (arg.diff === '0') ? '' : `*string i,pd=${pathDiff}`;
   return new Promise((resolve, reject) => {
-    exec(`${ppxDir}\\ppcw -r -noactive -bootid:${cID} -k *jumppath ${dist} -savelocate %:` +
+    exec(`${ppxDir}\\ppcw -r -noactive -bootid:${ppcID} -k *jumppath ${dest} -savelocate %:` +
     `*string i,gm=${mode} %:${ps} %:${pl} %:${pd} %:*viewstyle -thispath git${mode}` , (err) => {
       if (err) { reject(err); }
       resolve();

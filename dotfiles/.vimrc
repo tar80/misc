@@ -3,11 +3,6 @@
 "# 文字コードの判別
 set fileformats=unix,dos,mac
 set encoding=utf-8
-" if has('iconv')
-"   set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,utf-16le,utf-16,cp932,default,latin1
-" else
-"   set fileencodings=ucs-bom,utf-8,sjis,utf-16le,utf-16,cp932,default,latin1
-" endif
 "# scriptencodingは本来ファイル先頭で指定するべきだが、
 "# 内部エンコーディングを変更した場合は再設定の必要があるということ
 scriptencoding utf-8
@@ -143,7 +138,7 @@ set pumheight =10
 set completeopt =menuone,noselect
 " set completeopt =menuone,noselect,popup
 " set pvp =height:10,width:60
-set completefunc =BingSuggest
+" set completefunc =BingSuggest
 "# diffの設定
 set diffopt +=vertical,closeoff,iwhite,context:3,indent-heuristic,algorithm:histogram
 "# 自動インデント
@@ -210,7 +205,7 @@ call plug#begin('~/vimfiles')
   Plug 'kana/vim-operator-user'
   Plug 'kana/vim-operator-replace'
   Plug 'leafCage/yankround.vim'
-  Plug 'w0rp/ale'
+  Plug 'dense-analysis/ale'
   Plug 'tyru/caw.vim'
   Plug 'tpope/vim-fugitive'
   " Plug 'gorodinskiy/vim-coloresque'
@@ -305,21 +300,21 @@ command! Difforg vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd
 command! Diff diffthis | wincmd p | diffthis | wincmd h
 command! DiffExit syntax enable | diffoff
 "# <C-x><C-u>ユーザー補完にBingサジェストを割り当てる
-function! BingSuggest(findstart, base)
-  if a:findstart
-      let s:line = getline('.')
-      let s:start = col('.') - 1
-      while s:start > 0 && s:line[s:start - 1] =~ '\S'
-          let s:start -= 1
-      endwhile
-      return s:start
-  else
-      let s:ret = system('curl -s -G --data-urlencode "q='
-                  \ . a:base . '" "https://www.bing.com/osjson.aspx"')
-      let s:res = split(substitute(s:ret,'\[\|\]\|"',"","g"),",")
-      return s:res
-  endif
-endfunction
+" function! BingSuggest(findstart, base)
+"   if a:findstart
+"       let s:line = getline('.')
+"       let s:start = col('.') - 1
+"       while s:start > 0 && s:line[s:start - 1] =~ '\S'
+"           let s:start -= 1
+"       endwhile
+"       return s:start
+"   else
+"       let s:ret = system('curl -s -G --data-urlencode "q='
+"                  \ . a:base . '" "https://www.bing.com/osjson.aspx"')
+"       let s:res = split(substitute(s:ret,'\[\|\]\|"',"","g"),",")
+"       return s:res
+"   endif
+" endfunction
 "#}}}
 "======================================================================
 "# Keys{{{

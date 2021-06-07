@@ -25,4 +25,3 @@ const GetPath = () => {
     return PPx.Execute(`*ppv -bootid:${GetID(arrChr)} ${GetPath()}`);
   }
 })[argID]();
-

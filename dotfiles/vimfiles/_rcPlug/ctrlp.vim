@@ -81,21 +81,19 @@ endfunction
 " let g:ctrlp_extensions = ['dir',  'file', 'buf']
 "}}}
 "======================================================================
-"# Autocmd {{{
+"# Autocmd
 " augroup vimrcCtrlP
 " autocmd! FileType ctrlp
 " autocmd FileType ctrlp set laststatus=0
 " \| autocmd CmdlineLeave <buffer> set laststatus=2
 " augroup END
-"#}}}
 "======================================================================
-"# Command{{{
-"#}}}
+"# Command
 "======================================================================
 "# Keys
 " nnoremap <silent> <leader>; :<C-u>CtrlPMixed<CR>
 nnoremap <silent> <leader>l :<C-u>CtrlPLine<CR>
-nnoremap <silent> <leader>o :<C-u>CtrlPMixed<CR>
+nnoremap <silent> <leader>o :<C-u>CtrlP expand('%:p:h')<CR>
 nnoremap <silent> <leader>p :<C-u>CtrlPDir C:\bin\repository\tar80\misc<CR>
 nnoremap <silent> <leader>r :<C-u>CtrlP C:\bin\repository\tar80\misc<CR>
 " nnoremap <silent> <leader>g :<C-u>call <SID>CtrlPrg()<CR>

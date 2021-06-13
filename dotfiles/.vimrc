@@ -135,7 +135,8 @@ set matchpairs +=【:】,[:]
 "# 補完メニューの高さ
 set pumheight =10
 "# 補完メニューオプション
-set completeopt =menuone,noselect
+set completeopt =menuone,noselect,noinsert,preview
+" set completeopt =menuone,noselect
 " set completeopt =menuone,noselect,popup
 " set pvp =height:10,width:60
 " set completefunc =BingSuggest
@@ -193,8 +194,6 @@ call plug#begin('~/vimfiles')
 "# auto
   " Plug 'shougo/vimproc.vim', { 'dir': '~/vimfiles/vimproc.vim', 'do': 'make' }
   Plug 'rhysd/clever-f.vim'
-  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  " Plug 'junegunn/fzf.vim'
   Plug 'ctrlpvim/ctrlp.vim'
   " Plug 'mattn/ctrlp-matchfuzzy'
   Plug 'mattn/webapi-vim'
@@ -207,7 +206,11 @@ call plug#begin('~/vimfiles')
   Plug 'leafCage/yankround.vim'
   Plug 'dense-analysis/ale'
   Plug 'tyru/caw.vim'
-  Plug 'tpope/vim-fugitive'
+  " Plug 'prabirshrestha/asyncomplete.vim'
+  " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+  " Plug 'tpope/vim-fugitive'
   " Plug 'gorodinskiy/vim-coloresque'
 "# manual
   Plug '~/vimfiles/_rcPlug'
@@ -324,9 +327,21 @@ noremap <silent>, :<C-u>nohlsearch<cr>
 "# スペースでﾊﾞｯﾌｧ移動制御
 noremap <space> <C-w>
 noremap <nowait> <Space><Space> <C-w><C-w>
-"# F3で行番号切り替え
+"# 行番号切り替え
 noremap <silent><F3> :<C-u>setlocal relativenumber!<CR>
-"# F12でラップ状態の切り替え
+"# shellslashトグル
+noremap <expr> <F4> <SID>ToggleShellslash()
+function s:ToggleShellslash()
+  if &shellslash
+    echo '\noshellslash\'
+    setlocal noshellslash
+  else
+    echo '/shellslash/'
+    setlocal shellslash
+  endif
+  return ''
+endfunction
+"# ラップ状態の切り替え
 noremap <silent> <F12> :<C-u>call <SID>setWrap()<CR>
 function s:setWrap()
   let s:wr = &wrap ? 'nowrap' : 'wrap'
@@ -367,16 +382,6 @@ cnoremap <C-a> <HOME>
 "#}}}
 "# insert_mode{{{
 noremap! <expr> <F4> <SID>ToggleShellslash()
-function s:ToggleShellslash()
-  if &shellslash
-    echo '\noshellslash\'
-    setlocal noshellslash
-  else
-    echo '/shellslash/'
-    setlocal shellslash
-  endif
-  return ''
-endfunction
 noremap! <C-j> <Down>
 noremap! <C-k> <Up>
 noremap! <C-l> <Delete>
@@ -384,6 +389,11 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <S-Delete> <C-o>d$
 "# completion
+" 補完表示時のEnterで改行をしない
+inoremap <expr> <CR>  pumvisible() ? "<C-y>" : "<CR>"
+" 候補選択時に補完しない
+inoremap <expr> <C-n> pumvisible() ? "<Down>" : "<C-n>"
+inoremap <expr> <C-p> pumvisible() ? "<Up>" : "<C-p>"
 inoremap <expr> ( col('.') == col('$') ? "()<Left>" : "("
 inoremap <expr> { col('.') == col('$') ? "{}<Left>" : "{"
 inoremap <expr> ) (strpart(getline('.'), col('.') -2, 2) == '()') ? "\<Right>" : ")"

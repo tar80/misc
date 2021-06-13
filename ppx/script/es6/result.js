@@ -16,14 +16,11 @@ set['filetype'] = () => {
 };
 
 // 存在確認 要第2引数
+// o: %FDC, x: %#FDC
 set['exists'] = () => {
-  if (PPx.Arguments.length < 2) {
-    PPx.Echo('引数を指定してください\u000A○  単一のパス(%FDCなど)\u000A×   複数のパス(%#FDCなど)');
-    PPx.Quit(-1);
-  }
+  const argPath = (PPx.Arguments.length < 2) ? 0 : PPx.Arguments(1);
   const fso = PPx.CreateObject('Scripting.FileSystemObject');
-  const argPath = PPx.Arguments(1);
-  return fso.FileExists(argPath)|0 + fso.FolderExists(argPath)|0;
+  return fso.FileExists(argPath) + fso.FolderExists(argPath);
 };
 
 // 反対窓の有無でパスを変える

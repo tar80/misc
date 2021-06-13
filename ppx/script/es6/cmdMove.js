@@ -6,9 +6,21 @@
 
 'use strict';
 
-const cursorPos = PPx.Extract('%R');
 const opPath = PPx.Extract('%2');
-const opParentExt = PPx.GetFileInformation(opPath);
+// 対象がaux:の場合
+// if (/^aux:.*/.test(opPath)) {
+//   PPx.Execute('%K"@C"');
+//   PPx.Quit(1);
+// }
+
+const opParentExt = (() => {
+  const res = PPx.GetFileInformation(opPath);
+  if (res) { return res; }
+  const aux = new RegExp(/^aux:.*/);
+  return (aux.test(opPath)) ? 'AUX' : null;
+})();
+
+const cursorPos = PPx.Extract('%R');
 // 送り先を設定
 const cmd = (obj => {
   if (!opParentExt) {
@@ -50,4 +62,3 @@ switch (PPx.DirectoryType) {
     );
     break;
 }
-

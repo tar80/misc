@@ -7,12 +7,26 @@
 
 'use strict';
 
+const opPath = PPx.Extract('%2');
+// {
+//   // 対象がaux:の場合
+//   const wd = PPx.Extract('%FD');
+//   const aux = new RegExp(/^aux:.*/);
+//   if (aux.test(opPath)) {
+//     PPx.Execute('%K"@C"');
+//     PPx.Quit(1);
+//   }
+// }
 const arg = (PPx.Arguments.length) ? PPx.Arguments(0)|0 : 0;
 const filePaths = PPx.Extract('%#;FDCN').split(';');
 const fileNames = PPx.Extract('%#;FCN').split(';');
 const fileCount = fileNames.length;
-const opPath = PPx.Extract('%2');
-const opParentExt = PPx.GetFileInformation(opPath) || 'no';
+const opParentExt = (() => {
+  const res = PPx.GetFileInformation(opPath);
+  if (res) { return res; }
+  const aux = new RegExp(/^aux:.*/);
+  return (aux.test(opPath)) ? 'AUX' : 'no';
+})();
 // 送り先振り分け
 const cmd = {
   ':DIR': function () {
@@ -35,6 +49,16 @@ const cmd = {
     this.post = '';
     return this;
   },
+  'AUX': function () {
+    const obj = (arg === 0)
+      ? { act: 'copy', opt: '-renamedest:on -skiperror:on' }
+      : { act: '!copy', opt: '-min -skiperror:on' };
+    this.act = obj.act;
+    this.opt = obj.opt;
+    this.dest = opPath;
+    this.post = '-compcmd *execute ~,%%K"@F5"';
+    return this;
+  },
   'no': function () {
     this.act = 'copy';
     this.opt = '';
@@ -50,33 +74,6 @@ try {
   PPx.Echo('非対象ディレクトリ');
   PPx.Quit(1);
 }
-// const cmd = (obj => {
-//   switch (opParentExt) {
-//     case ':DIR':
-//       obj = (arg === 0)
-//         ? { act: 'copy', opt: '-renamedest:on' }
-//         : { act: '!copy', opt: '-min' };
-//       obj.dest = opPath;
-//       obj.post = '-compcmd *ppc -r -noactive';
-//       return obj;
-//     case ':XLF':
-//       obj = (arg === 0)
-//         ? { act: 'copy', opt: '-renamedest:on' }
-//         : { act: '!copy', opt: '-min' };
-//       obj.dest = opPath;
-//       obj.post = '';
-//       return obj;
-//     case 'no':
-//       obj.act = 'copy';
-//       obj.opt = '';
-//       obj.dest = '%\'work\'%\\';
-//       obj.post = `-compcmd *ppc -pane:~ %%hd0 -k *jumppath -entry:${fileNames[0]}`;
-//       return obj;
-//     default:
-//       PPx.Echo('非対象ディレクトリ');
-//       PPx.Quit(1);
-//   }
-// })();
 
 if (arg >= 2) {
   // シンボリックリンク
@@ -96,4 +93,3 @@ if (arg >= 2) {
 } else {
   PPx.Execute(`%Oi *ppcfile ${cmd.act}, ${cmd.dest}, ${cmd.opt} -qstart -nocount -preventsleep -same:0 -sameall -undolog ${cmd.post}`);
 }
-

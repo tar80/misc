@@ -7,20 +7,11 @@
 
 'use strict';
 
-const opPath = PPx.Extract('%2');
-// {
-//   // 対象がaux:の場合
-//   const wd = PPx.Extract('%FD');
-//   const aux = new RegExp(/^aux:.*/);
-//   if (aux.test(opPath)) {
-//     PPx.Execute('%K"@C"');
-//     PPx.Quit(1);
-//   }
-// }
 const arg = (PPx.Arguments.length) ? PPx.Arguments(0)|0 : 0;
 const filePaths = PPx.Extract('%#;FDCN').split(';');
 const fileNames = PPx.Extract('%#;FCN').split(';');
 const fileCount = fileNames.length;
+const opPath = PPx.Extract('%2');
 const opParentExt = (() => {
   const res = PPx.GetFileInformation(opPath);
   if (res) { return res; }

@@ -9,7 +9,7 @@ let g:ale_disable_lsp = 1
 " let g:ale_change_sign_column_color = 0
 " let g:ale_echo_cursor = 1
 " let g:ale_echo_delay = 10
-let g:ale_lint_delay = 500
+let g:ale_lint_delay = 1000
 let g:ale_linters = {
       \  'javascript': ['eslint'],
       \  'lua': ['luacheck'],

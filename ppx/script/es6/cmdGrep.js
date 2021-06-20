@@ -157,7 +157,7 @@ if (PPx.Extract('%si"output"') === 'PPv') {
   st.Close;
 }
 
-// ログの書き出しにunixコマンドを使う ※前後行の色分けは無し
+// ログの書き出しにlinaxコマンドを使う ※前後行の色分けは無し
 // } else {
 //   const dirType = PPx.DirectoryType;
 //   const pDir = PPx.Extract('%FD').replace(/\\/g, '\\\\\\\\');
@@ -171,5 +171,5 @@ if (PPx.Extract('%si"output"') === 'PPv') {
 //     ` > ${arg.listfile} %: *wait -run`);
 // }
 
-PPx.Execute(`*execute ${ppxID},*string i,cmd= %%: *string i,gopt=`);
+PPx.Execute(`*execute ${ppxID},*string i,cmd= %%: *string i,gopt= %%: *string i,Edit_OptionCmd= `);
 

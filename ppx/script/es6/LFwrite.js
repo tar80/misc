@@ -5,10 +5,7 @@
 
 'use strict';
 
-if (PPx.Arguments.length != 2) {
-  PPx.Echo('引数が異常');
-  PPx.Quit(-1);
-}
+if (PPx.Arguments.length !== 2) { throw new Error('引数が異常'); }
 
 const arg = { 'cmd': PPx.Arguments(0), 'path': PPx.Arguments(1) };
 const dirType = PPx.DirectoryType;

@@ -5,19 +5,16 @@
 
 'use strict';
 
-if (!PPx.Arguments.length) {
-  PPx.Echo('引数が足りません');
-  PPx.Quit(-1);
-}
-
 const editStr = (() => {
   const str = PPx.Extract('%*edittext');
   const rep = new RegExp('[",]', 'g');
   const esc = { '"': '""', ',': '@#' };
-  return str.replace(rep, (c) => esc[c]);
+  return str.replace(rep, c => esc[c]);
 })();
 
-const argTempFile = PPx.Arguments(0);
+const argTempFile = (PPx.Arguments.length)
+  ? PPx.Arguments(0)
+  : PPx.Extract('%\'temp\'%\\ppx_comppath.txt');
 
 /* コマンドと基準パスの分離整形 */
 const arrStr = editStr.replace(/^([^\\]*\s)?(.*\\)(?!$).*/, (match, p1, p2) => {
@@ -36,4 +33,3 @@ if (arrStr[2] === undefined) {
 }
 
 PPx.Result = `"${arrStr.join('').replace('@#',',')}"`;
-

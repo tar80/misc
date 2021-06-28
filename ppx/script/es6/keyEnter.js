@@ -14,21 +14,21 @@ const type = {
   movie: ['.3gp', '.avi', '.mp4', '.mpg', '.qt', '.ebml', '.webm']
 };
 
-const notSupportExt = () => {
-  PPx.Execute('*linecust editc,K_edit:FIRSTEVENT,*editmode -modify:silent %%: *linecust editc,K_edit:FIRSTEVENT');
-  PPx.Execute('%K"@^i');
-  PPx.Execute('*wait 10,1');
-  PPx.Execute('*topmostwindow %*findwindowclass(PPeditW),1');
-  PPx.Execute('*focus エントリ情報');
-  PPx.Quit(1);
-};
-
 const maskExt = (() => {
   if (PPx.Arguments.length) { return PPx.Arguments(0); }
+
   for (const key of Object.keys(type)) {
     if (~type[key].indexOf(filetype)) { return key; }
   }
-  return notSupportExt();
+
+  return (() => {
+    PPx.Execute('*linecust editc,K_edit:FIRSTEVENT,*editmode -modify:silent %%: *linecust editc,K_edit:FIRSTEVENT');
+    PPx.Execute('%K"@^i');
+    PPx.Execute('*wait 10,1');
+    PPx.Execute('*topmostwindow %*findwindowclass(PPeditW),1');
+    PPx.Execute('*focus エントリ情報');
+    PPx.Quit(1);
+  })();
 })();
 
 // 種別の処理
@@ -66,4 +66,3 @@ PPx.Execute('*setcust X_vpos=3');
 PPx.Execute('*ppvoption id z %K"@N');
 // maskを設定
 PPx.Execute(`*maskentry path:,${type[maskExt]}`);
-

@@ -8,24 +8,16 @@
 
 'use strict';
 
-const arg = (() => {
-  if (PPx.Arguments.length) {
-    return (PPx.Arguments(0) === 'filter') ? 'filter' : PPx.Arguments(0)|1;
-  } else {
-    PPx.Echo('引数が足りません');
-    return PPx.Quit(1);
-  }
-})();
+if (!PPx.Arguments.length) { throw new Error('引数が足りません'); }
 
+const arg = PPx.Arguments(0);
 const searchWord = PPx.Extract('%*script(%\'scr\'%\\compCode.js,"is","""%%","Search Comment.. ※正規表現")') || PPx.Quit(-1);
 const entryCount = PPx.Entry.Count;
 
 if (arg === 'filter') {
   for (let [i, l] = [entryCount, 0]; i > l; i--) {
     const objEntry = PPx.Entry(i - 1);
-    if (objEntry.Comment.search(searchWord) === -1) {
-      objEntry.Hide;
-    }
+    if (objEntry.Comment.search(searchWord) === -1) { objEntry.Hide; }
   }
   // 背景画像が設定されていたら表示更新
   if (PPx.Extract('%*getcust(X_bg:P_%n)') !== '"') { PPx.Execute('%K"@^F5"'); }

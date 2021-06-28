@@ -5,9 +5,9 @@
 
 'use strict';
 
-const argID = (PPx.Arguments.length) ? 'V' : PPx.WindowIDName.slice(0, 1);
+const argID = (PPx.Arguments.length && PPx.Arguments(0) === '1') ? 'V' : PPx.WindowIDName.slice(0, 1);
 // 未起動PPxのIDを取得
-const GetID = (key) => key.find(chr => PPx.Extract(`%N${argID}${chr}`) == '');
+const GetID = key => key.find(chr => PPx.Extract(`%N${argID}${chr}`) == '');
 // grepリストファイル上のパスを取得
 const GetPath = () => {
   if (PPx.Extract('%se"grep"') !== '1') { return '%R'; }

@@ -64,11 +64,11 @@ const objColor = JSON.parse(clipStr);
 
 const getCfg = ((t, e = ['A_color = {']) => {
   const cnts = {
-    'name': (v) => t = objColor[v].replace(' ', '-'),
-    'background': (v) => e.push(`BG = ${objColor[v]}`.toUpperCase()),
-    'foreground': (v) => e.push(`FG = ${objColor[v]}`.toUpperCase()),
-    'selectionbackground': (v) => e.push(`SEL_BG = ${objColor[v]}`.toUpperCase()),
-    'cursorcolor': (v) => e.push(`CUR = ${objColor[v]}`.toUpperCase())
+    'name': v => t = objColor[v].replace(' ', '-'),
+    'background': v => e.push(`BG = ${objColor[v]}`.toUpperCase()),
+    'foreground': v => e.push(`FG = ${objColor[v]}`.toUpperCase()),
+    'selectionbackground': v => e.push(`SEL_BG = ${objColor[v]}`.toUpperCase()),
+    'cursorcolor': v => e.push(`CUR = ${objColor[v]}`.toUpperCase())
   };
   for (const key of Object.keys(objColor)) {
     try {
@@ -82,7 +82,7 @@ const getCfg = ((t, e = ['A_color = {']) => {
 
 getCfg.ele.push('}');
 
-if (PPx.Execute(`%"テーマの生成"%Q"${getCfg.title} を生成します"`) !== 0) { PPx.Quit(1); }
+!PPx.Execute(`%"テーマの生成"%Q"${getCfg.title} を生成します"`) || PPx.Quit(1);
 
 if (PPx.Extract(`%*result(exists,${themeDir})`) === '0') { PPx.Execute(`*makedir ${themeDir}`); }
 

@@ -11,8 +11,7 @@
 const argLength = PPx.Arguments.length;
 
 if (argLength < 3) {
-  PPx.Echo('引数が足りません');
-  PPx.Quit(-1);
+  throw new Error('引数が足りません');
 } else if (argLength === 4 && PPx.Arguments(3) === '2') {
   PPx.Execute('*deletecust "M_grep"');
   PPx.SetPopLineMessage('Delete > M_grep');
@@ -91,23 +90,22 @@ PPx.Execute('*string i,Edit_OptionCmd=*string i,gopt=%%*input("%%se"lock"%%se"ad
   ' %%: *setcaption [%%si"output"] %%si"cmd" %%si"gopt"  ※\\=\\\\\\\\');
 
 // 検索文字の入力とエスケープ処理
-const str = (esc => {
+const searchWord = (() => {
+  const empty = () => {
+    PPx.Execute('*string i,gopt=');
+    PPx.Quit(-1);
+  };
   try {
     PPx.Execute(`*string i,gopt=${doGrep.lock}${doGrep.add}`);
-    return esc = PPx.Extract('%*script(%\'scr\'%\\compCode.js,' +
+    const esc = PPx.Extract('%*script(%\'scr\'%\\compCode.js,' +
       '"iOs",' +
       '"""%%",' +
       `"[${arg.output}] ${arg.cmd} %%si""gopt"" ※\\=\\\\\\\\",` +
       `"*execute %%%%%%%%M_grep,!${arg.cmd}${arg.output}")`);
-  } catch (e) {
+    return esc || empty();
+  } catch (err) {
     PPx.Execute('*string i,gopt=');
-    PPx.Echo(e);
-    PPx.Quit(-1);
-  } finally {
-    if (esc === '') {
-      PPx.Execute('*string i,gopt=');
-      PPx.Quit(-1);
-    }
+    throw new Error(err);
   }
 })();
 
@@ -118,12 +116,12 @@ if (PPx.Extract('%si"output"') === 'PPv') {
   PPx.Execute('*linecust tmod,KV_main:CLOSEEVENT,*setcust XV_tmod=%*getcust(XV_tmod) %%: *linecust tmod,KV_main:CLOSEEVENT,');
   PPx.Execute('*setcust XV_tmod=1');
   // grepの結果をPPvの標準入力で受け取る
-  PPx.Execute(`*run -noppb -min %si"cmd" %si"gopt" "${str}" ${targetPath}` +
-  ` | %0ppvw -bootid:w -esc -document -utf8 -k *string p,grep=1 %%: *find "${str}"`);
+  PPx.Execute(`*run -noppb -min %si"cmd" %si"gopt" "${searchWord}" ${targetPath}` +
+  ` | %0ppvw -bootid:w -esc -document -utf8 -k *string p,grep=1 %%: *find "${searchWord}"`);
 
 } else {
   // grepの結果を出力
-  PPx.Execute(`%Obn %si"cmd" %si"gopt" "${str}" ${targetPath} > ${arg.listfile} %&`);
+  PPx.Execute(`%Obn %si"cmd" %si"gopt" "${searchWord}" ${targetPath} > ${arg.listfile} %&`);
 
   // リストの整形
   const dirType = PPx.DirectoryType;
@@ -131,7 +129,7 @@ if (PPx.Extract('%si"output"') === 'PPv') {
   const result = [
     ';ListFile\u000D\u000A' +
     `;Base=${pDir}|${dirType}\u000D\u000A` +
-    `"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,H:0,M:0,T:"result => ${str}"`
+    `"file","line",A:H5,C:0.0,L:0.0,W:0.0,S:0.0,H:0,M:0,T:"result => ${searchWord}"`
   ];
 
   const st = PPx.CreateObject('ADODB.stream');
@@ -172,4 +170,3 @@ if (PPx.Extract('%si"output"') === 'PPv') {
 // }
 
 PPx.Execute(`*execute ${ppxID},*string i,cmd= %%: *string i,gopt= %%: *string i,Edit_OptionCmd= `);
-

@@ -10,12 +10,9 @@
 
 'use strict';
 
-if (!PPx.Arguments.length) {
-  PPx.Echo('引数が足りません');
-  PPx.Quit(-1);
-}
+if (!PPx.Arguments.length) { throw new Error('引数が足りません'); }
 
-const arg = { 'cmd': PPx.Arguments(0), 'exeDup': (PPx.Arguments.length != 2) ? 0 : PPx.Arguments(1)|0 };
+const arg = { 'cmd': PPx.Arguments(0), 'exeDup': (PPx.Arguments.length !== 2) ? 0 : PPx.Arguments(1)|0 };
 const cmd = {};
 // 関数の引数には(path, shortname, number, duplicate)が指定できる
 // returnより前の部分は初回のみ実行される
@@ -27,8 +24,8 @@ cmd['gvim'] = () => {
 };
 
 cmd['ppv'] = () => {
-  return (path) => {
-    PPx.Execute(`%Oi *ppv -r -bootid:C ${path}`);
+  return path => {
+    PPx.Execute(`%Oi *ppv -bootmax:k ${path}`);
     PPx.Execute('*wait 100,1');
   };
 };
@@ -36,7 +33,7 @@ cmd['ppv'] = () => {
 cmd['sed'] = () => {
   const rep = PPx.Extract('"s#%*script(%\'scr\'%\\compCode.js,"is","""%%","[検索文字#置換文字] ※\\=\\\\\\\\")#g"');
   return (path, shortname, number, duplicate) => {
-    if (!duplicate) { PPx.Execute(`%Oi copy ${path} ${path}_back`); }
+    if (!duplicate) { PPx.Execute(`%Oi copy ${path} ${path}_back %&`); }
     PPx.Execute(`%Oi sed -i -r ${number}${rep} ${path}`);
   };
 };
@@ -62,7 +59,7 @@ const exec = cmd[arg.cmd]();
 const markEntry = PPx.Extract('%#;FDC').split(';');
 const markCount = PPx.EntryMarkCount;
 // マークの有無でループの初期値を設定
-const n = (markCount !== 0) ? 1 : 0;
+const n = (!markCount) ? 0 : 1;
 // ShortNameチェック用
 const reg = new RegExp(/^[0-9]*/);
 // 重複エントリチェック用
@@ -83,7 +80,7 @@ for (let i = n; i <= markCount; i++) {
     let entryNum = (reg.test(entrySN)) ? entrySN|0 : 1;
     // 重複エントリの判別
     let entryDup = ((isDup) => {
-      isDup = (exist[entryPath]) ? true : false;
+      isDup = exist[entryPath] || false;
       exist[entryPath] = true;
       return isDup;
     })();

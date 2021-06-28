@@ -30,14 +30,14 @@ set['getpath'] = () => {
 };
 
 // メインレポジトリ
-set['myrepo'] = () => {
-  return PPx.Extract('%1').indexOf(PPx.Extract('%\'myrepo\''));
-};
+set['myrepo'] = () => (
+  PPx.Extract('%1').indexOf(PPx.Extract('%\'myrepo\''))
+);
 
 // 改行を含むPPxコマンドマクロを整形
-set['shapecode'] = () => {
-  return PPx.Extract('%OC %*edittext').split('\u000D\u000A').join('\u000D\u000A ');
-};
+set['shapecode'] = () => (
+  PPx.Extract('%OC %*edittext').split('\u000D\u000A').join('\u000D\u000A ')
+);
 
 // リンクならリンク先を、実体があればそのままのパスを返す
 // ※返すパスはスペース区切りの複数のパス

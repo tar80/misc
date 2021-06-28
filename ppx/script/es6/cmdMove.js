@@ -1,11 +1,12 @@
 ﻿//!*script
 /* 状況に応じたファイル移動の設定 */
 //
-// PPx.Arguments(0) = 無:detail | 有:quick
+// PPx.Arguments(0) = 0|無:detail | 1:quick
 // -compcmdはフォーカス制御
 
 'use strict';
 
+const order = PPx.Arguments.length && PPx.Arguments(0)|0;
 const opPath = PPx.Extract('%2');
 // 対象がaux:の場合
 // if (/^aux:.*/.test(opPath)) {
@@ -15,9 +16,8 @@ const opPath = PPx.Extract('%2');
 
 const opParentExt = (() => {
   const res = PPx.GetFileInformation(opPath);
-  if (res) { return res; }
   const aux = new RegExp(/^aux:.*/);
-  return (aux.test(opPath)) ? 'AUX' : null;
+  return res || (aux.test(opPath) ? 'AUX' : null);
 })();
 
 const cursorPos = PPx.Extract('%R');
@@ -29,7 +29,7 @@ const cmd = (obj => {
     obj.dest = '%\'work\'%\\';
   } else {
     // 反対窓あり
-    obj = (PPx.Arguments.length === 0)
+    obj = (order === 0)
       ? { act: 'move', opt: '-renamedest:on', post: '' }
       : { act: '!move', opt: '-min', post: '-compcmd *ppc -r -noactive' };
     obj.dest = opPath;

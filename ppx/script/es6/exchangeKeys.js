@@ -24,10 +24,7 @@
 
 'use strict';
 
-if (PPx.Arguments.length < 2) {
-  PPx.Echo('引数が足りません');
-  PPx.Quit(-1);
-}
+if (PPx.Arguments.length < 2) { throw new Error('引数が足りません'); }
 
 const targetPath = PPx.Arguments(1);
 const title = PPx.Extract(`%*name(X,${targetPath})`);
@@ -50,8 +47,7 @@ const setKeys = (() => {
     if (/^[^\s]*\s=\s{.*/.test(value) === true) {
       header = value.replace(/^([^\s]*)\s.*/, '$1');
       if (keybinds.indexOf(header) === -1) {
-        PPx.Echo(`${header}のキー登録は許可されていません`);
-        PPx.Quit(-1);
+        throw new Error(`${header}のキー登録は許可されていません`);
       }
     } else if (/^[^\s]*\s*[=,].*/.test(value) === true) {
       arrKey.push({ 'key': header, 'cmd': value.replace(/^([^\s]*)\s.*/, (match, p1) => p1.replace(/\\'/g, '\\\'')) });
@@ -60,10 +56,7 @@ const setKeys = (() => {
   return arrKey;
 })();
 
-if (setKeys[0].key === undefined) {
-  PPx.Echo('項目名が設定されていません');
-  PPx.Quit(-1);
-}
+if (setKeys[0].key === undefined) { throw new Error('項目名が設定されていません'); }
 
 ({
   '1': () => {

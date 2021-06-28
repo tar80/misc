@@ -3,23 +3,15 @@
 
 'use strict';
 
-// AUX窓なら終了
-// if (PPx.Extract('%1').match(/aux:\/\/.+/)) {
-//   PPx.Execute('*execute CY, %j"%*getcust(_User:pk1)');
-//   PPx.Execute('*closeppx CY');
-//   PPx.Quit(1);
-// }
-
 // C_A以外の窓から終了
 const ppxID = (() => {
-  const winID = PPx.WindowIDName;
+  let winID = PPx.WindowIDName;
   if (winID === 'C_A') {
     let list = PPx.Extract('%*ppxlist(-)').split(',');
     list.sort((a, b) => (a < b) ? 1 : -1);
-    return list[0];
-  } else {
-    return winID;
+    winID = list[0];
   }
+  return winID;
 })();
 
 const targetID = ppxID.slice(2);
@@ -39,4 +31,3 @@ if (ppvSync > 0) {
 }
 
 PPx.Execute(`*closeppx ${ppxID}`);
-

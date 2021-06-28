@@ -5,7 +5,6 @@
 
 'use strict';
 
-
 for (let [i, l] = [0, PPx.EntryDisplayCount]; i < l; i++) {
   const thisEntry = PPx.Entry(i);
   if (thisEntry.Mark === 1) {

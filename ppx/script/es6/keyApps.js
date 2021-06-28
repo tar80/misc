@@ -5,10 +5,7 @@
 
 'use strict';
 
-if (!PPx.Arguments.length) {
-  PPx.Echo('引数が足りません');
-  PPx.Quit(-1);
-}
+if (!PPx.Arguments.length) { throw new Error('引数が足りません'); }
 
 // auxパスメニュー
 // const cdPath = PPx.Extract('%1');

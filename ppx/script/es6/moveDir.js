@@ -8,16 +8,17 @@
 
 'use strict';
 
-if (PPx.Arguments.length !== 2) {
-  PPx.Echo('引数が異常');
-  PPx.Quit(1);
-}
+if (PPx.Arguments.length !== 2) { throw new Error('引数が異常'); }
 
 const arg = { 'action': PPx.Arguments(0)|0, 'filepath': PPx.Arguments(1) };
+const msg = (m => {
+  PPx.SetPopLineMessage(`!"${m}`);
+  PPx.Quit(1);
+});
 const current = (() => {
-  let result = {};
+  let res = {};
   PPx.Extract('%FDVN').replace(/^(.*)\\((.*\.)?(?!$)(.*))/, (match, p1, p2, p3, p4) => {
-    result = {
+    res = {
       path: `${match}\\`,
       pwd:  p1,
       name: p2,
@@ -25,13 +26,11 @@ const current = (() => {
     };
     return;
   });
-  return result;
-})();
 
-if (current.pwd === undefined) {
-  PPx.SetPopLineMessage('!"<<Root>>');
-  PPx.Quit(1);
-}
+  (res.pwd === undefined) && msg('<<Root>>');
+
+  return res;
+})();
 
 switch (PPx.DirectoryType) {
   case 0:
@@ -49,25 +48,20 @@ switch (PPx.DirectoryType) {
     current.path = current.path.slice(0, -1);
     break;
   default:
-    PPx.SetPopLineMessage('!"Not supported.');
-    PPx.Quit(1);
+    msg('Not supported.');
     break;
 }
 
-
 (arg.action === 0)
-  ? MovePath(-1, 1, 'top')
-  : MovePath(1, -1, 'bottom');
+  ? MovePath(-1, 1, 'Top')
+  : MovePath(1, -1, 'Bottom');
 
 // パス移動を実行する関数
 function MovePath(valA, valB, termMessage) {
   const fso = PPx.CreateObject('Scripting.FileSystemObject');
   const fsoTempfile = fso.OpenTextFile(arg.filepath, 1, false, -1);
 
-  if (fsoTempfile.AtEndOfLine) {
-    PPx.SetPopLineMessage('!"empty.');
-    PPx.Quit(1);
-  }
+  fsoTempfile.AtEndOfLine && msg('Empty.');
 
   // パスリストからパスを取得
   const pathList = [];
@@ -79,7 +73,7 @@ function MovePath(valA, valB, termMessage) {
   fsoTempfile.Close();
 
   if (pathList.length === 1) {
-    PPx.Execute('*linemessage !"not found.');
+    msg('Not found.');
   } else {
     // リストを名前順でソート
     pathList.sort((a, b) => (a.toLowerCase() < b.toLowerCase()) ? valA : valB);

@@ -1,12 +1,12 @@
 ﻿//!*script
 /* 対象ヒストリを初期化 */
 //
-// PPx.Arguments(0) = 1:履歴をバックアップ
+// PPx.Arguments(0) = 1:履歴をバックアップ 0|無:バックアップしない
 // 引数を付けると、X_save%\@history_?_back.txtが保存される
 
 'use strict';
 
-const saveHistory = (!PPx.Arguments.length) ? false : true;
+const saveHistory = PPx.Arguments.length && PPx.Arguments(0)|0;
 
 const targetHistory = PPx.Extract('%*editprop(whistory)').toLowerCase();
 const targetType = {

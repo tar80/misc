@@ -3,10 +3,7 @@
 
 'use strict';
 
-let i;
-const l = PPx.EntryDisplayCount;
-
-for (i = 0; i < l; i++) {
+for (let i = PPx.EntryDisplayCount; i--;) {
   if (PPx.Entry(i).Size) {
     PPx.Execute(`*delete "${PPx.Entry(i).Name}:thumbnail.jpg"`);
   }

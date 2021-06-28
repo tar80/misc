@@ -7,21 +7,21 @@
 
 'use strict';
 
-const arg = (PPx.Arguments.length) ? PPx.Arguments(0)|0 : 0;
+const argOrder = PPx.Arguments.length && PPx.Arguments(0)|0;
 const filePaths = PPx.Extract('%#;FDCN').split(';');
 const fileNames = PPx.Extract('%#;FCN').split(';');
 const fileCount = fileNames.length;
 const opPath = PPx.Extract('%2');
 const opParentExt = (() => {
   const res = PPx.GetFileInformation(opPath);
-  if (res) { return res; }
   const aux = new RegExp(/^aux:.*/);
-  return (aux.test(opPath)) ? 'AUX' : 'no';
+  return res || (aux.test(opPath) ? 'AUX' : 'no');
 })();
+
 // 送り先振り分け
 const cmd = {
   ':DIR': function () {
-    const obj = (arg === 0)
+    const obj = (argOrder === 0)
       ? { act: 'copy', opt: '-renamedest:on' }
       : { act: '!copy', opt: '-min' };
     this.act = obj.act;
@@ -31,7 +31,7 @@ const cmd = {
     return this;
   },
   ':XLF': function () {
-    const obj = (arg === 0)
+    const obj = (argOrder === 0)
       ? { act: 'copy', opt: '-renamedest:on' }
       : { act: '!copy', opt: '-min' };
     this.act = obj.act;
@@ -41,7 +41,7 @@ const cmd = {
     return this;
   },
   'AUX': function () {
-    const obj = (arg === 0)
+    const obj = (argOrder === 0)
       ? { act: 'copy', opt: '-renamedest:on -skiperror:on' }
       : { act: '!copy', opt: '-min -skiperror:on' };
     this.act = obj.act;
@@ -61,12 +61,12 @@ const cmd = {
 
 try {
   cmd[opParentExt]();
-} catch (e) {
+} catch (err) {
   PPx.Echo('非対象ディレクトリ');
   PPx.Quit(1);
 }
 
-if (arg >= 2) {
+if (argOrder >= 2) {
   // シンボリックリンク
   cmd.dest = PPx.Extract(`%*input("${cmd.dest}" -title:"リンク先" -mode:d)%\\`) || PPx.Quit(1);
   ((value, isDir) => {

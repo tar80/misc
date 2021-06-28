@@ -19,19 +19,16 @@
 
 const argLength = PPx.Arguments.length;
 
-if (argLength < 2) {
-  PPx.Echo('引数が足りません');
-  PPx.Quit(-1);
-}
+if (argLength < 2) { throw new Error('引数が足りません'); }
 
 // 現在の編集モードを参照
 const currentEditmode = (() => {
-  let historyType = 'g';
+  let wh;
   const reg = new RegExp('PP[BCV]\\[');
   if (!reg.test(PPx.Extract('%W'))) {
-    historyType = PPx.Extract('%*editprop(whistory)') || historyType;
+    wh = PPx.Extract('%*editprop(whistory)');
   }
-  return historyType;
+  return wh || 'g';
 })();
 
 const edit = {
@@ -53,9 +50,8 @@ const code = PPx.Extract(function () {
       's': () => '%*selecttext',
       'e': () => '%*edittext'
     }[edit.type()]();
-  } catch (e) {
-    PPx.Echo('引数が異常');
-    PPx.Quit(-1);
+  } catch (err) {
+    throw new Error('第一引数が範囲外です');
   }
 }()) || PPx.Quit(-1);
 
@@ -68,8 +64,8 @@ String.prototype.counter = function (seq, max) {
 const charArray = Array.from(new Set(edit.chr));
 
 // 同じ文字数のカウント
-const countMax = 4;
 const charCount = (() => {
+  const countMax = 4;
   let count = [];
   for (const value of charArray) {
     count.push(edit['chr'].counter(value, countMax));
@@ -79,19 +75,6 @@ const charCount = (() => {
 
 // 配列からオブジェクトを生成
 const bsNum = [];
-// const esc = charArray.reduce((chr, value, index) => {
-//   // 例外処理
-//   const escExcpt = ((ele, num) => {
-//     if (ele !== '\\') {
-//       return charCount[num] * 2;
-//     } else {
-//       bsNum[0] = num;
-//       return charCount[num];
-//     }
-//   });
-//   chr[value] = value.repeat(escExcpt(value, index));
-//   return chr;
-// }, {});
 const esc = charArray.reduce((chr, value, index) => {
   chr[value] = value.repeat(function (ele, num) {
     // 例外処理
@@ -110,5 +93,4 @@ if (bsNum !== -1) { charArray[bsNum] = '\\\\'; }
 const regStr = `[${charArray.join('')}]`;
 const rep = new RegExp(regStr, 'g');
 
-PPx.Result = code.replace(rep, (c) => esc[c]);
-
+PPx.Result = code.replace(rep, c => esc[c]);

@@ -19,13 +19,9 @@ const mouseX = PPx.Extract('%*extract(C,"%%*cursorpos(x)")')|0;
 
 const posW = (w => {
   w = PPx.Extract(`%*windowrect(${ppvID},w)`)|0;
-  if (mouseX <= (_displayX - 100)) {
-  // 左
-    return (w < _displayX) ? _displayX : displayX - w;
-  } else {
-  // 右
-    return (w < _displayX) ? _displayX - w : 0;
-  }
+  return (mouseX <= (_displayX - 100))
+    ? (w < _displayX) ? _displayX : displayX - w  // left
+    : (w < _displayX) ? _displayX - w : 0;        // right
 })();
 
 const posH = (h => {
@@ -34,4 +30,3 @@ const posH = (h => {
 })();
 
 PPx.Execute(`*windowposition ${ppvID},${posW},${posH}`);
-
